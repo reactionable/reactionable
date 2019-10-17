@@ -43,7 +43,7 @@ export const useSuccessNotification = (title: string) => {
     });
 }
 
-const ErrorNotification:  React.FC<INotificationProps & {
+const ErrorNotification: React.FC<INotificationProps & {
     title?: string,
 }> = (props) => {
     if (!props.title) {
@@ -65,7 +65,7 @@ export const useErrorNotification = (title?: string) => {
         const { t } = useTranslation();
         notificationTitle = t('An error has occured');
     }
-    else{
+    else {
         notificationTitle = title;
     }
     return useNotification({
