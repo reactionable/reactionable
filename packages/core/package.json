@@ -10,6 +10,7 @@
   "typings": "lib/index.d.ts",
   "scripts": {
     "start": "tsc -w",
+    "test": "jest",
     "build": "rimraf lib && barrelsby -d src --delete && tsc --pretty"
   },
   "repository": {
@@ -38,13 +39,17 @@
     "yup": "^0.27.0"
   },
   "devDependencies": {
+    "@types/jest": "^24.0.19",
+    "@types/node": "^12.11.1",
     "@types/react": "^16.9.7",
     "@types/react-dom": "^16.9.2",
     "@types/react-i18next": "^8.1.0",
     "@types/react-router-dom": "^5.1.0",
     "@types/yup": "^0.26.24",
     "barrelsby": "^2.2.0",
+    "jest": "^24.9.0",
     "rimraf": "^3.0.0",
+    "ts-jest": "^24.1.0",
     "typescript": "^3.6.4"
   }
 }
