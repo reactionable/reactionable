@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="/" target="_blank"><img src="resources/banner.jpg" width="400"></a>
+  <a href="/" target="_blank"><img src="resources/banner.jpg" width="600"></a>
   <br/><br/>
   <a href="/" target="_blank"><img src="https://img.shields.io/npm/l/@reactionable/reactionable" alt="License"></a>
   <a href="/" target="_blank"><img src="https://img.shields.io/github/package-json/v/@reactionable/reactionable" alt="Latest"></a>  
