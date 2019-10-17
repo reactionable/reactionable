@@ -1,0 +1,52 @@
+{
+  "name": "@reactionable/ui-bootstrap",
+  "version": "0.0.1",
+  "description": "Reactionable UI package for Bootsrap",
+  "private": false,
+  "files": [
+    "lib"
+  ],
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "start": "tsc -w",
+    "build": "rimraf lib && barrelsby -d src --delete && tsc --pretty"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reactionable/reactionable.git"
+  },
+  "keywords": [
+    "reactionable",
+    "react",
+    "framework",
+    "UI",
+    "Bootstrap"
+  ],
+  "author": "ESCEMI <developer@escemi.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/reactionable/reactionable/issues"
+  },
+  "homepage": "https://github.com/reactionable/reactionable#readme",
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.25",
+    "@fortawesome/free-solid-svg-icons": "^5.11.2",
+    "@fortawesome/react-fontawesome": "^0.1.6",
+    "@reactionable/core": "^0.0.1",
+    "bootstrap": "^4.3.1",
+    "formik": "^1.5.8",
+    "i18next": "^17.2.0",
+    "react-bootstrap": "^1.0.0-beta.14",
+    "yup": "^0.27.0"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.7",
+    "@types/react-dom": "^16.9.2",
+    "@types/react-i18next": "^8.1.0",
+    "@types/react-router-dom": "^5.1.0",
+    "@types/yup": "^0.26.24",
+    "barrelsby": "^2.2.0",
+    "typescript": "^3.2.2"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "name": "@reactionable/core",
+  "version": "0.0.1",
+  "description": "Reactionable Core package",
+  "private": false,
+  "files": [
+    "lib"
+  ],
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "start": "tsc -w",
+    "build": "rimraf lib && barrelsby -d src --delete && tsc --pretty"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reactionable/reactionable.git"
+  },
+  "keywords": [
+    "reactionable",
+    "react",
+    "framework",
+    "core"
+  ],
+  "author": "ESCEMI <developer@escemi.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/reactionable/reactionable/issues"
+  },
+  "homepage": "https://github.com/reactionable/reactionable#readme",
+  "dependencies": {
+    "formik": "^1.5.8",
+    "i18next": "^17.2.0",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2",
+    "react-i18next": "^10.13.1",
+    "react-router-dom": "^5.1.2",
+    "yup": "^0.27.0"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.7",
+    "@types/react-dom": "^16.9.2",
+    "@types/react-i18next": "^8.1.0",
+    "@types/react-router-dom": "^5.1.0",
+    "@types/yup": "^0.26.24",
+    "barrelsby": "^2.2.0",
+    "rimraf": "^3.0.0",
+    "typescript": "^3.6.4"
+  }
+}
