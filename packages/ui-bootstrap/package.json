@@ -58,5 +58,8 @@
   "jest": {
     "preset": "ts-jest"
   },
-  "gitHead": "a0d643bf97d2e98a5b62fe6682e858e2343b343d"
+  "publishConfig": {
+    "access": "public"
+  },
+  "gitHead": "3d2fbbfbdc4b1a48beaa96b38063de5fb4a82b2b"
 }
