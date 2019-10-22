@@ -5,7 +5,6 @@ import { User, useIdentityContext } from '../../identity/Identity';
 
 type IProps = RouteProps & {
     LoaderComponent: LoaderComponent;
-    Component: any;
 };
 
 const getRender = (
@@ -14,7 +13,6 @@ const getRender = (
     Component: any,
 ) => (props: any): ReactElement => {
     let render;
-
     switch (user) {
         case undefined:
             render = <LoaderComponent />;
@@ -30,7 +28,7 @@ const getRender = (
 }
 
 export const PrivateRoute: React.FC<IProps> = (props) => {
-    const { LoaderComponent, Component, ...routeProps } = props;
+    const { LoaderComponent, component, ...routeProps } = props;
     const { user } = useIdentityContext();
-    return <Route {...routeProps} render={getRender(user, LoaderComponent, Component)} />;
+    return <Route {...routeProps} render={getRender(user, LoaderComponent, component)} />;
 };

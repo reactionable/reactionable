@@ -25,7 +25,7 @@ jobs:
       env:
         CI: true
     - name: Publish
-      uses: mikeal/merge-release@master
+      uses: npm run publish from-git
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
