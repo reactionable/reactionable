@@ -3,27 +3,29 @@
   "private": true,
   "devDependencies": {
     "@types/jest": "^24.0.15",
-    "@types/node": "^12.6.8",
-    "jest": "^24.8.0",
-    "ts-jest": "^24.0.2",
-    "typescript": "^3.5.3",
-    "prettier": "^1.18.2",
-    "@typescript-eslint/eslint-plugin": "^2.0.0",
-    "@typescript-eslint/parser": "^2.0.0",
+    "@types/node": "^12.11.2",
+    "@typescript-eslint/eslint-plugin": "^2.5.0",
+    "@typescript-eslint/parser": "^2.5.0",
     "eslint": "^6.3.0",
     "eslint-config-prettier": "^6.1.0",
     "eslint-formatter-friendly": "^7.0.0",
-    "eslint-plugin-prettier": "^3.1.0"
+    "eslint-plugin-prettier": "^3.1.0",
+    "jest": "^24.8.0",
+    "prettier": "^1.18.2",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.5.3"
   },
   "scripts": {
     "start": "lerna run start --parallel",
     "test": "jest",
     "format": "prettier --write \"**/*.ts\"  \"!**/lib/**\"",
     "lint": "eslint \"packages/**/{src,__tests__}/**/*.ts\" -f eslint-formatter-friendly",
-    "build": "lerna run build && lerna bootstrap"
+    "build": "lerna run build && lerna bootstrap",
+    "update": "npm-check -u & (cd packages/core && npm run update & cd ../..) & (cd packages/ui-bootstrap && npm run update & cd ../..) & (cd packages/graphql && npm run update & cd ../..)",
+    "publish": "lerna publish from-git"
   },
   "dependencies": {
-    "lerna": "^3.16.1"
+    "lerna": "^3.18.3"
   },
   "prettier": {
     "printWidth": 100,

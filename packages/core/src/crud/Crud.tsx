@@ -20,7 +20,7 @@ export const Crud: NavComponent = ({
     LoaderComponent
 }) => {
     return <>
-        <PrivateRoute exact path={match.path} Component={lazyLoad(ListComponent)} LoaderComponent={LoaderComponent}/>
-        <PrivateRoute path={`${match.path}/:${name}Id`} Component={lazyLoad(ReadComponent)} LoaderComponent={LoaderComponent} />
+        <PrivateRoute exact path={match.path} component={lazyLoad(ListComponent)} LoaderComponent={LoaderComponent}/>
+        <PrivateRoute path={`${match.path}/:${name}Id`} component={lazyLoad(ReadComponent)} LoaderComponent={LoaderComponent} />
     </>;
 };

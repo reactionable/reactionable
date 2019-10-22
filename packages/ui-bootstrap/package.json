@@ -11,7 +11,8 @@
   "scripts": {
     "start": "tsc -w",
     "test": "jest",
-    "build": "rimraf lib && barrelsby -d src --delete && tsc --pretty"
+    "build": "rimraf lib && barrelsby -d src --delete && tsc --pretty",
+    "update": "npm-check -u"
   },
   "repository": {
     "type": "git",
@@ -33,18 +34,18 @@
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.25",
     "@fortawesome/free-solid-svg-icons": "^5.11.2",
-    "@fortawesome/react-fontawesome": "^0.1.6",
+    "@fortawesome/react-fontawesome": "^0.1.7",
     "@reactionable/core": "^0.1.0",
     "bootstrap": "^4.3.1",
     "formik": "^1.5.8",
-    "i18next": "^17.2.0",
+    "i18next": "^17.3.0",
     "react": "^16.10.2",
     "react-bootstrap": "^1.0.0-beta.14",
     "yup": "^0.27.0"
   },
   "devDependencies": {
     "@types/jest": "^24.0.19",
-    "@types/node": "^12.11.1",
+    "@types/node": "^12.11.2",
     "@types/react": "^16.9.7",
     "@types/react-dom": "^16.9.2",
     "@types/react-i18next": "^8.1.0",
