@@ -22,7 +22,7 @@
     "lint": "eslint \"packages/**/{src,__tests__}/**/*.ts\" -f eslint-formatter-friendly",
     "build": "lerna run build && lerna bootstrap",
     "update": "npm-check -u & (cd packages/core && npm run update & cd ../..) & (cd packages/ui-bootstrap && npm run update & cd ../..) & (cd packages/graphql && npm run update & cd ../..)",
-    "publish": "lerna publish from-git"
+    "publish": "lerna publish"
   },
   "dependencies": {
     "lerna": "^3.18.3"
