@@ -1,7 +1,7 @@
 {
-  "name": "@reactionable/ui-bootstrap",
+  "name": "@reactionable/graphql",
   "version": "0.0.6",
-  "description": "Reactionable UI package for Bootsrap",
+  "description": "Reactionable GraphQL package",
   "private": false,
   "files": [
     "lib"
@@ -21,8 +21,7 @@
     "reactionable",
     "react",
     "framework",
-    "UI",
-    "Bootstrap"
+    "GraphQL"
   ],
   "author": "ESCEMI <developer@escemi.com>",
   "license": "MIT",
@@ -31,16 +30,10 @@
   },
   "homepage": "https://github.com/reactionable/reactionable#readme",
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.25",
-    "@fortawesome/free-solid-svg-icons": "^5.11.2",
-    "@fortawesome/react-fontawesome": "^0.1.6",
     "@reactionable/core": "^0.0.6",
-    "bootstrap": "^4.3.1",
-    "formik": "^1.5.8",
-    "i18next": "^17.2.0",
+    "apollo-boost": "^0.4.4",
     "react": "^16.10.2",
-    "react-bootstrap": "^1.0.0-beta.14",
-    "yup": "^0.27.0"
+    "react-apollo": "^3.1.3"
   },
   "devDependencies": {
     "@types/jest": "^24.0.19",
@@ -49,7 +42,6 @@
     "@types/react-dom": "^16.9.2",
     "@types/react-i18next": "^8.1.0",
     "@types/react-router-dom": "^5.1.0",
-    "@types/yup": "^0.26.24",
     "barrelsby": "^2.2.0",
     "jest": "^24.9.0",
     "rimraf": "^3.0.0",
@@ -61,6 +53,5 @@
   },
   "publishConfig": {
     "access": "public"
-  },
-  "gitHead": "3d2fbbfbdc4b1a48beaa96b38063de5fb4a82b2b"
+  }
 }
