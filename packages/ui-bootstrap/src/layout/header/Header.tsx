@@ -6,13 +6,13 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useAuthenticator } from './Authenticator/Authenticator';
 
-interface IProps {
+export interface IHeaderProps {
     brand?: ReactElement;
     navbarProps?: NavbarProps;
     navStartItems?: ReactNode[];
 };
 
-const Header: React.FC<IProps> = ({ brand, navbarProps = {}, navStartItems = [] }) => {
+export const Header: React.FC<IHeaderProps> = ({ brand, navbarProps = {}, navStartItems = [] }) => {
 
     const { t } = useTranslation();
     const {
@@ -61,5 +61,3 @@ const Header: React.FC<IProps> = ({ brand, navbarProps = {}, navStartItems = [] 
         </Navbar>
     </>;
 };
-
-export default Header;
