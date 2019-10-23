@@ -5,7 +5,6 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useAuthenticator } from './Authenticator/Authenticator';
-import './Header.scss';
 
 interface IProps {
     brand?: ReactElement;
