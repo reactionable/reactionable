@@ -2,7 +2,6 @@ import React from 'react';
 import Spinner from 'react-bootstrap/Spinner';
 import { useTranslation } from 'react-i18next';
 import { ILoaderProps, IUseLoaderProps, useLoader as useLoaderCore } from '@reactionable/core';
-import './Loader.scss';
 
 export const Loader: React.FC<ILoaderProps & {
     overlay?: boolean,
@@ -14,7 +13,16 @@ export const Loader: React.FC<ILoaderProps & {
     if (!overlay) {
         return spinnerElement;
     }
-    return <div className="spinner--overlay">{spinnerElement}</div>;
+    return <div
+        className="spinner--overlay"
+        style={{
+            width: '100%',
+            height: '100%',
+            position: 'fixed',
+            top: '50%',
+            left: '50%',
+        }}
+    >{spinnerElement}</div>;
 };
 
 export const useLoader = (props: Omit<IUseLoaderProps, 'Component'> = {}) => {
