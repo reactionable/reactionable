@@ -4,7 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { useAuthenticator } from './Authenticator/Authenticator';
+import { useIdentityContext } from '@reactionable/core';
 
 export interface IHeaderProps {
     brand?: ReactElement;
@@ -15,12 +15,7 @@ export interface IHeaderProps {
 export const Header: React.FC<IHeaderProps> = ({ brand, navbarProps = {}, navStartItems = [] }) => {
 
     const { t } = useTranslation();
-    const {
-        user,
-        modal,
-        open,
-        logout
-    } = useAuthenticator();
+    const { user, logout } = useIdentityContext();
 
     const userMenuItems: ReactNode[] = [];
     if (user) {
@@ -47,7 +42,6 @@ export const Header: React.FC<IHeaderProps> = ({ brand, navbarProps = {}, navSta
     }
 
     return <>
-        {!user && modal}
         <Navbar {...Object.assign({
             variant: 'dark',
             expand: 'lg',
