@@ -8,7 +8,7 @@ export const useListCallback = async (query: string, variables?: Object) => {
     );
 
     return {
-        loading,
+        isLoading: !!loading,
         error,
         data: !loading && !error ? extractGqlData(data) : data,
         refetch,

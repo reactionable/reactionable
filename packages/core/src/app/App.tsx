@@ -37,7 +37,7 @@ export const App: React.FC<IAppProps> = ({
             const key = `${routeProps.exact ? 'exact' : 'non-exact'}-${routeProps.path}-${privateRoute ? 'private' : 'public'}-${component.name}`;
             if (privateRoute) {
                 if (!identity) {
-                    throw new Error('Unable to render a private route without identify configuration')
+                    throw new Error('Unable to render a private route without identify configuration');
                 }
                 return <PrivateRoute
                     key={key}
