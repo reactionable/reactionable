@@ -12,29 +12,23 @@ export interface ILoginFormValues {
 
 export interface IIdentityContext {
     user: IUser | undefined | null,
-    login: (values: ILoginFormValues) => Promise<IUser | null | undefined>,
     logout: () => Promise<void>,
 };
 
 export const IdentityContext = React.createContext<IIdentityContext>({
     user: undefined,
-    login: async (values: Object) => { return undefined },
     logout: async () => { },
 });
 
-export type IIdentityContextProviderProps = Pick<IIdentityContext, 'login' | 'logout'> & {
-    init: () => Promise<IUser | null>;
+export type IIdentityContextProviderProps = Pick<IIdentityContext, 'logout'> & {
     Component: React.FC<{
         setUser: (user: IUser | null) => void;
     }>;
 };
 
-export const IdentityContextProvider: React.FC<IIdentityContextProviderProps> = ({ init, Component, ...props }) => {
+export const IdentityContextProvider: React.FC<IIdentityContextProviderProps> = ({ Component, ...props }) => {
 
     const [user, setUser] = React.useState<IUser | null | undefined>(undefined);
-
-    init().then(user => { }).catch(error => { throw error });
-
     return <IdentityContext.Provider
         value={{
             user,

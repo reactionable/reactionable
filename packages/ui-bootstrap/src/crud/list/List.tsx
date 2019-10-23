@@ -6,7 +6,7 @@ import { Loader } from '../../loader/Loader';
 import { ErrorAlert } from '../../error-alert/ErrorAlert';
 
 export interface IListProps<Data> extends Omit<ICoreListProps<Data>, 'render' | 'LoaderComponent' | 'ErrorAlertComponent'> {
-    head: Array<ReactElement>;
+    head: Array<ReactElement|string>;
     render: (item: Data) => ReactElement;
 };
 
