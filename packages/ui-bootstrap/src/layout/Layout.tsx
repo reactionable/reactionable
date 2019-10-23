@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { LazyExoticComponent } from 'react';
 import { Header, IHeaderProps } from './header/Header';
 import { Footer, IFooterProps } from './footer/Footer';
 
@@ -17,4 +17,13 @@ export const Layout: React.FC<IProps> = ({
         <main>{children}</main>
         <Footer {...footer} />
     </>;
+};
+
+export const useLayout = (ComponentToLoad: LazyExoticComponent<any>): LazyExoticComponent<any> => {
+    const lazyComponent = (props: any) => {
+        return <Layout>
+            <ComponentToLoad {...props} />
+        </Layout>;
+    };
+    return lazyComponent as LazyExoticComponent<any>;
 };
