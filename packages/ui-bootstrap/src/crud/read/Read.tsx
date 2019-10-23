@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Read as CoreRead, IListProps as ICoreListProps } from '@reactionable/core';
 import { Loader } from '../../loader/Loader';
 import { ErrorAlert } from '../../error-alert/ErrorAlert';

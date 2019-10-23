@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { IFormProps, Form } from '../../form/Form';
 
 export interface ICreateProps<Value, Data> extends IFormProps<Value, Data> {};

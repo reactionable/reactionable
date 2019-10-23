@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import Toast from 'react-bootstrap/Toast';
 import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

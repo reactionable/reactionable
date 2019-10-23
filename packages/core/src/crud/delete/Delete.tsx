@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { useConfirmation, ConfirmationComponent } from '../../confirmation/Confirmation';
 import { IUseLoader } from '../../loader/Loader';
 import { IUseNotification } from '../../notification/Notification';

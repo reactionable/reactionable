@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { useSuccessNotification } from '../notification/Notification';
 import { useErrorAlert } from '../error-alert/ErrorAlert';
 import { useLoader } from '../loader/Loader';

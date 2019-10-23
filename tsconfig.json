@@ -24,7 +24,12 @@
     "strictNullChecks": true,
     "pretty": true,
     "jsx": "react",
-    "suppressImplicitAnyIndexErrors": true
+    "suppressImplicitAnyIndexErrors": true,
+    "esModuleInterop": true,
+    "importHelpers": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "isolatedModules": false
   },
   "exclude": [
     "**/*.test.ts",
