@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 export const EnhanceChildren: React.FC<{ enhance: { [key: string]: any } }> = (props) => {
     const {

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { EnhanceChildren } from '@reactionable/core';
 import { ModalForm, useModalForm } from '../../modal-form/ModalForm';

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { FormikProps, FormikActions } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { string } from 'yup';

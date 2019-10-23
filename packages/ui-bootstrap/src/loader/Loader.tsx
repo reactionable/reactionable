@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import Spinner from 'react-bootstrap/Spinner';
 import { useTranslation } from 'react-i18next';
 import { ILoaderProps, IUseLoaderProps, useLoader as useLoaderCore } from '@reactionable/core';
