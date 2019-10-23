@@ -12,11 +12,11 @@ export interface IUseNotificationProps extends Pick<INotificationProps, 'title'>
 
 export interface IUseNotification {
     notification: ReactElement;
-    setNotification: (error: any) => void;
+    setNotification: (message: string) => void;
 };
 
 export const useNotification = ({ Component, ...props }: IUseNotificationProps): IUseNotification => {
-    const [notification, setNotification] = useState(undefined);
+    const [notification, setNotification] = useState<string|undefined>(undefined);
     return {
         notification: <>{notification && <Component
             {...props}

@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, ReactElement } from 'react';
 import { FormikActions, Formik, FormikProps, Field, FieldProps, getIn } from 'formik';
 import { object } from 'yup';
-import { IUseErrorAlert } from '../error-alert/ErrorAlert';
+import { IUseErrorAlert, IError } from '../error-alert/ErrorAlert';
 import { IUseLoader } from '../loader/Loader';
 import { IUseNotification } from '../notification/Notification';
 import { useTranslation } from 'react-i18next';
@@ -67,17 +67,17 @@ export const Form: FormComponent = (props) => {
         render={renderForm} />;
 };
 
-
 export type IFormFieldPropsEnhanced<Values> = FieldProps<Values> & {
     field: {
-        isValid: boolean,
-        isInvalid: boolean,
-        ref: React.RefObject<any>,
-    }
+        isValid: boolean;
+        isInvalid: boolean;
+        ref: React.RefObject<any>;
+    };
 };
+
 export type IRenderFormField<Values> = (
     fieldProps: IFormFieldPropsEnhanced<Values>,
-    error?: string
+    error?: IError,
 ) => React.ReactElement;
 
 export type IFormFieldProps<Values = any> = {
@@ -102,8 +102,6 @@ export const FormField: FormField = ({ name, render, autoFocus }) => {
         const error = getIn(fieldProps.form.errors, fieldProps.field.name);
         const isValid = !!(touch && !error);
         const isInvalid = !!(error);
-
-
         return render(
             Object.assign(fieldProps, {
                 field: {

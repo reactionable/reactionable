@@ -1,12 +1,12 @@
 import React, { ReactNode, ReactElement } from 'react';
 import { LoaderComponent } from '../../loader/Loader';
-import { ErrorAlertComponent } from '../../error-alert/ErrorAlert';
+import { ErrorAlertComponent, IError } from '../../error-alert/ErrorAlert';
 
 export interface IListProps<Data> {
     data: Array<Data>;
     noData?: ReactNode;
     isLoading: boolean;
-    error?: string;
+    error?: IError;
     LoaderComponent: LoaderComponent;
     ErrorAlertComponent: ErrorAlertComponent;
     render: (data: Array<Data>) => React.ReactElement;
