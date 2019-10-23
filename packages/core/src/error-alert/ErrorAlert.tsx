@@ -10,8 +10,8 @@ export interface IUseErrorAlert {
     setError: (error: any) => void;
 };
 
-export const useErrorAlert = ({Component, ...props}: IUseErrorAlertProps): IUseErrorAlert => {
-    const [error, setError] = useState<string|undefined>(undefined);
+export const useErrorAlert = ({ Component, ...props }: IUseErrorAlertProps): IUseErrorAlert => {
+    const [error, setError] = useState<string | undefined>(undefined);
     return {
         errorAlert: <>{error && <Component {...props} />}</>,
         setError: (error: any) => {
