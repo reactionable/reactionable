@@ -1,53 +1,49 @@
-import React, { createContext, useContext, useState } from 'react';
+import * as React from 'react';
 
-export interface User {
+export interface IUser {
     displayName: () => string;
+    [key: string]: any;
 };
+
+export interface ILoginFormValues {
+    username: string,
+    password: string,
+}
 
 export interface IIdentityContext {
-    user: User | undefined | null,
-    setUser: (user: User | undefined | null) => void,
-    login: (values: Object) => User | null | undefined,
-    logout: () => void,
-}
-
-export const IdentityContext = createContext<IIdentityContext>({
-    user: undefined,
-    setUser: (user: User | null | undefined) => { },
-    login: (values: Object): User | null | undefined => { return undefined },
-    logout: () => { },
-});
-
-export interface IIdentityContextProviderProps {
-    logout: () => void;
-    login: (values: Object) => User | null | undefined;
-}
-export const IdentityContextProvider = (props: IIdentityContextProviderProps) => {
-
-    const [user, setUser] = useState<User | null | undefined>();
-
-    const logout = () => {
-        props.logout();
-        setUser(undefined);
-    }
-
-    const login = (values: Object) => {
-        const user = props.login(values);
-        setUser(user);
-        return user;
-    }
-
-    return (
-        <IdentityContext.Provider
-            value={{
-                user,
-                setUser,
-                login,
-                logout
-            }}
-            {...props}
-        />
-    )
+    user: IUser | undefined | null,
+    login: (values: ILoginFormValues) => Promise<IUser | null | undefined>,
+    logout: () => Promise<void>,
 };
 
-export const useIdentityContext = () => useContext(IdentityContext);
+export const IdentityContext = React.createContext<IIdentityContext>({
+    user: undefined,
+    login: async (values: Object) => { return undefined },
+    logout: async () => { },
+});
+
+export type IIdentityContextProviderProps = Pick<IIdentityContext, 'login' | 'logout'> & {
+    init: () => Promise<IUser | null>;
+    Component: React.FC<{
+        setUser: (user: IUser | null) => void;
+    }>;
+};
+
+export const IdentityContextProvider: React.FC<IIdentityContextProviderProps> = ({ init, Component, ...props }) => {
+
+    const [user, setUser] = React.useState<IUser | null | undefined>(undefined);
+
+    init().then(user => { }).catch(error => { throw error });
+
+    return <IdentityContext.Provider
+        value={{
+            user,
+            ...props
+        }}
+    >
+        <Component setUser={setUser} />
+        {props.children}
+    </IdentityContext.Provider>;
+};
+
+export const useIdentityContext = () => React.useContext(IdentityContext);

@@ -8,6 +8,7 @@ export interface IDeleteProps<Data> {
     successMessage: string;
     confirmation: ConfirmationComponent;
     confirmationTitle: string;
+    confirmationMessage: string;
     onConfirm: () => Promise<Data>;
     onSuccess?: (result: Data) => void;
     successNotification: IUseNotification;
@@ -25,6 +26,7 @@ export const Delete: DeleteComponent = (props) => {
     
     const { confirmation, setConfirmation } = useConfirmation({
         title: props.confirmationTitle,
+        children: props.confirmationMessage,
         callback: (confirm: boolean) => {
             if (!confirm) {
                 return;

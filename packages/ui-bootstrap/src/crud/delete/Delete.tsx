@@ -9,7 +9,9 @@ import { useLoader } from '../../loader/Loader';
 
 export interface IDeleteProps<Data> extends Pick<ICoreDeleteProps<Data>, 'onConfirm' | 'onSuccess' | 'successMessage'> {
     title: string;
+    confirmationMessage: string;
     label?: string;
+
 };
 
 export const Delete: React.FC<IDeleteProps<any>> = ({ title, label, ...props }) => {

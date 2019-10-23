@@ -1,14 +1,14 @@
 import React, { ReactElement } from 'react';
 import { Redirect, Route, RouteProps } from 'react-router-dom';
 import { LoaderComponent } from '../../loader/Loader';
-import { User, useIdentityContext } from '../../identity/Identity';
+import { IUser, useIdentityContext } from '../../identity/Identity';
 
 type IProps = RouteProps & {
     LoaderComponent: LoaderComponent;
 };
 
 const getRender = (
-    user: User | null | undefined, 
+    user: IUser | null | undefined, 
     LoaderComponent: LoaderComponent,
     Component: any,
 ) => (props: any): ReactElement => {

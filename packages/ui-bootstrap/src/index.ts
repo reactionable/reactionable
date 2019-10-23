@@ -15,7 +15,6 @@ export * from "./layout/footer/Footer.test";
 export * from "./layout/footer/Footer";
 export * from "./layout/header/Header.test";
 export * from "./layout/header/Header";
-export * from "./layout/header/Authenticator/Authenticator";
 export * from "./loader/Loader.test";
 export * from "./loader/Loader";
 export * from "./modal-form/ModalForm.test";
