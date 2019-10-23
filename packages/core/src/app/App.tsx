@@ -34,24 +34,27 @@ export const App: React.FC<IAppProps> = ({
 
     const router = <Router history={customHistory}>
         <Switch>{routes.map(({ privateRoute, component, ...routeProps }) => {
+            const key = `${routeProps.exact ? 'exact' : 'non-exact'}-${routeProps.path}-${privateRoute ? 'private' : 'public'}-${component.name}`;
             if (privateRoute) {
-                if(!identity){
+                if (!identity) {
                     throw new Error('Unable to render a private route without identify configuration')
                 }
                 return <PrivateRoute
+                    key={key}
                     component={lazyLoad(component, LoaderComponent)}
                     LoaderComponent={LoaderComponent}
                     {...routeProps}
                 />;
             }
             return <Route
+                key={key}
                 component={lazyLoad(component, LoaderComponent)}
                 {...routeProps}
             />;
         })}</Switch>
     </Router>;
 
-    if(!identity){
+    if (!identity) {
         return router;
     }
 
