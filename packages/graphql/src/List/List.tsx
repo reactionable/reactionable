@@ -15,7 +15,7 @@ export const useListCallback = (query: string, variables?: Object): IUseListCall
 
     return {
         isLoading: !!loading,
-        error: error ? error.message : undefined,
+        error: error ? error : undefined,
         data: !loading && !error ? extractGqlData(data) : data,
         refetch,
         fetchMore,
