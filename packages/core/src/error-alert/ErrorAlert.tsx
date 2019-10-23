@@ -1,5 +1,11 @@
 import React, { useState, ReactElement } from 'react';
 
+export interface IError extends Error {
+    name: string;
+    message: string;
+    code: number;
+}
+
 export interface IErrorAlertProps { };
 export type ErrorAlertComponent = React.FC<IErrorAlertProps>;
 export interface IUseErrorAlertProps extends IErrorAlertProps {

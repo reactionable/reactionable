@@ -1,21 +1,28 @@
 import { useQuery } from '@apollo/react-hooks';
+import { QueryResult } from '@apollo/react-common';
 import { gql } from 'apollo-boost';
+import { IListProps } from '@reactionable/core';
 
-export const useListCallback = async (query: string, variables?: Object) => {
-    const { loading, error, data, refetch } = useQuery(
+export type IUseListCallback<Data = any> =
+    Pick<IListProps<Data>, 'isLoading' | 'error' | 'data'>
+    & Pick<QueryResult<Data>, 'refetch' | 'fetchMore'>;
+
+export const useListCallback = (query: string, variables?: Object): IUseListCallback => {
+    const { loading, error, data, refetch, fetchMore } = useQuery(
         gql`${query}`,
         { variables }
     );
 
     return {
         isLoading: !!loading,
-        error,
+        error: error ? error.message : undefined,
         data: !loading && !error ? extractGqlData(data) : data,
         refetch,
+        fetchMore,
     };
 };
 
-export const extractGqlData: <Data = any, Result = any>(data?: Data) => Array<Result> = (data) => {
+const extractGqlData: <Data = any, Result = any>(data?: Data) => Array<Result> = (data) => {
     if (!data) {
         throw new Error('No data');
     }
