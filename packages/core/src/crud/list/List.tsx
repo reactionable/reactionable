@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { LoaderComponent } from '../../loader/Loader';
 import { IError, IUseErrorAlert } from '../../alert/ErrorAlert';
+import { IUseAlert } from '../../alert/Alert';
 
 export interface IListProps<Data> {
     data: Array<Data>;
-    noDataAlert: IUseErrorAlert;
+    noDataAlert: IUseAlert;
     isLoading: boolean;
     error?: IError;
     errorAlert: IUseErrorAlert;
@@ -29,15 +30,13 @@ export const List: ListComponent = ({
 }) => {
 
     React.useEffect(() => {
-        if (!isLoading && error) {
-            errorAlert.setError(error);
-        }
+        errorAlert.setErrorAlert(!isLoading && error ? error : undefined);
     }, [error, isLoading]);
 
     return <>
         {isLoading && <LoaderComponent />}
         {!isLoading && error && errorAlert.errorAlert}
-        {!isLoading && !error && !data.length && noDataAlert.errorAlert}
+        {!isLoading && !error && !data.length && noDataAlert.alert}
         {!isLoading && !error && !!data.length && render(data)}
     </>;
 };

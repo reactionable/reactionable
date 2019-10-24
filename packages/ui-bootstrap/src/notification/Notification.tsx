@@ -3,8 +3,8 @@ import Toast from 'react-bootstrap/Toast';
 import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
-import { useNotification, INotificationProps, NotificationComponent } from '@reactionable/core';
-import { ErrorAlert } from '../error-alert/ErrorAlert';
+import { useNotification, INotificationProps, NotificationComponent, IError } from '@reactionable/core';
+import { ErrorAlert } from '../alert/ErrorAlert';
 
 const Notification: React.FC<INotificationProps & {
     variant: string,
@@ -44,7 +44,8 @@ export const useSuccessNotification = (title: string) => {
 }
 
 const ErrorNotification: React.FC<INotificationProps & {
-    title?: string,
+    children?: IError;
+    title?: string;
 }> = (props) => {
     if (!props.title) {
         const { t } = useTranslation();
