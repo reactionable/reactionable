@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.4](https://github.com/reactionable/reactionable/compare/v0.9.3...v0.9.4) (2019-10-24)
+
+
+### Bug Fixes
+
+* **ui-bootstrap/crud/Read:** Fix typings ([91fca3b](https://github.com/reactionable/reactionable/commit/91fca3b1378b7d83558d622b20beb2aadc148185))
+
+
+
+
+
 ## [0.9.3](https://github.com/reactionable/reactionable/compare/v0.9.2...v0.9.3) (2019-10-24)
 
 
