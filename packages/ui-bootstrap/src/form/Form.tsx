@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useSuccessNotification } from '../notification/Notification';
-import { useErrorAlert } from '../error-alert/ErrorAlert';
+import { useErrorAlert } from '../alert/ErrorAlert';
 import { useLoader } from '../loader/Loader';
 import { FormikProps } from 'formik';
 import FormLabel from 'react-bootstrap/FormLabel';

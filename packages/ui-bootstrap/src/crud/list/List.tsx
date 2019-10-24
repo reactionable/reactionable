@@ -3,7 +3,8 @@ import { useTranslation } from 'react-i18next';
 import Table from 'react-bootstrap/Table';
 import { List as CoreList, IListProps as ICoreListProps } from '@reactionable/core';
 import { Loader } from '../../loader/Loader';
-import { useErrorAlert } from '../../error-alert/ErrorAlert';
+import { useAlert } from '../../alert/Alert';
+import { useErrorAlert } from '../../alert/ErrorAlert';
 
 export interface IListProps<Data> extends Omit<ICoreListProps<Data>, 'render' | 'LoaderComponent' | 'errorAlert' | 'noDataAlert'> {
     noData: string | React.ReactNode
@@ -17,7 +18,7 @@ export const List: ListComponent = ({ head, render, noData, ...props }) => {
     const { t } = useTranslation();
 
     const errorAlert = useErrorAlert();
-    const noDataAlert = useErrorAlert({ children: noData, 'variant': 'warning', 'className': 'text-center' });
+    const noDataAlert = useAlert({ children: noData, 'variant': 'warning', 'className': 'text-center' });
 
     return <CoreList
         {...props}

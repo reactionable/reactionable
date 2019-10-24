@@ -30,7 +30,7 @@ export const Form: FormComponent = (props) => {
         notification: successNotification,
         setNotification: setSuccessNotification,
     } = props.successNotification;
-    const { errorAlert, setError } = props.errorAlert;
+    const { errorAlert, setErrorAlert } = props.errorAlert;
     const { loader, setLoading, isLoading } = props.loader;
 
     const renderForm = (formikBag: FormikProps<any>) => {
@@ -56,7 +56,7 @@ export const Form: FormComponent = (props) => {
         }).catch(error => {
             setLoading(false);
             actions.setSubmitting(false);
-            setError(error);
+            setErrorAlert(error);
         });
     };
 

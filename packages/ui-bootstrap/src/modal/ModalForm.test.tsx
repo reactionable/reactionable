@@ -14,20 +14,22 @@ it('renders without crashing', () => {
   ReactDOM.render(<ModalForm
     title="Test modal form"
     submitButton="Submit modal form"
-    onSubmit={async (values: IFormValues, actions: FormikActions<IFormValues>) => 'ok'}
     onHide={() => { }}
-    formSchema={{
-      test: string()
-        .required('Test is required'),
+    form={{
+      onSubmit: async (values: IFormValues, actions: FormikActions<IFormValues>) => 'ok',
+      formSchema: {
+        test: string()
+          .required('Test is required'),
+      },
+      formValues: {
+        test: '',
+      },
+      render: (formikBag: FormikProps<IFormValues>, isLoading: boolean) => <>
+        <FormField
+          name="test"
+        />
+      </>,
     }}
-    formValues={{
-      test: '',
-    }}
-    render={(formikBag: FormikProps<IFormValues>, isLoading: boolean) => <>
-      <FormField
-        name="test"
-      />
-    </>}
   />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
