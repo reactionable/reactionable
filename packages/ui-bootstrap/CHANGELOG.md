@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.5](https://github.com/reactionable/reactionable/compare/v0.9.4...v0.9.5) (2019-10-24)
+
+
+### Bug Fixes
+
+* **Modal:** Fix hooks typings ([6e52b39](https://github.com/reactionable/reactionable/commit/6e52b390003131c46ccca81d9f63b1bb3efd37a3))
+
+
+
+
+
 ## [0.9.4](https://github.com/reactionable/reactionable/compare/v0.9.3...v0.9.4) (2019-10-24)
 
 
