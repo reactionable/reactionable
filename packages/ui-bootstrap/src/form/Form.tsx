@@ -2,12 +2,11 @@ import * as React from 'react';
 import { useSuccessNotification } from '../notification/Notification';
 import { useErrorAlert } from '../alert/ErrorAlert';
 import { useLoader } from '../loader/Loader';
-import { FormikProps } from 'formik';
+import { FormikProps, Form as FormikForm } from 'formik';
 import FormLabel from 'react-bootstrap/FormLabel';
 import Feedback from 'react-bootstrap/Feedback';
 import FormControl from 'react-bootstrap/FormControl';
 import FormGroup from 'react-bootstrap/FormGroup';
-import BootsrapForm from 'react-bootstrap/Form';
 import {
     Form as CoreForm,
     IFormProps as ICoreFormProps,
@@ -26,9 +25,9 @@ type FormComponent<Values = any, Data = any> = React.FC<IFormProps<Values, Data>
 export const Form: FormComponent = ({ title, render, ...props }) => {
 
     const renderFormFields = (formikBag: FormikProps<any>, isLoading: boolean) => {
-        return <BootsrapForm className="needs-validation">
+        return <FormikForm className="needs-validation">
             {render(formikBag, isLoading)}
-        </BootsrapForm>;
+        </FormikForm>;
     };
 
     return <CoreForm

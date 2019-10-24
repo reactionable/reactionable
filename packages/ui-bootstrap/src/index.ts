@@ -3,7 +3,6 @@
  */
 
 export * from "./alert/Alert";
-export * from "./alert/ErrorAlert.test";
 export * from "./alert/ErrorAlert";
 export * from "./confirmation/Confirmation";
 export * from "./crud/create/Create";
@@ -12,14 +11,10 @@ export * from "./crud/list/List";
 export * from "./crud/read/Read";
 export * from "./form/Form";
 export * from "./layout/Layout";
-export * from "./layout/footer/Footer.test";
 export * from "./layout/footer/Footer";
-export * from "./layout/header/Header.test";
 export * from "./layout/header/Header";
-export * from "./loader/Loader.test";
 export * from "./loader/Loader";
 export * from "./modal/Modal";
-export * from "./modal/ModalForm.test";
 export * from "./modal/ModalForm";
 export * from "./notification/Notification";
 export * from "./paginator/Paginator";

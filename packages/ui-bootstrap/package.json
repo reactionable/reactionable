@@ -11,7 +11,7 @@
   "scripts": {
     "start": "tsc -w",
     "test": "jest",
-    "build": "rimraf lib && barrelsby -d src --delete && tsc --pretty",
+    "build": "rimraf lib && barrelsby -d src --exclude \".+\\.test\\..+\" --delete && tsc --pretty",
     "update": "npm-check -u"
   },
   "repository": {
