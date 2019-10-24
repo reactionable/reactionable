@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { FormikActions, Formik, FormikProps, Field, FieldProps, getIn } from 'formik';
 import { object } from 'yup';
-import { IUseErrorAlert, IError } from '../alert/ErrorAlert';
+import { IUseErrorAlert } from '../alert/ErrorAlert';
 import { IUseLoader } from '../loader/Loader';
 import { IUseNotification } from '../notification/Notification';
 import { useTranslation } from 'react-i18next';
@@ -77,7 +77,7 @@ export type IFormFieldPropsEnhanced<Values> = FieldProps<Values> & {
 
 export type IRenderFormField<Values> = (
     fieldProps: IFormFieldPropsEnhanced<Values>,
-    error?: IError,
+    error?: string,
 ) => React.ReactElement;
 
 export type IFormFieldProps<Values = any> = {

@@ -13,7 +13,6 @@ import {
     FormField as CoreFormField,
     IFormFieldProps, IRenderFormField,
     IFormFieldPropsEnhanced,
-    IError
 } from '@reactionable/core';
 
 export interface IFormProps<Values, Data> extends Omit<ICoreFormProps<Values, Data>, 'successNotification' | 'errorAlert' | 'loader'> {
@@ -45,7 +44,7 @@ type FormField<Values = any> = React.FC<Omit<IFormFieldProps<Values>, 'render'> 
 }>;
 export const FormField: FormField = ({ label, render, ...props }) => {
 
-    const renderField = (fieldProps: IFormFieldPropsEnhanced<any>, error?: IError) => {
+    const renderField = (fieldProps: IFormFieldPropsEnhanced<any>, error?: string) => {
         return <FormGroup controlId={fieldProps.field.name}>
             {label && <FormLabel>{label}</FormLabel>}
             {
@@ -53,7 +52,7 @@ export const FormField: FormField = ({ label, render, ...props }) => {
                     {...fieldProps.field}
                 />
             }
-            {error && <Feedback type="invalid">{error.message}</Feedback>}
+            {error && <Feedback type="invalid">{error}</Feedback>}
         </FormGroup>;
     }
 
