@@ -14,7 +14,7 @@ export type IUseModalFormProps<Values, Data> = IUseModalProps & React.PropsWithC
     Component: ModalFormComponent;
 };
 
-export const useModalForm = (props: IUseModalFormProps<any, any>) => {
+export function useModalForm<P extends IUseModalFormProps<any, any>>(props: P) {
     const onSubmit = props.form.onSubmit;
     props.form.onSubmit = async (values: any, actions: FormikActions<any>) => {
         const result = await onSubmit(values, actions);

@@ -12,7 +12,7 @@ export type IUseModalProps = React.PropsWithChildren<IModalProps> & {
     Component: ModalComponent;
 };
 
-export const useModal = ({ Component, onHide, ...props }: IUseModalProps) => {
+export function useModal<P extends IUseModalProps>({ Component, onHide, ...props }: P) {
     const [show, setShow] = React.useState(props.show);
 
     const openModal = () => { setShow(true); }

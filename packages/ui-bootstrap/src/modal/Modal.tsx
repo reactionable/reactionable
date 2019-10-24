@@ -27,7 +27,7 @@ export const Modal: ModalComponent = ({ title, children, body, footer, ...modalP
 
 export type IUseModalProps = React.PropsWithChildren<IModalProps>;
 
-export const useModal = (props: IUseModalProps) => {
+export function useModal<P extends IUseModalProps>(props: P) {
     return useCoreModal({
         Component: Modal,
         ...props,
