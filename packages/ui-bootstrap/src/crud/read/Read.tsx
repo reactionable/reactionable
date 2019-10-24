@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { Read as CoreRead, IListProps as ICoreListProps } from '@reactionable/core';
+import { Read as CoreRead, IReadProps as ICoreReadProps } from '@reactionable/core';
 import { Loader } from '../../loader/Loader';
 import { useErrorAlert } from '../../alert/ErrorAlert';
 
-export interface IReadProps<Data> extends Omit<ICoreListProps<Data>, 'LoaderComponent' | 'errorAlert'> {
+export interface IReadProps<Data> extends Omit<ICoreReadProps<Data>, 'LoaderComponent' | 'errorAlert'> {
 };
 
 export type ReadComponent<Data = any> = React.FC<IReadProps<Data>>;
