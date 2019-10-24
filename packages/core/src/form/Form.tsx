@@ -102,14 +102,20 @@ export const FormField: FormField = ({ name, render, autoFocus }) => {
         const error = getIn(fieldProps.form.errors, fieldProps.field.name);
         const isValid = !!(touch && !error);
         const isInvalid = !!(error);
-        return render(
-            Object.assign(fieldProps, {
-                field: {
+
+        const fieldPropsEnhanced: IFormFieldPropsEnhanced<any> = Object.assign(fieldProps, {
+            field: Object.assign(
+                fieldProps.field,
+                {
                     isValid,
                     isInvalid,
                     ref: inputRef,
                 }
-            }),
+            ),
+        });
+
+        return render(
+            fieldPropsEnhanced,
             touch ? error : undefined
         );
     };
