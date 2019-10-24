@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.3](https://github.com/reactionable/reactionable/compare/v0.9.2...v0.9.3) (2019-10-24)
+
+
+### Bug Fixes
+
+* **ui-bootstrap/Form:** field props enhanced contains all orginal field properties ([31de226](https://github.com/reactionable/reactionable/commit/31de226721f7357a14bc0462598e71065de2cf4c))
+
+
+
+
+
 ## [0.9.2](https://github.com/reactionable/reactionable/compare/v0.9.1...v0.9.2) (2019-10-24)
 
 
