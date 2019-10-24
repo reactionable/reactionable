@@ -23,11 +23,9 @@ export const Read: ReadComponent = ({
     data,
 }) => {
 
-
     React.useEffect(() => {
         errorAlert.setErrorAlert(!isLoading && error ? error : undefined);
     }, [error, isLoading]);
-
 
     return <>
         {isLoading && <LoaderComponent />}

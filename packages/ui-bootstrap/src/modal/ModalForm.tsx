@@ -3,16 +3,17 @@ import BootstrapModal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { useTranslation } from 'react-i18next';
 import { FormikProps, FormikActions } from 'formik';
-import { IModalFormProps as ICoreModalFormProps, useModal } from '@reactionable/core';
+import { IModalFormProps as ICoreModalFormProps } from '@reactionable/core';
 import { IFormProps, Form } from '../form/Form';
-import { Modal, IModalProps } from './Modal';
+import { Modal, IModalProps, useModal } from './Modal';
 
-export type IModalFormProps<Values, Data> = Omit<ICoreModalFormProps<Values, Data>, 'form'> & IModalProps & {
-    form: Omit<IFormProps<Values, Data>, 'title'>;
-};
+export type IModalFormProps<Values, Data> = IModalProps
+    & Pick<ICoreModalFormProps<Values, Data>, 'submitButton'>
+    & {
+        form: Omit<IFormProps<Values, Data>, 'title'>;
+    };
 
 export type ModalFormComponent<Values = any, Data = any> = React.FC<IModalFormProps<Values, Data>>;
-
 
 export const ModalForm: ModalFormComponent = ({ submitButton, form, ...modalProps }) => {
     const { t } = useTranslation();
@@ -41,10 +42,9 @@ export const ModalForm: ModalFormComponent = ({ submitButton, form, ...modalProp
     </Modal>;
 };
 
-
 export type IUseModalFormProps<Values, Data> = React.PropsWithChildren<IModalFormProps<any, any>>;
 
-export const useModalForm = (props: IUseModalFormProps<any, any>) => {
+export function useModalForm<P extends IUseModalFormProps<any, any>>(props: P) {
     const onSubmit = props.form.onSubmit;
     props.form.onSubmit = async (values: any, actions: FormikActions<any>) => {
         const result = await onSubmit(values, actions);
@@ -54,7 +54,8 @@ export const useModalForm = (props: IUseModalFormProps<any, any>) => {
         return result;
     };
     return useModal({
-        Component: Modal,
+        Component: ModalForm,
         ...props,
     });
 };
+
