@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.2](https://github.com/reactionable/reactionable/compare/v0.9.1...v0.9.2) (2019-10-24)
+
+
+### Bug Fixes
+
+* **ui-bootstrap/Form:** field error must be a string or undefined ([a391ab7](https://github.com/reactionable/reactionable/commit/a391ab702a99dc2e586e3addeab7e3a2c07c8a17))
+
+
+
+
+
 ## [0.9.1](https://github.com/reactionable/reactionable/compare/v0.9.0...v0.9.1) (2019-10-24)
 
 
