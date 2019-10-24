@@ -1,4 +1,4 @@
-import React, { LazyExoticComponent } from 'react';
+import * as React from 'react';
 import { Router, Route, Switch, RouteProps } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import { lazyLoad, LoaderComponent } from '../loader/Loader';
@@ -7,12 +7,12 @@ import { PrivateRoute } from '../nav/privacy-route/PrivateRoute';
 
 export interface IAppProps {
     routes: Array<Omit<RouteProps, 'component'> & {
-        component: LazyExoticComponent<any>,
+        component: React.LazyExoticComponent<any>,
         privateRoute?: boolean,
     }>,
     LoaderComponent: LoaderComponent,
-    HomeComponent?: LazyExoticComponent<any>,
-    NotFoundComponent?: LazyExoticComponent<any>,
+    HomeComponent?: React.LazyExoticComponent<any>,
+    NotFoundComponent?: React.LazyExoticComponent<any>,
     identity?: IIdentityContextProviderProps,
 }
 

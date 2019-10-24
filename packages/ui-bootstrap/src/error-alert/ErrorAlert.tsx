@@ -1,25 +1,24 @@
 import * as React from 'react';
+import Alert, { AlertProps } from 'react-bootstrap/Alert';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
-import Alert from 'react-bootstrap/Alert';
-import { ErrorAlertComponent, useErrorAlert as useErrorAlertCore, isIError } from '@reactionable/core';
+import { useErrorAlert as useErrorAlertCore, isIError, IErrorAlertProps as IErrorAlertPropsCore } from '@reactionable/core';
 
-export const ErrorAlert: ErrorAlertComponent = (props) => {
+export type IErrorAlertProps = IErrorAlertPropsCore & AlertProps & {};
+export type ErrorAlertComponent = React.FC<IErrorAlertProps>;
+export const ErrorAlert: ErrorAlertComponent = ({ children, ...props }) => {
 
-
-    let text: string | React.ReactNode;
-    if (isIError(props.children)) {
-        text = props.children.message;
+    let alertContent: React.ReactElement;
+    if (isIError(children)) {
+        alertContent = <><FontAwesomeIcon icon={faExclamationCircle} /> {children.message}</>;
     }
     else {
-        text = props.children;
+        alertContent = <>{children}</>;
     }
 
-    return <Alert variant="danger">
-        <FontAwesomeIcon icon={faExclamationCircle} /> {text}
-    </Alert>;
+    return <Alert variant="danger" {...props}>{alertContent}</Alert>;
 };
 
-export const useErrorAlert = () => {
-    return useErrorAlertCore({ Component: ErrorAlert });
+export const useErrorAlert = (props?: IErrorAlertProps) => {
+    return useErrorAlertCore({ Component: ErrorAlert, ...props });
 };

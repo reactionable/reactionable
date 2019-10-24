@@ -1,4 +1,4 @@
-import React, { useState, ReactElement, ReactNode } from 'react';
+import * as React from 'react';
 
 export interface IError extends Error {
     code?: number;
@@ -10,18 +10,18 @@ export function isIError(arg: any): arg is IError {
 
 export interface IErrorAlertProps { };
 export type ErrorAlertComponent = React.FC<IErrorAlertProps> & {
-    children?: ReactNode | IError
+    children?: React.ReactNode | IError
 }
 export interface IUseErrorAlertProps extends IErrorAlertProps {
     Component: ErrorAlertComponent;
 };
 export interface IUseErrorAlert {
-    errorAlert: ReactElement;
+    errorAlert: React.ReactElement;
     setError: (error: IError) => void;
 };
 
 export const useErrorAlert = ({ Component, ...props }: IUseErrorAlertProps): IUseErrorAlert => {
-    const [error, setError] = useState<IError | undefined>(undefined);
+    const [error, setError] = React.useState<IError | undefined>(undefined);
     return {
         errorAlert: <>{error && <Component {...props} />}</>,
         setError: (error: IError) => {
