@@ -1,36 +1,43 @@
-import React, { ReactNode, ReactElement } from 'react';
+import * as React from 'react';
 import { LoaderComponent } from '../../loader/Loader';
-import { ErrorAlertComponent, IError } from '../../error-alert/ErrorAlert';
+import { IError, IUseErrorAlert } from '../../alert/ErrorAlert';
 
 export interface IListProps<Data> {
     data: Array<Data>;
-    noData?: ReactNode;
+    noDataAlert: IUseErrorAlert;
     isLoading: boolean;
     error?: IError;
+    errorAlert: IUseErrorAlert;
     LoaderComponent: LoaderComponent;
-    ErrorAlertComponent: ErrorAlertComponent;
     render: (data: Array<Data>) => React.ReactElement;
 };
 
 
 export type TableComponent = React.FC<{
-    rows: Array<ReactElement>,
+    rows: Array<React.ReactElement>,
 }>;
 
 export type ListComponent<Data = any> = React.FC<IListProps<Data>>;
 export const List: ListComponent = ({
     data,
-    noData,
     render,
     isLoading,
     error,
     LoaderComponent,
-    ErrorAlertComponent,
+    errorAlert,
+    noDataAlert,
 }) => {
+
+    React.useEffect(() => {
+        if (!isLoading && error) {
+            errorAlert.setError(error);
+        }
+    }, [error, isLoading]);
+
     return <>
         {isLoading && <LoaderComponent />}
-        {!isLoading && error && <ErrorAlertComponent children={error} />}
-        {!isLoading && !error && !data.length && noData && <ErrorAlertComponent children={noData} />}
+        {!isLoading && error && errorAlert.errorAlert}
+        {!isLoading && !error && !data.length && noDataAlert.errorAlert}
         {!isLoading && !error && !!data.length && render(data)}
     </>;
 };

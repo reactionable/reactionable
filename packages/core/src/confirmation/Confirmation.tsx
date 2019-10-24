@@ -1,4 +1,4 @@
-import React, { useState, PropsWithChildren, ReactElement } from 'react';
+import * as React from 'react';
 
 export interface IConfirmationProps {
   title: string;
@@ -6,17 +6,17 @@ export interface IConfirmationProps {
 };
 
 export type ConfirmationComponent = React.FC<IConfirmationProps>;
-export type IUseConfirmationProps = PropsWithChildren<IConfirmationProps> & {
+export type IUseConfirmationProps = React.PropsWithChildren<IConfirmationProps> & {
   Component: ConfirmationComponent;
 };
 
 export interface IUseConfirmation {
-  confirmation: ReactElement;
+  confirmation: React.ReactElement;
   setConfirmation: (confirmation: boolean) => void;
 };
 
 export const useConfirmation = ({ Component, ...props }: IUseConfirmationProps): IUseConfirmation => {
-  const [confirmation, setConfirmation] = useState<boolean>(false);
+  const [confirmation, setConfirmation] = React.useState<boolean>(false);
 
   const callback = props.callback;
   props.callback = (confirm: boolean) => {

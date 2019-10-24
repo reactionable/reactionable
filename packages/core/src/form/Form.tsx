@@ -1,7 +1,7 @@
-import React, { useRef, useEffect, ReactElement } from 'react';
+import * as React from 'react';
 import { FormikActions, Formik, FormikProps, Field, FieldProps, getIn } from 'formik';
 import { object } from 'yup';
-import { IUseErrorAlert, IError } from '../error-alert/ErrorAlert';
+import { IUseErrorAlert, IError } from '../alert/ErrorAlert';
 import { IUseLoader } from '../loader/Loader';
 import { IUseNotification } from '../notification/Notification';
 import { useTranslation } from 'react-i18next';
@@ -10,7 +10,7 @@ export interface IFormProps<Values, Data> {
     formSchema: object;
     onSubmit: (values: Values, actions: FormikActions<Values>) => Promise<Data>;
     formValues: Values;
-    render: (formikBag: FormikProps<Values>, isLoading: boolean) => ReactElement;
+    render: (formikBag: FormikProps<Values>, isLoading: boolean) => React.ReactElement;
     successNotification: IUseNotification;
     successMessage?: string;
     onSuccess?: (result: Data) => void;
@@ -90,8 +90,8 @@ type FormField<Values = any> = React.FC<IFormFieldProps<Values>>;
 
 export const FormField: FormField = ({ name, render, autoFocus }) => {
 
-    const inputRef = useRef<any>(null);
-    useEffect(() => {
+    const inputRef = React.useRef<any>(null);
+    React.useEffect(() => {
         if (autoFocus === true && inputRef && inputRef.current) {
             inputRef.current.focus();
         }

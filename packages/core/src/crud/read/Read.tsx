@@ -1,6 +1,6 @@
-import React, { ReactElement } from 'react';
+import * as React from 'react';
 import { LoaderComponent } from '../../loader/Loader';
-import { ErrorAlertComponent, IError } from '../../error-alert/ErrorAlert';
+import { ErrorAlertComponent, IError } from '../../alert/ErrorAlert';
 
 export interface IReadProps<Data> {
     loading?: boolean;
@@ -8,7 +8,7 @@ export interface IReadProps<Data> {
     error?: IError;
     ErrorAlertComponent: ErrorAlertComponent;
     data?: Data;
-    render: (data: Data) => ReactElement;
+    render: (data: Data) => React.ReactElement;
 };
 
 export type ReadDataComponent<Data> = React.FC<{ data: Data }>;

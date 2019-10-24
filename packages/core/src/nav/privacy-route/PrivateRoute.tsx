@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import * as React from 'react';
 import { Redirect, Route, RouteProps } from 'react-router-dom';
 import { LoaderComponent } from '../../loader/Loader';
 import { IUser, useIdentityContext } from '../../identity/Identity';
@@ -11,7 +11,7 @@ const getRender = (
     user: IUser | null | undefined, 
     LoaderComponent: LoaderComponent,
     Component: any,
-) => (props: any): ReactElement => {
+) => (props: any): React.ReactElement => {
     let render;
     switch (user) {
         case undefined:

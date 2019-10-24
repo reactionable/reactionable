@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import * as React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { useTranslation } from 'react-i18next';
@@ -54,7 +54,7 @@ export const ModalForm: ModalFormComponent = ({ title, submitButton, show = true
 };
 
 export const useModalForm = (props: IModalFormProps<any, any> | boolean) => {
-    const [show, setShow] = useState('boolean' === typeof props ? props : props.show);
+    const [show, setShow] = React.useState('boolean' === typeof props ? props : props.show);
 
     return {
         show,

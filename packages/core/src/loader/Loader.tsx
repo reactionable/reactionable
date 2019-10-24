@@ -1,4 +1,4 @@
-import React, { Suspense, useState, LazyExoticComponent, ReactElement } from 'react';
+import * as React from 'react';
 
 export interface ILoaderProps { };
 export type LoaderComponent = React.FC<ILoaderProps>;
@@ -7,13 +7,13 @@ export interface IUseLoaderProps extends ILoaderProps {
     Component: LoaderComponent;
 };
 export interface IUseLoader {
-    loader: ReactElement;
+    loader: React.ReactElement;
     setLoading: (loading: boolean) => void;
     isLoading: boolean;
 };
 
 export const useLoader = ({ Component, ...props }: IUseLoaderProps): IUseLoader => {
-    const [isLoading, setLoading] = useState<boolean>(false);
+    const [isLoading, setLoading] = React.useState<boolean>(false);
     return {
         loader: <>{isLoading && <Component {...props} />}</>,
         setLoading,
@@ -22,12 +22,12 @@ export const useLoader = ({ Component, ...props }: IUseLoaderProps): IUseLoader 
 };
 
 export const lazyLoad = (
-    ComponentToLoad: LazyExoticComponent<any>,
+    ComponentToLoad: React.LazyExoticComponent<any>,
     LoaderComponent?: LoaderComponent,
 ) => (props: any) => withSuspense(<ComponentToLoad {...props} />, LoaderComponent);
 
 export const withSuspense = (
-    ComponentToLoad: ReactElement,
+    ComponentToLoad: React.ReactElement,
     LoaderComponent?: LoaderComponent,
-) => <Suspense fallback={LoaderComponent || null}>{ComponentToLoad}</Suspense>;
+) => <React.Suspense fallback={LoaderComponent || null}>{ComponentToLoad}</React.Suspense>;
 

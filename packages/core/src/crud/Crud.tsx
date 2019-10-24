@@ -1,12 +1,12 @@
-import React, { LazyExoticComponent } from 'react';
+import * as React from 'react';
 import { lazyLoad, LoaderComponent } from '../loader/Loader';
 import { INavProps } from '../nav/INavProps';
 import { PrivateRoute } from '../nav/privacy-route/PrivateRoute';
 
 export interface ICrudProps<Match> extends INavProps<Match> {
     name: string
-    ListComponent: LazyExoticComponent<React.FC<INavProps<Match>>>;
-    ReadComponent: LazyExoticComponent<React.FC<INavProps<Match>>>;
+    ListComponent: React.LazyExoticComponent<React.FC<INavProps<Match>>>;
+    ReadComponent: React.LazyExoticComponent<React.FC<INavProps<Match>>>;
     LoaderComponent: LoaderComponent;
 };
 

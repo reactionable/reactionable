@@ -1,4 +1,4 @@
-import React, { ReactNode, ReactElement } from 'react';
+import * as React from 'react';
 import Navbar, { NavbarProps } from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
@@ -7,9 +7,9 @@ import { Link } from 'react-router-dom';
 import { useIdentityContext } from '@reactionable/core';
 
 export interface IHeaderProps {
-    brand?: ReactElement;
+    brand?: React.ReactElement;
     navbarProps?: NavbarProps;
-    navStartItems?: ReactNode[];
+    navStartItems?: React.ReactNode[];
 };
 
 export const Header: React.FC<IHeaderProps> = ({ brand, navbarProps = {}, navStartItems = [] }) => {
@@ -17,7 +17,7 @@ export const Header: React.FC<IHeaderProps> = ({ brand, navbarProps = {}, navSta
     const { t } = useTranslation();
     const { user, logout } = useIdentityContext();
 
-    const userMenuItems: ReactNode[] = [];
+    const userMenuItems: React.ReactNode[] = [];
     if (user) {
         userMenuItems.push(
             <NavDropdown key="userNav" id="userNav" title={user.displayName()}>

@@ -1,4 +1,4 @@
-import React, { useState, ReactElement } from 'react';
+import * as React from 'react';
 
 export interface INotificationProps {
     title: string,
@@ -11,12 +11,12 @@ export interface IUseNotificationProps extends Pick<INotificationProps, 'title'>
 };
 
 export interface IUseNotification {
-    notification: ReactElement;
+    notification: React.ReactElement;
     setNotification: (message: string) => void;
 };
 
 export const useNotification = ({ Component, ...props }: IUseNotificationProps): IUseNotification => {
-    const [notification, setNotification] = useState<string|undefined>(undefined);
+    const [notification, setNotification] = React.useState<string|undefined>(undefined);
     return {
         notification: <>{notification && <Component
             {...props}
