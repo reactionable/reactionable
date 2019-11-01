@@ -5,6 +5,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useIdentityContext } from '@reactionable/core';
+import { useModal } from '../../modal/Modal';
 
 export interface IHeaderProps {
     brand?: React.ReactElement;
@@ -15,7 +16,12 @@ export interface IHeaderProps {
 export const Header: React.FC<IHeaderProps> = ({ brand, navbarProps = {}, navStartItems = [] }) => {
 
     const { t } = useTranslation();
-    const { user, logout } = useIdentityContext();
+    const { user, logout, component } = useIdentityContext();
+
+    const { modal, openModal } = useModal({
+        title: t('Sign In / Sign Up'),
+        body: component,
+    });
 
     const userMenuItems: React.ReactNode[] = [];
     if (user) {
@@ -29,7 +35,7 @@ export const Header: React.FC<IHeaderProps> = ({ brand, navbarProps = {}, navSta
     }
     else {
 
-        const handleOnClick = () => open();
+        const handleOnClick = () => openModal();
 
         userMenuItems.push(
             <Nav.Link
@@ -42,6 +48,7 @@ export const Header: React.FC<IHeaderProps> = ({ brand, navbarProps = {}, navSta
     }
 
     return <>
+        {modal}
         <Navbar {...Object.assign({
             variant: 'dark',
             expand: 'lg',

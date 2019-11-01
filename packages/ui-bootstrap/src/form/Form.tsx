@@ -1,7 +1,4 @@
 import * as React from 'react';
-import { useSuccessNotification } from '../notification/Notification';
-import { useErrorAlert } from '../alert/ErrorAlert';
-import { useLoader } from '../loader/Loader';
 import { FormikProps, Form as FormikForm } from 'formik';
 import FormLabel from 'react-bootstrap/FormLabel';
 import Feedback from 'react-bootstrap/Feedback';
@@ -15,13 +12,12 @@ import {
     IFormFieldPropsEnhanced,
 } from '@reactionable/core';
 
-export interface IFormProps<Values, Data> extends Omit<ICoreFormProps<Values, Data>, 'successNotification' | 'errorAlert' | 'loader'> {
-    title: string;
+export interface IFormProps<Values, Data> extends ICoreFormProps<Values, Data> {
 };
 
 type FormComponent<Values = any, Data = any> = React.FC<IFormProps<Values, Data>>;
 
-export const Form: FormComponent = ({ title, render, ...props }) => {
+export const Form: FormComponent = ({ render, ...props }) => {
 
     const renderFormFields = (formikBag: FormikProps<any>, isLoading: boolean) => {
         return <FormikForm className="needs-validation">
@@ -32,9 +28,6 @@ export const Form: FormComponent = ({ title, render, ...props }) => {
     return <CoreForm
         {...props}
         render={renderFormFields}
-        successNotification={useSuccessNotification(title)}
-        errorAlert={useErrorAlert()}
-        loader={useLoader()}
     />;
 }
 

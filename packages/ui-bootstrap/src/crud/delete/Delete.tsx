@@ -3,30 +3,19 @@ import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { Delete as DeleteCore, IDeleteProps as ICoreDeleteProps } from '@reactionable/core';
-import { Confirmation } from '../../confirmation/Confirmation';
-import { useSuccessNotification, useErrorNotification } from '../../notification/Notification';
-import { useLoader } from '../../loader/Loader';
 
-export interface IDeleteProps<Data> extends Pick<ICoreDeleteProps<Data>, 'onConfirm' | 'onSuccess' | 'successMessage'> {
-    title: string;
-    confirmationMessage: string;
+export interface IDeleteProps<Data> extends ICoreDeleteProps<Data> {
     label?: string;
-
 };
 
-export const Delete: React.FC<IDeleteProps<any>> = ({ title, label, ...props }) => {
+export function Delete<Data>({ label, ...props }: React.PropsWithChildren<IDeleteProps<Data>>) {
 
-    return <DeleteCore
-        confirmationTitle={title}
-        confirmation={Confirmation}
-        successNotification={useSuccessNotification(title)}
-        errorNotification={useErrorNotification()}
-        loader={useLoader()}
+    return <DeleteCore<Data>
         {...props}
     >
         <Button
             variant="danger"
-            title={title || ''}
+            title={props.title || ''}
         >
             <FontAwesomeIcon icon={faTrashAlt} />
             {label}

@@ -26,6 +26,5 @@ export const Confirmation: ConfirmationComponent = (props) => {
 };
 
 export const useConfirmation = (props: IUseConfirmationProps) => {
-  props.Component = Confirmation;
-  return useConfirmationCore(props);
+  return useConfirmationCore({ Component: Confirmation, ...props });
 }
