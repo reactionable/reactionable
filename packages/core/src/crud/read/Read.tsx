@@ -1,35 +1,42 @@
 import * as React from 'react';
-import { LoaderComponent } from '../../loader/Loader';
-import { IError, IUseErrorAlert } from '../../alert/ErrorAlert';
+import { IError } from '../../ui/alert/ErrorAlert';
+import { useUIContext } from '../../ui/UI';
+import { IUseLoaderResult } from '../../ui/loader/Loader';
 
-export interface IReadProps<Data> {
-    isLoading?: boolean;
-    LoaderComponent: LoaderComponent,
+export type IReadProps<Data> = Pick<IUseLoaderResult, 'isLoading'> & {
     error?: IError;
-    errorAlert: IUseErrorAlert;
     data?: Data;
+    noData?: React.ReactElement;
     render: (data: Data) => React.ReactElement;
 };
 
 export type ReadDataComponent<Data> = React.FC<{ data: Data }>;
 
-export type ReadComponent<Data = any> = React.FC<IReadProps<Data>>;
-export const Read: ReadComponent = ({
+export type ReadComponent<Data> = React.FC<IReadProps<Data>>;
+export function Read<Data>({
     isLoading,
-    LoaderComponent,
     error,
-    errorAlert,
     render,
     data,
-}) => {
+    noData,
+}: React.PropsWithChildren<IReadProps<Data>>) {
+    const { useLoader, useErrorAlert, useWarningAlert } = useUIContext();
+    const { loader, setLoading } = useLoader({ isLoading });
+    const { errorAlert, setErrorAlert } = useErrorAlert({});
+    const { warningAlert, setWarningAlert } = useWarningAlert({});
 
     React.useEffect(() => {
-        errorAlert.setErrorAlert(!isLoading && error ? error : undefined);
-    }, [error, isLoading]);
+        setLoading(isLoading);
+        setErrorAlert(!isLoading && error ? error : undefined);
+        if (noData) {
+            setWarningAlert(!isLoading && !error && !data ? noData : undefined);
+        }
+    }, [isLoading, error, data]);
 
     return <>
-        {isLoading && <LoaderComponent />}
-        {!isLoading && error && errorAlert.errorAlert}
-        {!isLoading && !error && render(data)}
+        {loader}
+        {errorAlert}
+        {warningAlert}
+        {!isLoading && !error && !!data && render(data)}
     </>;
 };

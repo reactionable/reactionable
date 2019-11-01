@@ -1,26 +1,27 @@
 import * as React from 'react';
-import { lazyLoad, LoaderComponent } from '../loader/Loader';
-import { INavProps } from '../nav/INavProps';
-import { PrivateRoute } from '../nav/privacy-route/PrivateRoute';
+import { useRouteMatch } from 'react-router-dom';
+import { PrivateRoute } from '../nav/route/PrivateRoute';
+import { ReadDataComponent } from './read/Read';
+import { ListComponent } from './list/List';
 
-export interface ICrudProps<Match> extends INavProps<Match> {
+export interface ICrudProp<Data> {
     name: string
-    ListComponent: React.LazyExoticComponent<React.FC<INavProps<Match>>>;
-    ReadComponent: React.LazyExoticComponent<React.FC<INavProps<Match>>>;
-    LoaderComponent: LoaderComponent;
+    listComponent: React.LazyExoticComponent<ListComponent<Data>>;
+    readComponent: React.LazyExoticComponent<ReadDataComponent<Data>>;
 };
 
-export type NavComponent<Match = any> = React.FC<ICrudProps<Match>>;
 
-export const Crud: NavComponent = ({
-    match,
+export function Crud<Data>({
     name,
-    ListComponent,
-    ReadComponent,
-    LoaderComponent
-}) => {
+    listComponent,
+    readComponent,
+}: React.PropsWithChildren<ICrudProp<Data>>) {
+    const match = useRouteMatch();
+    if(!match){
+        return <></>;
+    }
     return <>
-        <PrivateRoute exact path={match.path} component={lazyLoad(ListComponent)} LoaderComponent={LoaderComponent}/>
-        <PrivateRoute path={`${match.path}/:${name}Id`} component={lazyLoad(ReadComponent)} LoaderComponent={LoaderComponent} />
+        <PrivateRoute exact path={match.path} component={listComponent}/>
+        <PrivateRoute path={`${match.path}/:${name}Id`} component={readComponent} />
     </>;
 };

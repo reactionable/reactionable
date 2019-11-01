@@ -1,31 +1,25 @@
 import * as React from 'react';
-import { useConfirmation, ConfirmationComponent } from '../../confirmation/Confirmation';
-import { IUseLoader } from '../../loader/Loader';
-import { IUseNotification } from '../../notification/Notification';
 import { EnhanceChildren } from '../../enhance-children/EnhanceChildren';
+import { useUIContext } from '../../ui/UI';
 
 export interface IDeleteProps<Data> {
+    title: string;
     successMessage: string;
-    confirmation: ConfirmationComponent;
-    confirmationTitle: string;
     confirmationMessage: string;
     onConfirm: () => Promise<Data>;
     onSuccess?: (result: Data) => void;
-    successNotification: IUseNotification;
-    errorNotification: IUseNotification;
-    loader: IUseLoader;
 };
 
-export type DeleteComponent<Data = any> = React.FC<IDeleteProps<Data>>;
+export type DeleteComponent<Data> = React.FC<IDeleteProps<Data>>;
 
-export const Delete: DeleteComponent = (props) => {
+export function Delete<Data>(props: React.PropsWithChildren<IDeleteProps<Data>>) {
+    const { useLoader, useSuccessNotification, useErrorNotification, useConfirmation } = useUIContext();
+    const { loader, isLoading, setLoading } = useLoader({});
+    const { successNotification, setSuccessNotification } = useSuccessNotification({ title: props.title });
+    const { errorNotification, setErrorNotification } = useErrorNotification({ title: props.title });
 
-    const { notification: successNotification, setNotification: setSuccessNotification } = props.successNotification;
-    const { notification: errorNotification, setNotification: setErrorNotification } = props.errorNotification;
-    const { loader, isLoading, setLoading } = props.loader;
-    
     const { confirmation, setConfirmation } = useConfirmation({
-        title: props.confirmationTitle,
+        title: props.title,
         children: props.confirmationMessage,
         callback: (confirm: boolean) => {
             if (!confirm) {
@@ -44,7 +38,6 @@ export const Delete: DeleteComponent = (props) => {
                 setErrorNotification(error);
             });
         },
-        Component: props.confirmation
     });
 
     const onClick = () => setConfirmation(true);
