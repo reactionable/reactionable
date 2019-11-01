@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
-import { useErrorAlert as useErrorAlertCore, IErrorAlertProps as IErrorAlertPropsCore, IError } from '@reactionable/core';
 import { Alert, IAlertProps } from './Alert';
+import { IError, IErrorAlertProps as ICoreErrorAlertProps, useErrorAlert as useErrorAlertCore } from '@reactionable/core';
 
-export type IErrorAlertProps = IAlertProps & IErrorAlertPropsCore & {
+export type IErrorAlertProps = IAlertProps & ICoreErrorAlertProps & {
     children?: IError
 };
 export type ErrorAlertComponent = React.FC<IErrorAlertProps>;
