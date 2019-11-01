@@ -1,28 +1,52 @@
 import * as React from 'react';
-import { Router, Route, Switch, RouteProps } from 'react-router-dom';
+import { Router, Switch, RouteProps } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
-import { lazyLoad, LoaderComponent } from '../loader/Loader';
-import { IdentityContextProvider, IIdentityContextProviderProps } from '../identity/Identity';
-import { PrivateRoute } from '../nav/privacy-route/PrivateRoute';
+import { IUseLoaderProps } from '../ui/loader/Loader';
+import { IdentityContextProvider, IIdentityContextProviderProps, IUser } from '../identity/Identity';
+import { LazyRoute } from '../nav/route/LazyRoute';
+import { PrivateRoute } from '../nav/route/PrivateRoute';
+import { IUIContextProviderProps, UIContextProvider } from '../ui/UI';
+import { IUseSuccessNotificationProps } from '../ui/notification/SuccessNotification';
+import { IUseErrorNotificationProps } from '../ui/notification/ErrorNotification';
+import { IUseWarningAlertProps } from '../ui/alert/WarningAlert';
+import { IUseErrorAlertProps } from '../ui/alert/ErrorAlert';
+import { IUseConfirmationProps } from '../ui/confirmation/Confirmation';
 
-export interface IAppProps {
+export interface IAppProps<
+    User extends IUser,
+    L extends IUseLoaderProps,
+    SN extends IUseSuccessNotificationProps,
+    EN extends IUseErrorNotificationProps,
+    EA extends IUseErrorAlertProps,
+    WA extends IUseWarningAlertProps,
+    C extends IUseConfirmationProps,
+    > {
     routes: Array<Omit<RouteProps, 'component'> & {
-        component: React.LazyExoticComponent<any>,
-        privateRoute?: boolean,
+        component: React.LazyExoticComponent<any>;
+        privateRoute?: boolean;
     }>,
-    LoaderComponent: LoaderComponent,
-    HomeComponent?: React.LazyExoticComponent<any>,
-    NotFoundComponent?: React.LazyExoticComponent<any>,
-    identity?: IIdentityContextProviderProps,
+    HomeComponent?: React.LazyExoticComponent<any>;
+    NotFoundComponent?: React.LazyExoticComponent<any>;
+    identity?: IIdentityContextProviderProps<User>;
+    ui?: IUIContextProviderProps<L, SN, EN, EA, WA, C>;
 }
 
-export const App: React.FC<IAppProps> = ({
-    routes = [],
-    LoaderComponent,
-    HomeComponent,
-    NotFoundComponent,
-    identity,
-}) => {
+
+export function App<
+    User extends IUser,
+    L extends IUseLoaderProps,
+    SN extends IUseSuccessNotificationProps,
+    EN extends IUseErrorNotificationProps,
+    EA extends IUseErrorAlertProps,
+    WA extends IUseWarningAlertProps,
+    C extends IUseConfirmationProps,
+    >({
+        routes = [],
+        HomeComponent,
+        NotFoundComponent,
+        identity,
+        ui,
+    }: React.PropsWithChildren<IAppProps<User, L, SN, EN, EA, WA, C>>) {
     const customHistory = createBrowserHistory();
 
     if (HomeComponent) {
@@ -32,7 +56,7 @@ export const App: React.FC<IAppProps> = ({
         routes.push({ component: NotFoundComponent, privateRoute: false, });
     }
 
-    const router = <Router history={customHistory}>
+    let content = <Router history={customHistory}>
         <Switch>{routes.map(({ privateRoute, component, ...routeProps }) => {
             const key = `${routeProps.exact ? 'exact' : 'non-exact'}-${routeProps.path}-${privateRoute ? 'private' : 'public'}-${component.name}`;
             if (privateRoute) {
@@ -41,22 +65,25 @@ export const App: React.FC<IAppProps> = ({
                 }
                 return <PrivateRoute
                     key={key}
-                    component={lazyLoad(component, LoaderComponent)}
-                    LoaderComponent={LoaderComponent}
+                    component={component}
                     {...routeProps}
                 />;
             }
-            return <Route
+            return <LazyRoute
                 key={key}
-                component={lazyLoad(component, LoaderComponent)}
+                component={component}
                 {...routeProps}
             />;
         })}</Switch>
     </Router>;
 
-    if (!identity) {
-        return router;
+    if (identity) {
+        content = <IdentityContextProvider<User> {...identity}>{content}</IdentityContextProvider>;
     }
 
-    return <IdentityContextProvider {...identity}>{router}</IdentityContextProvider>;
+    if (ui) {
+        content = <UIContextProvider<L, SN, EN, EA, WA, C> {...ui}>{content}</UIContextProvider>;
+    }
+
+    return content;
 };

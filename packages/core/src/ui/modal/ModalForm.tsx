@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { FormikActions } from 'formik';
-import { IFormProps } from '../form/Form';
-import { useModal, IUseModalProps, IModalProps } from './Modal';
+import { IFormProps } from '../../form/Form';
+import { useModal, IUseModalProps, IModalProps, IUseModalResult } from './Modal';
 
 export type IModalFormProps<Values, Data> = IModalProps & {
     form: IFormProps<Values, Data>;
@@ -14,9 +14,10 @@ export type IUseModalFormProps<Values, Data> = IUseModalProps & React.PropsWithC
     Component: ModalFormComponent;
 };
 
-export function useModalForm<P extends IUseModalFormProps<any, any>>(props: P) {
+export type IUseModalForm<Values, Data, P extends IUseModalFormProps<Values, Data>> = (props: P) => IUseModalResult;
+export function useModalForm<Values, Data, P extends IUseModalFormProps<Values, Data>>(props: P): IUseModalResult {
     const onSubmit = props.form.onSubmit;
-    props.form.onSubmit = async (values: any, actions: FormikActions<any>) => {
+    props.form.onSubmit = async (values: Values, actions: FormikActions<Values>): Promise<Data> => {
         const result = await onSubmit(values, actions);
         if (props.onHide) {
             props.onHide();

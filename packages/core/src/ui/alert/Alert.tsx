@@ -1,19 +1,18 @@
 import * as React from 'react';
 
-export interface IAlertProps { };
+export type IAlertProps = {};
 
 export type AlertComponent = React.FC<IAlertProps>;
 
-export type IUseAlertProps = React.PropsWithChildren<IAlertProps> & {
-    Component: AlertComponent;
-};
+export type IUseAlertProps = React.PropsWithChildren<IAlertProps>;
 
-export interface IUseAlert {
+export interface IUseAlertResult {
     alert: React.ReactElement;
     setAlert: (alert?: React.ReactNode) => void;
 };
 
-export const useAlert = ({ Component, ...props }: IUseAlertProps): IUseAlert => {
+export type IUseAlert<P extends IUseAlertProps> = (props: P) => IUseAlertResult;
+export function useAlert<P extends IUseAlertProps>({ Component, ...props }: P & { Component: AlertComponent }): IUseAlertResult {
     const [alert, setAlert] = React.useState<React.ReactNode | undefined>(props.children
         ? props.children
         : undefined

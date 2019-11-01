@@ -1,39 +1,32 @@
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 import { FormikActions, Formik, FormikProps, Field, FieldProps, getIn } from 'formik';
 import { object } from 'yup';
-import { IUseErrorAlert } from '../alert/ErrorAlert';
-import { IUseLoader } from '../loader/Loader';
-import { IUseNotification } from '../notification/Notification';
-import { useTranslation } from 'react-i18next';
+import { useUIContext } from '../ui/UI';
 
 export interface IFormProps<Values, Data> {
+    title: string;
     formSchema: object;
     onSubmit: (values: Values, actions: FormikActions<Values>) => Promise<Data>;
     formValues: Values;
     render: (formikBag: FormikProps<Values>, isLoading: boolean) => React.ReactElement;
-    successNotification: IUseNotification;
     successMessage?: string;
     onSuccess?: (result: Data) => void;
-    errorAlert: IUseErrorAlert;
-    loader: IUseLoader;
 };
 
-type FormComponent<Values = any, Data = any> = React.FC<IFormProps<Values, Data>>;
-
-export const Form: FormComponent = (props) => {
+export type FormComponent<Values, Data> = React.FC<IFormProps<Values, Data>>;
+export function Form<Value, Data>(props: React.PropsWithChildren<IFormProps<Value, Data>>) {
 
     const { t } = useTranslation();
     const formSchema = object().shape(props.formSchema);
-    const { onSubmit, formValues, onSuccess, successMessage } = props;
+    const { title, onSubmit, formValues, onSuccess, successMessage } = props;
 
-    const {
-        notification: successNotification,
-        setNotification: setSuccessNotification,
-    } = props.successNotification;
-    const { errorAlert, setErrorAlert } = props.errorAlert;
-    const { loader, setLoading, isLoading } = props.loader;
+    const { useLoader, useSuccessNotification, useErrorAlert } = useUIContext();
+    const { isLoading, loader, setLoading } = useLoader({});
+    const { errorAlert, setErrorAlert } = useErrorAlert({});
+    const { successNotification, setSuccessNotification } = useSuccessNotification({ title });
 
-    const renderForm = (formikBag: FormikProps<any>) => {
+    const renderForm = (formikBag: FormikProps<Value>) => {
         const form = props.render(formikBag, isLoading);
         return <>
             {form}
@@ -43,9 +36,9 @@ export const Form: FormComponent = (props) => {
         </>;
     };
 
-    const onSubmitCallback = (values: any, actions: FormikActions<any>) => {
+    const onSubmitCallback = (values: Value, actions: FormikActions<Value>) => {
         setLoading(true);
-        onSubmit(values, actions).then((data: any) => {
+        onSubmit(values, actions).then((data: Data) => {
             setLoading(false);
             if (successMessage) {
                 setSuccessNotification(t(successMessage, data));
@@ -80,15 +73,14 @@ export type IRenderFormField<Values> = (
     error?: string,
 ) => React.ReactElement;
 
-export type IFormFieldProps<Values = any> = {
+export type IFormFieldProps<Values> = {
     name: string;
     autoFocus?: boolean;
     render: IRenderFormField<Values>;
 };
 
-type FormField<Values = any> = React.FC<IFormFieldProps<Values>>;
-
-export const FormField: FormField = ({ name, render, autoFocus }) => {
+export type FormField<Values> = React.FC<IFormFieldProps<Values>>;
+export function FormField<Values>({ name, render, autoFocus }: React.PropsWithChildren<IFormFieldProps<Values>>) {
 
     const inputRef = React.useRef<any>(null);
     React.useEffect(() => {
@@ -97,13 +89,13 @@ export const FormField: FormField = ({ name, render, autoFocus }) => {
         }
     }, [inputRef, autoFocus]);
 
-    const renderField = (fieldProps: FieldProps<any>) => {
+    const renderField = (fieldProps: FieldProps<Values>) => {
         const touch = getIn(fieldProps.form.touched, fieldProps.field.name);
         const error = getIn(fieldProps.form.errors, fieldProps.field.name);
         const isValid = !!(touch && !error);
         const isInvalid = !!(error);
 
-        const fieldPropsEnhanced: IFormFieldPropsEnhanced<any> = Object.assign(fieldProps, {
+        const fieldPropsEnhanced: IFormFieldPropsEnhanced<Values> = Object.assign(fieldProps, {
             field: Object.assign(
                 fieldProps.field,
                 {

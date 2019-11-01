@@ -37,6 +37,7 @@
   "dependencies": {
     "formik": "^1.5.8",
     "i18next": "^17.3.0",
+    "i18next-browser-languagedetector": "^4.0.0",
     "react-helmet": "^5.2.1",
     "react-i18next": "^10.13.1",
     "react-router-dom": "^5.1.2",

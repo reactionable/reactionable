@@ -9,23 +9,22 @@ export function isIError(arg: any): arg is IError {
     return arg.name !== undefined && arg.message !== undefined;
 }
 
-export interface IErrorAlertProps extends IAlertProps {};
-
-export interface ErrorAlertComponent extends React.FC<IErrorAlertProps> {
+export type IErrorAlertProps = IAlertProps;
+export type ErrorAlertComponent = React.FC<IErrorAlertProps & {
     children?: IError
-};
+}>;
 
-export interface IUseErrorAlertProps extends IErrorAlertProps {
-    Component: ErrorAlertComponent;    
+export type IUseErrorAlertProps = React.PropsWithChildren<IAlertProps> & {
     children?: IError;
 };
 
-export interface IUseErrorAlert {
+export interface IUseErrorAlertResult {
     errorAlert: React.ReactElement;
     setErrorAlert: (alert?: IError) => void;
 };
 
-export const useErrorAlert = ({ Component, ...props }: IUseErrorAlertProps): IUseErrorAlert => {
+export type IUseErrorAlert<P extends IUseErrorAlertProps> = (props: P) => IUseErrorAlertResult;
+export function useErrorAlert<P extends IUseErrorAlertProps>({ Component, ...props }: P & { Component: ErrorAlertComponent }): IUseErrorAlertResult {
     const [errorAlert, setErrorAlert] = React.useState<IError | undefined>(props.children
         ? props.children
         : undefined

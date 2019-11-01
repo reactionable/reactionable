@@ -1,42 +1,41 @@
 import * as React from 'react';
-import { LoaderComponent } from '../../loader/Loader';
-import { IError, IUseErrorAlert } from '../../alert/ErrorAlert';
-import { IUseAlert } from '../../alert/Alert';
+import { IError } from '../../ui/alert/ErrorAlert';
+import { IUseLoaderResult } from '../../ui/loader/Loader';
+import { useUIContext } from '../../ui/UI';
 
-export interface IListProps<Data> {
+export type IListProps<Data> = Pick<IUseLoaderResult, 'isLoading'> & {
     data: Array<Data>;
-    noDataAlert: IUseAlert;
-    isLoading: boolean;
     error?: IError;
-    errorAlert: IUseErrorAlert;
-    LoaderComponent: LoaderComponent;
+    noData?: React.ReactElement;
     render: (data: Array<Data>) => React.ReactElement;
 };
 
-
-export type TableComponent = React.FC<{
-    rows: Array<React.ReactElement>,
-}>;
-
-export type ListComponent<Data = any> = React.FC<IListProps<Data>>;
-export const List: ListComponent = ({
+export type ListComponent<Data> = React.FC<IListProps<Data>>;
+export function List<Data>({
     data,
     render,
     isLoading,
     error,
-    LoaderComponent,
-    errorAlert,
-    noDataAlert,
-}) => {
+    noData,
+}: React.PropsWithChildren<IListProps<Data>>) {
+    const { useLoader, useErrorAlert, useWarningAlert } = useUIContext();
+    const { loader, setLoading } = useLoader({ isLoading });
+    const { errorAlert, setErrorAlert } = useErrorAlert({});
+    const { warningAlert, setWarningAlert } = useWarningAlert({});
 
     React.useEffect(() => {
-        errorAlert.setErrorAlert(!isLoading && error ? error : undefined);
-    }, [error, isLoading]);
+        setLoading(isLoading);
+        setErrorAlert(!isLoading && error ? error : undefined);
+        if (noData) {
+            setWarningAlert(!isLoading && !error && (!data || !data.length) ? noData : undefined);
+        }
+    }, [isLoading, error, data]);
+
 
     return <>
-        {isLoading && <LoaderComponent />}
-        {!isLoading && error && errorAlert.errorAlert}
-        {!isLoading && !error && !data.length && noDataAlert.alert}
+        {loader}
+        {errorAlert}
+        {warningAlert}
         {!isLoading && !error && !!data.length && render(data)}
     </>;
 };
