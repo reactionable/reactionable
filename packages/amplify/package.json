@@ -1,0 +1,54 @@
+{
+  "name": "@reactionable/amplify",
+  "version": "0.9.5",
+  "description": "Reactionable package for Amplify",
+  "private": false,
+  "files": [
+    "lib"
+  ],
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "start": "tsc -w",
+    "test": "jest",
+    "build": "rimraf lib && barrelsby -d src --exclude \".+\\.test\\..+\" --delete && tsc --pretty",
+    "update": "npm-check -u"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reactionable/reactionable.git"
+  },
+  "keywords": [
+    "reactionable",
+    "react",
+    "framework",
+    "Amplify"
+  ],
+  "author": "ESCEMI <developer@escemi.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/reactionable/reactionable/issues"
+  },
+  "homepage": "https://github.com/reactionable/reactionable#readme",
+  "dependencies": {
+    "@reactionable/core": "^0.9.5",
+    "aws-amplify": "^1.2.3",
+    "aws-amplify-react": "^2.5.3"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.19",
+    "@types/node": "^12.11.2",
+    "@types/react": "^16.9.7",
+    "barrelsby": "^2.2.0",
+    "jest": "^24.9.0",
+    "rimraf": "^3.0.0",
+    "ts-jest": "^24.1.0",
+    "typescript": "^3.2.2"
+  },
+  "jest": {
+    "preset": "ts-jest"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
