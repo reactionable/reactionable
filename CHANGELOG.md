@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.10.0](https://github.com/reactionable/reactionable/compare/v0.9.5...v0.10.0) (2019-11-01)
+
+
+### Features
+
+* **amplify:** initialize amplify package ([9dc5048](https://github.com/reactionable/reactionable/commit/9dc5048b901e3eca9ab249f9d309348d609d47ad))
+* **core:** refactor UI managment ([e75abaa](https://github.com/reactionable/reactionable/commit/e75abaa35d81634a440bb3dcfeb6d40d7f1190e2))
+* **ui-bootstrap:** refactor for using UI context provider ([b0b8ac9](https://github.com/reactionable/reactionable/commit/b0b8ac9a9d54f3a90c398c9ab0baac06cbd05253))
+
+
+
+
+
 ## [0.9.5](https://github.com/reactionable/reactionable/compare/v0.9.4...v0.9.5) (2019-10-24)
 
 

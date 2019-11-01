@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.10.0](https://github.com/reactionable/reactionable/compare/v0.9.5...v0.10.0) (2019-11-01)
+
+
+### Features
+
+* **core:** refactor UI managment ([e75abaa](https://github.com/reactionable/reactionable/commit/e75abaa35d81634a440bb3dcfeb6d40d7f1190e2))
+
+
+
+
+
 ## [0.9.5](https://github.com/reactionable/reactionable/compare/v0.9.4...v0.9.5) (2019-10-24)
 
 
