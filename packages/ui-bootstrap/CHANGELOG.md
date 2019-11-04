@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.11.2](https://github.com/reactionable/reactionable/compare/v0.11.1...v0.11.2) (2019-11-04)
+
+
+### Bug Fixes
+
+* **core:** install missing package ([8e6af71](https://github.com/reactionable/reactionable/commit/8e6af71fc00e42dbcd76abbc711de074ae6e1204))
+* **core, ui-bootstrap:** fix form typings ([9b331e0](https://github.com/reactionable/reactionable/commit/9b331e0d128d0d1e5c66cd858f0e2d235065829b))
+
+
+
+
+
 ## [0.11.1](https://github.com/reactionable/reactionable/compare/v0.11.0...v0.11.1) (2019-11-04)
 
 
