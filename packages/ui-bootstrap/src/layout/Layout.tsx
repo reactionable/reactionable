@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {
     useLayout as useLayoutCore,
     IUseLayoutProps as ICoreUseLayoutProps,

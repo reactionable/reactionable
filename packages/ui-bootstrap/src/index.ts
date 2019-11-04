@@ -13,6 +13,7 @@ export * from "./crud/list/List";
 export * from "./crud/read/Read";
 export * from "./form/Form";
 export * from "./layout/Layout";
+export * from "./layout/body/Body";
 export * from "./layout/footer/Footer";
 export * from "./layout/header/Header";
 export * from "./loader/Loader";

@@ -10,26 +10,25 @@ export interface ILoginFormValues {
 }
 
 export interface IIdentityContext<User extends IUser> {
-    identityProvider?:string;
     user: User | undefined | null;
-    logout: () => Promise<void>;
     component: React.ReactElement;
+    identityProvider?: string;
+    logout: () => Promise<void>;
 };
 
 export const IdentityContext = React.createContext<IIdentityContext<any>>({
-    identityProvider: undefined,
     user: undefined,
-    logout: async () => { },
     component: <></>,
+    logout: async () => { },
+    identityProvider: undefined,
 });
-
 
 export type IIdentityComponentProps<User extends IUser> = {
     setUser: (user: User | null) => void;
 };
 export type IdentityComponent<User extends IUser> = React.FC<IIdentityComponentProps<User>>;
 
-export type IIdentityContextProviderProps<User extends IUser = IUser> = Pick<IIdentityContext<User>, 'logout'> & {
+export type IIdentityContextProviderProps<User extends IUser = IUser> = Omit<IIdentityContext<User>, 'component' | 'user'> & {
     Component: IdentityComponent<User>;
 };
 
