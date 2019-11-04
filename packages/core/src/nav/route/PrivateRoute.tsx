@@ -1,40 +1,34 @@
 import * as React from 'react';
-import { Redirect, Route, RouteProps } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { IUser, useIdentityContext } from '../../identity/Identity';
 import { useUIContext } from '../../ui/UI';
-import { lazyLoad } from '../../ui/loader/Loader';
+import { LazyRoute, ILazyRouteProps } from './LazyRoute';
+import { IUseLayoutProps } from '../../ui/layout/Layout';
 
-function getRender<User extends IUser>(
-    user: User | null | undefined,
-    component: React.LazyExoticComponent<any>,
+function renderPrivateRoute(
+    user: undefined | null,
 ) {
+    const { loader } = useUIContext().useLoader({});
     return (props: any): React.ReactElement => {
-
-        const { loader } = useUIContext().useLoader({});
-
-        let render;
         switch (user) {
             case undefined:
-                render = loader;
-                break;
+                return loader;
             case null:
-                render = <Redirect to="/" />;
-                break;
-            default:
-                const Component = lazyLoad(component);
-                render = <Component {...props} />;
-                break;
+                return <Redirect to="/" />;
         }
-        return render;
     };
 }
 
-export type IPrivateRouteProps = Omit<RouteProps, 'component'> & {
-    component: React.LazyExoticComponent<any>;
-};
+export function PrivateRoute<
+    LP extends IUseLayoutProps,
+    User extends IUser
+>(props: React.PropsWithChildren<ILazyRouteProps<LP>>) {
 
-export function PrivateRoute<User extends IUser>(props: React.PropsWithChildren<IPrivateRouteProps>) {
-    const { component, ...routeProps } = props;
     const { user } = useIdentityContext<User>();
-    return <Route {...routeProps} render={getRender<User>(user, component)} />;
+
+    if (user) {
+        return <LazyRoute {...props} />;
+    }
+    const { component, ...routeProps } = props;
+    return <LazyRoute {...routeProps} render={renderPrivateRoute(user)} />;
 };

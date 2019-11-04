@@ -1,10 +1,14 @@
 import * as React from 'react';
 import { Auth } from 'aws-amplify';
-import { CognitoUser } from '@aws-amplify/auth';
+// import { CognitoUser } from '@aws-amplify/auth';
 import { Authenticator, SignIn, ConfirmSignIn, VerifyContact, ForgotPassword } from 'aws-amplify-react';
-import { IIdentityContextProviderProps, IUser as ICoreUser, IdentityComponent as CoreIdentityComponent } from '@reactionable/core';
+import { 
+    IUser as ICoreUser, 
+    IdentityComponent as CoreIdentityComponent ,
+    IIdentityContextProviderProps as ICoreIdentityContextProviderProps
+} from '@reactionable/core';
 
-export type IUser = ICoreUser & CognitoUser;
+export type IUser = ICoreUser/* & CognitoUser*/;
 
 const IdentityComponent: CoreIdentityComponent<IUser> = ({ setUser }) => {
     return <Authenticator
@@ -15,8 +19,8 @@ const IdentityComponent: CoreIdentityComponent<IUser> = ({ setUser }) => {
             }
             setUser({
                 displayName: () => data.username,
-                ...data,
-            });
+                // ...data,
+            } as IUser);
         }}
         children={[
             SignIn,
@@ -26,10 +30,13 @@ const IdentityComponent: CoreIdentityComponent<IUser> = ({ setUser }) => {
         ]} />;
 };
 
-export const useIdentityContextProviderProps = (props: Partial<IIdentityContextProviderProps<IUser>> = {}): IIdentityContextProviderProps<IUser> => {
+export type IIdentityContextProviderProps = ICoreIdentityContextProviderProps<IUser>;
+
+export const useIdentityContextProviderProps = (props: Partial<IIdentityContextProviderProps> = {}): IIdentityContextProviderProps => {
     return {
+        identityProvider: 'Amplify',
         logout: async () => await Auth.signOut(),
-        Component: IdentityComponent,
+        Component: IdentityComponent as CoreIdentityComponent<IUser>,
         ...props,
     };
 }
