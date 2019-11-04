@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.11.0](https://github.com/reactionable/reactionable/compare/v0.10.0...v0.11.0) (2019-11-04)
+
+
+### Bug Fixes
+
+* fix typing ([73a70e6](https://github.com/reactionable/reactionable/commit/73a70e6a62b4e5b09cddb54e40de72155c54ff88))
+
+
+### Features
+
+* add Layout component ([a8e7155](https://github.com/reactionable/reactionable/commit/a8e7155354168e3c71f978acf124cc651ae7fbe1))
+
+
+
+
+
 # [0.10.0](https://github.com/reactionable/reactionable/compare/v0.9.5...v0.10.0) (2019-11-01)
 
 
