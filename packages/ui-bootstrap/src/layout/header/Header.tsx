@@ -11,7 +11,7 @@ export interface IHeaderProps extends ICoreHeaderProps {
     navbarProps?: NavbarProps;
 };
 
-export const Header: React.FC<IHeaderProps> = ({ brand, navbarProps = {}, navStartItems = [] }) => {
+export const Header: React.FC<IHeaderProps> = ({ brand, navbarProps = {}, navItems = [] }) => {
 
     const { t } = useTranslation();
     const { user, logout, component, identityProvider } = useIdentityContext();
@@ -55,7 +55,7 @@ export const Header: React.FC<IHeaderProps> = ({ brand, navbarProps = {}, navSta
             {brand && <Navbar.Brand href="/">{brand}</Navbar.Brand>}
             <Navbar.Toggle aria-controls="main-navbar-nav" />
             <Navbar.Collapse id="main-navbar-nav">
-                <Nav className="mr-auto">{navStartItems}</Nav>
+                <Nav className="mr-auto">{navItems}</Nav>
             </Navbar.Collapse>
             {userMenuItems.length > 0 && <Nav>{userMenuItems}</Nav>}
         </Navbar>
