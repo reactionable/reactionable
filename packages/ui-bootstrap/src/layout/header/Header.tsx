@@ -16,7 +16,7 @@ export const Header: React.FC<IHeaderProps> = ({ brand, navbarProps = {}, navIte
     const { t } = useTranslation();
     const { user, logout, component, identityProvider } = useIdentityContext();
     
-    const userMenuItems: React.ReactNode[] = [];
+    const userMenuItems: Array<React.ReactNode> = [];
     let identityModal = undefined;
     if (identityProvider) {
         const { modal, openModal } = useModal({
@@ -28,9 +28,9 @@ export const Header: React.FC<IHeaderProps> = ({ brand, navbarProps = {}, navIte
         if (user) {
             userMenuItems.push(
                 <NavDropdown key="userNav" id="userNav" title={user.displayName()}>
-                    <NavDropdown.Item href="/account">{t('My account')}</NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/account">{t('My account')}</NavDropdown.Item>
                     <NavDropdown.Divider />
-                    <NavDropdown.Item href="#" onClick={logout}>{t('Log out')}</NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="#" onClick={logout}>{t('Log out')}</NavDropdown.Item>
                 </NavDropdown>
             );
         }
@@ -42,7 +42,7 @@ export const Header: React.FC<IHeaderProps> = ({ brand, navbarProps = {}, navIte
                     to="#"
                     key="signup_signin"
                     onClick={handleOnClick} className="btn btn-link"
-                >{t('Sign Up / Sign In')}</Nav.Link>
+                >{t('Sign In / Sign Up')}</Nav.Link>
             );
         }
     }
@@ -52,7 +52,7 @@ export const Header: React.FC<IHeaderProps> = ({ brand, navbarProps = {}, navIte
         <Navbar {...Object.assign({
             expand: 'lg',
         }, navbarProps)}>
-            {brand && <Navbar.Brand href="/">{brand}</Navbar.Brand>}
+            {brand && <Navbar.Brand as={Link} to="/">{brand}</Navbar.Brand>}
             <Navbar.Toggle aria-controls="main-navbar-nav" />
             <Navbar.Collapse id="main-navbar-nav">
                 <Nav className="mr-auto">{navItems}</Nav>
