@@ -6,9 +6,9 @@ import { IBodyProps as ICoreBodyProps } from '@reactionable/core';
 
 export interface IBodyProps extends ICoreBodyProps { };
 
-export const Body: React.FC<IBodyProps> = ({ children }) => {
+export function Body({ children }: React.PropsWithChildren<IBodyProps>) {
     return <main>
-        <Container>
+        <Container fluid>
             <Row>
                 <Col>{children}</Col>
             </Row>

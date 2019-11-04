@@ -11,13 +11,13 @@ export interface IHeaderProps extends ICoreHeaderProps {
     navbarProps?: NavbarProps;
 };
 
-export const Header: React.FC<IHeaderProps> = ({ brand, navbarProps = {}, navItems = [] }) => {
-
+export function Header({ brand, navbarProps = {}, navItems = [] }: React.PropsWithChildren<IHeaderProps>) {
     const { t } = useTranslation();
     const { user, logout, component, identityProvider } = useIdentityContext();
-    
+
     const userMenuItems: Array<React.ReactNode> = [];
     let identityModal = undefined;
+
     if (identityProvider) {
         const { modal, openModal } = useModal({
             title: t('Sign In / Sign Up'),
@@ -36,14 +36,12 @@ export const Header: React.FC<IHeaderProps> = ({ brand, navbarProps = {}, navIte
         }
         else {
             const handleOnClick = () => openModal();
-            userMenuItems.push(
-                <Nav.Link
-                    as={Link}
-                    to="#"
-                    key="signup_signin"
-                    onClick={handleOnClick} className="btn btn-link"
-                >{t('Sign In / Sign Up')}</Nav.Link>
-            );
+            userMenuItems.push(<Nav.Link
+                as={Link}
+                to="#"
+                key="signup_signin"
+                onClick={handleOnClick} className="btn btn-link"
+            >{t('Sign In / Sign Up')}</Nav.Link>);
         }
     }
 

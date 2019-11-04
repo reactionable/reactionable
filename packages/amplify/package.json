@@ -34,13 +34,13 @@
   "homepage": "https://github.com/reactionable/reactionable#readme",
   "dependencies": {
     "@reactionable/core": "^0.11.0",
-    "aws-amplify": "^1.2.3",
-    "aws-amplify-react": "^2.5.3"
+    "aws-amplify": "^1.2.4",
+    "aws-amplify-react": "^2.5.4"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.19",
-    "@types/node": "^12.11.2",
-    "@types/react": "^16.9.7",
+    "@types/jest": "^24.0.21",
+    "@types/node": "^12.12.5",
+    "@types/react": "^16.9.11",
     "barrelsby": "^2.2.0",
     "jest": "^24.9.0",
     "rimraf": "^3.0.0",

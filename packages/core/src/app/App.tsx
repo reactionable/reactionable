@@ -18,8 +18,7 @@ export interface IAppProps<
     identity?: ICP;
     ui?: UICP;
     layout?:LP;
-}
-
+};
 
 export function App<
     ICP extends IIdentityContextProviderProps = IIdentityContextProviderProps,

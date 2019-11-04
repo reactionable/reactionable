@@ -8,36 +8,35 @@ import {
     Form as CoreForm,
     IFormProps as ICoreFormProps,
     FormField as CoreFormField,
-    IFormFieldProps, IRenderFormField,
+    IFormFieldProps as ICoreFormFieldProps, 
+    IRenderFormField,
     IFormFieldPropsEnhanced,
 } from '@reactionable/core';
 
-export interface IFormProps<Values, Data> extends ICoreFormProps<Values, Data> {
-};
+export type IFormProps<Values, Data> = ICoreFormProps<Values, Data>;
 
-type FormComponent<Values = any, Data = any> = React.FC<IFormProps<Values, Data>>;
+export function Form<Value, Data>({ render, ...props }: React.PropsWithChildren<IFormProps<Value, Data>>) {
 
-export const Form: FormComponent = ({ render, ...props }) => {
-
-    const renderFormFields = (formikBag: FormikProps<any>, isLoading: boolean) => {
+    const renderFormFields = (formikProps: FormikProps<Value>, isLoading: boolean) => {
         return <FormikForm className="needs-validation">
-            {render(formikBag, isLoading)}
+            {render(formikProps, isLoading)}
         </FormikForm>;
     };
 
-    return <CoreForm
+    return <CoreForm<Value, Data>
         {...props}
         render={renderFormFields}
     />;
 }
 
-type FormField<Values = any> = React.FC<Omit<IFormFieldProps<Values>, 'render'> & {
+export type IFormFieldProps<Values> = Omit<ICoreFormFieldProps<Values>, 'render'> & {
     label?: string;
     render?: IRenderFormField<Values>;
-}>;
-export const FormField: FormField = ({ label, render, ...props }) => {
+};
 
-    const renderField = (fieldProps: IFormFieldPropsEnhanced<any>, error?: string) => {
+export function FormField<Values>({ label, render, ...props }: React.PropsWithChildren<IFormFieldProps<Values>>) {
+
+    const renderField = (fieldProps: IFormFieldPropsEnhanced<Values>, error?: string) => {
         return <FormGroup controlId={fieldProps.field.name}>
             {label && <FormLabel>{label}</FormLabel>}
             {
@@ -49,6 +48,6 @@ export const FormField: FormField = ({ label, render, ...props }) => {
         </FormGroup>;
     }
 
-    return <CoreFormField {...props} render={renderField} />;
+    return <CoreFormField<Values> {...props} render={renderField} />;
 };
 

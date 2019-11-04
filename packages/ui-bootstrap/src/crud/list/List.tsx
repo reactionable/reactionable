@@ -15,7 +15,7 @@ export function List<Data>({ head, render, ...props }: React.PropsWithChildren<I
 
     return <CoreList<Data>
         {...props}
-        render={(data: Array<any>) => <Table striped bordered hover responsive>
+        render={(data: Array<Data>) => <Table striped bordered hover responsive>
             <thead>
                 <tr>{head.map(item => 'string' === typeof item ? <th key={item}>{t(item)}</th> : item)}</tr>
             </thead>

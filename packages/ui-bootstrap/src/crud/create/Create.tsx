@@ -7,11 +7,9 @@ export type ICreateProps<Values, Data> = IModalFormProps<Values, Data> & {
     submitButton?: string;
 };
 
-export type CreateComponent<Values = any, Data = any> = React.FC<ICreateProps<Values, Data>>;
-
-export const Create: CreateComponent = ({ children,submitButton, ...props }) => {
+export function Create<Values, Data>({ children,submitButton, ...props }: React.PropsWithChildren<ICreateProps<Values, Data>>){
     const { t } = useTranslation();
-    const { modal, openModal } = useModalForm({
+    const { modal, openModal } = useModalForm<Values, Data>({
         submitButton: submitButton || t('Save'),
         ...props,
     });

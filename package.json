@@ -25,7 +25,7 @@
     "format": "prettier --write \"**/*.ts\"  \"!**/lib/**\"",
     "lint": "eslint \"packages/**/{src,__tests__}/**/*.ts\" -f eslint-formatter-friendly",
     "build": "lerna run build && lerna bootstrap",
-    "update": "npm-check -u & (cd packages/core && npm run update & cd ../..) & (cd packages/ui-bootstrap && npm run update & cd ../..) & (cd packages/graphql && npm run update & cd ../..)",
+    "update": "npm-check -u & (cd packages/core && npm run update & cd ../..) & (cd packages/amplify && npm run update & cd ../..) & (cd packages/ui-bootstrap && npm run update & cd ../..) & (cd packages/graphql && npm run update & cd ../..)",
     "publish": "lerna publish",
     "link": "lerna run link"
   },

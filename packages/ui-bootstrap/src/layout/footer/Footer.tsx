@@ -9,7 +9,7 @@ export interface IFooterProps extends ICoreFooterProps {
     sponsor?: boolean;
 };
 
-export const Footer: React.FC<IFooterProps> = ({ brand, sponsor = true }) => {
+export function Footer({ brand, sponsor = true }:React.PropsWithChildren<IFooterProps>) {
     const { t } = useTranslation();
 
     const currentYear = new Date().getFullYear();
