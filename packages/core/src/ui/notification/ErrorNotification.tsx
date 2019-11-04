@@ -2,9 +2,10 @@ import * as React from 'react';
 import { IError } from '../alert/ErrorAlert';
 import { INotificationProps } from './Notification';
 
-export type ErrorNotificationComponent = React.FC<INotificationProps & {
+export type IErrorNotificationProps = INotificationProps & {
     children?: IError
-}>;
+};
+export type ErrorNotificationComponent = React.FC<IErrorNotificationProps>;
 
 export type IUseErrorNotificationProps = React.PropsWithChildren<INotificationProps> & {
     children?: IError;
