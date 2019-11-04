@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { FormikHelpers, Formik, FormikProps, Field, FieldProps, getIn } from 'formik';
+import { FormikHelpers, Formik, FormikProps } from 'formik';
 import { object } from 'yup';
 import { useUIContext } from '../ui/UI';
 
@@ -58,62 +58,3 @@ export function Form<Value, Data>(props: React.PropsWithChildren<IFormProps<Valu
         validationSchema={formSchema}
         render={renderForm} />;
 };
-
-export type IFormFieldPropsEnhanced<Values> = FieldProps<Values> & {
-    field: {
-        isValid: boolean;
-        isInvalid: boolean;
-        ref: React.RefObject<any>;
-    };
-};
-
-export type IRenderFormField<Values> = (
-    fieldProps: IFormFieldPropsEnhanced<Values>,
-    error?: string,
-) => React.ReactElement;
-
-export type IFormFieldProps<Values> = {
-    name: string;
-    autoFocus?: boolean;
-    render: IRenderFormField<Values>;
-};
-
-export type FormField<Values> = React.FC<IFormFieldProps<Values>>;
-export function FormField<Values>({ name, render, autoFocus }: React.PropsWithChildren<IFormFieldProps<Values>>) {
-
-    const inputRef = React.useRef<any>(null);
-    React.useEffect(() => {
-        if (autoFocus === true && inputRef && inputRef.current) {
-            inputRef.current.focus();
-        }
-    }, [inputRef, autoFocus]);
-
-    const renderField = (fieldProps: FieldProps<Values>) => {
-        const touch = getIn(fieldProps.form.touched, fieldProps.field.name);
-        const error = getIn(fieldProps.form.errors, fieldProps.field.name);
-        const isValid = !!(touch && !error);
-        const isInvalid = !!(error);
-
-        const fieldPropsEnhanced: IFormFieldPropsEnhanced<Values> = Object.assign(fieldProps, {
-            field: Object.assign(
-                fieldProps.field,
-                {
-                    isValid,
-                    isInvalid,
-                    ref: inputRef,
-                }
-            ),
-        });
-
-        return render(
-            fieldPropsEnhanced,
-            touch ? error : undefined
-        );
-    };
-
-    return <Field
-        name={name}
-        render={renderField}
-    />;
-};
-

@@ -10,6 +10,7 @@ export * from "./crud/list/List";
 export * from "./crud/read/Read";
 export * from "./enhance-children/EnhanceChildren";
 export * from "./form/Form";
+export * from "./form/FormField";
 export * from "./frame/Frame";
 export * from "./identity/Identity";
 export * from "./nav/route/LazyRoute";
