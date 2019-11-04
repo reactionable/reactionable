@@ -19,6 +19,7 @@ export * from "./ui/alert/Alert";
 export * from "./ui/alert/ErrorAlert";
 export * from "./ui/alert/WarningAlert";
 export * from "./ui/confirmation/Confirmation";
+export * from "./ui/layout/Layout";
 export * from "./ui/loader/Loader";
 export * from "./ui/modal/Modal";
 export * from "./ui/modal/ModalForm";

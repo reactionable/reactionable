@@ -10,12 +10,14 @@ export interface ILoginFormValues {
 }
 
 export interface IIdentityContext<User extends IUser> {
+    identityProvider?:string;
     user: User | undefined | null;
     logout: () => Promise<void>;
     component: React.ReactElement;
 };
 
 export const IdentityContext = React.createContext<IIdentityContext<any>>({
+    identityProvider: undefined,
     user: undefined,
     logout: async () => { },
     component: <></>,
@@ -27,12 +29,11 @@ export type IIdentityComponentProps<User extends IUser> = {
 };
 export type IdentityComponent<User extends IUser> = React.FC<IIdentityComponentProps<User>>;
 
-export type IIdentityContextProviderProps<User extends IUser> = Pick<IIdentityContext<User>, 'logout'> & {
+export type IIdentityContextProviderProps<User extends IUser = IUser> = Pick<IIdentityContext<User>, 'logout'> & {
     Component: IdentityComponent<User>;
 };
 
 export function IdentityContextProvider<User extends IUser>({ Component, ...props }: React.PropsWithChildren<IIdentityContextProviderProps<User>>) {
-
     const [user, setUser] = React.useState<User | null | undefined>(undefined);
     return <IdentityContext.Provider
         value={{

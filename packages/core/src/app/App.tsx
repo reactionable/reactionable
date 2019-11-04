@@ -1,52 +1,38 @@
 import * as React from 'react';
-import { Router, Switch, RouteProps } from 'react-router-dom';
+import { Router, Switch } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
-import { IUseLoaderProps } from '../ui/loader/Loader';
-import { IdentityContextProvider, IIdentityContextProviderProps, IUser } from '../identity/Identity';
-import { LazyRoute } from '../nav/route/LazyRoute';
+import { IdentityContextProvider, IIdentityContextProviderProps } from '../identity/Identity';
+import { LazyRoute, ILazyRouteComponentProps } from '../nav/route/LazyRoute';
 import { PrivateRoute } from '../nav/route/PrivateRoute';
 import { IUIContextProviderProps, UIContextProvider } from '../ui/UI';
-import { IUseSuccessNotificationProps } from '../ui/notification/SuccessNotification';
-import { IUseErrorNotificationProps } from '../ui/notification/ErrorNotification';
-import { IUseWarningAlertProps } from '../ui/alert/WarningAlert';
-import { IUseErrorAlertProps } from '../ui/alert/ErrorAlert';
-import { IUseConfirmationProps } from '../ui/confirmation/Confirmation';
+import { IUseLayoutProps } from '../ui/layout/Layout';
 
 export interface IAppProps<
-    User extends IUser,
-    L extends IUseLoaderProps,
-    SN extends IUseSuccessNotificationProps,
-    EN extends IUseErrorNotificationProps,
-    EA extends IUseErrorAlertProps,
-    WA extends IUseWarningAlertProps,
-    C extends IUseConfirmationProps,
+    ICP extends IIdentityContextProviderProps,
+    UICP extends IUIContextProviderProps,
+    LP extends IUseLayoutProps,
     > {
-    routes: Array<Omit<RouteProps, 'component'> & {
-        component: React.LazyExoticComponent<any>;
-        privateRoute?: boolean;
-    }>,
+    routes: Array<ILazyRouteComponentProps<LP> & { privateRoute?: boolean }>,
     HomeComponent?: React.LazyExoticComponent<any>;
     NotFoundComponent?: React.LazyExoticComponent<any>;
-    identity?: IIdentityContextProviderProps<User>;
-    ui?: IUIContextProviderProps<L, SN, EN, EA, WA, C>;
+    identity?: ICP;
+    ui?: UICP;
+    layout?:LP;
 }
 
 
 export function App<
-    User extends IUser,
-    L extends IUseLoaderProps,
-    SN extends IUseSuccessNotificationProps,
-    EN extends IUseErrorNotificationProps,
-    EA extends IUseErrorAlertProps,
-    WA extends IUseWarningAlertProps,
-    C extends IUseConfirmationProps,
-    >({
-        routes = [],
-        HomeComponent,
-        NotFoundComponent,
-        identity,
-        ui,
-    }: React.PropsWithChildren<IAppProps<User, L, SN, EN, EA, WA, C>>) {
+    ICP extends IIdentityContextProviderProps = IIdentityContextProviderProps,
+    UICP extends IUIContextProviderProps = IUIContextProviderProps,
+    LP extends IUseLayoutProps = IUseLayoutProps
+>({
+    routes = [],
+    HomeComponent,
+    NotFoundComponent,
+    identity,
+    ui,
+    layout,
+}: React.PropsWithChildren<IAppProps<ICP, UICP, LP>>) {
     const customHistory = createBrowserHistory();
 
     if (HomeComponent) {
@@ -66,24 +52,26 @@ export function App<
                 return <PrivateRoute
                     key={key}
                     component={component}
+                    layout={layout}
                     {...routeProps}
                 />;
             }
             return <LazyRoute
                 key={key}
                 component={component}
+                layout={layout}
                 {...routeProps}
             />;
         })}</Switch>
     </Router>;
 
     if (identity) {
-        content = <IdentityContextProvider<User> {...identity}>{content}</IdentityContextProvider>;
+        content = <IdentityContextProvider {...identity}>{content}</IdentityContextProvider>;
     }
 
     if (ui) {
-        content = <UIContextProvider<L, SN, EN, EA, WA, C> {...ui}>{content}</UIContextProvider>;
+        content = <UIContextProvider {...ui}>{content}</UIContextProvider>;
     }
 
-    return content;
+    return <React.StrictMode>{content}</React.StrictMode>;
 };

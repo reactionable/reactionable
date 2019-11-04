@@ -1,3 +1,3 @@
 import Amplify from 'aws-amplify';
 
-export const configure = Amplify.configure;
+export const configure = (config: any) => Amplify.configure(config);
