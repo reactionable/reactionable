@@ -29,9 +29,9 @@ export const lazyLoad = (
 ): React.FC => (props: any) => withSuspense(<ComponentToLoad {...props} />);
 
 export const withSuspense = (
-    ComponentToLoad: React.ReactElement,
+    component: React.ReactElement,
 ) => {
     const { loader } = useUIContext().useLoader({isLoading: true});
-    return <React.Suspense fallback={loader}>{ComponentToLoad}</React.Suspense>
+    return <React.Suspense fallback={loader}>{component}</React.Suspense>
 };
 

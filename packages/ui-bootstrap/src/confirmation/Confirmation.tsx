@@ -2,7 +2,13 @@ import * as React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { useTranslation } from 'react-i18next';
-import { useConfirmation as useConfirmationCore, ConfirmationComponent, IUseConfirmationProps } from '@reactionable/core';
+import { 
+  useConfirmation as useConfirmationCore, ConfirmationComponent, 
+  IUseConfirmationProps as ICoreUseConfirmationProps, 
+  IConfirmationProps as ICoreConfirmationProps
+} from '@reactionable/core';
+
+export type IConfirmationProps = ICoreConfirmationProps;
 
 export const Confirmation: ConfirmationComponent = (props) => {
   const { t } = useTranslation();
@@ -25,6 +31,7 @@ export const Confirmation: ConfirmationComponent = (props) => {
   </Modal>;
 };
 
+export type IUseConfirmationProps = ICoreUseConfirmationProps & {};
 export const useConfirmation = (props: IUseConfirmationProps) => {
-  return useConfirmationCore({ Component: Confirmation, ...props });
+  return useConfirmationCore<IConfirmationProps>({ Component: Confirmation, ...props });
 }

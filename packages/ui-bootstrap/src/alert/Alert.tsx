@@ -9,5 +9,5 @@ export const Alert: AlertComponent = ({ children, ...props }) => {
 };
 
 export const useAlert = (props?: IAlertProps) => {
-    return useAlertCore({ Component: Alert, ...props });
+    return useAlertCore<IAlertProps>({ Component: Alert, ...props });
 };

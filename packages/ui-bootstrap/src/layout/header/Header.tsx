@@ -4,53 +4,52 @@ import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { useIdentityContext } from '@reactionable/core';
+import { useIdentityContext, IHeaderProps as ICoreHeaderProps } from '@reactionable/core';
 import { useModal } from '../../modal/Modal';
 
-export interface IHeaderProps {
-    brand?: React.ReactElement;
+export interface IHeaderProps extends ICoreHeaderProps {
     navbarProps?: NavbarProps;
-    navStartItems?: React.ReactNode[];
 };
 
 export const Header: React.FC<IHeaderProps> = ({ brand, navbarProps = {}, navStartItems = [] }) => {
 
     const { t } = useTranslation();
-    const { user, logout, component } = useIdentityContext();
-
-    const { modal, openModal } = useModal({
-        title: t('Sign In / Sign Up'),
-        body: component,
-    });
-
+    const { user, logout, component, identityProvider } = useIdentityContext();
+    
     const userMenuItems: React.ReactNode[] = [];
-    if (user) {
-        userMenuItems.push(
-            <NavDropdown key="userNav" id="userNav" title={user.displayName()}>
-                <NavDropdown.Item href="/account">{t('My account')}</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#" onClick={logout}>{t('Log out')}</NavDropdown.Item>
-            </NavDropdown>
-        );
-    }
-    else {
+    let identityModal = undefined;
+    if (identityProvider) {
+        const { modal, openModal } = useModal({
+            title: t('Sign In / Sign Up'),
+            body: component,
+        });
+        identityModal = modal;
 
-        const handleOnClick = () => openModal();
-
-        userMenuItems.push(
-            <Nav.Link
-                as={Link}
-                to="#"
-                key="signup_signin"
-                onClick={handleOnClick} className="btn btn-outline-primary"
-            >{t('Sign Up / Sign In')}</Nav.Link>
-        );
+        if (user) {
+            userMenuItems.push(
+                <NavDropdown key="userNav" id="userNav" title={user.displayName()}>
+                    <NavDropdown.Item href="/account">{t('My account')}</NavDropdown.Item>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item href="#" onClick={logout}>{t('Log out')}</NavDropdown.Item>
+                </NavDropdown>
+            );
+        }
+        else {
+            const handleOnClick = () => openModal();
+            userMenuItems.push(
+                <Nav.Link
+                    as={Link}
+                    to="#"
+                    key="signup_signin"
+                    onClick={handleOnClick} className="btn btn-link"
+                >{t('Sign Up / Sign In')}</Nav.Link>
+            );
+        }
     }
 
     return <>
-        {modal}
+        {identityModal}
         <Navbar {...Object.assign({
-            variant: 'dark',
             expand: 'lg',
         }, navbarProps)}>
             {brand && <Navbar.Brand href="/">{brand}</Navbar.Brand>}
@@ -58,7 +57,7 @@ export const Header: React.FC<IHeaderProps> = ({ brand, navbarProps = {}, navSta
             <Navbar.Collapse id="main-navbar-nav">
                 <Nav className="mr-auto">{navStartItems}</Nav>
             </Navbar.Collapse>
-            <Nav>{userMenuItems}</Nav>
+            {userMenuItems.length > 0 && <Nav>{userMenuItems}</Nav>}
         </Navbar>
     </>;
 };

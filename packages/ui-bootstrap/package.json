@@ -9,10 +9,12 @@
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
-    "start": "tsc -w",
+    "start": "npm run build:barrelsby && tsc-watch --onSuccess \"\"",
     "test": "jest",
-    "build": "rimraf lib && barrelsby -d src --exclude \".+\\.test\\..+\" --delete && tsc --pretty",
-    "update": "npm-check -u"
+    "build": "rimraf lib && tsc --pretty && npm run build:barrelsby",
+    "build:barrelsby": "barrelsby -d src --exclude \".+\\.test\\..+\" --delete",
+    "update": "npm-check -u",
+    "link": "npm link"
   },
   "repository": {
     "type": "git",
@@ -51,6 +53,7 @@
     "jest": "^24.9.0",
     "rimraf": "^3.0.0",
     "ts-jest": "^24.1.0",
+    "tsc-watch": "^4.0.0",
     "typescript": "^3.2.2"
   },
   "jest": {

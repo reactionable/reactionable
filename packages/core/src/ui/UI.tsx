@@ -5,61 +5,68 @@ import { IUseErrorNotification, useErrorNotification, IUseErrorNotificationProps
 import { IUseErrorAlert, useErrorAlert, IUseErrorAlertProps } from './alert/ErrorAlert';
 import { IUseWarningAlert, useWarningAlert, IUseWarningAlertProps } from './alert/WarningAlert';
 import { IUseConfirmationProps, useConfirmation, IUseConfirmation } from './confirmation/Confirmation';
+import { IUseLayoutProps, useLayout, IUseLayout } from './layout/Layout';
 
 export type IUIContext<
-    L extends IUseLoaderProps,
-    SN extends IUseSuccessNotificationProps,
-    EN extends IUseErrorNotificationProps,
-    EA extends IUseErrorAlertProps,
-    WA extends IUseWarningAlertProps,
-    C extends IUseConfirmationProps,
+    LO extends IUseLoaderProps = IUseLoaderProps,
+    SN extends IUseSuccessNotificationProps = IUseSuccessNotificationProps,
+    EN extends IUseErrorNotificationProps = IUseErrorNotificationProps,
+    EA extends IUseErrorAlertProps = IUseErrorAlertProps,
+    WA extends IUseWarningAlertProps = IUseWarningAlertProps,
+    CO extends IUseConfirmationProps = IUseConfirmationProps,
+    LA extends IUseLayoutProps = IUseLayoutProps,
     > = {
-        useLoader: IUseLoader<L>;
+        useLoader: IUseLoader<LO>;
         useSuccessNotification: IUseSuccessNotification<SN>;
         useErrorNotification: IUseErrorNotification<EN>;
         useErrorAlert: IUseErrorAlert<EA>;
         useWarningAlert: IUseWarningAlert<WA>;
-        useConfirmation: IUseConfirmation<C>;
+        useConfirmation: IUseConfirmation<CO>;
+        useLayout: IUseLayout<LA>;
     };
 
-export const UIContext = React.createContext<IUIContext<any, any, any, any, any, any>>({
+export const UIContext = React.createContext<IUIContext<any,any,any,any,any,any,any>>({
     useLoader,
     useSuccessNotification,
     useErrorNotification,
     useErrorAlert,
     useWarningAlert,
     useConfirmation,
+    useLayout,
 });
 
 export type IUIContextProviderProps<
-    L extends IUseLoaderProps,
-    SN extends IUseSuccessNotificationProps,
-    EN extends IUseErrorNotificationProps,
-    EA extends IUseErrorAlertProps,
-    WA extends IUseWarningAlertProps,
-    C extends IUseConfirmationProps,
-    > = React.PropsWithChildren<IUIContext<L, SN, EN, EA, WA, C>>;
+    LO extends IUseLoaderProps = IUseLoaderProps,
+    SN extends IUseSuccessNotificationProps = IUseSuccessNotificationProps,
+    EN extends IUseErrorNotificationProps = IUseErrorNotificationProps,
+    EA extends IUseErrorAlertProps = IUseErrorAlertProps,
+    WA extends IUseWarningAlertProps = IUseWarningAlertProps,
+    CO extends IUseConfirmationProps = IUseConfirmationProps,
+    LA extends IUseLayoutProps = IUseLayoutProps,
+    > = React.PropsWithChildren<IUIContext<LO, SN, EN, EA, WA, CO, LA>>;
 
 export function UIContextProvider<
-    L extends IUseLoaderProps,
+    LO extends IUseLoaderProps,
     SN extends IUseSuccessNotificationProps,
     EN extends IUseErrorNotificationProps,
     EA extends IUseErrorAlertProps,
     WA extends IUseWarningAlertProps,
-    C extends IUseConfirmationProps,
->(props: IUIContextProviderProps<L, SN, EN, EA, WA, C>) {
+    CO extends IUseConfirmationProps,
+    LA extends IUseLayoutProps,
+>(props: IUIContextProviderProps<LO, SN, EN, EA, WA, CO, LA>) {
     return <UIContext.Provider
         value={props}
     >{props.children}</UIContext.Provider>;
 };
 
 export function useUIContext<
-    L extends IUseLoaderProps,
+    LO extends IUseLoaderProps,
     SN extends IUseSuccessNotificationProps,
     EN extends IUseErrorNotificationProps,
     EA extends IUseErrorAlertProps,
     WA extends IUseWarningAlertProps,
-    C extends IUseConfirmationProps,
+    CO extends IUseConfirmationProps,
+    LA extends IUseLayoutProps,
 >() {
-    return React.useContext<IUIContext<L, SN, EN, EA, WA, C>>(UIContext);
+    return React.useContext<IUIContext<LO, SN, EN, EA, WA, CO, LA>>(UIContext);
 }
