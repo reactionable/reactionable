@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.11.3](https://github.com/reactionable/reactionable/compare/v0.11.2...v0.11.3) (2019-11-08)
+
+
+### Bug Fixes
+
+* **amplify:** improve identity ([da048f0](https://github.com/reactionable/reactionable/commit/da048f0bcb5f8008457b4edc9fa03490a5e46585))
+
+
+
+
+
 ## [0.11.2](https://github.com/reactionable/reactionable/compare/v0.11.1...v0.11.2) (2019-11-04)
 
 **Note:** Version bump only for package @reactionable/graphql
