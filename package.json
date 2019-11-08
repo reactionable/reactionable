@@ -4,10 +4,10 @@
   "devDependencies": {
     "@commitlint/cli": "^8.2.0",
     "@commitlint/config-conventional": "^8.2.0",
-    "@types/jest": "^24.0.15",
-    "@types/node": "^12.11.2",
-    "@typescript-eslint/eslint-plugin": "^2.5.0",
-    "@typescript-eslint/parser": "^2.5.0",
+    "@types/jest": "^24.0.22",
+    "@types/node": "^12.12.6",
+    "@typescript-eslint/eslint-plugin": "^2.6.1",
+    "@typescript-eslint/parser": "^2.6.1",
     "cz-conventional-changelog": "^3.0.2",
     "eslint": "^6.3.0",
     "eslint-config-prettier": "^6.1.0",
@@ -17,7 +17,7 @@
     "jest": "^24.8.0",
     "prettier": "^1.18.2",
     "ts-jest": "^24.0.2",
-    "typescript": "^3.5.3"
+    "typescript": "^3.7.2"
   },
   "scripts": {
     "start": "npm run link --parallel && lerna run start --parallel",
@@ -30,7 +30,7 @@
     "link": "lerna run link"
   },
   "dependencies": {
-    "lerna": "^3.18.3"
+    "lerna": "^3.18.4"
   },
   "prettier": {
     "printWidth": 100,
