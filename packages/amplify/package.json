@@ -38,15 +38,15 @@
     "aws-amplify-react": "^2.5.4"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.21",
-    "@types/node": "^12.12.5",
+    "@types/jest": "^24.0.22",
+    "@types/node": "^12.12.6",
     "@types/react": "^16.9.11",
     "barrelsby": "^2.2.0",
     "jest": "^24.9.0",
     "rimraf": "^3.0.0",
     "ts-jest": "^24.1.0",
     "tsc-watch": "^4.0.0",
-    "typescript": "^3.2.2"
+    "typescript": "^3.7.2"
   },
   "jest": {
     "preset": "ts-jest"

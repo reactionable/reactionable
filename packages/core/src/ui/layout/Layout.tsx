@@ -31,7 +31,7 @@ export function Layout<
     const HC = components.HeaderComponent as HeaderComponent<H>;
     const BC = components.BodyComponent;
     const FC = components.FooterComponent;
-    return <>    
+    return <>
         <HC {...header} />
         <BC {...body} children={children} />
         <FC {...footer} />

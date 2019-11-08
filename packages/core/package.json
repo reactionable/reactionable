@@ -41,15 +41,15 @@
     "i18next": "^19.0.0",
     "i18next-browser-languagedetector": "^4.0.1",
     "react-helmet": "^5.2.1",
-    "react-i18next": "^11.0.1",
+    "react-i18next": "^11.1.0",
     "react-router-dom": "^5.1.2",
     "yup": "^0.27.0"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.21",
-    "@types/node": "^12.12.5",
+    "@types/jest": "^24.0.22",
+    "@types/node": "^12.12.6",
     "@types/react": "^16.9.11",
-    "@types/react-dom": "^16.9.3",
+    "@types/react-dom": "^16.9.4",
     "@types/react-helmet": "^5.0.14",
     "@types/react-i18next": "^8.1.0",
     "@types/react-router-dom": "^5.1.2",
@@ -61,7 +61,7 @@
     "rimraf": "^3.0.0",
     "ts-jest": "^24.1.0",
     "tsc-watch": "^4.0.0",
-    "typescript": "^3.6.4"
+    "typescript": "^3.7.2"
   },
   "jest": {
     "preset": "ts-jest"

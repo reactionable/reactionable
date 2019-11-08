@@ -13,9 +13,13 @@ export type ILayoutProps = ICoreLayoutProps<
     IFooterProps
 >;
 
-export type IUseLayoutProps = ICoreUseLayoutProps & {};
+export type IUseLayoutProps = ICoreUseLayoutProps<
+    IHeaderProps,
+    IBodyProps,
+    IFooterProps
+> & {};
 export const useLayout = (props: IUseLayoutProps) => {
-    return useLayoutCore<IUseLayoutProps>({ 
+    return useLayoutCore<IUseLayoutProps>({
         ...props,
         HeaderComponent: Header,
         BodyComponent: Body,

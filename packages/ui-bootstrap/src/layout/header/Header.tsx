@@ -7,11 +7,9 @@ import { Link } from 'react-router-dom';
 import { useIdentityContext, IHeaderProps as ICoreHeaderProps } from '@reactionable/core';
 import { useModal } from '../../modal/Modal';
 
-export interface IHeaderProps extends ICoreHeaderProps {
-    navbarProps?: NavbarProps;
-};
+export type IHeaderProps = ICoreHeaderProps & NavbarProps & {};
 
-export function Header({ brand, navbarProps = {}, navItems = [] }: React.PropsWithChildren<IHeaderProps>) {
+export function Header({ brand, navItems = [], ...navbarProps }: React.PropsWithChildren<IHeaderProps>) {
     const { t } = useTranslation();
     const { user, logout, component, identityProvider } = useIdentityContext();
 
@@ -47,9 +45,10 @@ export function Header({ brand, navbarProps = {}, navItems = [] }: React.PropsWi
 
     return <>
         {identityModal}
-        <Navbar {...Object.assign({
-            expand: 'lg',
-        }, navbarProps)}>
+        <Navbar
+            expand="lg"
+            {...navbarProps}
+        >
             {brand && <Navbar.Brand as={Link} to="/">{brand}</Navbar.Brand>}
             <Navbar.Toggle aria-controls="main-navbar-nav" />
             <Navbar.Collapse id="main-navbar-nav">
