@@ -21,6 +21,6 @@ export function Crud<Data>({
     }
     return <Switch>
         <PrivateRoute exact path={match.path} component={listComponent} />
-        <PrivateRoute path={`${match.path}/:${name}Id`} component={readComponent} />
+        <PrivateRoute path={`${match.path}/:${name.charAt(0).toLowerCase() + name.slice(1)}Id`} component={readComponent} />
     </Switch>;
 };
