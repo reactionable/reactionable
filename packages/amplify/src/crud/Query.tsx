@@ -26,14 +26,22 @@ function useDeepCompareMemoize(value: any) {
 export function useDeepCompareEffect(callback: any, dependencies: any) {
     useEffect(callback, useDeepCompareMemoize(dependencies))
 }
-export const gqlOp = async <Data, Variables>({ query, variables }: {
-    query: string,
-    variables?: Variables
-}): Promise<Data> => {
+
+type IApiGraphqlOptions<Variables> = {
+    query: string;
+    variables?: Variables;
+    rawData?: boolean;
+};
+
+export async function apiGraphql<Data, Variables>({ query, variables, rawData }: IApiGraphqlOptions<Variables>): Promise<Data>{
     const result = (await API.graphql(graphqlOperation(query, variables)));
 
     if (!isGraphQLResult(result) || !result.data) {
         throw new Error('No data');
+    }
+
+    if(rawData){
+        return result.data as unknown as Data;
     }
 
     const data = extractGqlData<Data>(result.data);
@@ -44,12 +52,9 @@ export const gqlOp = async <Data, Variables>({ query, variables }: {
     return data;
 };
 
-export const mutation = async <Data extends {}, Variables extends {}>(options: {
-    query: string,
-    variables?: Variables
-}) => gqlOp<Data, Variables>(options);
+export const mutation = async <Data extends {}, Variables extends {}>(options: IApiGraphqlOptions<Variables>) => apiGraphql<Data, Variables>(options);
 
-export type IUseQueryOptions<Variables> = ICoreUseQueryOptions<Variables> & { query: string };
+export type IUseQueryOptions<Variables> = ICoreUseQueryOptions<Variables> & IApiGraphqlOptions<Variables>;
 
 export const useQuery = <Data extends {}, Variables extends {}>({ query, variables }: IUseQueryOptions<Variables>): IUseQueryResult<Data> => {
     const [isLoading, setLoading] = useState<boolean>(true);
@@ -59,7 +64,7 @@ export const useQuery = <Data extends {}, Variables extends {}>({ query, variabl
     const fetchQuery = async (query: string, variables?: Variables) => {
         try {
             setLoading(true);
-            const data = await gqlOp<Data, Variables>({ query, variables });
+            const data = await apiGraphql<Data, Variables>({ query, variables });
             setData(data);
         } catch (error) {
             setError(error);
