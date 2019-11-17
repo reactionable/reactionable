@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.13.1](https://github.com/reactionable/reactionable/compare/v0.13.0...v0.13.1) (2019-11-17)
+
+
+### Bug Fixes
+
+* **amplify:** fix extracting data for query list ([9adef2a](https://github.com/reactionable/reactionable/commit/9adef2a22320e81d1eda94c8f9d958ea7802ed1a))
+* **core:** fix CRUD routing ([1d90857](https://github.com/reactionable/reactionable/commit/1d9085755ca38ca93eafe2cb0e6f47a0167edd13))
+
+
+
+
+
 # [0.13.0](https://github.com/reactionable/reactionable/compare/v0.12.0...v0.13.0) (2019-11-17)
 
 
