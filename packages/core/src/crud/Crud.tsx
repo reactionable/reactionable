@@ -31,7 +31,7 @@ export function Crud<Data, LP extends IUseLayoutProps>({
 
     // Add CRUD path prefix to given routes
     routes = routes.map(route => {
-        route.path = `${match.path}/:${idParam}/${route.path}`;
+        route.path = `${match.path}/${idParam}/${route.path}`;
         return route;
     });
 
@@ -47,7 +47,7 @@ export function Crud<Data, LP extends IUseLayoutProps>({
     if (readComponent) {
         routes.push({
             exact: true,
-            path: `${match.path}/:${idParam}`,
+            path: `${match.path}/${idParam}`,
             component: readComponent,
             privateRoute: privateRoute,
         });
