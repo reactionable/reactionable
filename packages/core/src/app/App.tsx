@@ -2,8 +2,7 @@ import React, { LazyExoticComponent, PropsWithChildren, StrictMode } from 'react
 import { Router, Switch } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import { IdentityContextProvider, IIdentityContextProviderProps } from '../identity/Identity';
-import { LazyRoute, ILazyRouteComponentProps } from '../nav/route/LazyRoute';
-import { PrivateRoute } from '../nav/route/PrivateRoute';
+import { IRouteProps, renderRoute } from '../nav/route/Route';
 import { IUIContextProviderProps, UIContextProvider } from '../ui/UI';
 import { IUseLayoutProps } from '../ui/layout/Layout';
 import { useCaptureRouteNotFound } from '../nav/route/NotFound';
@@ -13,7 +12,7 @@ export interface IAppProps<
     UICP extends IUIContextProviderProps,
     LP extends IUseLayoutProps,
     > {
-    routes: Array<ILazyRouteComponentProps<LP> & { privateRoute?: boolean }>,
+    routes: Array<IRouteProps<LP>>;
     HomeComponent?: LazyExoticComponent<any>;
     NotFoundComponent?: LazyExoticComponent<any>;
     identity?: ICP;
@@ -38,30 +37,8 @@ export function App<
     if (HomeComponent) {
         routes.unshift({ component: HomeComponent, exact: true, path: '/', privateRoute: false, });
     }
-    if (NotFoundComponent) {
-        // routes.push({ component: NotFoundComponent, privateRoute: false, path:'*', exact:true });
-    }
 
-    let routerContent = <Switch>{routes.map(({ privateRoute, component, ...routeProps }) => {
-        const key = `${routeProps.exact ? 'exact' : 'non-exact'}-${routeProps.path}-${privateRoute ? 'private' : 'public'}-${component.name}`;
-        if (privateRoute) {
-            if (!identity) {
-                throw new Error('Unable to render a private route without identify configuration');
-            }
-            return <PrivateRoute
-                key={key}
-                component={component}
-                layout={layout}
-                {...routeProps}
-            />;
-        }
-        return <LazyRoute
-            key={key}
-            component={component}
-            layout={layout}
-            {...routeProps}
-        />;
-    })}</Switch>
+    let routerContent = <Switch>{routes.map(route => renderRoute<LP>({ layout, ...route }))}</Switch>
 
     if (NotFoundComponent) {
         const CaptureRouteNotFound = useCaptureRouteNotFound(NotFoundComponent);

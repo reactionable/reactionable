@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, PropsWithChildren } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FormikHelpers, Formik, FormikProps } from 'formik';
 import { object } from 'yup';
@@ -15,7 +15,7 @@ export interface IFormProps<Values, Data> {
     onSuccess?: (result: Data) => void;
 };
 
-export function Form<Values, Data>(props: IFormProps<Values, Data>) {
+export function Form<Values, Data>(props: PropsWithChildren<IFormProps<Values, Data>>) {
 
     const { t } = useTranslation();
     const formSchema = object().shape(props.formSchema);

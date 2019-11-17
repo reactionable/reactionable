@@ -1,26 +1,57 @@
 import React, { LazyExoticComponent, PropsWithChildren } from 'react';
 import { useRouteMatch, Switch } from 'react-router-dom';
-import { PrivateRoute } from '../nav/route/PrivateRoute';
 import { ReadDataComponent } from './read/Read';
 import { ListComponent } from './list/List';
+import { IUseLayoutProps } from '../ui/layout/Layout';
+import { IRouteProps, renderRoute } from '../nav/route/Route';
 
-export interface ICrudProp<Data> {
+export interface ICrudProp<Data, LP extends IUseLayoutProps = IUseLayoutProps> {
     name: string
-    listComponent: LazyExoticComponent<ListComponent<Data>>;
-    readComponent: LazyExoticComponent<ReadDataComponent<Data>>;
+    listComponent?: LazyExoticComponent<ListComponent<Data>>;
+    readComponent?: LazyExoticComponent<ReadDataComponent<Data>>;
+    routes?: Array<IRouteProps<LP>>;
+    privateRoute?: boolean;
+    layout?: LP;
 };
 
-export function Crud<Data>({
+export function Crud<Data, LP extends IUseLayoutProps>({
     name,
     listComponent,
     readComponent,
-}: PropsWithChildren<ICrudProp<Data>>) {
+    routes = [],
+    privateRoute = true,
+    layout,
+}: PropsWithChildren<ICrudProp<Data, LP>>) {
     const match = useRouteMatch();
     if (!match) {
-        return <></>;
+        return null;
     }
-    return <Switch>
-        <PrivateRoute exact path={match.path} component={listComponent} />
-        <PrivateRoute path={`${match.path}/:${name.charAt(0).toLowerCase() + name.slice(1)}Id`} component={readComponent} />
-    </Switch>;
+    
+    const idParam = `:${name.charAt(0).toLowerCase() + name.slice(1)}Id`;
+
+    // Add CRUD path prefix to given routes
+    routes = routes.map(route => {
+        route.path = `${match.path}/:${idParam}/${route.path}`;
+        return route;
+    });
+
+    if (listComponent) {
+        routes.push({
+            exact: true,
+            path: match.path,
+            component: listComponent,
+            privateRoute: privateRoute,
+        });
+    }
+
+    if (readComponent) {
+        routes.push({
+            exact: true,
+            path: `${match.path}/:${idParam}`,
+            component: readComponent,
+            privateRoute: privateRoute,
+        });
+    }
+
+    return <Switch>{routes.map(route => renderRoute<LP>({ layout, ...route }))}</Switch>;
 };
