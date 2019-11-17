@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.12.0](https://github.com/reactionable/reactionable/compare/v0.11.3...v0.12.0) (2019-11-17)
+
+
+### Features
+
+* improve CRUD components ([ba9da60](https://github.com/reactionable/reactionable/commit/ba9da6058443e420e24d740c84fed382ba70b702))
+
+
+
+
+
 ## [0.11.3](https://github.com/reactionable/reactionable/compare/v0.11.2...v0.11.3) (2019-11-08)
 
 
