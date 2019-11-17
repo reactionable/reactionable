@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { FC } from 'react';
 import {
     IError,
     IErrorNotificationProps as ICoreErrorNotificationProps,
@@ -14,7 +14,7 @@ export type IErrorNotificationProps = ICoreErrorNotificationProps & {
     title?: string;
 };
 
-export const ErrorNotification: React.FC<IErrorNotificationProps> = (props) => {
+export const ErrorNotification: FC<IErrorNotificationProps> = (props) => {
     if (!props.title) {
         const { t } = useTranslation();
         props.title = t('An error has occured');

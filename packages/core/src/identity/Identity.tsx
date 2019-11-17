@@ -1,22 +1,20 @@
-import * as React from 'react';
+import React, { useContext, createContext, ReactElement, FC, PropsWithChildren, useState, useEffect } from 'react';
 
 export type IUser = {
     displayName: () => string;
 };
-
 export interface ILoginFormValues {
     username: string;
     password: string;
 };
-
 export interface IIdentityContext<User extends IUser> {
     user: User | undefined | null;
-    component: React.ReactElement;
+    component: ReactElement;
     identityProvider?: string;
     logout: () => Promise<void>;
 };
 
-export const IdentityContext = React.createContext<IIdentityContext<any>>({
+export const IdentityContext = createContext<IIdentityContext<any>>({
     user: undefined,
     component: <></>,
     logout: async () => { },
@@ -27,7 +25,7 @@ export type IIdentityComponentProps<User extends IUser> = {
     setUser: (user: User | null) => void;
 };
 
-export type IdentityComponent<User extends IUser> = React.FC<IIdentityComponentProps<User>>;
+export type IdentityComponent<User extends IUser> = FC<IIdentityComponentProps<User>>;
 
 export type IIdentityContextProviderProps<User extends IUser = IUser> = Omit<IIdentityContext<User>, 'component' | 'user'> & {
     Component: IdentityComponent<User>;
@@ -40,19 +38,24 @@ export function IdentityContextProvider<User extends IUser>({
     logout,
     identityProvider,
     ...props
-}: React.PropsWithChildren<IIdentityContextProviderProps<User>>) {
-    const [user, setUser] = React.useState<User | null | undefined>(undefined);
+}: PropsWithChildren<IIdentityContextProviderProps<User>>) {
+    const [user, setUser] = useState<User | null | undefined>(undefined);
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (user === undefined) {
             getUser().then(user => setUser(user));
         }
     }, [user]);
 
+    const logoutHandler = async () => {
+        await logout();
+        setUser(null);
+    }
+
     return <IdentityContext.Provider
         value={{
             user,
-            logout,
+            logout: logoutHandler,
             identityProvider,
             component: <Component setUser={setUser} {...props} />,
         }}
@@ -60,5 +63,5 @@ export function IdentityContextProvider<User extends IUser>({
 };
 
 export function useIdentityContext<User extends IUser>() {
-    return React.useContext<IIdentityContext<User>>(IdentityContext);
+    return useContext<IIdentityContext<User>>(IdentityContext);
 };

@@ -1,14 +1,14 @@
-import * as React from 'react';
+import { FC, PropsWithChildren, ReactElement, ReactNode } from 'react';
 import { useAlert, IAlertProps } from './Alert';
 
 export type IWarningAlertProps = IAlertProps;
-export type WarningAlertComponent = React.FC<IWarningAlertProps>;
+export type WarningAlertComponent = FC<IWarningAlertProps>;
 
-export type IUseWarningAlertProps = React.PropsWithChildren<IWarningAlertProps>;
+export type IUseWarningAlertProps = PropsWithChildren<IWarningAlertProps>;
 
 export interface IUseWarningAlertResult {
-    warningAlert: React.ReactElement;
-    setWarningAlert: (alert?: React.ReactNode) => void;
+    warningAlert: ReactElement;
+    setWarningAlert: (alert?: ReactNode) => void;
 };
 
 export type IUseWarningAlert<P extends IUseWarningAlertProps> = (props: P) => IUseWarningAlertResult;

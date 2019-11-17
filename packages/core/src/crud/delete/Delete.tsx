@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 import { EnhanceChildren } from '../../enhance-children/EnhanceChildren';
 import { useUIContext } from '../../ui/UI';
 
@@ -10,9 +10,9 @@ export interface IDeleteProps<Data> {
     onSuccess?: (result: Data) => void;
 };
 
-export type DeleteComponent<Data> = React.FC<IDeleteProps<Data>>;
+export type DeleteComponent<Data> = FC<IDeleteProps<Data>>;
 
-export function Delete<Data>(props: React.PropsWithChildren<IDeleteProps<Data>>) {
+export function Delete<Data>(props: PropsWithChildren<IDeleteProps<Data>>) {
     const { useLoader, useSuccessNotification, useErrorNotification, useConfirmation } = useUIContext();
     const { loader, isLoading, setLoading } = useLoader({});
     const { successNotification, setSuccessNotification } = useSuccessNotification({ title: props.title });

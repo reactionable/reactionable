@@ -1,13 +1,13 @@
-import * as React from 'react';
+import React, { PropsWithChildren } from 'react';
 import FormLabel from 'react-bootstrap/FormLabel';
 import Feedback from 'react-bootstrap/Feedback';
 import FormControl from 'react-bootstrap/FormControl';
 import FormGroup from 'react-bootstrap/FormGroup';
-import { 
+import {
     FormField as CoreFormField,
-    IFormFieldProps as ICoreFormFieldProps, 
-    IFormFieldPropsEnhanced, IRenderFormField, 
-    IFormFieldValue 
+    IFormFieldProps as ICoreFormFieldProps,
+    IFormFieldPropsEnhanced, IRenderFormField,
+    IFormFieldValue
 } from '@reactionable/core';
 
 export type IFormFieldProps<Value extends IFormFieldValue> = Omit<ICoreFormFieldProps<Value>, 'render'> & {
@@ -15,7 +15,7 @@ export type IFormFieldProps<Value extends IFormFieldValue> = Omit<ICoreFormField
     render?: IRenderFormField<Value>;
 };
 
-export function FormField<Value extends string>({ label, render, ...props }: React.PropsWithChildren<IFormFieldProps<Value>>) {
+export function FormField<Value extends string>({ label, render, ...props }: PropsWithChildren<IFormFieldProps<Value>>) {
     const renderField = (fieldProps: IFormFieldPropsEnhanced<Value>, error?: string) => {
         return <FormGroup controlId={fieldProps.field.name}>
             {label && <FormLabel>{label}</FormLabel>}

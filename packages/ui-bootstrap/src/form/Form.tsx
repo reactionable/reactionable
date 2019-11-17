@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { FormikProps, Form as FormikForm } from 'formik';
+import React, { PropsWithChildren } from 'react';
+import { Form as FormikForm } from 'formik';
 import {
     Form as CoreForm,
     IFormProps as ICoreFormProps,
@@ -7,17 +7,17 @@ import {
 
 export type IFormProps<Values, Data> = ICoreFormProps<Values, Data>;
 
-export function Form<Values, Data>({ render, ...props }: React.PropsWithChildren<IFormProps<Values, Data>>) {
+export function Form<Values, Data>({ formChildren, ...props }: PropsWithChildren<IFormProps<Values, Data>>) {
 
-    const renderFormFields = (formikProps: FormikProps<Values>, isLoading: boolean) => {
+    const renderFormFields = (isLoading: boolean) => {
         return <FormikForm className="needs-validation">
-            {render(formikProps, isLoading)}
+            {formChildren(isLoading)}
         </FormikForm>;
     };
 
     return <CoreForm<Values, Data>
         {...props}
-        render={renderFormFields}
+        formChildren={renderFormFields}
     />;
 }
 

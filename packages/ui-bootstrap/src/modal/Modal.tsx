@@ -1,19 +1,18 @@
-import * as React from 'react';
+import React, { ReactElement, FC, PropsWithChildren } from 'react';
 import BootstrapModal, { ModalProps } from 'react-bootstrap/Modal';
 import { useModal as useCoreModal, IModalProps as ICoreModalProps } from '@reactionable/core';
 
 export type IModalProps = ICoreModalProps & ModalProps & {
-    body?: React.ReactElement;
-    footer?: React.ReactElement;
-}
+    body?: ReactElement;
+    footer?: ReactElement;
+};
 
-export type ModalComponent = React.FC<IModalProps>;
+export type ModalComponent = FC<IModalProps>;
 export const Modal: ModalComponent = ({ title, children, body, footer, ...modalProps }) => {
     return <BootstrapModal
         centered
         show={true}
         backdrop="static"
-        dialogClassName="modal-lg"
         {...modalProps}
     >
         <BootstrapModal.Header closeButton>
@@ -25,10 +24,10 @@ export const Modal: ModalComponent = ({ title, children, body, footer, ...modalP
     </BootstrapModal>;
 };
 
-export type IUseModalProps = React.PropsWithChildren<IModalProps>;
+export type IUseModalProps = PropsWithChildren<IModalProps>;
 
-export function useModal<P extends IUseModalProps>(props: P) {
-    return useCoreModal({
+export function useModal(props: IUseModalProps) {
+    return useCoreModal<IUseModalProps>({
         Component: Modal,
         ...props,
     });

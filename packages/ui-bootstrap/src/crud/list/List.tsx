@@ -1,15 +1,15 @@
-import * as React from 'react';
+import React, { FC, PropsWithChildren, ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
 import Table from 'react-bootstrap/Table';
 import { List as CoreList, IListProps as ICoreListProps } from '@reactionable/core';
 
 export interface IListProps<Data> extends Omit<ICoreListProps<Data>, 'render'> {
-    head: Array<React.ReactElement | string>;
-    render: (item: Data) => React.ReactElement;
+    head: Array<ReactElement | string>;
+    render: (item: Data) => ReactElement;
 };
 
-export type ListComponent<Data> = React.FC<IListProps<Data>>;
-export function List<Data>({ head, render, ...props }: React.PropsWithChildren<IListProps<Data>>) {
+export type ListComponent<Data> = FC<IListProps<Data>>;
+export function List<Data>({ head, render, ...props }: PropsWithChildren<IListProps<Data>>) {
 
     const { t } = useTranslation();
 

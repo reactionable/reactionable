@@ -1,9 +1,9 @@
-import * as React from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import { ModalForm } from './ModalForm';
-import { FormikHelpers, FormikProps } from 'formik';
+import { FormikHelpers } from 'formik';
 import { string } from 'yup';
-import { FormField } from '../form/Form';
+import { FormField } from '../Form/FormField';
+import { ModalForm } from './ModalForm';
 
 interface IFormValues {
   test: string;
@@ -16,6 +16,7 @@ it('renders without crashing', () => {
     submitButton="Submit modal form"
     onHide={() => { }}
     form={{
+      title: undefined,
       onSubmit: async (values: IFormValues, formikHelpers: FormikHelpers<IFormValues>) => 'ok',
       formSchema: {
         test: string()
@@ -24,7 +25,7 @@ it('renders without crashing', () => {
       formValues: {
         test: '',
       },
-      render: (formikProps: FormikProps<IFormValues>, isLoading: boolean) => <>
+      render: (isLoading: boolean) => <>
         <FormField
           name="test"
         />

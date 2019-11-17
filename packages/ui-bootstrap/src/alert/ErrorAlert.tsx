@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { FC } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { Alert, IAlertProps } from './Alert';
@@ -10,7 +10,7 @@ import {
 export type IErrorAlertProps = IAlertProps & ICoreErrorAlertProps & {
     children?: IError
 };
-export type ErrorAlertComponent = React.FC<IErrorAlertProps>;
+export type ErrorAlertComponent = FC<IErrorAlertProps>;
 export const ErrorAlert: ErrorAlertComponent = ({ children, ...props }) => {
     return <Alert variant="danger" {...props}>
         <FontAwesomeIcon icon={faExclamationCircle} /> {children && children.message}

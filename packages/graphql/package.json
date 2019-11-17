@@ -11,7 +11,8 @@
   "scripts": {
     "start": "npm run build:barrelsby && tsc-watch --onSuccess \"\"",
     "test": "jest",
-    "build": "rimraf lib && tsc --pretty && npm run build:barrelsby",
+    "build": "npm run build:clean && npm run build:barrelsby && tsc --pretty",
+    "build:clean": "rimraf lib",
     "build:barrelsby": "barrelsby -d src --exclude \".+\\.test\\..+\" --delete",
     "update": "npm-check -u",
     "link": "npm link"
@@ -43,19 +44,8 @@
     "react-apollo": "^3.1.3"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.22",
-    "@types/node": "^12.12.6",
-    "@types/react": "^16.9.11",
-    "@types/react-dom": "^16.9.4",
-    "@types/react-i18next": "^8.1.0",
-    "@types/react-router-dom": "^5.1.2",
     "barrelsby": "^2.2.0",
-    "jest": "^24.9.0",
-    "react": "^16.11.0",
-    "rimraf": "^3.0.0",
-    "ts-jest": "^24.1.0",
-    "tsc-watch": "^4.0.0",
-    "typescript": "^3.7.2"
+    "rimraf": "^3.0.0"
   },
   "jest": {
     "preset": "ts-jest"

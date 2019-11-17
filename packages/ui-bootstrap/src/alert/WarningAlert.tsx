@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { IAlertProps, Alert } from './Alert';
 import {
     IUseWarningAlertProps as ICoreUseWarningAlertProps,

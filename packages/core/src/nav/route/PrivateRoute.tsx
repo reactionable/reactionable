@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { ReactElement, PropsWithChildren } from 'react';
 import { Redirect } from 'react-router-dom';
 import { IUser, useIdentityContext } from '../../identity/Identity';
 import { useUIContext } from '../../ui/UI';
@@ -9,7 +9,7 @@ function renderPrivateRoute(
     user: undefined | null,
 ) {
     const { loader } = useUIContext().useLoader({});
-    return (props: any): React.ReactElement => {
+    return (props: any): ReactElement => {
         switch (user) {
             case undefined:
                 return loader;
@@ -17,12 +17,12 @@ function renderPrivateRoute(
                 return <Redirect to="/" />;
         }
     };
-}
+};
 
 export function PrivateRoute<
     LP extends IUseLayoutProps,
     User extends IUser
->(props: React.PropsWithChildren<ILazyRouteProps<LP>>) {
+>(props: PropsWithChildren<ILazyRouteProps<LP>>) {
 
     const { user } = useIdentityContext<User>();
 

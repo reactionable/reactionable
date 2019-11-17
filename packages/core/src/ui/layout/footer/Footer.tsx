@@ -1,5 +1,5 @@
-import * as React from 'react';
+import { ReactElement, FC } from 'react';
 export interface IFooterProps {
-    brand?: React.ReactElement|string;
+    brand?: ReactElement | string;
 };
-export type FooterComponent<F extends IFooterProps = IFooterProps> = React.FC<F>;
+export type FooterComponent<F extends IFooterProps = IFooterProps> = FC<F>;
