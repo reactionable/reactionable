@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.13.1](https://github.com/reactionable/reactionable/compare/v0.13.0...v0.13.1) (2019-11-17)
+
+
+### Bug Fixes
+
+* **amplify:** fix extracting data for query list ([9adef2a](https://github.com/reactionable/reactionable/commit/9adef2a22320e81d1eda94c8f9d958ea7802ed1a))
+
+
+
+
+
 # [0.13.0](https://github.com/reactionable/reactionable/compare/v0.12.0...v0.13.0) (2019-11-17)
 
 **Note:** Version bump only for package @reactionable/amplify
