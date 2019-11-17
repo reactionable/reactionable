@@ -1,6 +1,4 @@
-import * as React from 'react';
-
-import { IUIContextProviderProps as ICoreUIContextProviderProps, IUseLoaderProps } from '@reactionable/core';
+import { IUIContextProviderProps as ICoreUIContextProviderProps, IUseLoaderProps, useUIContext as useCoreUIContext } from '@reactionable/core';
 import { useLoader } from './loader/Loader';
 import { useSuccessNotification, IUseSuccessNotificationProps } from './notification/SuccessNotification';
 import { useErrorNotification, IUseErrorNotificationProps } from './notification/ErrorNotification';
@@ -8,8 +6,7 @@ import { useErrorAlert, IUseErrorAlertProps } from './alert/ErrorAlert';
 import { useWarningAlert, IUseWarningAlertProps } from './alert/WarningAlert';
 import { useConfirmation, IUseConfirmationProps } from './confirmation/Confirmation';
 import { useLayout, IUseLayoutProps } from './layout/Layout';
-
-export const patch = <></>;
+import { useModalForm, IUseModalFormProps } from './modal/ModalForm';
 
 export type IUIContextProviderProps = ICoreUIContextProviderProps<
     IUseLoaderProps,
@@ -18,8 +15,20 @@ export type IUIContextProviderProps = ICoreUIContextProviderProps<
     IUseErrorAlertProps,
     IUseWarningAlertProps,
     IUseConfirmationProps,
-    IUseLayoutProps
+    IUseLayoutProps,
+    IUseModalFormProps
 >;
+
+export function useUIContext() {
+    return useCoreUIContext<IUseLoaderProps,
+    IUseSuccessNotificationProps,
+    IUseErrorNotificationProps,
+    IUseErrorAlertProps,
+    IUseWarningAlertProps,
+    IUseConfirmationProps,
+    IUseLayoutProps,
+    IUseModalFormProps>();
+}
 
 export const useUIContextProviderProps = (): IUIContextProviderProps => {
     return {
@@ -30,5 +39,6 @@ export const useUIContextProviderProps = (): IUIContextProviderProps => {
         useWarningAlert,
         useConfirmation,
         useLayout,
+        useModalForm,
     };
 }

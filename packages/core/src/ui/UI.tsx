@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useContext, createContext, PropsWithChildren } from 'react';
 import { useLoader, IUseLoader, IUseLoaderProps } from './loader/Loader';
 import { IUseSuccessNotification, useSuccessNotification, IUseSuccessNotificationProps } from './notification/SuccessNotification';
 import { IUseErrorNotification, useErrorNotification, IUseErrorNotificationProps } from './notification/ErrorNotification';
@@ -6,6 +6,7 @@ import { IUseErrorAlert, useErrorAlert, IUseErrorAlertProps } from './alert/Erro
 import { IUseWarningAlert, useWarningAlert, IUseWarningAlertProps } from './alert/WarningAlert';
 import { IUseConfirmationProps, useConfirmation, IUseConfirmation } from './confirmation/Confirmation';
 import { IUseLayoutProps, useLayout, IUseLayout } from './layout/Layout';
+import { IUseModalForm, IUseModalFormProps, useModalForm } from './modal/ModalForm';
 
 export type IUIContext<
     LO extends IUseLoaderProps = IUseLoaderProps,
@@ -15,6 +16,7 @@ export type IUIContext<
     WA extends IUseWarningAlertProps = IUseWarningAlertProps,
     CO extends IUseConfirmationProps = IUseConfirmationProps,
     LA extends IUseLayoutProps = IUseLayoutProps,
+    MF extends IUseModalFormProps = IUseModalFormProps,
     > = {
         useLoader: IUseLoader<LO>;
         useSuccessNotification: IUseSuccessNotification<SN>;
@@ -23,9 +25,10 @@ export type IUIContext<
         useWarningAlert: IUseWarningAlert<WA>;
         useConfirmation: IUseConfirmation<CO>;
         useLayout: IUseLayout<LA>;
+        useModalForm: IUseModalForm<MF>;
     };
 
-export const UIContext = React.createContext<IUIContext<any,any,any,any,any,any,any>>({
+export const UIContext = createContext<IUIContext<any, any, any, any, any, any, any, any>>({
     useLoader,
     useSuccessNotification,
     useErrorNotification,
@@ -33,6 +36,7 @@ export const UIContext = React.createContext<IUIContext<any,any,any,any,any,any,
     useWarningAlert,
     useConfirmation,
     useLayout,
+    useModalForm,
 });
 
 export type IUIContextProviderProps<
@@ -43,7 +47,8 @@ export type IUIContextProviderProps<
     WA extends IUseWarningAlertProps = IUseWarningAlertProps,
     CO extends IUseConfirmationProps = IUseConfirmationProps,
     LA extends IUseLayoutProps = IUseLayoutProps,
-    > = React.PropsWithChildren<IUIContext<LO, SN, EN, EA, WA, CO, LA>>;
+    MF extends IUseModalFormProps = IUseModalFormProps,
+    > = PropsWithChildren<IUIContext<LO, SN, EN, EA, WA, CO, LA, MF>>;
 
 export function UIContextProvider<
     LO extends IUseLoaderProps,
@@ -53,7 +58,8 @@ export function UIContextProvider<
     WA extends IUseWarningAlertProps,
     CO extends IUseConfirmationProps,
     LA extends IUseLayoutProps,
->(props: IUIContextProviderProps<LO, SN, EN, EA, WA, CO, LA>) {
+    MF extends IUseModalFormProps,
+    >(props: IUIContextProviderProps<LO, SN, EN, EA, WA, CO, LA, MF>) {
     return <UIContext.Provider
         value={props}
     >{props.children}</UIContext.Provider>;
@@ -67,6 +73,7 @@ export function useUIContext<
     WA extends IUseWarningAlertProps,
     CO extends IUseConfirmationProps,
     LA extends IUseLayoutProps,
->() {
-    return React.useContext<IUIContext<LO, SN, EN, EA, WA, CO, LA>>(UIContext);
+    MF extends IUseModalFormProps,
+    >() {
+    return useContext<IUIContext<LO, SN, EN, EA, WA, CO, LA, MF>>(UIContext);
 }

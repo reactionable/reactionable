@@ -1,32 +1,33 @@
-import * as React from 'react';
+import React, { ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FormikHelpers, Formik, FormikProps } from 'formik';
 import { object } from 'yup';
 import { useUIContext } from '../ui/UI';
 
+export type IOnSubmitForm<Values, Data> = (values: Values, formikHelpers: FormikHelpers<Values>) => Promise<Data>;
 export interface IFormProps<Values, Data> {
     title: string;
     formSchema: object;
-    onSubmit: (values: Values, formikHelpers: FormikHelpers<Values>) => Promise<Data>;
+    onSubmit: IOnSubmitForm<Values, Data>;
     formValues: Values;
-    render: (props: FormikProps<Values>, isLoading: boolean) => React.ReactElement;
+    formChildren: (isLoading: boolean) => ReactElement;
     successMessage?: string;
     onSuccess?: (result: Data) => void;
 };
 
-export function Form<Value, Data>(props: React.PropsWithChildren<IFormProps<Value, Data>>) {
+export function Form<Values, Data>(props: IFormProps<Values, Data>) {
 
     const { t } = useTranslation();
     const formSchema = object().shape(props.formSchema);
-    const { render, title, onSubmit, formValues, onSuccess, successMessage } = props;
+    const { formChildren, title, onSubmit, formValues, onSuccess, successMessage } = props;
 
     const { useLoader, useSuccessNotification, useErrorAlert } = useUIContext();
     const { isLoading, loader, setLoading } = useLoader({});
     const { errorAlert, setErrorAlert } = useErrorAlert({});
     const { successNotification, setSuccessNotification } = useSuccessNotification({ title });
 
-    const renderForm = (formikProps: FormikProps<Value>) => {
-        const form = render(formikProps, isLoading);
+    const renderFormChildren = (formikProps: FormikProps<Values>) => {
+        const form = formChildren(isLoading);
         return <>
             {form}
             {errorAlert}
@@ -35,7 +36,7 @@ export function Form<Value, Data>(props: React.PropsWithChildren<IFormProps<Valu
         </>;
     };
 
-    const onSubmitCallback = (values: Value, formikHelpers: FormikHelpers<Value>) => {
+    const onSubmitCallback = (values: Values, formikHelpers: FormikHelpers<Values>) => {
         setLoading(true);
         onSubmit(values, formikHelpers).then((data: Data) => {
             setLoading(false);
@@ -56,5 +57,5 @@ export function Form<Value, Data>(props: React.PropsWithChildren<IFormProps<Valu
         initialValues={formValues}
         onSubmit={onSubmitCallback}
         validationSchema={formSchema}
-        render={renderForm} />;
+        children={renderFormChildren} />;
 };

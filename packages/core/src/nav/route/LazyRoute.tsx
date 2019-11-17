@@ -1,29 +1,27 @@
-import * as React from 'react';
+import React, { LazyExoticComponent, ReactNode, ReactElement, PropsWithChildren } from 'react';
 import { Route, RouteProps, RouteComponentProps } from 'react-router-dom';
 import { lazyLoad } from '../../ui/loader/Loader';
 import { useUIContext } from '../../ui/UI';
 import { IUseLayoutProps } from '../../ui/layout/Layout';
 
-
 export type ILazyRouteComponentProps<LP extends IUseLayoutProps> = Omit<RouteProps, 'component'> & {
-    component: React.LazyExoticComponent<any>;
+    component: LazyExoticComponent<any>;
     layout?: LP;
-}
-
+};
 
 export type ILazyRouteProps<LP extends IUseLayoutProps> = Omit<ILazyRouteComponentProps<LP>, 'component'> & {
-    component?: React.LazyExoticComponent<any>;
-    render?: ((props: RouteComponentProps<any>) => React.ReactNode);
+    component?: LazyExoticComponent<any>;
+    render?: ((props: RouteComponentProps<any>) => ReactNode);
 };
 
 export function renderLazyRoute<LP extends IUseLayoutProps>({ layout, component, render }: {
     layout?: LP;
-    component?: React.LazyExoticComponent<any>;
-    render?: ((props: RouteComponentProps<any>) => React.ReactNode);
+    component?: LazyExoticComponent<any>;
+    render?: ((props: RouteComponentProps<any>) => ReactNode);
 }) {
     const { useLayout } = useUIContext();
-    return (props: any): React.ReactElement => {
-        let rendered: React.ReactNode;
+    return (props: any): ReactElement => {
+        let rendered: ReactNode;
         if (component) {
             const Component = lazyLoad(component);
             rendered = <Component {...props} />;
@@ -43,7 +41,7 @@ export function renderLazyRoute<LP extends IUseLayoutProps>({ layout, component,
     };
 };
 
-export function LazyRoute<LP extends IUseLayoutProps>({ component, render, layout, ...routeProps }: React.PropsWithChildren<ILazyRouteProps<LP>>) {
+export function LazyRoute<LP extends IUseLayoutProps>({ component, render, layout, ...routeProps }: PropsWithChildren<ILazyRouteProps<LP>>) {
     return <Route {...routeProps} render={renderLazyRoute({
         layout,
         component,

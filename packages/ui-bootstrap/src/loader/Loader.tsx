@@ -1,10 +1,10 @@
-import * as React from 'react';
+import React, { FC } from 'react';
 import Spinner from 'react-bootstrap/Spinner';
 import { useTranslation } from 'react-i18next';
-import { 
-    ILoaderProps as ICoreLoaderProps, 
-    IUseLoaderProps as ICoreUseLoaderProps, 
-    useLoader as useLoaderCore ,
+import {
+    ILoaderProps as ICoreLoaderProps,
+    IUseLoaderProps as ICoreUseLoaderProps,
+    useLoader as useLoaderCore,
     IUseLoader,
 } from '@reactionable/core';
 
@@ -12,7 +12,7 @@ export type ILoaderProps = ICoreLoaderProps & {
     overlay?: boolean,
 };
 
-export const Loader: React.FC<ILoaderProps> = ({ overlay = true }) => {
+export const Loader: FC<ILoaderProps> = ({ overlay = true }) => {
     const { t } = useTranslation();
     const spinnerElement = <Spinner animation="grow" role="status" variant="primary">
         <span className="sr-only">{t('Loading')}</span>
@@ -34,7 +34,7 @@ export const Loader: React.FC<ILoaderProps> = ({ overlay = true }) => {
 
 export type IUseLoaderProps = ICoreUseLoaderProps & ILoaderProps;
 
-export const useLoader:IUseLoader<IUseLoaderProps> = (props) => {
+export const useLoader: IUseLoader<IUseLoaderProps> = (props) => {
     return useLoaderCore({ ...props, Component: Loader });
 };
 

@@ -3,4 +3,6 @@
  */
 
 export * from "./Amplify";
+export * from "./crud/Query";
+export * from "./crud/QueryList";
 export * from "./identity/Identity";

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
 };
 interface State { };
 
-class Frame extends React.Component<Props, State> {
+class Frame extends Component<Props, State> {
 
     private mounted: boolean;
     private setInitialContent: boolean;

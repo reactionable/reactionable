@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { PureComponent } from 'react';
 import Pagination from 'react-bootstrap/Pagination';
 
 interface State {
@@ -14,7 +14,7 @@ interface Props {
     onChange: (page: number) => void
 };
 
-export class Paginator extends React.PureComponent<Props, State> {
+export class Paginator extends PureComponent<Props, State> {
 
     constructor(props: Props) {
         super(props);
@@ -111,7 +111,7 @@ export class Paginator extends React.PureComponent<Props, State> {
         return <Pagination.Item key={page} current={this.props.currentPage === page} onClick={() => this.props.onChange(page)}>{page}</Pagination.Item>;
     }
 
-    
+
     private handleFirstPage = () => {
         this.props.onChange(1);
     }

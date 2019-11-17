@@ -1,12 +1,12 @@
-import * as React from 'react';
+import React, { FC } from 'react';
 import Toast from 'react-bootstrap/Toast';
 import { useNotification as useCoreNotification, INotificationProps as ICoreNotificationProps } from '@reactionable/core';
 
-type INotificationProps = ICoreNotificationProps & {
+export type INotificationProps = ICoreNotificationProps & {
     variant?: string;
 };
 
-export const Notification: React.FC<INotificationProps> = (props) => {
+export const Notification: FC<INotificationProps> = (props) => {
     return <Toast
         show
         autohide

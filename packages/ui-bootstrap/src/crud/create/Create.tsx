@@ -1,18 +1,27 @@
-import * as React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { useTranslation } from 'react-i18next';
-import { EnhanceChildren } from '@reactionable/core';
-import { useModalForm, IModalFormProps } from '../../modal/ModalForm';
+import { IModalFormProps } from '../../modal/ModalForm';
+import { IFormProps } from '../../form/Form';
+import { EnhanceChildren, Form, IUseModalFormProps } from '@reactionable/core';
+import { useUIContext } from '../../UI';
 
-export type ICreateProps<Values, Data> = IModalFormProps<Values, Data> & {
-    submitButton?: string;
+export type ICreateProps<Values, Data> = IFormProps<Values, Data> & {
+    modal?: Omit<IModalFormProps<Values, Data>, 'form' | 'title'>;
 };
 
-export function Create<Values, Data>({ children,submitButton, ...props }: React.PropsWithChildren<ICreateProps<Values, Data>>){
+export function Create<Values, Data>({ modal: modalProps, children, ...formProps }: PropsWithChildren<ICreateProps<Values, Data>>) {
+    if (!modalProps) {
+        return <Form<Values, Data> {...formProps} />;
+    }
+
     const { t } = useTranslation();
-    const { modal, openModal } = useModalForm<Values, Data>({
-        submitButton: submitButton || t('Save'),
-        ...props,
-    });
+    const { useModalForm } = useUIContext();
+    const { modal, openModal } = useModalForm({
+        ...modalProps,
+        title: formProps.title,
+        submitButton: modalProps.submitButton || t('Save'),
+        form: formProps,
+    } as IUseModalFormProps<IModalFormProps<Values, Data>>);
 
     return <>
         <EnhanceChildren children={children} enhance={{ onClick: openModal }} />

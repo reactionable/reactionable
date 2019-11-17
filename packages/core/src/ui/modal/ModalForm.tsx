@@ -1,29 +1,32 @@
-import * as React from 'react';
-import { FormikHelpers } from 'formik';
-import { IFormProps } from '../../form/Form';
-import { useModal, IUseModalProps, IModalProps, IUseModalResult } from './Modal';
+import React, { PropsWithChildren } from 'react';
+import { IFormProps, Form } from '../../form/Form';
+import { useModal, IUseModalProps, IModalProps, IUseModalResult, ModalComponent } from './Modal';
 
-export type IModalFormProps<Values, Data> = IModalProps & {
-    form: IFormProps<Values, Data>;
-    submitButton: string;
+export type IModalFormProps<F extends IFormProps<any, any> = IFormProps<any, any>, M extends IModalProps = IModalProps> = M & {
+    form: F;
 };
 
-export type ModalFormComponent<Values = any, Data = any> = React.FC<IModalFormProps<Values, Data>>;
+type IModalPropsType<MFP extends IModalFormProps> = MFP extends IModalFormProps<infer M>
+    ? (M extends IUseModalProps ? M : never)
+    : never;
 
-export type IUseModalFormProps<Values, Data> = IUseModalProps & React.PropsWithChildren<IModalFormProps<Values, Data>> & {
-    Component: ModalFormComponent;
-};
+export type IUseModalFormProps<MFP extends IModalFormProps = IModalFormProps> = IUseModalProps<IModalPropsType<MFP>> & PropsWithChildren<MFP>;
 
-export type IUseModalForm<Values, Data, P extends IUseModalFormProps<Values, Data>> = (props: P) => IUseModalResult;
-export function useModalForm<Values, Data, P extends IUseModalFormProps<Values, Data>>(props: P): IUseModalResult {
-    const onSubmit = props.form.onSubmit;
-    props.form.onSubmit = async (values: Values, formikHelpers: FormikHelpers<Values>): Promise<Data> => {
+export type IUseModalForm<P extends IUseModalFormProps> = (props: P) => IUseModalResult;
+
+export function useModalForm<P extends IUseModalFormProps>({ form, ...modalProps }: P & {
+    Component: ModalComponent;
+}): IUseModalResult {
+    const onSubmit = form.onSubmit;
+    form.onSubmit = async (values, formikHelpers) => {
         const result = await onSubmit(values, formikHelpers);
-        if (props.onHide) {
-            props.onHide();
+        if (modalProps.onHide) {
+            modalProps.onHide();
         }
         return result;
     };
-    return useModal(props);
+    modalProps.children = <Form {...form} />;
+    return useModal<IUseModalProps<IModalPropsType<P>>>(modalProps as unknown as IModalPropsType<P> & {
+        Component: ModalComponent;
+    });
 };
-

@@ -1,7 +1,8 @@
-import * as React from 'react';
+import React, { PropsWithChildren, ReactElement } from 'react';
 import { FooterComponent, IFooterProps } from './footer/Footer';
 import { HeaderComponent, IHeaderProps } from './header/Header';
 import { BodyComponent, IBodyProps } from './body/Body';
+import { createNavItemContextProvider } from '../../nav/NavItem';
 
 export interface ILayoutProps<
     H extends IHeaderProps,
@@ -19,11 +20,11 @@ export function Layout<
     F extends IFooterProps
 >({
     children,
-    header = {} as H,
-    body = {} as B,
-    footer = {} as F,
+    header,
+    body,
+    footer,
     ...components
-}: React.PropsWithChildren<ILayoutProps<H, B, F> & {
+}: PropsWithChildren<ILayoutProps<H, B, F> & {
     HeaderComponent: HeaderComponent<H>,
     BodyComponent: BodyComponent<B>,
     FooterComponent: FooterComponent<F>
@@ -31,22 +32,49 @@ export function Layout<
     const HC = components.HeaderComponent as HeaderComponent<H>;
     const BC = components.BodyComponent;
     const FC = components.FooterComponent;
-    return <>
-        <HC {...header} />
-        <BC {...body} children={children} />
-        <FC {...footer} />
+
+    const layoutContent = <>
+        {(body || children) && <BC {...body ?? {} as B} children={children} />}
+        {footer && <FC {...footer} />}
     </>;
+
+    if (!header) {
+        return layoutContent;
+    }
+
+    const contextProvider = createNavItemContextProvider<H>(header);
+    const {
+        NavItemContextProvider: HeaderContextProvider,
+        NavItemContextConsumer: HeaderContextConsumer,
+    } = contextProvider;
+
+    return <HeaderContextProvider {...header}>
+        <HeaderContextConsumer>{({ setNavItems, ...headerProps }) => <><HC {...headerProps as H} /> {layoutContent}</>}</HeaderContextConsumer>
+    </HeaderContextProvider>;
 };
 
 export type IUseLayoutProps<
     H extends IHeaderProps = IHeaderProps,
     B extends IBodyProps = IBodyProps,
     F extends IFooterProps = IFooterProps
-    > = React.PropsWithChildren<ILayoutProps<H, B, F>>;
+    > = PropsWithChildren<ILayoutProps<H, B, F>>;
 
-export type IUseLayoutResult = React.ReactElement;
+export type IUseLayoutResult = ReactElement;
 
 export type IUseLayout<P extends IUseLayoutProps> = (props: P) => IUseLayoutResult;
+
+type HeaderPropsType<U extends IUseLayoutProps> = U extends IUseLayoutProps<infer H>
+    ? (H extends IHeaderProps ? H : never)
+    : never;
+
+type BodyPropsType<U extends IUseLayoutProps> = U extends IUseLayoutProps<infer B>
+    ? (B extends IBodyProps ? B : never)
+    : never;
+
+type FooterPropsType<U extends IUseLayoutProps> = U extends IUseLayoutProps<infer H>
+    ? (H extends IFooterProps ? H : never)
+    : never;
+
 export function useLayout<P extends IUseLayoutProps>({
     HeaderComponent,
     BodyComponent,
@@ -54,11 +82,11 @@ export function useLayout<P extends IUseLayoutProps>({
     children,
     ...props
 }: P & {
-    HeaderComponent: HeaderComponent,
-    BodyComponent: BodyComponent,
-    FooterComponent: FooterComponent,
+    HeaderComponent: HeaderComponent<HeaderPropsType<P>>,
+    BodyComponent: BodyComponent<BodyPropsType<P>>,
+    FooterComponent: FooterComponent<FooterPropsType<P>>,
 }): IUseLayoutResult {
-    return <Layout
+    return <Layout<any, any, any>
         {...{ HeaderComponent, BodyComponent, FooterComponent }}
         {...props}
     >{children}</Layout>

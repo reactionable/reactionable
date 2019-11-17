@@ -1,38 +1,41 @@
-import * as React from 'react';
+import React, { PropsWithChildren, DetailedHTMLProps, HTMLAttributes, FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { IFooterProps as ICoreFooterProps } from '@reactionable/core';
 
-export interface IFooterProps extends ICoreFooterProps {
+export type IFooterProps = ICoreFooterProps & Omit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onSelect'> & {
     sponsor?: boolean;
 };
 
-export function Footer({ brand, sponsor = true }:React.PropsWithChildren<IFooterProps>) {
+export function Footer({ brand, sponsor = true, ...footerProps }: PropsWithChildren<IFooterProps>) {
     const { t } = useTranslation();
 
     const currentYear = new Date().getFullYear();
 
-    return <footer className="footer" style={{
+    footerProps.style = {
         position: 'absolute',
         bottom: 0,
         width: '100%',
         height: '60px',
         lineHeight: '60px',
-    }}>
+        ...footerProps.style,
+    };
+
+    return <footer {...footerProps}>
         <Container>
             <Row className="justify-content-between">
                 <Col>{t('Copyright')} &copy; {currentYear} {brand}</Col>
                 {sponsor && <Col className="text-right"><SponsorFooter /></Col>}
             </Row>
         </Container>
-    </footer >;
+    </footer>;
 };
 
-export const SponsorFooter: React.FC<{}> = ({ }) => {
+export const SponsorFooter: FC<{}> = ({ }) => {
     const { t } = useTranslation();
-    return <> 
+    return <>
         <span title={t('Powered by')}>⚡ by </span>
         <a href="https://github.com/reactionable/reactionable" title={t('Reactionable - An effective toolkit for React')}>Reactionable</a>
     </>;
