@@ -14,3 +14,22 @@
 # Contributing
 
 👍 If you wish to contribute to __Reactionable__, please read the [CONTRIBUTING.md](CONTRIBUTING.md) file, PRs are Welcome !
+
+
+# Dev
+
+## Use reactionable in local
+
+1. In __reactionable__ dir
+```bash
+npm run link;
+npm start
+```
+
+2. In react  app dir
+
+```bash
+npm link react react-dom @reactionable/core @reactionable/ui-bootstrap @reactionable/amplify;
+npm start;
+```
+

@@ -11,7 +11,7 @@ export interface ICreateProps<Values, Data> extends IFormProps<Values, Data> {
 export type CreateComponent<Values, Data> = FC<ICreateProps<Values, Data>>;
 export function Create<Values, Data>({ modal: modalProps, children, ...formProps }: PropsWithChildren<ICreateProps<Values, Data>>) {
     if (!modalProps) {
-        return <Form<Values, Data> {...formProps} />;
+        return <Form<Values, Data> {...formProps} children={children} />;
     }
 
     const { useModalForm } = useUIContext();
