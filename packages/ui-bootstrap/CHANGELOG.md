@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.13.0](https://github.com/reactionable/reactionable/compare/v0.12.0...v0.13.0) (2019-11-17)
+
+
+### Bug Fixes
+
+* **ui-bootstrap:** set React container fluid ([ef6be83](https://github.com/reactionable/reactionable/commit/ef6be836f9a190da4d51ef89b6e0c352fdced53a))
+
+
+### Features
+
+* add routes params to Crud component ([0b1617b](https://github.com/reactionable/reactionable/commit/0b1617b88759eb454c7d05dbca9479e1641af88e))
+
+
+
+
+
 # [0.12.0](https://github.com/reactionable/reactionable/compare/v0.11.3...v0.12.0) (2019-11-17)
 
 
