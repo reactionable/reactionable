@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { IUseQueryListResult } from '@reactionable/core';
+import { IUseQueryListResult, IUseQueryListOptions as ICoreUseQueryListOptions } from '@reactionable/core';
 import { GraphQLResult } from '@aws-amplify/api/lib-esm/types';
 import { useQuery, IUseQueryOptions, useDeepCompareEffect } from './Query';
 
@@ -32,9 +32,12 @@ function extractGqlList<Data>(result: GraphQLResult): AmplifyListType<Data> | nu
     return data && data.items ? data : null;
 };
 
-export const useQueryList = <Data extends {}, Variables extends {}>({ query, variables }: IUseQueryOptions<Variables>): IUseQueryListResult<Data> => {
+
+export type IUseQueryListOptions<Variables> = IUseQueryOptions<Variables> & ICoreUseQueryListOptions<Variables>;
+
+export const useQueryList = <Data extends {}, Variables extends {}>({ query, variables, queryAll }: IUseQueryListOptions<Variables>): IUseQueryListResult<Data> => {
     const [token, setToken] = useState<UndefinedGQLType<string>>();
-    const [nextToken, setNextToken] = useState<UndefinedGQLType<string>>();    
+    const [nextToken, setNextToken] = useState<UndefinedGQLType<string>>();
     const [previousToken, setPreviousToken] = useState<UndefinedGQLType<string>>();
     const [list, setList] = useState<Data[]>([]);
 
@@ -70,10 +73,9 @@ export const useQueryList = <Data extends {}, Variables extends {}>({ query, var
             let updatedItems = list;
             if (listData) {
 
-                const newList: Data[] | null =
-                listData && listData.items && listData.items.filter(notEmpty);
+                const newList: Data[] | null = listData && listData.items && listData.items.filter(notEmpty);
                 if (newList) {
-                    updatedItems = updatedItems.concat(newList);
+                    updatedItems = newList;
                 }
                 return updatedItems;
             }
@@ -85,5 +87,12 @@ export const useQueryList = <Data extends {}, Variables extends {}>({ query, var
         }
     }, [data]);
 
-    return { data: list, isLoading, error, refetch: refetchList, next, previous };
+    return {
+        data: list,
+        isLoading,
+        error,
+        refetch: refetchList,
+        next: nextToken ? next : undefined,
+        previous: previousToken ? previous : undefined,
+    };
 };
