@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from 'react';
 import FormLabel from 'react-bootstrap/FormLabel';
 import Feedback from 'react-bootstrap/Feedback';
-import FormControl from 'react-bootstrap/FormControl';
+import FormControl, { FormControlProps } from 'react-bootstrap/FormControl';
 import FormGroup from 'react-bootstrap/FormGroup';
 import {
     FormField as CoreFormField,
@@ -10,7 +10,7 @@ import {
     IFormFieldValue
 } from '@reactionable/core';
 
-export type IFormFieldProps<Value extends IFormFieldValue> = Omit<ICoreFormFieldProps<Value>, 'render'> & {
+export type IFormFieldProps<Value extends IFormFieldValue> = Omit<ICoreFormFieldProps<Value>, 'render'> & FormControlProps & {
     label?: string;
     render?: IRenderFormField<Value>;
 };
