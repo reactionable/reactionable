@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.13.6](https://github.com/reactionable/reactionable/compare/v0.13.5...v0.13.6) (2019-11-18)
+
+
+### Bug Fixes
+
+* **ui-bootstrap:** fix FormField typing ([257e839](https://github.com/reactionable/reactionable/commit/257e83988d12bed9721ed8226684a9e16f94e1d3))
+
+
+
+
+
 ## [0.13.5](https://github.com/reactionable/reactionable/compare/v0.13.4...v0.13.5) (2019-11-18)
 
 
