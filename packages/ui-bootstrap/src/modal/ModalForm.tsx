@@ -2,7 +2,11 @@ import React, { PropsWithChildren } from 'react';
 import BootstrapModal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { useTranslation } from 'react-i18next';
-import { IUseModalFormProps as ICoreUseModalFormProps, IModalFormProps as ICoreModalFormProps, useModal } from '@reactionable/core';
+import {
+    IUseModalFormProps as ICoreUseModalFormProps,
+    IModalFormProps as ICoreModalFormProps,
+    useModal, IFormChildrenProps
+} from '@reactionable/core';
 import { IFormProps, Form } from '../form/Form';
 import { Modal, IModalProps } from './Modal';
 
@@ -10,24 +14,25 @@ export interface IModalFormProps<Values, Data> extends ICoreModalFormProps<
     IFormProps<Values, Data> & { title: string | undefined },
     IModalProps & {
         submitButton?: string;
+        cancelButton?: string;
     }
     > { };
 
-export function ModalForm<Values, Data>({ submitButton, form, ...modalProps }: PropsWithChildren<IModalFormProps<Values, Data>>) {
+export function ModalForm<Values, Data>({ submitButton,cancelButton, form, ...modalProps }: PropsWithChildren<IModalFormProps<Values, Data>>) {
     const { t } = useTranslation();
 
     const formChildren = form.formChildren;
-    const renderFormChildren = (isLoading: boolean) => {
+    const renderFormChildren = (formikProps: IFormChildrenProps<Values>) => {
         const onCancel = () => {
             if (modalProps.onHide) {
                 modalProps.onHide();
             }
         };
         return <>
-            <BootstrapModal.Body>{formChildren(isLoading)}</BootstrapModal.Body>
+            <BootstrapModal.Body>{formChildren(formikProps)}</BootstrapModal.Body>
             <BootstrapModal.Footer>
-                <Button disabled={isLoading} type="submit" variant="primary">{submitButton}</Button>
-                <Button disabled={isLoading} onClick={onCancel} variant="secondary">{t('Cancel')}</Button>
+                <Button disabled={formikProps.isSubmitting} type="submit" variant="primary">{submitButton}</Button>
+                <Button disabled={formikProps.isSubmitting} onClick={onCancel} variant="secondary">{cancelButton ? cancelButton : t('Cancel')}</Button>
             </BootstrapModal.Footer>
         </>;
     };
