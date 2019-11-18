@@ -1,7 +1,7 @@
 import React, { RefObject, ReactElement, PropsWithChildren, useRef, useEffect, InputHTMLAttributes } from 'react';
 import { Field, FieldProps, getIn } from 'formik';
 
-export type IFormFieldValue = string;
+export type IFormFieldValue = string|boolean;
 
 export type IFormFieldPropsEnhanced<Value extends IFormFieldValue> = FieldProps<Value> & {
     field: {
