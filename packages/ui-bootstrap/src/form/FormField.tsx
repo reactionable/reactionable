@@ -15,11 +15,11 @@ export type IFormFieldProps<Value extends IFormFieldValue> = Omit<ICoreFormField
     render?: IRenderFormField<Value>;
 };
 
-export function FormField<Value extends string>({ label, render, ...props }: PropsWithChildren<IFormFieldProps<Value>>) {
+export function FormField<Value extends IFormFieldValue>({ label, render, ...props }: PropsWithChildren<IFormFieldProps<Value>>) {
     const renderField = (fieldProps: IFormFieldPropsEnhanced<Value>, error?: string) => {
         return <FormGroup controlId={fieldProps.field.name}>
             {label && <FormLabel>{label}</FormLabel>}
-            {render ? render(fieldProps, error) : <FormControl {...fieldProps.field} />}
+            {render ? render(fieldProps, error) : <FormControl {...fieldProps.field as FormControlProps} />}
             {error && <Feedback type="invalid">{error}</Feedback>}
         </FormGroup>;
     };
