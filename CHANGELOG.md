@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.13.4](https://github.com/reactionable/reactionable/compare/v0.13.3...v0.13.4) (2019-11-18)
+
+
+### Bug Fixes
+
+* **amplify:** fix useQueryList hook ([bcee39b](https://github.com/reactionable/reactionable/commit/bcee39be27af6271a9be21123cee182b2ab572d6))
+
+
+
+
+
 ## [0.13.3](https://github.com/reactionable/reactionable/compare/v0.13.2...v0.13.3) (2019-11-18)
 
 
