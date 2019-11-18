@@ -34,7 +34,8 @@ function extractGqlList<Data>(result: GraphQLResult): AmplifyListType<Data> | nu
 
 export const useQueryList = <Data extends {}, Variables extends {}>({ query, variables }: IUseQueryOptions<Variables>): IUseQueryListResult<Data> => {
     const [token, setToken] = useState<UndefinedGQLType<string>>();
-    const [nextToken, setNextToken] = useState<UndefinedGQLType<string>>();
+    const [nextToken, setNextToken] = useState<UndefinedGQLType<string>>();    
+    const [previousToken, setPreviousToken] = useState<UndefinedGQLType<string>>();
     const [list, setList] = useState<Data[]>([]);
 
     const { data, isLoading, error, refetch } = useQuery<GraphQLResult, IVariablesWithNextToken<Variables>>({
@@ -46,12 +47,23 @@ export const useQueryList = <Data extends {}, Variables extends {}>({ query, var
         rawData: true,
     });
 
+    const refetchList = () => {
+        setList([]);
+        refetch();
+    };
+    const next = () => {
+        setPreviousToken(token);
+        setToken(nextToken);
+    };
+    const previous = () => {
+        setToken(previousToken);
+    };
+
     useDeepCompareEffect(() => {
         setList([]);
     }, [variables]);
 
     useEffect(() => {
-
         const listData = data ? extractGqlList<Data>(data) : null;
 
         setList(list => {
@@ -73,5 +85,5 @@ export const useQueryList = <Data extends {}, Variables extends {}>({ query, var
         }
     }, [data]);
 
-    return { data: list, isLoading, error, refetch, next: () => setToken(nextToken) };
+    return { data: list, isLoading, error, refetch: refetchList, next, previous };
 };
