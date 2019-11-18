@@ -3,21 +3,22 @@ import { Form as FormikForm } from 'formik';
 import {
     Form as CoreForm,
     IFormProps as ICoreFormProps,
+    IFormChildrenProps,
 } from '@reactionable/core';
 
 export type IFormProps<Values, Data> = ICoreFormProps<Values, Data>;
 
 export function Form<Values, Data>({ formChildren, ...props }: PropsWithChildren<IFormProps<Values, Data>>) {
 
-    const renderFormFields = (isLoading: boolean) => {
+    const renderFormChildren = (formikProps: IFormChildrenProps<Values>) => {
         return <FormikForm className="needs-validation">
-            {formChildren(isLoading)}
+            {formChildren(formikProps)}
         </FormikForm>;
     };
 
     return <CoreForm<Values, Data>
         {...props}
-        formChildren={renderFormFields}
+        formChildren={renderFormChildren}
     />;
 }
 

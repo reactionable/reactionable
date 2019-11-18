@@ -5,12 +5,13 @@ import { object } from 'yup';
 import { useUIContext } from '../ui/UI';
 
 export type IOnSubmitForm<Values, Data> = (values: Values, formikHelpers: FormikHelpers<Values>) => Promise<Data>;
+export type IFormChildrenProps<Values> = FormikProps<Values>;
 export interface IFormProps<Values, Data> {
     title: string;
     formSchema: object;
     onSubmit: IOnSubmitForm<Values, Data>;
     formValues: Values;
-    formChildren: (isLoading: boolean) => ReactElement;
+    formChildren: (formikProps: IFormChildrenProps<Values>) => ReactElement;
     successMessage?: string;
     onSuccess?: (result: Data) => void;
 };
@@ -22,12 +23,12 @@ export function Form<Values, Data>(props: PropsWithChildren<IFormProps<Values, D
     const { formChildren, title, onSubmit, formValues, onSuccess, successMessage } = props;
 
     const { useLoader, useSuccessNotification, useErrorAlert } = useUIContext();
-    const { isLoading, loader, setLoading } = useLoader({});
+    const { loader, setLoading } = useLoader({});
     const { errorAlert, setErrorAlert } = useErrorAlert({});
     const { successNotification, setSuccessNotification } = useSuccessNotification({ title });
 
     const renderFormChildren = (formikProps: FormikProps<Values>) => {
-        const form = formChildren(isLoading);
+        const form = formChildren(formikProps);
         return <>
             {form}
             {errorAlert}
@@ -39,7 +40,6 @@ export function Form<Values, Data>(props: PropsWithChildren<IFormProps<Values, D
     const onSubmitCallback = (values: Values, formikHelpers: FormikHelpers<Values>) => {
         setLoading(true);
         onSubmit(values, formikHelpers).then((data: Data) => {
-            setLoading(false);
             if (successMessage) {
                 setSuccessNotification(t(successMessage, data));
             }
@@ -47,10 +47,10 @@ export function Form<Values, Data>(props: PropsWithChildren<IFormProps<Values, D
                 onSuccess(data);
             }
         }).catch(error => {
-            setLoading(false);
-            formikHelpers.setSubmitting(false);
             setErrorAlert(error);
         });
+        setLoading(false);
+        formikHelpers.setSubmitting(false);
     };
 
     return <Formik
