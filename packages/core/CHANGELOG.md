@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.14.0](https://github.com/reactionable/reactionable/compare/v0.13.6...v0.14.0) (2019-11-19)
+
+
+### Bug Fixes
+
+* use "children" instead of "render" Formik Field function ([9b04d3b](https://github.com/reactionable/reactionable/commit/9b04d3b960fcd7c19a7df46c2427641363f96420))
+
+
+### Features
+
+* add QueryWrapper component ([3af01b2](https://github.com/reactionable/reactionable/commit/3af01b2b3392f2c87f70a3b13a9154789a9e0fd8))
+
+
+
+
+
 ## [0.13.5](https://github.com/reactionable/reactionable/compare/v0.13.4...v0.13.5) (2019-11-18)
 
 
