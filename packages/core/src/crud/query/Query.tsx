@@ -17,15 +17,20 @@ export type IUseQuery<Data extends {}, Options extends IUseQueryOptions = {}> = 
     options?: Options
 ) => IUseQueryResult<Data>;
 
+type DataPropsType<UQR extends IUseQueryResult<any>> = UQR extends IUseQueryResult<infer Data>
+    ? (Data extends {} ? Data : never)
+    : never;
 
-export type IQueryWrapperProps<Data, UQR extends IUseQueryResult<Data> = IUseQueryResult<Data>> = UQR & {
+export type IQueryWrapperProps<UQR extends IUseQueryResult<any> = IUseQueryResult<any>> = Pick<UQR, 'isLoading' | 'error' | 'data'> & {
     noData?: ReactElement;
-    children: (props: UQR) => ReactElement;
+    children: (props: IQueryWrapperChildrenProps<UQR>) => ReactElement;
 };
 
-export function QueryWrapper<Data, UQR extends IUseQueryResult<Data> = IUseQueryResult<Data>>({ children, ...props }: IQueryWrapperProps<Data, UQR>) {
+export type IQueryWrapperChildrenProps<UQR extends IUseQueryResult<any>> = Omit<UQR, 'data'> & { data: DataPropsType<UQR> };
 
-    const { isLoading, error, data, noData } = props;
+export function QueryWrapper<Data extends {}, UQR extends IUseQueryResult<Data> = IUseQueryResult<Data>>({ children, data, ...props }: IQueryWrapperProps<UQR>) {
+
+    const { isLoading, error, noData } = props;
     const { useLoader, useErrorAlert, useWarningAlert } = useUIContext();
     const { loader, setLoading } = useLoader({ isLoading });
     const { warningAlert, setWarningAlert } = useWarningAlert({});
@@ -49,6 +54,6 @@ export function QueryWrapper<Data, UQR extends IUseQueryResult<Data> = IUseQuery
         {loader}
         {errorAlert}
         {warningAlert}
-        {!isLoading && !error && children(props as UQR)}
+        {!isLoading && !error && data && children({ data: data as DataPropsType<UQR>, ...props } as IQueryWrapperChildrenProps<UQR>)}
     </>;
 }
