@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.14.1](https://github.com/reactionable/reactionable/compare/v0.14.0...v0.14.1) (2019-11-19)
+
+
+### Bug Fixes
+
+* **core:** list & Read components do not need refresh ([a970c94](https://github.com/reactionable/reactionable/commit/a970c94f21c466595e7ab8c55a598c615dac8a8f)), closes [#2](https://github.com/reactionable/reactionable/issues/2)
+* read children data must not be undefined ([5205db7](https://github.com/reactionable/reactionable/commit/5205db740cc6ea88a9e7f31196e445f17760e355)), closes [#3](https://github.com/reactionable/reactionable/issues/3)
+
+
+
+
+
 # [0.14.0](https://github.com/reactionable/reactionable/compare/v0.13.6...v0.14.0) (2019-11-19)
 
 
