@@ -1,4 +1,4 @@
-import { IUseQueryResult, IUseQueryOptions } from '../Query';
+import { IUseQueryResult, IUseQueryOptions } from './Query';
 
 export type IUseQueryListOptions<Variables extends {} = {}> = IUseQueryOptions<Variables> & {
     queryAll?: boolean;

@@ -1,42 +1,15 @@
-import React, { ReactElement, FC, PropsWithChildren, useEffect } from 'react';
-import { IError } from '../../error/IError';
-import { useUIContext } from '../../ui/UI';
-import { IUseLoaderResult } from '../../ui/loader/Loader';
+import React, { ReactElement } from 'react';
+import { IQueryWrapperProps, QueryWrapper, IUseQueryResult } from '../query/Query';
 
-export type IReadProps<Data> = Pick<IUseLoaderResult, 'isLoading'> & {
-    error?: IError;
-    data?: Data;
-    noData?: ReactElement;
-    render: (data: Data) => ReactElement;
+export type IReadProps<Data> = Omit<IQueryWrapperProps<Data>, 'children'> & {
+    children: (data?: Data) => ReactElement;
 };
 
-export type ReadDataComponent<Data> = FC<{ data: Data }>;
+export type ReadComponent<Data> = React.FC<IReadProps<Data>>;
 
-export type ReadComponent<Data> = FC<IReadProps<Data>>;
-export function Read<Data>({
-    isLoading,
-    error,
-    render,
-    data,
-    noData,
-}: PropsWithChildren<IReadProps<Data>>) {
-    const { useLoader, useErrorAlert, useWarningAlert } = useUIContext();
-    const { loader, setLoading } = useLoader({ isLoading });
-    const { errorAlert, setErrorAlert } = useErrorAlert({});
-    const { warningAlert, setWarningAlert } = useWarningAlert({});
-
-    useEffect(() => {
-        setLoading(isLoading);
-        setErrorAlert(!isLoading && error ? error : undefined);
-        if (noData) {
-            setWarningAlert(!isLoading && !error && !data ? noData : undefined);
-        }
-    }, [isLoading, error, data]);
-
-    return <>
-        {loader}
-        {errorAlert}
-        {warningAlert}
-        {!isLoading && !error && !!data && render(data)}
-    </>;
+export function Read<Data>({ children, ...props }: IReadProps<Data>) {
+    const renderChildren = (props: IUseQueryResult<Data>) => {
+        return children(props.data);
+    };
+    return <QueryWrapper<Data> {...props} children={renderChildren} />;
 };

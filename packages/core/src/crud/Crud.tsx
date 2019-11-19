@@ -1,6 +1,6 @@
 import React, { LazyExoticComponent, PropsWithChildren } from 'react';
 import { useRouteMatch, Switch } from 'react-router-dom';
-import { ReadDataComponent } from './read/Read';
+import { ReadComponent } from './read/Read';
 import { ListComponent } from './list/List';
 import { IUseLayoutProps } from '../ui/layout/Layout';
 import { IRouteProps, renderRoute } from '../nav/route/Route';
@@ -8,7 +8,7 @@ import { IRouteProps, renderRoute } from '../nav/route/Route';
 export interface ICrudProp<Data, LP extends IUseLayoutProps = IUseLayoutProps> {
     name: string
     listComponent?: LazyExoticComponent<ListComponent<Data>>;
-    readComponent?: LazyExoticComponent<ReadDataComponent<Data>>;
+    readComponent?: LazyExoticComponent<ReadComponent<Data>>;
     routes?: Array<IRouteProps<LP>>;
     privateRoute?: boolean;
     layout?: LP;

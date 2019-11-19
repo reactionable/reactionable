@@ -1,40 +1,18 @@
-import React, { ReactElement, FC, PropsWithChildren, useEffect } from 'react';
-import { IError } from '../../error/IError';
-import { IUseLoaderResult } from '../../ui/loader/Loader';
-import { useUIContext } from '../../ui/UI';
+import React, { ReactElement } from 'react';
+import { QueryWrapper, IQueryWrapperProps } from '../query/Query';
+import { IUseQueryListResult } from '../query/QueryList';
 
-export type IListProps<Data> = Pick<IUseLoaderResult, 'isLoading'> & {
-    data: Array<Data>;
-    error?: IError;
-    noData?: ReactElement;
-    render: (data: Array<Data>) => ReactElement;
+export type IListProps<Data> = Omit<IQueryWrapperProps<Array<Data>, IUseQueryListResult<Data>>, 'children'> & {
+    children: (data: Array<Data>) => ReactElement;
 };
 
-export type ListComponent<Data> = FC<IListProps<Data>>;
-export function List<Data>({
-    data,
-    render,
-    isLoading,
-    error,
-    noData,
-}: PropsWithChildren<IListProps<Data>>) {
-    const { useLoader, useErrorAlert, useWarningAlert } = useUIContext();
-    const { loader, setLoading } = useLoader({ isLoading });
-    const { errorAlert, setErrorAlert } = useErrorAlert({});
-    const { warningAlert, setWarningAlert } = useWarningAlert({});
+export type ListComponent<Data> = React.FC<IListProps<Data>>;
 
-    useEffect(() => {
-        setLoading(isLoading);
-        setErrorAlert(!isLoading && error ? error : undefined);
-        if (noData) {
-            setWarningAlert(!isLoading && !error && (!data || !data.length) ? noData : undefined);
-        }
-    }, [isLoading, error, data]);
+export function List<Data>({ children, ...props }: IListProps<Data>) {
 
-    return <>
-        {loader}
-        {errorAlert}
-        {warningAlert}
-        {!isLoading && !error && !!data.length && render(data)}
-    </>;
+    const renderChildren = (props: IUseQueryListResult<Data>) => {
+        return children(props.data);
+    };
+
+    return <QueryWrapper<Array<Data>, IUseQueryListResult<Data>> {...props} children={renderChildren} />;
 };
