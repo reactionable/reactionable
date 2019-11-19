@@ -6,22 +6,28 @@ import FormGroup from 'react-bootstrap/FormGroup';
 import {
     FormField as CoreFormField,
     IFormFieldProps as ICoreFormFieldProps,
-    IFormFieldPropsEnhanced, IRenderFormField,
+    IFormFieldPropsEnhanced as ICoreFormFieldPropsEnhanced, 
+    IRenderFormField,
     IFormFieldValue
 } from '@reactionable/core';
 
-export type IFormFieldProps<Value extends IFormFieldValue> = Omit<ICoreFormFieldProps<Value>, 'render'> & FormControlProps & {
+export type IFormFieldProps<Value extends IFormFieldValue> = Omit<ICoreFormFieldProps<Value>, 'children'> & FormControlProps & {
     label?: string;
-    render?: IRenderFormField<Value>;
+    children?: IRenderFormField<Value>;
 };
 
-export function FormField<Value extends IFormFieldValue>({ label, render, ...props }: PropsWithChildren<IFormFieldProps<Value>>) {
-    const renderField = (fieldProps: IFormFieldPropsEnhanced<Value>, error?: string) => {
+export type IFormFieldPropsEnhanced<Value extends IFormFieldValue> = ICoreFormFieldPropsEnhanced<Value>;
+
+export function FormField<Value extends IFormFieldValue = string>({ label, children, ...props }: PropsWithChildren<IFormFieldProps<Value>>) {
+    const renderChildren = (fieldProps: IFormFieldPropsEnhanced<Value>, error?: string) => {
         return <FormGroup controlId={fieldProps.field.name}>
             {label && <FormLabel>{label}</FormLabel>}
-            {render ? render(fieldProps, error) : <FormControl {...fieldProps.field as FormControlProps} />}
+            {children
+                ? children(fieldProps, error)
+                : <FormControl {...fieldProps.field} />
+            }
             {error && <Feedback type="invalid">{error}</Feedback>}
         </FormGroup>;
     };
-    return <CoreFormField<Value> {...props} render={renderField} />;
+    return <CoreFormField<Value> {...props} children={renderChildren} />;
 }

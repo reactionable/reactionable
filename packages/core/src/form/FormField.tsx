@@ -1,7 +1,7 @@
 import React, { RefObject, ReactElement, PropsWithChildren, useRef, useEffect, InputHTMLAttributes } from 'react';
 import { Field, FieldProps, getIn } from 'formik';
 
-export type IFormFieldValue = string|boolean;
+export type IFormFieldValue = string;
 
 export type IFormFieldPropsEnhanced<Value extends IFormFieldValue> = FieldProps<Value> & {
     field: {
@@ -17,10 +17,10 @@ export type IRenderFormField<Value extends IFormFieldValue> = (
 ) => ReactElement;
 
 export type IFormFieldProps<Value extends IFormFieldValue, T = Element> = {
-    render: IRenderFormField<Value>;
+    children: IRenderFormField<Value>;
 } & InputHTMLAttributes<T>;
 
-export function FormField<Value extends IFormFieldValue>({ render, autoFocus, ...props }: PropsWithChildren<IFormFieldProps<Value>>) {
+export function FormField<Value extends IFormFieldValue = IFormFieldValue>({ children, autoFocus, ...props }: PropsWithChildren<IFormFieldProps<Value>>) {
     const inputRef = useRef<any>(null);
 
     useEffect(() => {
@@ -29,8 +29,7 @@ export function FormField<Value extends IFormFieldValue>({ render, autoFocus, ..
         }
     }, [inputRef, autoFocus]);
 
-
-    const renderField = (fieldProps: FieldProps<Value>) => {
+    const renderChildren = (fieldProps: FieldProps<Value>) => {
         const touch = getIn(fieldProps.form.touched, fieldProps.field.name);
         const error = getIn(fieldProps.form.errors, fieldProps.field.name);
         const isValid = !!(touch && !error);
@@ -43,8 +42,8 @@ export function FormField<Value extends IFormFieldValue>({ render, autoFocus, ..
                 ref: inputRef,
             }),
         });
-        return render(fieldPropsEnhanced, touch ? error : undefined);
+        return children(fieldPropsEnhanced, touch ? error : undefined);
     };
 
-    return <Field {...props} render={renderField} />;
+    return <Field {...props} children={renderChildren} />;
 }
