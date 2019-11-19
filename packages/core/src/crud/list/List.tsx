@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 import { QueryWrapper, IQueryWrapperProps } from '../query/Query';
 import { IUseQueryListResult } from '../query/QueryList';
 
-export type IListProps<Data> = Omit<IQueryWrapperProps<Array<Data>, IUseQueryListResult<Data>>, 'children'> & {
+export type IListProps<Data> = Omit<IQueryWrapperProps<IUseQueryListResult<Data>>, 'children'> & {
     children: (data: Array<Data>) => ReactElement;
 };
 
