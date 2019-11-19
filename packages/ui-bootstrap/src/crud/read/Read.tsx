@@ -6,12 +6,12 @@ import { Read as CoreRead, IReadProps as ICoreReadProps } from '@reactionable/co
 
 export interface IReadProps<Data> extends ICoreReadProps<Data> { };
 
-export function Read<Data>({ render, ...props }: IReadProps<Data>) {
-    return <CoreRead
+export function Read<Data>({ children, ...props }: IReadProps<Data>) {
+    return <CoreRead<Data>
         {...props}
-        render={(data: Data) => <Container fluid>
+        children={(data?: Data) => <Container fluid>
             <Row>
-                <Col>{render(data)}</Col>
+                <Col>{children(data)}</Col>
             </Row>
         </Container>}
     />;

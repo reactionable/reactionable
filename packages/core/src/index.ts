@@ -4,11 +4,11 @@
 
 export * from "./app/App";
 export * from "./crud/Crud";
-export * from "./crud/Query";
 export * from "./crud/create/Create";
 export * from "./crud/delete/Delete";
 export * from "./crud/list/List";
-export * from "./crud/list/QueryList";
+export * from "./crud/query/Query";
+export * from "./crud/query/QueryList";
 export * from "./crud/read/Read";
 export * from "./crud/update/Update";
 export * from "./enhance-children/EnhanceChildren";
