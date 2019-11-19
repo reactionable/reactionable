@@ -9,7 +9,7 @@ export interface IReadProps<Data> extends ICoreReadProps<Data> { };
 export function Read<Data>({ children, ...props }: IReadProps<Data>) {
     return <CoreRead<Data>
         {...props}
-        children={(data?: Data) => <Container fluid>
+        children={(data: Data) => <Container fluid>
             <Row>
                 <Col>{children(data)}</Col>
             </Row>
