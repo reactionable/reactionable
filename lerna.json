@@ -1,7 +1,6 @@
 {
   "packages": [
-    "packages/*",
-    "tools/*"
+    "packages/*"
   ],
   "version": "0.15.0",
   "command": {

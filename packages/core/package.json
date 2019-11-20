@@ -9,7 +9,7 @@
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
-    "start": "npm run build:barrelsby && tsc-watch --onSuccess \"\"",
+    "start": "npm run build:barrelsby && tsc",
     "test": "node_modules/.bin/jest",
     "build": "npm run build:clean && npm run build:barrelsby && tsc --pretty",
     "build:clean": "rimraf lib",
@@ -45,15 +45,6 @@
     "react-i18next": "^11.2.1",
     "react-router-dom": "^5.1.2",
     "yup": "^0.27.0"
-  },
-  "devDependencies": {
-    "@types/enzyme": "^3.10.3",
-    "barrelsby": "^2.2.0",
-    "enzyme": "^3.10.0",
-    "enzyme-adapter-react-16": "^1.15.1",
-    "jest-environment-enzyme": "^7.1.2",
-    "jest-enzyme": "^7.1.2",
-    "rimraf": "^3.0.0"
   },
   "publishConfig": {
     "access": "public"
