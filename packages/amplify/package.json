@@ -39,6 +39,10 @@
     "aws-amplify-react": "^2.5.4",
     "dequal": "^1.0.0"
   },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node"
+  },
   "publishConfig": {
     "access": "public"
   }
