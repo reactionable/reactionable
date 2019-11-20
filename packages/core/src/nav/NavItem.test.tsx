@@ -1,21 +1,28 @@
-import React from 'react';
-import { shallow } from 'enzyme';
-import { useGeneratedPath } from './NavItem';
+import { generatePath } from './NavItem';
 
-export default function testHook(runHook) {
-  function HookWrapper() {
-    const output = runHook();
-
-    return (
-      <span data-output={output} />
-    );
+it('generate absolute path with duplicated separators', () => {
+  for (const path of ['/', '/', '/test/..', '/test/../', '//test//..//']) {
+    const value = generatePath(path);
+    expect(value).toBe('/');
   }
-  const wrapper = shallow(<HookWrapper />);
+});
 
-  return wrapper.find('span').props()['data-output'];
-}
+it('generate absolute path with parent directory pattern', () => {
+  for (const path of [
+    '/test/:id/child/:childId/sub-child/..',
+    '/test//:id/child//:childId/sub-child/..',
+  ]) {
+    const value = generatePath(path, { id: '1' }, { childId: 2 });
+    expect(value).toBe('/test/1/child/2');
+  }
+});
 
-it('generatePath with parent directory pattern', () => {
-  const value = testHook(() => useGeneratedPath('/test/:id/child/..', { id: '1' }));
-  expect(value).toBe('/test/1');
+it('generate relative path with parent directory pattern', () => {
+  for (const path of [
+    'test/:id/child/:childId/sub-child/..',
+    'test//:id/child//:childId/sub-child/..',
+  ]) {
+    const value = generatePath(path, { id: '1' }, { childId: 2 });
+    expect(value).toBe('test/1/child/2');
+  }
 });

@@ -1,6 +1,6 @@
 import React, { useContext, createContext, useReducer, PropsWithChildren } from 'react';
-import { LinkProps, useParams, generatePath } from 'react-router-dom';
-import { normalize } from 'path';
+import { LinkProps, generatePath as routerGeneratePath } from 'react-router-dom';
+// import { normalize } from 'path';
 
 
 export type INavItem = Omit<LinkProps, 'onSelect'>;
@@ -17,10 +17,42 @@ type NavItemType<C extends INavItemsProps<INavItem>> = C extends INavItemsProps<
     ? (N extends INavItem ? N : INavItem)
     : INavItem;
 
-export function useGeneratedPath(pattern: string, params?: { [paramName: string]: string | number | boolean | undefined }): string {
-    const matchParams = useParams();
-    return generatePath(normalize(pattern), { ...matchParams, ...params });
-}
+const normalizePath = (path: string): string => {
+    path = path.trim();
+    const separator = '/';
+    const normalizedPathParts: string[] = [];
+    path.split(separator).forEach(part => {
+        part = part.trim();
+        if (!part.length) {
+            return;
+        }
+        if (part === '..') {
+            normalizedPathParts.pop();
+            return;
+        }
+        normalizedPathParts.push(part);
+    });
+
+    if(!normalizedPathParts.length){
+        return '/';
+    }
+
+    let normalizedPath = normalizedPathParts.join(separator);
+    if (path[0] === separator) {
+        normalizedPath = separator + normalizedPath;
+    }
+    if (path[path.length - 1] === separator) {
+        normalizedPath += separator;
+    }
+
+    return normalizedPath;
+};
+
+export function generatePath(pattern: string, ...params: Array<{ [paramName: string]: string | number | boolean | undefined }>): string {
+    return routerGeneratePath(normalizePath(pattern), params.reduce((previous, current) => {
+        return { ...previous, ...current };
+    }, {}));
+};
 
 export function createNavItemContextProvider<P extends INavItemsProps<INavItem>>(defaultValue: P) {
     const NavItemContext = createContext<INavItemsContext<NavItemType<P>>>({
@@ -64,7 +96,7 @@ export function createNavItemContextProvider<P extends INavItemsProps<INavItem>>
         return <NavItemContext.Provider value={{
             navItems: navItems.map(navItem => {
                 if (navItem.to && 'string' === typeof navItem.to) {
-                    navItem.to = useGeneratedPath(navItem.to);
+                    navItem.to = generatePath(navItem.to);
                 }
                 return navItem;
             }),
