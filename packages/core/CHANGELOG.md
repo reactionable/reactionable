@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.16.0](https://github.com/reactionable/reactionable/compare/v0.15.0...v0.16.0) (2019-11-20)
+
+
+### Bug Fixes
+
+* **core:** add missing NotFound route ([0076fa5](https://github.com/reactionable/reactionable/commit/0076fa5dd2830b5229340359fa5435df6de91dc6))
+
+
+### Features
+
+* **core:** add useGeneratedPath hook & use it in NavItemContextProvider ([4e1e4ed](https://github.com/reactionable/reactionable/commit/4e1e4ed55dae69172811e7005eb1e237c500c845))
+
+
+
+
+
 # [0.15.0](https://github.com/reactionable/reactionable/compare/v0.14.1...v0.15.0) (2019-11-20)
 
 
