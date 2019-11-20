@@ -30,7 +30,7 @@ export function useUIContext() {
     IUseModalFormProps>();
 }
 
-export const useUIContextProviderProps = (): IUIContextProviderProps => {
+export function useUIContextProviderProps(): IUIContextProviderProps {
     return {
         useLoader,
         useSuccessNotification,

@@ -18,7 +18,8 @@ export type IUseLayoutProps = ICoreUseLayoutProps<
     IBodyProps,
     IFooterProps
 > & {};
-export const useLayout = (props: IUseLayoutProps) => {
+
+export function useLayout(props: IUseLayoutProps) {
     return useLayoutCore<IUseLayoutProps>({
         ...props,
         HeaderComponent: Header,
