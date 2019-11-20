@@ -1,6 +1,9 @@
 import { IError } from '../../error/IError';
 import React, { useEffect, ReactElement } from 'react';
 import { useUIContext } from '../../ui/UI';
+import { IUseLoaderResult } from '../../ui/loader/Loader';
+import { IUseErrorAlertResult } from '../../ui/alert/ErrorAlert';
+import { IUseWarningAlertResult } from '../../ui/alert/WarningAlert';
 
 export interface IUseQueryResult<Data> {
     isLoading: boolean;
@@ -26,7 +29,11 @@ export type IQueryWrapperProps<UQR extends IUseQueryResult<any> = IUseQueryResul
     children: (props: IQueryWrapperChildrenProps<UQR>) => ReactElement;
 };
 
-export type IQueryWrapperChildrenProps<UQR extends IUseQueryResult<any>> = Omit<UQR, 'data'> & { data: DataPropsType<UQR> };
+export type IQueryWrapperChildrenProps<UQR extends IUseQueryResult<any>> = Omit<UQR, 'data'>
+    & { data: DataPropsType<UQR> }
+    & Pick<IUseLoaderResult, 'setLoading'>
+    & Pick<IUseErrorAlertResult, 'setErrorAlert'>
+    & Pick<IUseWarningAlertResult, 'setWarningAlert'>;
 
 export function QueryWrapper<Data extends {}, UQR extends IUseQueryResult<Data> = IUseQueryResult<Data>>({ children, data, ...props }: IQueryWrapperProps<UQR>) {
 
@@ -54,6 +61,12 @@ export function QueryWrapper<Data extends {}, UQR extends IUseQueryResult<Data> 
         {loader}
         {errorAlert}
         {warningAlert}
-        {!isLoading && !error && data && children({ data: data as DataPropsType<UQR>, ...props } as IQueryWrapperChildrenProps<UQR>)}
+        {!isLoading && !error && data && children({
+            data: data as DataPropsType<UQR>,
+            setLoading,
+            setErrorAlert,
+            setWarningAlert,
+            ...props
+        } as IQueryWrapperChildrenProps<UQR>)}
     </>;
 }
