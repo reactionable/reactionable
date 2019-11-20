@@ -1,6 +1,5 @@
 import React, { LazyExoticComponent, PropsWithChildren, StrictMode } from 'react';
-import { Router, Switch } from 'react-router-dom';
-import { createBrowserHistory } from 'history';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import { IdentityContextProvider, IIdentityContextProviderProps } from '../identity/Identity';
 import { IRouteProps, renderRoute } from '../nav/route/Route';
 import { IUIContextProviderProps, UIContextProvider } from '../ui/UI';
@@ -32,10 +31,11 @@ export function App<
     ui,
     layout,
 }: PropsWithChildren<IAppProps<ICP, UICP, LP>>) {
-    const customHistory = createBrowserHistory();
-
     if (HomeComponent) {
         routes.unshift({ component: HomeComponent, exact: true, path: '/', privateRoute: false, });
+    }
+    if (NotFoundComponent) {
+        routes.push({ component: NotFoundComponent, privateRoute: false, });
     }
 
     let routerContent = <Switch>{routes.map(route => renderRoute<LP>({ layout, ...route }))}</Switch>
@@ -45,7 +45,7 @@ export function App<
         routerContent = <CaptureRouteNotFound>{routerContent}</CaptureRouteNotFound>;
     }
 
-    routerContent = <Router history={customHistory}>{routerContent}</Router>;
+    routerContent = <Router>{routerContent}</Router>;
 
     if (identity) {
         routerContent = <IdentityContextProvider {...identity}>{routerContent}</IdentityContextProvider>;
