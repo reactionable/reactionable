@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.16.1](https://github.com/reactionable/reactionable/compare/v0.16.0...v0.16.1) (2019-11-20)
+
+
+### Bug Fixes
+
+* **core:** fix generatePath function ([8e1d12c](https://github.com/reactionable/reactionable/commit/8e1d12c61ceb8046362a6852f67c0a8cc5948767))
+
+
+
+
+
 # [0.16.0](https://github.com/reactionable/reactionable/compare/v0.15.0...v0.16.0) (2019-11-20)
 
 
