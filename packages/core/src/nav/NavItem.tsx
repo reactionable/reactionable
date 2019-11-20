@@ -1,5 +1,6 @@
 import React, { useContext, createContext, useReducer, PropsWithChildren } from 'react';
-import { LinkProps } from 'react-router-dom';
+import { LinkProps, useParams, generatePath } from 'react-router-dom';
+import { normalize } from 'path';
 
 
 export type INavItem = Omit<LinkProps, 'onSelect'>;
@@ -16,6 +17,11 @@ type NavItemType<C extends INavItemsProps<INavItem>> = C extends INavItemsProps<
     ? (N extends INavItem ? N : INavItem)
     : INavItem;
 
+export function useGeneratedPath(pattern: string, params?: { [paramName: string]: string | number | boolean | undefined }): string {
+    const matchParams = useParams();
+    return generatePath(normalize(pattern), { ...matchParams, ...params });
+}
+
 export function createNavItemContextProvider<P extends INavItemsProps<INavItem>>(defaultValue: P) {
     const NavItemContext = createContext<INavItemsContext<NavItemType<P>>>({
         ...defaultValue,
@@ -23,28 +29,30 @@ export function createNavItemContextProvider<P extends INavItemsProps<INavItem>>
     } as INavItemsContext<NavItemType<P>>);
 
     const NavItemContextProvider = ({ children, ...props }: PropsWithChildren<P>) => {
-        const [navItems, setNavItems] = useReducer((prevState, state) => {
-            
+        const [navItems, setNavItems] = useReducer<(
+            prevState: Array<NavItemType<P>>,
+            state: Array<NavItemType<P>>
+        ) => Array<NavItemType<P>>>((prevState, state) => {
             return state.every((navItem: NavItemType<P>, index: number) => {
                 if (!prevState[index]) {
                     return false;
                 }
-                const {children: navItemChildren, ...navItemProps } = navItem;
-                const {children: prevNavItemChildren, ...prevNavItemProps} = navItem;
+                const { children: navItemChildren, ...navItemProps } = navItem;
+                const { children: prevNavItemChildren, ...prevNavItemProps } = navItem;
 
-                if(JSON.stringify(navItemProps) !== JSON.stringify(prevNavItemProps)){
+                if (JSON.stringify(navItemProps) !== JSON.stringify(prevNavItemProps)) {
                     return false;
                 }
 
-                if(!navItemChildren || !prevNavItemChildren){
+                if (!navItemChildren || !prevNavItemChildren) {
                     return true;
                 }
 
-                if(typeof navItemChildren !== typeof prevNavItemChildren){
+                if (typeof navItemChildren !== typeof prevNavItemChildren) {
                     return false;
                 }
 
-                if(/^[sbn]/.test(typeof navItemChildren)){
+                if (/^[sbn]/.test(typeof navItemChildren)) {
                     return navItemChildren === prevNavItemChildren;
                 }
 
@@ -54,7 +62,12 @@ export function createNavItemContextProvider<P extends INavItemsProps<INavItem>>
         }, []);
 
         return <NavItemContext.Provider value={{
-            navItems,
+            navItems: navItems.map(navItem => {
+                if (navItem.to && 'string' === typeof navItem.to) {
+                    navItem.to = useGeneratedPath(navItem.to);
+                }
+                return navItem;
+            }),
             setNavItems,
             ...props,
         } as INavItemsContext<NavItemType<P>>}>{children}</NavItemContext.Provider>;
