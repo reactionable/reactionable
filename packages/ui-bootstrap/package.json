@@ -9,7 +9,7 @@
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
-    "start": "npm run build:barrelsby && tsc-watch --onSuccess \"\"",
+    "start": "npm run build:barrelsby && tsc",
     "test": "jest",
     "build": "npm run build:clean && npm run build:barrelsby && tsc --pretty",
     "build:clean": "rimraf lib",
@@ -42,18 +42,8 @@
     "bootstrap": "^4.3.1",
     "react-bootstrap": "^1.0.0-beta.15"
   },
-  "jest": {
-    "preset": "ts-jest"
-  },
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "97af7efb2493028fd374029db49187f7bcdbbb21",
-  "devDependencies": {
-    "@types/enzyme": "^3.10.3",
-    "enzyme": "^3.10.0",
-    "enzyme-adapter-react-16": "^1.15.1",
-    "jest-environment-enzyme": "^7.1.2",
-    "jest-enzyme": "^7.1.2"
-  }
+  "gitHead": "97af7efb2493028fd374029db49187f7bcdbbb21"
 }
