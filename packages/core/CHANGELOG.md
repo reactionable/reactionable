@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.15.0](https://github.com/reactionable/reactionable/compare/v0.14.1...v0.15.0) (2019-11-20)
+
+
+### Features
+
+* **core:** queryWrapper exposes setters ([2e6ea8f](https://github.com/reactionable/reactionable/commit/2e6ea8f3667d1ea76296da187b2b2bb606e199de))
+
+
+
+
+
 ## [0.14.1](https://github.com/reactionable/reactionable/compare/v0.14.0...v0.14.1) (2019-11-19)
 
 
