@@ -27,11 +27,20 @@ export function Sidebar({ children, ...props }: PropsWithChildren<ISidebarProps>
     const [open, setOpen] = useState(true);
 
     return <SidebarContextProvider>
-        <Container fluid className="sidebar-container">
+        <Container fluid className="sidebar-container" style={{
+            paddingLeft: 0,
+            paddingRight: 0,
+        }}>
             <Row>
                 <SidebarContextConsumer>{(context: ISidebarContext) => (<>
                     <Collapse in={open}>
-                        <Col xs="auto" className="sidebar-left-side" style={{ borderRight: 'solid 1px', height: '94vh' }}>
+                        <Col xs="auto" className="sidebar-left-side" style={{
+                            borderRight: 'solid 1px',
+                            height: '94vh',
+                            paddingTop: '1vh',
+                            paddingLeft: 0,
+                            paddingRight: 0,
+                        }}>
                             {!open && <Button
                                 onClick={() => setOpen(!open)}
                                 aria-controls={t('Collapse sidebar')}
@@ -40,7 +49,10 @@ export function Sidebar({ children, ...props }: PropsWithChildren<ISidebarProps>
                             {open && context.navItems?.map(navItemToComponent)}
                         </Col>
                     </Collapse>
-                    <Col className="sidebar-right-side">{children}</Col>
+                    <Col className="sidebar-right-side" style={{
+                        height: '89vh',
+                        overflow: 'auto',
+                    }}>{children}</Col>
                 </>)}</SidebarContextConsumer>
             </Row>
         </Container>
