@@ -32,13 +32,13 @@
   },
   "scripts": {
     "start": "npm run bootstrap && lerna run start --parallel",
-    "test": "jest",
+    "test": "lerna run test --parallel",
     "format": "prettier --write \"**/*.ts\"  \"!**/lib/**\"",
     "lint": "eslint \"packages/**/{src,__tests__}/**/*.ts\" -f eslint-formatter-friendly",
     "bootstrap": "lerna bootstrap --hoist",
     "build": "npm run bootstrap && lerna run build",
     "lernaupdate": "lernaupdate",
-    "publish": "lerna publish",
+    "publish": "lerna publish --yes",
     "link": "cd node_modules/react && npm link && cd ../react-dom && npm link && cd ../.. && npm run bootstrap && lerna run link --parallel"
   },
   "prettier": {
