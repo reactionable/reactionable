@@ -3,24 +3,27 @@ import { Field, FieldProps, getIn } from 'formik';
 
 export type IFormFieldValue = string;
 
-export type IFormFieldPropsEnhanced<Value extends IFormFieldValue> = FieldProps<Value> & {
+export type IFormFieldPropsEnhanced<FieldElement extends React.ElementType, Value extends IFormFieldValue> = FieldProps<Value> & {
     field: {
         isValid: boolean;
         isInvalid: boolean;
         ref: RefObject<any>;
-    };
+    } & InputHTMLAttributes<FieldElement>;
 };
 
-export type IRenderFormField<Value extends IFormFieldValue> = (
-    fieldProps: IFormFieldPropsEnhanced<Value>,
+export type IRenderFormField<FieldElement extends React.ElementType, Value extends IFormFieldValue> = (
+    fieldProps: IFormFieldPropsEnhanced<FieldElement, Value>,
     error?: string,
 ) => ReactElement;
 
-export type IFormFieldProps<Value extends IFormFieldValue, T = Element> = {
-    children: IRenderFormField<Value>;
-} & InputHTMLAttributes<T>;
+export type IFormFieldProps<FieldElement extends React.ElementType, Value extends IFormFieldValue> = {
+    children: IRenderFormField<FieldElement, Value>;
+} & InputHTMLAttributes<FieldElement>;
 
-export function FormField<Value extends IFormFieldValue = IFormFieldValue>({ children, autoFocus, ...props }: PropsWithChildren<IFormFieldProps<Value>>) {
+export function FormField<
+    FieldElement extends React.ElementType = 'input',
+    Value extends IFormFieldValue = IFormFieldValue
+>({ children, autoFocus, ...props }: PropsWithChildren<IFormFieldProps<FieldElement, Value>>) {
     const inputRef = useRef<any>(null);
 
     useEffect(() => {
@@ -35,13 +38,20 @@ export function FormField<Value extends IFormFieldValue = IFormFieldValue>({ chi
         const isValid = !!(touch && !error);
         const isInvalid = !!(error);
 
-        const fieldPropsEnhanced: IFormFieldPropsEnhanced<Value> = Object.assign(fieldProps, {
-            field: Object.assign(fieldProps.field, props, {
-                isValid,
-                isInvalid,
-                ref: inputRef,
-            }),
-        });
+        const fieldPropsEnhanced: IFormFieldPropsEnhanced<FieldElement, Value> = Object.assign(
+            fieldProps,
+            {
+                field: Object.assign(
+                    fieldProps.field,
+                    props,
+                    {
+                        isValid,
+                        isInvalid,
+                        ref: inputRef,
+                    }
+                ),
+            }
+        );
         return children(fieldPropsEnhanced, touch ? error : undefined);
     };
 

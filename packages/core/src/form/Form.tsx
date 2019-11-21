@@ -48,14 +48,16 @@ export function Form<Values, Data>(props: PropsWithChildren<IFormProps<Values, D
             }
         }).catch(error => {
             setErrorAlert(error);
+        }).finally(() => {
+            setLoading(false);
+            formikHelpers.setSubmitting(false);
         });
-        setLoading(false);
-        formikHelpers.setSubmitting(false);
     };
 
     return <Formik
         initialValues={formValues}
         onSubmit={onSubmitCallback}
         validationSchema={formSchema}
-        children={renderFormChildren} />;
+        children={renderFormChildren}
+    />;
 };
