@@ -12,9 +12,10 @@ export type IUseLoaderResult = {
     isLoading: boolean;
     loader: ReactElement;
     setLoading: (isLoading: boolean) => void;
-}
+};
 
 export type IUseLoader<P extends IUseLoaderProps> = (props: P) => IUseLoaderResult;
+
 export function useLoader<P extends IUseLoaderProps>({ Component, isLoading, ...props }: P & { Component: LoaderComponent }): IUseLoaderResult {
     const [isLoadingState, setLoading] = useState<boolean>(isLoading || false);
     return {
@@ -34,4 +35,3 @@ export const withSuspense = (
     const { loader } = useUIContext().useLoader({ isLoading: true });
     return <Suspense fallback={loader}>{component}</Suspense>
 };
-
