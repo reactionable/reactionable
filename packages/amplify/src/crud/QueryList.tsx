@@ -11,7 +11,7 @@ export type UndefinedGQLType<T> = T | null | undefined;
 
 export type AmplifyListType<Data> = {
     items: Data[];
-    nextToken: UndefinedGQLType<string>;
+    nextToken?: string | null;
 };
 
 export async function queryList<Data extends {}, Variables extends {}>(options: IQueryListOptions<Variables>): Promise<AmplifyListType<Data>> {
