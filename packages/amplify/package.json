@@ -1,6 +1,6 @@
 {
   "name": "@reactionable/amplify",
-  "version": "0.16.6",
+  "version": "0.16.7",
   "description": "Reactionable package for Amplify",
   "private": false,
   "files": [
@@ -34,7 +34,7 @@
   },
   "homepage": "https://github.com/reactionable/reactionable#readme",
   "dependencies": {
-    "@reactionable/core": "^0.16.6",
+    "@reactionable/core": "^0.16.7",
     "aws-amplify": "^1.2.4",
     "aws-amplify-react": "^2.5.4"
   },
@@ -45,5 +45,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "d3fbcb5f25719f9974f76be1c53e6cf2a00ccda9"
+  "gitHead": "bcedc7709779896dda5a3fceafbe242d62067379"
 }
