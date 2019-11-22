@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.16.6](https://github.com/reactionable/reactionable/compare/v0.16.5...v0.16.6) (2019-11-22)
+
+
+### Bug Fixes
+
+* fix form field typings ([b19c89c](https://github.com/reactionable/reactionable/commit/b19c89c7ebef93b11b5ba7e5a9dd2dc9ddf144c3))
+* **amplify:** fix query list typings ([29ce780](https://github.com/reactionable/reactionable/commit/29ce780ad541a71b0c600a6f8fcf26f002872c3f))
+* **amplify:** fix queryList typings ([fc958b2](https://github.com/reactionable/reactionable/commit/fc958b2bddcdfedefa8f9476069acebadf42f317))
+
+
+
+
+
 ## [0.16.5](https://github.com/reactionable/reactionable/compare/v0.16.4...v0.16.5) (2019-11-22)
 
 
