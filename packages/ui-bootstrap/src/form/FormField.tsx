@@ -1,36 +1,61 @@
-import React, { PropsWithChildren, ReactElement } from 'react';
+import React, { ReactElement, ElementType } from 'react';
 import FormLabel from 'react-bootstrap/FormLabel';
 import Feedback from 'react-bootstrap/Feedback';
 import FormControl, { FormControlProps } from 'react-bootstrap/FormControl';
 import FormGroup from 'react-bootstrap/FormGroup';
+import { ReplaceProps, BsPrefixProps } from 'react-bootstrap/helpers';
 import {
     FormField as CoreFormField,
     IFormFieldProps as ICoreFormFieldProps,
-    IFormFieldPropsEnhanced as ICoreFormFieldPropsEnhanced, 
-    IRenderFormField,
+    IFormFieldPropsEnhanced as ICoreFormFieldPropsEnhanced,
     IFormFieldValue
 } from '@reactionable/core';
-import { ReplaceProps, BsPrefixProps } from 'react-bootstrap/helpers';
 
-export type IFormFieldProps<FieldElement extends React.ElementType, Value extends IFormFieldValue> = Omit<ICoreFormFieldProps<FieldElement, Value>, 'children'> & FormControlProps & {
-    label?: string;
-    children?: IRenderFormField<FieldElement, Value> | ReactElement;
-};
+export type IFormFieldProps<
+    FieldElement extends ElementType,
+    Value extends IFormFieldValue
+    > = Omit<ICoreFormFieldProps<FieldElementProps<FieldElement>, Value>, 'children'> &
+    Partial<Pick<ICoreFormFieldProps<FieldElementProps<FieldElement>, Value>, 'children'>>
+    & {
+        label?: ReactElement;
+    };
 
-export type IFormFieldPropsEnhanced<FieldElement extends React.ElementType, Value extends IFormFieldValue> = ICoreFormFieldPropsEnhanced<FieldElement, Value>;
+export type IFormFieldPropsEnhanced<
+    FieldElement extends ElementType,
+    Value extends IFormFieldValue
+    > = ICoreFormFieldPropsEnhanced<FieldElementProps<FieldElement>, Value>;
 
-type IFormControlProps<FieldElement extends React.ElementType> = ReplaceProps<FieldElement, BsPrefixProps<FieldElement> & FormControlProps>;
+type FieldElementProps<FieldElement extends ElementType> =
+    ReplaceProps<FieldElement, BsPrefixProps<FieldElement> & FormControlProps>;
 
-export function FormField<FieldElement extends React.ElementType = 'input', Value extends IFormFieldValue = string>({ label, children, ...props }: PropsWithChildren<IFormFieldProps<FieldElement,Value>>) {
-    const renderChildren = (fieldProps: IFormFieldPropsEnhanced<FieldElement, Value>, error?: string) => {
+export function FormField<
+    FieldElement extends ElementType = 'input',
+    Value extends IFormFieldValue = string
+>({ label, children, ...props }: IFormFieldProps<FieldElement, Value>) {
+
+    const renderChildren = (fieldProps: IFormFieldPropsEnhanced<FieldElement, Value>) => {
+        let fieldContent: ReactElement;
+        if (children) {
+            fieldContent = children(fieldProps);
+        }
+        else {
+            fieldContent = <FormControl {...fieldProps.field} />;
+            if (fieldProps.field.type === 'hidden') {
+                return fieldContent;
+            }
+        }
         return <FormGroup controlId={fieldProps.field.name}>
             {label && <FormLabel>{label}</FormLabel>}
-            {children && 'function' === typeof children
-                ? children(fieldProps, error)
-                : <FormControl {...fieldProps.field as IFormControlProps<FieldElement>} children={children} />
-            }
-            {error && <Feedback type="invalid">{error}</Feedback>}
+            {fieldContent}
+            {fieldProps.error && <Feedback type="invalid">{fieldProps.error}</Feedback>}
         </FormGroup>;
     };
-    return <CoreFormField<FieldElement, Value> {...props} children={renderChildren} />;
+
+    return <CoreFormField<
+        FieldElementProps<FieldElement>,
+        Value
+    > {...{
+        ...props,
+        children: renderChildren,
+    } as ICoreFormFieldProps<FieldElementProps<FieldElement>, Value>} />;
 }
