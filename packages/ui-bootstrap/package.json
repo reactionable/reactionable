@@ -1,6 +1,6 @@
 {
   "name": "@reactionable/ui-bootstrap",
-  "version": "0.16.3",
+  "version": "0.16.4",
   "description": "Reactionable UI package for Bootsrap",
   "private": false,
   "files": [
@@ -38,7 +38,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.25",
     "@fortawesome/free-solid-svg-icons": "^5.11.2",
     "@fortawesome/react-fontawesome": "^0.1.7",
-    "@reactionable/core": "^0.16.3",
+    "@reactionable/core": "^0.16.4",
     "bootstrap": "^4.3.1",
     "react-bootstrap": "^1.0.0-beta.15"
   },
@@ -49,5 +49,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "b59f815cd9b2d705570df6e008404dcc77b52420"
+  "gitHead": "d3fbcb5f25719f9974f76be1c53e6cf2a00ccda9"
 }

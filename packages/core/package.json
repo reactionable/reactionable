@@ -1,6 +1,6 @@
 {
   "name": "@reactionable/core",
-  "version": "0.16.3",
+  "version": "0.16.4",
   "description": "Reactionable Core package",
   "private": false,
   "files": [
@@ -54,5 +54,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "b59f815cd9b2d705570df6e008404dcc77b52420"
+  "gitHead": "d3fbcb5f25719f9974f76be1c53e6cf2a00ccda9"
 }
