@@ -3,7 +3,9 @@ import { IUseQueryListResult, IUseQueryListOptions as ICoreUseQueryListOptions, 
 import { GraphQLResult } from '@aws-amplify/api/lib-esm/types';
 import { IUseQueryOptions, query, IQueryOptions } from './Query';
 
-export type IQueryListOptions<Variables extends {}> = IQueryOptions<Variables & { nextToken: UndefinedGQLType<string> }> & {
+export type IQueryListOptions<Variables extends {}> = IQueryOptions<Variables & { 
+    nextToken?: UndefinedGQLType<string>;
+}> & {
     queryAll?: boolean;
 };
 
@@ -11,7 +13,7 @@ export type UndefinedGQLType<T> = T | null | undefined;
 
 export type AmplifyListType<Data> = {
     items: Data[];
-    nextToken?: string | null;
+    nextToken?: UndefinedGQLType<string>;
 };
 
 export async function queryList<Data extends {}, Variables extends {}>(options: IQueryListOptions<Variables>): Promise<AmplifyListType<Data>> {
