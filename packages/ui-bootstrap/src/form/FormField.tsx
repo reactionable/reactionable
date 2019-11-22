@@ -7,23 +7,19 @@ import { ReplaceProps, BsPrefixProps } from 'react-bootstrap/helpers';
 import {
     FormField as CoreFormField,
     IFormFieldProps as ICoreFormFieldProps,
-    IFormFieldPropsEnhanced as ICoreFormFieldPropsEnhanced,
-    IFormFieldValue
+    IFormFieldPropsEnhanced,
+    IFormFieldValue,
+    IRenderFormField
 } from '@reactionable/core';
 
 export type IFormFieldProps<
     FieldElement extends ElementType,
     Value extends IFormFieldValue
-    > = Omit<ICoreFormFieldProps<FieldElementProps<FieldElement>, Value>, 'children'> &
-    Partial<Pick<ICoreFormFieldProps<FieldElementProps<FieldElement>, Value>, 'children'>>
+    > = Omit<ICoreFormFieldProps<FieldElementProps<FieldElement>, Value>, 'children'>
     & {
         label?: ReactElement;
+        children?: IRenderFormField<FieldElementProps<FieldElement>, Value>;
     };
-
-export type IFormFieldPropsEnhanced<
-    FieldElement extends ElementType,
-    Value extends IFormFieldValue
-    > = ICoreFormFieldPropsEnhanced<FieldElementProps<FieldElement>, Value>;
 
 type FieldElementProps<FieldElement extends ElementType> =
     ReplaceProps<FieldElement, BsPrefixProps<FieldElement> & FormControlProps>;
@@ -33,7 +29,7 @@ export function FormField<
     Value extends IFormFieldValue = string
 >({ label, children, ...props }: IFormFieldProps<FieldElement, Value>) {
 
-    const renderChildren = (fieldProps: IFormFieldPropsEnhanced<FieldElement, Value>) => {
+    const renderChildren = (fieldProps: IFormFieldPropsEnhanced<FieldElementProps<FieldElement>, Value>) => {
         let fieldContent: ReactElement;
         if (children) {
             fieldContent = children(fieldProps);
@@ -58,4 +54,4 @@ export function FormField<
         ...props,
         children: renderChildren,
     } as ICoreFormFieldProps<FieldElementProps<FieldElement>, Value>} />;
-}
+};
