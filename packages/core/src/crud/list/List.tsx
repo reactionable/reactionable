@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
-import { QueryWrapper, IQueryWrapperProps } from '../query/Query';
 import { IUseQueryListResult } from '../query/QueryList';
+import { IQueryWrapperProps, QueryWrapper } from '../query/QueryWrapper';
 
 export type IListProps<Data> = Omit<IQueryWrapperProps<IUseQueryListResult<Data>>, 'children'> & {
     children: (data: Array<Data>) => ReactElement;

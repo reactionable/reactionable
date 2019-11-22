@@ -9,6 +9,7 @@ export * from "./crud/delete/Delete";
 export * from "./crud/list/List";
 export * from "./crud/query/Query";
 export * from "./crud/query/QueryList";
+export * from "./crud/query/QueryWrapper";
 export * from "./crud/read/Read";
 export * from "./crud/update/Update";
 export * from "./enhance-children/EnhanceChildren";

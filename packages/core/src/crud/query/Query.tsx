@@ -1,9 +1,10 @@
+import { useEffect, useState, useRef } from 'react';
+import deepEqual from 'dequal';
 import { IError } from '../../error/IError';
-import React, { useEffect, ReactElement } from 'react';
-import { useUIContext } from '../../ui/UI';
-import { IUseLoaderResult } from '../../ui/loader/Loader';
-import { IUseErrorAlertResult } from '../../ui/alert/ErrorAlert';
-import { IUseWarningAlertResult } from '../../ui/alert/WarningAlert';
+
+export type IQueryOptions<Variables extends {} = {}> = {
+    variables?: Variables;
+};
 
 export interface IUseQueryResult<Data> {
     isLoading: boolean;
@@ -12,61 +13,66 @@ export interface IUseQueryResult<Data> {
     refetch: () => void;
 };
 
-export interface IUseQueryOptions<Variables extends {} = {}> {
-    variables?: Variables;
-};
+export type IUseQueryOptions<
+    Data extends {},
+    O extends IQueryOptions = IQueryOptions<any>,
+    > = O & {
+        handleQuery: (queryOptions: O) => Promise<Data>
+    };
 
-export type IUseQuery<Data extends {}, Options extends IUseQueryOptions = {}> = (
-    options?: Options
-) => IUseQueryResult<Data>;
 
-type DataPropsType<UQR extends IUseQueryResult<any>> = UQR extends IUseQueryResult<infer Data>
-    ? (Data extends {} ? Data : never)
-    : never;
+export function useQuery<
+    Data extends {},
+    O extends IQueryOptions = IQueryOptions<any>,
+    >(
+        {
+            handleQuery,
+            ...queryOptions
+        }: IUseQueryOptions<Data, O>
+    ): IUseQueryResult<Data> {
 
-export type IQueryWrapperProps<UQR extends IUseQueryResult<any> = IUseQueryResult<any>> = Pick<UQR, 'isLoading' | 'error' | 'data'> & {
-    noData?: ReactElement;
-    children: (props: IQueryWrapperChildrenProps<UQR>) => ReactElement;
-};
+    const [isLoading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<IError | undefined>(undefined);
+    const [data, setData] = useState<Data | undefined>(undefined);
 
-export type IQueryWrapperChildrenProps<UQR extends IUseQueryResult<any>> = Omit<UQR, 'data'>
-    & { data: DataPropsType<UQR> }
-    & Pick<IUseLoaderResult, 'setLoading'>
-    & Pick<IUseErrorAlertResult, 'setErrorAlert'>
-    & Pick<IUseWarningAlertResult, 'setWarningAlert'>;
-
-export function QueryWrapper<Data extends {}, UQR extends IUseQueryResult<Data> = IUseQueryResult<Data>>({ children, data, ...props }: IQueryWrapperProps<UQR>) {
-
-    const { isLoading, error, noData } = props;
-    const { useLoader, useErrorAlert, useWarningAlert } = useUIContext();
-    const { loader, setLoading } = useLoader({ isLoading });
-    const { warningAlert, setWarningAlert } = useWarningAlert({});
-    const { errorAlert, setErrorAlert } = useErrorAlert({});
-
-    useEffect(() => {
-        setLoading(isLoading);
-        setErrorAlert(!isLoading && error ? error : undefined);
-        if (error || isLoading || !noData || data) {
-            return;
+    const fetchQuery = async (queryOptions: O) => {
+        try {
+            setLoading(true);
+            const data = await handleQuery(queryOptions);
+            setData(data);
+        } catch (error) {
+            setError(error);
+        } finally {
+            setLoading(false);
         }
-        setWarningAlert(
-            !data
-                || (Array.isArray(data) && !data.length)
-                ? noData
-                : undefined
-        );
-    }, [isLoading, error, data]);
+    };
 
-    return <>
-        {loader}
-        {errorAlert}
-        {warningAlert}
-        {!isLoading && !error && data && children({
-            data: data as DataPropsType<UQR>,
-            setLoading,
-            setErrorAlert,
-            setWarningAlert,
-            ...props
-        } as IQueryWrapperChildrenProps<UQR>)}
-    </>;
+    const refetch = () => {
+        fetchQuery(queryOptions as unknown as O);
+    };
+
+    useDeepCompareEffect(() => {
+        fetchQuery(queryOptions as unknown as O);
+    }, [queryOptions]);
+
+    return {
+        isLoading,
+        data,
+        error,
+        refetch,
+    };
+};
+
+function useDeepCompareMemoize(value: any) {
+    const ref = useRef()
+
+    if (!deepEqual(value, ref.current)) {
+        ref.current = value
+    }
+
+    return ref.current
 }
+
+export function useDeepCompareEffect(callback: any, dependencies: any) {
+    useEffect(callback, useDeepCompareMemoize(dependencies))
+};

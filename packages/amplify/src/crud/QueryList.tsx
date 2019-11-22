@@ -1,53 +1,54 @@
 import { useState, useEffect } from 'react';
-import { IUseQueryListResult, IUseQueryListOptions as ICoreUseQueryListOptions } from '@reactionable/core';
+import { IUseQueryListResult, IUseQueryListOptions as ICoreUseQueryListOptions, useQuery as coreUseQuery } from '@reactionable/core';
 import { GraphQLResult } from '@aws-amplify/api/lib-esm/types';
-import { useQuery, IUseQueryOptions, useDeepCompareEffect } from './Query';
+import { IUseQueryOptions, query, IQueryOptions } from './Query';
+
+export type IQueryListOptions<Variables extends {}> = IQueryOptions<Variables & { nextToken: UndefinedGQLType<string> }> & {
+    queryAll?: boolean;
+};
 
 export type UndefinedGQLType<T> = T | null | undefined;
+
 export type AmplifyListType<Data> = {
-    items: Data[] | null;
+    items: Data[];
     nextToken: UndefinedGQLType<string>;
 };
 
-export function notEmpty<TValue>(
-    value: TValue | null | undefined
-): value is TValue {
-    return value !== null && value !== undefined;
-};
-
-export type IVariablesWithNextToken<Variables extends {}> = Variables & { nextToken: UndefinedGQLType<string> };
-
-function extractGqlList<Data>(result: GraphQLResult): AmplifyListType<Data> | null {
-    if (!result) {
-        throw new Error('No data');
-    }
-
-    let data: any = result;
-    while (data.items === undefined) {
-        data = data[Object.keys(data)[0]];
-        if (!data) {
-            throw new Error('No data found in result');
+export async function queryList<Data extends {}, Variables extends {}>(options: IQueryListOptions<Variables>): Promise<AmplifyListType<Data>> {
+    const items: Array<Data> = [];
+    while (true) {
+        const result = await query<Data, IQueryListOptions<Variables>>({
+            ...options,
+            rawData: true,
+        });
+        const data = extractGqlList<Data>(result);
+        items.push(...data.items);
+        if (
+            !options.queryAll
+            || !data.nextToken
+        ) {
+            return { ...data, items };
         }
+
+        // Set next token variable
+        options.variables = {
+            ...options.variables as Variables,
+            nextToken: data.nextToken,
+        };
     }
-    return data && data.items ? data : null;
 };
 
+export type IUseQueryListOptions<Data extends {}, Variables extends {}> = IUseQueryOptions<Data, Variables> & ICoreUseQueryListOptions<Variables>;
 
-export type IUseQueryListOptions<Variables> = IUseQueryOptions<Variables> & ICoreUseQueryListOptions<Variables>;
-
-export const useQueryList = <Data extends {}, Variables extends {}>({ query, variables, queryAll }: IUseQueryListOptions<Variables>): IUseQueryListResult<Data> => {
+export const useQueryList = <Data extends {}, Variables extends {}>(options: IUseQueryListOptions<Data, Variables>): IUseQueryListResult<Data> => {
     const [token, setToken] = useState<UndefinedGQLType<string>>();
     const [nextToken, setNextToken] = useState<UndefinedGQLType<string>>();
     const [previousToken, setPreviousToken] = useState<UndefinedGQLType<string>>();
     const [list, setList] = useState<Data[]>([]);
 
-    const { data, isLoading, error, refetch } = useQuery<GraphQLResult, IVariablesWithNextToken<Variables>>({
-        query,
-        variables: {
-            ...variables,
-            nextToken: token,
-        } as IVariablesWithNextToken<Variables>,
-        rawData: true,
+    const { refetch, data, ...result } = coreUseQuery<AmplifyListType<Data>, IQueryListOptions<Variables>>({
+        ...options,
+        handleQuery: queryOptions => queryList<Data, Variables>(queryOptions),
     });
 
     const refetchList = () => {
@@ -62,37 +63,33 @@ export const useQueryList = <Data extends {}, Variables extends {}>({ query, var
         setToken(previousToken);
     };
 
-    useDeepCompareEffect(() => {
-        setList([]);
-    }, [variables]);
-
     useEffect(() => {
-        const listData = data ? extractGqlList<Data>(data) : null;
-
-        setList(list => {
-            let updatedItems = list;
-            if (listData) {
-
-                const newList: Data[] | null = listData && listData.items && listData.items.filter(notEmpty);
-                if (newList) {
-                    updatedItems = newList;
-                }
-                return updatedItems;
-            }
-            return [];
-        });
-
-        if (listData) {
-            setNextToken(listData.nextToken);
+        setList(data ? data.items || [] : []);
+        if (data) {
+            setNextToken(data.nextToken);
         }
     }, [data]);
 
     return {
+        ...result,
         data: list,
-        isLoading,
-        error,
         refetch: refetchList,
         next: nextToken ? next : undefined,
         previous: previousToken ? previous : undefined,
     };
+};
+
+function extractGqlList<Data extends {}>(result: GraphQLResult): AmplifyListType<Data> {
+    if (!result) {
+        throw new Error('No data');
+    }
+
+    let data: any = result;
+    while (data.items === undefined) {
+        data = data[Object.keys(data)[0]];
+        if (!data) {
+            throw new Error('No data found in result');
+        }
+    }
+    return data;
 };
