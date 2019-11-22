@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.16.8](https://github.com/reactionable/reactionable/compare/v0.16.7...v0.16.8) (2019-11-22)
+
+
+### Bug Fixes
+
+* **ui-bootstrap:** fix form field typings ([21dfd55](https://github.com/reactionable/reactionable/commit/21dfd55406042f4e6ca8c68361c1837d9be51912))
+
+
+
+
+
 ## [0.16.7](https://github.com/reactionable/reactionable/compare/v0.16.6...v0.16.7) (2019-11-22)
 
 **Note:** Version bump only for package @reactionable/ui-bootstrap
