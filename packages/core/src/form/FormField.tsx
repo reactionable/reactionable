@@ -1,29 +1,32 @@
-import React, { RefObject, ReactElement, PropsWithChildren, useRef, useEffect, InputHTMLAttributes } from 'react';
+import React, { RefObject, ReactElement, HTMLProps, useRef, useEffect } from 'react';
 import { Field, FieldProps, getIn } from 'formik';
 
 export type IFormFieldValue = string;
 
-export type IFormFieldPropsEnhanced<FieldElement extends React.ElementType, Value extends IFormFieldValue> = FieldProps<Value> & {
-    field: {
+
+export type IFormFieldPropsEnhanced<
+    FieldElement extends {},
+    Value extends IFormFieldValue
+    > = FieldProps<Value> & {
         isValid: boolean;
         isInvalid: boolean;
         ref: RefObject<any>;
-    } & InputHTMLAttributes<FieldElement>;
-};
+        error?: string;
+        field: FieldElement;
+    };
 
-export type IRenderFormField<FieldElement extends React.ElementType, Value extends IFormFieldValue> = (
+export type IRenderFormField<FieldElement extends HTMLProps<HTMLInputElement>, Value extends IFormFieldValue> = (
     fieldProps: IFormFieldPropsEnhanced<FieldElement, Value>,
-    error?: string,
 ) => ReactElement;
 
-export type IFormFieldProps<FieldElement extends React.ElementType, Value extends IFormFieldValue> = {
+export type IFormFieldProps<FieldElement extends HTMLProps<HTMLInputElement>, Value extends IFormFieldValue> = FieldElement & {
     children: IRenderFormField<FieldElement, Value>;
-} & InputHTMLAttributes<FieldElement>;
+};
 
 export function FormField<
-    FieldElement extends React.ElementType = 'input',
+    FieldElement extends HTMLProps<HTMLInputElement> = HTMLProps<HTMLInputElement>,
     Value extends IFormFieldValue = IFormFieldValue
->({ children, autoFocus, ...props }: PropsWithChildren<IFormFieldProps<FieldElement, Value>>) {
+>({ children, autoFocus, ...props }: IFormFieldProps<FieldElement, Value>) {
     const inputRef = useRef<any>(null);
 
     useEffect(() => {
@@ -41,18 +44,14 @@ export function FormField<
         const fieldPropsEnhanced: IFormFieldPropsEnhanced<FieldElement, Value> = Object.assign(
             fieldProps,
             {
-                field: Object.assign(
-                    fieldProps.field,
-                    props,
-                    {
-                        isValid,
-                        isInvalid,
-                        ref: inputRef,
-                    }
-                ),
+                error: touch ? error : undefined,
+                isValid,
+                isInvalid,
+                ref: inputRef,
+                field: Object.assign(fieldProps.field, props) as unknown as FieldElement,
             }
         );
-        return children(fieldPropsEnhanced, touch ? error : undefined);
+        return children(fieldPropsEnhanced);
     };
 
     return <Field {...props} children={renderChildren} />;
