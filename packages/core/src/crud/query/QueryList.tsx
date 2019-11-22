@@ -10,6 +10,6 @@ export interface IUseQueryListResult<Data> extends Omit<IUseQueryResult<Data>, '
     previous?: () => void;
 };
 
-export type IUseQueryList<Data extends {}, Options extends IUseQueryListOptions = {}> = (
+export type IUseQueryList<Data extends {}, Options extends IUseQueryListOptions = IUseQueryListOptions> = (
     options?: Options
 ) => IUseQueryListResult<Data>;

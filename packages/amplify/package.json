@@ -36,8 +36,7 @@
   "dependencies": {
     "@reactionable/core": "^0.16.1",
     "aws-amplify": "^1.2.4",
-    "aws-amplify-react": "^2.5.4",
-    "dequal": "^1.0.0"
+    "aws-amplify-react": "^2.5.4"
   },
   "jest": {
     "preset": "ts-jest",

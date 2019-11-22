@@ -1,8 +1,8 @@
-import { useState, useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import deepEqual from 'dequal';
 import { API, graphqlOperation } from 'aws-amplify';
 import { GraphQLResult } from '@aws-amplify/api/lib-esm/types';
-import { IError, IUseQueryOptions as ICoreUseQueryOptions, IUseQueryResult } from '@reactionable/core';
+import { IUseQueryOptions as ICoreUseQueryOptions, useQuery as coreUseQuery, IUseQueryResult, IQueryOptions as ICoreQueryOptions } from '@reactionable/core';
 
 function isGraphQLResult(arg: any): arg is GraphQLResult {
     return arg.data !== undefined;
@@ -27,20 +27,19 @@ export function useDeepCompareEffect(callback: any, dependencies: any) {
     useEffect(callback, useDeepCompareMemoize(dependencies))
 }
 
-type IApiGraphqlOptions<Variables> = {
+export type IQueryOptions<Variables extends {}> = ICoreQueryOptions<Variables> & {
     query: string;
-    variables?: Variables;
     rawData?: boolean;
 };
 
-export async function apiGraphql<Data, Variables>({ query, variables, rawData }: IApiGraphqlOptions<Variables>): Promise<Data>{
-    const result = (await API.graphql(graphqlOperation(query, variables)));
+export async function query<Data extends {}, QO extends IQueryOptions<any>>({ query, variables, rawData }: QO): Promise<Data> {
+    const result = await API.graphql(graphqlOperation(query, variables));
 
     if (!isGraphQLResult(result) || !result.data) {
         throw new Error('No data');
     }
 
-    if(rawData){
+    if (rawData) {
         return result.data as unknown as Data;
     }
 
@@ -52,39 +51,16 @@ export async function apiGraphql<Data, Variables>({ query, variables, rawData }:
     return data;
 };
 
-export const mutation = async <Data extends {}, Variables extends {}>(options: IApiGraphqlOptions<Variables>) => apiGraphql<Data, Variables>(options);
+export const mutation = async <
+    Data extends {},
+    Variables extends {}
+>(options: IQueryOptions<Variables>) => query<Data, IQueryOptions<Variables>>(options);
 
-export type IUseQueryOptions<Variables> = ICoreUseQueryOptions<Variables> & IApiGraphqlOptions<Variables>;
+export type IUseQueryOptions<Data extends {}, Variables extends {}> = ICoreUseQueryOptions<Data, IQueryOptions<Variables>>;
 
-export const useQuery = <Data extends {}, Variables extends {}>({ query, variables }: IUseQueryOptions<Variables>): IUseQueryResult<Data> => {
-    const [isLoading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<IError | undefined>(undefined);
-    const [data, setData] = useState<Data | undefined>(undefined);
-
-    const fetchQuery = async (query: string, variables?: Variables) => {
-        try {
-            setLoading(true);
-            const data = await apiGraphql<Data, Variables>({ query, variables });
-            setData(data);
-        } catch (error) {
-            setError(error);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const refetch = () => {
-        fetchQuery(query, variables);
-    };
-
-    useDeepCompareEffect(() => {
-        fetchQuery(query, variables);
-    }, [query, variables]);
-
-    return {
-        isLoading,
-        data,
-        error,
-        refetch,
-    };
+export const useQuery = <Data extends {}, Variables extends {}>(options: IUseQueryOptions<Data, Variables>): IUseQueryResult<Data> => {
+    return coreUseQuery<Data, IQueryOptions<Variables>>({
+        ...options,
+        handleQuery: (queryOptions: IQueryOptions<Variables>) => query<Data, IQueryOptions<Variables>>(queryOptions),
+    });
 };

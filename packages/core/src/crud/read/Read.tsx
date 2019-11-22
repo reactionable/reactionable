@@ -1,5 +1,6 @@
 import React, { ReactElement } from 'react';
-import { IQueryWrapperProps, QueryWrapper, IUseQueryResult, IQueryWrapperChildrenProps } from '../query/Query';
+import { IUseQueryResult } from '../query/Query';
+import { IQueryWrapperProps, IQueryWrapperChildrenProps, QueryWrapper } from '../query/QueryWrapper';
 
 export type IReadProps<Data> = Omit<IQueryWrapperProps<IUseQueryResult<Data>>, 'children'> & {
     children: (data: Data) => ReactElement;
