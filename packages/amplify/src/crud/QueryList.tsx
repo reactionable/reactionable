@@ -38,7 +38,13 @@ export async function queryList<Data extends {}, Variables extends {}>(options: 
     }
 };
 
-export type IUseQueryListOptions<Data extends {}, Variables extends {}> = IUseQueryOptions<Data, Variables> & ICoreUseQueryListOptions<Variables>;
+export type IUseQueryListOptions<
+    Data extends {},
+    Variables extends {}
+    > = IUseQueryOptions<Data, Variables> & Omit<
+        ICoreUseQueryListOptions<Variables>,
+        'handleQuery'
+    >;
 
 export const useQueryList = <Data extends {}, Variables extends {}>(options: IUseQueryListOptions<Data, Variables>): IUseQueryListResult<Data> => {
     const [token, setToken] = useState<UndefinedGQLType<string>>();

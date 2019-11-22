@@ -56,7 +56,7 @@ export const mutation = async <
     Variables extends {}
 >(options: IQueryOptions<Variables>) => query<Data, IQueryOptions<Variables>>(options);
 
-export type IUseQueryOptions<Data extends {}, Variables extends {}> = ICoreUseQueryOptions<Data, IQueryOptions<Variables>>;
+export type IUseQueryOptions<Data extends {}, Variables extends {}> = Omit<ICoreUseQueryOptions<Data, IQueryOptions<Variables>>, 'handleQuery'>;
 
 export const useQuery = <Data extends {}, Variables extends {}>(options: IUseQueryOptions<Data, Variables>): IUseQueryResult<Data> => {
     return coreUseQuery<Data, IQueryOptions<Variables>>({
