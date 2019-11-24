@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.17.0](https://github.com/reactionable/reactionable/compare/v0.16.8...v0.17.0) (2019-11-24)
+
+
+### Bug Fixes
+
+* fix form field typings ([e6542ed](https://github.com/reactionable/reactionable/commit/e6542edf0399c5c436c98f9abbf2303a7c4ed6f8))
+
+
+### Features
+
+* upgrade dependencies ([8631f1c](https://github.com/reactionable/reactionable/commit/8631f1c7e9e54222a97aa3f18e3843416e96767d))
+
+
+
+
+
 ## [0.16.7](https://github.com/reactionable/reactionable/compare/v0.16.6...v0.16.7) (2019-11-22)
 
 **Note:** Version bump only for package @reactionable/core
