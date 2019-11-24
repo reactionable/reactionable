@@ -1,4 +1,4 @@
-<p>
+<p align="center">
   <a href="/" target="_blank"><img src="https://repository-images.githubusercontent.com/215304880/02830f80-f11d-11e9-893a-20a50b13e17c" width="600"></a>
   <br/><br/>
   <a href="https://reactionable.github.io/reactionable/docs" target="_blank">
