@@ -40,7 +40,7 @@
     "@fortawesome/react-fontawesome": "^0.1.7",
     "@reactionable/core": "^0.16.7",
     "bootstrap": "^4.3.1",
-    "react-bootstrap": "^1.0.0-beta.15"
+    "react-bootstrap": "^1.0.0-beta.16"
   },
   "jest": {
     "preset": "ts-jest",
@@ -49,5 +49,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "bcedc7709779896dda5a3fceafbe242d62067379"
+  "gitHead": "3966d10a2a6a1dedcb2cad674a45ae5cbe96b1c8"
 }
