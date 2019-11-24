@@ -2,48 +2,77 @@ import React, { ReactElement, ElementType } from 'react';
 import FormLabel from 'react-bootstrap/FormLabel';
 import Feedback from 'react-bootstrap/Feedback';
 import FormControl, { FormControlProps } from 'react-bootstrap/FormControl';
+import FormCheck, { FormCheckProps } from 'react-bootstrap/FormCheck';
 import FormGroup from 'react-bootstrap/FormGroup';
 import { ReplaceProps, BsPrefixProps } from 'react-bootstrap/helpers';
 import {
     FormField as CoreFormField,
     IFormFieldProps as ICoreFormFieldProps,
-    IFormFieldPropsEnhanced,
+    IFormFieldPropsEnhanced as ICoreFormFieldPropsEnhanced,
     IFormFieldValue,
-    IRenderFormField
+    IRenderFormField,
+    IFieldInputPropsEnhanced,
 } from '@reactionable/core';
 
+type IFieldElement = 'input' | 'checkbox';
+
 export type IFormFieldProps<
-    FieldElement extends ElementType,
+    FieldElement extends IFieldElement,
     Value extends IFormFieldValue
     > = Omit<ICoreFormFieldProps<FieldElementProps<FieldElement>, Value>, 'children'>
     & {
-        label?: ReactElement;
+        label?: ReactElement | string;
         children?: IRenderFormField<FieldElementProps<FieldElement>, Value>;
     };
 
-type FieldElementProps<FieldElement extends ElementType> =
-    ReplaceProps<FieldElement, BsPrefixProps<FieldElement> & FormControlProps>;
+export type IFormFieldPropsEnhanced<
+    FieldElement extends IFieldElement = 'input',
+    Value extends IFormFieldValue = string
+    > = ICoreFormFieldPropsEnhanced<FieldElementProps<FieldElement>, Value>;
+
+type FieldElementProps<FieldElement extends IFieldElement> = FieldElement extends ElementType ? FieldFormElementProps<FieldElement> : FieldCheckElementProps;
+
+type FieldFormElementProps<FieldElement extends ElementType> = ReplaceProps<FieldElement, BsPrefixProps<FieldElement> & FormControlProps>;
+type FieldCheckElementProps = ReplaceProps<'input', BsPrefixProps<'input'> & FormCheckProps>;
+
+function isFormCheckProps(props: any): props is FieldFormElementProps<any> {
+    return (props as FieldFormElementProps<any>).field.checked !== undefined;
+}
 
 export function FormField<
-    FieldElement extends ElementType = 'input',
+    FieldElement extends IFieldElement = 'input',
     Value extends IFormFieldValue = string
 >({ label, children, ...props }: IFormFieldProps<FieldElement, Value>) {
 
-    const renderChildren = (fieldProps: IFormFieldPropsEnhanced<FieldElementProps<FieldElement>, Value>) => {
-        let fieldContent: ReactElement;
+    const renderChildren = (fieldProps: IFormFieldPropsEnhanced<FieldElement, Value>) => {
+        let fieldContent: ReactElement = <></>;
+
+        if (fieldProps.error) {
+            fieldContent = <Feedback type="invalid">{fieldProps.error}</Feedback>;
+        }
+
         if (children) {
-            fieldContent = children(fieldProps);
+            fieldContent = <>
+                {children(fieldProps as IFormFieldPropsEnhanced<FieldElement, Value>)}
+                {fieldContent}
+            </>;
         }
         else {
-            fieldContent = <FormControl {...fieldProps.field} />;
+            fieldContent = <>
+                {isFormCheckProps(fieldProps)
+                    ? <FormCheck {...fieldProps.field as IFieldInputPropsEnhanced<FieldCheckElementProps, Value>} />
+                    : <FormControl {...fieldProps.field as IFieldInputPropsEnhanced<FieldFormElementProps<any>, Value>} />
+                }
+                {fieldContent}
+            </>;
             if (fieldProps.field.type === 'hidden') {
                 return fieldContent;
             }
         }
+
         return <FormGroup controlId={fieldProps.field.name}>
             {label && <FormLabel>{label}</FormLabel>}
             {fieldContent}
-            {fieldProps.error && <Feedback type="invalid">{fieldProps.error}</Feedback>}
         </FormGroup>;
     };
 
