@@ -3,7 +3,7 @@ import { IUseQueryListResult, IUseQueryListOptions as ICoreUseQueryListOptions, 
 import { GraphQLResult } from '@aws-amplify/api/lib-esm/types';
 import { IUseQueryOptions, query, IQueryOptions } from './Query';
 
-export type IQueryListOptions<Variables extends {}> = IQueryOptions<Variables & { 
+export type IQueryListOptions<Variables extends {}> = IQueryOptions<Variables & {
     nextToken?: UndefinedGQLType<string>;
 }> & {
     queryAll?: boolean;
@@ -18,25 +18,29 @@ export type AmplifyListType<Data> = {
 
 export async function queryList<Data extends {}, Variables extends {}>(options: IQueryListOptions<Variables>): Promise<AmplifyListType<Data>> {
     const items: Array<Data> = [];
+    let tmpOptions = Object.assign({}, options);
     while (true) {
+
         const result = await query<Data, IQueryListOptions<Variables>>({
-            ...options,
+            ...tmpOptions,
             rawData: true,
         });
         const data = extractGqlList<Data>(result);
         items.push(...data.items);
         if (
-            !options.queryAll
+            !tmpOptions.queryAll
             || !data.nextToken
         ) {
             return { ...data, items };
         }
 
         // Set next token variable
-        options.variables = {
-            ...options.variables as Variables,
-            nextToken: data.nextToken,
-        };
+        tmpOptions = Object.assign(tmpOptions, {
+            variables: {
+                ...tmpOptions.variables as Variables,
+                nextToken: data.nextToken,
+            }
+        });
     }
 };
 
