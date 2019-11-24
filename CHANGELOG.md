@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.18.0](https://github.com/reactionable/reactionable/compare/v0.17.0...v0.18.0) (2019-11-24)
+
+
+### Features
+
+* fix form field typings ([37c6e40](https://github.com/reactionable/reactionable/commit/37c6e40799a8d96b0f888229d1815a21073cc683))
+
+
+
+
+
 # [0.17.0](https://github.com/reactionable/reactionable/compare/v0.16.8...v0.17.0) (2019-11-24)
 
 
