@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.18.1](https://github.com/reactionable/reactionable/compare/v0.18.0...v0.18.1) (2019-11-24)
+
+
+### Bug Fixes
+
+* **amplify:** fix queryList queryAll behaviour ([ecba631](https://github.com/reactionable/reactionable/commit/ecba63155db7eab30af03f53f87b0187f78b2e1b))
+
+
+
+
+
 # [0.18.0](https://github.com/reactionable/reactionable/compare/v0.17.0...v0.18.0) (2019-11-24)
 
 
