@@ -14,7 +14,7 @@ import {
     IFieldInputPropsEnhanced,
 } from '@reactionable/core';
 
-type IFieldElement = 'input' | 'checkbox';
+type IFieldElement = 'input' | 'select' | 'textarea' | 'checkbox';
 
 export type IFormFieldProps<
     FieldElement extends IFieldElement,
@@ -22,7 +22,7 @@ export type IFormFieldProps<
     > = Omit<ICoreFormFieldProps<FieldElementProps<FieldElement>, Value>, 'children'>
     & {
         label?: ReactElement | string;
-        children?: IRenderFormField<FieldElementProps<FieldElement>, Value>;
+        children?: IRenderFormField<FieldElementProps<FieldElement>, Value> | ReactElement;
     };
 
 export type IFormFieldPropsEnhanced<
@@ -51,7 +51,7 @@ export function FormField<
             fieldContent = <Feedback type="invalid">{fieldProps.error}</Feedback>;
         }
 
-        if (children) {
+        if ('function' === typeof children) {
             fieldContent = <>
                 {children(fieldProps as IFormFieldPropsEnhanced<FieldElement, Value>)}
                 {fieldContent}
@@ -60,8 +60,8 @@ export function FormField<
         else {
             fieldContent = <>
                 {isFormCheckProps(fieldProps)
-                    ? <FormCheck {...fieldProps.field as IFieldInputPropsEnhanced<FieldCheckElementProps, Value>} />
-                    : <FormControl {...fieldProps.field as IFieldInputPropsEnhanced<FieldFormElementProps<any>, Value>} />
+                    ? <FormCheck {...fieldProps.field as IFieldInputPropsEnhanced<FieldCheckElementProps, Value>} children={children} />
+                    : <FormControl {...fieldProps.field as IFieldInputPropsEnhanced<FieldFormElementProps<any>, Value>} children={children} />
                 }
                 {fieldContent}
             </>;
