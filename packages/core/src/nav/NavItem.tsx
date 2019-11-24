@@ -1,7 +1,5 @@
 import React, { useContext, createContext, useReducer, PropsWithChildren } from 'react';
 import { LinkProps, generatePath as routerGeneratePath } from 'react-router-dom';
-// import { normalize } from 'path';
-
 
 export type INavItem = Omit<LinkProps, 'onSelect'>;
 
@@ -94,12 +92,7 @@ export function createNavItemContextProvider<P extends INavItemsProps<INavItem>>
         }, []);
 
         return <NavItemContext.Provider value={{
-            navItems: navItems.map(navItem => {
-                if (navItem.to && 'string' === typeof navItem.to) {
-                    navItem.to = generatePath(navItem.to);
-                }
-                return navItem;
-            }),
+            navItems,
             setNavItems,
             ...props,
         } as INavItemsContext<NavItemType<P>>}>{children}</NavItemContext.Provider>;
