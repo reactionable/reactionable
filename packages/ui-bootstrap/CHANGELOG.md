@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.20.2](https://github.com/reactionable/reactionable/compare/v0.20.1...v0.20.2) (2019-11-25)
+
+
+### Bug Fixes
+
+* **ui-bootstrap:** render header brand as Link ([afba5d5](https://github.com/reactionable/reactionable/commit/afba5d55c99063c385cf4bac50f2039bd2d25645))
+
+
+
+
+
 ## [0.20.1](https://github.com/reactionable/reactionable/compare/v0.20.0...v0.20.1) (2019-11-25)
 
 
