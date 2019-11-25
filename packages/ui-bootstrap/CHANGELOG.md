@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.19.0](https://github.com/reactionable/reactionable/compare/v0.18.4...v0.19.0) (2019-11-25)
+
+
+### Bug Fixes
+
+* fix Form & Create typings ([2113ad6](https://github.com/reactionable/reactionable/commit/2113ad6266e2b12762d08e47f175134d6b3eb5d3))
+
+
+### Features
+
+* **ui-bootstrap:** header brand accepts Link props ([d3c2f59](https://github.com/reactionable/reactionable/commit/d3c2f598aa11d933d83a8faae35f76006766abac))
+
+
+
+
+
 ## [0.18.4](https://github.com/reactionable/reactionable/compare/v0.18.3...v0.18.4) (2019-11-25)
 
 **Note:** Version bump only for package @reactionable/ui-bootstrap
