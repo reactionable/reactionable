@@ -38,8 +38,9 @@
     "format": "prettier --write \"**/*.ts\"  \"!**/lib/**\"",
     "lint": "eslint \"packages/**/{src,__tests__}/**/*.ts\" -f eslint-formatter-friendly",
     "bootstrap": "lerna bootstrap --hoist",
-    "build": "npm run bootstrap && lerna run build && npm run build:doc",
+    "build": "lerna run build",
     "build:doc": "rimraf -rf docs && typedoc",
+    "build:publish": "npm run bootstrap && npm run build && npm run build:doc",
     "lernaupdate": "lernaupdate",
     "publish": "lerna publish --yes",
     "link": "cd node_modules/react && npm link && cd ../react-dom && npm link && cd ../.. && npm run bootstrap && lerna run link --parallel"
