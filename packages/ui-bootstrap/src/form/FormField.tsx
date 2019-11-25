@@ -14,7 +14,7 @@ import {
     IFieldInputPropsEnhanced,
 } from '@reactionable/core';
 
-type IFieldElement = 'input' | 'select' | 'textarea' | 'checkbox';
+type IFieldElement = 'input' | 'select' | 'textarea' | 'checkbox' | 'radio';
 
 export type IFormFieldProps<
     FieldElement extends IFieldElement,
