@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.20.0](https://github.com/reactionable/reactionable/compare/v0.18.4...v0.20.0) (2019-11-25)
+
+
+### Bug Fixes
+
+* fix Form & Create typings ([2113ad6](https://github.com/reactionable/reactionable/commit/2113ad6266e2b12762d08e47f175134d6b3eb5d3))
+
+
+
+
+
 # [0.19.0](https://github.com/reactionable/reactionable/compare/v0.18.4...v0.19.0) (2019-11-25)
 
 
