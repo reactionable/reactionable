@@ -6,7 +6,7 @@ import { EnhanceChildren, IUseModalFormProps } from '@reactionable/core';
 import { useUIContext } from '../../UI';
 
 export interface ICreateProps<Values, Data> {
-    modal?: Omit<IModalFormProps<Values, Data>, 'form' | 'title'> & IUseModalFormProps<IModalFormProps<Values, Data>>;
+    modal?: Omit<IUseModalFormProps<IModalFormProps<Values, Data>>, 'form' | 'title'>;
     form: IFormProps<Values, Data>;
 };
 

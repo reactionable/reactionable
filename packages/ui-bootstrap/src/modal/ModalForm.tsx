@@ -37,7 +37,7 @@ export function ModalForm<Values, Data>({ submitButton, cancelButton, closeModal
             <BootstrapModal.Body>{children(formikProps)}</BootstrapModal.Body>
             <BootstrapModal.Footer>
                 <Button disabled={formikProps.isSubmitting} onClick={onCancel} variant="secondary">{cancelButton ? cancelButton : t('Cancel')}</Button>
-                <Button disabled={formikProps.isSubmitting} type="submit" variant="primary">{submitButton}</Button>
+                <Button disabled={formikProps.isSubmitting} type="submit" variant="primary">{submitButton ? submitButton : t('Save')}</Button>
             </BootstrapModal.Footer>
         </>;
     };
