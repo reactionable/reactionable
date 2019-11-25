@@ -37,6 +37,6 @@ export const SponsorFooter: FC<{}> = ({ }) => {
     const { t } = useTranslation();
     return <>
         <span title={t('Powered by')}>⚡ by </span>
-        <a href="https://github.com/reactionable/reactionable" title={t('Reactionable - An effective toolkit for React')}>Reactionable</a>
+        <a href="https://github.com/reactionable/reactionable" target="_blank" title={t('Reactionable - An effective toolkit for React')}>Reactionable</a>
     </>;
 };
