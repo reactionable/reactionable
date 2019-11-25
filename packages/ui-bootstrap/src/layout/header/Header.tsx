@@ -1,18 +1,20 @@
-import * as React from 'react';
+import { useIdentityContext, IHeaderProps as ICoreHeaderProps } from '@reactionable/core';
+import React, { PropsWithChildren, ReactElement } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Link, LinkProps } from 'react-router-dom';
 import Navbar, { NavbarProps } from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { useTranslation } from 'react-i18next';
-import { Link, LinkProps } from 'react-router-dom';
-import { useIdentityContext, IHeaderProps as ICoreHeaderProps } from '@reactionable/core';
 import { useModal } from '../../modal/Modal';
 import { INavItem, navItemToComponent } from '../../nav/NavItem';
 
-export type IHeaderProps = Omit<ICoreHeaderProps<INavItem>, 'brand'> & NavbarProps & {
-    brand?: string | LinkProps
-};
+export type IHeaderProps = ICoreHeaderProps<INavItem, NavbarProps>;
 
-export function Header({ brand, navItems = [], ...navbarProps }: React.PropsWithChildren<IHeaderProps>) {
+function isLinkProps(brand: string|ReactElement|LinkProps): brand is LinkProps {
+    return (brand as LinkProps).to !== undefined;
+}
+
+export function Header({ brand, navItems = [], ...navbarProps }: PropsWithChildren<IHeaderProps>) {
     const { t } = useTranslation();
     const { user, logout, component, identityProvider } = useIdentityContext();
     const { modal, openModal, closeModal } = useModal({
@@ -52,13 +54,18 @@ export function Header({ brand, navItems = [], ...navbarProps }: React.PropsWith
         }
     }
 
+    let brandContent: ReactElement = <></>;
+    if (brand) {
+        brandContent = isLinkProps(brand) ? <Navbar.Brand {...brand} /> : <Navbar.Brand as={Link} to="/">{brand}</Navbar.Brand>;
+    }
+
     return <>
         {identityModal}
         <Navbar
             expand="lg"
             {...navbarProps}
         >
-            {brand && <Navbar.Brand as={Link} to="/" {...('string' === typeof brand ? { children: brand } : brand)} />}
+            {brandContent}
             <Navbar.Toggle aria-controls="main-navbar-nav" />
             <Navbar.Collapse id="main-navbar-nav">
                 <Nav className="mr-auto">{navItems?.map(navItemToComponent)}</Nav>
