@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.18.3](https://github.com/reactionable/reactionable/compare/v0.18.2...v0.18.3) (2019-11-25)
+
+
+### Bug Fixes
+
+* **ui-bootstrap:** adapte Create component to modal form props ([cd8fb30](https://github.com/reactionable/reactionable/commit/cd8fb30f76dc6583ff6ae9c30c3841dd68b563b4))
+* **ui-bootstrap:** set sponsor footer link as target blank ([b572d75](https://github.com/reactionable/reactionable/commit/b572d75cc977fbd7174d3a95e2fd8c1c1868841a))
+
+
+
+
+
 ## [0.18.2](https://github.com/reactionable/reactionable/compare/v0.18.1...v0.18.2) (2019-11-25)
 
 **Note:** Version bump only for package @reactionable/ui-bootstrap
