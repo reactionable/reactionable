@@ -1,4 +1,4 @@
-import React, { ReactElement, PropsWithChildren } from 'react';
+import React, { FC, ReactElement, PropsWithChildren } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FormikHelpers, Formik, FormikProps } from 'formik';
 import { object } from 'yup';
@@ -11,16 +11,18 @@ export interface IFormProps<Values, Data> {
     formSchema: object;
     onSubmit: IOnSubmitForm<Values, Data>;
     formValues: Values;
-    formChildren: (formikProps: IFormChildrenProps<Values>) => ReactElement;
+    children: (formikProps: IFormChildrenProps<Values>) => ReactElement;
     successMessage?: string;
     onSuccess?: (result: Data) => void;
 };
+
+export type FormComponent<P extends IFormProps<any, any> = IFormProps<any, any>> = FC<P>;
 
 export function Form<Values, Data>(props: PropsWithChildren<IFormProps<Values, Data>>) {
 
     const { t } = useTranslation();
     const formSchema = object().shape(props.formSchema);
-    const { formChildren, title, onSubmit, formValues, onSuccess, successMessage } = props;
+    const { children, title, onSubmit, formValues, onSuccess, successMessage } = props;
 
     const { useLoader, useSuccessNotification, useErrorAlert } = useUIContext();
     const { loader, setLoading } = useLoader({});
@@ -28,7 +30,7 @@ export function Form<Values, Data>(props: PropsWithChildren<IFormProps<Values, D
     const { successNotification, setSuccessNotification } = useSuccessNotification({ title });
 
     const renderFormChildren = (formikProps: FormikProps<Values>) => {
-        const form = formChildren(formikProps);
+        const form = children(formikProps);
         return <>
             {form}
             {errorAlert}

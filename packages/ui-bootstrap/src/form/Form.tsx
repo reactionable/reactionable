@@ -8,17 +8,17 @@ import {
 
 export type IFormProps<Values, Data> = ICoreFormProps<Values, Data>;
 
-export function Form<Values, Data>({ formChildren, ...props }: PropsWithChildren<IFormProps<Values, Data>>) {
+export function Form<Values, Data>({ children, ...props }: PropsWithChildren<IFormProps<Values, Data>>) {
 
-    const renderFormChildren = (formikProps: IFormChildrenProps<Values>) => {
+    const renderChildren = (formikProps: IFormChildrenProps<Values>) => {
         return <FormikForm className="needs-validation">
-            {formChildren(formikProps)}
+            {children(formikProps)}
         </FormikForm>;
     };
 
     return <CoreForm<Values, Data>
         {...props}
-        formChildren={renderFormChildren}
+        children={renderChildren}
     />;
 }
 
