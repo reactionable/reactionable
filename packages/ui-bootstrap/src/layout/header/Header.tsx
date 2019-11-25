@@ -56,7 +56,7 @@ export function Header({ brand, navItems = [], ...navbarProps }: PropsWithChildr
 
     let brandContent: ReactElement = <></>;
     if (brand) {
-        brandContent = isLinkProps(brand) ? <Navbar.Brand {...brand} /> : <Navbar.Brand as={Link} to="/">{brand}</Navbar.Brand>;
+        brandContent = isLinkProps(brand) ? <Navbar.Brand as={Link} {...brand} /> : <Navbar.Brand as={Link} to="/">{brand}</Navbar.Brand>;
     }
 
     return <>
