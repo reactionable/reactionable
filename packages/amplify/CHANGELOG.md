@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.18.4](https://github.com/reactionable/reactionable/compare/v0.18.3...v0.18.4) (2019-11-25)
+
+**Note:** Version bump only for package @reactionable/amplify
+
+
+
+
+
 ## [0.18.2](https://github.com/reactionable/reactionable/compare/v0.18.1...v0.18.2) (2019-11-25)
 
 **Note:** Version bump only for package @reactionable/amplify
