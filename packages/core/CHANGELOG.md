@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.20.1](https://github.com/reactionable/reactionable/compare/v0.20.0...v0.20.1) (2019-11-25)
+
+
+### Bug Fixes
+
+* fix header props typings ([eae0fb8](https://github.com/reactionable/reactionable/commit/eae0fb8318bf4e8c0c4595a87dad090c76379649))
+
+
+
+
+
 # [0.20.0](https://github.com/reactionable/reactionable/compare/v0.18.4...v0.20.0) (2019-11-25)
 
 
