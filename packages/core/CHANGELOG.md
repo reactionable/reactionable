@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.21.0](https://github.com/reactionable/reactionable/compare/v0.20.2...v0.21.0) (2019-11-30)
+
+
+### Features
+
+* **core:** use formik FastField by default ([2806582](https://github.com/reactionable/reactionable/commit/2806582feac68ed16e6dbd5cf4a74208fa3ea7a6))
+
+
+
+
+
 ## [0.20.1](https://github.com/reactionable/reactionable/compare/v0.20.0...v0.20.1) (2019-11-25)
 
 
