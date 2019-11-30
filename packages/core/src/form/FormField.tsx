@@ -1,5 +1,5 @@
 import React, { RefObject, ReactElement, HTMLProps, useRef, useEffect } from 'react';
-import { Field, FieldProps, getIn, FieldInputProps } from 'formik';
+import { Field, FieldProps, getIn, FieldInputProps, FastField } from 'formik';
 
 export type IFormFieldValue = string;
 export type IFieldElementProps = HTMLProps<HTMLInputElement>;
@@ -33,12 +33,13 @@ export type IFormFieldProps<
     Value extends IFormFieldValue
     > = FieldElementProps & {
         children: IRenderFormField<FieldElementProps, Value>;
+        fastField?: boolean;
     };
 
 export function FormField<
     FieldElementProps extends IFieldElementProps = IFieldElementProps,
     Value extends IFormFieldValue = IFormFieldValue
->({ children, autoFocus, ...props }: IFormFieldProps<FieldElementProps, Value>) {
+>({ children, autoFocus, fastField = true, ...props }: IFormFieldProps<FieldElementProps, Value>) {
     const inputRef = useRef<any>(null);
 
     useEffect(() => {
@@ -71,5 +72,7 @@ export function FormField<
         return children(fieldPropsEnhanced);
     };
 
-    return <Field {...props} children={renderChildren} />;
+    const FieldComponent = fastField ? FastField : Field;
+
+    return <FieldComponent {...props} children={renderChildren} />;
 }
