@@ -60,7 +60,13 @@ export function FormField<
         else {
             fieldContent = <>
                 {isFormCheckProps(fieldProps)
-                    ? <FormCheck {...fieldProps.field as IFieldInputPropsEnhanced<FieldCheckElementProps, Value>} children={children} />
+                    ? <FormCheck
+                        {...{
+                            ...fieldProps.field,
+                            checked: !!fieldProps.field.value
+                        } as IFieldInputPropsEnhanced<FieldCheckElementProps, Value>}
+                        children={children}
+                    />
                     : <FormControl {...fieldProps.field as IFieldInputPropsEnhanced<FieldFormElementProps<any>, Value>} children={children} />
                 }
                 {fieldContent}
