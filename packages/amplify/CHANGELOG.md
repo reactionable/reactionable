@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.21.4](https://github.com/reactionable/reactionable/compare/v0.21.3...v0.21.4) (2019-12-17)
+
+
+### Bug Fixes
+
+* **amplify:** configure translation ([c6ab617](https://github.com/reactionable/reactionable/commit/c6ab6177d0dbbbd3f82eaf231ccf5de40971b820))
+
+
+
+
+
 ## [0.21.2](https://github.com/reactionable/reactionable/compare/v0.21.1...v0.21.2) (2019-12-14)
 
 **Note:** Version bump only for package @reactionable/amplify
