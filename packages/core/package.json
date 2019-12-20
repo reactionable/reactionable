@@ -45,7 +45,7 @@
     "react-helmet": "^5.2.1",
     "react-i18next": "^11.2.1",
     "react-router-dom": "^5.1.2",
-    "yup": "^0.27.0"
+    "yup": "^0.28.0"
   },
   "jest": {
     "preset": "ts-jest",
