@@ -6,6 +6,5 @@
         "**/*.spec.ts"
     ],
     "name": "@reactionable/reactionable",
-    "excludePrivate": true,
-    "skipInternal": true
+    "excludePrivate": true
 }

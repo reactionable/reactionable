@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>State | @reactionable/reactionable</title>
+	<title>IAppProps | @reactionable/reactionable</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,24 +56,38 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_reactionable_ui_bootstrap.html">@reactionable/ui-bootstrap</a>
+					<a href="../modules/_reactionable_core.html">@reactionable/core</a>
 				</li>
 				<li>
-					<a href="_reactionable_ui_bootstrap.state.html">State</a>
+					<a href="_reactionable_core.iappprops-1.html">IAppProps</a>
 				</li>
 			</ul>
-			<h1>Interface State</h1>
+			<h1>Interface IAppProps&lt;ICP, UICP, LP&gt;</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-type-parameters">
+				<h3>Type parameters</h3>
+				<ul class="tsd-type-parameters">
+					<li>
+						<h4>ICP<span class="tsd-signature-symbol">: </span><a href="../modules/_reactionable_core.html#iidentitycontextproviderprops-1" class="tsd-signature-type">IIdentityContextProviderProps</a></h4>
+					</li>
+					<li>
+						<h4>UICP<span class="tsd-signature-symbol">: </span><a href="../modules/_reactionable_core.html#iuicontextproviderprops-1" class="tsd-signature-type">IUIContextProviderProps</a></h4>
+					</li>
+					<li>
+						<h4>LP<span class="tsd-signature-symbol">: </span><a href="../modules/_reactionable_core.html#iuselayoutprops-1" class="tsd-signature-type">IUseLayoutProps</a></h4>
+					</li>
+				</ul>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">State</span>
+						<span class="target">IAppProps</span>
 					</li>
 				</ul>
 			</section>
@@ -81,24 +95,79 @@
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
-						<section class="tsd-index-section tsd-is-not-exported">
+						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_reactionable_ui_bootstrap.state.html#pagecount" class="tsd-kind-icon">page<wbr>Count</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_reactionable_core.iappprops-1.html#homecomponent" class="tsd-kind-icon">Home<wbr>Component</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_reactionable_core.iappprops-1.html#notfoundcomponent" class="tsd-kind-icon">Not<wbr>Found<wbr>Component</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_reactionable_core.iappprops-1.html#identity" class="tsd-kind-icon">identity</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_reactionable_core.iappprops-1.html#layout" class="tsd-kind-icon">layout</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_reactionable_core.iappprops-1.html#routes" class="tsd-kind-icon">routes</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_reactionable_core.iappprops-1.html#ui" class="tsd-kind-icon">ui</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
+			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-					<a name="pagecount" class="tsd-anchor"></a>
-					<h3>page<wbr>Count</h3>
-					<div class="tsd-signature tsd-kind-icon">page<wbr>Count<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="homecomponent" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> Home<wbr>Component</h3>
+					<div class="tsd-signature tsd-kind-icon">Home<wbr>Component<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">LazyExoticComponent</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/reactionable/reactionable/blob/6202f65/packages/ui-bootstrap/src/paginator/Paginator.tsx#L5">packages/ui-bootstrap/src/paginator/Paginator.tsx:5</a></li>
+							<li>Defined in <a href="https://github.com/reactionable/reactionable/blob/6202f65/packages/core/src/app/App.tsx#L15">packages/core/src/app/App.tsx:15</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="notfoundcomponent" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> Not<wbr>Found<wbr>Component</h3>
+					<div class="tsd-signature tsd-kind-icon">Not<wbr>Found<wbr>Component<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">LazyExoticComponent</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/reactionable/reactionable/blob/6202f65/packages/core/src/app/App.tsx#L16">packages/core/src/app/App.tsx:16</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="identity" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> identity</h3>
+					<div class="tsd-signature tsd-kind-icon">identity<span class="tsd-signature-symbol">:</span> <a href="" class="tsd-signature-type">ICP</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/reactionable/reactionable/blob/6202f65/packages/core/src/app/App.tsx#L17">packages/core/src/app/App.tsx:17</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="layout" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> layout</h3>
+					<div class="tsd-signature tsd-kind-icon">layout<span class="tsd-signature-symbol">:</span> <a href="" class="tsd-signature-type">LP</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/reactionable/reactionable/blob/6202f65/packages/core/src/app/App.tsx#L19">packages/core/src/app/App.tsx:19</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="routes" class="tsd-anchor"></a>
+					<h3>routes</h3>
+					<div class="tsd-signature tsd-kind-icon">routes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/_reactionable_core.html#irouteprops-1" class="tsd-signature-type">IRouteProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">LP</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/reactionable/reactionable/blob/6202f65/packages/core/src/app/App.tsx#L14">packages/core/src/app/App.tsx:14</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="ui" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> ui</h3>
+					<div class="tsd-signature tsd-kind-icon">ui<span class="tsd-signature-symbol">:</span> <a href="" class="tsd-signature-type">UICP</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/reactionable/reactionable/blob/6202f65/packages/core/src/app/App.tsx#L18">packages/core/src/app/App.tsx:18</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -113,13 +182,13 @@
 					<li class=" tsd-kind-module">
 						<a href="../modules/_reactionable_amplify.html">@reactionable/amplify</a>
 					</li>
-					<li class=" tsd-kind-module">
+					<li class="current tsd-kind-module">
 						<a href="../modules/_reactionable_core.html">@reactionable/core</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/_reactionable_graphql.html">@reactionable/graphql</a>
 					</li>
-					<li class="current tsd-kind-module">
+					<li class=" tsd-kind-module">
 						<a href="../modules/_reactionable_ui_bootstrap.html">@reactionable/ui-<wbr>bootstrap</a>
 					</li>
 				</ul>
@@ -128,11 +197,26 @@
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-module tsd-is-not-exported">
-						<a href="_reactionable_ui_bootstrap.state.html" class="tsd-kind-icon">State</a>
+					<li class="current tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
+						<a href="_reactionable_core.iappprops-1.html" class="tsd-kind-icon">IApp<wbr>Props</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-								<a href="_reactionable_ui_bootstrap.state.html#pagecount" class="tsd-kind-icon">page<wbr>Count</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_reactionable_core.iappprops-1.html#homecomponent" class="tsd-kind-icon">Home<wbr>Component</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_reactionable_core.iappprops-1.html#notfoundcomponent" class="tsd-kind-icon">Not<wbr>Found<wbr>Component</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_reactionable_core.iappprops-1.html#identity" class="tsd-kind-icon">identity</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_reactionable_core.iappprops-1.html#layout" class="tsd-kind-icon">layout</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_reactionable_core.iappprops-1.html#routes" class="tsd-kind-icon">routes</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_reactionable_core.iappprops-1.html#ui" class="tsd-kind-icon">ui</a>
 							</li>
 						</ul>
 					</li>

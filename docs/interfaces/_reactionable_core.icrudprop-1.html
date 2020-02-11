@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>State | @reactionable/reactionable</title>
+	<title>ICrudProp | @reactionable/reactionable</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,24 +56,35 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_reactionable_ui_bootstrap.html">@reactionable/ui-bootstrap</a>
+					<a href="../modules/_reactionable_core.html">@reactionable/core</a>
 				</li>
 				<li>
-					<a href="_reactionable_ui_bootstrap.state.html">State</a>
+					<a href="_reactionable_core.icrudprop-1.html">ICrudProp</a>
 				</li>
 			</ul>
-			<h1>Interface State</h1>
+			<h1>Interface ICrudProp&lt;Data, LP&gt;</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-type-parameters">
+				<h3>Type parameters</h3>
+				<ul class="tsd-type-parameters">
+					<li>
+						<h4>Data</h4>
+					</li>
+					<li>
+						<h4>LP<span class="tsd-signature-symbol">: </span><a href="../modules/_reactionable_core.html#iuselayoutprops-1" class="tsd-signature-type">IUseLayoutProps</a></h4>
+					</li>
+				</ul>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">State</span>
+						<span class="target">ICrudProp</span>
 					</li>
 				</ul>
 			</section>
@@ -81,24 +92,79 @@
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
-						<section class="tsd-index-section tsd-is-not-exported">
+						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_reactionable_ui_bootstrap.state.html#pagecount" class="tsd-kind-icon">page<wbr>Count</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_reactionable_core.icrudprop-1.html#layout" class="tsd-kind-icon">layout</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_reactionable_core.icrudprop-1.html#listcomponent" class="tsd-kind-icon">list<wbr>Component</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_reactionable_core.icrudprop-1.html#name" class="tsd-kind-icon">name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_reactionable_core.icrudprop-1.html#privateroute" class="tsd-kind-icon">private<wbr>Route</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_reactionable_core.icrudprop-1.html#readcomponent" class="tsd-kind-icon">read<wbr>Component</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_reactionable_core.icrudprop-1.html#routes" class="tsd-kind-icon">routes</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
+			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-					<a name="pagecount" class="tsd-anchor"></a>
-					<h3>page<wbr>Count</h3>
-					<div class="tsd-signature tsd-kind-icon">page<wbr>Count<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="layout" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> layout</h3>
+					<div class="tsd-signature tsd-kind-icon">layout<span class="tsd-signature-symbol">:</span> <a href="" class="tsd-signature-type">LP</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/reactionable/reactionable/blob/6202f65/packages/ui-bootstrap/src/paginator/Paginator.tsx#L5">packages/ui-bootstrap/src/paginator/Paginator.tsx:5</a></li>
+							<li>Defined in <a href="https://github.com/reactionable/reactionable/blob/6202f65/packages/core/src/crud/Crud.tsx#L14">packages/core/src/crud/Crud.tsx:14</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="listcomponent" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> list<wbr>Component</h3>
+					<div class="tsd-signature tsd-kind-icon">list<wbr>Component<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">LazyExoticComponent</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/_reactionable_core.html#listcomponent-1" class="tsd-signature-type">ListComponent</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Data</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/reactionable/reactionable/blob/6202f65/packages/core/src/crud/Crud.tsx#L10">packages/core/src/crud/Crud.tsx:10</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="name" class="tsd-anchor"></a>
+					<h3>name</h3>
+					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/reactionable/reactionable/blob/6202f65/packages/core/src/crud/Crud.tsx#L9">packages/core/src/crud/Crud.tsx:9</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="privateroute" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> private<wbr>Route</h3>
+					<div class="tsd-signature tsd-kind-icon">private<wbr>Route<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/reactionable/reactionable/blob/6202f65/packages/core/src/crud/Crud.tsx#L13">packages/core/src/crud/Crud.tsx:13</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="readcomponent" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> read<wbr>Component</h3>
+					<div class="tsd-signature tsd-kind-icon">read<wbr>Component<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">LazyExoticComponent</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/_reactionable_core.html#readcomponent-1" class="tsd-signature-type">ReadComponent</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Data</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/reactionable/reactionable/blob/6202f65/packages/core/src/crud/Crud.tsx#L11">packages/core/src/crud/Crud.tsx:11</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="routes" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> routes</h3>
+					<div class="tsd-signature tsd-kind-icon">routes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/_reactionable_core.html#irouteprops-1" class="tsd-signature-type">IRouteProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">LP</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/reactionable/reactionable/blob/6202f65/packages/core/src/crud/Crud.tsx#L12">packages/core/src/crud/Crud.tsx:12</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -113,13 +179,13 @@
 					<li class=" tsd-kind-module">
 						<a href="../modules/_reactionable_amplify.html">@reactionable/amplify</a>
 					</li>
-					<li class=" tsd-kind-module">
+					<li class="current tsd-kind-module">
 						<a href="../modules/_reactionable_core.html">@reactionable/core</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/_reactionable_graphql.html">@reactionable/graphql</a>
 					</li>
-					<li class="current tsd-kind-module">
+					<li class=" tsd-kind-module">
 						<a href="../modules/_reactionable_ui_bootstrap.html">@reactionable/ui-<wbr>bootstrap</a>
 					</li>
 				</ul>
@@ -128,11 +194,26 @@
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-module tsd-is-not-exported">
-						<a href="_reactionable_ui_bootstrap.state.html" class="tsd-kind-icon">State</a>
+					<li class="current tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
+						<a href="_reactionable_core.icrudprop-1.html" class="tsd-kind-icon">ICrud<wbr>Prop</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-								<a href="_reactionable_ui_bootstrap.state.html#pagecount" class="tsd-kind-icon">page<wbr>Count</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_reactionable_core.icrudprop-1.html#layout" class="tsd-kind-icon">layout</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_reactionable_core.icrudprop-1.html#listcomponent" class="tsd-kind-icon">list<wbr>Component</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_reactionable_core.icrudprop-1.html#name" class="tsd-kind-icon">name</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_reactionable_core.icrudprop-1.html#privateroute" class="tsd-kind-icon">private<wbr>Route</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_reactionable_core.icrudprop-1.html#readcomponent" class="tsd-kind-icon">read<wbr>Component</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_reactionable_core.icrudprop-1.html#routes" class="tsd-kind-icon">routes</a>
 							</li>
 						</ul>
 					</li>
