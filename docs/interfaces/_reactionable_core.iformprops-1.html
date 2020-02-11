@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Props | @reactionable/reactionable</title>
+	<title>IFormProps | @reactionable/reactionable</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,24 +56,35 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_reactionable_ui_bootstrap.html">@reactionable/ui-bootstrap</a>
+					<a href="../modules/_reactionable_core.html">@reactionable/core</a>
 				</li>
 				<li>
-					<a href="_reactionable_ui_bootstrap.props.html">Props</a>
+					<a href="_reactionable_core.iformprops-1.html">IFormProps</a>
 				</li>
 			</ul>
-			<h1>Interface Props</h1>
+			<h1>Interface IFormProps&lt;Values, Data&gt;</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-type-parameters">
+				<h3>Type parameters</h3>
+				<ul class="tsd-type-parameters">
+					<li>
+						<h4>Values</h4>
+					</li>
+					<li>
+						<h4>Data</h4>
+					</li>
+				</ul>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">Props</span>
+						<span class="target">IFormProps</span>
 					</li>
 				</ul>
 			</section>
@@ -81,100 +92,111 @@
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
-						<section class="tsd-index-section tsd-is-not-exported">
+						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_reactionable_ui_bootstrap.props.html#currentpage" class="tsd-kind-icon">current<wbr>Page</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_reactionable_ui_bootstrap.props.html#marginpagesdisplayed" class="tsd-kind-icon">margin<wbr>Pages<wbr>Displayed</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_reactionable_ui_bootstrap.props.html#onchange" class="tsd-kind-icon">on<wbr>Change</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_reactionable_ui_bootstrap.props.html#pagerangedisplayed" class="tsd-kind-icon">page<wbr>Range<wbr>Displayed</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_reactionable_ui_bootstrap.props.html#perpage" class="tsd-kind-icon">per<wbr>Page</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_reactionable_ui_bootstrap.props.html#totalcount" class="tsd-kind-icon">total<wbr>Count</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_reactionable_core.iformprops-1.html#children" class="tsd-kind-icon">children</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_reactionable_core.iformprops-1.html#formschema" class="tsd-kind-icon">form<wbr>Schema</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_reactionable_core.iformprops-1.html#formvalues" class="tsd-kind-icon">form<wbr>Values</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_reactionable_core.iformprops-1.html#onsubmit" class="tsd-kind-icon">on<wbr>Submit</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_reactionable_core.iformprops-1.html#onsuccess" class="tsd-kind-icon">on<wbr>Success</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_reactionable_core.iformprops-1.html#successmessage" class="tsd-kind-icon">success<wbr>Message</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_reactionable_core.iformprops-1.html#title" class="tsd-kind-icon">title</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
+			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-					<a name="currentpage" class="tsd-anchor"></a>
-					<h3>current<wbr>Page</h3>
-					<div class="tsd-signature tsd-kind-icon">current<wbr>Page<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="children" class="tsd-anchor"></a>
+					<h3>children</h3>
+					<div class="tsd-signature tsd-kind-icon">children<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>formikProps<span class="tsd-signature-symbol">: </span><a href="../modules/_reactionable_core.html#iformchildrenprops-1" class="tsd-signature-type">IFormChildrenProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Values</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">ReactElement</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/reactionable/reactionable/blob/6202f65/packages/ui-bootstrap/src/paginator/Paginator.tsx#L9">packages/ui-bootstrap/src/paginator/Paginator.tsx:9</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-					<a name="marginpagesdisplayed" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> margin<wbr>Pages<wbr>Displayed</h3>
-					<div class="tsd-signature tsd-kind-icon">margin<wbr>Pages<wbr>Displayed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/reactionable/reactionable/blob/6202f65/packages/ui-bootstrap/src/paginator/Paginator.tsx#L13">packages/ui-bootstrap/src/paginator/Paginator.tsx:13</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-					<a name="onchange" class="tsd-anchor"></a>
-					<h3>on<wbr>Change</h3>
-					<div class="tsd-signature tsd-kind-icon">on<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>page<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/reactionable/reactionable/blob/6202f65/packages/ui-bootstrap/src/paginator/Paginator.tsx#L14">packages/ui-bootstrap/src/paginator/Paginator.tsx:14</a></li>
+							<li>Defined in <a href="https://github.com/reactionable/reactionable/blob/6202f65/packages/core/src/form/Form.tsx#L14">packages/core/src/form/Form.tsx:14</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
 						<h4>Type declaration</h4>
 						<ul class="tsd-parameters">
 							<li class="tsd-parameter-siganture">
-								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property tsd-is-not-exported">
-									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>page<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>formikProps<span class="tsd-signature-symbol">: </span><a href="../modules/_reactionable_core.html#iformchildrenprops-1" class="tsd-signature-type">IFormChildrenProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Values</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReactElement</span></li>
 								</ul>
 								<ul class="tsd-descriptions">
 									<li class="tsd-description">
 										<h4 class="tsd-parameters-title">Parameters</h4>
 										<ul class="tsd-parameters">
 											<li>
-												<h5>page: <span class="tsd-signature-type">number</span></h5>
+												<h5>formikProps: <a href="../modules/_reactionable_core.html#iformchildrenprops-1" class="tsd-signature-type">IFormChildrenProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Values</span><span class="tsd-signature-symbol">&gt;</span></h5>
 											</li>
 										</ul>
-										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ReactElement</span></h4>
 									</li>
 								</ul>
 							</li>
 						</ul>
 					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-					<a name="pagerangedisplayed" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> page<wbr>Range<wbr>Displayed</h3>
-					<div class="tsd-signature tsd-kind-icon">page<wbr>Range<wbr>Displayed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="formschema" class="tsd-anchor"></a>
+					<h3>form<wbr>Schema</h3>
+					<div class="tsd-signature tsd-kind-icon">form<wbr>Schema<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/reactionable/reactionable/blob/6202f65/packages/ui-bootstrap/src/paginator/Paginator.tsx#L12">packages/ui-bootstrap/src/paginator/Paginator.tsx:12</a></li>
+							<li>Defined in <a href="https://github.com/reactionable/reactionable/blob/6202f65/packages/core/src/form/Form.tsx#L11">packages/core/src/form/Form.tsx:11</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-					<a name="perpage" class="tsd-anchor"></a>
-					<h3>per<wbr>Page</h3>
-					<div class="tsd-signature tsd-kind-icon">per<wbr>Page<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="formvalues" class="tsd-anchor"></a>
+					<h3>form<wbr>Values</h3>
+					<div class="tsd-signature tsd-kind-icon">form<wbr>Values<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Values</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/reactionable/reactionable/blob/6202f65/packages/ui-bootstrap/src/paginator/Paginator.tsx#L11">packages/ui-bootstrap/src/paginator/Paginator.tsx:11</a></li>
+							<li>Defined in <a href="https://github.com/reactionable/reactionable/blob/6202f65/packages/core/src/form/Form.tsx#L13">packages/core/src/form/Form.tsx:13</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-					<a name="totalcount" class="tsd-anchor"></a>
-					<h3>total<wbr>Count</h3>
-					<div class="tsd-signature tsd-kind-icon">total<wbr>Count<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="onsubmit" class="tsd-anchor"></a>
+					<h3>on<wbr>Submit</h3>
+					<div class="tsd-signature tsd-kind-icon">on<wbr>Submit<span class="tsd-signature-symbol">:</span> <a href="../modules/_reactionable_core.html#ionsubmitform-1" class="tsd-signature-type">IOnSubmitForm</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Values</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Data</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/reactionable/reactionable/blob/6202f65/packages/ui-bootstrap/src/paginator/Paginator.tsx#L10">packages/ui-bootstrap/src/paginator/Paginator.tsx:10</a></li>
+							<li>Defined in <a href="https://github.com/reactionable/reactionable/blob/6202f65/packages/core/src/form/Form.tsx#L12">packages/core/src/form/Form.tsx:12</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="onsuccess" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> on<wbr>Success</h3>
+					<div class="tsd-signature tsd-kind-icon">on<wbr>Success<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>result<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Data</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/reactionable/reactionable/blob/6202f65/packages/core/src/form/Form.tsx#L16">packages/core/src/form/Form.tsx:16</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="successmessage" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> success<wbr>Message</h3>
+					<div class="tsd-signature tsd-kind-icon">success<wbr>Message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/reactionable/reactionable/blob/6202f65/packages/core/src/form/Form.tsx#L15">packages/core/src/form/Form.tsx:15</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="title" class="tsd-anchor"></a>
+					<h3>title</h3>
+					<div class="tsd-signature tsd-kind-icon">title<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/reactionable/reactionable/blob/6202f65/packages/core/src/form/Form.tsx#L10">packages/core/src/form/Form.tsx:10</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -189,13 +211,13 @@
 					<li class=" tsd-kind-module">
 						<a href="../modules/_reactionable_amplify.html">@reactionable/amplify</a>
 					</li>
-					<li class=" tsd-kind-module">
+					<li class="current tsd-kind-module">
 						<a href="../modules/_reactionable_core.html">@reactionable/core</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/_reactionable_graphql.html">@reactionable/graphql</a>
 					</li>
-					<li class="current tsd-kind-module">
+					<li class=" tsd-kind-module">
 						<a href="../modules/_reactionable_ui_bootstrap.html">@reactionable/ui-<wbr>bootstrap</a>
 					</li>
 				</ul>
@@ -204,26 +226,29 @@
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-module tsd-is-not-exported">
-						<a href="_reactionable_ui_bootstrap.props.html" class="tsd-kind-icon">Props</a>
+					<li class="current tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
+						<a href="_reactionable_core.iformprops-1.html" class="tsd-kind-icon">IForm<wbr>Props</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-								<a href="_reactionable_ui_bootstrap.props.html#currentpage" class="tsd-kind-icon">current<wbr>Page</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_reactionable_core.iformprops-1.html#children" class="tsd-kind-icon">children</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-								<a href="_reactionable_ui_bootstrap.props.html#marginpagesdisplayed" class="tsd-kind-icon">margin<wbr>Pages<wbr>Displayed</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_reactionable_core.iformprops-1.html#formschema" class="tsd-kind-icon">form<wbr>Schema</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-								<a href="_reactionable_ui_bootstrap.props.html#onchange" class="tsd-kind-icon">on<wbr>Change</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_reactionable_core.iformprops-1.html#formvalues" class="tsd-kind-icon">form<wbr>Values</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-								<a href="_reactionable_ui_bootstrap.props.html#pagerangedisplayed" class="tsd-kind-icon">page<wbr>Range<wbr>Displayed</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_reactionable_core.iformprops-1.html#onsubmit" class="tsd-kind-icon">on<wbr>Submit</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-								<a href="_reactionable_ui_bootstrap.props.html#perpage" class="tsd-kind-icon">per<wbr>Page</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_reactionable_core.iformprops-1.html#onsuccess" class="tsd-kind-icon">on<wbr>Success</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-								<a href="_reactionable_ui_bootstrap.props.html#totalcount" class="tsd-kind-icon">total<wbr>Count</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_reactionable_core.iformprops-1.html#successmessage" class="tsd-kind-icon">success<wbr>Message</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_reactionable_core.iformprops-1.html#title" class="tsd-kind-icon">title</a>
 							</li>
 						</ul>
 					</li>

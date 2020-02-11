@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>State | @reactionable/reactionable</title>
+	<title>IDeleteProps | @reactionable/reactionable</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,24 +56,32 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_reactionable_ui_bootstrap.html">@reactionable/ui-bootstrap</a>
+					<a href="../modules/_reactionable_core.html">@reactionable/core</a>
 				</li>
 				<li>
-					<a href="_reactionable_ui_bootstrap.state.html">State</a>
+					<a href="_reactionable_core.ideleteprops-1.html">IDeleteProps</a>
 				</li>
 			</ul>
-			<h1>Interface State</h1>
+			<h1>Interface IDeleteProps&lt;Data&gt;</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-type-parameters">
+				<h3>Type parameters</h3>
+				<ul class="tsd-type-parameters">
+					<li>
+						<h4>Data</h4>
+					</li>
+				</ul>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">State</span>
+						<span class="target">IDeleteProps</span>
 					</li>
 				</ul>
 			</section>
@@ -81,24 +89,83 @@
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
-						<section class="tsd-index-section tsd-is-not-exported">
+						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_reactionable_ui_bootstrap.state.html#pagecount" class="tsd-kind-icon">page<wbr>Count</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_reactionable_core.ideleteprops-1.html#confirmationmessage" class="tsd-kind-icon">confirmation<wbr>Message</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_reactionable_core.ideleteprops-1.html#onconfirm" class="tsd-kind-icon">on<wbr>Confirm</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_reactionable_core.ideleteprops-1.html#onsuccess" class="tsd-kind-icon">on<wbr>Success</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_reactionable_core.ideleteprops-1.html#successmessage" class="tsd-kind-icon">success<wbr>Message</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_reactionable_core.ideleteprops-1.html#title" class="tsd-kind-icon">title</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
+			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-					<a name="pagecount" class="tsd-anchor"></a>
-					<h3>page<wbr>Count</h3>
-					<div class="tsd-signature tsd-kind-icon">page<wbr>Count<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="confirmationmessage" class="tsd-anchor"></a>
+					<h3>confirmation<wbr>Message</h3>
+					<div class="tsd-signature tsd-kind-icon">confirmation<wbr>Message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/reactionable/reactionable/blob/6202f65/packages/ui-bootstrap/src/paginator/Paginator.tsx#L5">packages/ui-bootstrap/src/paginator/Paginator.tsx:5</a></li>
+							<li>Defined in <a href="https://github.com/reactionable/reactionable/blob/6202f65/packages/core/src/crud/delete/Delete.tsx#L8">packages/core/src/crud/delete/Delete.tsx:8</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="onconfirm" class="tsd-anchor"></a>
+					<h3>on<wbr>Confirm</h3>
+					<div class="tsd-signature tsd-kind-icon">on<wbr>Confirm<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Data</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/reactionable/reactionable/blob/6202f65/packages/core/src/crud/delete/Delete.tsx#L9">packages/core/src/crud/delete/Delete.tsx:9</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-siganture">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Data</span><span class="tsd-signature-symbol">&gt;</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Data</span><span class="tsd-signature-symbol">&gt;</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="onsuccess" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> on<wbr>Success</h3>
+					<div class="tsd-signature tsd-kind-icon">on<wbr>Success<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>result<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Data</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/reactionable/reactionable/blob/6202f65/packages/core/src/crud/delete/Delete.tsx#L10">packages/core/src/crud/delete/Delete.tsx:10</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="successmessage" class="tsd-anchor"></a>
+					<h3>success<wbr>Message</h3>
+					<div class="tsd-signature tsd-kind-icon">success<wbr>Message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/reactionable/reactionable/blob/6202f65/packages/core/src/crud/delete/Delete.tsx#L7">packages/core/src/crud/delete/Delete.tsx:7</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="title" class="tsd-anchor"></a>
+					<h3>title</h3>
+					<div class="tsd-signature tsd-kind-icon">title<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/reactionable/reactionable/blob/6202f65/packages/core/src/crud/delete/Delete.tsx#L6">packages/core/src/crud/delete/Delete.tsx:6</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -113,13 +180,13 @@
 					<li class=" tsd-kind-module">
 						<a href="../modules/_reactionable_amplify.html">@reactionable/amplify</a>
 					</li>
-					<li class=" tsd-kind-module">
+					<li class="current tsd-kind-module">
 						<a href="../modules/_reactionable_core.html">@reactionable/core</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/_reactionable_graphql.html">@reactionable/graphql</a>
 					</li>
-					<li class="current tsd-kind-module">
+					<li class=" tsd-kind-module">
 						<a href="../modules/_reactionable_ui_bootstrap.html">@reactionable/ui-<wbr>bootstrap</a>
 					</li>
 				</ul>
@@ -128,11 +195,23 @@
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-module tsd-is-not-exported">
-						<a href="_reactionable_ui_bootstrap.state.html" class="tsd-kind-icon">State</a>
+					<li class="current tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
+						<a href="_reactionable_core.ideleteprops-1.html" class="tsd-kind-icon">IDelete<wbr>Props</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-								<a href="_reactionable_ui_bootstrap.state.html#pagecount" class="tsd-kind-icon">page<wbr>Count</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_reactionable_core.ideleteprops-1.html#confirmationmessage" class="tsd-kind-icon">confirmation<wbr>Message</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_reactionable_core.ideleteprops-1.html#onconfirm" class="tsd-kind-icon">on<wbr>Confirm</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_reactionable_core.ideleteprops-1.html#onsuccess" class="tsd-kind-icon">on<wbr>Success</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_reactionable_core.ideleteprops-1.html#successmessage" class="tsd-kind-icon">success<wbr>Message</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_reactionable_core.ideleteprops-1.html#title" class="tsd-kind-icon">title</a>
 							</li>
 						</ul>
 					</li>
