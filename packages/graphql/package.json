@@ -1,6 +1,6 @@
 {
   "name": "@reactionable/graphql",
-  "version": "0.21.3",
+  "version": "0.21.5",
   "description": "Reactionable GraphQL package",
   "private": false,
   "files": [
@@ -38,7 +38,7 @@
   },
   "dependencies": {
     "@apollo/react-hooks": "^3.1.3",
-    "@reactionable/core": "^0.21.2",
+    "@reactionable/core": "^0.21.5",
     "apollo-boost": "^0.4.4",
     "graphql": "^14.5.8",
     "react-apollo": "^3.1.3"
