@@ -49,5 +49,10 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "1301e652cf34ddf0e2e42509f49b059f34c492a9"
+  "gitHead": "1301e652cf34ddf0e2e42509f49b059f34c492a9",
+  "devDependencies": {
+    "barrelsby": "^2.2.0",
+    "rimraf": "^3.0.2",
+    "typescript": "^3.8.3"
+  }
 }

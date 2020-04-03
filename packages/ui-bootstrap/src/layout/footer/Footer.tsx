@@ -1,11 +1,11 @@
-import React, { PropsWithChildren, DetailedHTMLProps, HTMLAttributes, FC } from 'react';
+import React, { PropsWithChildren, FC, HTMLAttributes } from 'react';
 import { useTranslation } from 'react-i18next';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { IFooterProps as ICoreFooterProps } from '@reactionable/core';
 
-export type IFooterProps = ICoreFooterProps & Omit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'onSelect'> & {
+export type IFooterProps = ICoreFooterProps & HTMLAttributes<HTMLElement> & {
     sponsor?: boolean;
 };
 

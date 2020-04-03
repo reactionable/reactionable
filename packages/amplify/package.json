@@ -10,7 +10,7 @@
   "typings": "lib/index.d.ts",
   "scripts": {
     "start": "npm run build:barrelsby && tsc",
-    "test": "jest",
+    "test": "jest --passWithNoTests",
     "build": "npm run build:clean && npm run build:barrelsby && tsc --pretty",
     "build:clean": "rimraf lib",
     "build:barrelsby": "barrelsby -d src --exclude \".+\\.test\\..+\" --delete",
