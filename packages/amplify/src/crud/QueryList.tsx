@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { IUseQueryListResult, IUseQueryListOptions as ICoreUseQueryListOptions, useQuery as coreUseQuery } from '@reactionable/core';
-import { GraphQLResult } from '@aws-amplify/api/lib-esm/types';
+// import { GraphQLResult } from "@aws-amplify/api-graphql" => issue: https://github.com/aws-amplify/amplify-cli/issues/3863
 import { IUseQueryOptions, query, IQueryOptions } from './Query';
 
 export type IQueryListOptions<Variables extends {}> = IQueryOptions<Variables & {
@@ -91,7 +91,7 @@ export const useQueryList = <Data extends {}, Variables extends {}>(options: IUs
     };
 };
 
-function extractGqlList<Data extends {}>(result: GraphQLResult): AmplifyListType<Data> {
+function extractGqlList<Data extends {}>(result: any): AmplifyListType<Data> {
     if (!result) {
         throw new Error('No data');
     }
