@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, LinkProps } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { INavItem as ICoreNavItem } from '@reactionable/core';
 import NavLink, { NavLinkProps } from 'react-bootstrap/NavLink';
@@ -12,5 +12,5 @@ export function navItemToComponent(props: INavItem): ReactElement {
     if (icon) {
         linkProps.children = <><FontAwesomeIcon icon={icon} /> {linkProps.children}</>;
     }
-    return <NavLink as={Link} key={key} {...linkProps} />;
+    return <NavLink as={Link} key={key} {...linkProps as LinkProps<any> & NavLinkProps} />;
 }

@@ -4,5 +4,5 @@
 
 export * from "./create/Create";
 export * from "./delete/Delete";
-export * from "./list/List";
-export * from "./read/Read";
+export * from "./List/List";
+export * from "./Read/Read";
