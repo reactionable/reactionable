@@ -1,14 +1,14 @@
 import { useRef, useEffect } from 'react';
 import deepEqual from 'dequal';
 import { API, graphqlOperation } from 'aws-amplify';
-import { GraphQLResult } from '@aws-amplify/api/lib-esm/types';
+// import { GraphQLResult } from "@aws-amplify/api-graphql" => issue: https://github.com/aws-amplify/amplify-cli/issues/3863
 import { IUseQueryOptions as ICoreUseQueryOptions, useQuery as coreUseQuery, IUseQueryResult, IQueryOptions as ICoreQueryOptions } from '@reactionable/core';
 
-function isGraphQLResult(arg: any): arg is GraphQLResult {
+function isGraphQLResult(arg: any): arg is {data: any} {
     return arg.data !== undefined;
 }
 
-function extractGqlData<Data>(result: GraphQLResult): Data | undefined {
+function extractGqlData<Data>(result: any): Data | undefined {
     const data = result[Object.keys(result)[0]];
     return data as Data | undefined;
 };

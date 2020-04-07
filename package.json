@@ -1,49 +1,30 @@
 {
   "name": "root",
   "private": true,
-  "devDependencies": {
-    "@commitlint/cli": "^8.2.0",
-    "@commitlint/config-conventional": "^8.2.0",
-    "@types/jest": "^25.2.1",
-    "@types/node": "^13.11.0",
+  "engines": {
+    "yarn": ">=1.17.3"
+  },
+  "dependencies": {
     "@types/react": "^16.9.32",
-    "@types/react-dom": "^16.9.6",
-    "@types/react-helmet": "^5.0.14",
-    "@types/react-router-dom": "^5.1.2",
-    "@types/yup": "^0.26.34",
-    "@typescript-eslint/eslint-plugin": "^2.26.0",
-    "@typescript-eslint/parser": "^2.26.0",
-    "barrelsby": "^2.2.0",
-    "cz-conventional-changelog": "^3.0.2",
-    "eslint": "^6.7.0",
-    "eslint-config-prettier": "^6.10.1",
-    "eslint-formatter-friendly": "^7.0.0",
-    "eslint-plugin-prettier": "^3.1.0",
-    "husky": "^4.2.3",
-    "jest": "^25.2.7",
-    "lerna-update-wizard": "^0.17.2",
+    "eslint": "^6.8.0",
+    "lerna": "^3.20.2",
     "prettier": "^2.0.2",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "rimraf": "^3.0.0",
-    "ts-jest": "^25.3.1",
-    "typedoc": "^0.17.3",
-    "typedoc-plugin-lerna-packages": "^0.3.0",
-    "typedoc-plugin-nojekyll": "^1.0.1",
+    "react-i18next": "^11.3.4",
     "typescript": "^3.8.3"
   },
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "start": "npm run bootstrap && lerna run start --parallel",
-    "test": "lerna run test --parallel",
+    "bootstrap": "lerna bootstrap",
+    "start": "lerna run start",
+    "test": "lerna run test",
     "format": "prettier --write \"**/*.ts\"  \"!**/lib/**\"",
     "lint": "eslint \"packages/**/{src,__tests__}/**/*.ts\" -f eslint-formatter-friendly",
-    "bootstrap": "lerna bootstrap --hoist",
     "build": "lerna run build",
     "build:doc": "rimraf -rf docs && typedoc",
-    "build:ci": "npm run bootstrap && npm run build",
-    "lernaupdate": "lernaupdate",
-    "publish": "lerna publish --yes",
-    "link": "cd node_modules/react && npm link && cd ../react-dom && npm link && cd ../.. && npm run bootstrap && lerna run link --parallel"
+    "publish": "lerna publish --yes"
   },
   "prettier": {
     "printWidth": 100,
@@ -60,5 +41,8 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "devDependencies": {
+    "typedoc": "^0.17.4"
   }
 }

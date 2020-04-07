@@ -38,5 +38,11 @@
     "node_modules",
     "**/build/*",
     "**/*.d.ts"
-  ]
+  ],
+  "baseUrl": "./src",
+  "paths": {
+      "@utils/*": [
+        "packages/utils/*"
+      ],
+  },
 }

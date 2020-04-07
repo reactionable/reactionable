@@ -10,7 +10,7 @@ import { INavItem, navItemToComponent } from '../../nav/NavItem';
 
 export type IHeaderProps = ICoreHeaderProps<INavItem, NavbarProps>;
 
-function isLinkProps(brand: string|ReactElement|LinkProps): brand is LinkProps {
+function isLinkProps(brand: string|ReactElement|LinkProps): brand is LinkProps<any> {
     return (brand as LinkProps).to !== undefined;
 }
 

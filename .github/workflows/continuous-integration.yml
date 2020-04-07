@@ -1,9 +1,15 @@
 name: Continuous Integration
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    paths-ignore:
+      - '**.md'
 
 jobs:
-  build:
+  continuous-integration:
 
     runs-on: ubuntu-latest
 
@@ -14,12 +20,17 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Get yarn cache directory path
+      id: yarn-cache-dir-path
+      run: echo "::set-output name=dir::$(yarn cache dir)"
+
     - uses: actions/cache@v1
+      id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
       with:
-        path: ~/.npm
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
         restore-keys: |
-          ${{ runner.os }}-node-
+          ${{ runner.os }}-yarn-
 
     - name: Setup Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
@@ -28,22 +39,22 @@ jobs:
       
     - name: Install Dependencies
       run: |
-        npm install -g lerna
-        npm ci
+        yarn
+        yarn bootstrap
 
     - name: Build
-      run: npm run build:ci
+      run: yarn build
 
     - name: Test
-      run: npm test
+      run: yarn test
       env:
         CI: true
-        
+
     - name: Prepare gh-pages
       run: |
         mkdir build
         cp README.md build/index.md
-        npm run build:doc
+        yarn build:doc
 
     - name: Publish gh-pages
       if: github.event_name == 'push' && github.ref == 'refs/heads/master'
@@ -53,4 +64,3 @@ jobs:
         BASE_BRANCH: master # The branch the action should deploy from.
         BRANCH: gh-pages # The branch the action should deploy to.
         FOLDER: build # The folder the action should deploy.
-

@@ -5,6 +5,7 @@ import {
     IFormProps as ICoreFormProps,
     IOnSubmitForm as ICoreOnSubmitForm,
     IFormChildrenProps,
+    App,
 } from '@reactionable/core';
 
 export type IFormProps<Values, Data> = ICoreFormProps<Values, Data>;
@@ -19,9 +20,9 @@ export function Form<Values, Data>({ children, ...props }: PropsWithChildren<IFo
         </FormikForm>;
     };
 
-    return <CoreForm<Values, Data>
+    return <App routes={[]}><CoreForm<Values, Data>
         {...props}
         children={renderChildren}
-    />;
+    /></App>;
 }
 
