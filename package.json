@@ -45,5 +45,6 @@
   "devDependencies": {
     "typedoc": "^0.17.4",
     "typedoc-plugin-nojekyll": "^1.0.1"
-  }
+  },
+  "publishConfig": { "registry": "https://npm.pkg.github.com/" }
 }
