@@ -5,7 +5,21 @@ on:
     types: [started]
 
 jobs:
+
+  authorize: 
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: octokit/request-action@v2.0.0
+      id: get_latest_release
+      with:
+        route: GET /repos/:repository/collaborators/${{ github.actor }}
+        repository: ${{ github.repository }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   publish:
+    needs: [authorize]
     runs-on: ubuntu-latest
 
     strategy:
@@ -40,7 +54,7 @@ jobs:
       env:       
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+        NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
       run: |
         git config user.email "${{ github.actor }}@users.noreply.github.com"
         git config user.name "${{ github.actor }}"
