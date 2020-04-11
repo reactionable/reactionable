@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.21.10 (2020-04-11)
+
+
+### Bug Fixes
+
+* **publish:** attempt to fix lerna publish ([bd56734](https://github.com/reactionable/reactionable/commit/bd5673415a9ea88291ff75b06420a38af2bdcb45))
+
+
+
+
+
 ## 0.21.9 (2020-04-11)
 
 **Note:** Version bump only for package @reactionable/amplify
