@@ -71,7 +71,6 @@ jobs:
         yarn build:doc
         
     - name: Publish gh-pages
-      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
       uses: JamesIves/github-pages-deploy-action@3.4.6
       with:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
