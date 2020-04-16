@@ -58,13 +58,11 @@ jobs:
       run: yarn build
 
     - name: Commit changes
-      uses: github-actions-x/commit@v2.5
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        push-branch: master
-        commit-message: 'chore: prepare release'
-        rebase: 'true'
-
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git commit -am "chore: prepare release"
+        
     - name: Publish
       env:       
         NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
