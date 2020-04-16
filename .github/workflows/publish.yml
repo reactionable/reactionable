@@ -49,10 +49,6 @@ jobs:
       
     - name: Install Dependencies
       run: yarn
-    
-    - run: |
-        git config user.email "${{ github.actor }}@users.noreply.github.com"
-        git config user.name "${{ github.actor }}"
       
     - name: Build
       run: yarn build
@@ -61,7 +57,7 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git commit -am "chore: prepare release"
+        echo `git add -A && git commit -m "chore: prepare release"`
         
     - name: Publish
       env:       
