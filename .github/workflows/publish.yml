@@ -62,7 +62,7 @@ jobs:
     - name: Publish
       env:       
         NODE_AUTH_TOKEN: ${{secrets.NODE_AUTH_TOKEN}}
-      run: yarn run publish --access public
+      run: yarn run publish
   
     - name: Prepare gh-pages
       run: |
