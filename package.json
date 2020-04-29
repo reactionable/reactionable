@@ -10,7 +10,7 @@
     "lerna": "^3.20.2",
     "prettier": "^2.0.2",
     "react": "^16.13.1",
-    "react-i18next": "^11.3.4",
+    "react-i18next": "^11.4.0",
     "typescript": "^3.8.3"
   },
   "workspaces": [
@@ -43,8 +43,10 @@
     }
   },
   "devDependencies": {
-    "typedoc": "^0.17.4",
+    "typedoc": "^0.17.6",
     "typedoc-plugin-nojekyll": "^1.0.1"
   },
-  "publishConfig": { "registry": "https://npm.pkg.github.com/" }
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  }
 }
