@@ -18,13 +18,39 @@ interface ITestData {
 describe('Create', () => {
   beforeAll(i18nTestInstance);
 
-  it('renders without crashing', () => {
+  it('renders without a modal', () => {
     const div = document.createElement('div');
 
     ReactDOM.render(
       <UIContextProvider {...useUIContextProviderProps()}>
         <Create<ITestValues, ITestData>
-          modal={{}}
+          form={{
+            onSuccess: () => {},
+            title: 'Create a new test',
+            onSubmit: async (values) => values,
+            formValues: {
+              test: '',
+            },
+            formSchema: {
+              test: string().required('Test is required'),
+            },
+            children: () => <FormField name="test" />,
+          }}
+        />
+      </UIContextProvider>,
+      div
+    );
+
+    ReactDOM.unmountComponentAtNode(div);
+  });
+
+  it('renders with a modal', () => {
+    const div = document.createElement('div');
+
+    ReactDOM.render(
+      <UIContextProvider {...useUIContextProviderProps()}>
+        <Create<ITestValues, ITestData>
+          modal
           form={{
             onSuccess: () => {},
             title: 'Create a new test',

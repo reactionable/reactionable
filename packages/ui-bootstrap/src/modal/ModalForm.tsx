@@ -15,10 +15,7 @@ import { IModalProps, useModal } from './Modal';
 export interface IModalFormProps<Values, Data>
   extends ICoreModalFormProps<
     IFormProps<Values, Data> & { title: string | undefined },
-    IModalProps & {
-      submitButton?: string;
-      cancelButton?: string;
-    }
+    IModalProps
   > {}
 
 export type IModalFormComponentProps<Values, Data> = ICoreModalFormComponentProps<
@@ -66,6 +63,6 @@ export function useModalForm<Values = any, Data = any>(props: IUseModalFormProps
   return useCoreModalForm<IUseModalFormProps<Values, Data>>({
     ...props,
     FormComponent: ModalForm,
-    useModal: useModal,
+    useModal,
   });
 }

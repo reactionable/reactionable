@@ -6,6 +6,7 @@ export * from "./UI";
 export * from "./alert/Alert";
 export * from "./alert/ErrorAlert";
 export * from "./alert/WarningAlert";
+export * from "./app/App";
 export * from "./confirmation/Confirmation";
 export * from "./crud/create/Create";
 export * from "./crud/delete/Delete";
