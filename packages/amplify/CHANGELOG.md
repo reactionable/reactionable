@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.21.24 (2020-05-01)
+
+
+### Bug Fixes
+
+* form and list issues ([4463cfa](https://github.com/reactionable/reactionable/commit/4463cfa953a6462b3a68f5dfa743af9f4fa85415))
+
+
+
+
+
 ## 0.21.23 (2020-04-29)
 
 **Note:** Version bump only for package @reactionable/amplify
