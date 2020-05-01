@@ -29,7 +29,7 @@
 
 ## Contributing
 
-👍 If you wish to contribute to __Reactionable__, please read the [CONTRIBUTING.md](CONTRIBUTING.md) file, PRs are Welcome !
+👍 If you wish to contribute to **Reactionable**, please read the [CONTRIBUTING.md](CONTRIBUTING.md) file, PRs are Welcome !
 
 ## Install
 
@@ -37,36 +37,42 @@
 npm install @reactionable/core
 ```
 
+Or with `yarn`
+
+```sh
+yarn add @reactionable/core
+```
+
 ## Dev
 
 ### Use reactionable in local
 
-1. In __reactionable__ dir
+1. In **reactionable** dir
+
 ```bash
-npm run link;
-npm start
+yarn run link;
+yarn start
 ```
 
-2. In react  app dir
+2. In react app dir
 
 ```bash
-npm link react react-dom @reactionable/core @reactionable/ui-bootstrap @reactionable/amplify;
-npm start;
+yarn link react react-dom aws-amplify @reactionable/core @reactionable/ui-bootstrap @reactionable/amplify;
+yarn start;
 ```
 
 ### Run tests
 
 ```sh
-npm run test
+yarn test
 ```
-
 
 ## Author
 
 👤 **Neilime**
 
-* Website: https://github.com/sponsors/neilime
-* Github: [@neilime](https://github.com/neilime)
+- Website: https://github.com/sponsors/neilime
+- Github: [@neilime](https://github.com/neilime)
 
 ## 📝 License
 

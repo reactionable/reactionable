@@ -18,13 +18,15 @@
   ],
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "start": "lerna run start",
+    "start": "lerna run start --parallel",
     "test": "lerna run test",
     "format": "prettier --write \"**/*.ts\"  \"!**/lib/**\"",
     "lint": "eslint \"packages/**/{src,__tests__}/**/*.ts\" -f eslint-formatter-friendly",
     "build": "lerna run build",
     "build:doc": "rimraf -rf docs && typedoc",
-    "publish": "lerna publish --yes"
+    "publish": "lerna publish --yes",
+    "link": "for package in react react-dom react-router-dom aws-amplify; do cd node_modules/$package && yarn link && cd ../..; done && lerna exec yarn link",
+    "unlink": "for package in react react-dom react-router-dom aws-amplify; do cd node_modules/$package && yarn unlink && cd ../..; done && lerna exec yarn unlink"
   },
   "prettier": {
     "printWidth": 100,

@@ -8,7 +8,7 @@
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
-    "start": "yarn build:barrelsby && tsc",
+    "start": "yarn build:barrelsby && tsc --watch",
     "test": "jest --passWithNoTests",
     "build": "yarn build:clean && yarn build:barrelsby && tsc --pretty",
     "build:clean": "rimraf lib",
@@ -32,15 +32,15 @@
   "homepage": "https://github.com/reactionable/reactionable#readme",
   "dependencies": {
     "@reactionable/core": "^0.21.23",
-    "aws-amplify": "^3.0.9",
-    "aws-amplify-react": "^4.1.8",
+    "aws-amplify": "^3.0.10",
+    "aws-amplify-react": "^4.1.9",
     "dequal": "^1.0.0"
   },
   "devDependencies": {
     "@types/jest": "^25.2.1",
     "@types/react": "^16.9.32",
     "barrelsby": "^2.2.0",
-    "jest": "^25.5.1",
+    "jest": "^25.5.3",
     "react": "^16.13.1",
     "react-i18next": "^11.4.0",
     "rimraf": "^3.0.2",
