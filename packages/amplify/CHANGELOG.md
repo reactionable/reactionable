@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.22.0 (2020-05-03)
+
+
+### Features
+
+* add i18n initialization ([1a7caf9](https://github.com/reactionable/reactionable/commit/1a7caf960dc9966688999a8b9b3e9ff193a9a263))
+
+
+
+
+
 ## 0.21.24 (2020-05-01)
 
 
