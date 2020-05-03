@@ -17,6 +17,7 @@ export * from "./error/IError";
 export * from "./form/Form";
 export * from "./form/FormField";
 export * from "./frame/Frame";
+export * from "./i18n/I18n";
 export * from "./identity/Identity";
 export * from "./nav/NavItem";
 export * from "./nav/route/LazyRoute";

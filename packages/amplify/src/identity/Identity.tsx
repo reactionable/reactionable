@@ -1,7 +1,6 @@
-import React, { useEffect, PropsWithChildren } from 'react';
-import { Auth, I18n } from 'aws-amplify';
+import React, { PropsWithChildren } from 'react';
+import { Auth } from 'aws-amplify';
 import { UsernameAttributes } from 'aws-amplify-react/lib-esm/Auth/common/types';
-// import { CognitoUser } from '@aws-amplify/auth';
 import {
   Authenticator,
   SignIn,
@@ -39,14 +38,7 @@ function IdentityComponent({
   setUser,
   ...props
 }: PropsWithChildren<IIdentityComponentProps<IUser> & IAuthenticatorProps>) {
-  const { t, i18n } = useTranslation();
-  const { language } = i18n;
-
-  useEffect(() => {
-    if (language && language.length) {
-      I18n.setLanguage(language.split('-').shift());
-    }
-  }, [language]);
+  const { t } = useTranslation();
 
   const authenticatorProps = Object.assign(
     {
@@ -56,14 +48,14 @@ function IdentityComponent({
         hideAllDefaults: true,
         signUpFields: [
           {
-            label: t('Email'),
+            label: 'Email',
             key: 'email',
             required: true,
             displayOrder: 1,
             type: 'string',
           },
           {
-            label: t('Password'),
+            label: 'Password',
             key: 'password',
             required: true,
             displayOrder: 2,

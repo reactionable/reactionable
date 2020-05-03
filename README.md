@@ -57,8 +57,14 @@ yarn start
 2. In react app dir
 
 ```bash
-yarn link react react-dom aws-amplify @reactionable/core @reactionable/ui-bootstrap @reactionable/amplify;
+for package in react react-dom aws-amplify @reactionable/core @reactionable/ui-bootstrap @reactionable/amplify; do yarn link $package; done;
 yarn start;
+```
+
+3. Remove links when finish
+
+```bash
+for package in react react-dom aws-amplify @reactionable/core @reactionable/ui-bootstrap @reactionable/amplify; do yarn unlink $package; done;
 ```
 
 ### Run tests
