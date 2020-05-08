@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.22.2 (2020-05-08)
+
+
+### Bug Fixes
+
+* **ui-bootstrap:** revert setSidebarNavItems fix ([dd9e2f7](https://github.com/reactionable/reactionable/commit/dd9e2f76e39356dee4b3230c76399a89c0c2a5d7))
+
+
+
+
+
 ## 0.22.1 (2020-05-08)
 
 
