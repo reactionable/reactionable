@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useState, useEffect } from 'react';
+import React, { PropsWithChildren, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Collapse from 'react-bootstrap/Collapse';
 import Container from 'react-bootstrap/Container';
@@ -77,7 +77,5 @@ export function Sidebar({ children }: PropsWithChildren<ISidebarProps>) {
 }
 
 export function setSidebarNavItems(navItems: Array<INavItem>) {
-  useEffect(() => {
-    useSidebarContext().setNavItems(navItems);
-  }, [navItems]);
+  useSidebarContext().setNavItems(navItems);
 }
