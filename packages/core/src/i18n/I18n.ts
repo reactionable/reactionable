@@ -12,8 +12,8 @@ export async function initializeI18n(options: InitOptions) {
     // init i18next
     // for all options read: https://www.i18next.com/overview/configuration-options
     .init({
-      fallbackLng: 'en',
-      debug: true,
+      fallbackLng: options.resources ? Object.keys(options.resources)[0] : undefined,
+      debug: process.env.NODE_ENV === 'development',
       interpolation: { escapeValue: false },
       ...options,
     });

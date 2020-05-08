@@ -24,7 +24,7 @@ export * from "./nav/route/LazyRoute";
 export * from "./nav/route/NotFound";
 export * from "./nav/route/PrivateRoute";
 export * from "./nav/route/Route";
-export * from "./tests/i18n";
+export * from "./tests/I18n";
 export * from "./ui/UI";
 export * from "./ui/alert/Alert";
 export * from "./ui/alert/ErrorAlert";

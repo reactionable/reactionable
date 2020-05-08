@@ -4,7 +4,7 @@ import { FormikHelpers } from 'formik';
 import { string } from 'yup';
 import { FormField } from '../form/FormField';
 import { ModalForm } from './ModalForm';
-import { i18nTestInstance } from '@reactionable/core/lib/tests/i18n';
+import { i18nTestInstance } from '@reactionable/core/lib/tests/I18n';
 import { UIContextProvider } from '@reactionable/core';
 import { useUIContextProviderProps } from '../UI';
 

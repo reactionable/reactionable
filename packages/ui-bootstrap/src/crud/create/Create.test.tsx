@@ -5,7 +5,7 @@ import { FormField } from '../../form/FormField';
 import { Create } from '../../crud/create/Create';
 import { UIContextProvider } from '@reactionable/core';
 import { useUIContextProviderProps } from '../../UI';
-import { i18nTestInstance } from '@reactionable/core/lib/tests/i18n';
+import { i18nTestInstance } from '@reactionable/core/lib/tests/I18n';
 
 interface ITestValues {
   test: string;

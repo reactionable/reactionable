@@ -13,7 +13,7 @@ function isGraphQLResult(arg: any): arg is GraphQLResult {
   return arg.data !== undefined;
 }
 
-function extractGqlData<Data>(result: any): Data | undefined {
+function extractData<Data>(result: any): Data | undefined {
   const data = result[Object.keys(result)[0]];
   return data as Data | undefined;
 }
@@ -52,7 +52,7 @@ export async function query<Data extends {}, QO extends IQueryOptions<any>>({
     return (result.data as unknown) as Data;
   }
 
-  const data = extractGqlData<Data>(result.data);
+  const data = extractData<Data>(result.data);
   if (!data) {
     throw new Error('No data');
   }

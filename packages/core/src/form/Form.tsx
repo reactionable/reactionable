@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, PropsWithChildren } from 'react';
+import React, { FC, ReactElement, PropsWithChildren, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FormikHelpers, Formik, FormikProps } from 'formik';
 import { object } from 'yup';
@@ -22,14 +22,26 @@ export interface IFormProps<Values, Data> {
 export type FormComponent<P extends IFormProps<any, any> = IFormProps<any, any>> = FC<P>;
 
 export function Form<Values, Data>(props: PropsWithChildren<IFormProps<Values, Data>>) {
-  const { t } = useTranslation();
-  const formSchema = object().shape(props.formSchema);
   const { children, title, onSubmit, formValues, onSuccess, successMessage } = props;
+  const formSchema = object().shape(props.formSchema);
 
+  const { t } = useTranslation();
   const { useLoader, useSuccessNotification, useErrorAlert } = useUIContext();
   const { loader, setLoading } = useLoader({});
   const { errorAlert, setErrorAlert } = useErrorAlert({});
   const { successNotification, setSuccessNotification } = useSuccessNotification({ title });
+  const [success, setSuccess] = useState<Data>();
+
+  useEffect(() => {
+    if (success) {
+      if (successMessage) {
+        setSuccessNotification(t(successMessage, success));
+      }
+      if (onSuccess) {
+        onSuccess(success);
+      }
+    }
+  }, [success, onSuccess]);
 
   const renderFormChildren = (formikProps: FormikProps<Values>) => {
     const form = children(formikProps);
@@ -43,24 +55,20 @@ export function Form<Values, Data>(props: PropsWithChildren<IFormProps<Values, D
     );
   };
 
-  const onSubmitCallback = (values: Values, formikHelpers: FormikHelpers<Values>) => {
+  const onSubmitCallback = async (values: Values, formikHelpers: FormikHelpers<Values>) => {
     setLoading(true);
-    onSubmit(values, formikHelpers)
-      .then((data: Data) => {
-        if (successMessage) {
-          setSuccessNotification(t(successMessage, data));
-        }
-        if (onSuccess) {
-          onSuccess(data);
-        }
-      })
-      .catch((error) => {
-        setErrorAlert(error);
-      })
-      .finally(() => {
-        setLoading(false);
-        formikHelpers.setSubmitting(false);
-      });
+
+    try {
+      const data = await onSubmit(values, formikHelpers);
+      if (onSuccess) {
+        setSuccess(data);
+      }
+    } catch (error) {
+      setErrorAlert(error);
+    }
+
+    setLoading(false);
+    formikHelpers.setSubmitting(false);
   };
 
   return (

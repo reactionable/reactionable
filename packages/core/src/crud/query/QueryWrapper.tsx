@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 import { IUseLoaderResult } from '../../ui/loader/Loader';
 import { IUseWarningAlertResult } from '../../ui/alert/WarningAlert';
 import { IUseErrorAlertResult } from '../../ui/alert/ErrorAlert';
@@ -25,6 +25,18 @@ type DataPropsType<UQR extends IUseQueryResult<any>> = UQR extends IUseQueryResu
     : never
   : never;
 
+function checkHasData(data: any) {
+  if (Array.isArray(data)) {
+    return data.length > 0;
+  }
+
+  if (typeof data === 'object') {
+    return Object.keys(data).length > 0;
+  }
+
+  return data !== null && data != undefined;
+}
+
 export function QueryWrapper<
   Data extends {},
   UQR extends IUseQueryResult<Data> = IUseQueryResult<Data>
@@ -34,14 +46,16 @@ export function QueryWrapper<
   const { loader, setLoading } = useLoader({ isLoading });
   const { warningAlert, setWarningAlert } = useWarningAlert({});
   const { errorAlert, setErrorAlert } = useErrorAlert({});
-
-  const checkHasData = (data: UQR['data']) => data && (!Array.isArray(data) || data.length > 0);
+  const [childrenData, setData] = useState<DataPropsType<UQR>>();
 
   useEffect(() => {
     setLoading(isLoading);
     setErrorAlert(!isLoading && error ? error : undefined);
 
     const hasData = checkHasData(data);
+
+    setData(!isLoading && !error && hasData ? (data as DataPropsType<UQR>) : undefined);
+
     if (error || isLoading || !noData || hasData) {
       return;
     }
@@ -49,18 +63,14 @@ export function QueryWrapper<
     setWarningAlert(hasData ? undefined : noData);
   }, [isLoading, error, data]);
 
-  const hasData = checkHasData(data);
-
   return (
     <>
       {loader}
       {errorAlert}
       {warningAlert}
-      {!isLoading &&
-        !error &&
-        hasData &&
+      {childrenData &&
         children({
-          data: data as DataPropsType<UQR>,
+          data: childrenData,
           setLoading,
           setErrorAlert,
           setWarningAlert,
