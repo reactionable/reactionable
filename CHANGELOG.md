@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.22.1 (2020-05-08)
+
+
+### Bug Fixes
+
+* add useEffect when needed ([ef70e61](https://github.com/reactionable/reactionable/commit/ef70e611c2b319695473ffc61a60f70f7357fdb3))
+
+
+
+
+
 # 0.22.0 (2020-05-03)
 
 
