@@ -68,7 +68,7 @@ jobs:
           mkdir build
           cp README.md build/index.md
           yarn build:doc
-          yarnn build:storybook
+          yarn build:storybook
 
       - name: Publish gh-pages
         uses: JamesIves/github-pages-deploy-action@3.4.6
