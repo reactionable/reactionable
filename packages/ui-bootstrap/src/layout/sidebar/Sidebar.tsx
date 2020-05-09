@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useState } from 'react';
+import React, { PropsWithChildren, useState, useEffect, FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import Collapse from 'react-bootstrap/Collapse';
 import Container from 'react-bootstrap/Container';
@@ -22,60 +22,67 @@ export const {
   NavItemContextConsumer: SidebarContextConsumer,
 } = contextProvider;
 
-export function Sidebar({ children }: PropsWithChildren<ISidebarProps>) {
+const SidebarItems: FC = ({ children }) => {
   const { t } = useTranslation();
   const [open, setOpen] = useState(true);
+  const { navItems } = useSidebarContext();
 
   return (
-    <SidebarContextProvider>
-      <Container
-        fluid
-        className="sidebar-container"
-        style={{
-          paddingLeft: 0,
-          paddingRight: 0,
-        }}
-      >
-        <Row>
-          <SidebarContextConsumer>
-            {(context: ISidebarContext) => (
-              <>
-                <Collapse in={open}>
-                  <Col
-                    xs="auto"
-                    className="sidebar-left-side"
-                    style={{
-                      borderRight: 'solid 1px',
-                      height: '93vh',
-                      paddingTop: '1vh',
-                      paddingLeft: 0,
-                      paddingRight: 0,
-                    }}
-                  >
-                    {!open && (
-                      <Button
-                        onClick={() => setOpen(!open)}
-                        aria-controls={t('Collapse sidebar')}
-                        aria-expanded={open}
-                      >
-                        {t('Collapse sidebar')}
-                      </Button>
-                    )}
-                    {open && context.navItems?.map(navItemToComponent)}
-                  </Col>
-                </Collapse>
-                <Col className="sidebar-right-side" style={{ height: '89vh', overflow: 'auto' }}>
-                  {children}
-                </Col>
-              </>
-            )}
-          </SidebarContextConsumer>
-        </Row>
-      </Container>
-    </SidebarContextProvider>
+    <>
+      <Collapse in={open}>
+        <Col
+          xs="auto"
+          className="sidebar-left-side"
+          style={{
+            borderRight: 'solid 1px',
+            height: '93vh',
+            paddingTop: '1vh',
+            paddingLeft: 0,
+            paddingRight: 0,
+          }}
+        >
+          {!open && (
+            <Button
+              onClick={() => setOpen(!open)}
+              aria-controls={t('Collapse sidebar')}
+              aria-expanded={open}
+            >
+              {t('Collapse sidebar')}
+            </Button>
+          )}
+          {navItems?.map(navItemToComponent)}
+        </Col>
+      </Collapse>
+      <Col className="sidebar-right-side" style={{ height: '89vh', overflow: 'auto' }}>
+        {children}
+      </Col>
+    </>
+  );
+};
+
+export function Sidebar({ children }: PropsWithChildren<ISidebarProps>) {
+  return (
+    <Container
+      fluid
+      className="sidebar-container"
+      style={{
+        paddingLeft: 0,
+        paddingRight: 0,
+      }}
+    >
+      <Row>
+        <SidebarContextProvider>
+          <SidebarItems children={children} />
+        </SidebarContextProvider>
+      </Row>
+    </Container>
   );
 }
 
 export function setSidebarNavItems(navItems: Array<INavItem>) {
-  useSidebarContext().setNavItems(navItems);
+  const { setNavItems } = useSidebarContext();
+
+  useEffect(() => {
+    setNavItems(navItems);
+  }, navItems);
 }

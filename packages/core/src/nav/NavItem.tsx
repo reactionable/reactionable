@@ -11,6 +11,7 @@ import {
   NavLinkProps,
   Link,
 } from 'react-router-dom';
+import isEqual from 'react-fast-compare';
 
 export type INavItem = Omit<LinkProps, 'onSelect'>;
 
@@ -79,36 +80,13 @@ export function createNavItemContextProvider<P extends INavItemsProps<INavItem>>
 
   const NavItemContextProvider = ({ children, ...props }: PropsWithChildren<P>) => {
     const [navItems, setNavItems] = useReducer<
-      (prevState: Array<NavItemType<P>>, state: Array<NavItemType<P>>) => Array<NavItemType<P>>
+      (
+        prevState: Array<NavItemType<P>> | undefined,
+        state: Array<NavItemType<P>> | undefined
+      ) => Array<NavItemType<P>> | undefined
     >((prevState, state) => {
-      return state.every((navItem: NavItemType<P>, index: number) => {
-        if (!prevState[index]) {
-          return false;
-        }
-        const { children: navItemChildren, ...navItemProps } = navItem;
-        const { children: prevNavItemChildren, ...prevNavItemProps } = navItem;
-
-        if (JSON.stringify(navItemProps) !== JSON.stringify(prevNavItemProps)) {
-          return false;
-        }
-
-        if (!navItemChildren || !prevNavItemChildren) {
-          return true;
-        }
-
-        if (typeof navItemChildren !== typeof prevNavItemChildren) {
-          return false;
-        }
-
-        if (/^[sbn]/.test(typeof navItemChildren)) {
-          return navItemChildren === prevNavItemChildren;
-        }
-
-        return true;
-      })
-        ? prevState
-        : state;
-    }, []);
+      return isEqual(prevState, state) ? prevState : state;
+    }, undefined);
 
     return (
       <NavItemContext.Provider
