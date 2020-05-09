@@ -8,7 +8,11 @@ import './config';
 
 export default {
   title: 'UI Bootstrap/Alert',
-  parameters: { info: { inline: true }, component:Alert, subComponents: [ErrorAlert,WarningAlert] },
+  parameters: {
+    info: { inline: true },
+    component: Alert,
+    subComponents: [ErrorAlert, WarningAlert],
+  },
   decorators: [withKnobs],
 };
 

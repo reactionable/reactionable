@@ -5,74 +5,73 @@ export type IFormFieldValue = string;
 export type IFieldElementProps = HTMLProps<HTMLInputElement>;
 
 export type IFieldInputPropsEnhanced<
-    FieldElementProps extends IFieldElementProps,
-    Value extends IFormFieldValue
-    > = FieldElementProps & FieldInputProps<Value> & {
-        isValid: boolean;
-        isInvalid: boolean;
-        ref: RefObject<any>;
-    };
+  FieldElementProps extends IFieldElementProps,
+  Value extends IFormFieldValue
+> = FieldElementProps &
+  FieldInputProps<Value> & {
+    isValid: boolean;
+    isInvalid: boolean;
+    ref: RefObject<any>;
+  };
 
 export type IFormFieldPropsEnhanced<
-    FieldElementProps extends IFieldElementProps,
-    Value extends IFormFieldValue
-    > = FieldProps<Value> & {
-        error?: string;
-        field: IFieldInputPropsEnhanced<FieldElementProps, Value>;
-    };
+  FieldElementProps extends IFieldElementProps,
+  Value extends IFormFieldValue
+> = FieldProps<Value> & {
+  error?: string;
+  field: IFieldInputPropsEnhanced<FieldElementProps, Value>;
+};
 
 export type IRenderFormField<
-    FieldElementProps extends IFieldElementProps,
-    Value extends IFormFieldValue
-    > = (
-        fieldProps: IFormFieldPropsEnhanced<FieldElementProps, Value>,
-    ) => ReactElement;
+  FieldElementProps extends IFieldElementProps,
+  Value extends IFormFieldValue
+> = (fieldProps: IFormFieldPropsEnhanced<FieldElementProps, Value>) => ReactElement;
 
 export type IFormFieldProps<
-    FieldElementProps extends IFieldElementProps,
-    Value extends IFormFieldValue
-    > = FieldElementProps & {
-        children: IRenderFormField<FieldElementProps, Value>;
-        fastField?: boolean;
-    };
+  FieldElementProps extends IFieldElementProps,
+  Value extends IFormFieldValue
+> = FieldElementProps & {
+  children: IRenderFormField<FieldElementProps, Value>;
+  fastField?: boolean;
+};
 
 export function FormField<
-    FieldElementProps extends IFieldElementProps = IFieldElementProps,
-    Value extends IFormFieldValue = IFormFieldValue
+  FieldElementProps extends IFieldElementProps = IFieldElementProps,
+  Value extends IFormFieldValue = IFormFieldValue
 >({ children, autoFocus, fastField = true, ...props }: IFormFieldProps<FieldElementProps, Value>) {
-    const inputRef = useRef<any>(null);
+  const inputRef = useRef<any>(null);
 
-    useEffect(() => {
-        if (autoFocus === true && inputRef && inputRef.current) {
-            inputRef.current.focus();
-        }
-    }, [inputRef, autoFocus]);
+  useEffect(() => {
+    if (autoFocus === true && inputRef && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [inputRef, autoFocus]);
 
-    const renderChildren = ({ field, ...fieldProps }: FieldProps<Value>) => {
-        const touch = getIn(fieldProps.form.touched, field.name);
-        const error = getIn(fieldProps.form.errors, field.name);
-        const isValid = !!(touch && !error);
-        const isInvalid = !!(error);
+  const renderChildren = ({ field, ...fieldProps }: FieldProps<Value>) => {
+    const touch = getIn(fieldProps.form.touched, field.name);
+    const error = getIn(fieldProps.form.errors, field.name);
+    const isValid = !!(touch && !error);
+    const isInvalid = !!error;
 
-        const fieldInputPropsEnhanced: IFieldInputPropsEnhanced<FieldElementProps, Value> = {
-            ...props,
-            ...field,
-            ...{
-                isValid,
-                isInvalid,
-                ref: inputRef,
-            },
-        } as unknown as IFieldInputPropsEnhanced<FieldElementProps, Value>;
+    const fieldInputPropsEnhanced: IFieldInputPropsEnhanced<FieldElementProps, Value> = ({
+      ...props,
+      ...field,
+      ...{
+        isValid,
+        isInvalid,
+        ref: inputRef,
+      },
+    } as unknown) as IFieldInputPropsEnhanced<FieldElementProps, Value>;
 
-        const fieldPropsEnhanced: IFormFieldPropsEnhanced<FieldElementProps, Value> = {
-            ...fieldProps,
-            error: touch ? error : undefined,
-            field: fieldInputPropsEnhanced,
-        };
-        return children(fieldPropsEnhanced);
+    const fieldPropsEnhanced: IFormFieldPropsEnhanced<FieldElementProps, Value> = {
+      ...fieldProps,
+      error: touch ? error : undefined,
+      field: fieldInputPropsEnhanced,
     };
+    return children(fieldPropsEnhanced);
+  };
 
-    const FieldComponent = fastField ? FastField : Field;
+  const FieldComponent = fastField ? FastField : Field;
 
-    return <FieldComponent {...props} children={renderChildren} />;
+  return <FieldComponent {...props} children={renderChildren} />;
 }

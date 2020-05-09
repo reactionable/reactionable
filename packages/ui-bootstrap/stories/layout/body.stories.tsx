@@ -7,7 +7,10 @@ import Button from 'react-bootstrap/Button';
 import { Body } from '../../src/layout/body/Body';
 import '../config';
 
-export default { title: 'UI Bootstrap/Layout/Body', parameters: { info: { inline: true }, component: Body } };
+export default {
+  title: 'UI Bootstrap/Layout/Body',
+  parameters: { info: { inline: true }, component: Body },
+};
 
 export const SimpleBody = () => (
   <Body>

@@ -6,7 +6,7 @@ import '../config';
 
 export default {
   title: 'UI Bootstrap/Layout/Header',
-  parameters: { info: { inline: true }, component:Header },
+  parameters: { info: { inline: true }, component: Header },
   decorators: [withKnobs],
 };
 

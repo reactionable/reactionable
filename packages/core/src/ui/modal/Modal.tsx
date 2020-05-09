@@ -9,14 +9,14 @@ export interface IModalProps {
 
 export type ModalComponent<P extends IModalProps = IModalProps> = FC<P>;
 
-export const Modal: ModalComponent = ({ title,show = true, onHide, children, ...modalProps }) => {
+export const Modal: ModalComponent = ({ title, show = true, onHide, children, ...modalProps }) => {
   const { t } = useTranslation();
   const [showState, setShow] = useState(show);
 
   const handleOnClose = () => {
-      setShow(false);
-      onHide && onHide();
-  }
+    setShow(false);
+    onHide && onHide();
+  };
 
   return (
     <>
@@ -58,11 +58,10 @@ export function useModal<P extends IUseModalProps>({
   const handleOnHide = () => {
     closeModal();
     onHide && onHide();
-  }
-
+  };
 
   return {
-    modal: <Component {...props} show={showState} onHide={handleOnHide}/>,
+    modal: <Component {...props} show={showState} onHide={handleOnHide} />,
     openModal,
     closeModal,
   };

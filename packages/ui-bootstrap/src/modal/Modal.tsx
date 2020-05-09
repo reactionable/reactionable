@@ -9,13 +9,12 @@ export type IModalProps = ICoreModalProps &
   };
 
 export type ModalComponent = FC<IModalProps>;
-export const Modal: ModalComponent = ({ title, children, body, footer,onHide, ...modalProps }) => {
-  
+export const Modal: ModalComponent = ({ title, children, body, footer, onHide, ...modalProps }) => {
   const [show, setShow] = useState(true);
   const handleOnClose = () => {
-      setShow(false);
-      onHide && onHide();
-  }
+    setShow(false);
+    onHide && onHide();
+  };
 
   return (
     <BootstrapModal centered show={show} backdrop="static" onHide={handleOnClose} {...modalProps}>

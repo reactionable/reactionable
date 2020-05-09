@@ -3,9 +3,9 @@ import { action } from '@storybook/addon-actions';
 import { ConfirmationAction } from '../../src/ui/confirmation/Confirmation';
 import { UIContextProvider, useUIContextProviderProps } from '../../src/ui/UI';
 
-export default { 
-  title: 'Core/UI/Confirmation', 
-  parameters: { info: { inline: true }, component: ConfirmationAction }, 
+export default {
+  title: 'Core/UI/Confirmation',
+  parameters: { info: { inline: true }, component: ConfirmationAction },
 };
 
 export const SimpleConfirmationAction = () => (

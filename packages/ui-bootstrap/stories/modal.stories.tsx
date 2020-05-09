@@ -16,7 +16,12 @@ export default {
 
 export const SimpleModal = () => {
   return (
-    <Modal title="Simple modal" body={<>Simple modal body</>} footer={<>Simple modal footer</>} onHide={action('Modal closed')} />
+    <Modal
+      title="Simple modal"
+      body={<>Simple modal body</>}
+      footer={<>Simple modal footer</>}
+      onHide={action('Modal closed')}
+    />
   );
 };
 

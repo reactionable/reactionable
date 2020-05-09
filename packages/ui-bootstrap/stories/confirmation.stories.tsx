@@ -8,7 +8,7 @@ import './config';
 
 export default {
   title: 'UI Bootstrap/Confirmation',
-  parameters: { info: { inline: true }, component:ConfirmationAction },
+  parameters: { info: { inline: true }, component: ConfirmationAction },
   component: ConfirmationAction,
 };
 

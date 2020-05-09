@@ -7,15 +7,16 @@ export type WarningAlertComponent = FC<IWarningAlertProps>;
 export type IUseWarningAlertProps = PropsWithChildren<IWarningAlertProps>;
 
 export interface IUseWarningAlertResult {
-    warningAlert: ReactElement;
-    setWarningAlert: (alert?: ReactNode) => void;
-};
+  warningAlert: ReactElement;
+  setWarningAlert: (alert?: ReactNode) => void;
+}
 
-export type IUseWarningAlert<P extends IUseWarningAlertProps> = (props: P) => IUseWarningAlertResult;
-export function useWarningAlert<P extends IUseWarningAlertProps>(props: P & { Component: WarningAlertComponent }) {
-    const {
-        alert: warningAlert,
-        setAlert: setWarningAlert,
-    } = useAlert<P>(props);
-    return { warningAlert, setWarningAlert };
-};
+export type IUseWarningAlert<P extends IUseWarningAlertProps> = (
+  props: P
+) => IUseWarningAlertResult;
+export function useWarningAlert<P extends IUseWarningAlertProps>(
+  props: P & { Component: WarningAlertComponent }
+) {
+  const { alert: warningAlert, setAlert: setWarningAlert } = useAlert<P>(props);
+  return { warningAlert, setWarningAlert };
+}

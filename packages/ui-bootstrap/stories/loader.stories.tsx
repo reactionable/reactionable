@@ -5,7 +5,7 @@ import './config';
 
 export default {
   title: 'UI Bootstrap/Loader',
-  parameters: { info: { inline: true },component:Loader  },
+  parameters: { info: { inline: true }, component: Loader },
   decorators: [withKnobs],
 };
 

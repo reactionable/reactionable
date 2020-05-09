@@ -12,7 +12,10 @@ import { useUIContextProviderProps } from '../../src/UI';
 import { Sidebar, setSidebarNavItems } from '../../src/layout/sidebar/Sidebar';
 import '../config';
 
-export default { title: 'UI Bootstrap/Layout/Sidebar', parameters: { info: { inline: true }, component: Sidebar} };
+export default {
+  title: 'UI Bootstrap/Layout/Sidebar',
+  parameters: { info: { inline: true }, component: Sidebar },
+};
 
 const SampleComponent: FC = () => {
   const { t } = useTranslation();
