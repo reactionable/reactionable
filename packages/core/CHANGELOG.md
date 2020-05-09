@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.22.5 (2020-05-09)
+
+
+### Bug Fixes
+
+* component update error after form success ([81cfe95](https://github.com/reactionable/reactionable/commit/81cfe956c06cf92439c88872e366e2a155fa1de3))
+
+
+
+
+
 ## 0.22.4 (2020-05-09)
 
 **Note:** Version bump only for package @reactionable/core
