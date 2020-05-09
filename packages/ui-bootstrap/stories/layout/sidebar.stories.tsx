@@ -1,5 +1,5 @@
-import React, { FC, useEffect } from 'react';
-import { BrowserRouter as Router, useRouteMatch } from 'react-router-dom';
+import React, { FC } from 'react';
+import { MemoryRouter as Router, useRouteMatch } from 'react-router-dom';
 import { faImages } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
 import Container from 'react-bootstrap/Container';
@@ -10,8 +10,9 @@ import Button from 'react-bootstrap/Button';
 import { UIContextProvider, generatePath } from '@reactionable/core';
 import { useUIContextProviderProps } from '../../src/UI';
 import { Sidebar, setSidebarNavItems } from '../../src/layout/sidebar/Sidebar';
+import '../config';
 
-export default { title: 'UI Bootstrap/Layout/Sidebar', parameters: { info: { inline: true } } };
+export default { title: 'UI Bootstrap/Layout/Sidebar', parameters: { info: { inline: true }, component: Sidebar} };
 
 const SampleComponent: FC = () => {
   const { t } = useTranslation();

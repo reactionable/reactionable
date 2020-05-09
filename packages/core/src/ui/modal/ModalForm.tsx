@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, FC } from 'react';
+import React, { PropsWithChildren, FC} from 'react';
 import { IFormProps } from '../../form/Form';
 import { IUseModalProps, IModalProps, IUseModalResult, ModalComponent, IUseModal } from './Modal';
 
@@ -26,7 +26,7 @@ export type IModalFormProps<
   F extends IFormProps<any, any> = IFormProps<any, any>,
   M extends IModalProps = IModalProps
 > = PropsWithChildren<M> & {
-  form: PropsWithChildren<F>;
+  form: PropsWithChildren<Omit<F, 'title'>>;
 };
 
 export type IUseModalFormProps<MFP extends IModalFormProps = IModalFormProps> = IUseModalProps<MFP>;
@@ -40,22 +40,31 @@ export type ModalFormComponent<P extends IFormProps<any, any>> = FC<IModalFormCo
 
 export function useModalForm<P extends IUseModalFormProps>({
   useModal,
-  form,
+  form: {
+    onSubmit,
+    onSuccess,
+    ...form
+  },
   FormComponent,
   ...modalProps
 }: P & {
   FormComponent: ModalFormComponent<any>;
   useModal: IUseModal<IUseModalProps<IModalPropsType<IModalFormPropsType<P>>>>;
 }): IUseModalResult {
-  const onSubmit = form.onSubmit;
   const formProps: IFormPropsType<IModalFormPropsType<P>> = {
     ...form,
     onSubmit: async (values, formikHelpers) => {
       const result = await onSubmit(values, formikHelpers);
-      useModalResult.closeModal();
       return result;
     },
+    onSuccess: (data) => {
+      if (onSuccess) {
+        onSuccess(data);
+      }
+      useModalResult.closeModal();
+    },
   } as IFormPropsType<IModalFormPropsType<P>>;
+
 
   const formElement = (
     <FormComponent {...formProps} closeModal={() => useModalResult.closeModal()} />

@@ -3,7 +3,10 @@ import { action } from '@storybook/addon-actions';
 import { ConfirmationAction } from '../../src/ui/confirmation/Confirmation';
 import { UIContextProvider, useUIContextProviderProps } from '../../src/ui/UI';
 
-export default { title: 'Core/UI/Confirmation', parameters: { info: { inline: true } } };
+export default { 
+  title: 'Core/UI/Confirmation', 
+  parameters: { info: { inline: true }, component: ConfirmationAction }, 
+};
 
 export const SimpleConfirmationAction = () => (
   <UIContextProvider {...useUIContextProviderProps()}>
@@ -19,6 +22,7 @@ export const SimpleConfirmationAction = () => (
       }
       onConfirm={async () => {
         action('Action confirmed')();
+        await new Promise((resolve) => setTimeout(resolve, 1000));
         return 'ok';
       }}
       onSuccess={action('Action succeed')}

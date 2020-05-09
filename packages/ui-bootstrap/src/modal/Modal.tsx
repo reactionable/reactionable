@@ -1,4 +1,4 @@
-import React, { ReactElement, FC, PropsWithChildren } from 'react';
+import React, { ReactElement, FC, PropsWithChildren, useState } from 'react';
 import BootstrapModal, { ModalProps } from 'react-bootstrap/Modal';
 import { useModal as useCoreModal, IModalProps as ICoreModalProps } from '@reactionable/core';
 
@@ -9,9 +9,16 @@ export type IModalProps = ICoreModalProps &
   };
 
 export type ModalComponent = FC<IModalProps>;
-export const Modal: ModalComponent = ({ title, children, body, footer, ...modalProps }) => {
+export const Modal: ModalComponent = ({ title, children, body, footer,onHide, ...modalProps }) => {
+  
+  const [show, setShow] = useState(true);
+  const handleOnClose = () => {
+      setShow(false);
+      onHide && onHide();
+  }
+
   return (
-    <BootstrapModal centered show={true} backdrop="static" {...modalProps}>
+    <BootstrapModal centered show={show} backdrop="static" onHide={handleOnClose} {...modalProps}>
       <BootstrapModal.Header closeButton>
         <BootstrapModal.Title>{title}</BootstrapModal.Title>
       </BootstrapModal.Header>

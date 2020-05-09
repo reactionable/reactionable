@@ -4,8 +4,13 @@ import { UIContextProvider } from '@reactionable/core';
 import Button from 'react-bootstrap/Button';
 import { useUIContextProviderProps } from '../src/UI';
 import { ConfirmationAction } from '../src/confirmation/Confirmation';
+import './config';
 
-export default { title: 'UI Bootstrap/Confirmation', parameters: { info: { inline: true } } };
+export default {
+  title: 'UI Bootstrap/Confirmation',
+  parameters: { info: { inline: true }, component:ConfirmationAction },
+  component: ConfirmationAction,
+};
 
 export const SimpleConfirmationAction = () => (
   <UIContextProvider {...useUIContextProviderProps()}>
@@ -15,6 +20,7 @@ export const SimpleConfirmationAction = () => (
       successMessage="The action has been confirmed"
       children={<Button>Click on me</Button>}
       onConfirm={async () => {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
         action('Action confirmed')();
         return 'ok';
       }}

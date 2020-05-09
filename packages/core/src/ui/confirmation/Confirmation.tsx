@@ -96,19 +96,23 @@ export function ConfirmationAction<Data>(props: PropsWithChildren<IConfirmationA
         return;
       }
       setLoading(true);
+
       try {
         const data = await props.onConfirm();
         setLoading(false);
+        setErrorNotification(undefined);
         setSuccessNotification(props.successMessage);
         setSuccess(data);
       } catch (error) {
         setLoading(false);
+        setSuccessNotification(undefined);
         setErrorNotification(error);
       }
     },
   });
 
   const onClick = () => {
+    setErrorNotification(undefined);
     setSuccessNotification(undefined);
     setSuccess(undefined);
     setConfirmation(true);

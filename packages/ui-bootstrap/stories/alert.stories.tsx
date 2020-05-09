@@ -4,10 +4,11 @@ import { faAtom } from '@fortawesome/free-solid-svg-icons';
 import { Alert } from '../src/alert/Alert';
 import { ErrorAlert } from '../src/alert/ErrorAlert';
 import { WarningAlert } from '../src/alert/WarningAlert';
+import './config';
 
 export default {
   title: 'UI Bootstrap/Alert',
-  parameters: { info: { inline: true } },
+  parameters: { info: { inline: true }, component:Alert, subComponents: [ErrorAlert,WarningAlert] },
   decorators: [withKnobs],
 };
 

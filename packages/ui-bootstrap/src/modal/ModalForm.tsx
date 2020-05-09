@@ -13,10 +13,7 @@ import { IFormProps, Form } from '../form/Form';
 import { IModalProps, useModal } from './Modal';
 
 export interface IModalFormProps<Values, Data>
-  extends ICoreModalFormProps<
-    IFormProps<Values, Data> & { title: string | undefined },
-    IModalProps
-  > {}
+  extends ICoreModalFormProps<IFormProps<Values, Data>, IModalProps> {}
 
 export type IModalFormComponentProps<Values, Data> = ICoreModalFormComponentProps<
   IFormProps<Values, Data>
@@ -35,14 +32,11 @@ export function ModalForm<Values, Data>({
   const { t } = useTranslation();
 
   const renderFormChildren = (formikProps: IFormChildrenProps<Values>) => {
-    const onCancel = () => {
-      closeModal();
-    };
     return (
       <>
         <BootstrapModal.Body>{children(formikProps)}</BootstrapModal.Body>
         <BootstrapModal.Footer>
-          <Button disabled={formikProps.isSubmitting} onClick={onCancel} variant="secondary">
+          <Button disabled={formikProps.isSubmitting} onClick={closeModal} variant="secondary">
             {cancelButton ? cancelButton : t('Cancel')}
           </Button>
           <Button disabled={formikProps.isSubmitting} type="submit" variant="primary">
