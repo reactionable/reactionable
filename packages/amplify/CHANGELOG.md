@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.22.3 (2020-05-09)
+
+**Note:** Version bump only for package @reactionable/amplify
+
+
+
+
+
 ## 0.22.2 (2020-05-08)
 
 
