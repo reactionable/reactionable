@@ -91,6 +91,8 @@ export function ConfirmationAction<Data>(props: PropsWithChildren<IConfirmationA
     children: props.confirmationMessage,
     callback: async (confirm: boolean) => {
       if (!confirm) {
+        setSuccessNotification(undefined);
+        setSuccess(undefined);
         return;
       }
       setLoading(true);
@@ -106,7 +108,11 @@ export function ConfirmationAction<Data>(props: PropsWithChildren<IConfirmationA
     },
   });
 
-  const onClick = () => setConfirmation(true);
+  const onClick = () => {
+    setSuccessNotification(undefined);
+    setSuccess(undefined);
+    setConfirmation(true);
+  };
 
   return (
     <>

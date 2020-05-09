@@ -51,14 +51,18 @@ export function ConfirmationAction<Data>({
   label,
   button,
   icon,
+  children,
   ...props
 }: PropsWithChildren<IConfirmationActionProps<Data>>) {
   return (
     <CoreConfirmationAction<Data> {...props}>
-      <Button title={props.title || ''} {...button}>
-        {icon && <FontAwesomeIcon {...icon} />}
-        {label}
-      </Button>
+      {children}
+      {button && (
+        <Button title={props.title || ''} {...button}>
+          {icon && <FontAwesomeIcon {...icon} />}
+          {label}
+        </Button>
+      )}
     </CoreConfirmationAction>
   );
 }
