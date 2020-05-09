@@ -2,13 +2,9 @@
   "compilerOptions": {
     "module": "commonjs",
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["es5", "es6", "es7", "es2017", "dom", "dom.iterable", "esnext"],
     "sourceMap": true,
-    "allowJs": false,
+    "allowJs": true,
     "moduleResolution": "node",
     "strict": true,
     "declaration": true,
@@ -29,20 +25,21 @@
     "importHelpers": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "isolatedModules": false
+    "isolatedModules": false,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "baseUrl": "src"
   },
+  "include": ["packages/*/src"],
   "exclude": [
     "**/*.test.ts",
     "**/*.test.tsx",
     "**/test.config.ts",
     "node_modules",
-    "**/build/*",
+    "**/lib/*",
     "**/*.d.ts"
   ],
-  "baseUrl": "./src",
   "paths": {
-      "@utils/*": [
-        "packages/utils/*"
-      ],
-  },
+    "@reactionable/*": ["packages/*"]
+  }
 }

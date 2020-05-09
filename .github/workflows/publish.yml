@@ -5,18 +5,17 @@ on:
     types: [started]
 
 jobs:
-
-  authorize: 
+  authorize:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: octokit/request-action@v2.0.0
-      id: get_latest_release
-      with:
-        route: GET /repos/:repository/collaborators/${{ github.actor }}
-        repository: ${{ github.repository }}
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: octokit/request-action@v2.0.0
+        id: get_latest_release
+        with:
+          route: GET /repos/:repository/collaborators/${{ github.actor }}
+          repository: ${{ github.repository }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   publish:
     needs: [authorize]
@@ -27,53 +26,54 @@ jobs:
         node-version: [12.x]
 
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: Get yarn cache directory path
-      id: yarn-cache-dir-path
-      run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
 
-    - uses: actions/cache@v1
-      id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
-      with:
-        path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-yarn-
+      - uses: actions/cache@v1
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
 
-    - name: Setup Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-        registry-url: https://registry.npmjs.org/
-      
-    - name: Install Dependencies
-      run: yarn
-      
-    - name: Build
-      run: yarn build
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+          registry-url: https://registry.npmjs.org/
 
-    - name: Commit changes
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        echo `git add -A && git commit -m "chore: prepare release"`
-        
-    - name: Publish
-      env:       
-        NODE_AUTH_TOKEN: ${{secrets.NODE_AUTH_TOKEN}}
-      run: yarn run publish
-  
-    - name: Prepare gh-pages
-      run: |
-        mkdir build
-        cp README.md build/index.md
-        yarn build:doc
-        
-    - name: Publish gh-pages
-      uses: JamesIves/github-pages-deploy-action@3.4.6
-      with:
-        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        BASE_BRANCH: master # The branch the action should deploy from.
-        BRANCH: gh-pages # The branch the action should deploy to.
-        FOLDER: build # The folder the action should deploy.
+      - name: Install Dependencies
+        run: yarn
+
+      - name: Build
+        run: yarn build
+
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          echo `git add -A && git commit -m "chore: prepare release"`
+
+      - name: Publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NODE_AUTH_TOKEN}}
+        run: yarn run publish
+
+      - name: Prepare gh-pages
+        run: |
+          mkdir build
+          cp README.md build/index.md
+          yarn build:doc
+          yarnn build:storybook
+
+      - name: Publish gh-pages
+        uses: JamesIves/github-pages-deploy-action@3.4.6
+        with:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BASE_BRANCH: master # The branch the action should deploy from.
+          BRANCH: gh-pages # The branch the action should deploy to.
+          FOLDER: build # The folder the action should deploy.

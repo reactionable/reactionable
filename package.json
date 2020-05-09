@@ -26,7 +26,9 @@
     "build:doc": "rimraf -rf docs && typedoc",
     "publish": "lerna publish --yes",
     "link": "for package in react react-dom react-router-dom aws-amplify; do cd node_modules/$package && yarn link && cd ../..; done && lerna exec yarn link",
-    "unlink": "for package in react react-dom react-router-dom aws-amplify; do cd node_modules/$package && yarn unlink && cd ../..; done && lerna exec yarn unlink"
+    "unlink": "for package in react react-dom react-router-dom aws-amplify; do cd node_modules/$package && yarn unlink && cd ../..; done && lerna exec yarn unlink",
+    "storybook": "start-storybook -p 6006",
+    "build:storybook": "build-storybook -o build/storybook"
   },
   "prettier": {
     "printWidth": 100,
@@ -45,6 +47,17 @@
     }
   },
   "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@storybook/addon-actions": "^6.0.0-beta.4",
+    "@storybook/addon-docs": "^5.3.18",
+    "@storybook/addon-knobs": "^5.3.18",
+    "@storybook/addon-links": "^6.0.0-beta.4",
+    "@storybook/addon-storysource": "^5.3.18",
+    "@storybook/addons": "^6.0.0-beta.4",
+    "@storybook/preset-typescript": "^3.0.0",
+    "@storybook/react": "^6.0.0-beta.4",
+    "@storybook/theming": "^5.3.18",
+    "babel-loader": "^8.1.0",
     "typedoc": "^0.17.6",
     "typedoc-plugin-nojekyll": "^1.0.1"
   },

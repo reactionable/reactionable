@@ -1,0 +1,24 @@
+import React from 'react';
+import { action } from '@storybook/addon-actions';
+import { UIContextProvider } from '@reactionable/core';
+import Button from 'react-bootstrap/Button';
+import { useUIContextProviderProps } from '../src/UI';
+import { ConfirmationAction } from '../src/confirmation/Confirmation';
+
+export default { title: 'UI Bootstrap/Confirmation', parameters: { info: { inline: true } } };
+
+export const SimpleConfirmationAction = () => (
+  <UIContextProvider {...useUIContextProviderProps()}>
+    <ConfirmationAction
+      title="Confirm?"
+      confirmationMessage="Do you want to perform this action"
+      successMessage="The action has been confirmed"
+      children={<Button>Click on me</Button>}
+      onConfirm={async () => {
+        action('Action confirmed')();
+        return 'ok';
+      }}
+      onSuccess={action('Action succeed')}
+    />
+  </UIContextProvider>
+);
