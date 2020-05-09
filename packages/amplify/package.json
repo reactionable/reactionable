@@ -33,8 +33,7 @@
   "dependencies": {
     "@reactionable/core": "^0.22.2",
     "aws-amplify": "^3.0.10",
-    "aws-amplify-react": "^4.1.9",
-    "dequal": "^1.0.0"
+    "aws-amplify-react": "^4.1.9"
   },
   "devDependencies": {
     "@types/jest": "^25.2.1",
@@ -44,7 +43,7 @@
     "react": "^16.13.1",
     "react-i18next": "^11.4.0",
     "rimraf": "^3.0.2",
-    "ts-jest": "^25.5.0",
+    "ts-jest": "^25.5.1",
     "tslib": "^1.11.2",
     "typescript": "^3.8.3"
   },

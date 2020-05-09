@@ -1,5 +1,3 @@
-import { useRef, useEffect } from 'react';
-import deepEqual from 'dequal';
 import { API, graphqlOperation } from 'aws-amplify';
 import { GraphQLResult } from '@aws-amplify/api-graphql';
 import {
@@ -16,20 +14,6 @@ function isGraphQLResult(arg: any): arg is GraphQLResult {
 function extractData<Data>(result: any): Data | undefined {
   const data = result[Object.keys(result)[0]];
   return data as Data | undefined;
-}
-
-function useDeepCompareMemoize(value: any) {
-  const ref = useRef();
-
-  if (!deepEqual(value, ref.current)) {
-    ref.current = value;
-  }
-
-  return ref.current;
-}
-
-export function useDeepCompareEffect(callback: any, dependencies: any) {
-  useEffect(callback, useDeepCompareMemoize(dependencies));
 }
 
 export type IQueryOptions<Variables extends {}> = ICoreQueryOptions<Variables> & {
