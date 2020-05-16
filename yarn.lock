@@ -4437,17 +4437,17 @@
     babel-preset-typescript-vue "^1.0.3"
     fork-ts-checker-webpack-plugin "^4.1.0"
 
-"@storybook/react@^6.0.0-beta.4":
-  version "6.0.0-beta.4"
-  resolved "https://registry.yarnpkg.com/@storybook/react/-/react-6.0.0-beta.4.tgz#35fa9c55879ab4bbc7ed026c29c8d963957f3973"
-  integrity sha512-lM342/IzIhOnIkywB1r8KjwobgfLNCYhtDS5zZdbAltUEUCCYKCfcnJaN0wXvaHraGWv9EGO9eGReqXlVAgtaw==
+"@storybook/react@^6.0.0-beta.7":
+  version "6.0.0-beta.7"
+  resolved "https://registry.yarnpkg.com/@storybook/react/-/react-6.0.0-beta.7.tgz#af992bbfe266cd553be5b8917bbfba8f1d6ce17b"
+  integrity sha512-84Ry/+FdxIFVA+MaJPiIBbmhsl9IgFXbHStHxrS2OJNgnVeXIryk5Rpa6PxopbC9OLTpLJpr+4+WRcIJawvYDA==
   dependencies:
     "@babel/plugin-transform-react-constant-elements" "^7.6.3"
     "@babel/preset-flow" "^7.0.0"
     "@babel/preset-react" "^7.0.0"
-    "@storybook/addons" "6.0.0-beta.4"
-    "@storybook/core" "6.0.0-beta.4"
-    "@storybook/node-logger" "6.0.0-beta.4"
+    "@storybook/addons" "6.0.0-beta.7"
+    "@storybook/core" "6.0.0-beta.7"
+    "@storybook/node-logger" "6.0.0-beta.7"
     "@svgr/webpack" "^5.4.0"
     "@types/webpack-env" "^1.15.2"
     babel-plugin-add-react-displayname "^0.0.5"
