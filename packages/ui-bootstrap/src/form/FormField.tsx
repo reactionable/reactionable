@@ -11,7 +11,6 @@ import {
   IFormFieldPropsEnhanced as ICoreFormFieldPropsEnhanced,
   IFormFieldValue,
   IRenderFormField,
-  IFieldInputPropsEnhanced,
 } from '@reactionable/core';
 
 type IFieldElement = 'input' | 'select' | 'textarea' | 'checkbox' | 'radio';
@@ -37,6 +36,7 @@ type FieldFormElementProps<FieldElement extends ElementType> = ReplaceProps<
   FieldElement,
   BsPrefixProps<FieldElement> & FormControlProps
 >;
+
 type FieldCheckElementProps = ReplaceProps<'input', BsPrefixProps<'input'> & FormCheckProps>;
 
 function isFormCheckProps(props: any): props is FieldFormElementProps<any> {
@@ -62,25 +62,28 @@ export function FormField<
         </>
       );
     } else {
-      fieldContent = (
-        <>
-          {isFormCheckProps(fieldProps) ? (
-            <FormCheck
-              {...({
+      if (isFormCheckProps(fieldProps)) {
+        fieldContent = (
+          <>
+            <FormCheck<any>
+              {...{
                 ...fieldProps.field,
                 checked: !!fieldProps.field.value,
-              } as IFieldInputPropsEnhanced<FieldCheckElementProps, Value>)}
+              }}
               children={children}
             />
-          ) : (
-            <FormControl
-              {...(fieldProps.field as IFieldInputPropsEnhanced<FieldFormElementProps<any>, Value>)}
-              children={children}
-            />
-          )}
-          {fieldContent}
-        </>
-      );
+            {fieldContent}
+          </>
+        );
+      } else {
+        fieldContent = (
+          <>
+            <FormControl<any> {...fieldProps.field} children={children} />
+            {fieldContent}
+          </>
+        );
+      }
+
       if (fieldProps.field.type === 'hidden') {
         return fieldContent;
       }
@@ -94,12 +97,10 @@ export function FormField<
     );
   };
 
-  return (
-    <CoreFormField<FieldElementProps<FieldElement>, Value>
-      {...({
-        ...props,
-        children: renderChildren,
-      } as ICoreFormFieldProps<FieldElementProps<FieldElement>, Value>)}
-    />
-  );
+  const formFieldProps = {
+    ...props,
+    children: renderChildren,
+  };
+
+  return <CoreFormField<any, Value> {...formFieldProps} />;
 }

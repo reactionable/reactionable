@@ -73,6 +73,14 @@ for package in react react-dom aws-amplify @reactionable/core @reactionable/ui-b
 yarn test
 ```
 
+### Run storybook
+
+```sh
+yarn storybook
+```
+
+Visit: http://localhost:6006/
+
 ## Author
 
 👤 **Neilime**

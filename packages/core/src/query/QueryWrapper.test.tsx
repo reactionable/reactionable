@@ -1,5 +1,5 @@
 import React from 'react';
-import { i18nTestInstance } from '../../tests/I18n';
+import { i18nTestInstance } from '../tests/I18n';
 import { render } from '@testing-library/react';
 import { QueryWrapper } from './QueryWrapper';
 
