@@ -4218,10 +4218,10 @@
   dependencies:
     core-js "^3.0.1"
 
-"@storybook/preset-typescript@^3.0.0-alpha.1":
-  version "3.0.0-alpha.1"
-  resolved "https://registry.yarnpkg.com/@storybook/preset-typescript/-/preset-typescript-3.0.0-alpha.1.tgz#9d7dc8b612d6d4837b3921a627d9829469ef05d8"
-  integrity sha512-T+Og5Vn84EtmuWjjQ+wpZki62ltz4MeXYfup7hLh5n5MxfzJ0S4xFw0T5eEZ4LV/T7WjiqZjg0tZNxUq4lV0iw==
+"@storybook/preset-typescript@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@storybook/preset-typescript/-/preset-typescript-3.0.0.tgz#e157baf6f2c4982c3da3328f5e1a640b3d7db9e4"
+  integrity sha512-tEbFWg5h/8SPfSCNXPxyqY418704K14q5H/xb9t0ARMXK3kZPTkKqKvdTvYg3UEKBBYbc+GA57UWaL+9b+DbDg==
   dependencies:
     "@babel/preset-typescript" "^7.8.3"
     "@storybook/node-logger" "^5.3.17"
