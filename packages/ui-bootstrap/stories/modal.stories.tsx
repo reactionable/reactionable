@@ -1,12 +1,11 @@
 import React from 'react';
 import { string } from 'yup';
 import { action } from '@storybook/addon-actions';
-import { UIContextProvider } from '@reactionable/core';
 import Button from 'react-bootstrap/Button';
 import { Modal, useModal } from '../src/modal/Modal';
 import { ModalForm, useModalForm } from '../src/modal/ModalForm';
 import { FormField } from '../src/form/FormField';
-import { useUIContextProviderProps } from '../src/UI';
+import { UIContextProvider } from '../src/UI';
 import './config';
 
 export default {
@@ -34,7 +33,7 @@ export const useModalHook = () => {
   });
 
   return (
-    <UIContextProvider {...useUIContextProviderProps()}>
+    <UIContextProvider>
       <Button onClick={() => openModal()}>Open modal</Button>
       {modal}
     </UIContextProvider>
@@ -47,7 +46,7 @@ interface IFormValues {
 
 export const ModalWithForm = () => {
   return (
-    <UIContextProvider {...useUIContextProviderProps()}>
+    <UIContextProvider>
       <ModalForm
         title="Modal with form"
         submitButton="Submit form"
@@ -84,7 +83,7 @@ export const useModalFormHook = () => {
     },
   });
   return (
-    <UIContextProvider {...useUIContextProviderProps()}>
+    <UIContextProvider>
       <Button onClick={() => openModal()}>Open modal with form</Button>
       {modal}
     </UIContextProvider>

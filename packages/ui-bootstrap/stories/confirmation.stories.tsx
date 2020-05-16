@@ -1,8 +1,7 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { UIContextProvider } from '@reactionable/core';
 import Button from 'react-bootstrap/Button';
-import { useUIContextProviderProps } from '../src/UI';
+import { UIContextProvider } from '../src/UI';
 import { ConfirmationAction } from '../src/confirmation/Confirmation';
 import './config';
 
@@ -13,7 +12,7 @@ export default {
 };
 
 export const SimpleConfirmationAction = () => (
-  <UIContextProvider {...useUIContextProviderProps()}>
+  <UIContextProvider>
     <ConfirmationAction
       title="Confirm?"
       confirmationMessage="Do you want to perform this action"

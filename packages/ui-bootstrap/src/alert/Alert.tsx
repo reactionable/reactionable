@@ -13,7 +13,7 @@ export type AlertComponent = FC<IAlertProps>;
 export const Alert: AlertComponent = ({ children, icon, ...props }) => {
   return (
     <BootstrapAlert {...props}>
-      {icon && <FontAwesomeIcon className="mr-3" {...icon} />}
+      {icon && <FontAwesomeIcon className="mr-2" {...icon} />}
       {children}
     </BootstrapAlert>
   );

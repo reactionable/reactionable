@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { IError } from '../../error/IError';
-import { useDeepCompareEffect } from '../../hooks/useDeepCompareEffect';
+import { IError } from '../error/IError';
+import { useDeepCompareEffect } from '../hooks/useDeepCompareEffect';
 
 export type IQueryOptions<Variables extends {} = {}> = {
   variables?: Variables;

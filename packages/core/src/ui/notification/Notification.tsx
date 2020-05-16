@@ -11,10 +11,10 @@ export type NotificationComponent = FC<INotificationProps>;
 export const Notification: NotificationComponent = ({ children, title }) => {
   const { t } = useTranslation();
   return (
-    <>
-      {t(title)}
-      {children}
-    </>
+    <div>
+      <div>{t(title)}</div>
+      <div>{children}</div>
+    </div>
   );
 };
 

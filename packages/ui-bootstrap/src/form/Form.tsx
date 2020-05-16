@@ -1,6 +1,6 @@
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, Children } from 'react';
 import { useTranslation } from 'react-i18next';
-import Button from 'react-bootstrap/Button';
+import Button, { ButtonProps } from 'react-bootstrap/Button';
 import { Form as FormikForm } from 'formik';
 import {
   Form as CoreForm,
@@ -15,21 +15,36 @@ export type IFormProps<Values, Data> = ICoreFormProps<Values, Data> & {
 
 export type IOnSubmitForm<Values, Data> = ICoreOnSubmitForm<Values, Data>;
 
+export type ISubmitButtonProps = ButtonProps;
+
+export function SubmitButton({ children, ...props }: PropsWithChildren<ISubmitButtonProps>) {
+  const { t } = useTranslation();
+  return (
+    <Button
+      type="submit"
+      variant="primary"
+      children={Children.count(children) ? children : t('Save')}
+      {...props}
+    />
+  );
+}
+
 export function Form<Values, Data>({
   children,
   submitButton,
   ...props
 }: PropsWithChildren<IFormProps<Values, Data>>) {
-  const { t } = useTranslation();
-
   const renderChildren = (formikProps: IFormChildrenProps<Values>) => {
     return (
       <FormikForm className="needs-validation mb-1">
         {children(formikProps)}
         {submitButton && (
-          <Button disabled={formikProps.isSubmitting} type="submit" variant="primary">
-            {submitButton === true ? t('Save') : submitButton}
-          </Button>
+          <SubmitButton
+            {...{
+              disabled: formikProps.isSubmitting,
+              children: typeof submitButton === 'string' ? submitButton : undefined,
+            }}
+          />
         )}
       </FormikForm>
     );

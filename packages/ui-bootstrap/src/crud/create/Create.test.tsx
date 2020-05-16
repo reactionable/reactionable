@@ -1,11 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { string } from 'yup';
+import { i18nTestInstance } from '@reactionable/core/lib/tests/I18n';
 import { FormField } from '../../form/FormField';
 import { Create } from '../../crud/create/Create';
-import { UIContextProvider } from '@reactionable/core';
-import { useUIContextProviderProps } from '../../UI';
-import { i18nTestInstance } from '@reactionable/core/lib/tests/I18n';
+import { UIContextProvider } from '../../UI';
 
 interface ITestValues {
   test: string;
@@ -22,7 +21,7 @@ describe('Create', () => {
     const div = document.createElement('div');
 
     ReactDOM.render(
-      <UIContextProvider {...useUIContextProviderProps()}>
+      <UIContextProvider>
         <Create<ITestValues, ITestData>
           form={{
             onSuccess: () => {},
@@ -48,7 +47,7 @@ describe('Create', () => {
     const div = document.createElement('div');
 
     ReactDOM.render(
-      <UIContextProvider {...useUIContextProviderProps()}>
+      <UIContextProvider>
         <Create<ITestValues, ITestData>
           modal
           form={{

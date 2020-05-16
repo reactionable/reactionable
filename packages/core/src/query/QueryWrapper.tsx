@@ -1,8 +1,8 @@
 import React, { ReactElement, useEffect, useState } from 'react';
-import { IUseLoaderResult } from '../../ui/loader/Loader';
-import { IUseWarningAlertResult } from '../../ui/alert/WarningAlert';
-import { IUseErrorAlertResult } from '../../ui/alert/ErrorAlert';
-import { useUIContext } from '../../ui/UI';
+import { IUseLoaderResult } from '../ui/loader/Loader';
+import { IUseWarningAlertResult } from '../ui/alert/WarningAlert';
+import { IUseErrorAlertResult } from '../ui/alert/ErrorAlert';
+import { useUIContext } from '../ui/UI';
 import { IUseQueryResult } from './Query';
 
 export type IQueryWrapperProps<UQR extends IUseQueryResult<any> = IUseQueryResult<any>> = Pick<

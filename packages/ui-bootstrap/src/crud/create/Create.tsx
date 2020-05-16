@@ -1,5 +1,4 @@
 import React, { PropsWithChildren } from 'react';
-import { useTranslation } from 'react-i18next';
 import { IModalFormProps } from '../../modal/ModalForm';
 import { IFormProps, Form } from '../../form/Form';
 import { EnhanceChildren, IUseModalFormProps } from '@reactionable/core';
@@ -19,15 +18,11 @@ export function Create<Values, Data>({
     return <Form<Values, Data> {...form} />;
   }
 
-  const { t } = useTranslation();
   const { useModalForm } = useUIContext();
   const { modal, openModal } = useModalForm({
     ...(modalProps === true ? {} : modalProps),
     title: form.title,
-    form: {
-      submitButton: t('Save'),
-      ...form,
-    },
+    form,
   } as IUseModalFormProps<IModalFormProps<Values, Data>>);
 
   return (

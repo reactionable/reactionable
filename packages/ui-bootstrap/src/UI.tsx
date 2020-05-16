@@ -1,5 +1,7 @@
+import React, { PropsWithChildren } from 'react';
 import {
   IUIContextProviderProps as ICoreUIContextProviderProps,
+  UIContextProvider as CoreUIContextProvider,
   IUseLoaderProps,
   useUIContext as useCoreUIContext,
 } from '@reactionable/core';
@@ -51,3 +53,7 @@ export function useUIContextProviderProps(): IUIContextProviderProps {
     useModalForm,
   };
 }
+
+export const UIContextProvider = (props?: PropsWithChildren<Partial<IUIContextProviderProps>>) => {
+  return <CoreUIContextProvider {...useUIContextProviderProps()} {...props} />;
+};

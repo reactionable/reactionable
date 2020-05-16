@@ -9,7 +9,7 @@ import {
   IModalFormComponentProps as ICoreModalFormComponentProps,
   IFormChildrenProps,
 } from '@reactionable/core';
-import { IFormProps, Form } from '../form/Form';
+import { IFormProps, Form, SubmitButton } from '../form/Form';
 import { IModalProps, useModal } from './Modal';
 
 export interface IModalFormProps<Values, Data>
@@ -39,9 +39,12 @@ export function ModalForm<Values, Data>({
           <Button disabled={formikProps.isSubmitting} onClick={closeModal} variant="secondary">
             {cancelButton ? cancelButton : t('Cancel')}
           </Button>
-          <Button disabled={formikProps.isSubmitting} type="submit" variant="primary">
-            {submitButton ? submitButton : t('Save')}
-          </Button>
+          <SubmitButton
+            {...{
+              disabled: formikProps.isSubmitting,
+              children: typeof submitButton === 'string' ? submitButton : undefined,
+            }}
+          />
         </BootstrapModal.Footer>
       </>
     );

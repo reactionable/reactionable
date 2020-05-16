@@ -1,7 +1,7 @@
 import React from 'react';
-import { UIContextProvider, i18nTestInstance } from '@reactionable/core';
 import { Confirmation } from './Confirmation';
-import { useUIContextProviderProps } from '../UI';
+import { UIContextProvider } from '../UI';
+import { i18nTestInstance } from '@reactionable/core';
 import { render, fireEvent } from '@testing-library/react';
 
 describe('Confirmation', () => {
@@ -11,7 +11,7 @@ describe('Confirmation', () => {
     const callback = jest.fn();
 
     const { getByText } = render(
-      <UIContextProvider {...useUIContextProviderProps()}>
+      <UIContextProvider>
         <Confirmation title="test" callback={callback} />
       </UIContextProvider>
     );
@@ -25,7 +25,7 @@ describe('Confirmation', () => {
     const callback = jest.fn();
 
     const { getByText } = render(
-      <UIContextProvider {...useUIContextProviderProps()}>
+      <UIContextProvider>
         <Confirmation title="test" callback={callback} />
       </UIContextProvider>
     );

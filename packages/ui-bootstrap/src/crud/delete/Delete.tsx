@@ -17,7 +17,7 @@ export function Delete<Data>({
   return (
     <DeleteCore<Data> {...props}>
       <Button variant="danger" title={props.title || ''}>
-        <FontAwesomeIcon {...icon} />
+        <FontAwesomeIcon className="mr-2" {...icon} />
         {label}
       </Button>
     </DeleteCore>
