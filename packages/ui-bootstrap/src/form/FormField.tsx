@@ -1,4 +1,4 @@
-import React, { ReactElement, ElementType } from 'react';
+import React, { ReactElement, ElementType, ReactNode } from 'react';
 import FormLabel from 'react-bootstrap/FormLabel';
 import Feedback from 'react-bootstrap/Feedback';
 import FormControl, { FormControlProps } from 'react-bootstrap/FormControl';
@@ -11,40 +11,57 @@ import {
   IFormFieldPropsEnhanced as ICoreFormFieldPropsEnhanced,
   IFormFieldValue,
   IRenderFormField,
+  IFieldElementProps as ICoreFieldElementProps,
 } from '@reactionable/core';
 
-type IFieldElement = 'input' | 'select' | 'textarea' | 'checkbox' | 'radio';
-
-export type IFormFieldProps<
-  FieldElement extends IFieldElement,
-  Value extends IFormFieldValue
-> = Omit<ICoreFormFieldProps<FieldElementProps<FieldElement>, Value>, 'children'> & {
-  label?: ReactElement | string;
-  children?: IRenderFormField<FieldElementProps<FieldElement>, Value> | ReactElement;
-};
-
-export type IFormFieldPropsEnhanced<
-  FieldElement extends IFieldElement = 'input',
-  Value extends IFormFieldValue = string
-> = ICoreFormFieldPropsEnhanced<FieldElementProps<FieldElement>, Value>;
-
-type FieldElementProps<FieldElement extends IFieldElement> = FieldElement extends ElementType
-  ? FieldFormElementProps<FieldElement>
-  : FieldCheckElementProps;
+// type IFieldElement = 'input' | 'select' | 'textarea' | 'checkbox' | 'radio';
 
 type FieldFormElementProps<FieldElement extends ElementType> = ReplaceProps<
   FieldElement,
   BsPrefixProps<FieldElement> & FormControlProps
 >;
 
-type FieldCheckElementProps = ReplaceProps<'input', BsPrefixProps<'input'> & FormCheckProps>;
+// type FieldElementProps<FieldElement extends IFieldElement> = FieldElement extends ElementType
+//   ? FieldFormElementProps<FieldElement>
+//   : FieldCheckElementProps;
+
+// type FieldCheckElementProps = ReplaceProps<'input', BsPrefixProps<'input'> & FormCheckProps>;
+
+// export type IFormFieldProps<
+//   FieldElement extends IFieldElement,
+//   Value extends IFormFieldValue
+// > = Omit<ICoreFormFieldProps<FieldElementProps<FieldElement>, Value>, 'children'> & {
+//   label?: ReactNode | string;
+//   children?: IRenderFormField<FieldElementProps<FieldElement>, Value> | ReactElement;
+// };
+
+// export type IFormFieldPropsEnhanced<
+//   FieldElement extends IFieldElement = 'input',
+//   Value extends IFormFieldValue = string
+// > = ICoreFormFieldPropsEnhanced<FieldElementProps<FieldElement>, Value>;
+
+export type IFieldElementProps = ICoreFieldElementProps & {
+  label?: ReactNode | string;
+};
+
+export type IFormFieldProps<
+  FieldElement extends IFieldElementProps,
+  Value extends IFormFieldValue
+> = Omit<ICoreFormFieldProps<FieldElement, Value>, 'children'> & {
+  children?: IRenderFormField<IFieldElementProps, Value> | ReactElement;
+};
+
+export type IFormFieldPropsEnhanced<
+  FieldElement extends IFieldElementProps,
+  Value extends IFormFieldValue
+> = ICoreFormFieldPropsEnhanced<FieldElement, Value>;
 
 function isFormCheckProps(props: any): props is FieldFormElementProps<any> {
   return (props as FieldFormElementProps<any>).field.checked !== undefined;
 }
 
 export function FormField<
-  FieldElement extends IFieldElement = 'input',
+  FieldElement extends IFieldElementProps = IFieldElementProps,
   Value extends IFormFieldValue = string
 >({ label, children, ...props }: IFormFieldProps<FieldElement, Value>) {
   const renderChildren = (fieldProps: IFormFieldPropsEnhanced<FieldElement, Value>) => {
@@ -57,28 +74,27 @@ export function FormField<
     if ('function' === typeof children) {
       fieldContent = (
         <>
-          {children(fieldProps as IFormFieldPropsEnhanced<FieldElement, Value>)}
+          {children(fieldProps)}
           {fieldContent}
         </>
       );
     } else {
       if (isFormCheckProps(fieldProps)) {
+        const formCheckProps = {
+          ...fieldProps.field,
+          checked: !!fieldProps.field.value,
+        } as FormCheckProps;
+
         fieldContent = (
           <>
-            <FormCheck<any>
-              {...{
-                ...fieldProps.field,
-                checked: !!fieldProps.field.value,
-              }}
-              children={children}
-            />
+            <FormCheck {...formCheckProps} children={children} />
             {fieldContent}
           </>
         );
       } else {
         fieldContent = (
           <>
-            <FormControl<any> {...fieldProps.field} children={children} />
+            <FormControl {...(fieldProps.field as FormControlProps)} children={children} />
             {fieldContent}
           </>
         );

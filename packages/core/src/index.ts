@@ -7,12 +7,6 @@ export * from './crud/Crud';
 export * from './crud/create/Create';
 export * from './crud/delete/Delete';
 export * from './crud/list/List';
-<<<<<<< HEAD
-export * from './query/Query';
-export * from './query/QueryList';
-export * from './query/QueryWrapper';
-=======
->>>>>>> 4f0ddb1... test: add new stories for UI components
 export * from './crud/read/Read';
 export * from './crud/update/Update';
 export * from './enhance-children/EnhanceChildren';
