@@ -3834,18 +3834,18 @@
     regenerator-runtime "^0.13.3"
     ts-dedent "^1.1.1"
 
-"@storybook/addon-storysource@^6.0.0-beta.7":
-  version "6.0.0-beta.7"
-  resolved "https://registry.yarnpkg.com/@storybook/addon-storysource/-/addon-storysource-6.0.0-beta.7.tgz#8576373366c57f24dcc41606fb1bd83f6b97d630"
-  integrity sha512-9XYtlGtbeYNBlkY5vUTMOlINQA8owXDQgwO9rFoK8sU2IRgbgbmabOmr/d54704dAKfwyzJYlX7VRc/nUe/Qeg==
+"@storybook/addon-storysource@^6.0.0-beta.8":
+  version "6.0.0-beta.8"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-storysource/-/addon-storysource-6.0.0-beta.8.tgz#dc2215c4f3ed99e442c4618854c91b9e4cbcea75"
+  integrity sha512-bRo8Hfy9UdcT7lfV/l5qQIiGmUtA8mBEse55qoRqHLUBj3SQfETjU+3cX9NcxHCg4X31rOsunM6Ktlx/oB5yRA==
   dependencies:
-    "@storybook/addons" "6.0.0-beta.7"
-    "@storybook/api" "6.0.0-beta.7"
-    "@storybook/client-logger" "6.0.0-beta.7"
-    "@storybook/components" "6.0.0-beta.7"
-    "@storybook/router" "6.0.0-beta.7"
-    "@storybook/source-loader" "6.0.0-beta.7"
-    "@storybook/theming" "6.0.0-beta.7"
+    "@storybook/addons" "6.0.0-beta.8"
+    "@storybook/api" "6.0.0-beta.8"
+    "@storybook/client-logger" "6.0.0-beta.8"
+    "@storybook/components" "6.0.0-beta.8"
+    "@storybook/router" "6.0.0-beta.8"
+    "@storybook/source-loader" "6.0.0-beta.8"
+    "@storybook/theming" "6.0.0-beta.8"
     core-js "^3.0.1"
     estraverse "^4.2.0"
     loader-utils "^2.0.0"
@@ -4514,6 +4514,21 @@
   dependencies:
     "@storybook/addons" "6.0.0-beta.7"
     "@storybook/client-logger" "6.0.0-beta.7"
+    "@storybook/csf" "0.0.1"
+    core-js "^3.0.1"
+    estraverse "^4.2.0"
+    global "^4.3.2"
+    loader-utils "^2.0.0"
+    prettier "^2.0.5"
+    regenerator-runtime "^0.13.3"
+
+"@storybook/source-loader@6.0.0-beta.8":
+  version "6.0.0-beta.8"
+  resolved "https://registry.yarnpkg.com/@storybook/source-loader/-/source-loader-6.0.0-beta.8.tgz#ca8a09d3ab4c3d754e7205f4590d086b454a594f"
+  integrity sha512-TT8WPLe9HH5zzRUA+EFvy1JWNxasmgdzWEF6603q7TCU5/bcuAgij1hCSwE6lcTT2AXtiXB4GlofUzFHnxODzw==
+  dependencies:
+    "@storybook/addons" "6.0.0-beta.8"
+    "@storybook/client-logger" "6.0.0-beta.8"
     "@storybook/csf" "0.0.1"
     core-js "^3.0.1"
     estraverse "^4.2.0"
