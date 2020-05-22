@@ -3992,6 +3992,13 @@
   dependencies:
     core-js "^3.0.1"
 
+"@storybook/client-logger@6.0.0-beta.12":
+  version "6.0.0-beta.12"
+  resolved "https://registry.yarnpkg.com/@storybook/client-logger/-/client-logger-6.0.0-beta.12.tgz#847e91684d1161552e29b082a99c0790a2ccc742"
+  integrity sha512-gacr1kFJsmLh+nAJ2L3qqvlHPKYKZqdQlBIvKBJsqxztU5OVYfh+kD8V7uI89oAR+QNSjXzfgqFEiXh6YPUS4g==
+  dependencies:
+    core-js "^3.0.1"
+
 "@storybook/client-logger@6.0.0-beta.8":
   version "6.0.0-beta.8"
   resolved "https://registry.yarnpkg.com/@storybook/client-logger/-/client-logger-6.0.0-beta.8.tgz#731176c0efb66dfd255360383fb21f0927f69192"
@@ -4297,7 +4304,7 @@
     resolve-from "^5.0.0"
     ts-dedent "^1.1.0"
 
-"@storybook/theming@6.0.0-beta.8", "@storybook/theming@^6.0.0-beta.8":
+"@storybook/theming@6.0.0-beta.8":
   version "6.0.0-beta.8"
   resolved "https://registry.yarnpkg.com/@storybook/theming/-/theming-6.0.0-beta.8.tgz#2608e0c8d5cb6bd63ee2495b2b0a2a2056568f30"
   integrity sha512-0K3ZMoDiRUJ93y1nauygsX9l7EyusubLlSEwZhAOPnCnTCqWb3gM31SbzxEh4AUYjIQfhWDU8B0a2FZNb6GqJg==
@@ -4306,6 +4313,24 @@
     "@emotion/is-prop-valid" "^0.8.6"
     "@emotion/styled" "^10.0.17"
     "@storybook/client-logger" "6.0.0-beta.8"
+    core-js "^3.0.1"
+    deep-object-diff "^1.1.0"
+    emotion-theming "^10.0.19"
+    global "^4.3.2"
+    memoizerific "^1.11.3"
+    polished "^3.4.4"
+    resolve-from "^5.0.0"
+    ts-dedent "^1.1.1"
+
+"@storybook/theming@^6.0.0-beta.12":
+  version "6.0.0-beta.12"
+  resolved "https://registry.yarnpkg.com/@storybook/theming/-/theming-6.0.0-beta.12.tgz#0b52e9701a22e6c5d6e410683813a74c415e25b7"
+  integrity sha512-WP17IeQP3tB0h0TOeT9mkbK1K0TGbYGSZTIcnlSB+2LkQI10WFfUPCzsdwN/GBurrclUFE+wqd4SbJQcmxAYlg==
+  dependencies:
+    "@emotion/core" "^10.0.20"
+    "@emotion/is-prop-valid" "^0.8.6"
+    "@emotion/styled" "^10.0.17"
+    "@storybook/client-logger" "6.0.0-beta.12"
     core-js "^3.0.1"
     deep-object-diff "^1.1.0"
     emotion-theming "^10.0.19"
