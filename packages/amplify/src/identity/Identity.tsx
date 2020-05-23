@@ -14,10 +14,20 @@ import {
   IUser as ICoreUser,
   IdentityComponent as CoreIdentityComponent,
   IIdentityContextProviderProps as ICoreIdentityContextProviderProps,
+  IdentityContextProvider as CoreIdentityContextProvider,
   IIdentityComponentProps,
 } from '@reactionable/core';
 
 export type IUser = ICoreUser;
+
+export {
+  SignIn,
+  ConfirmSignIn,
+  VerifyContact,
+  ForgotPassword,
+  SignUp,
+  SignOut,
+} from 'aws-amplify-react';
 
 const dataToUser = (data?: {
   id: string;
@@ -94,4 +104,10 @@ export const useIdentityContextProviderProps = (
     Component: IdentityComponent as CoreIdentityComponent<IUser>,
     ...props,
   };
+};
+
+export const IdentityContextProvider = (
+  props?: PropsWithChildren<Partial<IIdentityContextProviderProps>>
+) => {
+  return <CoreIdentityContextProvider {...useIdentityContextProviderProps()} {...props} />;
 };

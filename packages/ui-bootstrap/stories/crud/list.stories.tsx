@@ -3,14 +3,10 @@ import { withKnobs, boolean } from '@storybook/addon-knobs';
 import { List } from '../../src/crud/list/List';
 import { UIContextProvider } from '../../src/UI';
 import '../config';
-import { action } from '@storybook/addon-actions';
 
 export default {
   title: 'UI Bootstrap/Crud/List',
-  parameters: {
-    info: { inline: true },
-    component: List,
-  },
+  parameters: { info: { inline: true }, component: List },
   decorators: [withKnobs],
 };
 

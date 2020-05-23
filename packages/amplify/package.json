@@ -33,8 +33,8 @@
   "homepage": "https://github.com/reactionable/reactionable#readme",
   "dependencies": {
     "@reactionable/core": "^0.22.6",
-    "aws-amplify": "^3.0.11",
-    "aws-amplify-react": "^4.1.10"
+    "aws-amplify": "^3.0.12",
+    "aws-amplify-react": "^4.1.11"
   },
   "devDependencies": {
     "@types/jest": "^25.2.3",
@@ -42,11 +42,11 @@
     "barrelsby": "^2.2.0",
     "jest": "^26.0.1",
     "react": "^16.13.1",
-    "react-i18next": "^11.4.0",
+    "react-i18next": "^11.5.0",
     "rimraf": "^3.0.2",
     "ts-jest": "^26.0.0",
     "tslib": "^2.0.0",
-    "typescript": "^3.9.2"
+    "typescript": "^3.9.3"
   },
   "jest": {
     "preset": "ts-jest"

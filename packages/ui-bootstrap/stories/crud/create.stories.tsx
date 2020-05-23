@@ -9,10 +9,7 @@ import '../config';
 
 export default {
   title: 'UI Bootstrap/Crud/Create',
-  parameters: {
-    info: { inline: true },
-    component: Create,
-  },
+  parameters: { info: { inline: true }, component: Create },
 };
 
 interface IFormValues {

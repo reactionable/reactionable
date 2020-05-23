@@ -3,15 +3,12 @@ import { string } from 'yup';
 import { action } from '@storybook/addon-actions';
 import { Form } from '../src/form/Form';
 import { FormField } from '../src/form/FormField';
-import './config';
 import { UIContextProvider } from '../src/UI';
+import './config';
 
 export default {
   title: 'UI Bootstrap/Form',
-  parameters: {
-    info: { inline: true },
-    component: Form,
-  },
+  parameters: { info: { inline: true }, component: Form },
 };
 
 interface IFormValues {
@@ -50,12 +47,7 @@ export const FormWithTextArea = () => (
       formSchema={{ test: string().required('Test is required') }}
       formValues={{ test: '' }}
       children={() => (
-        <FormField<'textarea'>
-          as="textarea"
-          name="test"
-          autoFocus
-          placeholder="Text area form input"
-        />
+        <FormField as="textarea" name="test" autoFocus placeholder="Text area form input" />
       )}
     />
   </UIContextProvider>

@@ -7,10 +7,7 @@ import '../config';
 
 export default {
   title: 'UI Bootstrap/Crud/Delete',
-  parameters: {
-    info: { inline: true },
-    component: Delete,
-  },
+  parameters: { info: { inline: true }, component: Delete },
 };
 
 export const SimpleDelete = () => (
