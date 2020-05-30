@@ -5,16 +5,22 @@ import {
   ISuccessNotificationProps as ICoreSuccessNotificationProps,
   IUseSuccessNotificationProps as ICoreUseSuccessNotificationProps,
 } from '@reactionable/core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { Notification } from './Notification';
+import { Alert } from '../alert/Alert';
 
 export type ISuccessNotificationProps = ICoreSuccessNotificationProps;
 
-const SuccessNotification: SuccessNotificationComponent = (props) => {
+export const SuccessNotification: SuccessNotificationComponent = ({ children, ...props }) => {
+  const variant = 'success';
   return (
-    <Notification {...props} variant={'sucess'}>
-      <FontAwesomeIcon icon={faCheckCircle} /> {props.children}
+    <Notification variant={variant} {...props}>
+      <Alert
+        variant={variant}
+        icon={{ icon: faCheckCircle }}
+        children={children}
+        className="mb-0"
+      />
     </Notification>
   );
 };

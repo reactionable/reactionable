@@ -38,6 +38,7 @@ export function Form<Values, Data>(props: PropsWithChildren<IFormProps<Values, D
         setSuccessNotification(t(successMessage, success));
       }
       if (onSuccess) {
+        setSuccess(undefined);
         onSuccess(success);
       }
     }

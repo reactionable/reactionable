@@ -20,8 +20,8 @@ export const ErrorNotification: FC<IErrorNotificationProps> = (props) => {
     props.title = t('An error has occured');
   }
   return (
-    <Notification variant={'danger'} {...props}>
-      <ErrorAlert>{props.children}</ErrorAlert>
+    <Notification variant="danger" {...props}>
+      <ErrorAlert className="mb-0">{props.children}</ErrorAlert>
     </Notification>
   );
 };

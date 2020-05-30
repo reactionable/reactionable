@@ -1,17 +1,19 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
+import { withKnobs, text } from '@storybook/addon-knobs';
 import Button from 'react-bootstrap/Button';
 import { UIContextProvider } from '../src/UI';
-import { ConfirmationAction } from '../src/confirmation/Confirmation';
+import { ConfirmationAction, useConfirmation } from '../src/confirmation/Confirmation';
 import './config';
 
 export default {
   title: 'UI Bootstrap/Confirmation',
   parameters: { info: { inline: true }, component: ConfirmationAction },
   component: ConfirmationAction,
+  decorators: [withKnobs],
 };
 
-export const SimpleConfirmationAction = () => (
+export const confirmationAction = () => (
   <UIContextProvider>
     <ConfirmationAction
       title="Confirm?"
@@ -27,3 +29,24 @@ export const SimpleConfirmationAction = () => (
     />
   </UIContextProvider>
 );
+
+export const UseConfirmation = () => {
+  const title = text('Title', 'This is a confirmation');
+  const content = text('Content', 'This is a confirmation content');
+
+  const { confirmation, setConfirmation } = useConfirmation({
+    title,
+    children: content,
+    callback: async (confirm: boolean) => {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      action(confirm ? 'Action confirmed' : 'Action canceled')();
+    },
+  });
+
+  return (
+    <>
+      <Button onClick={() => setConfirmation(true)}>Click on me</Button>
+      {confirmation}
+    </>
+  );
+};

@@ -32,9 +32,9 @@ export const Notification: FC<INotificationProps> = (props) => {
   );
 };
 
-export const useNotification = (title: string) => {
+export const useNotification = (props: INotificationProps) => {
   return useCoreNotification<INotificationProps>({
-    title,
+    ...props,
     Component: Notification,
   });
 };

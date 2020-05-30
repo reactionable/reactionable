@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { withKnobs, boolean } from '@storybook/addon-knobs';
-import { Loader } from '../src/loader/Loader';
+import { Loader, useLoader } from '../src/loader/Loader';
 import './config';
 
 export default {
@@ -13,4 +13,16 @@ export const SimpleLoader = () => {
   const overlay = boolean('Overlay', false);
 
   return <Loader overlay={overlay} />;
+};
+
+export const UseLoader = () => {
+  const overlay = boolean('Overlay', false);
+  const loading = boolean('Loading', true);
+  const { loader, setLoading } = useLoader({ overlay });
+
+  useEffect(() => {
+    setLoading(loading);
+  }, [loading]);
+
+  return loader;
 };

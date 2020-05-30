@@ -6,5 +6,6 @@ module.exports = {
     '@storybook/addon-knobs',
     '@storybook/addon-storysource',
     '@storybook/addon-docs',
+    '@storybook/addon-controls',
   ],
 };

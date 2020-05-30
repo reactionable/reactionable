@@ -82,6 +82,7 @@ export function ConfirmationAction<Data>(props: PropsWithChildren<IConfirmationA
 
   useEffect(() => {
     if (success && onSuccess) {
+      setSuccess(undefined);
       onSuccess(success);
     }
   }, [success, onSuccess]);

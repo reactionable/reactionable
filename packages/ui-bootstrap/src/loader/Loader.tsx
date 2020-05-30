@@ -40,6 +40,6 @@ export const Loader: FC<ILoaderProps> = ({ overlay = true }) => {
 
 export type IUseLoaderProps = ICoreUseLoaderProps & ILoaderProps;
 
-export const useLoader: IUseLoader<IUseLoaderProps> = (props) => {
+export const useLoader: IUseLoader<IUseLoaderProps> = (props = {}) => {
   return useLoaderCore({ ...props, Component: Loader });
 };
