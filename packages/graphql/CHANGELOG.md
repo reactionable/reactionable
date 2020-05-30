@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.23.0 (2020-05-30)
+
+
+### Features
+
+* improve notification behaviour ([847b416](https://github.com/reactionable/reactionable/commit/847b416d112dd8ec76ee2d746dcbb20e366c4eb7))
+
+
+
+
+
 ## 0.22.7 (2020-05-23)
 
 **Note:** Version bump only for package @reactionable/graphql
