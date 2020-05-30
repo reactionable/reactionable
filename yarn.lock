@@ -3763,25 +3763,25 @@
     regenerator-runtime "^0.13.3"
     ts-dedent "^1.1.1"
 
-"@storybook/addon-storysource@^6.0.0-beta.13":
-  version "6.0.0-beta.13"
-  resolved "https://registry.yarnpkg.com/@storybook/addon-storysource/-/addon-storysource-6.0.0-beta.13.tgz#663610c91a3c7e4b0293bd6ebad72314bf940509"
-  integrity sha512-PS3l1RN0awmI3+riKp8eoSUz2+rkotXZISJzrU388mmqEnC5I0kELehU8cgxOOl0ooTWGOtegBn9UkGFV6V6GQ==
+"@storybook/addon-storysource@^6.0.0-beta.19":
+  version "6.0.0-beta.19"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-storysource/-/addon-storysource-6.0.0-beta.19.tgz#0635176373cea7cfdcb6738af17cb568f29f3297"
+  integrity sha512-AjTJWSo4az+MgQsl3DDbyNgFl1cAeYxVeFc1F/L3+gNBuDcD2RYuKTxJ34pdqNDSs8Uq6EaXsJRoip07b6c9Hw==
   dependencies:
-    "@storybook/addons" "6.0.0-beta.13"
-    "@storybook/api" "6.0.0-beta.13"
-    "@storybook/client-logger" "6.0.0-beta.13"
-    "@storybook/components" "6.0.0-beta.13"
-    "@storybook/router" "6.0.0-beta.13"
-    "@storybook/source-loader" "6.0.0-beta.13"
-    "@storybook/theming" "6.0.0-beta.13"
+    "@storybook/addons" "6.0.0-beta.19"
+    "@storybook/api" "6.0.0-beta.19"
+    "@storybook/client-logger" "6.0.0-beta.19"
+    "@storybook/components" "6.0.0-beta.19"
+    "@storybook/router" "6.0.0-beta.19"
+    "@storybook/source-loader" "6.0.0-beta.19"
+    "@storybook/theming" "6.0.0-beta.19"
     core-js "^3.0.1"
     estraverse "^4.2.0"
     loader-utils "^2.0.0"
     prettier "^2.0.5"
     prop-types "^15.7.2"
     react "^16.9.17"
-    react-syntax-highlighter "^11.0.2"
+    react-syntax-highlighter "^12.2.1"
     regenerator-runtime "^0.13.3"
 
 "@storybook/addons@6.0.0-alpha.2":
@@ -4409,6 +4409,21 @@
   dependencies:
     "@storybook/addons" "6.0.0-beta.13"
     "@storybook/client-logger" "6.0.0-beta.13"
+    "@storybook/csf" "0.0.1"
+    core-js "^3.0.1"
+    estraverse "^4.2.0"
+    global "^4.3.2"
+    loader-utils "^2.0.0"
+    prettier "^2.0.5"
+    regenerator-runtime "^0.13.3"
+
+"@storybook/source-loader@6.0.0-beta.19":
+  version "6.0.0-beta.19"
+  resolved "https://registry.yarnpkg.com/@storybook/source-loader/-/source-loader-6.0.0-beta.19.tgz#243381ba7055de3ae393f141e62c364815201c2f"
+  integrity sha512-eXZdzUI9COMBYVdGrIwATv/4y198vtwcxwmTqL7QUjJmJhX2IkCOWt2qTsZUkoDRmtlKEx5hdUf011NTMnTgnQ==
+  dependencies:
+    "@storybook/addons" "6.0.0-beta.19"
+    "@storybook/client-logger" "6.0.0-beta.19"
     "@storybook/csf" "0.0.1"
     core-js "^3.0.1"
     estraverse "^4.2.0"
