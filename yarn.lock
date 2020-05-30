@@ -3719,18 +3719,18 @@
     react-lifecycles-compat "^3.0.4"
     util-deprecate "^1.0.2"
 
-"@storybook/addon-knobs@^6.0.0-beta.13":
-  version "6.0.0-beta.13"
-  resolved "https://registry.yarnpkg.com/@storybook/addon-knobs/-/addon-knobs-6.0.0-beta.13.tgz#4f7e78036dd761a5dfe7a1214704f044a594dd39"
-  integrity sha512-5RM6yQY57w3TA2C8g6Ca8ZQesjkZ4fVRC4u7fxfGueeCAHxeDlwg59Sa/TvW6dgl63H+1kfdGOv9rB1Fl43ncg==
+"@storybook/addon-knobs@^6.0.0-beta.19":
+  version "6.0.0-beta.19"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-knobs/-/addon-knobs-6.0.0-beta.19.tgz#df0ea3e25788550b17f997fa6e7d63556488e330"
+  integrity sha512-QCa9EqUH/oEZXPTAV7DUD0+NpGsds7rk9lj24QB+1YhFSBYO+jFUqETWDS/F1bzD+8278DRHemy+zlbBi3sBag==
   dependencies:
-    "@storybook/addons" "6.0.0-beta.13"
-    "@storybook/api" "6.0.0-beta.13"
-    "@storybook/channels" "6.0.0-beta.13"
-    "@storybook/client-api" "6.0.0-beta.13"
-    "@storybook/components" "6.0.0-beta.13"
-    "@storybook/core-events" "6.0.0-beta.13"
-    "@storybook/theming" "6.0.0-beta.13"
+    "@storybook/addons" "6.0.0-beta.19"
+    "@storybook/api" "6.0.0-beta.19"
+    "@storybook/channels" "6.0.0-beta.19"
+    "@storybook/client-api" "6.0.0-beta.19"
+    "@storybook/components" "6.0.0-beta.19"
+    "@storybook/core-events" "6.0.0-beta.19"
+    "@storybook/theming" "6.0.0-beta.19"
     "@types/react-color" "^3.0.1"
     copy-to-clipboard "^3.0.8"
     core-js "^3.0.1"
