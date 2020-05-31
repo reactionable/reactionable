@@ -1,6 +1,7 @@
 import React from 'react';
 import { withKnobs, select, boolean, text } from '@storybook/addon-knobs';
 import { faAtom } from '@fortawesome/free-solid-svg-icons';
+import Button from 'react-bootstrap/Button';
 import { Alert, useAlert } from '../src/alert/Alert';
 import { ErrorAlert, useErrorAlert } from '../src/alert/ErrorAlert';
 import { WarningAlert, useWarningAlert } from '../src/alert/WarningAlert';
@@ -48,7 +49,7 @@ export const UseAlert = () => {
 
   return (
     <>
-      <button onClick={() => setAlert(content)}>Click on me</button>
+      <Button onClick={() => setAlert(content)}>Click on me</Button>
       <hr />
       {alert}
     </>
@@ -64,7 +65,7 @@ export const UseErrorAlert = () => {
 
   return (
     <>
-      <button onClick={() => setErrorAlert(new Error(content))}>Click on me</button>
+      <Button onClick={() => setErrorAlert(new Error(content))}>Click on me</Button>
       <hr />
       {errorAlert}
     </>
@@ -80,7 +81,7 @@ export const UseWarningAlert = () => {
 
   return (
     <>
-      <button onClick={() => setWarningAlert(content)}>Click on me</button>
+      <Button onClick={() => setWarningAlert(content)}>Click on me</Button>
       <hr />
       {warningAlert}
     </>
