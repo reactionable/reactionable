@@ -1,9 +1,9 @@
 import React from 'react';
-import { withKnobs, select, boolean } from '@storybook/addon-knobs';
+import { withKnobs, select, boolean, text } from '@storybook/addon-knobs';
 import { faAtom } from '@fortawesome/free-solid-svg-icons';
-import { Alert } from '../src/alert/Alert';
-import { ErrorAlert } from '../src/alert/ErrorAlert';
-import { WarningAlert } from '../src/alert/WarningAlert';
+import { Alert, useAlert } from '../src/alert/Alert';
+import { ErrorAlert, useErrorAlert } from '../src/alert/ErrorAlert';
+import { WarningAlert, useWarningAlert } from '../src/alert/WarningAlert';
 import './config';
 
 export default {
@@ -16,7 +16,7 @@ export default {
   decorators: [withKnobs],
 };
 
-export const SimpleAlert = () => {
+export const alert = () => {
   const variant = select(
     'Variant',
     ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'dark', 'light', undefined],
@@ -24,9 +24,65 @@ export const SimpleAlert = () => {
   );
   const icon = boolean('Icon', false);
 
-  return <Alert variant={variant} icon={icon && { icon: faAtom }} children={<>test alert</>} />;
+  return (
+    <Alert variant={variant} icon={icon && { icon: faAtom }}>
+      Test alert
+    </Alert>
+  );
 };
 
-export const SimpleErrorAlert = () => <ErrorAlert children={new Error('test error')} />;
+export const UseAlert = () => {
+  const content = text('Content', 'This is the alert content');
+  const variant = select(
+    'Variant',
+    ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'dark', 'light', undefined],
+    'primary'
+  );
 
-export const SimpleWarningAlert = () => <WarningAlert children={'test warning'} />;
+  const icon = boolean('Icon', false);
+
+  const { alert, setAlert } = useAlert({
+    variant,
+    icon: icon && { icon: faAtom },
+  });
+
+  return (
+    <>
+      <button onClick={() => setAlert(content)}>Click on me</button>
+      <hr />
+      {alert}
+    </>
+  );
+};
+
+export const errorAlert = () => <ErrorAlert children={new Error('Test error alert')} />;
+
+export const UseErrorAlert = () => {
+  const content = text('Content', 'This is the error alert content');
+
+  const { errorAlert, setErrorAlert } = useErrorAlert();
+
+  return (
+    <>
+      <button onClick={() => setErrorAlert(new Error(content))}>Click on me</button>
+      <hr />
+      {errorAlert}
+    </>
+  );
+};
+
+export const warningAlert = () => <WarningAlert>Test warning alert</WarningAlert>;
+
+export const UseWarningAlert = () => {
+  const content = text('Content', 'This is the warning alert content');
+
+  const { warningAlert, setWarningAlert } = useWarningAlert();
+
+  return (
+    <>
+      <button onClick={() => setWarningAlert(content)}>Click on me</button>
+      <hr />
+      {warningAlert}
+    </>
+  );
+};

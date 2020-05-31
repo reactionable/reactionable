@@ -1,5 +1,5 @@
 import { FC, PropsWithChildren, ReactElement, ReactNode } from 'react';
-import { useAlert, IAlertProps } from './Alert';
+import { useAlert, IAlertProps, Alert } from './Alert';
 
 export type IWarningAlertProps = IAlertProps;
 export type WarningAlertComponent = FC<IWarningAlertProps>;
@@ -12,10 +12,14 @@ export interface IUseWarningAlertResult {
 }
 
 export type IUseWarningAlert<P extends IUseWarningAlertProps> = (
-  props: P
+  props?: P
 ) => IUseWarningAlertResult;
+
 export function useWarningAlert<P extends IUseWarningAlertProps>(
-  props: P & { Component: WarningAlertComponent }
+  props: P & { Component: WarningAlertComponent } = {
+    ...({ children: undefined } as P),
+    Component: Alert,
+  }
 ) {
   const { alert: warningAlert, setAlert: setWarningAlert } = useAlert<P>(props);
   return { warningAlert, setWarningAlert };

@@ -1,27 +1,31 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
-import { Alert, IAlertProps } from './Alert';
 import {
-  IError,
+  printError,
   IErrorAlertProps as ICoreErrorAlertProps,
   useErrorAlert as useCoreErrorAlert,
   IUseErrorAlertProps as ICoreUseErrorAlertProps,
+  ErrorAlertComponent as CoreErrorAlertComponent,
 } from '@reactionable/core';
+import { Alert, IAlertProps } from './Alert';
 
-export type IErrorAlertProps = IAlertProps &
-  ICoreErrorAlertProps & {
-    children?: IError;
-  };
-export type ErrorAlertComponent = FC<IErrorAlertProps>;
+export type IErrorAlertProps = ICoreErrorAlertProps<IAlertProps>;
+export type ErrorAlertComponent = CoreErrorAlertComponent<IErrorAlertProps>;
 export const ErrorAlert: ErrorAlertComponent = ({ children, ...props }) => {
   return (
-    <Alert variant="danger" icon={{ icon: faExclamationTriangle }} {...props}>
-      {children && children.message}
-    </Alert>
+    <Alert
+      variant="danger"
+      icon={{ icon: faExclamationTriangle }}
+      children={printError(children)}
+      {...props}
+    />
   );
 };
 
 export type IUseErrorAlertProps = ICoreUseErrorAlertProps & IAlertProps;
-export const useErrorAlert = (props?: IErrorAlertProps) => {
-  return useCoreErrorAlert<IErrorAlertProps>({ Component: ErrorAlert, ...props });
+export const useErrorAlert = (props?: IUseErrorAlertProps) => {
+  return useCoreErrorAlert<IUseErrorAlertProps>({
+    Component: ErrorAlert,
+    ...props,
+  });
 };
