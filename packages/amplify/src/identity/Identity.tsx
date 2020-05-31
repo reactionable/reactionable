@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react';
-import { Auth } from 'aws-amplify';
+import { Auth } from '@aws-amplify/auth';
 import { UsernameAttributes } from 'aws-amplify-react/lib-esm/Auth/common/types';
 import {
   Authenticator,
