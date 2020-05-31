@@ -1,5 +1,4 @@
-import { API, graphqlOperation } from 'aws-amplify';
-import { GraphQLResult } from '@aws-amplify/api-graphql';
+import { GraphQLResult, graphqlOperation, GraphQLAPI } from '@aws-amplify/api-graphql';
 import {
   IUseQueryOptions as ICoreUseQueryOptions,
   useQuery as coreUseQuery,
@@ -26,9 +25,9 @@ export async function query<Data extends {}, QO extends IQueryOptions<any>>({
   variables,
   rawData,
 }: QO): Promise<Data> {
-  const result = await API.graphql(graphqlOperation(query, variables));
+  const result = await GraphQLAPI.graphql(graphqlOperation(query, variables));
 
-  if (!isGraphQLResult(result) || !result.data) {
+  if (!result || !isGraphQLResult(result) || !result.data) {
     throw new Error('No data');
   }
 

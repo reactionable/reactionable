@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import {
   IUseQueryListResult,
   IUseQueryListOptions as ICoreUseQueryListOptions,
-  useQuery as coreUseQuery,
+  useQuery as useQueryCore,
 } from '@reactionable/core';
 import { IUseQueryOptions, query, IQueryOptions } from './Query';
 
@@ -58,16 +58,20 @@ export type IUseQueryListOptions<Data extends {}, Variables extends {}> = IUseQu
 export const useQueryList = <Data extends {}, Variables extends {}>(
   options: IUseQueryListOptions<Data, Variables>
 ): IUseQueryListResult<Data> => {
-  const [token, setToken] = useState<UndefinedType<string>>();
+  const [currentToken, setCurrentToken] = useState<UndefinedType<string>>();
   const [nextToken, setNextToken] = useState<UndefinedType<string>>();
   const [previousToken, setPreviousToken] = useState<UndefinedType<string>>();
   const [list, setList] = useState<Data[]>([]);
 
-  const { refetch, data, ...result } = coreUseQuery<
+  const { refetch, data, ...result } = useQueryCore<
     AmplifyListType<Data>,
     IQueryListOptions<Variables>
   >({
     ...options,
+    variables: {
+      ...options.variables,
+      nextToken: currentToken,
+    },
     handleQuery: (queryOptions) => queryList<Data, Variables>(queryOptions),
   });
 
@@ -75,13 +79,13 @@ export const useQueryList = <Data extends {}, Variables extends {}>(
     setList([]);
     refetch();
   };
+
   const next = () => {
-    setPreviousToken(token);
-    setToken(nextToken);
+    setPreviousToken(currentToken);
+    setCurrentToken(nextToken);
   };
-  const previous = () => {
-    setToken(previousToken);
-  };
+
+  const previous = () => setCurrentToken(previousToken);
 
   useEffect(() => {
     setList(data ? data.items || [] : []);
@@ -95,7 +99,7 @@ export const useQueryList = <Data extends {}, Variables extends {}>(
     data: list,
     refetch: refetchList,
     next: nextToken ? next : undefined,
-    previous: previousToken ? previous : undefined,
+    previous: currentToken ? previous : undefined,
   };
 };
 

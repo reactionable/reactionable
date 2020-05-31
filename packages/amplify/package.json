@@ -9,7 +9,7 @@
   "typings": "lib/index.d.ts",
   "scripts": {
     "start": "yarn build:barrelsby && tsc --watch",
-    "test": "jest --passWithNoTests",
+    "test": "jest",
     "build": "yarn build:clean && yarn build:barrelsby && tsc --pretty",
     "build:clean": "rimraf lib",
     "build:barrelsby": "barrelsby -d src --exclude \".+\\.test\\..+\" --delete -q",
@@ -37,19 +37,26 @@
     "aws-amplify-react": "^4.1.12"
   },
   "devDependencies": {
+    "@babel/core": "^7.10.2",
+    "@testing-library/react": "^10.0.4",
+    "@testing-library/react-hooks": "^3.2.1",
     "@types/jest": "^25.2.3",
     "@types/react": "^16.9.35",
     "barrelsby": "^2.2.0",
     "jest": "^26.0.1",
     "react": "^16.13.1",
     "react-i18next": "^11.5.0",
+    "react-test-renderer": "^16.13.1",
     "rimraf": "^3.0.2",
-    "ts-jest": "^26.0.0",
+    "ts-jest": "^26.1.0",
     "tslib": "^2.0.0",
     "typescript": "^3.9.3"
   },
   "jest": {
-    "preset": "ts-jest"
+    "preset": "ts-jest",
+    "roots": [
+      "<rootDir>/src"
+    ]
   },
   "publishConfig": {
     "access": "public"

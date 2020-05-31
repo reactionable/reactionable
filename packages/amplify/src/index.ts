@@ -3,7 +3,8 @@
  */
 
 export * from './Amplify';
-export * from './crud/Query';
-export * from './crud/QueryList';
 export * from './i18n/I18n';
 export * from './identity/Identity';
+export * from './query/Query';
+export * from './query/QueryList';
+export * from './query/__mocks__/@aws-amplify/api-graphql';

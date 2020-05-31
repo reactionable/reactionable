@@ -6,6 +6,7 @@ import './config';
 export default {
   title: 'Amplify/Identity',
   parameters: { info: { inline: true } },
+  component: IdentityContextProvider,
 };
 
 export const UseIdentityContext = () => {
