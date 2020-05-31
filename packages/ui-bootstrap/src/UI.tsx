@@ -16,6 +16,8 @@ import { useWarningAlert, IUseWarningAlertProps } from './alert/WarningAlert';
 import { useConfirmation, IUseConfirmationProps } from './confirmation/Confirmation';
 import { useLayout, IUseLayoutProps } from './layout/Layout';
 import { useModalForm, IUseModalFormProps } from './modal/ModalForm';
+import { useModal, IUseModalProps } from './modal/Modal';
+import { useForm, IUseFormProps } from './form/Form';
 
 export type IUIContextProviderProps = ICoreUIContextProviderProps<
   IUseLoaderProps,
@@ -25,6 +27,8 @@ export type IUIContextProviderProps = ICoreUIContextProviderProps<
   IUseWarningAlertProps,
   IUseConfirmationProps,
   IUseLayoutProps,
+  IUseFormProps,
+  IUseModalProps,
   IUseModalFormProps
 >;
 
@@ -37,6 +41,8 @@ export function useUIContext() {
     IUseWarningAlertProps,
     IUseConfirmationProps,
     IUseLayoutProps,
+    IUseFormProps,
+    IUseModalProps,
     IUseModalFormProps
   >();
 }
@@ -50,6 +56,8 @@ export function useUIContextProviderProps(): IUIContextProviderProps {
     useWarningAlert,
     useConfirmation,
     useLayout,
+    useForm,
+    useModal,
     useModalForm,
   };
 }

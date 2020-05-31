@@ -11,7 +11,7 @@ import {
   useErrorNotification,
   IUseErrorNotificationProps,
 } from './notification/ErrorNotification';
-import { IUseErrorAlert, useErrorAlert, IUseErrorAlertProps } from './alert/ErrorAlert';
+import { IUseErrorAlert, useErrorAlert, IUseErrorAlertProps, ErrorAlert } from './alert/ErrorAlert';
 import { IUseWarningAlert, useWarningAlert, IUseWarningAlertProps } from './alert/WarningAlert';
 import {
   IUseConfirmationProps,
@@ -20,13 +20,13 @@ import {
   Confirmation,
 } from './confirmation/Confirmation';
 import { IUseLayoutProps, useLayout, IUseLayout } from './layout/Layout';
-import { useModal, Modal } from './modal/Modal';
-import { IUseModalForm, IUseModalFormProps, useModalForm } from './modal/ModalForm';
+import { useModal, Modal, IUseModalProps, IUseModal } from './modal/Modal';
 import { Alert } from './alert/Alert';
-import { Form } from '../form/Form';
+import { Form, IUseFormProps, IUseForm, useForm } from '../form/Form';
 import { Header } from './layout/header/Header';
 import { Body } from './layout/body/Body';
 import { Footer } from './layout/footer/Footer';
+import { IUseModalFormProps, IUseModalForm, useModalForm } from './modal/ModalForm';
 
 export type IUIContext<
   LO extends IUseLoaderProps = IUseLoaderProps,
@@ -36,6 +36,8 @@ export type IUIContext<
   WA extends IUseWarningAlertProps = IUseWarningAlertProps,
   CO extends IUseConfirmationProps = IUseConfirmationProps,
   LA extends IUseLayoutProps = IUseLayoutProps,
+  FO extends IUseFormProps = IUseFormProps,
+  MO extends IUseModalProps = IUseModalProps,
   MF extends IUseModalFormProps = IUseModalFormProps
 > = {
   useLoader: IUseLoader<LO>;
@@ -45,10 +47,14 @@ export type IUIContext<
   useWarningAlert: IUseWarningAlert<WA>;
   useConfirmation: IUseConfirmation<CO>;
   useLayout: IUseLayout<LA>;
+  useForm: IUseForm<FO>;
+  useModal: IUseModal<MO>;
   useModalForm: IUseModalForm<MF>;
 };
 
-export const UIContext = createContext<IUIContext<any, any, any, any, any, any, any, any>>({
+export const UIContext = createContext<
+  IUIContext<any, any, any, any, any, any, any, any, any, any>
+>({
   useLoader,
   useSuccessNotification,
   useErrorNotification,
@@ -56,6 +62,8 @@ export const UIContext = createContext<IUIContext<any, any, any, any, any, any, 
   useWarningAlert,
   useConfirmation,
   useLayout,
+  useForm,
+  useModal,
   useModalForm,
 });
 
@@ -67,8 +75,10 @@ export type IUIContextProviderProps<
   WA extends IUseWarningAlertProps = IUseWarningAlertProps,
   CO extends IUseConfirmationProps = IUseConfirmationProps,
   LA extends IUseLayoutProps = IUseLayoutProps,
+  FO extends IUseFormProps = IUseFormProps,
+  MO extends IUseModalProps = IUseModalProps,
   MF extends IUseModalFormProps = IUseModalFormProps
-> = PropsWithChildren<IUIContext<LO, SN, EN, EA, WA, CO, LA, MF>>;
+> = PropsWithChildren<IUIContext<LO, SN, EN, EA, WA, CO, LA, FO, MO, MF>>;
 
 export function UIContextProvider<
   LO extends IUseLoaderProps,
@@ -78,9 +88,23 @@ export function UIContextProvider<
   WA extends IUseWarningAlertProps,
   CO extends IUseConfirmationProps,
   LA extends IUseLayoutProps,
+  FO extends IUseFormProps,
+  MO extends IUseModalProps,
   MF extends IUseModalFormProps
->(props: IUIContextProviderProps<LO, SN, EN, EA, WA, CO, LA, MF>) {
-  return <UIContext.Provider value={props}>{props.children}</UIContext.Provider>;
+>(
+  props?: PropsWithChildren<
+    Partial<IUIContextProviderProps<LO, SN, EN, EA, WA, CO, LA, FO, MO, MF>>
+  >
+) {
+  return (
+    <UIContext.Provider
+      value={{
+        ...useUIContextProviderProps(),
+        ...props,
+      }}
+      children={props?.children}
+    />
+  );
 }
 
 export function useUIContext<
@@ -91,9 +115,11 @@ export function useUIContext<
   WA extends IUseWarningAlertProps,
   CO extends IUseConfirmationProps,
   LA extends IUseLayoutProps,
+  FO extends IUseFormProps,
+  MO extends IUseModalProps,
   MF extends IUseModalFormProps
 >() {
-  return useContext<IUIContext<LO, SN, EN, EA, WA, CO, LA, MF>>(UIContext);
+  return useContext<IUIContext<LO, SN, EN, EA, WA, CO, LA, FO, MO, MF>>(UIContext);
 }
 
 export function useUIContextProviderProps(): IUIContextProviderProps {
@@ -102,7 +128,7 @@ export function useUIContextProviderProps(): IUIContextProviderProps {
     useSuccessNotification: (props) =>
       useSuccessNotification({ Component: Notification, ...props }),
     useErrorNotification: (props) => useErrorNotification({ Component: Loader, ...props }),
-    useErrorAlert: (props) => useErrorAlert({ Component: Alert, ...props }),
+    useErrorAlert: (props) => useErrorAlert({ Component: ErrorAlert, ...props }),
     useWarningAlert: (props) => useWarningAlert({ Component: Alert, ...props }),
     useConfirmation: (props) => useConfirmation({ Component: Confirmation, ...props }),
     useLayout: (props) =>
@@ -112,11 +138,8 @@ export function useUIContextProviderProps(): IUIContextProviderProps {
         BodyComponent: Body,
         FooterComponent: Footer,
       }),
-    useModalForm: (props) =>
-      useModalForm({
-        FormComponent: Form,
-        useModal: (modalProps) => useModal({ Component: Modal, ...modalProps }),
-        ...props,
-      }),
+    useForm: (props) => useForm({ Component: Form, ...props }),
+    useModal: (props) => useModal({ Component: Modal, ...props }),
+    useModalForm,
   };
 }

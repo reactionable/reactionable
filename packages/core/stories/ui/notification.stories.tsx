@@ -6,6 +6,6 @@ export default {
   parameters: { info: { inline: true }, component: Notification },
 };
 
-export const SimpleNotification = () => (
+export const notification = () => (
   <Notification title="Simple notification" children={<>Simple notification content</>} />
 );

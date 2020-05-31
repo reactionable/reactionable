@@ -3,15 +3,14 @@ import { useTranslation } from 'react-i18next';
 import Button, { ButtonProps } from 'react-bootstrap/Button';
 import { Form as FormikForm } from 'formik';
 import {
+  useForm as useCoreForm,
   Form as CoreForm,
   IFormProps as ICoreFormProps,
   IOnSubmitForm as ICoreOnSubmitForm,
   IFormChildrenProps,
 } from '@reactionable/core';
 
-export type IFormProps<Values, Data> = ICoreFormProps<Values, Data> & {
-  submitButton?: true | string;
-};
+export type IFormProps<Values, Data> = ICoreFormProps<Values, Data>;
 
 export type IOnSubmitForm<Values, Data> = ICoreOnSubmitForm<Values, Data>;
 
@@ -51,4 +50,13 @@ export function Form<Values, Data>({
   };
 
   return <CoreForm<Values, Data> {...props} children={renderChildren} />;
+}
+
+export type IUseFormProps<Values = any, Data = any> = PropsWithChildren<IFormProps<Values, Data>>;
+
+export function useForm<Values, Data>(props: IUseFormProps<Values, Data>) {
+  return useCoreForm<IUseFormProps<Values, Data>>({
+    Component: Form,
+    ...props,
+  });
 }

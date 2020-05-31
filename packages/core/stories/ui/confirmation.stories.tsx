@@ -8,8 +8,8 @@ export default {
   parameters: { info: { inline: true }, component: ConfirmationAction },
 };
 
-export const SimpleConfirmationAction = () => (
-  <UIContextProvider {...useUIContextProviderProps()}>
+export const confirmationAction = () => (
+  <UIContextProvider>
     <ConfirmationAction
       title="Confirm?"
       confirmationMessage="Do you want to perform this action"

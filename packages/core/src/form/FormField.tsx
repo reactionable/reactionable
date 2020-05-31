@@ -31,7 +31,7 @@ export type IFormFieldProps<
   FieldElementProps extends IFieldElementProps,
   Value extends IFormFieldValue
 > = FieldElementProps & {
-  children: IRenderFormField<FieldElementProps, Value>;
+  children?: IRenderFormField<FieldElementProps, Value>;
   fastField?: boolean;
 };
 
@@ -68,7 +68,18 @@ export function FormField<
       error: touch ? error : undefined,
       field: fieldInputPropsEnhanced,
     };
-    return children(fieldPropsEnhanced);
+
+    if (children) {
+      return children(fieldPropsEnhanced);
+    }
+
+    const {
+      isValid: isValidProp,
+      isInvalid: isInvalidProp,
+      ...inputProps
+    } = fieldPropsEnhanced.field;
+
+    return <input {...inputProps} />;
   };
 
   const FieldComponent = fastField ? FastField : Field;

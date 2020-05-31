@@ -1,11 +1,10 @@
 import React from 'react';
 import { withKnobs, boolean } from '@storybook/addon-knobs';
 import { List } from '../../src/crud/list/List';
-import { UIContextProvider } from '../../src/UI';
-import '../config';
+import { UIContextProvider } from '../../src/ui/UI';
 
 export default {
-  title: 'UI Bootstrap/Crud/List',
+  title: 'Core/Crud/List',
   parameters: { info: { inline: true }, component: List },
   decorators: [withKnobs],
 };
@@ -13,10 +12,10 @@ export default {
 export const list = () => {
   const isLoading = boolean('Is loading?', false);
   const hasError = boolean('Has error?', false);
+
   return (
     <UIContextProvider>
       <List
-        head={['ID', 'Label']}
         isLoading={isLoading}
         error={hasError && new Error('An error has occured')}
         data={[
@@ -24,10 +23,14 @@ export const list = () => {
           { id: '2', label: 'Data 2' },
         ]}
         children={(data) => (
-          <tr>
-            <td>{data.id}</td>
-            <td>{data.label}</td>
-          </tr>
+          <table>
+            {data.map((item) => (
+              <tr key={item.id}>
+                <td>{item.id}</td>
+                <td>{item.label}</td>
+              </tr>
+            ))}
+          </table>
         )}
       />
     </UIContextProvider>

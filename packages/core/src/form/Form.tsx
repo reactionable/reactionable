@@ -13,6 +13,7 @@ export interface IFormProps<Values, Data> {
   title: string;
   formSchema: object;
   onSubmit: IOnSubmitForm<Values, Data>;
+  submitButton?: true | string;
   formValues: Values;
   children: (formikProps: IFormChildrenProps<Values>) => ReactElement;
   successMessage?: string;
@@ -80,4 +81,21 @@ export function Form<Values, Data>(props: PropsWithChildren<IFormProps<Values, D
       children={renderFormChildren}
     />
   );
+}
+
+export type IUseFormProps<
+  P extends IFormProps<any, any> = IFormProps<any, any>
+> = PropsWithChildren<P>;
+
+export type IUseFormResult = ReactElement;
+
+export type IUseForm<P extends IUseFormProps> = (props: P) => IUseFormResult;
+
+export function useForm<P extends IUseFormProps>({
+  Component,
+  ...props
+}: P & {
+  Component: FormComponent<any>;
+}): IUseFormResult {
+  return <Component {...props} />;
 }

@@ -1,11 +1,13 @@
 import React, { FC, PropsWithChildren } from 'react';
-import { IFormProps, Form } from '../../form/Form';
+import { IFormProps } from '../../form/Form';
 import { IModalFormProps, IUseModalFormProps } from '../../ui/modal/ModalForm';
 import { EnhanceChildren } from '../../enhance-children/EnhanceChildren';
 import { useUIContext } from '../../ui/UI';
 
 export interface ICreateProps<Values, Data> {
-  modal?: Omit<IUseModalFormProps<IModalFormProps<IFormProps<Values, Data>>>, 'form' | 'title'>;
+  modal?:
+    | Omit<IUseModalFormProps<IModalFormProps<IFormProps<Values, Data>>>, 'form' | 'title'>
+    | true;
   form: IFormProps<Values, Data>;
 }
 
@@ -16,13 +18,13 @@ export function Create<Values, Data>({
   children,
   form,
 }: PropsWithChildren<ICreateProps<Values, Data>>) {
+  const { useForm, useModalForm } = useUIContext();
   if (!modalProps) {
-    return <Form<Values, Data> {...form} />;
+    return useForm(form);
   }
 
-  const { useModalForm } = useUIContext();
   const { modal, openModal } = useModalForm({
-    ...modalProps,
+    ...(modalProps === true ? {} : modalProps),
     title: form.title,
     form,
   });

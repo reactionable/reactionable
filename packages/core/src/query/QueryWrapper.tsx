@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useState } from 'react';
+import React, { useEffect, useState, ReactNode } from 'react';
 import { IUseLoaderResult } from '../ui/loader/Loader';
 import { IUseWarningAlertResult } from '../ui/alert/WarningAlert';
 import { IUseErrorAlertResult } from '../ui/alert/ErrorAlert';
@@ -9,8 +9,8 @@ export type IQueryWrapperProps<UQR extends IUseQueryResult<any> = IUseQueryResul
   UQR,
   'isLoading' | 'error' | 'data'
 > & {
-  noData?: ReactElement;
-  children: (props: IQueryWrapperChildrenProps<UQR>) => ReactElement;
+  noData?: ReactNode;
+  children: (props: IQueryWrapperChildrenProps<UQR>) => ReactNode;
 };
 
 export type IQueryWrapperChildrenProps<UQR extends IUseQueryResult<any>> = Omit<UQR, 'data'> & {
@@ -34,7 +34,7 @@ function checkHasData(data: any) {
     return Object.keys(data).length > 0;
   }
 
-  return data !== null && data != undefined;
+  return data !== null && data !== undefined;
 }
 
 export function QueryWrapper<
@@ -44,9 +44,9 @@ export function QueryWrapper<
   const { isLoading, error, noData } = props;
   const { useLoader, useErrorAlert, useWarningAlert } = useUIContext();
   const { loader, setLoading } = useLoader({ isLoading });
-  const { warningAlert, setWarningAlert } = useWarningAlert({});
-  const { errorAlert, setErrorAlert } = useErrorAlert({});
-  const [childrenData, setData] = useState<DataPropsType<UQR>>();
+  const { warningAlert, setWarningAlert } = useWarningAlert();
+  const { errorAlert, setErrorAlert } = useErrorAlert();
+  const [childrenData, setChildrenData] = useState<ReactNode>();
 
   useEffect(() => {
     setLoading(isLoading);
@@ -54,13 +54,19 @@ export function QueryWrapper<
 
     const hasData = checkHasData(data);
 
-    setData(!isLoading && !error && hasData ? (data as DataPropsType<UQR>) : undefined);
+    setChildrenData(
+      !isLoading && !error && hasData
+        ? children({
+            data,
+            setLoading,
+            setErrorAlert,
+            setWarningAlert,
+            ...props,
+          } as IQueryWrapperChildrenProps<UQR>)
+        : undefined
+    );
 
-    if (error || isLoading || !noData || hasData) {
-      return;
-    }
-
-    setWarningAlert(hasData ? undefined : noData);
+    setWarningAlert(error || isLoading || !noData || hasData ? undefined : noData);
   }, [isLoading, error, data]);
 
   return (
@@ -68,14 +74,7 @@ export function QueryWrapper<
       {loader}
       {errorAlert}
       {warningAlert}
-      {childrenData &&
-        children({
-          data: childrenData,
-          setLoading,
-          setErrorAlert,
-          setWarningAlert,
-          ...props,
-        } as IQueryWrapperChildrenProps<UQR>)}
+      {childrenData}
     </>
   );
 }

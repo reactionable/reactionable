@@ -1,16 +1,11 @@
 import React, { PropsWithChildren, FC } from 'react';
 import { IFormProps } from '../../form/Form';
-import { IUseModalProps, IModalProps, IUseModalResult, ModalComponent, IUseModal } from './Modal';
+import { IUseModalProps, IModalProps, IUseModalResult } from './Modal';
+import { useUIContext } from '../UI';
 
 type IFormPropsType<MFP extends IModalFormProps> = MFP extends IModalFormProps<infer F>
   ? F extends IFormProps<any, any>
     ? F
-    : never
-  : never;
-
-type IModalPropsType<MFP extends IModalFormProps> = MFP extends IModalFormProps<infer M>
-  ? M extends IModalProps
-    ? M
     : never
   : never;
 
@@ -39,15 +34,15 @@ export type IModalFormComponentProps<P extends IFormProps<any, any>> = P &
 export type ModalFormComponent<P extends IFormProps<any, any>> = FC<IModalFormComponentProps<P>>;
 
 export function useModalForm<P extends IUseModalFormProps>({
-  useModal,
   form: { onSubmit, onSuccess, ...form },
   FormComponent,
   ...modalProps
 }: P & {
-  FormComponent: ModalFormComponent<any>;
-  useModal: IUseModal<IUseModalProps<IModalPropsType<IModalFormPropsType<P>>>>;
+  FormComponent?: ModalFormComponent<any>;
 }): IUseModalResult {
-  const formProps: IFormPropsType<IModalFormPropsType<P>> = {
+  const { useForm, useModal } = useUIContext();
+
+  const formProps = {
     ...form,
     onSubmit: async (values, formikHelpers) => {
       const result = await onSubmit(values, formikHelpers);
@@ -59,18 +54,14 @@ export function useModalForm<P extends IUseModalFormProps>({
       }
       useModalResult.closeModal();
     },
-  } as IFormPropsType<IModalFormPropsType<P>>;
+    closeModal: () => useModalResult.closeModal(),
+  } as IModalFormComponentProps<IFormPropsType<IModalFormPropsType<P>>>;
 
-  const formElement = (
-    <FormComponent {...formProps} closeModal={() => useModalResult.closeModal()} />
-  );
+  const formElement = FormComponent ? <FormComponent {...formProps} /> : useForm(formProps);
+
   modalProps.children = formElement;
 
-  const useModalResult = useModal(
-    (modalProps as unknown) as IUseModalProps<IModalPropsType<IModalFormPropsType<P>>> & {
-      Component: ModalComponent<IUseModalProps<IModalPropsType<IModalFormPropsType<P>>>>;
-    }
-  );
+  const useModalResult = useModal(modalProps);
 
   return useModalResult;
 }
