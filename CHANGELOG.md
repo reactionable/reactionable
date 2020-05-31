@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.24.0 (2020-05-31)
+
+
+### Features
+
+* improve form related components ([c3720dd](https://github.com/reactionable/reactionable/commit/c3720dd878d96b9d293a6609ecf637101cdea8cc))
+
+
+
+
+
 # 0.23.0 (2020-05-30)
 
 
