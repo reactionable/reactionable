@@ -4,5 +4,6 @@
     "outDir": "./lib",
     "declarationDir": "lib"
   },
-  "include": ["./src"]
+  "include": ["./src"],
+  "exclude": ["./src/**/__mocks__/*"]
 }
