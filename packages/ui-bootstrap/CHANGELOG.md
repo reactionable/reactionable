@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.24.2 (2020-06-03)
+
+
+### Bug Fixes
+
+* **amplify:** handle graphql errors, fixes [#321](https://github.com/reactionable/reactionable/issues/321) ([469a166](https://github.com/reactionable/reactionable/commit/469a166892e853d7eadecc0ed3f1f239afc1a8cf))
+
+
+
+
+
 ## 0.24.1 (2020-05-31)
 
 **Note:** Version bump only for package @reactionable/ui-bootstrap
