@@ -4,10 +4,11 @@ import {
   useQuery as coreUseQuery,
   IUseQueryResult,
   IQueryOptions as ICoreQueryOptions,
+  IVariables,
 } from '@reactionable/core';
 
 function isGraphQLResult(arg: any): arg is GraphQLResult {
-  return arg.data !== undefined;
+  return arg.data !== undefined || arg.errors !== undefined;
 }
 
 function extractData<Data>(result: any): Data | undefined {
@@ -15,7 +16,7 @@ function extractData<Data>(result: any): Data | undefined {
   return data as Data | undefined;
 }
 
-export type IQueryOptions<Variables extends {}> = ICoreQueryOptions<Variables> & {
+export type IQueryOptions<Variables extends IVariables> = ICoreQueryOptions<Variables> & {
   query: string;
   rawData?: boolean;
 };
@@ -25,7 +26,22 @@ export async function query<Data extends {}, QO extends IQueryOptions<any>>({
   variables,
   rawData,
 }: QO): Promise<Data> {
-  const result = await GraphQLAPI.graphql(graphqlOperation(query, variables));
+  let result;
+  try {
+    result = await GraphQLAPI.graphql(graphqlOperation(query, variables));
+  } catch (error) {
+    if (error instanceof Error) {
+      throw error;
+    }
+
+    if (!isGraphQLResult(error) || !error.errors) {
+      throw new Error('An unexpected error occurred');
+    }
+
+    // TODO: types will be fixed: https://github.com/aws-amplify/amplify-js/pull/5994
+    const errors = error.errors;
+    throw new Error(errors.map((errorItem: any) => errorItem.message).join(', '));
+  }
 
   if (!result || !isGraphQLResult(result) || !result.data) {
     throw new Error('No data');
@@ -43,16 +59,16 @@ export async function query<Data extends {}, QO extends IQueryOptions<any>>({
   return data;
 }
 
-export const mutation = async <Data extends {}, Variables extends {}>(
+export const mutation = async <Data extends {}, Variables extends IVariables>(
   options: IQueryOptions<Variables>
 ) => query<Data, IQueryOptions<Variables>>(options);
 
-export type IUseQueryOptions<Data extends {}, Variables extends {}> = Omit<
+export type IUseQueryOptions<Data extends {}, Variables extends IVariables> = Omit<
   ICoreUseQueryOptions<Data, IQueryOptions<Variables>>,
   'handleQuery'
 >;
 
-export const useQuery = <Data extends {}, Variables extends {}>(
+export const useQuery = <Data extends {}, Variables extends IVariables>(
   options: IUseQueryOptions<Data, Variables>
 ): IUseQueryResult<Data> => {
   return coreUseQuery<Data, IQueryOptions<Variables>>({

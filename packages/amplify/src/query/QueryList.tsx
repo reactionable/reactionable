@@ -3,12 +3,13 @@ import {
   IUseQueryListResult,
   IUseQueryListOptions as ICoreUseQueryListOptions,
   useQuery as useQueryCore,
+  IVariables,
 } from '@reactionable/core';
 import { IUseQueryOptions, query, IQueryOptions } from './Query';
 
 export type UndefinedType<T> = T | null | undefined;
 
-export type IQueryListOptions<Variables extends {}> = IQueryOptions<
+export type IQueryListOptions<Variables extends IVariables> = IQueryOptions<
   Variables & {
     nextToken?: UndefinedType<string>;
   }
@@ -21,7 +22,7 @@ export type AmplifyListType<Data> = {
   nextToken?: UndefinedType<string>;
 };
 
-export async function queryList<Data extends {}, Variables extends {}>(
+export async function queryList<Data extends {}, Variables extends IVariables>(
   options: IQueryListOptions<Variables>
 ): Promise<AmplifyListType<Data>> {
   const items: Array<Data> = [];
@@ -35,7 +36,13 @@ export async function queryList<Data extends {}, Variables extends {}>(
     const data = extractListData<Data>(result);
 
     items.push(...data.items);
-    if (!tmpOptions.queryAll || !data.nextToken) {
+
+    // Aws do not apply filters before applying limit
+    const hasLimitVariable = !!options?.variables?.limit;
+    const limitNotReached = hasLimitVariable && items.length - 1 < options.variables!.limit;
+
+    const shouldFetchMore = data.nextToken && (tmpOptions.queryAll || limitNotReached);
+    if (!shouldFetchMore) {
       return { ...data, items };
     }
 
@@ -49,7 +56,7 @@ export async function queryList<Data extends {}, Variables extends {}>(
   }
 }
 
-export type IUseQueryListOptions<Data extends {}, Variables extends {}> = IUseQueryOptions<
+export type IUseQueryListOptions<Data extends {}, Variables extends IVariables> = IUseQueryOptions<
   Data,
   Variables
 > &

@@ -1,6 +1,6 @@
 import { renderHook, act } from '@testing-library/react-hooks';
 import { GraphQLAPI } from '@aws-amplify/api-graphql';
-import { useQueryList } from './QueryList';
+import { useQueryList, queryList } from './QueryList';
 
 type IItemData = {
   id: string;
@@ -26,8 +26,67 @@ const listItems = `query ListItems($filter: ModelImageFilterInput, $limit: Int, 
 const graphqlMock = GraphQLAPI.graphql as jest.MockedFunction<typeof GraphQLAPI.graphql>;
 
 describe('QueryList', () => {
+  // Load first page
+  const expectedItems = [
+    { id: '1', label: 'item 1' },
+    { id: '2', label: 'item 2' },
+  ];
+  const nextToken = 'test-next-token';
+
   beforeEach(() => {
     graphqlMock.mockReset();
+  });
+
+  describe('queryList', () => {
+    it('should query all items', async () => {
+      graphqlMock.mockResolvedValueOnce({
+        data: { listItems: { items: expectedItems, nextToken } },
+      });
+      graphqlMock.mockResolvedValueOnce({
+        data: { listItems: { items: expectedItems, nextToken } },
+      });
+      graphqlMock.mockResolvedValueOnce({
+        data: { listItems: { items: expectedItems, nextToken: null } },
+      });
+
+      const result = await queryList<IItemData, ListItemsQueryVariables>({
+        query: listItems,
+        queryAll: true,
+      });
+
+      expect(result.items).toEqual([...expectedItems, ...expectedItems, ...expectedItems]);
+
+      expect(graphqlMock).toHaveBeenCalledWith({ query: listItems, variables: {} });
+      expect(graphqlMock).toHaveBeenCalledWith({ query: listItems, variables: { nextToken } });
+      expect(graphqlMock).toHaveBeenCalledWith({ query: listItems, variables: { nextToken } });
+    });
+
+    it('should query expected items limit', async () => {
+      graphqlMock.mockResolvedValueOnce({
+        data: { listItems: { items: expectedItems, nextToken } },
+      });
+      graphqlMock.mockResolvedValueOnce({
+        data: { listItems: { items: expectedItems, nextToken } },
+      });
+      graphqlMock.mockResolvedValueOnce({
+        data: { listItems: { items: expectedItems, nextToken: null } },
+      });
+
+      const variables = { limit: 3 };
+
+      const result = await queryList<IItemData, ListItemsQueryVariables>({
+        query: listItems,
+        variables,
+      });
+
+      expect(result.items).toEqual([...expectedItems, ...expectedItems]);
+
+      expect(graphqlMock).toHaveBeenCalledWith({ query: listItems, variables });
+      expect(graphqlMock).toHaveBeenCalledWith({
+        query: listItems,
+        variables: { ...variables, nextToken },
+      });
+    });
   });
 
   describe('useQueryList', () => {
@@ -44,12 +103,6 @@ describe('QueryList', () => {
     });
 
     it('should return graphql result data', async () => {
-      const expectedItems = [
-        { id: '1', label: 'item 1' },
-        { id: '2', label: 'item 2' },
-      ];
-      const nextToken = 'test-next-token';
-
       graphqlMock.mockResolvedValueOnce({
         data: { listItems: { items: expectedItems, nextToken } },
       });
@@ -70,11 +123,6 @@ describe('QueryList', () => {
     });
 
     it('should paginate through items', async () => {
-      // Load first page
-      const expectedItems = [
-        { id: '1', label: 'item 1' },
-        { id: '2', label: 'item 2' },
-      ];
       const nextToken = 'test-next-token';
 
       graphqlMock.mockResolvedValueOnce({

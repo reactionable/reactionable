@@ -2,7 +2,9 @@ import { useState } from 'react';
 import { IError } from '../error/IError';
 import { useDeepCompareEffect } from '../hooks/useDeepCompareEffect';
 
-export type IQueryOptions<Variables extends {} = {}> = {
+export type IVariables = { [key: string]: any };
+
+export type IQueryOptions<Variables extends IVariables = {}> = {
   variables?: Variables;
 };
 
