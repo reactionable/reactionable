@@ -10,7 +10,7 @@ import {
   IFormChildrenProps,
 } from '@reactionable/core';
 import { IFormProps, Form, SubmitButton } from '../form/Form';
-import { IModalProps, useModal } from './Modal';
+import { IModalProps } from './Modal';
 
 export interface IModalFormProps<Values, Data>
   extends ICoreModalFormProps<IFormProps<Values, Data>, IModalProps> {}
@@ -60,6 +60,5 @@ export function useModalForm<Values = any, Data = any>(props: IUseModalFormProps
   return useCoreModalForm<IUseModalFormProps<Values, Data>>({
     ...props,
     FormComponent: ModalForm,
-    useModal,
   });
 }
