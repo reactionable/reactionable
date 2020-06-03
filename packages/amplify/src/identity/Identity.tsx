@@ -40,7 +40,7 @@ const dataToUser = (data?: {
     return null;
   }
   return {
-    displayName: () => data.attributes.email,
+    displayName: () => data?.attributes?.email || '',
   } as IUser;
 };
 
