@@ -1,6 +1,6 @@
 {
   "name": "@reactionable/amplify",
-  "version": "0.24.2",
+  "version": "0.24.3",
   "description": "Reactionable package for Amplify",
   "files": [
     "lib"
@@ -32,7 +32,7 @@
   },
   "homepage": "https://github.com/reactionable/reactionable#readme",
   "dependencies": {
-    "@reactionable/core": "^0.24.2",
+    "@reactionable/core": "^0.24.3",
     "aws-amplify": "^3.0.17",
     "aws-amplify-react": "^4.1.16"
   },
