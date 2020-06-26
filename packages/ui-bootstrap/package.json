@@ -1,6 +1,6 @@
 {
   "name": "@reactionable/ui-bootstrap",
-  "version": "0.24.3",
+  "version": "0.24.4",
   "description": "Reactionable UI package for Bootsrap",
   "files": [
     "lib"
@@ -36,7 +36,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.29",
     "@fortawesome/free-solid-svg-icons": "^5.13.1",
     "@fortawesome/react-fontawesome": "^0.1.11",
-    "@reactionable/core": "^0.24.3",
+    "@reactionable/core": "^0.24.4",
     "bootstrap": "^4.5.0",
     "react-bootstrap": "^1.0.0"
   },
