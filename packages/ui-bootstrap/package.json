@@ -52,7 +52,7 @@
     "react-i18next": "^11.7.0",
     "rimraf": "^3.0.2",
     "ts-jest": "^26.1.1",
-    "typescript": "^3.9.5"
+    "typescript": "^3.9.6"
   },
   "jest": {
     "preset": "ts-jest"
