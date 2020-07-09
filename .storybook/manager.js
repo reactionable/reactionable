@@ -4,7 +4,6 @@ import { addons } from '@storybook/addons';
 addons.setConfig({
   theme: {
     ...themes.light,
-
     brandTitle: 'Reactionable storybook',
     brandUrl: 'https://reactionable.github.io/reactionable/',
     brandImage:
