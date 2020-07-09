@@ -15,6 +15,7 @@
   </a>
   <a href="CONTRIBUTING.md" target="_blank"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome"></a>
   <a href="https://github.com/sponsors/neilime"><img src="https://img.shields.io/badge/%E2%9D%A4-Sponsor-ff69b4" alt="Sponsor"></a>
+  <a href="https://github.com/reactionable/reactionable"><img alt="GitHub stars" src="https://img.shields.io/github/stars/reactionable/reactionable?logo=github"></a>
 </p>
 
 ### 🏠 [Homepage](https://reactionable.github.io/reactionable/)
