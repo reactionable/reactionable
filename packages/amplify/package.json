@@ -34,7 +34,7 @@
   "dependencies": {
     "@reactionable/core": "^0.24.5",
     "aws-amplify": "^3.0.20",
-    "aws-amplify-react": "^4.1.18"
+    "aws-amplify-react": "^4.1.19"
   },
   "devDependencies": {
     "@babel/core": "^7.10.4",
