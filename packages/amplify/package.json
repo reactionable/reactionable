@@ -37,7 +37,7 @@
     "aws-amplify-react": "^4.1.19"
   },
   "devDependencies": {
-    "@babel/core": "^7.10.4",
+    "@babel/core": "^7.10.5",
     "@testing-library/react": "^10.4.6",
     "@testing-library/react-hooks": "^3.3.0",
     "@types/jest": "^26.0.4",
