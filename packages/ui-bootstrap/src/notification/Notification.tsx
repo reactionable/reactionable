@@ -15,7 +15,6 @@ export const Notification: FC<INotificationProps> = (props) => {
       show
       autohide
       onClose={props.onClose}
-      transition={false}
       style={{
         position: 'fixed',
         top: '1vw',
