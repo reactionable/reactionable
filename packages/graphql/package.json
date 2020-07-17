@@ -10,6 +10,7 @@
   "scripts": {
     "start": "yarn build:barrelsby && tsc",
     "test": "jest --passWithNoTests",
+    "test:coverage": "yarn test --coverage",
     "build": "yarn build:clean && yarn build:barrelsby && tsc --pretty",
     "build:clean": "rimraf lib",
     "build:barrelsby": "barrelsby -d src --exclude \".+\\.test\\..+\" --delete -q",

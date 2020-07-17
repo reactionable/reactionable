@@ -20,6 +20,7 @@
     "bootstrap": "lerna bootstrap",
     "start": "lerna run start --parallel",
     "test": "lerna run test",
+    "test:coverage": "lerna run test:coverage",
     "format": "prettier --write \"**/*.ts\"  \"!**/lib/**\"",
     "lint": "lerna run lint --",
     "build": "lerna run build",
