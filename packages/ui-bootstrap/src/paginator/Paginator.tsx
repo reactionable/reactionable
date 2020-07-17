@@ -126,7 +126,7 @@ export class Paginator extends PureComponent<Props, State> {
     return (
       <Pagination.Item
         key={page}
-        current={this.props.currentPage === page}
+        active={this.props.currentPage === page}
         onClick={() => this.props.onChange(page)}
       >
         {page}
