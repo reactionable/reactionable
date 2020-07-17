@@ -50,3 +50,6 @@ jobs:
           yarn test
         env:
           CI: true
+
+      - name: Test storybook build
+        run: yarn build:storybook
