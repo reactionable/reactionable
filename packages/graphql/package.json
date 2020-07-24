@@ -32,17 +32,12 @@
     "url": "https://github.com/reactionable/reactionable/issues"
   },
   "homepage": "https://github.com/reactionable/reactionable#readme",
-  "peerDependencies": {
-    "react": "^16.10.2"
-  },
   "dependencies": {
-    "@apollo/react-hooks": "^3.1.4",
-    "@reactionable/core": "^0.24.6",
-    "apollo-boost": "^0.4.9",
-    "graphql": "^15.3.0",
-    "react-apollo": "^3.1.4"
+    "@apollo/react-hooks": "^4.0.0",
+    "@reactionable/core": "^0.24.6"
   },
   "devDependencies": {
+    "@testing-library/react-hooks": "^3.4.1",
     "@types/jest": "^26.0.4",
     "@types/react": "^16.9.42",
     "barrelsby": "^2.2.0",
