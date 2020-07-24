@@ -40,7 +40,7 @@
   "devDependencies": {
     "@babel/core": "^7.10.5",
     "@testing-library/react": "^10.4.6",
-    "@testing-library/react-hooks": "^3.3.0",
+    "@testing-library/react-hooks": "^3.4.1",
     "@types/jest": "^26.0.4",
     "@types/react": "^16.9.42",
     "barrelsby": "^2.2.0",
