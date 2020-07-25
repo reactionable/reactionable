@@ -44,7 +44,7 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^5.11.0",
     "@testing-library/react": "^10.4.6",
-    "@types/jest": "^26.0.4",
+    "@types/jest": "^26.0.7",
     "@types/node": "^14.0.22",
     "@types/react": "^16.9.42",
     "barrelsby": "^2.2.0",
