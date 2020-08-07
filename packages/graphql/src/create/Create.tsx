@@ -1,5 +1,4 @@
-import { MutationFetchResult, useMutation } from 'react-apollo';
-import { gql } from 'apollo-boost';
+import { useMutation, gql } from '@apollo/react-hooks';
 
 type IUseCreateCallback<Result> = (mutation: string) => Promise<Result>;
 
@@ -11,7 +10,7 @@ export const useCreateCallback: IUseCreateCallback<any> = async (mutation: strin
   );
 
   return async (values: any) => {
-    const response: void | MutationFetchResult = await mutationCallback({
+    const response = await mutationCallback({
       variables: {
         data: values,
       },

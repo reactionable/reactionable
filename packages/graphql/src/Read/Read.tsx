@@ -1,7 +1,6 @@
-import { useQuery } from 'react-apollo';
-import { gql } from 'apollo-boost';
+import { useQuery, gql } from '@apollo/react-hooks';
 
-export const useReadCallback = async (query: string, variables?: Object) => {
+export const useReadCallback = (query: string, variables?: Object) => {
   const { loading, error, data, refetch } = useQuery(
     gql`
       ${query}
@@ -9,10 +8,18 @@ export const useReadCallback = async (query: string, variables?: Object) => {
     { variables }
   );
 
+  let realData = null;
+  if (!loading && !error) {
+    if (!data) {
+      throw new Error('No data');
+    }
+    realData = data[Object.keys(data)[0]];
+  }
+
   return {
-    loading,
+    isLoading: !!loading,
     error,
-    data: !loading && !error ? data[Object.keys(data)[0]] : data,
+    data: realData,
     refetch,
   };
 };
