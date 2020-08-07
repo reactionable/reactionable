@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: octokit/request-action@v2.0.8
+      - uses: octokit/request-action@v2.0.12
         id: get_latest_release
         with:
           route: GET /repos/${{ github.repository }}/collaborators/${{ github.actor }}
@@ -40,7 +40,7 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: Setup Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2.1.0
+        uses: actions/setup-node@v2.1.1
         with:
           node-version: ${{ matrix.node-version }}
           registry-url: https://registry.npmjs.org/
@@ -70,7 +70,7 @@ jobs:
           yarn build:storybook
 
       - name: Publish gh-pages
-        uses: JamesIves/github-pages-deploy-action@3.5.8
+        uses: JamesIves/github-pages-deploy-action@3.5.9
         with:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           BASE_BRANCH: master # The branch the action should deploy from.
