@@ -4601,14 +4601,6 @@
     "@babel/runtime" "^7.5.4"
     "@types/testing-library__react-hooks" "^3.3.0"
 
-"@testing-library/react-hooks@^3.4.1":
-  version "3.4.1"
-  resolved "https://registry.yarnpkg.com/@testing-library/react-hooks/-/react-hooks-3.4.1.tgz#1f8ccd21208086ec228d9743fe40b69d0efcd7e5"
-  integrity sha512-LbzvE7oKsVzuW1cxA/aOeNgeVvmHWG2p/WSzalIGyWuqZT3jVcNDT5KPEwy36sUYWde0Qsh32xqIUFXukeywXg==
-  dependencies:
-    "@babel/runtime" "^7.5.4"
-    "@types/testing-library__react-hooks" "^3.3.0"
-
 "@testing-library/react@^10.4.6":
   version "10.4.7"
   resolved "https://registry.yarnpkg.com/@testing-library/react/-/react-10.4.7.tgz#fc14847fb70a5e93576b8f7f0d1490ead02a9061"
@@ -4928,14 +4920,6 @@
   integrity sha512-yYn5EKHO3MPEMSOrcAb1dLWY+68CG29LiXKsWmmpVHqoP5+ZRiAVLyUHvPNrO2dABDdUGZvavMsaGpWNjM6N2g==
   dependencies:
     "@types/jest" "*"
-
-"@types/testing-library__react-hooks@^3.3.0":
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/@types/testing-library__react-hooks/-/testing-library__react-hooks-3.3.0.tgz#f5d3e4ba1c811ef04f7f2309c9f5946e420060cd"
-  integrity sha512-ZbMmXaVqeiLjbRGEXuDeh6fG2hkNxaOiXV7o9RklXwKeSrygx0aohuomnkWi7UobJUhkvGZLFUmsoirfGY8HPw==
-  dependencies:
-    "@types/react" "*"
-    "@types/react-test-renderer" "*"
 
 "@types/testing-library__react-hooks@^3.3.0":
   version "3.4.0"
@@ -5792,10 +5776,10 @@ autoprefixer@^9.7.2:
     postcss "^7.0.32"
     postcss-value-parser "^4.1.0"
 
-aws-amplify-react@^4.1.21:
-  version "4.1.21"
-  resolved "https://registry.yarnpkg.com/aws-amplify-react/-/aws-amplify-react-4.1.21.tgz#7b074f36befe066bac3f5183191ae62713207de4"
-  integrity sha512-daCsHY9INqnqSsjhsKrhq+Tg1Bgm5fR75bqM9smnWwylskXIrNakGsu5e0vPrhC0q+2dFTjnhDCf2digy03g/A==
+aws-amplify-react@^4.1.22:
+  version "4.1.22"
+  resolved "https://registry.yarnpkg.com/aws-amplify-react/-/aws-amplify-react-4.1.22.tgz#6adcd2f5ce067a9143a7cda230dadab88eef000f"
+  integrity sha512-wY9clrU6o9j7yrcnHHhd2uHnBfl0zaEEeNGpOagJdQZmHeME+J3DHZzmETT0bDQSl+dJUI4Z6dZ9FWrUsMRAVA==
   dependencies:
     qrcode.react "^0.8.0"
     regenerator-runtime "^0.11.1"
