@@ -21,8 +21,8 @@ export const SimpleForm = () => (
       title="Create form"
       submitButton
       onSubmit={async (values: IFormValues) => {
+        action('Form submitted...')(values);
         await new Promise((resolve) => setTimeout(resolve, 1000));
-        action('Form submit')(values);
         return values;
       }}
       onSuccess={action('Form submit succeed')}
@@ -39,8 +39,8 @@ export const FormWithTextArea = () => (
       title="Create form"
       submitButton
       onSubmit={async (values: IFormValues) => {
+        action('Form submitted...')(values);
         await new Promise((resolve) => setTimeout(resolve, 1000));
-        action('Form submit')(values);
         return values;
       }}
       onSuccess={action('Form submit succeed')}

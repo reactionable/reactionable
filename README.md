@@ -41,21 +41,21 @@ yarn add @reactionable/core
 
 ### Use reactionable in local
 
-1. In **reactionable** dir
+#### 1. In **reactionable** dir
 
 ```bash
 yarn run link;
 yarn start
 ```
 
-2. In react app dir
+#### 2. In react app dir
 
 ```bash
 for package in react react-dom aws-amplify @reactionable/core @reactionable/ui-bootstrap @reactionable/amplify; do yarn link $package; done;
 yarn start;
 ```
 
-3. Remove links when finish
+#### 3. Remove links when finish
 
 ```bash
 for package in react react-dom aws-amplify @reactionable/core @reactionable/ui-bootstrap @reactionable/amplify; do yarn unlink $package; done;

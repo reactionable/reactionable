@@ -17,7 +17,7 @@ export default {
   decorators: [withKnobs],
 };
 
-export const alert = () => {
+export const alert = (args) => {
   const variant = select(
     'Variant',
     ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'dark', 'light', undefined],
