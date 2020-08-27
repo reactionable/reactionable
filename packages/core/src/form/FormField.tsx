@@ -2,7 +2,9 @@ import React, { RefObject, ReactElement, HTMLProps, useRef, useEffect } from 're
 import { Field, FieldProps, getIn, FieldInputProps, FastField } from 'formik';
 
 export type IFormFieldValue = string;
-export type IFieldElementProps = HTMLProps<HTMLInputElement>;
+export type IFieldElementProps<InputElement extends HTMLElement = HTMLInputElement> = HTMLProps<
+  InputElement
+>;
 
 export type IFieldInputPropsEnhanced<
   FieldElementProps extends IFieldElementProps,
