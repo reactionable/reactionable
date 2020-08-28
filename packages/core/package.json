@@ -42,7 +42,7 @@
     "i18next-browser-languagedetector": "^6.0.0",
     "react-fast-compare": "^3.2.0",
     "react-helmet": "^6.1.0",
-    "react-i18next": "^11.7.0",
+    "react-i18next": "^11.7.2",
     "react-router-dom": "^5.2.0",
     "yup": "^0.29.3"
   },
