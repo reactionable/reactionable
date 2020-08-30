@@ -1,12 +1,12 @@
+import { ILoaderProps as ICoreLoaderProps } from '@reactionable/core/lib/ui/loader/Loader';
+import {
+  IUseLoaderProps as ICoreUseLoaderProps,
+  IUseLoader,
+  useLoader as useLoaderCore,
+} from '@reactionable/core/lib/ui/loader/useLoader';
 import React, { FC } from 'react';
 import Spinner from 'react-bootstrap/Spinner';
 import { useTranslation } from 'react-i18next';
-import {
-  ILoaderProps as ICoreLoaderProps,
-  IUseLoaderProps as ICoreUseLoaderProps,
-  useLoader as useLoaderCore,
-  IUseLoader,
-} from '@reactionable/core';
 
 export type ILoaderProps = ICoreLoaderProps & {
   overlay?: boolean;
