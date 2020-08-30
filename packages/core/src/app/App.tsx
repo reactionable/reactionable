@@ -1,10 +1,12 @@
-import React, { LazyExoticComponent, PropsWithChildren, StrictMode } from 'react';
+import React, { LazyExoticComponent, PropsWithChildren } from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
-import { IdentityContextProvider, IIdentityContextProviderProps } from '../identity/Identity';
-import { IRouteProps, renderRoute } from '../nav/route/Route';
-import { IUIContextProviderProps, UIContextProvider } from '../ui/UI';
-import { IUseLayoutProps } from '../ui/layout/Layout';
+
+import { IIdentityContextProviderProps } from '../identity/Identity';
 import { useCaptureRouteNotFound } from '../nav/route/NotFound';
+import { IRouteProps, renderRoute } from '../nav/route/Route';
+import { IUseLayoutProps } from '../ui/layout/Layout';
+import { IUIContextProviderProps } from '../ui/UI';
+import { Wrapper } from './Wrapper';
 
 export interface IAppProps<
   ICP extends IIdentityContextProviderProps,
@@ -49,17 +51,5 @@ export function App<
     routerContent = <CaptureRouteNotFound>{routerContent}</CaptureRouteNotFound>;
   }
 
-  routerContent = <Router>{routerContent}</Router>;
-
-  if (identity) {
-    routerContent = (
-      <IdentityContextProvider {...identity}>{routerContent}</IdentityContextProvider>
-    );
-  }
-
-  if (ui) {
-    routerContent = <UIContextProvider {...ui}>{routerContent}</UIContextProvider>;
-  }
-
-  return <StrictMode>{routerContent}</StrictMode>;
+  return <Wrapper identity={identity} ui={ui} RouterComponent={Router} children={routerContent} />;
 }
