@@ -1,7 +1,8 @@
 import React, { FC, PropsWithChildren } from 'react';
+
+import { EnhanceChildren } from '../../enhance-children/EnhanceChildren';
 import { IFormProps } from '../../form/Form';
 import { IModalFormProps, IUseModalFormProps } from '../../ui/modal/ModalForm';
-import { EnhanceChildren } from '../../enhance-children/EnhanceChildren';
 import { useUIContext } from '../../ui/UI';
 
 export interface ICreateProps<Values, Data> {

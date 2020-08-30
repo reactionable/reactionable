@@ -1,9 +1,9 @@
+import {
+  INotificationProps as ICoreNotificationProps,
+  useNotification as useCoreNotification,
+} from '@reactionable/core/lib/ui/notification/Notification';
 import React, { FC } from 'react';
 import Toast from 'react-bootstrap/Toast';
-import {
-  useNotification as useCoreNotification,
-  INotificationProps as ICoreNotificationProps,
-} from '@reactionable/core';
 
 export type INotificationProps = ICoreNotificationProps & {
   variant?: string;

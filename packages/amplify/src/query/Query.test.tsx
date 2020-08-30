@@ -1,5 +1,6 @@
 import { GraphQLAPI } from '@aws-amplify/api-graphql';
-import { query, IQueryOptions } from './Query';
+
+import { IQueryOptions, query } from './Query';
 
 type ITestData = {};
 

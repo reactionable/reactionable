@@ -1,4 +1,4 @@
-import { IUseQueryResult, IUseQueryOptions, IVariables } from './Query';
+import { IUseQueryOptions, IUseQueryResult, IVariables } from './Query';
 
 export type IUseQueryListOptions<Variables extends {} = IVariables> = IUseQueryOptions<
   Variables

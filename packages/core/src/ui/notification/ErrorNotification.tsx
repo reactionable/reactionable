@@ -1,4 +1,5 @@
 import React, { FC, PropsWithChildren, ReactElement, useState } from 'react';
+
 import { IError } from '../../error/IError';
 import { INotificationProps } from './Notification';
 

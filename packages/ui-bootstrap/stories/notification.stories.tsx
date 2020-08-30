@@ -1,13 +1,15 @@
+import './config';
+
+import { select, text, withKnobs } from '@storybook/addon-knobs';
 import React from 'react';
-import { withKnobs, select, text } from '@storybook/addon-knobs';
+import Button from 'react-bootstrap/Button';
+
+import { ErrorNotification, useErrorNotification } from '../src/notification/ErrorNotification';
 import { Notification, useNotification } from '../src/notification/Notification';
 import {
   SuccessNotification,
   useSuccessNotification,
 } from '../src/notification/SuccessNotification';
-import { ErrorNotification, useErrorNotification } from '../src/notification/ErrorNotification';
-import './config';
-import Button from 'react-bootstrap/Button';
 
 export default {
   title: 'UI Bootstrap/Notification',

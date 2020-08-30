@@ -1,7 +1,10 @@
+import {
+  List as CoreList,
+  IListProps as ICoreListProps,
+} from '@reactionable/core/lib/crud/list/List';
 import React, { FC, PropsWithChildren, ReactElement } from 'react';
-import { useTranslation } from 'react-i18next';
 import Table from 'react-bootstrap/Table';
-import { List as CoreList, IListProps as ICoreListProps } from '@reactionable/core';
+import { useTranslation } from 'react-i18next';
 
 export interface IListProps<Data> extends Omit<ICoreListProps<Data>, 'children'> {
   head: Array<ReactElement | string>;

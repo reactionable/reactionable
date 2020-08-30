@@ -1,12 +1,14 @@
-import React, { FC, lazy } from 'react';
-import { App } from '@reactionable/core';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Jumbotron from 'react-bootstrap/Jumbotron';
-import Button from 'react-bootstrap/Button';
-import { useUIContextProviderProps } from '../src/UI';
 import './config';
+
+import { App } from '@reactionable/core';
+import React, { FC, lazy } from 'react';
+import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
+import Jumbotron from 'react-bootstrap/Jumbotron';
+import Row from 'react-bootstrap/Row';
+
+import { useUIContextProviderProps } from '../src/UI';
 
 export default {
   title: 'UI Bootstrap/App',

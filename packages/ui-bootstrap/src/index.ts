@@ -28,3 +28,4 @@ export * from './notification/ErrorNotification';
 export * from './notification/Notification';
 export * from './notification/SuccessNotification';
 export * from './paginator/Paginator';
+export * from './tests/TestWrapper';

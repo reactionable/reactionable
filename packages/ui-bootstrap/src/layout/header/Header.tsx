@@ -1,14 +1,15 @@
+import { useIdentityContext } from '@reactionable/core/lib/identity/Identity';
 import {
-  useIdentityContext,
   IHeaderProps as ICoreHeaderProps,
   isLinkProps,
-} from '@reactionable/core';
-import React, { PropsWithChildren, ReactElement } from 'react';
+} from '@reactionable/core/lib/ui/layout/header/Header';
+import React, { PropsWithChildren, ReactElement, ReactNode, useEffect } from 'react';
+import Nav from 'react-bootstrap/Nav';
+import Navbar, { NavbarProps } from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import Navbar, { NavbarProps } from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+
 import { useModal } from '../../modal/Modal';
 import { INavItem, navItemToComponent } from '../../nav/NavItem';
 
@@ -22,13 +23,13 @@ export function Header({ brand, navItems = [], ...navbarProps }: PropsWithChildr
     body: component,
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (user) {
       closeModal();
     }
   }, [user]);
 
-  const userMenuItems: Array<React.ReactNode> = [];
+  const userMenuItems: Array<ReactNode> = [];
   let identityModal = undefined;
 
   if (identityProvider) {

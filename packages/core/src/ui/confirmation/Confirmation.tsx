@@ -1,7 +1,8 @@
-import React, { FC, PropsWithChildren, ReactElement, useState, useEffect } from 'react';
-import { useUIContext } from '../UI';
-import { EnhanceChildren } from '../../enhance-children/EnhanceChildren';
+import React, { FC, PropsWithChildren, ReactElement, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+
+import { EnhanceChildren } from '../../enhance-children/EnhanceChildren';
+import { useUIContext } from '../UI';
 
 export type IConfirmationProps = {
   title: string;

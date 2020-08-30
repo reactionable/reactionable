@@ -1,9 +1,10 @@
 import { ReactElement } from 'react';
+
 import {
   INotificationProps,
   IUseNotificationProps,
-  useNotification,
   NotificationComponent,
+  useNotification,
 } from './Notification';
 
 export type ISuccessNotificationProps = INotificationProps;

@@ -1,9 +1,10 @@
-import React, { ReactElement, PropsWithChildren } from 'react';
+import React, { PropsWithChildren, ReactElement } from 'react';
 import { Redirect } from 'react-router-dom';
+
 import { IUser, useIdentityContext } from '../../identity/Identity';
-import { useUIContext } from '../../ui/UI';
-import { LazyRoute, ILazyRouteProps } from './LazyRoute';
 import { IUseLayoutProps } from '../../ui/layout/Layout';
+import { useUIContext } from '../../ui/UI';
+import { ILazyRouteProps, LazyRoute } from './LazyRoute';
 
 function renderPrivateRoute(user: undefined | null) {
   const { loader } = useUIContext().useLoader({});

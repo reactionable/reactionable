@@ -1,6 +1,7 @@
-import { renderHook, act } from '@testing-library/react-hooks';
 import { GraphQLAPI } from '@aws-amplify/api-graphql';
-import { useQueryList, queryList } from './QueryList';
+import { act, renderHook } from '@testing-library/react-hooks';
+
+import { queryList, useQueryList } from './QueryList';
 
 type IItemData = {
   id: string;

@@ -1,6 +1,7 @@
-import React, { PropsWithChildren, ReactElement, useState, ReactNode } from 'react';
-import { IAlertProps, Alert } from './Alert';
+import React, { PropsWithChildren, ReactElement, ReactNode, useState } from 'react';
+
 import { IError } from '../../error/IError';
+import { Alert, IAlertProps } from './Alert';
 
 export function isIError(arg: any): arg is IError {
   return arg.name !== undefined && arg.message !== undefined;

@@ -1,4 +1,4 @@
-import React, { ReactElement, FC } from 'react';
+import React, { FC, ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
 export interface IFooterProps {
   brand?: ReactElement | string;

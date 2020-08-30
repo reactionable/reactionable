@@ -1,21 +1,6 @@
 {
   "name": "root",
   "private": true,
-  "engines": {
-    "yarn": ">=1.17.3"
-  },
-  "dependencies": {
-    "@types/react": "^16.9.46",
-    "eslint": "^7.5.0",
-    "lerna": "^3.22.1",
-    "prettier": "^2.0.5",
-    "react": "^16.13.1",
-    "react-i18next": "^11.7.0",
-    "typescript": "^4.0.2"
-  },
-  "workspaces": [
-    "packages/*"
-  ],
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "start": "lerna run start --parallel",
@@ -31,22 +16,10 @@
     "storybook": "start-storybook -p 6006",
     "build:storybook": "build-storybook -o build/storybook"
   },
-  "prettier": {
-    "printWidth": 100,
-    "singleQuote": true,
-    "trailingComma": "es5"
-  },
-  "husky": {
-    "hooks": {
-      "prepare-commit-msg": "prepare-commit-msg",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "yarn lint --fix"
-    }
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-i18next": "^11.7.0",
+    "typescript": "^4.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.11.4",
@@ -60,12 +33,47 @@
     "@storybook/addons": "^6.0.16",
     "@storybook/react": "^6.0.16",
     "@storybook/theming": "^6.0.16",
+    "@types/react": "^16.9.46",
     "@typescript-eslint/eslint-plugin": "^3.8.0",
     "@typescript-eslint/parser": "^3.9.1",
     "babel-loader": "^8.1.0",
+    "eslint": "^7.5.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
+    "import-sort-style-module": "^6.0.0",
+    "lerna": "^3.22.1",
+    "prettier": "^2.0.5",
+    "prettier-plugin-import-sort": "^0.0.4",
     "typedoc": "^0.18.0",
     "typedoc-plugin-nojekyll": "^1.0.1"
+  },
+  "engines": {
+    "yarn": ">=1.17.3"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "prettier": {
+    "printWidth": 100,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "importSort": {
+    ".js, .jsx, .ts, .tsx": {
+      "style": "module",
+      "parser": "typescript"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "yarn lint --fix"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }

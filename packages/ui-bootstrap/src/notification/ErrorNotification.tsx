@@ -1,11 +1,12 @@
-import React, { FC } from 'react';
+import { IError } from '@reactionable/core/lib/error/IError';
 import {
-  IError,
   IErrorNotificationProps as ICoreErrorNotificationProps,
-  useErrorNotification as useCoreErrorNotification,
   IUseErrorNotificationProps as ICoreUseErrorNotificationProps,
-} from '@reactionable/core';
+  useErrorNotification as useCoreErrorNotification,
+} from '@reactionable/core/lib/ui/notification/ErrorNotification';
+import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
+
 import { ErrorAlert } from '../alert/ErrorAlert';
 import { Notification } from './Notification';
 

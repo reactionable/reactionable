@@ -1,7 +1,8 @@
-import React from 'react';
+import { MockedProvider } from '@apollo/client/testing';
 import { gql } from '@apollo/react-hooks';
 import { renderHook } from '@testing-library/react-hooks';
-import { MockedProvider } from '@apollo/client/testing';
+import React from 'react';
+
 import { useReadCallback } from './Read';
 
 describe('Read', () => {

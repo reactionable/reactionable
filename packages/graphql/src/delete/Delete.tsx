@@ -1,4 +1,4 @@
-import { useMutation, gql } from '@apollo/react-hooks';
+import { gql, useMutation } from '@apollo/react-hooks';
 
 export const useDeleteCallback = ({ id, mutation }: { id: string; mutation: string }) => {
   const [mutationCallback] = useMutation<any, { id: string }>(

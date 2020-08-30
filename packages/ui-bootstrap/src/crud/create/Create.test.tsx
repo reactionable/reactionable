@@ -1,10 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { string } from 'yup';
 import { i18nTestInstance } from '@reactionable/core/lib/tests/I18n';
-import { FormField } from '../../form/FormField';
+import { render } from '@testing-library/react';
+import React from 'react';
+import { string } from 'yup';
+
 import { Create } from '../../crud/create/Create';
-import { UIContextProvider } from '../../UI';
+import { FormField } from '../../form/FormField';
+import { TestWrapper } from '../../tests/TestWrapper';
 
 interface ITestValues {
   test: string;
@@ -17,11 +18,9 @@ interface ITestData {
 describe('Create', () => {
   beforeAll(i18nTestInstance);
 
-  it('renders without a modal', () => {
-    const div = document.createElement('div');
-
-    ReactDOM.render(
-      <UIContextProvider>
+  it('should render without crashing', () => {
+    render(
+      <TestWrapper>
         <Create<ITestValues, ITestData>
           form={{
             onSuccess: () => {},
@@ -36,18 +35,13 @@ describe('Create', () => {
             children: () => <FormField name="test" />,
           }}
         />
-      </UIContextProvider>,
-      div
+      </TestWrapper>
     );
-
-    ReactDOM.unmountComponentAtNode(div);
   });
 
-  it('renders with a modal', () => {
-    const div = document.createElement('div');
-
-    ReactDOM.render(
-      <UIContextProvider>
+  it('should renders inside a modal without crashing', () => {
+    render(
+      <TestWrapper>
         <Create<ITestValues, ITestData>
           modal
           form={{
@@ -63,10 +57,7 @@ describe('Create', () => {
             children: () => <FormField name="test" />,
           }}
         />
-      </UIContextProvider>,
-      div
+      </TestWrapper>
     );
-
-    ReactDOM.unmountComponentAtNode(div);
   });
 });

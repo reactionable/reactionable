@@ -1,15 +1,16 @@
-import React, { PropsWithChildren } from 'react';
-import BootstrapModal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
-import { useTranslation } from 'react-i18next';
+import { IFormChildrenProps } from '@reactionable/core/lib/form/Form';
 import {
-  IUseModalFormProps as ICoreUseModalFormProps,
-  IModalFormProps as ICoreModalFormProps,
-  useModalForm as useCoreModalForm,
   IModalFormComponentProps as ICoreModalFormComponentProps,
-  IFormChildrenProps,
-} from '@reactionable/core';
-import { IFormProps, Form, SubmitButton } from '../form/Form';
+  IModalFormProps as ICoreModalFormProps,
+  IUseModalFormProps as ICoreUseModalFormProps,
+  useModalForm as useCoreModalForm,
+} from '@reactionable/core/lib/ui/modal/ModalForm';
+import React, { PropsWithChildren } from 'react';
+import Button from 'react-bootstrap/Button';
+import BootstrapModal from 'react-bootstrap/Modal';
+import { useTranslation } from 'react-i18next';
+
+import { Form, IFormProps, SubmitButton } from '../form/Form';
 import { IModalProps } from './Modal';
 
 export interface IModalFormProps<Values, Data>

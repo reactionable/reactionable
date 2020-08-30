@@ -1,6 +1,6 @@
-import { InitOptions } from 'i18next';
 import { I18n } from '@aws-amplify/core';
-import { initializeI18n as coreInitializeI18n } from '@reactionable/core';
+import { initializeI18n as coreInitializeI18n } from '@reactionable/core/lib/i18n/I18n';
+import { InitOptions } from 'i18next';
 
 function extractLanguage(language: string) {
   return language.split('-').shift();

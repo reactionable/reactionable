@@ -1,17 +1,17 @@
 import React, {
-  useContext,
-  createContext,
-  useReducer,
   PropsWithChildren,
   ReactElement,
+  createContext,
+  useContext,
+  useReducer,
 } from 'react';
-import {
-  LinkProps,
-  generatePath as routerGeneratePath,
-  NavLinkProps,
-  Link,
-} from 'react-router-dom';
 import isEqual from 'react-fast-compare';
+import {
+  Link,
+  LinkProps,
+  NavLinkProps,
+  generatePath as routerGeneratePath,
+} from 'react-router-dom';
 
 export type INavItem = Omit<LinkProps, 'onSelect'>;
 

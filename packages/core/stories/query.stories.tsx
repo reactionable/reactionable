@@ -1,5 +1,6 @@
+import { boolean, text, withKnobs } from '@storybook/addon-knobs';
 import React from 'react';
-import { withKnobs, boolean, text } from '@storybook/addon-knobs';
+
 import { QueryWrapper } from '../src/query/QueryWrapper';
 import { UIContextProvider } from '../src/ui/UI';
 

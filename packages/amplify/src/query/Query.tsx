@@ -1,10 +1,10 @@
-import { GraphQLResult, graphqlOperation, GraphQLAPI } from '@aws-amplify/api-graphql';
+import { GraphQLAPI, GraphQLResult, graphqlOperation } from '@aws-amplify/api-graphql';
 import {
-  IUseQueryOptions as ICoreUseQueryOptions,
-  useQuery as coreUseQuery,
-  IUseQueryResult,
   IQueryOptions as ICoreQueryOptions,
+  IUseQueryOptions as ICoreUseQueryOptions,
+  IUseQueryResult,
   IVariables,
+  useQuery as coreUseQuery,
 } from '@reactionable/core';
 
 function isGraphQLResult(arg: any): arg is GraphQLResult {

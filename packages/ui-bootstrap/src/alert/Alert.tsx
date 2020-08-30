@@ -1,7 +1,8 @@
+import { FontAwesomeIcon, FontAwesomeIconProps } from '@fortawesome/react-fontawesome';
+import { IAlertProps as IAlertPropsCore } from '@reactionable/core/lib/ui/alert/Alert';
+import { useAlert as useAlertCore } from '@reactionable/core/lib/ui/alert/useAlert';
 import React, { FC } from 'react';
 import BootstrapAlert, { AlertProps } from 'react-bootstrap/Alert';
-import { useAlert as useAlertCore, IAlertProps as IAlertPropsCore } from '@reactionable/core';
-import { FontAwesomeIconProps, FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export type IAlertProps = IAlertPropsCore &
   AlertProps & {

@@ -1,8 +1,8 @@
-import React, { ReactElement } from 'react';
-import { Link, LinkProps } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { INavItem as ICoreNavItem } from '@reactionable/core';
+import { INavItem as ICoreNavItem } from '@reactionable/core/lib/nav/NavItem';
+import React, { ReactElement } from 'react';
 import NavLink, { NavLinkProps } from 'react-bootstrap/NavLink';
+import { Link, LinkProps } from 'react-router-dom';
 
 export type INavItem = ICoreNavItem & NavLinkProps & { icon?: any };
 

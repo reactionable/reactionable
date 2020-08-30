@@ -1,5 +1,6 @@
 import React, { FC, PropsWithChildren } from 'react';
-import { IConfirmationActionProps, ConfirmationAction } from '../../ui/confirmation/Confirmation';
+
+import { ConfirmationAction, IConfirmationActionProps } from '../../ui/confirmation/Confirmation';
 
 export interface IDeleteProps<Data> extends IConfirmationActionProps<Data> {}
 

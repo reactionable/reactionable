@@ -1,9 +1,10 @@
 import React, { LazyExoticComponent, PropsWithChildren } from 'react';
-import { useRouteMatch, Switch } from 'react-router-dom';
-import { ReadComponent } from './read/Read';
-import { ListComponent } from './list/List';
-import { IUseLayoutProps } from '../ui/layout/Layout';
+import { Switch, useRouteMatch } from 'react-router-dom';
+
 import { IRouteProps, renderRoute } from '../nav/route/Route';
+import { IUseLayoutProps } from '../ui/layout/Layout';
+import { ListComponent } from './list/List';
+import { ReadComponent } from './read/Read';
 
 export interface ICrudProp<Data, LP extends IUseLayoutProps = IUseLayoutProps> {
   name: string;

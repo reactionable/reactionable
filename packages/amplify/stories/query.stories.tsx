@@ -1,7 +1,9 @@
-import React from 'react';
-import { List, UIContextProvider } from '@reactionable/core';
-import { useQueryList } from '../src/query/QueryList';
 import './config';
+
+import { List, UIContextProvider } from '@reactionable/core';
+import React from 'react';
+
+import { useQueryList } from '../src/query/QueryList';
 
 export default {
   title: 'Amplify/Query',

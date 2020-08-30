@@ -1,8 +1,9 @@
+import { action } from '@storybook/addon-actions';
 import React from 'react';
 import { string } from 'yup';
-import { action } from '@storybook/addon-actions';
-import { FormField } from '../../src/form/FormField';
+
 import { Update } from '../../src/crud/update/Update';
+import { FormField } from '../../src/form/FormField';
 import { UIContextProvider } from '../../src/ui/UI';
 
 export default {

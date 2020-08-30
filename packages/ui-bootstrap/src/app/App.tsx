@@ -1,6 +1,8 @@
-import { IIdentityContextProviderProps, IAppProps as ICoreAppProps } from '@reactionable/core';
-import { IUIContextProviderProps } from '../UI';
+import { IAppProps as ICoreAppProps } from '@reactionable/core/lib/app/App';
+import { IIdentityContextProviderProps } from '@reactionable/core/lib/identity/Identity';
+
 import { IUseLayoutProps } from '../layout/Layout';
+import { IUIContextProviderProps } from '../UI';
 
 export interface IAppProps<
   ICP extends IIdentityContextProviderProps,

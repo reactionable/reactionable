@@ -1,8 +1,9 @@
 import React, { PropsWithChildren, ReactElement } from 'react';
+
+import { createNavItemContextProvider } from '../../nav/NavItem';
+import { BodyComponent, IBodyProps } from './body/Body';
 import { FooterComponent, IFooterProps } from './footer/Footer';
 import { HeaderComponent, IHeaderProps } from './header/Header';
-import { BodyComponent, IBodyProps } from './body/Body';
-import { createNavItemContextProvider } from '../../nav/NavItem';
 
 export interface ILayoutProps<
   H extends IHeaderProps,

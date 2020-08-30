@@ -1,8 +1,9 @@
 import React, { ReactElement } from 'react';
+
 import { IUseQueryResult } from '../../query/Query';
 import {
-  IQueryWrapperProps,
   IQueryWrapperChildrenProps,
+  IQueryWrapperProps,
   QueryWrapper,
 } from '../../query/QueryWrapper';
 

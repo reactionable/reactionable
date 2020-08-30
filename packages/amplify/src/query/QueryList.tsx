@@ -1,13 +1,16 @@
-import { useState, useEffect } from 'react';
 import {
-  IUseQueryListResult,
   IUseQueryListOptions as ICoreUseQueryListOptions,
-  useQuery as useQueryCore,
+  IUseQueryListResult as ICoreUseQueryListResult,
   IVariables,
+  useQuery as useQueryCore,
 } from '@reactionable/core';
-import { IUseQueryOptions, query, IQueryOptions } from './Query';
+import { useEffect, useState } from 'react';
+
+import { IQueryOptions, IUseQueryOptions, query } from './Query';
 
 export type UndefinedType<T> = T | null | undefined;
+
+export type IUseQueryListResult<Data> = ICoreUseQueryListResult<Data>;
 
 export type IQueryListOptions<Variables extends IVariables> = IQueryOptions<
   Variables & {

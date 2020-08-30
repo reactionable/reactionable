@@ -1,7 +1,8 @@
-import React, { useEffect, useState, ReactNode } from 'react';
-import { IUseLoaderResult } from '../ui/loader/Loader';
-import { IUseWarningAlertResult } from '../ui/alert/WarningAlert';
+import React, { ReactNode, useEffect, useState } from 'react';
+
 import { IUseErrorAlertResult } from '../ui/alert/ErrorAlert';
+import { IUseWarningAlertResult } from '../ui/alert/WarningAlert';
+import { IUseLoaderResult } from '../ui/loader/useLoader';
 import { useUIContext } from '../ui/UI';
 import { IUseQueryResult } from './Query';
 

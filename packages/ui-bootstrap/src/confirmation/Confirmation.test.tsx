@@ -1,8 +1,9 @@
+import { i18nTestInstance } from '@reactionable/core/lib/tests/I18n';
+import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
+
+import { TestWrapper } from '../tests/TestWrapper';
 import { Confirmation } from './Confirmation';
-import { UIContextProvider } from '../UI';
-import { i18nTestInstance } from '@reactionable/core';
-import { render, fireEvent } from '@testing-library/react';
 
 describe('Confirmation', () => {
   beforeAll(i18nTestInstance);
@@ -11,9 +12,9 @@ describe('Confirmation', () => {
     const callback = jest.fn();
 
     const { getByText } = render(
-      <UIContextProvider>
+      <TestWrapper>
         <Confirmation title="test" callback={callback} />
-      </UIContextProvider>
+      </TestWrapper>
     );
 
     fireEvent.click(getByText('OK'));
@@ -25,9 +26,9 @@ describe('Confirmation', () => {
     const callback = jest.fn();
 
     const { getByText } = render(
-      <UIContextProvider>
+      <TestWrapper>
         <Confirmation title="test" callback={callback} />
-      </UIContextProvider>
+      </TestWrapper>
     );
 
     fireEvent.click(getByText('Cancel'));

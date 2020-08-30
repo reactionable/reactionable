@@ -1,5 +1,6 @@
-import React from 'react';
 import { action } from '@storybook/addon-actions';
+import React from 'react';
+
 import { Delete } from '../../src/crud/delete/Delete';
 import { UIContextProvider } from '../../src/ui/UI';
 

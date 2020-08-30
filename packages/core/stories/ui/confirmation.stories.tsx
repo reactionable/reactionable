@@ -1,5 +1,6 @@
-import React from 'react';
 import { action } from '@storybook/addon-actions';
+import React from 'react';
+
 import { ConfirmationAction } from '../../src/ui/confirmation/Confirmation';
 import { UIContextProvider, useUIContextProviderProps } from '../../src/ui/UI';
 

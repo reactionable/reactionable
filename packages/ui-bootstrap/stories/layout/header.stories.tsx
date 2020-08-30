@@ -1,8 +1,10 @@
+import '../config';
+
+import { select, withKnobs } from '@storybook/addon-knobs';
 import React from 'react';
 import { MemoryRouter as Router } from 'react-router-dom';
-import { withKnobs, select } from '@storybook/addon-knobs';
+
 import { Header } from '../../src/layout/header/Header';
-import '../config';
 
 export default {
   title: 'UI Bootstrap/Layout/Header',

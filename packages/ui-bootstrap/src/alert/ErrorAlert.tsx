@@ -1,12 +1,13 @@
-import React from 'react';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import {
-  printError,
-  IErrorAlertProps as ICoreErrorAlertProps,
-  useErrorAlert as useCoreErrorAlert,
-  IUseErrorAlertProps as ICoreUseErrorAlertProps,
   ErrorAlertComponent as CoreErrorAlertComponent,
-} from '@reactionable/core';
+  IErrorAlertProps as ICoreErrorAlertProps,
+  IUseErrorAlertProps as ICoreUseErrorAlertProps,
+  printError,
+  useErrorAlert as useCoreErrorAlert,
+} from '@reactionable/core/lib/ui/alert/ErrorAlert';
+import React from 'react';
+
 import { Alert, IAlertProps } from './Alert';
 
 export type IErrorAlertProps = ICoreErrorAlertProps<IAlertProps>;

@@ -1,16 +1,16 @@
-import React, { PropsWithChildren } from 'react';
-import Modal from 'react-bootstrap/Modal';
-import Button, { ButtonProps } from 'react-bootstrap/Button';
-import { useTranslation } from 'react-i18next';
+import { FontAwesomeIcon, FontAwesomeIconProps } from '@fortawesome/react-fontawesome';
 import {
-  useConfirmation as useConfirmationCore,
   ConfirmationComponent,
-  IUseConfirmationProps as ICoreUseConfirmationProps,
-  IConfirmationProps as ICoreConfirmationProps,
-  IConfirmationActionProps as ICoreConfirmationActionProps,
   ConfirmationAction as CoreConfirmationAction,
-} from '@reactionable/core';
-import { FontAwesomeIconProps, FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+  IConfirmationActionProps as ICoreConfirmationActionProps,
+  IConfirmationProps as ICoreConfirmationProps,
+  IUseConfirmationProps as ICoreUseConfirmationProps,
+  useConfirmation as useConfirmationCore,
+} from '@reactionable/core/lib/ui/confirmation/Confirmation';
+import React, { PropsWithChildren } from 'react';
+import Button, { ButtonProps } from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import { useTranslation } from 'react-i18next';
 
 export type IConfirmationProps = ICoreConfirmationProps;
 

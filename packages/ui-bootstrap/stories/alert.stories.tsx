@@ -1,11 +1,13 @@
-import React from 'react';
-import { withKnobs, select, boolean, text } from '@storybook/addon-knobs';
+import './config';
+
 import { faAtom } from '@fortawesome/free-solid-svg-icons';
+import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
+import React from 'react';
 import Button from 'react-bootstrap/Button';
+
 import { Alert, useAlert } from '../src/alert/Alert';
 import { ErrorAlert, useErrorAlert } from '../src/alert/ErrorAlert';
 import { WarningAlert, useWarningAlert } from '../src/alert/WarningAlert';
-import './config';
 
 export default {
   title: 'UI Bootstrap/Alert',

@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren, ReactElement, ReactNode, useState } from 'react';
+import React, { FC, PropsWithChildren, ReactElement, ReactNode } from 'react';
 
 export type IAlertProps = {};
 
@@ -16,21 +16,3 @@ export interface IUseAlertResult {
 }
 
 export type IUseAlert<P extends IUseAlertProps> = (props: P) => IUseAlertResult;
-
-export function useAlert<P extends IUseAlertProps = IUseAlertProps>(
-  { Component, ...props }: P & { Component: AlertComponent } = {
-    ...({ children: undefined } as P),
-    Component: Alert,
-  }
-): IUseAlertResult {
-  const [alert, setAlert] = useState<ReactNode | undefined>(
-    props.children ? props.children : undefined
-  );
-
-  return {
-    alert: <>{alert && <Component {...props} children={alert} />}</>,
-    setAlert: (alert?: ReactNode) => {
-      setAlert(alert);
-    },
-  };
-}

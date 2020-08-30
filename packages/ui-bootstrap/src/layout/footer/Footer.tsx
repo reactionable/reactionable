@@ -1,9 +1,12 @@
-import React, { PropsWithChildren, HTMLAttributes } from 'react';
-import { useTranslation } from 'react-i18next';
+import {
+  IFooterProps as ICoreFooterProps,
+  SponsorFooter,
+} from '@reactionable/core/lib/ui/layout/footer/Footer';
+import React, { HTMLAttributes, PropsWithChildren } from 'react';
+import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import { IFooterProps as ICoreFooterProps, SponsorFooter } from '@reactionable/core';
+import { useTranslation } from 'react-i18next';
 
 export type IFooterProps = ICoreFooterProps &
   HTMLAttributes<HTMLElement> & {

@@ -1,12 +1,14 @@
-import React from 'react';
-import { string } from 'yup';
+import './config';
+
 import { action } from '@storybook/addon-actions';
+import React from 'react';
 import Button from 'react-bootstrap/Button';
+import { string } from 'yup';
+
+import { FormField } from '../src/form/FormField';
 import { Modal, useModal } from '../src/modal/Modal';
 import { ModalForm, useModalForm } from '../src/modal/ModalForm';
-import { FormField } from '../src/form/FormField';
 import { UIContextProvider } from '../src/UI';
-import './config';
 
 export default {
   title: 'UI Bootstrap/Modal',

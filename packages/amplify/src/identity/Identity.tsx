@@ -1,22 +1,22 @@
-import React, { PropsWithChildren } from 'react';
 import { Auth } from '@aws-amplify/auth';
-import { UsernameAttributes } from 'aws-amplify-react/lib-esm/Auth/common/types';
 import {
-  Authenticator,
-  SignIn,
-  ConfirmSignIn,
-  VerifyContact,
-  ForgotPassword,
-} from 'aws-amplify-react';
-import { IAuthenticatorProps } from 'aws-amplify-react/lib-esm/Auth/Authenticator';
-import { useTranslation } from 'react-i18next';
-import {
-  IUser as ICoreUser,
   IdentityComponent as CoreIdentityComponent,
-  IIdentityContextProviderProps as ICoreIdentityContextProviderProps,
   IdentityContextProvider as CoreIdentityContextProvider,
+  IIdentityContextProviderProps as ICoreIdentityContextProviderProps,
+  IUser as ICoreUser,
   IIdentityComponentProps,
 } from '@reactionable/core';
+import {
+  Authenticator,
+  ConfirmSignIn,
+  ForgotPassword,
+  SignIn,
+  VerifyContact,
+} from 'aws-amplify-react';
+import { IAuthenticatorProps } from 'aws-amplify-react/lib-esm/Auth/Authenticator';
+import { UsernameAttributes } from 'aws-amplify-react/lib-esm/Auth/common/types';
+import React, { PropsWithChildren } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export type IUser = ICoreUser;
 

@@ -1,7 +1,8 @@
-import React, { PropsWithChildren, FC } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
+
 import { IFormProps } from '../../form/Form';
-import { IUseModalProps, IModalProps, IUseModalResult } from './Modal';
 import { useUIContext } from '../UI';
+import { IModalProps, IUseModalProps, IUseModalResult } from './Modal';
 
 type IFormPropsType<MFP extends IModalFormProps> = MFP extends IModalFormProps<infer F>
   ? F extends IFormProps<any, any>

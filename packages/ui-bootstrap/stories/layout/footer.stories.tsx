@@ -1,6 +1,8 @@
-import React from 'react';
-import { Footer } from '../../src/layout/footer/Footer';
 import '../config';
+
+import React from 'react';
+
+import { Footer } from '../../src/layout/footer/Footer';
 
 export default {
   title: 'UI Bootstrap/Layout/Footer',

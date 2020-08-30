@@ -1,32 +1,34 @@
-import React, { useContext, createContext, PropsWithChildren } from 'react';
-import { useLoader, IUseLoader, IUseLoaderProps, Loader } from './loader/Loader';
+import React, { PropsWithChildren, createContext, useContext } from 'react';
+
+import { Form, IUseForm, IUseFormProps, useForm } from '../form/Form';
+import { Alert } from './alert/Alert';
+import { ErrorAlert, IUseErrorAlert, IUseErrorAlertProps, useErrorAlert } from './alert/ErrorAlert';
+import { IUseWarningAlert, IUseWarningAlertProps, useWarningAlert } from './alert/WarningAlert';
+import {
+  Confirmation,
+  IUseConfirmation,
+  IUseConfirmationProps,
+  useConfirmation,
+} from './confirmation/Confirmation';
+import { Body } from './layout/body/Body';
+import { Footer } from './layout/footer/Footer';
+import { Header } from './layout/header/Header';
+import { IUseLayout, IUseLayoutProps, useLayout } from './layout/Layout';
+import { Loader } from './loader/Loader';
+import { IUseLoader, IUseLoaderProps, useLoader } from './loader/useLoader';
+import { IUseModal, IUseModalProps, Modal, useModal } from './modal/Modal';
+import { IUseModalForm, IUseModalFormProps, useModalForm } from './modal/ModalForm';
+import {
+  IUseErrorNotification,
+  IUseErrorNotificationProps,
+  useErrorNotification,
+} from './notification/ErrorNotification';
 import { Notification } from './notification/Notification';
 import {
   IUseSuccessNotification,
-  useSuccessNotification,
   IUseSuccessNotificationProps,
+  useSuccessNotification,
 } from './notification/SuccessNotification';
-import {
-  IUseErrorNotification,
-  useErrorNotification,
-  IUseErrorNotificationProps,
-} from './notification/ErrorNotification';
-import { IUseErrorAlert, useErrorAlert, IUseErrorAlertProps, ErrorAlert } from './alert/ErrorAlert';
-import { IUseWarningAlert, useWarningAlert, IUseWarningAlertProps } from './alert/WarningAlert';
-import {
-  IUseConfirmationProps,
-  useConfirmation,
-  IUseConfirmation,
-  Confirmation,
-} from './confirmation/Confirmation';
-import { IUseLayoutProps, useLayout, IUseLayout } from './layout/Layout';
-import { useModal, Modal, IUseModalProps, IUseModal } from './modal/Modal';
-import { Alert } from './alert/Alert';
-import { Form, IUseFormProps, IUseForm, useForm } from '../form/Form';
-import { Header } from './layout/header/Header';
-import { Body } from './layout/body/Body';
-import { Footer } from './layout/footer/Footer';
-import { IUseModalFormProps, IUseModalForm, useModalForm } from './modal/ModalForm';
 
 export type IUIContext<
   LO extends IUseLoaderProps = IUseLoaderProps,

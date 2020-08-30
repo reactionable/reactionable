@@ -1,9 +1,10 @@
-import React, { ReactElement, FC, useEffect } from 'react';
-import { LinkProps, Link } from 'react-router-dom';
-import { INavItemsProps, INavItem, navItemToComponent } from '../../../nav/NavItem';
+import React, { FC, ReactElement, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link, LinkProps } from 'react-router-dom';
+
 import { useIdentityContext } from '../../../identity/Identity';
-import { useModal, Modal } from '../../modal/Modal';
+import { INavItem, INavItemsProps, navItemToComponent } from '../../../nav/NavItem';
+import { Modal, useModal } from '../../modal/Modal';
 
 export function isLinkProps(brand: string | ReactElement | LinkProps): brand is LinkProps<any> {
   return (brand as LinkProps).to !== undefined;

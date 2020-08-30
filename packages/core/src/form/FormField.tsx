@@ -1,5 +1,5 @@
-import React, { RefObject, ReactElement, HTMLProps, useRef, useEffect } from 'react';
-import { Field, FieldProps, getIn, FieldInputProps, FastField } from 'formik';
+import { FastField, Field, FieldInputProps, FieldProps, getIn } from 'formik';
+import React, { HTMLProps, ReactElement, RefObject, useEffect, useRef } from 'react';
 
 export type IFormFieldValue = string;
 export type IFieldElementProps<InputElement extends HTMLElement = HTMLInputElement> = HTMLProps<

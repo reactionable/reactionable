@@ -1,8 +1,10 @@
+import '../config';
+
+import { boolean, withKnobs } from '@storybook/addon-knobs';
 import React from 'react';
-import { withKnobs, boolean } from '@storybook/addon-knobs';
+
 import { List } from '../../src/crud/list/List';
 import { UIContextProvider } from '../../src/UI';
-import '../config';
 
 export default {
   title: 'UI Bootstrap/Crud/List',

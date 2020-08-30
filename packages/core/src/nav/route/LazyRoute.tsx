@@ -1,8 +1,9 @@
-import React, { LazyExoticComponent, ReactNode, ReactElement, PropsWithChildren } from 'react';
-import { Route, RouteProps, RouteComponentProps } from 'react-router-dom';
+import React, { LazyExoticComponent, PropsWithChildren, ReactElement, ReactNode } from 'react';
+import { Route, RouteComponentProps, RouteProps } from 'react-router-dom';
+
+import { IUseLayoutProps } from '../../ui/layout/Layout';
 import { lazyLoad } from '../../ui/loader/Loader';
 import { useUIContext } from '../../ui/UI';
-import { IUseLayoutProps } from '../../ui/layout/Layout';
 
 export type ILazyRouteComponentProps<LP extends IUseLayoutProps> = Omit<RouteProps, 'component'> & {
   component: LazyExoticComponent<any>;

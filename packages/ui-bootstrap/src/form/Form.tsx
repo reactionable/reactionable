@@ -1,14 +1,14 @@
-import React, { PropsWithChildren, Children } from 'react';
-import { useTranslation } from 'react-i18next';
-import Button, { ButtonProps } from 'react-bootstrap/Button';
-import { Form as FormikForm } from 'formik';
 import {
-  useForm as useCoreForm,
   Form as CoreForm,
   IFormProps as ICoreFormProps,
   IOnSubmitForm as ICoreOnSubmitForm,
   IFormChildrenProps,
-} from '@reactionable/core';
+  useForm as useCoreForm,
+} from '@reactionable/core/lib/form/Form';
+import { Form as FormikForm } from 'formik';
+import React, { Children, PropsWithChildren } from 'react';
+import Button, { ButtonProps } from 'react-bootstrap/Button';
+import { useTranslation } from 'react-i18next';
 
 export type IFormProps<Values, Data> = ICoreFormProps<Values, Data>;
 

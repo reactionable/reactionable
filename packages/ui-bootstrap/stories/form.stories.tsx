@@ -1,10 +1,12 @@
+import './config';
+
+import { action } from '@storybook/addon-actions';
 import React from 'react';
 import { string } from 'yup';
-import { action } from '@storybook/addon-actions';
+
 import { Form } from '../src/form/Form';
 import { FormField } from '../src/form/FormField';
 import { UIContextProvider } from '../src/UI';
-import './config';
 
 export default {
   title: 'UI Bootstrap/Form',

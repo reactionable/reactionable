@@ -1,6 +1,9 @@
-import React, { ReactElement, FC, PropsWithChildren, useState } from 'react';
+import {
+  IModalProps as ICoreModalProps,
+  useModal as useCoreModal,
+} from '@reactionable/core/lib/ui/modal/Modal';
+import React, { FC, PropsWithChildren, ReactElement, useState } from 'react';
 import BootstrapModal, { ModalProps } from 'react-bootstrap/Modal';
-import { useModal as useCoreModal, IModalProps as ICoreModalProps } from '@reactionable/core';
 
 export type IModalProps = ICoreModalProps &
   ModalProps & {

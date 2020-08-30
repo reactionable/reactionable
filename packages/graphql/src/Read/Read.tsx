@@ -1,4 +1,4 @@
-import { useQuery, gql } from '@apollo/react-hooks';
+import { gql, useQuery } from '@apollo/react-hooks';
 
 export const useReadCallback = (query: string, variables?: Object) => {
   const { loading, error, data, refetch } = useQuery(

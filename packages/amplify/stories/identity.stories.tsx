@@ -1,7 +1,9 @@
-import React from 'react';
-import { useIdentityContext } from '@reactionable/core';
-import { IdentityContextProvider, SignUp } from '../src/identity/Identity';
 import './config';
+
+import { useIdentityContext } from '@reactionable/core';
+import React from 'react';
+
+import { IdentityContextProvider, SignUp } from '../src/identity/Identity';
 
 export default {
   title: 'Amplify/Identity',

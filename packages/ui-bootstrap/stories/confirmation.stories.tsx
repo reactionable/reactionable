@@ -1,10 +1,12 @@
-import React from 'react';
-import { action } from '@storybook/addon-actions';
-import { withKnobs, text } from '@storybook/addon-knobs';
-import Button from 'react-bootstrap/Button';
-import { UIContextProvider } from '../src/UI';
-import { ConfirmationAction, useConfirmation } from '../src/confirmation/Confirmation';
 import './config';
+
+import { action } from '@storybook/addon-actions';
+import { text, withKnobs } from '@storybook/addon-knobs';
+import React from 'react';
+import Button from 'react-bootstrap/Button';
+
+import { ConfirmationAction, useConfirmation } from '../src/confirmation/Confirmation';
+import { UIContextProvider } from '../src/UI';
 
 export default {
   title: 'UI Bootstrap/Confirmation',

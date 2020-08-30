@@ -1,4 +1,4 @@
-import { useQuery, QueryResult, gql } from '@apollo/react-hooks';
+import { QueryResult, gql, useQuery } from '@apollo/react-hooks';
 import { IListProps } from '@reactionable/core';
 
 export type IUseListCallback<Data = any> = Pick<IListProps<Data>, 'isLoading' | 'error' | 'data'> &

@@ -1,16 +1,18 @@
-import React, { FC } from 'react';
-import { MemoryRouter as Router, useRouteMatch } from 'react-router-dom';
-import { faImages } from '@fortawesome/free-solid-svg-icons';
-import { useTranslation } from 'react-i18next';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Jumbotron from 'react-bootstrap/Jumbotron';
-import Button from 'react-bootstrap/Button';
-import { UIContextProvider, generatePath } from '@reactionable/core';
-import { useUIContextProviderProps } from '../../src/UI';
-import { Sidebar, setSidebarNavItems } from '../../src/layout/sidebar/Sidebar';
 import '../config';
+
+import { faImages } from '@fortawesome/free-solid-svg-icons';
+import { UIContextProvider, generatePath } from '@reactionable/core';
+import React, { FC } from 'react';
+import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
+import Jumbotron from 'react-bootstrap/Jumbotron';
+import Row from 'react-bootstrap/Row';
+import { useTranslation } from 'react-i18next';
+import { MemoryRouter as Router, useRouteMatch } from 'react-router-dom';
+
+import { Sidebar, setSidebarNavItems } from '../../src/layout/sidebar/Sidebar';
+import { useUIContextProviderProps } from '../../src/UI';
 
 export default {
   title: 'UI Bootstrap/Layout/Sidebar',

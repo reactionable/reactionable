@@ -1,9 +1,11 @@
-import React from 'react';
+import '../config';
+
 import { action } from '@storybook/addon-actions';
+import React from 'react';
 import Button from 'react-bootstrap/Button';
+
 import { Delete } from '../../src/crud/delete/Delete';
 import { UIContextProvider } from '../../src/UI';
-import '../config';
 
 export default {
   title: 'UI Bootstrap/Crud/Delete',

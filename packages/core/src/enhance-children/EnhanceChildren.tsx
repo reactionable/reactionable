@@ -1,4 +1,4 @@
-import React, { FC, Children, cloneElement } from 'react';
+import React, { Children, FC, cloneElement } from 'react';
 
 export const EnhanceChildren: FC<{ enhance: { [key: string]: any } }> = (props) => {
   const { children, enhance } = props;

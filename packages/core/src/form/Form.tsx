@@ -1,7 +1,8 @@
-import React, { FC, ReactElement, PropsWithChildren, useState, useEffect } from 'react';
+import { Formik, FormikHelpers, FormikProps } from 'formik';
+import React, { FC, PropsWithChildren, ReactElement, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FormikHelpers, Formik, FormikProps } from 'formik';
 import { object } from 'yup';
+
 import { useUIContext } from '../ui/UI';
 
 export type IOnSubmitForm<Values, Data> = (

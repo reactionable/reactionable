@@ -1,13 +1,14 @@
-import React from 'react';
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import {
-  SuccessNotificationComponent,
-  useSuccessNotification as useCoreSuccessNotification,
   ISuccessNotificationProps as ICoreSuccessNotificationProps,
   IUseSuccessNotificationProps as ICoreUseSuccessNotificationProps,
-} from '@reactionable/core';
-import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
-import { Notification } from './Notification';
+  SuccessNotificationComponent,
+  useSuccessNotification as useCoreSuccessNotification,
+} from '@reactionable/core/lib/ui/notification/SuccessNotification';
+import React from 'react';
+
 import { Alert } from '../alert/Alert';
+import { Notification } from './Notification';
 
 export type ISuccessNotificationProps = ICoreSuccessNotificationProps;
 

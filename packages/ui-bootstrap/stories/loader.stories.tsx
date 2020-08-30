@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
-import { withKnobs, boolean } from '@storybook/addon-knobs';
-import { Loader, useLoader } from '../src/loader/Loader';
 import './config';
+
+import { boolean, withKnobs } from '@storybook/addon-knobs';
+import React, { useEffect } from 'react';
+
+import { Loader, useLoader } from '../src/loader/Loader';
 
 export default {
   title: 'UI Bootstrap/Loader',

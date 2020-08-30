@@ -1,5 +1,7 @@
 import { FC, PropsWithChildren, ReactElement, ReactNode } from 'react';
-import { useAlert, IAlertProps, Alert } from './Alert';
+
+import { Alert, IAlertProps } from './Alert';
+import { useAlert } from './useAlert';
 
 export type IWarningAlertProps = IAlertProps;
 export type WarningAlertComponent = FC<IWarningAlertProps>;

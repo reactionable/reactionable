@@ -1,8 +1,10 @@
-import React from 'react';
-import { withKnobs, number } from '@storybook/addon-knobs';
-import { action } from '@storybook/addon-actions';
-import { Paginator } from '../src/paginator/Paginator';
 import './config';
+
+import { action } from '@storybook/addon-actions';
+import { number, withKnobs } from '@storybook/addon-knobs';
+import React from 'react';
+
+import { Paginator } from '../src/paginator/Paginator';
 
 export default {
   title: 'UI Bootstrap/Paginator',

@@ -1,11 +1,13 @@
-import React from 'react';
-import { string } from 'yup';
-import { action } from '@storybook/addon-actions';
-import Button from 'react-bootstrap/Button';
-import { FormField } from '../../src/form/FormField';
-import { Update } from '../../src/crud/update/Update';
-import { UIContextProvider } from '../../src/UI';
 import '../config';
+
+import { action } from '@storybook/addon-actions';
+import React from 'react';
+import Button from 'react-bootstrap/Button';
+import { string } from 'yup';
+
+import { Update } from '../../src/crud/update/Update';
+import { FormField } from '../../src/form/FormField';
+import { UIContextProvider } from '../../src/UI';
 
 export default {
   title: 'UI Bootstrap/Crud/Update',
