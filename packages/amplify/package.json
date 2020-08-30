@@ -1,6 +1,6 @@
 {
   "name": "@reactionable/amplify",
-  "version": "0.24.7",
+  "version": "0.24.8",
   "description": "Reactionable package for Amplify",
   "files": [
     "lib"
@@ -33,7 +33,7 @@
   },
   "homepage": "https://github.com/reactionable/reactionable#readme",
   "dependencies": {
-    "@reactionable/core": "^0.24.7",
+    "@reactionable/core": "^0.24.8",
     "aws-amplify": "^3.0.21",
     "aws-amplify-react": "^4.1.22"
   },
@@ -44,9 +44,9 @@
     "@types/jest": "^26.0.10",
     "@types/react": "^16.9.46",
     "barrelsby": "^2.2.0",
-    "jest": "^26.4.1",
+    "jest": "^26.4.2",
     "react": "^16.13.1",
-    "react-i18next": "^11.7.0",
+    "react-i18next": "^11.7.2",
     "react-test-renderer": "^16.13.1",
     "rimraf": "^3.0.2",
     "ts-jest": "^26.2.0",
