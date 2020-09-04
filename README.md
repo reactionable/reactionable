@@ -77,12 +77,14 @@ Visit: http://localhost:6006/
 
 ## Author
 
-👤 **Neilime**
+👤 **ESCEMI <contact@escemi.com>**
 
-- Website: https://github.com/sponsors/neilime
-- Github: [@neilime](https://github.com/neilime)
+- Website: https://www.escemi.com
+- Sponsor: https://github.com/sponsors/neilime
+- Github: [@reactionable](https://github.com/reactionable)
+- LinkedIn: [@https:\/\/www.linkedin.com\/company\/escemi](https://linkedin.com/in/https://www.linkedin.com/company/escemi)
 
 ## 📝 License
 
-Copyright © 2019 [Neilime](https://github.com/neilime).<br />
-This project is [MIT](https://github.com/reactionable/reactionable/blob/master/LICENSE) licensed.
+Copyright © 2020 [ESCEMI <contact@escemi.com>](https://www.escemi.com).<br />
+This project is [MIT](https://github.com/reactionable/reactionable-cli/blob/master/LICENSE) licensed.
