@@ -39,7 +39,7 @@
   "devDependencies": {
     "@testing-library/react-hooks": "^3.4.1",
     "@types/jest": "^26.0.10",
-    "@types/react": "^16.9.48",
+    "@types/react": "^16.9.49",
     "barrelsby": "^2.2.0",
     "jest": "^26.4.2",
     "react": "^16.13.1",
