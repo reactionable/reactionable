@@ -43,7 +43,7 @@
     "import-sort-style-module": "^6.0.0",
     "lerna": "^3.22.1",
     "prettier": "^2.1.2",
-    "prettier-plugin-import-sort": "^0.0.4",
+    "prettier-plugin-import-sort": "^0.0.5",
     "typedoc": "^0.19.2",
     "typedoc-plugin-nojekyll": "^1.0.1"
   },
