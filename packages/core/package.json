@@ -58,7 +58,7 @@
     "react-dom": "^16.13.1",
     "rimraf": "^3.0.2",
     "ts-jest": "^26.3.0",
-    "tslib": "^2.0.1",
+    "tslib": "^2.0.2",
     "typescript": "^4.0.3"
   },
   "jest": {
