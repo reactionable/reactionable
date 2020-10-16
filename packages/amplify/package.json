@@ -47,7 +47,7 @@
     "jest": "^26.5.2",
     "react": "^16.13.1",
     "react-i18next": "^11.7.3",
-    "react-test-renderer": "^16.13.1",
+    "react-test-renderer": "^16.14.0",
     "rimraf": "^3.0.2",
     "ts-jest": "^26.3.0",
     "tslib": "^2.0.2",
