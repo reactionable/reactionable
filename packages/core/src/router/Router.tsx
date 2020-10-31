@@ -1,43 +1,36 @@
-import React, { PropsWithChildren, createContext, useContext } from 'react';
+import { IProviderProps, createProvider } from '../app/Provider';
 import { ILinkProps, IRouterLinkComponent, RouterLink } from './Link';
 import {
   IRenderRoutes,
-  IUseRouteMatch,
-  useRouteMatchCore,
-  renderRoutes,
   IRouteMatch,
+  IUseRouteMatch,
+  renderRoutes,
+  useRouteMatchCore,
 } from './Route';
 
-export interface IRouterContext<LinkProps extends ILinkProps> {
+export type IRouterProviderProps<LinkProps extends ILinkProps = ILinkProps> = IProviderProps<{
   RouterLink: IRouterLinkComponent<LinkProps>;
   useRouteMatch: IUseRouteMatch;
   renderRoutes: IRenderRoutes;
+}>;
+
+export function useRouterProviderProps(): IRouterProviderProps {
+  return {
+    RouterLink,
+    useRouteMatch: useRouteMatchCore,
+    renderRoutes,
+  };
 }
 
-export const RouterContext = createContext<IRouterContext<any>>({
-  RouterLink,
-  useRouteMatch: useRouteMatchCore,
-  renderRoutes,
-});
+export const {
+  Context: RouterContext,
+  ContextProvider: RouterContextProvider,
+  useContext: useRouterContext,
+} = createProvider<IRouterProviderProps>(useRouterProviderProps());
 
-export type IRouterContextProviderProps<LinkProps extends ILinkProps = ILinkProps> = IRouterContext<
-  LinkProps
->;
-
-export function RouterContextProvider<LinkProps extends ILinkProps>(
-  props: PropsWithChildren<IRouterContextProviderProps<LinkProps>>
-) {
-  return <RouterContext.Provider value={props}>{props.children}</RouterContext.Provider>;
-}
-
-export function useRouterContext<LinkProps extends ILinkProps>() {
-  return useContext<IRouterContext<LinkProps>>(RouterContext);
-}
-
-export function useRouteMatch<
-  Params extends { [K in keyof Params]?: string } = {},
-  LinkProps extends ILinkProps = ILinkProps
->(): IRouteMatch<Params> {
-  const { useRouteMatch } = useRouterContext<LinkProps>();
+export function useRouteMatch<Params extends { [K in keyof Params]?: string } = {}>(): IRouteMatch<
+  Params
+> {
+  const { useRouteMatch } = useRouterContext();
   return useRouteMatch() as IRouteMatch<Params>;
 }

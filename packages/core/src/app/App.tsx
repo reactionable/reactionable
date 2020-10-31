@@ -2,7 +2,7 @@ import React, { LazyExoticComponent, PropsWithChildren } from 'react';
 
 import { IIdentityContextProviderProps } from '../identity/Identity';
 import { IRouteProps } from '../router/Route';
-import { IRouterContextProviderProps } from '../router/Router';
+import { IRouterProviderProps } from '../router/Router';
 import { IUseLayoutProps } from '../ui/layout/Layout';
 import { IUIContextProviderProps } from '../ui/UI';
 import { Wrapper } from './Wrapper';
@@ -11,7 +11,7 @@ export interface IAppProps<
   ICP extends IIdentityContextProviderProps,
   UICP extends IUIContextProviderProps,
   LP extends IUseLayoutProps,
-  RCP extends IRouterContextProviderProps
+  RCP extends IRouterProviderProps
 > {
   routes: Array<IRouteProps>;
   HomeComponent?: LazyExoticComponent<any>;
@@ -26,7 +26,7 @@ export function App<
   ICP extends IIdentityContextProviderProps = IIdentityContextProviderProps,
   UICP extends IUIContextProviderProps = IUIContextProviderProps,
   LP extends IUseLayoutProps = IUseLayoutProps,
-  RCP extends IRouterContextProviderProps = IRouterContextProviderProps
+  RCP extends IRouterProviderProps = IRouterProviderProps
 >({
   routes = [],
   HomeComponent,

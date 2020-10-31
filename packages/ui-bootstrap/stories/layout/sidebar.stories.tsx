@@ -25,9 +25,9 @@ const SampleComponent: FC = () => {
 
   setSidebarNavItems([
     {
-      to: generatePath(`${match.path}/sample`, match.params),
+      href: generatePath(`${match.path}/sample`, match.params),
       title: t('Go to sample page'),
-      icon: faImages,
+      icon: { icon: faImages },
       children: t('Sample'),
     },
   ]);

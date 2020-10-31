@@ -3,7 +3,7 @@ import {
   INavItemsProps,
   createNavItemContextProvider,
 } from '@reactionable/core/lib/nav/NavItem';
-import React, { FC, PropsWithChildren, useEffect, useState } from 'react';
+import React, { ComponentType, PropsWithChildren, useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Collapse from 'react-bootstrap/Collapse';
@@ -11,9 +11,9 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import { useTranslation } from 'react-i18next';
 
-import { INavItem, navItemToComponent } from '../../nav/NavItem';
+import { INavItemProps, navItemToComponent } from '../../nav/NavItem';
 
-export type ISidebarNavItem = INavItem;
+export type ISidebarNavItem = INavItemProps;
 
 export interface ISidebarProps extends INavItemsProps<ISidebarNavItem> {}
 
@@ -27,7 +27,7 @@ export const {
   NavItemContextConsumer: SidebarContextConsumer,
 } = contextProvider;
 
-const SidebarItems: FC = ({ children }) => {
+const SidebarItems: ComponentType = ({ children }) => {
   const { t } = useTranslation();
   const [open, setOpen] = useState(true);
   const { navItems } = useSidebarContext();
@@ -84,7 +84,7 @@ export function Sidebar({ children }: PropsWithChildren<ISidebarProps>) {
   );
 }
 
-export function setSidebarNavItems(navItems: Array<INavItem>) {
+export function setSidebarNavItems(navItems: Array<INavItemProps>) {
   const { setNavItems } = useSidebarContext();
 
   useEffect(() => {

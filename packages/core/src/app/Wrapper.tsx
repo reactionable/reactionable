@@ -1,13 +1,13 @@
 import React, { PropsWithChildren, StrictMode } from 'react';
 
 import { IIdentityContextProviderProps, IdentityContextProvider } from '../identity/Identity';
-import { IRouterContextProviderProps, RouterContextProvider } from '../router/Router';
+import { IRouterProviderProps, RouterContextProvider } from '../router/Router';
 import { IUIContextProviderProps, UIContextProvider } from '../ui/UI';
 
 export interface IWrapperProps<
   ICP extends IIdentityContextProviderProps,
   UICP extends IUIContextProviderProps,
-  RCP extends IRouterContextProviderProps
+  RCP extends IRouterProviderProps
 > {
   identity?: ICP;
   ui?: UICP;
@@ -17,7 +17,7 @@ export interface IWrapperProps<
 export function Wrapper<
   ICP extends IIdentityContextProviderProps = IIdentityContextProviderProps,
   UICP extends IUIContextProviderProps = IUIContextProviderProps,
-  RCP extends IRouterContextProviderProps = IRouterContextProviderProps
+  RCP extends IRouterProviderProps = IRouterProviderProps
 >({ children, identity, ui, router }: PropsWithChildren<IWrapperProps<ICP, UICP, RCP>>) {
   let wrapped = children;
 
@@ -29,7 +29,9 @@ export function Wrapper<
     wrapped = <IdentityContextProvider {...identity}>{wrapped}</IdentityContextProvider>;
   }
 
-  wrapped = <UIContextProvider {...ui}>{wrapped}</UIContextProvider>;
+  if (ui) {
+    wrapped = <UIContextProvider {...ui}>{wrapped}</UIContextProvider>;
+  }
 
   return <StrictMode>{wrapped}</StrictMode>;
 }
