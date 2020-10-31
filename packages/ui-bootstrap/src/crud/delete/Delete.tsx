@@ -1,15 +1,15 @@
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon, FontAwesomeIconProps } from '@fortawesome/react-fontawesome';
 import {
   Delete as DeleteCore,
   IDeleteProps as ICoreDeleteProps,
 } from '@reactionable/core/lib/crud/delete/Delete';
 import React, { PropsWithChildren, ReactNode } from 'react';
 import Button from 'react-bootstrap/Button';
+import { Icon, IIconProps } from '../../icon/icon';
 
 export interface IDeleteProps<Data> extends ICoreDeleteProps<Data> {
   label?: ReactNode;
-  icon?: FontAwesomeIconProps;
+  icon?: IIconProps;
 }
 
 export function Delete<Data>({
@@ -20,7 +20,7 @@ export function Delete<Data>({
   return (
     <DeleteCore<Data> {...props}>
       <Button variant="danger" title={props.title || ''}>
-        {icon && <FontAwesomeIcon className={label ? 'mr-2' : ''} {...icon} />}
+        {icon && <Icon className={label ? 'mr-2' : ''} {...icon} />}
         {label}
       </Button>
     </DeleteCore>

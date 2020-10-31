@@ -1,4 +1,3 @@
-import { FontAwesomeIcon, FontAwesomeIconProps } from '@fortawesome/react-fontawesome';
 import {
   ConfirmationComponent,
   ConfirmationAction as CoreConfirmationAction,
@@ -11,6 +10,7 @@ import React, { PropsWithChildren } from 'react';
 import Button, { ButtonProps } from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useTranslation } from 'react-i18next';
+import { Icon, IIconProps } from '../icon/icon';
 
 export type IConfirmationProps = ICoreConfirmationProps;
 
@@ -43,7 +43,7 @@ export const Confirmation: ConfirmationComponent = ({ callback, children, title 
 
 export interface IConfirmationActionProps<Data> extends ICoreConfirmationActionProps<Data> {
   label?: string;
-  icon?: FontAwesomeIconProps;
+  icon?: IIconProps;
   button?: ButtonProps;
 }
 
@@ -59,7 +59,7 @@ export function ConfirmationAction<Data>({
       {children}
       {button && (
         <Button title={props.title || ''} {...button}>
-          {icon && <FontAwesomeIcon {...icon} />}
+          {icon && <Icon {...icon} />}
           {label}
         </Button>
       )}
