@@ -4,10 +4,10 @@ import { string } from 'yup';
 
 import { Form } from '../src/form/Form';
 import { FormField } from '../src/form/FormField';
-import { UIContextProvider } from '../src/UI';
+import { UIContextProvider } from '../src/ui/UI';
 
 export default {
-  title: 'UI Bootstrap/Form',
+  title: 'Core/Form',
   parameters: { info: { inline: true }, component: Form },
   subComponents: [FormField],
 };
@@ -30,26 +30,6 @@ export const SimpleForm = () => (
       validationSchema={{ test: string().required('Test is required') }}
       initialValues={{ test: '' }}
       children={() => <FormField name="test" autoFocus placeholder="Simple form input" />}
-    />
-  </UIContextProvider>
-);
-
-export const FormWithLabelledInput = () => (
-  <UIContextProvider>
-    <Form
-      title="Simple form"
-      submitButton
-      onSubmit={async (values) => {
-        action('Form submitted...')(values);
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        return values;
-      }}
-      onSuccess={action('Form submit succeed')}
-      validationSchema={{ test: string().required('Test is required') }}
-      initialValues={{ test: '' }}
-      children={() => (
-        <FormField label="Test" name="test" autoFocus placeholder="Simple form input" />
-      )}
     />
   </UIContextProvider>
 );
@@ -113,7 +93,7 @@ export const FormWithCheckbox = () => (
       onSuccess={action('Form submit succeed')}
       validationSchema={{ test: string().required('Test is required') }}
       initialValues={{ test: '' }}
-      children={() => <FormField label="Test" type="checkbox" name="test" autoFocus />}
+      children={() => <FormField type="checkbox" name="test" autoFocus />}
     />
   </UIContextProvider>
 );

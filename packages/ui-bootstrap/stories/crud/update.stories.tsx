@@ -30,8 +30,8 @@ export const SimpleUpdate = () => (
           return values;
         },
         onSuccess: action('Form submit succeed'),
-        formSchema: { test: string().required('Test is required') },
-        formValues: { test: 'test value' },
+        validationSchema: { test: string().required('Test is required') },
+        initialValues: { test: 'test value' },
         children: () => <FormField name="test" autoFocus placeholder="Simple form input" />,
       }}
     />
@@ -51,8 +51,8 @@ export const UpdateInModal = () => (
           return values;
         },
         onSuccess: action('Form submit succeed'),
-        formSchema: { test: string().required('Test is required') },
-        formValues: { test: 'test value' },
+        validationSchema: { test: string().required('Test is required') },
+        initialValues: { test: 'test value' },
         children: () => <FormField name="test" autoFocus placeholder="Simple form input" />,
       }}
     >

@@ -2,54 +2,23 @@ import {
   Form as CoreForm,
   IFormProps as ICoreFormProps,
   IOnSubmitForm as ICoreOnSubmitForm,
-  IFormChildrenProps,
   useForm as useCoreForm,
 } from '@reactionable/core/lib/form/Form';
-import { Form as FormikForm } from 'formik';
-import React, { Children, PropsWithChildren } from 'react';
-import Button, { ButtonProps } from 'react-bootstrap/Button';
-import { useTranslation } from 'react-i18next';
+import React, { PropsWithChildren } from 'react';
+import { SubmitButton } from './SubmitButton';
 
 export type IFormProps<Values, Data> = ICoreFormProps<Values, Data>;
 
 export type IOnSubmitForm<Values, Data> = ICoreOnSubmitForm<Values, Data>;
 
-export type ISubmitButtonProps = ButtonProps;
-
-export function SubmitButton({ children, ...props }: PropsWithChildren<ISubmitButtonProps>) {
-  const { t } = useTranslation();
+export function Form<Values, Data>(props: PropsWithChildren<IFormProps<Values, Data>>) {
   return (
-    <Button
-      type="submit"
-      variant="primary"
-      children={Children.count(children) ? children : t('Save')}
+    <CoreForm<Values, Data>
       {...props}
+      form={{ className: 'needs-validation mb-1' }}
+      submitButtonComponent={SubmitButton}
     />
   );
-}
-
-export function Form<Values, Data>({
-  children,
-  submitButton,
-  ...props
-}: PropsWithChildren<IFormProps<Values, Data>>) {
-  const renderChildren = (formikProps: IFormChildrenProps<Values>) => {
-    return (
-      <FormikForm className="needs-validation mb-1">
-        {children(formikProps)}
-        {submitButton && (
-          <SubmitButton
-            {...{
-              disabled: formikProps.isSubmitting,
-              children: typeof submitButton === 'string' ? submitButton : undefined,
-            }}
-          />
-        )}
-      </FormikForm>
-    );
-  };
-
-  return <CoreForm<Values, Data> {...props} children={renderChildren} />;
 }
 
 export type IUseFormProps<Values = any, Data = any> = PropsWithChildren<IFormProps<Values, Data>>;

@@ -2,9 +2,10 @@ import { IUseLoaderProps } from '@reactionable/core/lib/ui/loader/useLoader';
 import {
   UIContextProvider as CoreUIContextProvider,
   IUIContextProviderProps as ICoreUIContextProviderProps,
+  UIContext,
   useUIContext as useCoreUIContext,
 } from '@reactionable/core/lib/ui/UI';
-import React, { PropsWithChildren } from 'react';
+import React, { ConsumerProps, PropsWithChildren } from 'react';
 
 import { IUseErrorAlertProps, useErrorAlert } from './alert/ErrorAlert';
 import { IUseWarningAlertProps, useWarningAlert } from './alert/WarningAlert';
@@ -13,7 +14,7 @@ import { IUseFormProps, useForm } from './form/Form';
 import { IUseLayoutProps, useLayout } from './layout/Layout';
 import { useLoader } from './loader/Loader';
 import { IUseModalProps, useModal } from './modal/Modal';
-import { IUseModalFormProps, useModalForm } from './modal/ModalForm';
+import { IUseModalFormProps, useModalForm } from './modal/useModalForm';
 import { IUseErrorNotificationProps, useErrorNotification } from './notification/ErrorNotification';
 import {
   IUseSuccessNotificationProps,
@@ -66,3 +67,7 @@ export function useUIContextProviderProps(): IUIContextProviderProps {
 export const UIContextProvider = (props?: PropsWithChildren<Partial<IUIContextProviderProps>>) => {
   return <CoreUIContextProvider {...useUIContextProviderProps()} {...props} />;
 };
+
+export function UIContextConsumer(props: ConsumerProps<IUIContextProviderProps>) {
+  return <UIContext.Consumer {...props} />;
+}

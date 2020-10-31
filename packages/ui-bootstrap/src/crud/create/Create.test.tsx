@@ -26,10 +26,10 @@ describe('Create', () => {
             onSuccess: () => {},
             title: 'Create a new test',
             onSubmit: async (values) => values,
-            formValues: {
+            initialValues: {
               test: '',
             },
-            formSchema: {
+            validationSchema: {
               test: string().required('Test is required'),
             },
             children: () => <FormField name="test" />,
@@ -48,10 +48,10 @@ describe('Create', () => {
             onSuccess: () => {},
             title: 'Create a new test',
             onSubmit: async (values) => values,
-            formValues: {
+            initialValues: {
               test: '',
             },
-            formSchema: {
+            validationSchema: {
               test: string().required('Test is required'),
             },
             children: () => <FormField name="test" />,

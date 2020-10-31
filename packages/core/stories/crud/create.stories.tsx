@@ -27,8 +27,8 @@ export const SimpleCreate = () => (
           return values;
         },
         onSuccess: action('Form submit succeed'),
-        formSchema: { test: string().required('Test is required') },
-        formValues: { test: '' },
+        validationSchema: { test: string().required('Test is required') },
+        initialValues: { test: '' },
         children: () => <FormField name="test" autoFocus placeholder="Simple form input" />,
       }}
     />
@@ -48,8 +48,8 @@ export const CreateInModal = () => (
           return values;
         },
         onSuccess: action('Form submit succeed'),
-        formSchema: { test: string().required('Test is required') },
-        formValues: { test: '' },
+        validationSchema: { test: string().required('Test is required') },
+        initialValues: { test: '' },
         children: () => <FormField name="test" autoFocus placeholder="Simple form input" />,
       }}
     >

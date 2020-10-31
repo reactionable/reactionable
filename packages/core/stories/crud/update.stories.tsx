@@ -20,14 +20,15 @@ export const update = () => (
     <Update
       form={{
         title: 'Update form',
+        submitButton: true,
         onSubmit: async (values: IFormValues) => {
           await new Promise((resolve) => setTimeout(resolve, 1000));
           action('Form submit')(values);
           return values;
         },
         onSuccess: action('Form submit succeed'),
-        formSchema: { test: string().required('Test is required') },
-        formValues: { test: 'test value' },
+        validationSchema: { test: string().required('Test is required') },
+        initialValues: { test: 'test value' },
         children: () => <FormField name="test" autoFocus placeholder="Simple form input" />,
       }}
     />
@@ -47,8 +48,8 @@ export const updateInModal = () => (
           return values;
         },
         onSuccess: action('Form submit succeed'),
-        formSchema: { test: string().required('Test is required') },
-        formValues: { test: 'test value' },
+        validationSchema: { test: string().required('Test is required') },
+        initialValues: { test: 'test value' },
         children: () => <FormField name="test" autoFocus placeholder="Simple form input" />,
       }}
     >

@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, createContext, useContext } from 'react';
+import React, { ConsumerProps, PropsWithChildren, createContext, useContext } from 'react';
 
 import { Form, IUseForm, IUseFormProps, useForm } from '../form/Form';
 import { Alert } from './alert/Alert';
@@ -17,7 +17,7 @@ import { IUseLayout, IUseLayoutProps, useLayout } from './layout/Layout';
 import { Loader } from './loader/Loader';
 import { IUseLoader, IUseLoaderProps, useLoader } from './loader/useLoader';
 import { IUseModal, IUseModalProps, Modal, useModal } from './modal/Modal';
-import { IUseModalForm, IUseModalFormProps, useModalForm } from './modal/ModalForm';
+import { IUseModalForm, IUseModalFormProps, useModalForm } from './modal/useModalForm';
 import {
   IUseErrorNotification,
   IUseErrorNotificationProps,
@@ -109,6 +109,21 @@ export function UIContextProvider<
   );
 }
 
+export function UIContextConsumer<
+  LO extends IUseLoaderProps,
+  SN extends IUseSuccessNotificationProps,
+  EN extends IUseErrorNotificationProps,
+  EA extends IUseErrorAlertProps,
+  WA extends IUseWarningAlertProps,
+  CO extends IUseConfirmationProps,
+  LA extends IUseLayoutProps,
+  FO extends IUseFormProps,
+  MO extends IUseModalProps,
+  MF extends IUseModalFormProps
+>(props: ConsumerProps<IUIContextProviderProps<LO, SN, EN, EA, WA, CO, LA, FO, MO, MF>>) {
+  return <UIContext.Consumer {...props} />;
+}
+
 export function useUIContext<
   LO extends IUseLoaderProps,
   SN extends IUseSuccessNotificationProps,
@@ -129,7 +144,7 @@ export function useUIContextProviderProps(): IUIContextProviderProps {
     useLoader: (props) => useLoader({ Component: Loader, ...props }),
     useSuccessNotification: (props) =>
       useSuccessNotification({ Component: Notification, ...props }),
-    useErrorNotification: (props) => useErrorNotification({ Component: Loader, ...props }),
+    useErrorNotification: (props) => useErrorNotification({ Component: Notification, ...props }),
     useErrorAlert: (props) => useErrorAlert({ Component: ErrorAlert, ...props }),
     useWarningAlert: (props) => useWarningAlert({ Component: Alert, ...props }),
     useConfirmation: (props) => useConfirmation({ Component: Confirmation, ...props }),

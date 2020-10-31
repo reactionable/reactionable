@@ -1,19 +1,18 @@
-import { IFormChildrenProps } from '@reactionable/core/lib/form/Form';
+import { FormFieldsChildren, IFormChildrenProps } from '@reactionable/core/lib/form/Form';
 import {
   IModalFormComponentProps as ICoreModalFormComponentProps,
   IModalFormProps as ICoreModalFormProps,
-  IUseModalFormProps as ICoreUseModalFormProps,
-  useModalForm as useCoreModalForm,
 } from '@reactionable/core/lib/ui/modal/ModalForm';
-import React, { PropsWithChildren } from 'react';
+import React from 'react';
 import Button from 'react-bootstrap/Button';
 import BootstrapModal from 'react-bootstrap/Modal';
 import { useTranslation } from 'react-i18next';
 
-import { Form, IFormProps, SubmitButton } from '../form/Form';
+import { Form, IFormProps } from '../form/Form';
+import { renderSubmitButton } from '../form/SubmitButton';
 import { IModalProps } from './Modal';
 
-export interface IModalFormProps<Values, Data>
+export interface IModalFormProps<Values = any, Data = any>
   extends ICoreModalFormProps<IFormProps<Values, Data>, IModalProps> {}
 
 export type IModalFormComponentProps<Values, Data> = ICoreModalFormComponentProps<
@@ -23,43 +22,59 @@ export type IModalFormComponentProps<Values, Data> = ICoreModalFormComponentProp
   cancelButton?: string;
 };
 
+type IModalFormChildrenProps<Values, Data> = Pick<
+  IModalFormComponentProps<Values, Data>,
+  'submitButton' | 'cancelButton' | 'closeModal' | 'children'
+> & { formikProps: IFormChildrenProps<Values> };
+
+function ModalFormChildren<Values, Data>({
+  submitButton,
+  cancelButton,
+  closeModal,
+  children,
+  formikProps,
+}: IModalFormChildrenProps<Values, Data>) {
+  const { t } = useTranslation();
+
+  const submit = renderSubmitButton({
+    submitButton,
+    disabled: formikProps.isSubmitting,
+  });
+
+  return (
+    <>
+      <BootstrapModal.Body>
+        <FormFieldsChildren children={children} formikProps={formikProps} />
+      </BootstrapModal.Body>
+      <BootstrapModal.Footer>
+        <Button disabled={formikProps.isSubmitting} onClick={closeModal} variant="secondary">
+          {cancelButton ? cancelButton : t('Cancel')}
+        </Button>
+        {submit}
+      </BootstrapModal.Footer>
+    </>
+  );
+}
+
 export function ModalForm<Values, Data>({
   submitButton,
   cancelButton,
   closeModal,
   children,
   ...formProps
-}: PropsWithChildren<IModalFormComponentProps<Values, Data>>) {
-  const { t } = useTranslation();
-
-  const renderFormChildren = (formikProps: IFormChildrenProps<Values>) => {
-    return (
-      <>
-        <BootstrapModal.Body>{children(formikProps)}</BootstrapModal.Body>
-        <BootstrapModal.Footer>
-          <Button disabled={formikProps.isSubmitting} onClick={closeModal} variant="secondary">
-            {cancelButton ? cancelButton : t('Cancel')}
-          </Button>
-          <SubmitButton
-            {...{
-              disabled: formikProps.isSubmitting,
-              children: typeof submitButton === 'string' ? submitButton : undefined,
-            }}
-          />
-        </BootstrapModal.Footer>
-      </>
-    );
-  };
-
-  return <Form {...formProps} children={renderFormChildren} />;
-}
-
-export interface IUseModalFormProps<Values = any, Data = any>
-  extends ICoreUseModalFormProps<IModalFormProps<Values, Data>> {}
-
-export function useModalForm<Values = any, Data = any>(props: IUseModalFormProps<Values, Data>) {
-  return useCoreModalForm<IUseModalFormProps<Values, Data>>({
-    ...props,
-    FormComponent: ModalForm,
-  });
+}: IModalFormComponentProps<Values, Data>) {
+  return (
+    <Form
+      {...formProps}
+      children={(formikProps) => (
+        <ModalFormChildren
+          submitButton={submitButton}
+          cancelButton={cancelButton}
+          closeModal={closeModal}
+          children={children}
+          formikProps={formikProps}
+        />
+      )}
+    />
+  );
 }
