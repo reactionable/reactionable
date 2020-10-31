@@ -1,13 +1,11 @@
-import './config';
-
 import { action } from '@storybook/addon-actions';
 import { number, withKnobs } from '@storybook/addon-knobs';
 import React from 'react';
 
-import { Paginator } from '../src/paginator/Paginator';
+import { Paginator } from '../../src/ui/paginator/Paginator';
 
 export default {
-  title: 'UI Bootstrap/Paginator',
+  title: 'Core/UI/Paginator',
   parameters: {
     info: { inline: true },
     component: Paginator,
@@ -21,7 +19,7 @@ export const SimplePaginator = () => {
   const perPage = number('Per page', 2);
   const pageRangeDisplayed = number('Page range displayed', 2);
   const marginPagesDisplayed = number('Margin pages displayed', 2);
-  const onChange = action(`Page changed`);
+  const onChange = () => action(`Page changed`);
 
   return (
     <Paginator
