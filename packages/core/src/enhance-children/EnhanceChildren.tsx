@@ -1,6 +1,7 @@
-import React, { Children, FC, cloneElement } from 'react';
+import React, { Children, PropsWithChildren, cloneElement } from 'react';
 
-export const EnhanceChildren: FC<{ enhance: { [key: string]: any } }> = (props) => {
+export type IEnhanceChildrenProps = { enhance: { [key: string]: any } };
+export const EnhanceChildren = (props: PropsWithChildren<IEnhanceChildrenProps>) => {
   const { children, enhance } = props;
 
   const newChildren = Children.map(children, (child, i) => {

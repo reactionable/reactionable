@@ -1,11 +1,10 @@
 import { text, withKnobs } from '@storybook/addon-knobs';
 import React from 'react';
 
-import { WarningAlert } from '../../../ui-bootstrap/src/alert/WarningAlert';
 import { Alert } from '../../src/ui/alert/Alert';
 import { ErrorAlert, useErrorAlert } from '../../src/ui/alert/ErrorAlert';
 import { useAlert } from '../../src/ui/alert/useAlert';
-import { useWarningAlert } from '../../src/ui/alert/WarningAlert';
+import { WarningAlert, useWarningAlert } from '../../src/ui/alert/WarningAlert';
 
 export default {
   title: 'Core/UI/Alert',

@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, ReactElement } from 'react';
+import React, { PropsWithChildren, ReactNode } from 'react';
 
 import { createNavItemContextProvider } from '../../nav/NavItem';
 import { BodyComponent, IBodyProps } from './body/Body';
@@ -6,36 +6,40 @@ import { FooterComponent, IFooterProps } from './footer/Footer';
 import { HeaderComponent, IHeaderProps } from './header/Header';
 
 export interface ILayoutProps<
-  H extends IHeaderProps,
-  B extends IBodyProps,
-  F extends IFooterProps
+  HeaderProps extends IHeaderProps,
+  BodyProps extends IBodyProps,
+  FooterProps extends IFooterProps
 > {
-  header?: H;
-  body?: B;
-  footer?: F;
+  header?: HeaderProps;
+  body?: BodyProps;
+  footer?: FooterProps;
 }
 
-export function Layout<H extends IHeaderProps, B extends IBodyProps, F extends IFooterProps>({
+export function Layout<
+  HeaderProps extends IHeaderProps,
+  BodyProps extends IBodyProps,
+  FooterProps extends IFooterProps
+>({
   children,
   header,
   body,
   footer,
   ...components
 }: PropsWithChildren<
-  ILayoutProps<H, B, F> & {
-    HeaderComponent: HeaderComponent<H>;
-    BodyComponent: BodyComponent<B>;
-    FooterComponent: FooterComponent<F>;
+  ILayoutProps<HeaderProps, BodyProps, FooterProps> & {
+    HeaderComponent: HeaderComponent<HeaderProps>;
+    BodyComponent: BodyComponent<BodyProps>;
+    FooterComponent: FooterComponent<FooterProps>;
   }
 >) {
-  const HC = components.HeaderComponent;
-  const BC = components.BodyComponent;
-  const FC = components.FooterComponent;
+  const Header = components.HeaderComponent;
+  const Body = components.BodyComponent;
+  const Footer = components.FooterComponent;
 
   const layoutContent = (
     <>
-      {(body || children) && <BC {...(body ?? ({} as B))} children={children} />}
-      {footer && <FC {...footer} />}
+      {(body || children) && <Body {...(body ?? ({} as BodyProps))} children={children} />}
+      {footer && <Footer {...footer} />}
     </>
   );
 
@@ -43,7 +47,7 @@ export function Layout<H extends IHeaderProps, B extends IBodyProps, F extends I
     return layoutContent;
   }
 
-  const contextProvider = createNavItemContextProvider<H>(header);
+  const contextProvider = createNavItemContextProvider<HeaderProps>(header);
   const {
     NavItemContextProvider: HeaderContextProvider,
     NavItemContextConsumer: HeaderContextConsumer,
@@ -54,7 +58,7 @@ export function Layout<H extends IHeaderProps, B extends IBodyProps, F extends I
       <HeaderContextConsumer>
         {({ setNavItems, ...headerProps }) => (
           <>
-            <HC {...(headerProps as H)} /> {layoutContent}
+            <Header {...(headerProps as HeaderProps)} /> {layoutContent}
           </>
         )}
       </HeaderContextConsumer>
@@ -63,43 +67,43 @@ export function Layout<H extends IHeaderProps, B extends IBodyProps, F extends I
 }
 
 export type IUseLayoutProps<
-  H extends IHeaderProps = IHeaderProps,
-  B extends IBodyProps = IBodyProps,
-  F extends IFooterProps = IFooterProps
-> = PropsWithChildren<ILayoutProps<H, B, F>>;
+  HeaderProps extends IHeaderProps = IHeaderProps,
+  BodyProps extends IBodyProps = IBodyProps,
+  FooterProps extends IFooterProps = IFooterProps
+> = PropsWithChildren<ILayoutProps<HeaderProps, BodyProps, FooterProps>>;
 
-export type IUseLayoutResult = ReactElement;
+export type IUseLayoutResult = ReactNode;
 
 export type IUseLayout<P extends IUseLayoutProps> = (props: P) => IUseLayoutResult;
 
-type HeaderPropsType<U extends IUseLayoutProps> = U extends IUseLayoutProps<infer H>
-  ? H extends IHeaderProps
-    ? H
+type HeaderPropsType<U extends IUseLayoutProps> = U extends IUseLayoutProps<infer HeaderProps>
+  ? HeaderProps extends IHeaderProps
+    ? HeaderProps
     : IHeaderProps
   : IHeaderProps;
 
-type BodyPropsType<U extends IUseLayoutProps> = U extends IUseLayoutProps<infer B>
-  ? B extends IBodyProps
-    ? B
+type BodyPropsType<U extends IUseLayoutProps> = U extends IUseLayoutProps<infer BodyProps>
+  ? BodyProps extends IBodyProps
+    ? BodyProps
     : IBodyProps
   : IBodyProps;
 
-type FooterPropsType<U extends IUseLayoutProps> = U extends IUseLayoutProps<infer F>
-  ? F extends IFooterProps
-    ? F
+type FooterPropsType<U extends IUseLayoutProps> = U extends IUseLayoutProps<infer FooterProps>
+  ? FooterProps extends IFooterProps
+    ? FooterProps
     : IFooterProps
   : IFooterProps;
 
-export function useLayout<P extends IUseLayoutProps>({
+export function useLayout<UseLayoutProps extends IUseLayoutProps>({
   HeaderComponent,
   BodyComponent,
   FooterComponent,
   children,
   ...props
-}: P & {
-  HeaderComponent: HeaderComponent<HeaderPropsType<P>>;
-  BodyComponent: BodyComponent<BodyPropsType<P>>;
-  FooterComponent: FooterComponent<FooterPropsType<P>>;
+}: UseLayoutProps & {
+  HeaderComponent: HeaderComponent<HeaderPropsType<UseLayoutProps>>;
+  BodyComponent: BodyComponent<BodyPropsType<UseLayoutProps>>;
+  FooterComponent: FooterComponent<FooterPropsType<UseLayoutProps>>;
 }): IUseLayoutResult {
   return (
     <Layout<any, any, any> {...{ HeaderComponent, BodyComponent, FooterComponent }} {...props}>

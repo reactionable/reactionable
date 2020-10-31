@@ -60,11 +60,6 @@ export const successNotification = () => {
 };
 
 export const UseSuccessNotification = () => {
-  const variant = select(
-    'Variant',
-    ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'dark', 'light', undefined],
-    'primary'
-  );
   const title = text('Title', 'This is a success notification');
   const content = text('Content', 'This is the success notification content');
 
@@ -88,11 +83,6 @@ export const errorNotification = () => {
 };
 
 export const UseErrorNotification = () => {
-  const variant = select(
-    'Variant',
-    ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'dark', 'light', undefined],
-    'primary'
-  );
   const title = text('Title', 'This is a success notification');
   const content = text('Content', 'This is the success notification content');
 

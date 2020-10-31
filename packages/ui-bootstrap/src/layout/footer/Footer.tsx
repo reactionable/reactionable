@@ -2,16 +2,17 @@ import {
   IFooterProps as ICoreFooterProps,
   SponsorFooter,
 } from '@reactionable/core/lib/ui/layout/footer/Footer';
-import React, { HTMLAttributes, PropsWithChildren } from 'react';
+import React, { ComponentType, DetailedHTMLProps, HTMLAttributes } from 'react';
+import { PropsWithChildren } from 'react';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import { useTranslation } from 'react-i18next';
 
 export type IFooterProps = ICoreFooterProps &
-  HTMLAttributes<HTMLElement> & {
-    sponsor?: boolean;
-  };
+  Omit<DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>, 'onSelect'>;
+
+export type FooterComponent = ComponentType<IFooterProps>;
 
 export function Footer({ brand, sponsor = true, ...footerProps }: PropsWithChildren<IFooterProps>) {
   const { t } = useTranslation();

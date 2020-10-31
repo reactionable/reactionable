@@ -22,8 +22,9 @@ export function useLoader<P extends IUseLoaderProps = IUseLoaderProps>(
   }
 ): IUseLoaderResult {
   const [isLoadingState, setLoading] = useState<boolean>(isLoading || false);
+  const loader = <>{isLoadingState && <Component {...props} />}</>;
   return {
-    loader: <>{isLoadingState && <Component {...props} />}</>,
+    loader,
     setLoading,
     isLoading: isLoadingState,
   };

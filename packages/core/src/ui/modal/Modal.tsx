@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren, ReactElement, useState } from 'react';
+import React, { ComponentType, PropsWithChildren, ReactNode, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 export interface IModalProps {
@@ -7,13 +7,18 @@ export interface IModalProps {
   onHide?: () => void;
 }
 
-export type ModalComponent<P extends IModalProps = IModalProps> = FC<P>;
+export type ModalComponent<P extends IModalProps = IModalProps> = ComponentType<P>;
 
-export const Modal: ModalComponent = ({ title, children, onHide, ...modalProps }) => {
+export const Modal: ModalComponent = ({
+  title,
+  children,
+  onHide,
+  show,
+
+  ...modalProps
+}) => {
   const { t } = useTranslation();
-  const [show, setShow] = useState(true);
   const handleOnClose = () => {
-    setShow(false);
     onHide && onHide();
   };
 
@@ -28,10 +33,14 @@ export const Modal: ModalComponent = ({ title, children, onHide, ...modalProps }
   );
 };
 
-export type IUseModalProps<P extends IModalProps = IModalProps> = PropsWithChildren<P>;
+export type IUseModalProps<P extends IModalProps = IModalProps> = PropsWithChildren<
+  P & {
+    Component?: ModalComponent<P>;
+  }
+>;
 
 export type IUseModalResult = {
-  modal: ReactElement;
+  modal: ReactNode;
   openModal: () => void;
   closeModal: () => void;
 };
@@ -43,9 +52,7 @@ export function useModal<P extends IUseModalProps>({
   show,
   onHide,
   ...props
-}: P & {
-  Component: ModalComponent<any>;
-}): IUseModalResult {
+}: P): IUseModalResult {
   const [showState, setShow] = useState(show);
 
   const openModal = () => setShow(true);
@@ -55,8 +62,10 @@ export function useModal<P extends IUseModalProps>({
     onHide && onHide();
   };
 
+  const ModalComponent = Component || Modal;
+
   return {
-    modal: <Component {...props} show={showState} onHide={handleOnHide} />,
+    modal: <ModalComponent {...props} show={showState} onHide={handleOnHide} />,
     openModal,
     closeModal,
   };

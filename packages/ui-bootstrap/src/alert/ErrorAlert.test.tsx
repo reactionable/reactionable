@@ -3,6 +3,8 @@ import React from 'react';
 
 import { ErrorAlert } from './ErrorAlert';
 
-it('should render without crashing', () => {
-  render(<ErrorAlert />);
+describe('ErrorAlert', () => {
+  it('should render without crashing', () => {
+    render(<ErrorAlert />);
+  });
 });

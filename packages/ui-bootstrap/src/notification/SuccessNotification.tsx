@@ -2,17 +2,19 @@ import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import {
   ISuccessNotificationProps as ICoreSuccessNotificationProps,
   IUseSuccessNotificationProps as ICoreUseSuccessNotificationProps,
-  SuccessNotificationComponent,
   useSuccessNotification as useCoreSuccessNotification,
 } from '@reactionable/core/lib/ui/notification/SuccessNotification';
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 
 import { Alert } from '../alert/Alert';
 import { Notification } from './Notification';
 
 export type ISuccessNotificationProps = ICoreSuccessNotificationProps;
 
-export const SuccessNotification: SuccessNotificationComponent = ({ children, ...props }) => {
+export const SuccessNotification = ({
+  children,
+  ...props
+}: PropsWithChildren<ISuccessNotificationProps>) => {
   const variant = 'success';
   return (
     <Notification variant={variant} {...props}>

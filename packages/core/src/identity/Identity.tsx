@@ -1,7 +1,7 @@
 import React, {
-  FC,
+  ComponentType,
   PropsWithChildren,
-  ReactElement,
+  ReactNode,
   createContext,
   useContext,
   useEffect,
@@ -17,7 +17,7 @@ export interface ILoginFormValues {
 }
 export interface IIdentityContext<User extends IUser> {
   user: User | undefined | null;
-  component: ReactElement;
+  component: ReactNode;
   identityProvider?: string;
   logout: () => Promise<void>;
 }
@@ -33,7 +33,7 @@ export type IIdentityComponentProps<User extends IUser> = {
   setUser: (user: User | null) => void;
 };
 
-export type IdentityComponent<User extends IUser> = FC<IIdentityComponentProps<User>>;
+export type IdentityComponent<User extends IUser> = ComponentType<IIdentityComponentProps<User>>;
 
 export type IIdentityContextProviderProps<User extends IUser = IUser> = Omit<
   IIdentityContext<User>,

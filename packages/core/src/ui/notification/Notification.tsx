@@ -1,18 +1,18 @@
-import React, { FC, PropsWithChildren, ReactElement, useState } from 'react';
+import React, { ComponentType, PropsWithChildren, ReactNode, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 export interface INotificationProps {
-  title: string;
+  title: ReactNode;
   onClose?: () => void;
 }
 
-export type NotificationComponent = FC<INotificationProps>;
+export type NotificationComponent = ComponentType<INotificationProps>;
 
 export const Notification: NotificationComponent = ({ children, title }) => {
   const { t } = useTranslation();
   return (
     <div>
-      <div>{t(title)}</div>
+      <div>{'string' === typeof title ? t(title) : title}</div>
       <div>{children}</div>
     </div>
   );
@@ -21,7 +21,7 @@ export const Notification: NotificationComponent = ({ children, title }) => {
 export type IUseNotificationProps = PropsWithChildren<INotificationProps>;
 
 export interface IUseNotificationResult {
-  notification: ReactElement;
+  notification: ReactNode;
   setNotification: (message?: string) => void;
 }
 

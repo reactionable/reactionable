@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ComponentType, ReactNode } from 'react';
 
 import { IUseQueryResult } from '../../query/Query';
 import {
@@ -8,10 +8,10 @@ import {
 } from '../../query/QueryWrapper';
 
 export type IReadProps<Data> = Omit<IQueryWrapperProps<IUseQueryResult<Data>>, 'children'> & {
-  children: (data: Data) => ReactElement;
+  children: (data: Data) => ReactNode;
 };
 
-export type ReadComponent<Data> = React.FC<IReadProps<Data>>;
+export type ReadComponent<Data> = ComponentType<IReadProps<Data>>;
 
 export function Read<Data>({ children, ...props }: IReadProps<Data>) {
   const renderChildren = (props: IQueryWrapperChildrenProps<IUseQueryResult<Data>>) => {

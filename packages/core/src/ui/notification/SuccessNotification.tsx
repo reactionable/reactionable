@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactNode } from 'react';
 
 import {
   INotificationProps,
@@ -14,7 +14,7 @@ export type SuccessNotificationComponent = NotificationComponent;
 export type IUseSuccessNotificationProps = IUseNotificationProps;
 
 export interface IUseSuccessNotificationResult {
-  successNotification: ReactElement;
+  successNotification: ReactNode;
   setSuccessNotification: (message?: string) => void;
 }
 

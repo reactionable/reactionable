@@ -1,43 +1,37 @@
-import { IError } from '@reactionable/core/lib/error/IError';
 import {
   IErrorNotificationProps as ICoreErrorNotificationProps,
   IUseErrorNotificationProps as ICoreUseErrorNotificationProps,
   useErrorNotification as useCoreErrorNotification,
 } from '@reactionable/core/lib/ui/notification/ErrorNotification';
-import React, { FC } from 'react';
+import React, { PropsWithChildren } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { ErrorAlert } from '../alert/ErrorAlert';
 import { Notification } from './Notification';
 
-export type IErrorNotificationProps = ICoreErrorNotificationProps & {
-  children?: IError;
-  title?: string;
-};
+export type IErrorNotificationProps = ICoreErrorNotificationProps;
 
-export const ErrorNotification: FC<IErrorNotificationProps> = (props) => {
-  if (!props.title) {
-    const { t } = useTranslation();
-    props.title = t('An error has occured');
+export const ErrorNotification = ({
+  title,
+  children,
+  ...props
+}: PropsWithChildren<IErrorNotificationProps>) => {
+  const { t } = useTranslation();
+  if (!title) {
+    title = t('An error has occured');
   }
+
   return (
-    <Notification variant="danger" {...props}>
-      <ErrorAlert className="mb-0">{props.children}</ErrorAlert>
+    <Notification variant="danger" title={title} {...props}>
+      <ErrorAlert className="mb-0">{children}</ErrorAlert>
     </Notification>
   );
 };
 
 export type IUseErrorNotificationProps = ICoreUseErrorNotificationProps & IErrorNotificationProps;
 export const useErrorNotification = (props: IErrorNotificationProps) => {
-  let notificationTitle: string;
-  if (props.title === undefined) {
-    const { t } = useTranslation();
-    notificationTitle = t('An error has occured');
-  } else {
-    notificationTitle = props.title;
-  }
   return useCoreErrorNotification<IErrorNotificationProps>({
-    title: notificationTitle,
+    ...props,
     Component: ErrorNotification,
   });
 };

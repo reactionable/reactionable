@@ -2,14 +2,14 @@ import {
   INotificationProps as ICoreNotificationProps,
   useNotification as useCoreNotification,
 } from '@reactionable/core/lib/ui/notification/Notification';
-import React, { FC } from 'react';
+import React, { PropsWithChildren } from 'react';
 import Toast from 'react-bootstrap/Toast';
 
 export type INotificationProps = ICoreNotificationProps & {
   variant?: string;
 };
 
-export const Notification: FC<INotificationProps> = (props) => {
+export const Notification = (props: PropsWithChildren<INotificationProps>) => {
   return (
     <Toast
       show

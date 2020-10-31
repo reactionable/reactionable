@@ -1,20 +1,21 @@
-import { FontAwesomeIcon, FontAwesomeIconProps } from '@fortawesome/react-fontawesome';
 import { IAlertProps as IAlertPropsCore } from '@reactionable/core/lib/ui/alert/Alert';
 import { useAlert as useAlertCore } from '@reactionable/core/lib/ui/alert/useAlert';
-import React, { FC } from 'react';
+import React, { ComponentType } from 'react';
 import BootstrapAlert, { AlertProps } from 'react-bootstrap/Alert';
+
+import { IIconProps, Icon } from '../icon/icon';
 
 export type IAlertProps = IAlertPropsCore &
   AlertProps & {
-    icon?: FontAwesomeIconProps;
+    icon?: IIconProps;
   };
 
-export type AlertComponent = FC<IAlertProps>;
+export type AlertComponent = ComponentType<IAlertProps>;
 
 export const Alert: AlertComponent = ({ children, icon, ...props }) => {
   return (
     <BootstrapAlert {...props}>
-      {icon && <FontAwesomeIcon className="mr-2" {...icon} />}
+      {icon && <Icon className="mr-2" {...icon} />}
       {children}
     </BootstrapAlert>
   );

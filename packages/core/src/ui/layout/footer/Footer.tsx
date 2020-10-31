@@ -1,12 +1,17 @@
-import React, { FC, ReactElement } from 'react';
+import React, { ComponentType, PropsWithChildren, ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 export interface IFooterProps {
-  brand?: ReactElement | string;
+  brand?: ReactNode | string;
   sponsor?: boolean;
 }
-export type FooterComponent<F extends IFooterProps = IFooterProps> = FC<F>;
+export type FooterComponent<FooterProps extends IFooterProps = IFooterProps> = ComponentType<
+  FooterProps
+>;
 
-export const Footer: FooterComponent = ({ brand, sponsor = true }) => {
+export function Footer<FooterProps extends IFooterProps = IFooterProps>({
+  brand,
+  sponsor = true,
+}: PropsWithChildren<FooterProps>) {
   const { t } = useTranslation();
 
   const currentYear = new Date().getFullYear();
@@ -23,9 +28,9 @@ export const Footer: FooterComponent = ({ brand, sponsor = true }) => {
       )}
     </footer>
   );
-};
+}
 
-export const SponsorFooter: FC<{}> = ({}) => {
+export const SponsorFooter = () => {
   const { t } = useTranslation();
   return (
     <>

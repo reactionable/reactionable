@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, ReactElement, ReactNode, useState } from 'react';
+import React, { ComponentType, PropsWithChildren, ReactNode, useState } from 'react';
 
 import { IError } from '../../error/IError';
 import { Alert, IAlertProps } from './Alert';
@@ -9,10 +9,9 @@ export function isIError(arg: any): arg is IError {
 
 export type IErrorAlertProps<AlertProps extends IAlertProps = IAlertProps> = AlertProps;
 
-export type ErrorAlertComponent<AlertProps extends IAlertProps = IAlertProps> = (
-  props: IUseErrorAlertProps<AlertProps>,
-  context?: any
-) => ReactElement<any, any>;
+export type ErrorAlertComponent<AlertProps extends IAlertProps = IAlertProps> = ComponentType<
+  IUseErrorAlertProps<AlertProps>
+>;
 
 export function printError(error?: IError): ReactNode {
   return error ? error.message : <></>;
@@ -30,7 +29,7 @@ export type IUseErrorAlertProps<AlertProps extends IAlertProps = IAlertProps> = 
 };
 
 export interface IUseErrorAlertResult {
-  errorAlert: ReactElement;
+  errorAlert: ReactNode;
   setErrorAlert: (alert?: IError) => void;
 }
 

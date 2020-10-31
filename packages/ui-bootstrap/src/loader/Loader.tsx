@@ -4,7 +4,7 @@ import {
   IUseLoader,
   useLoader as useLoaderCore,
 } from '@reactionable/core/lib/ui/loader/useLoader';
-import React, { FC } from 'react';
+import React, { ComponentType } from 'react';
 import Spinner from 'react-bootstrap/Spinner';
 import { useTranslation } from 'react-i18next';
 
@@ -12,7 +12,7 @@ export type ILoaderProps = ICoreLoaderProps & {
   overlay?: boolean;
 };
 
-export const Loader: FC<ILoaderProps> = ({ overlay = true }) => {
+export const Loader: ComponentType<ILoaderProps> = ({ overlay = true }) => {
   const { t } = useTranslation();
   const spinnerElement = (
     <Spinner animation="grow" role="status" variant="primary">

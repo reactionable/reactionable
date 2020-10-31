@@ -1,13 +1,13 @@
-import React, { ReactElement } from 'react';
+import React, { ComponentType, ReactNode } from 'react';
 
 import { IUseQueryListResult } from '../../query/QueryList';
 import { IQueryWrapperProps, QueryWrapper } from '../../query/QueryWrapper';
 
 export type IListProps<Data> = Omit<IQueryWrapperProps<IUseQueryListResult<Data>>, 'children'> & {
-  children: (data: Array<Data>) => ReactElement;
+  children: (data: Array<Data>) => ReactNode;
 };
 
-export type ListComponent<Data> = React.FC<IListProps<Data>>;
+export type ListComponent<Data> = ComponentType<IListProps<Data>>;
 
 export function List<Data>({ children, ...props }: IListProps<Data>) {
   const renderChildren = (props: IUseQueryListResult<Data>) => {

@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren, ReactElement, useEffect, useState } from 'react';
+import React, { ComponentType, PropsWithChildren, ReactNode, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { EnhanceChildren } from '../../enhance-children/EnhanceChildren';
@@ -9,7 +9,7 @@ export type IConfirmationProps = {
   callback: (confirm: boolean) => void;
 };
 
-export type ConfirmationComponent = FC<IConfirmationProps>;
+export type ConfirmationComponent = ComponentType<IConfirmationProps>;
 
 export const Confirmation: ConfirmationComponent = ({ callback, children, title }) => {
   const { t } = useTranslation();
@@ -29,7 +29,7 @@ export const Confirmation: ConfirmationComponent = ({ callback, children, title 
 export type IUseConfirmationProps = PropsWithChildren<IConfirmationProps>;
 
 export interface IUseConfirmationResult {
-  confirmation: ReactElement;
+  confirmation: ReactNode;
   setConfirmation: (confirmation: boolean) => void;
 }
 
@@ -62,7 +62,7 @@ export interface IConfirmationActionProps<Data> {
   onSuccess?: (result: Data) => void;
 }
 
-export type ConfirmationActionComponent<Data> = FC<IConfirmationActionProps<Data>>;
+export type ConfirmationActionComponent<Data> = ComponentType<IConfirmationActionProps<Data>>;
 
 export function ConfirmationAction<Data>(props: PropsWithChildren<IConfirmationActionProps<Data>>) {
   const {

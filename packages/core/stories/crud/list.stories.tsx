@@ -25,12 +25,20 @@ export const list = () => {
         ]}
         children={(data) => (
           <table>
-            {data.map((item) => (
-              <tr key={item.id}>
-                <td>{item.id}</td>
-                <td>{item.label}</td>
+            <thead>
+              <tr>
+                <td>Id</td>
+                <td>Label</td>
               </tr>
-            ))}
+            </thead>
+            <tbody>
+              {data.map((item) => (
+                <tr key={item.id}>
+                  <td>{item.id}</td>
+                  <td>{item.label}</td>
+                </tr>
+              ))}
+            </tbody>
           </table>
         )}
       />

@@ -26,7 +26,7 @@ export const list = () => {
           { id: '2', label: 'Data 2' },
         ]}
         children={(data) => (
-          <tr>
+          <tr key={data.id}>
             <td>{data.id}</td>
             <td>{data.label}</td>
           </tr>
