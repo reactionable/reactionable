@@ -1,34 +1,30 @@
-import React, { LazyExoticComponent, PropsWithChildren, ReactElement, ReactNode } from 'react';
+import { IUseLayoutProps } from '@reactionable/core/lib/ui/layout/Layout';
+import { lazyLoad } from '@reactionable/core/lib/ui/loader/Loader';
+import { useUIContext } from '@reactionable/core/lib/ui/UI';
+import React, { LazyExoticComponent, PropsWithChildren, ReactNode } from 'react';
 import { Route, RouteComponentProps, RouteProps } from 'react-router-dom';
 
-import { IUseLayoutProps } from '../../ui/layout/Layout';
-import { lazyLoad } from '../../ui/loader/Loader';
-import { useUIContext } from '../../ui/UI';
-
-export type ILazyRouteComponentProps<LP extends IUseLayoutProps> = Omit<RouteProps, 'component'> & {
+export type ILazyRouteComponentProps = Omit<RouteProps, 'component'> & {
   component: LazyExoticComponent<any>;
-  layout?: LP;
+  layout?: IUseLayoutProps;
 };
 
-export type ILazyRouteProps<LP extends IUseLayoutProps> = Omit<
-  ILazyRouteComponentProps<LP>,
-  'component'
-> & {
+export type ILazyRouteProps = Omit<ILazyRouteComponentProps, 'component'> & {
   component?: LazyExoticComponent<any>;
   render?: (props: RouteComponentProps<any>) => ReactNode;
 };
 
-export function renderLazyRoute<LP extends IUseLayoutProps>({
+export function renderLazyRoute({
   layout,
   component,
   render,
 }: {
-  layout?: LP;
+  layout?: IUseLayoutProps;
   component?: LazyExoticComponent<any>;
   render?: (props: RouteComponentProps<any>) => ReactNode;
 }) {
   const { useLayout } = useUIContext();
-  return (props: any): ReactElement => {
+  return (props: any): ReactNode => {
     let rendered: ReactNode;
     if (component) {
       const Component = lazyLoad(component);
@@ -53,7 +49,7 @@ export function LazyRoute<LP extends IUseLayoutProps>({
   render,
   layout,
   ...routeProps
-}: PropsWithChildren<ILazyRouteProps<LP>>) {
+}: PropsWithChildren<ILazyRouteProps>) {
   return (
     <Route
       {...routeProps}

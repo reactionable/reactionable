@@ -1,78 +1,26 @@
-import React, {
-  PropsWithChildren,
-  ReactElement,
-  createContext,
-  useContext,
-  useReducer,
-} from 'react';
+import React, { PropsWithChildren, ReactNode, createContext, useContext, useReducer } from 'react';
 import isEqual from 'react-fast-compare';
-import {
-  Link,
-  LinkProps,
-  NavLinkProps,
-  generatePath as routerGeneratePath,
-} from 'react-router-dom';
+import { ILinkProps, Link } from '../router/Link';
 
-export type INavItem = Omit<LinkProps, 'onSelect'>;
+export type INavItemProps<LinkProps extends ILinkProps = ILinkProps> = LinkProps;
 
-export type INavItemsProps<N extends INavItem> = {
-  navItems?: Array<N>;
+export type INavItemsProps<NavItemProps extends INavItemProps> = {
+  navItems?: Array<NavItemProps>;
 };
 
-export type INavItemsContext<N extends INavItem> = INavItemsProps<N> & {
+export type INavItemsContext<N extends INavItemProps> = INavItemsProps<N> & {
   setNavItems: (navItems: Array<N>) => void;
 };
 
-type NavItemType<C extends INavItemsProps<INavItem>> = C extends INavItemsProps<infer N>
-  ? N extends INavItem
+type NavItemType<C extends INavItemsProps<INavItemProps>> = C extends INavItemsProps<infer N>
+  ? N extends INavItemProps
     ? N
-    : INavItem
-  : INavItem;
+    : INavItemProps
+  : INavItemProps;
 
-const normalizePath = (path: string): string => {
-  path = path.trim();
-  const separator = '/';
-  const normalizedPathParts: string[] = [];
-  path.split(separator).forEach((part) => {
-    part = part.trim();
-    if (!part.length) {
-      return;
-    }
-    if (part === '..') {
-      normalizedPathParts.pop();
-      return;
-    }
-    normalizedPathParts.push(part);
-  });
-
-  if (!normalizedPathParts.length) {
-    return '/';
-  }
-
-  let normalizedPath = normalizedPathParts.join(separator);
-  if (path[0] === separator) {
-    normalizedPath = separator + normalizedPath;
-  }
-  if (path[path.length - 1] === separator) {
-    normalizedPath += separator;
-  }
-
-  return normalizedPath;
-};
-
-export function generatePath(
-  pattern: string,
-  ...params: Array<{ [paramName: string]: string | number | boolean | undefined }>
-): string {
-  return routerGeneratePath(
-    normalizePath(pattern),
-    params.reduce((previous, current) => {
-      return { ...previous, ...current };
-    }, {})
-  );
-}
-
-export function createNavItemContextProvider<P extends INavItemsProps<INavItem>>(defaultValue: P) {
+export function createNavItemContextProvider<P extends INavItemsProps<INavItemProps>>(
+  defaultValue: P
+) {
   const NavItemContext = createContext<INavItemsContext<NavItemType<P>>>({
     ...defaultValue,
     setNavItems: (navItems: Array<NavItemType<P>>) => {},
@@ -114,8 +62,8 @@ export function createNavItemContextProvider<P extends INavItemsProps<INavItem>>
   };
 }
 
-export function navItemToComponent(props: INavItem): ReactElement {
-  const key = `${props.to}`;
+export function navItemToComponent(props: INavItemProps): ReactNode {
+  const key = `${props.href}`;
 
-  return <Link key={key} {...(props as LinkProps<any> & NavLinkProps)} />;
+  return <Link key={key} {...(props as ILinkProps)} />;
 }

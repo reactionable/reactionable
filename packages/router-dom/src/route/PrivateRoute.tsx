@@ -1,14 +1,13 @@
-import React, { PropsWithChildren, ReactElement } from 'react';
+import { IUser, useIdentityContext } from '@reactionable/core/lib/identity/Identity';
+import { useUIContext } from '@reactionable/core/lib/ui/UI';
+import React, { PropsWithChildren, ReactNode } from 'react';
 import { Redirect } from 'react-router-dom';
 
-import { IUser, useIdentityContext } from '../../identity/Identity';
-import { IUseLayoutProps } from '../../ui/layout/Layout';
-import { useUIContext } from '../../ui/UI';
 import { ILazyRouteProps, LazyRoute } from './LazyRoute';
 
 function renderPrivateRoute(user: undefined | null) {
   const { loader } = useUIContext().useLoader({});
-  return (props: any): ReactElement => {
+  return (props: any): ReactNode => {
     switch (user) {
       case undefined:
         return loader;
@@ -18,9 +17,7 @@ function renderPrivateRoute(user: undefined | null) {
   };
 }
 
-export function PrivateRoute<LP extends IUseLayoutProps, User extends IUser>(
-  props: PropsWithChildren<ILazyRouteProps<LP>>
-) {
+export function PrivateRoute<User extends IUser>(props: PropsWithChildren<ILazyRouteProps>) {
   const { user } = useIdentityContext<User>();
 
   if (user) {

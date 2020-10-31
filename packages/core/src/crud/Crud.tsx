@@ -1,28 +1,26 @@
-import React, { LazyExoticComponent, PropsWithChildren } from 'react';
-import { Switch, useRouteMatch } from 'react-router-dom';
+import { LazyExoticComponent, PropsWithChildren } from 'react';
+import { IRouteProps } from '../router/Route';
+import { useRouterContext } from '../router/Router';
 
-import { IRouteProps, renderRoute } from '../nav/route/Route';
-import { IUseLayoutProps } from '../ui/layout/Layout';
 import { ListComponent } from './list/List';
 import { ReadComponent } from './read/Read';
 
-export interface ICrudProp<Data, LP extends IUseLayoutProps = IUseLayoutProps> {
+export interface ICrudProp<Data> {
   name: string;
   listComponent?: LazyExoticComponent<ListComponent<Data>>;
   readComponent?: LazyExoticComponent<ReadComponent<Data>>;
-  routes?: Array<IRouteProps<LP>>;
+  routes?: Array<IRouteProps>;
   privateRoute?: boolean;
-  layout?: LP;
 }
 
-export function Crud<Data, LP extends IUseLayoutProps>({
+export function Crud<Data>({
   name,
   listComponent,
   readComponent,
   routes = [],
   privateRoute = true,
-  layout,
-}: PropsWithChildren<ICrudProp<Data, LP>>) {
+}: PropsWithChildren<ICrudProp<Data>>) {
+  const {renderRoutes, useRouteMatch } = useRouterContext();
   const match = useRouteMatch();
   if (!match) {
     return null;
@@ -54,9 +52,5 @@ export function Crud<Data, LP extends IUseLayoutProps>({
     });
   }
 
-  return (
-    <Switch>
-      {routes.map((route) => renderRoute<LP>({ layout, ...route }))}
-    </Switch>
-  );
+  return renderRoutes(routes);
 }

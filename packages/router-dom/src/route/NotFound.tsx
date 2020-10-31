@@ -1,7 +1,6 @@
+import { lazyLoad } from '@reactionable/core/lib/ui/loader/Loader';
 import React, { LazyExoticComponent } from 'react';
 import { Redirect, RouteComponentProps, useLocation, withRouter } from 'react-router-dom';
-
-import { lazyLoad } from '../../ui/loader/Loader';
 
 export const RouteNotFound = () => <Redirect to={{ state: { notFoundError: true } }} />;
 
