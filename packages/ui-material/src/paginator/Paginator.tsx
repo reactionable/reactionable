@@ -1,19 +1,27 @@
-import Pagination from '@material-ui/lab/Pagination/Pagination';
-import React, { ChangeEvent, useState } from 'react';
+import MaterialUIPagination, { PaginationProps } from '@material-ui/lab/Pagination/Pagination';
+import {
+  Paginator as CorePaginator,
+  IPaginationProps as ICorePaginationProps,
+  IPaginatorProps as ICorePaginatorProps,
+} from '@reactionable/core/lib/ui/paginator/Paginator';
+import React from 'react';
 
-interface IPaginatorProps {
-  currentPage: number;
-  totalCount: number;
-  perPage: number;
-  onChange: (page: number) => void;
+export type IPaginationProps = Omit<
+  ICorePaginationProps,
+  | 'PaginationLinkComponent'
+  | 'PaginationEllipsisComponent'
+  | 'PaginationLinkFirstComponent'
+  | 'PaginationLinkPrevComponent'
+  | 'PaginationLinkNextComponent'
+  | 'PaginationLinkLastComponent'
+> &
+  PaginationProps;
+
+export function Pagination({ pageCount: count, currentPage: page, ...props }: IPaginationProps) {
+  return <MaterialUIPagination page={page} count={count} {...props} />;
 }
 
-export function Paginator({ currentPage, perPage, totalCount, onChange }: IPaginatorProps) {
-  const [page, setPage] = useState(currentPage);
-  const handleChange = (event: ChangeEvent<unknown>, value: number) => {
-    onChange(value);
-    setPage(value);
-  };
-  const totalPage = Math.round((totalCount + perPage - 1) / perPage);
-  return <Pagination count={totalPage} page={page} onChange={handleChange} />;
+export type IPaginatorProps = Omit<ICorePaginatorProps, 'PaginationComponent'>;
+export function Paginator(props: IPaginatorProps & PaginationProps) {
+  return <CorePaginator {...props} PaginationComponent={Pagination} />;
 }

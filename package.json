@@ -9,12 +9,13 @@
     "format": "prettier --write \"**/*.ts\"  \"!**/lib/**\"",
     "lint": "lerna run --stream lint --",
     "build": "lerna run --stream build",
-    "build:doc": "rimraf -rf docs && typedoc",
+    "build:doc": "rimraf -rf build/docs && typedoc",
     "publish": "lerna publish --yes",
     "link": "for package in react react-dom react-router-dom aws-amplify; do cd node_modules/$package && yarn link && cd ../..; done && lerna exec yarn link",
     "unlink": "for package in react react-dom react-router-dom aws-amplify; do cd node_modules/$package && yarn unlink && cd ../..; done && lerna exec yarn unlink",
     "storybook": "start-storybook -p 6006",
-    "build:storybook": "build-storybook -o build/storybook"
+    "storybook:build": "yarn storybook:deploy --dry-run",
+    "storybook:deploy": "rimraf -rf build/storybook && storybook-to-ghpages -o build/storybook --ci"
   },
   "dependencies": {
     "typescript": "^4.0.3"
@@ -30,6 +31,7 @@
     "@storybook/addon-storysource": "^6.0.26",
     "@storybook/addons": "^6.0.16",
     "@storybook/react": "^6.0.26",
+    "@storybook/storybook-deployer": "^2.8.7",
     "@storybook/theming": "^6.0.21",
     "@types/react": "^16.9.51",
     "@typescript-eslint/eslint-plugin": "^4.0.0",

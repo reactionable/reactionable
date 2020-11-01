@@ -1,4 +1,4 @@
-import React, { AnchorHTMLAttributes, ComponentType, useState } from 'react';
+import React, { AnchorHTMLAttributes, ChangeEvent, ComponentType, useState } from 'react';
 
 export type IPaginationEllipsisProps = {};
 export type IPaginationEllipsisComponent = ComponentType<IPaginationEllipsisProps>;
@@ -65,7 +65,7 @@ export function PaginationLinks({
       key={page}
       active={currentPage === page}
       disabled={currentPage === page}
-      onClick={() => currentPage !== page && onChange(page)}
+      onClick={(event) => currentPage !== page && onChange(event, page)}
       children={page}
     />
   );
@@ -162,20 +162,20 @@ export function Pagination({
   PaginationLinkNextComponent = PaginationLinkNext,
   PaginationLinkLastComponent = PaginationLinkLast,
 }: IPaginationProps) {
-  const handleFirstPage = () => {
-    currentPage > 1 && onChange(1);
+  const handleFirstPage = (event: ChangeEvent<unknown>) => {
+    currentPage > 1 && onChange(event, 1);
   };
 
-  const handlePreviousPage = () => {
-    currentPage > 1 && onChange(currentPage - 1);
+  const handlePreviousPage = (event: ChangeEvent<unknown>) => {
+    currentPage > 1 && onChange(event, currentPage - 1);
   };
 
-  const handleNextPage = () => {
-    currentPage < pageCount && onChange(currentPage + 1);
+  const handleNextPage = (event: ChangeEvent<unknown>) => {
+    currentPage < pageCount && onChange(event, currentPage + 1);
   };
 
-  const handleLastPage = () => {
-    currentPage < pageCount && onChange(pageCount);
+  const handleLastPage = (event: ChangeEvent<unknown>) => {
+    currentPage < pageCount && onChange(event, pageCount);
   };
 
   return (
@@ -203,7 +203,7 @@ export type IPaginatorProps = {
   perPage: number;
   pageRangeDisplayed?: number;
   marginPagesDisplayed?: number;
-  onChange: (page: number) => void;
+  onChange: (event: ChangeEvent<unknown>, page: number) => void;
   PaginationComponent?: IPaginationComponent;
 };
 export function Paginator({
@@ -217,8 +217,8 @@ export function Paginator({
 }: IPaginatorProps) {
   const pageCount = Math.round(totalCount / perPage) + (totalCount % perPage ? 1 : 0);
   const [currentPage, setCurrentPage] = useState(defaultCurrentPage);
-  const onChange = (page: number) => {
-    defaultOnChange(page);
+  const onChange = (event: ChangeEvent<unknown>, page: number) => {
+    defaultOnChange(event, page);
     setCurrentPage(page);
   };
 

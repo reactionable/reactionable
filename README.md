@@ -10,7 +10,28 @@
   <a href="https://github.com/reactionable/reactionable"><img alt="GitHub stars" src="https://img.shields.io/github/stars/reactionable/reactionable?logo=github"></a>
 </p>
 
-## 📖 [Documentation](https://reactionable.github.io/reactionable)
+---
+
+<br>
+
+## [🚀 Getting Started / 📖 Documentation](https://reactionable.github.io/reactionable)
+
+<br>
+
+---
+
+## Packages
+
+| Name                                                                                                                   | Npm                                                                                                                         | Description                                                                                        |
+| ---------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| [@reactionable/core](https://reactionable.github.io/reactionable/?path=/story/core-home--presentation)                 | [![Npm](https://img.shields.io/npm/v/@reactionable/core)](https://www.npmjs.com/package/@reactionable/core)                 | Main package of Reactionnable                                                                      |
+| **UI Packages**                                                                                                        |                                                                                                                             |                                                                                                    |
+| [@reactionable/ui-bootstrap](https://reactionable.github.io/reactionable/?path=/story/ui-bootstrap-home--presentation) | [![Npm](https://img.shields.io/npm/v/@reactionable/ui-bootstrap)](https://www.npmjs.com/package/@reactionable/ui-bootstrap) | UI package for [React Bootstrap](https://react-bootstrap.github.io/) integration                   |
+| [@reactionable/ui-material](https://reactionable.github.io/reactionable/?path=/story/ui-material-home--presentation)   | [![Npm](https://img.shields.io/npm/v/@reactionable/ui-material)](https://www.npmjs.com/package/@reactionable/ui-material)   | UI package for [Material-UI](https://material-ui.com/) integration                                 |
+| **Router Packages**                                                                                                    |                                                                                                                             |
+| [@reactionable/router-dom](https://reactionable.github.io/reactionable/?path=/story/router-dom-home--presentation)     | [![Npm](https://img.shields.io/npm/v/@reactionable/router-dom)](https://www.npmjs.com/package/@reactionable/router-dom)     | Router package for [React Router DOM](https://reactrouter.com/web/guides/quick-start/) integration |
+| **Backend Packages**                                                                                                   |                                                                                                                             |
+| [@reactionable/amplify](https://reactionable.github.io/reactionable/?path=/story/amplify-home--presentation)           | [![Npm](https://img.shields.io/npm/v/@reactionable/amplify)](https://www.npmjs.com/package/@reactionable/amplify)           | Backend package for [AWS Amplify](https://docs.amplify.aws/) integration                           |
 
 ## Helping Project
 
@@ -20,68 +41,16 @@
 
 👍 If you wish to contribute to **Reactionable**, please read the [CONTRIBUTING.md](CONTRIBUTING.md) file, PRs are Welcome !
 
-## Install
-
-```sh
-npm install @reactionable/core
-```
-
-Or with `yarn`
-
-```sh
-yarn add @reactionable/core
-```
-
-## Usage
-
-## Dev
-
-### Use reactionable in local
-
-#### 1. In **reactionable** dir
-
-```bash
-yarn run link;
-yarn start
-```
-
-#### 2. In react app dir
-
-```bash
-for package in react react-dom aws-amplify @reactionable/core @reactionable/ui-bootstrap @reactionable/amplify; do yarn link $package; done;
-yarn start;
-```
-
-#### 3. Remove links when finish
-
-```bash
-for package in react react-dom aws-amplify @reactionable/core @reactionable/ui-bootstrap @reactionable/amplify; do yarn unlink $package; done;
-```
-
-### Run tests
-
-```sh
-yarn test
-```
-
-### Run storybook
-
-```sh
-yarn storybook
-```
-
-Visit: http://localhost:6006/
-
 ## Author
 
-👤 **ESCEMI <contact@escemi.com>**
+🏢 **ESCEMI <contact@escemi.com>**
 
 - Website: https://www.escemi.com
-- Sponsor: https://github.com/sponsors/neilime
+- Sponsor: [@neilime](https://github.com/sponsors/)
 - Github: [@reactionable](https://github.com/reactionable)
-- LinkedIn: [@https:\/\/www.linkedin.com\/company\/escemi](https://linkedin.com/in/https://www.linkedin.com/company/escemi)
+- LinkedIn: [@escemi](https://www.linkedin.com/company/escemi)
 
-## 📝 License
+## License
 
-Copyright © 2020 [ESCEMI <contact@escemi.com>](https://www.escemi.com).<br />
+📝 Copyright © 2020 [ESCEMI <contact@escemi.com>](https://www.escemi.com).<br />
 This project is [MIT](https://github.com/reactionable/reactionable-cli/blob/master/LICENSE) licensed.

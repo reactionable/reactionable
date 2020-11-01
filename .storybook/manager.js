@@ -1,7 +1,8 @@
-import { themes } from '@storybook/theming/create';
 import { addons } from '@storybook/addons';
+import { themes } from '@storybook/theming/create';
 
 addons.setConfig({
+  showPanel: true,
   theme: {
     ...themes.light,
     brandTitle: 'Reactionable storybook',

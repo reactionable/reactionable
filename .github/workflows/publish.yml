@@ -20,17 +20,12 @@ jobs:
     needs: [authorize]
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [12.x]
-
     steps:
       - uses: actions/checkout@v2
 
-      - name: Setup Node.js ${{ matrix.node-version }}
+      - name: Setup Node.js
         uses: actions/setup-node@v2.1.2
         with:
-          node-version: ${{ matrix.node-version }}
           registry-url: https://registry.npmjs.org/
 
       - name: Get yarn cache directory path
@@ -43,8 +38,7 @@ jobs:
           path: |
             ${{ steps.yarn-cache-dir-path.outputs.dir }}
             node_modules
-            */*/node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
 
       - name: Install Dependencies
         run: yarn
@@ -63,17 +57,12 @@ jobs:
           NODE_AUTH_TOKEN: ${{secrets.NODE_AUTH_TOKEN}}
         run: yarn run publish
 
-      - name: Prepare gh-pages
+      - name: Generate doc
         run: |
           mkdir build
-          cp README.md build/index.md
           yarn build:doc
-          yarn build:storybook
 
-      - name: Publish gh-pages
-        uses: JamesIves/github-pages-deploy-action@3.7.1
-        with:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          BASE_BRANCH: master # The branch the action should deploy from.
-          BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: build/storybook # The folder the action should deploy.
+      - name: Publish Storybook to gh-pages
+        run: yarn storybook:deploy
+        env:
+          GH_TOKEN: ${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}
