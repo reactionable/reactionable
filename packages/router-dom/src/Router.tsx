@@ -5,19 +5,27 @@ import {
   useRouterProviderProps as useCoreRouterProviderProps,
 } from '@reactionable/core/lib/router/Router';
 import React, { PropsWithChildren } from 'react';
-import { BrowserRouter as Router, useRouteMatch } from 'react-router-dom';
+import { BrowserRouter, MemoryRouter, useRouteMatch } from 'react-router-dom';
 
 import { ILinkProps, RouterLink } from './link/Link';
 import { renderRoutes } from './route/Route';
 
 export type IRouterProviderProps = ICoreRouterProviderProps<ILinkProps>;
 
+export function BrowserRouterComponent({ children }: PropsWithChildren<IRouterProviderProps>) {
+  return <BrowserRouter>{children}</BrowserRouter>;
+}
+
+export function MemoryRouterComponent({ children }: PropsWithChildren<IRouterProviderProps>) {
+  return <MemoryRouter>{children}</MemoryRouter>;
+}
+
 export const useRouterProviderProps = (
   props: Partial<IRouterProviderProps> = {}
 ): IRouterProviderProps => {
   return {
     ...useCoreRouterProviderProps(),
-    Component: Router,
+    Component: BrowserRouterComponent,
     RouterLink,
     useRouteMatch,
     renderRoutes: renderRoutes as IRenderRoutes,

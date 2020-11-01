@@ -1,5 +1,6 @@
 import React, { PropsWithChildren, ReactNode, createContext, useContext, useReducer } from 'react';
 import isEqual from 'react-fast-compare';
+
 import { ILinkProps, Link } from '../router/Link';
 
 export type INavItemProps<LinkProps extends ILinkProps = ILinkProps> = LinkProps;

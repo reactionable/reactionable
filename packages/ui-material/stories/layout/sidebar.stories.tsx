@@ -1,13 +1,12 @@
 import Button from '@material-ui/core/Button/Button';
 import Paper from '@material-ui/core/Paper/Paper';
 import SaveIcon from '@material-ui/icons/Save';
-import { UIContextProvider, generatePath } from '@reactionable/core';
+import { generatePath, useRouteMatch } from '@reactionable/core';
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { MemoryRouter as Router, useRouteMatch } from 'react-router-dom';
 
 import { Sidebar, setSidebarNavItems } from '../../src/layout/sidebar/Sidebar';
-import { useUIContextProviderProps } from '../../src/UI';
+import { UIContextProvider } from '../../src/UI';
 
 export default {
   title: 'UI Material/Layout/Sidebar',
@@ -42,11 +41,9 @@ const SampleComponent: FC = () => {
 };
 
 export const SimpleSidebar = () => (
-  <UIContextProvider {...useUIContextProviderProps()}>
-    <Router>
-      <Sidebar>
-        <SampleComponent />
-      </Sidebar>
-    </Router>
+  <UIContextProvider>
+    <Sidebar>
+      <SampleComponent />
+    </Sidebar>
   </UIContextProvider>
 );

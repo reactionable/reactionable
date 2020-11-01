@@ -2,7 +2,7 @@ import { action } from '@storybook/addon-actions';
 import React from 'react';
 
 import { ConfirmationAction } from '../../src/ui/confirmation/Confirmation';
-import { UIContextProvider, useUIContextProviderProps } from '../../src/ui/UI';
+import { UIContextProvider, useUIProviderProps } from '../../src/ui/UI';
 
 export default {
   title: 'Core/UI/Confirmation',
@@ -10,7 +10,7 @@ export default {
 };
 
 export const confirmationAction = () => (
-  <UIContextProvider>
+  <UIContextProvider {...useUIProviderProps()}>
     <ConfirmationAction
       title="Confirm?"
       confirmationMessage="Do you want to perform this action"

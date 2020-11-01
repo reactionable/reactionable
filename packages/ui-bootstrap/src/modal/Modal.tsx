@@ -3,7 +3,7 @@ import {
   IUseModalProps as ICoreUseModalProps,
   useModal as useCoreModal,
 } from '@reactionable/core/lib/ui/modal/Modal';
-import React, { ComponentType, ReactNode, useState } from 'react';
+import React, { ComponentType, ReactNode } from 'react';
 import BootstrapModal, { ModalProps } from 'react-bootstrap/Modal';
 
 export type IModalProps = ICoreModalProps &
@@ -14,14 +14,12 @@ export type IModalProps = ICoreModalProps &
 
 export type ModalComponent = ComponentType<IModalProps>;
 export const Modal: ModalComponent = ({ title, children, body, footer, onHide, ...modalProps }) => {
-  const [show, setShow] = useState(true);
   const handleOnClose = () => {
-    setShow(false);
     onHide && onHide();
   };
 
   return (
-    <BootstrapModal centered show={show} backdrop="static" onHide={handleOnClose} {...modalProps}>
+    <BootstrapModal centered backdrop="static" onHide={handleOnClose} {...modalProps}>
       <BootstrapModal.Header closeButton>
         <BootstrapModal.Title>{title}</BootstrapModal.Title>
       </BootstrapModal.Header>

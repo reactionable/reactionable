@@ -13,14 +13,16 @@ export function createProvider<ProviderProps extends IProviderProps = IProviderP
   props: ProviderProps
 ): ICreateProviderResult<ProviderProps> {
   const CreatedContext = createContext<ProviderProps>(props);
-  const ContextProvider = ({ children, ...props }: PropsWithChildren<ProviderProps>) => {
-    if (props.Component) {
-      const ProviderComponent = props.Component as ComponentType<any>;
-      children = <ProviderComponent>{children}</ProviderComponent>;
+  const ContextProvider = ({ children, Component, ...props }: PropsWithChildren<ProviderProps>) => {
+    if (Component) {
+      const ProviderComponent = Component as ComponentType<any>;
+      children = <ProviderComponent {...props}>{children}</ProviderComponent>;
     }
 
     return (
-      <CreatedContext.Provider value={props as ProviderProps}>{children}</CreatedContext.Provider>
+      <CreatedContext.Provider value={{ ...props, Component } as ProviderProps}>
+        {children}
+      </CreatedContext.Provider>
     );
   };
 

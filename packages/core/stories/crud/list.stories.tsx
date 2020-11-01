@@ -2,7 +2,7 @@ import { boolean, withKnobs } from '@storybook/addon-knobs';
 import React from 'react';
 
 import { List } from '../../src/crud/list/List';
-import { UIContextProvider } from '../../src/ui/UI';
+import { UIContextProvider, useUIProviderProps } from '../../src/ui/UI';
 
 export default {
   title: 'Core/Crud/List',
@@ -15,7 +15,7 @@ export const list = () => {
   const hasError = boolean('Has error?', false);
 
   return (
-    <UIContextProvider>
+    <UIContextProvider {...useUIProviderProps()}>
       <List
         isLoading={isLoading}
         error={hasError && new Error('An error has occured')}

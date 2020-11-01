@@ -4,7 +4,7 @@ import { string } from 'yup';
 
 import { Form } from '../src/form/Form';
 import { FormField } from '../src/form/FormField';
-import { UIContextProvider } from '../src/ui/UI';
+import { UIContextProvider, useUIProviderProps } from '../src/ui/UI';
 
 export default {
   title: 'Core/Form',
@@ -17,7 +17,7 @@ interface IFormValues {
 }
 
 export const SimpleForm = () => (
-  <UIContextProvider>
+  <UIContextProvider {...useUIProviderProps()}>
     <Form
       title="Simple form"
       submitButton
@@ -35,7 +35,7 @@ export const SimpleForm = () => (
 );
 
 export const FormWithTextArea = () => (
-  <UIContextProvider>
+  <UIContextProvider {...useUIProviderProps()}>
     <Form
       title="Form with textarea"
       submitButton
@@ -55,7 +55,7 @@ export const FormWithTextArea = () => (
 );
 
 export const FormWithSelect = () => (
-  <UIContextProvider>
+  <UIContextProvider {...useUIProviderProps()}>
     <Form
       title="Form with select"
       submitButton
@@ -81,7 +81,7 @@ export const FormWithSelect = () => (
 );
 
 export const FormWithCheckbox = () => (
-  <UIContextProvider>
+  <UIContextProvider {...useUIProviderProps()}>
     <Form
       title="Form with select"
       submitButton

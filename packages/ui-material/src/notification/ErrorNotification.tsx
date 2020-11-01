@@ -1,3 +1,4 @@
+import { SnackbarProps } from '@material-ui/core/Snackbar/Snackbar';
 import {
   IErrorNotificationProps as ICoreErrorNotificationProps,
   IUseErrorNotificationProps as ICoreUseErrorNotificationProps,
@@ -6,14 +7,17 @@ import {
 import React, { PropsWithChildren } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { IAlertProps } from '../alert/Alert';
 import { ErrorAlert } from '../alert/ErrorAlert';
 import { Notification } from './Notification';
 
-export type IErrorNotificationProps = ICoreErrorNotificationProps;
+export type IErrorNotificationProps = ICoreErrorNotificationProps &
+  Omit<SnackbarProps, 'children' | 'title'> & { alert?: IAlertProps };
 
 export const ErrorNotification = ({
   title,
   children,
+  alert,
   ...props
 }: PropsWithChildren<IErrorNotificationProps>) => {
   const { t } = useTranslation();
@@ -23,7 +27,14 @@ export const ErrorNotification = ({
 
   return (
     <Notification {...props} title={title}>
-      <ErrorAlert title={title} children={children} />
+      <ErrorAlert
+        title={title}
+        elevation={6}
+        variant="filled"
+        {...alert}
+        onClose={props.onClose}
+        children={children}
+      />
     </Notification>
   );
 };

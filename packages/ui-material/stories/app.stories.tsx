@@ -3,7 +3,7 @@ import Paper from '@material-ui/core/Paper/Paper';
 import { App } from '@reactionable/core';
 import React, { lazy } from 'react';
 
-import { useUIContextProviderProps } from '../src/UI';
+import { useUIProviderProps } from '../src/UI';
 
 export default {
   title: 'UI Material/App',
@@ -29,7 +29,7 @@ const HomeComponent = lazy(async () => ({
 
 export const AppBasic = () => (
   <App
-    ui={useUIContextProviderProps()}
+    ui={useUIProviderProps()}
     routes={[]}
     layout={{
       header: { brand: 'Sample Header Brand' },

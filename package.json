@@ -3,12 +3,12 @@
   "private": true,
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "start": "lerna run start --parallel",
-    "test": "lerna run test",
-    "test:coverage": "lerna run test:coverage",
+    "start": "lerna run --parallel start",
+    "test": "lerna run --stream test --",
+    "test:coverage": "lerna run --stream test:coverage",
     "format": "prettier --write \"**/*.ts\"  \"!**/lib/**\"",
-    "lint": "lerna run lint --",
-    "build": "lerna run build",
+    "lint": "lerna run --stream lint --",
+    "build": "lerna run --stream build",
     "build:doc": "rimraf -rf docs && typedoc",
     "publish": "lerna publish --yes",
     "link": "for package in react react-dom react-router-dom aws-amplify; do cd node_modules/$package && yarn link && cd ../..; done && lerna exec yarn link",
@@ -17,8 +17,6 @@
     "build:storybook": "build-storybook -o build/storybook"
   },
   "dependencies": {
-    "react": "^17.0.1",
-    "react-i18next": "^11.7.3",
     "typescript": "^4.0.3"
   },
   "devDependencies": {
@@ -46,6 +44,10 @@
     "prettier-plugin-import-sort": "^0.0.6",
     "typedoc": "^0.19.2",
     "typedoc-plugin-nojekyll": "^1.0.1"
+  },
+  "resolutions": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
   },
   "engines": {
     "yarn": ">=1.17.3"

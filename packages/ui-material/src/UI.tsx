@@ -1,3 +1,5 @@
+import { ThemeProvider } from '@material-ui/core/styles';
+import createMuiTheme, { Theme, ThemeOptions } from '@material-ui/core/styles/createMuiTheme';
 import { IUseLoaderProps } from '@reactionable/core/lib/ui/loader/useLoader';
 import {
   UIContextProvider as CoreUIContextProvider,
@@ -31,11 +33,19 @@ export type IUIProviderProps = ICoreUIContextProviderProps<
   IUseFormProps,
   IUseModalProps,
   IUseModalFormProps
->;
+> & {
+  theme?: Theme | ThemeOptions;
+};
+
+export function UIComponent({ children, theme = {} }: PropsWithChildren<IUIProviderProps>) {
+  const providerTheme = createMuiTheme(theme);
+  return <ThemeProvider theme={providerTheme}>{children}</ThemeProvider>;
+}
 
 export function useUIProviderProps(): IUIProviderProps {
   return {
     ...useCoreUIProviderProps(),
+    Component: UIComponent,
     useLoader,
     useSuccessNotification,
     useErrorNotification,

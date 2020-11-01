@@ -7,13 +7,15 @@ import IconButton from '@material-ui/core/IconButton/IconButton';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
 import createStyles from '@material-ui/core/styles/createStyles';
 import makeStyles from '@material-ui/core/styles/makeStyles';
+import useTheme from '@material-ui/core/styles/useTheme';
+import useMediaQuery from '@material-ui/core/useMediaQuery/useMediaQuery';
 import CloseIcon from '@material-ui/icons/Close';
 import {
   IModalProps as ICoreModalProps,
   IUseModalProps as ICoreUseModalProps,
   useModal as useCoreModal,
 } from '@reactionable/core/lib/ui/modal/Modal';
-import React, { ComponentType, ReactNode, useState } from 'react';
+import React, { ComponentType, ReactNode } from 'react';
 
 export type IModalProps = ICoreModalProps &
   Omit<DialogProps, 'open'> & {
@@ -39,23 +41,25 @@ export const Modal: ModalComponent = ({
   body,
   footer,
   onHide,
+  show: open,
   ...dialogProps
 }) => {
-  const [show, setShow] = useState(true);
   const classes = useStyles();
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   const handleOnClose = () => {
-    setShow(false);
     onHide && onHide();
   };
 
   return (
     <Dialog
       {...dialogProps}
-      open={show}
+      open={open === undefined ? false : open}
       onClose={handleOnClose}
       aria-labelledby="dialog-title"
-      fullScreen
+      fullScreen={fullScreen}
+      fullWidth
     >
       <DialogTitle id="dialog-title">
         {title}
@@ -77,7 +81,7 @@ export const Modal: ModalComponent = ({
 export type IUseModalProps = ICoreUseModalProps<IModalProps>;
 
 export function useModal(props: IUseModalProps) {
-  return useCoreModal<IUseModalProps>({
+  return useCoreModal<IModalProps>({
     Component: Modal,
     ...props,
   });

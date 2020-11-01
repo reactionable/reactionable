@@ -10,7 +10,7 @@ export interface ILoginFormValues {
   username: string;
   password: string;
 }
-export type IAuthComponentProps<User extends IUser> = {
+export type IAuthComponentProps<User extends IUser> = IIdentityProviderProps<User> & {
   setUser: (user: User | null) => void;
 };
 
@@ -36,17 +36,25 @@ export function IdentityComponent<User extends IUser>({
     setUser(null);
   };
 
+  const providerProps = {
+    ...props,
+    user,
+    logout: logoutHandler,
+    identityProvider,
+    getUser,
+    AuthComponent,
+  };
+  const auth = <AuthComponent setUser={setUser} {...providerProps} />;
+
   return (
     <IdentityContext.Provider
-      value={{
-        ...props,
-        user,
-        logout: logoutHandler,
-        identityProvider,
-        auth: <AuthComponent setUser={setUser} {...props} />,
-        getUser,
-        AuthComponent: AuthComponent as IdentityComponent<IUser>,
-      }}
+      value={
+        {
+          ...providerProps,
+          AuthComponent,
+          auth,
+        } as IIdentityProviderProps<IUser>
+      }
     >
       {props.children}
     </IdentityContext.Provider>

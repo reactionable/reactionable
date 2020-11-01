@@ -8,7 +8,7 @@ import Container from 'react-bootstrap/Container';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Row from 'react-bootstrap/Row';
 
-import { useUIContextProviderProps } from '../src/UI';
+import { useUIProviderProps } from '../src/UI';
 
 export default {
   title: 'UI Bootstrap/App',
@@ -40,7 +40,7 @@ const HomeComponent = lazy(async () => ({
 
 export const AppBasic = () => (
   <App
-    ui={useUIContextProviderProps()}
+    ui={useUIProviderProps()}
     routes={[]}
     layout={{
       header: { brand: 'Sample Header Brand' },

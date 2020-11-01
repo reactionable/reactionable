@@ -5,6 +5,8 @@ import DialogContent from '@material-ui/core/DialogContent/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle/DialogTitle';
 import Paper, { PaperProps } from '@material-ui/core/Paper/Paper';
+import useTheme from '@material-ui/core/styles/useTheme';
+import useMediaQuery from '@material-ui/core/useMediaQuery/useMediaQuery';
 import {
   ConfirmationComponent,
   ConfirmationAction as CoreConfirmationAction,
@@ -31,14 +33,18 @@ function PaperComponent(props: PaperProps) {
 
 export const Confirmation: ConfirmationComponent = ({ callback, children, title }) => {
   const { t } = useTranslation();
-  const handleClose = () => callback(false);
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const handleCancel = () => callback(false);
+  const handleOk = () => callback(true);
 
   return (
     <Dialog
       open
-      onClose={handleClose}
+      onClose={handleCancel}
       PaperComponent={PaperComponent}
       aria-labelledby="draggable-dialog-title"
+      fullScreen={fullScreen}
       fullWidth
     >
       <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
@@ -48,10 +54,10 @@ export const Confirmation: ConfirmationComponent = ({ callback, children, title 
         <DialogContentText>{children}</DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} color="primary">
+        <Button onClick={handleCancel} color="primary">
           {t('Cancel')}
         </Button>
-        <Button onClick={handleClose} color="primary">
+        <Button onClick={handleOk} color="primary">
           {t('OK')}
         </Button>
       </DialogActions>

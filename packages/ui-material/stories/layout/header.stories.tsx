@@ -1,8 +1,8 @@
-import { select, withKnobs } from '@storybook/addon-knobs';
+import { boolean, select, withKnobs } from '@storybook/addon-knobs';
 import React from 'react';
-import { MemoryRouter as Router } from 'react-router-dom';
 
 import { Header } from '../../src/layout/header/Header';
+import { UIContextProvider } from '../../src/UI';
 
 export default {
   title: 'UI Material/Layout/Header',
@@ -14,15 +14,18 @@ export const SimpleHeader = () => {
   const variant = select(
     'Variant',
     ['default', 'inherit', 'primary', 'secondary', 'transparent', undefined],
-    'primary'
+    'default'
   );
+
+  const dark = boolean('Dark Mode', false);
+
   return (
-    <Router>
+    <UIContextProvider theme={{ palette: { type: dark ? 'dark' : 'light' } }}>
       <Header
         brand="Test brand header"
         color={variant}
         navItems={[{ href: '/sample', children: 'Sample link' }]}
       />
-    </Router>
+    </UIContextProvider>
   );
 };

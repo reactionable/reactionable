@@ -4,21 +4,24 @@ import { useTranslation } from 'react-i18next';
 export interface INotificationProps {
   title: ReactNode;
   onClose?: () => void;
+  show?: boolean;
 }
 
 export type NotificationComponent = ComponentType<INotificationProps>;
 
-export const Notification: NotificationComponent = ({ children, title }) => {
+export const Notification: NotificationComponent = ({ children, title, show = true }) => {
   const { t } = useTranslation();
   return (
-    <div>
+    <div hidden={!show}>
       <div>{'string' === typeof title ? t(title) : title}</div>
       <div>{children}</div>
     </div>
   );
 };
 
-export type IUseNotificationProps = PropsWithChildren<INotificationProps>;
+export type IUseNotificationProps<
+  NotificationProps extends INotificationProps = INotificationProps
+> = PropsWithChildren<NotificationProps>;
 
 export interface IUseNotificationResult {
   notification: ReactNode;
@@ -36,13 +39,14 @@ export function useNotification<P extends IUseNotificationProps>({
   return {
     notification: (
       <>
-        {notification && (
+        {
           <Component
             {...props}
             children={notification}
             onClose={() => setNotification(undefined)}
+            show={!!notification}
           />
-        )}
+        }
       </>
     ),
     setNotification,

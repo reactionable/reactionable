@@ -1,7 +1,7 @@
 import { LazyExoticComponent, PropsWithChildren } from 'react';
+
 import { IRouteProps } from '../router/Route';
 import { useRouterContext } from '../router/Router';
-
 import { ListComponent } from './list/List';
 import { ReadComponent } from './read/Read';
 
@@ -20,7 +20,7 @@ export function Crud<Data>({
   routes = [],
   privateRoute = true,
 }: PropsWithChildren<ICrudProp<Data>>) {
-  const {renderRoutes, useRouteMatch } = useRouterContext();
+  const { renderRoutes, useRouteMatch } = useRouterContext();
   const match = useRouteMatch();
   if (!match) {
     return null;

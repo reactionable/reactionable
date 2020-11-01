@@ -5,7 +5,8 @@ import {
 } from '@reactionable/core/lib/crud/delete/Delete';
 import React, { PropsWithChildren, ReactNode } from 'react';
 import Button from 'react-bootstrap/Button';
-import { Icon, IIconProps } from '../../icon/icon';
+
+import { IIconProps, Icon } from '../../icon/icon';
 
 export interface IDeleteProps<Data> extends ICoreDeleteProps<Data> {
   label?: ReactNode;

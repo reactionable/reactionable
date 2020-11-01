@@ -1,10 +1,10 @@
 import { IRouteProps as ICoreRouteProps } from '@reactionable/core/lib/router/Route';
-import { Switch } from 'react-router-dom';
 import React, { ReactNode } from 'react';
+import { Switch } from 'react-router-dom';
 
 import { ILazyRouteComponentProps, LazyRoute } from './LazyRoute';
-import { PrivateRoute } from './PrivateRoute';
 import { useCaptureRouteNotFound } from './NotFound';
+import { PrivateRoute } from './PrivateRoute';
 
 export type IRouteProps = ICoreRouteProps & ILazyRouteComponentProps;
 

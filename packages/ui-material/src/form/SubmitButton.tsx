@@ -1,8 +1,8 @@
 import Button, { ButtonProps } from '@material-ui/core/Button/Button';
 import {
-  renderSubmitButton as coreRenderSubmitButton,
-  ISubmitButtonProps as ICoreSubmitButtonProps,
   IRenderSubmitButtonProps as ICoreRenderSubmitButtonProps,
+  ISubmitButtonProps as ICoreSubmitButtonProps,
+  renderSubmitButton as coreRenderSubmitButton,
 } from '@reactionable/core/lib/form/SubmitButton';
 import React, { ReactNode } from 'react';
 

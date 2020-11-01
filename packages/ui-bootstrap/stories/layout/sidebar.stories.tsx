@@ -1,7 +1,7 @@
 import '../config';
 
 import { faImages } from '@fortawesome/free-solid-svg-icons';
-import { UIContextProvider, generatePath } from '@reactionable/core';
+import { generatePath, useRouteMatch } from '@reactionable/core';
 import React, { FC } from 'react';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
@@ -9,10 +9,9 @@ import Container from 'react-bootstrap/Container';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Row from 'react-bootstrap/Row';
 import { useTranslation } from 'react-i18next';
-import { MemoryRouter as Router, useRouteMatch } from 'react-router-dom';
 
 import { Sidebar, setSidebarNavItems } from '../../src/layout/sidebar/Sidebar';
-import { useUIContextProviderProps } from '../../src/UI';
+import { UIContextProvider } from '../../src/UI';
 
 export default {
   title: 'UI Bootstrap/Layout/Sidebar',
@@ -53,11 +52,9 @@ const SampleComponent: FC = () => {
 };
 
 export const SimpleSidebar = () => (
-  <UIContextProvider {...useUIContextProviderProps()}>
-    <Router>
-      <Sidebar>
-        <SampleComponent />
-      </Sidebar>
-    </Router>
+  <UIContextProvider>
+    <Sidebar>
+      <SampleComponent />
+    </Sidebar>
   </UIContextProvider>
 );

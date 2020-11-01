@@ -2,7 +2,7 @@ import { action } from '@storybook/addon-actions';
 import React from 'react';
 
 import { Delete } from '../../src/crud/delete/Delete';
-import { UIContextProvider } from '../../src/ui/UI';
+import { UIContextProvider, useUIProviderProps } from '../../src/ui/UI';
 
 export default {
   title: 'Core/Crud/Delete',
@@ -10,7 +10,7 @@ export default {
 };
 
 export const SimpleDelete = () => (
-  <UIContextProvider>
+  <UIContextProvider {...useUIProviderProps()}>
     <Delete
       title="Simple label"
       confirmationMessage="Do you want to delete?"

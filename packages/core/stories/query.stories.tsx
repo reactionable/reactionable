@@ -2,7 +2,7 @@ import { boolean, text, withKnobs } from '@storybook/addon-knobs';
 import React from 'react';
 
 import { QueryWrapper } from '../src/query/QueryWrapper';
-import { UIContextProvider } from '../src/ui/UI';
+import { UIContextProvider, useUIProviderProps } from '../src/ui/UI';
 
 export default {
   title: 'Core/Query',
@@ -21,7 +21,7 @@ export const queryWrapper = () => {
   };
 
   return (
-    <UIContextProvider>
+    <UIContextProvider {...useUIProviderProps()}>
       <h3>Query result</h3>
       <QueryWrapper<{ content: string }>
         isLoading={isLoading}

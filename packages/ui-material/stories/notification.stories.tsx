@@ -19,22 +19,33 @@ export default {
   decorators: [withKnobs],
 };
 
-export const notification = () => {
+export const SimpleNotification = () => {
   const title = text('Title', 'This is a notification');
   const content = text('Content', 'This is the notification content');
 
-  return (
-    <Notification title={title}>
-      <>{content}</>
-    </Notification>
+  return <Notification title={title}>{content}</Notification>;
+};
+
+export const NotificationWithComplexContent = () => {
+  const content = (
+    <>
+      <b>Lorem Ipsum</b> is simply dummy text of the printing and typesetting industry.{' '}
+      <b>Lorem Ipsum</b> has been the industry's standard dummy text ever since the 1500s, when an
+      unknown printer took a galley of type and scrambled it to make a type specimen book. It has
+      survived not only five centuries, but also the leap into electronic typesetting, remaining
+      essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
+      containing <b>Lorem Ipsum</b> passages, and more recently with desktop publishing software
+      like Aldus PageMaker including versions of <b>Lorem Ipsum</b>
+    </>
   );
+  return <Notification title="Notification With Complex Content" children={content} />;
 };
 
 export const UseNotification = () => {
   const title = text('Title', 'This is a notification');
   const content = text('Content', 'This is the notification content');
 
-  const { notification, setNotification } = useNotification({ title, children: <>{content}</> });
+  const { notification, setNotification } = useNotification({ title, children: content });
 
   return (
     <>

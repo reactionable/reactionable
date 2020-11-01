@@ -4,7 +4,7 @@ import { string } from 'yup';
 
 import { Update } from '../../src/crud/update/Update';
 import { FormField } from '../../src/form/FormField';
-import { UIContextProvider } from '../../src/ui/UI';
+import { UIContextProvider, useUIProviderProps } from '../../src/ui/UI';
 
 export default {
   title: 'Core/Crud/Update',
@@ -16,7 +16,7 @@ interface IFormValues {
 }
 
 export const update = () => (
-  <UIContextProvider>
+  <UIContextProvider {...useUIProviderProps()}>
     <Update
       form={{
         title: 'Update form',
@@ -36,7 +36,7 @@ export const update = () => (
 );
 
 export const updateInModal = () => (
-  <UIContextProvider>
+  <UIContextProvider {...useUIProviderProps()}>
     <Update
       modal
       form={{

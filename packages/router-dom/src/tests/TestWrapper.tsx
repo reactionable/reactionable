@@ -3,9 +3,8 @@ import { IIdentityProviderProps } from '@reactionable/core/lib/identity/Identity
 import { ITestWrapperProps } from '@reactionable/core/lib/tests/TestWrapper';
 import { IUIProviderProps } from '@reactionable/core/lib/ui/UI';
 import React, { PropsWithChildren } from 'react';
-import { MemoryRouter } from 'react-router';
 
-import { IRouterProviderProps } from '../Router';
+import { IRouterProviderProps, MemoryRouterComponent } from '../Router';
 
 export function TestWrapper<
   IdentityProviderProps extends IIdentityProviderProps = IIdentityProviderProps,
@@ -17,6 +16,6 @@ export function TestWrapper<
 }: PropsWithChildren<
   ITestWrapperProps<IdentityProviderProps, UIProviderProps, RouterProviderProps>
 >) {
-  router = { ...router, Router: MemoryRouter } as RouterProviderProps;
+  router = { ...router, Component: MemoryRouterComponent } as RouterProviderProps;
   return <Wrapper {...props} router={router} />;
 }

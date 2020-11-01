@@ -10,12 +10,15 @@ import React, { PropsWithChildren } from 'react';
 import Button, { ButtonProps } from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useTranslation } from 'react-i18next';
-import { Icon, IIconProps } from '../icon/icon';
+
+import { IIconProps, Icon } from '../icon/icon';
 
 export type IConfirmationProps = ICoreConfirmationProps;
 
 export const Confirmation: ConfirmationComponent = ({ callback, children, title }) => {
   const { t } = useTranslation();
+  const handleCancel = () => callback(false);
+  const handleOk = () => callback(true);
 
   return (
     <Modal
@@ -23,17 +26,17 @@ export const Confirmation: ConfirmationComponent = ({ callback, children, title 
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
-      onHide={() => callback(false)}
+      onHide={handleCancel}
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">{title || t('Confirm ?')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>{children}</Modal.Body>
       <Modal.Footer>
-        <Button variant="outline-primary" onClick={() => callback(false)}>
+        <Button variant="outline-primary" onClick={handleCancel}>
           {t('Cancel')}
         </Button>
-        <Button variant="primary" onClick={() => callback(true)}>
+        <Button variant="primary" onClick={handleOk}>
           {t('OK')}
         </Button>
       </Modal.Footer>

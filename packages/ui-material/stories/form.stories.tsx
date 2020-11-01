@@ -1,3 +1,4 @@
+import MenuItem from '@material-ui/core/MenuItem/MenuItem';
 import { action } from '@storybook/addon-actions';
 import React from 'react';
 import { string } from 'yup';
@@ -89,11 +90,9 @@ export const FormWithSelect = () => (
       initialValues={{ test: '' }}
       children={() => (
         <FormField as="select" name="test" autoFocus>
-          <>
-            <option value="">Choose an option</option>
-            <option value="1">First option</option>
-            <option value="2">Second option</option>
-          </>
+          <MenuItem value="">Choose an option</MenuItem>
+          <MenuItem value="1">First option</MenuItem>
+          <MenuItem value="2">Second option</MenuItem>
         </FormField>
       )}
     />

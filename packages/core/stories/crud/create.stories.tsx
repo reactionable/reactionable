@@ -4,7 +4,7 @@ import { string } from 'yup';
 
 import { Create } from '../../src/crud/create/Create';
 import { FormField } from '../../src/form/FormField';
-import { UIContextProvider } from '../../src/ui/UI';
+import { UIContextProvider, useUIProviderProps } from '../../src/ui/UI';
 
 export default {
   title: 'Core/Crud/Create',
@@ -16,7 +16,7 @@ interface IFormValues {
 }
 
 export const SimpleCreate = () => (
-  <UIContextProvider>
+  <UIContextProvider {...useUIProviderProps()}>
     <Create
       form={{
         title: 'Create form',
@@ -36,7 +36,7 @@ export const SimpleCreate = () => (
 );
 
 export const CreateInModal = () => (
-  <UIContextProvider>
+  <UIContextProvider {...useUIProviderProps()}>
     <Create
       modal
       form={{

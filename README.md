@@ -3,7 +3,6 @@
   <br/><br/>
   <a href="https://github.com/reactionable/reactionable/actions?query=workflow%3A%22Continuous+Integration%22" target="_blank"><img alt="Continuous integration" src="https://github.com/reactionable/reactionable/workflows/Continuous%20Integration/badge.svg"></a>
   <a href="https://codecov.io/gh/reactionable/reactionable" target="_blank"><img alt="Coverage Status" src="https://codecov.io/gh/reactionable/reactionable/branch/master/graph/badge.svg"></a>
-  <a href="https://reactionable.github.io/reactionable/docs" target="_blank"><img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" /></a>
   <a href="https://github.com/reactionable/reactionable/blob/master/LICENSE" target="_blank"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" /></a>
   <a href="https://www.npmjs.com/search?q=%40reactionable" target="_blank"><img alt="npm" src="https://img.shields.io/npm/v/@reactionable/core"></a>
   <a href="CONTRIBUTING.md" target="_blank"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome"></a>
@@ -11,11 +10,7 @@
   <a href="https://github.com/reactionable/reactionable"><img alt="GitHub stars" src="https://img.shields.io/github/stars/reactionable/reactionable?logo=github"></a>
 </p>
 
-### 🏠 [Homepage](https://reactionable.github.io/reactionable/)
-
-### 📖 [Documentation](https://reactionable.github.io/reactionable/docs)
-
-### ✨ [Demo](https://reactionable.github.io/reactionable/storybook)
+## 📖 [Documentation](https://reactionable.github.io/reactionable)
 
 ## Helping Project
 
@@ -36,6 +31,8 @@ Or with `yarn`
 ```sh
 yarn add @reactionable/core
 ```
+
+## Usage
 
 ## Dev
 
