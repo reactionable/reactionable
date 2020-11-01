@@ -25,12 +25,12 @@ export const UserLoggedHeaderNav = () => {
 
 export const UserUnloggedHeaderNav = () => {
   const { t } = useTranslation();
-  const { user, component } = useIdentityContext();
+  const { user, AuthComponent } = useIdentityContext();
   const { useModal } = useUIContext();
 
   const { modal, openModal, closeModal } = useModal({
     title: t('Sign In / Sign Up'),
-    children: component,
+    children: AuthComponent,
   });
 
   useEffect(() => {

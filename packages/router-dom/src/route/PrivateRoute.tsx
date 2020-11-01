@@ -1,4 +1,4 @@
-import { IUser, useIdentityContext } from '@reactionable/core/lib/identity/Identity';
+import { useIdentityContext } from '@reactionable/core/lib/identity/Identity';
 import { useUIContext } from '@reactionable/core/lib/ui/UI';
 import React, { PropsWithChildren, ReactNode } from 'react';
 import { Redirect } from 'react-router-dom';
@@ -17,8 +17,8 @@ function renderPrivateRoute(user: undefined | null) {
   };
 }
 
-export function PrivateRoute<User extends IUser>(props: PropsWithChildren<ILazyRouteProps>) {
-  const { user } = useIdentityContext<User>();
+export function PrivateRoute(props: PropsWithChildren<ILazyRouteProps>) {
+  const { user } = useIdentityContext();
 
   if (user) {
     return <LazyRoute {...props} />;

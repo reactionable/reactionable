@@ -1,12 +1,7 @@
-import React, {
-  ComponentType,
-  PropsWithChildren,
-  ReactNode,
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
+import { ComponentType, PropsWithChildren } from 'react';
+
+import { IProviderProps, createProvider } from '../app/Provider';
 
 export type IUser = {
   displayName: () => string;
@@ -15,41 +10,19 @@ export interface ILoginFormValues {
   username: string;
   password: string;
 }
-export interface IIdentityContext<User extends IUser> {
-  user: User | undefined | null;
-  component: ReactNode;
-  identityProvider?: string;
-  logout: () => Promise<void>;
-}
-
-export const IdentityContext = createContext<IIdentityContext<any>>({
-  user: undefined,
-  component: <></>,
-  logout: async () => {},
-  identityProvider: undefined,
-});
-
-export type IIdentityComponentProps<User extends IUser> = {
+export type IAuthComponentProps<User extends IUser> = {
   setUser: (user: User | null) => void;
 };
 
-export type IdentityComponent<User extends IUser> = ComponentType<IIdentityComponentProps<User>>;
+export type IdentityComponent<User extends IUser> = ComponentType<IAuthComponentProps<User>>;
 
-export type IIdentityContextProviderProps<User extends IUser = IUser> = Omit<
-  IIdentityContext<User>,
-  'component' | 'user'
-> & {
-  Component: IdentityComponent<User>;
-  getUser: () => Promise<User | null>;
-};
-
-export function IdentityContextProvider<User extends IUser>({
-  Component,
+export function IdentityComponent<User extends IUser>({
+  AuthComponent,
   getUser,
   logout,
   identityProvider,
   ...props
-}: PropsWithChildren<IIdentityContextProviderProps<User>>) {
+}: PropsWithChildren<IIdentityProviderProps<User>>) {
   const [user, setUser] = useState<User | null | undefined>(undefined);
 
   useEffect(() => {
@@ -66,10 +39,13 @@ export function IdentityContextProvider<User extends IUser>({
   return (
     <IdentityContext.Provider
       value={{
+        ...props,
         user,
         logout: logoutHandler,
         identityProvider,
-        component: <Component setUser={setUser} {...props} />,
+        auth: <AuthComponent setUser={setUser} {...props} />,
+        getUser,
+        AuthComponent: AuthComponent as IdentityComponent<IUser>,
       }}
     >
       {props.children}
@@ -77,6 +53,36 @@ export function IdentityContextProvider<User extends IUser>({
   );
 }
 
-export function useIdentityContext<User extends IUser>() {
-  return useContext<IIdentityContext<User>>(IdentityContext);
+export type IIdentityProviderProps<User extends IUser = IUser> = IProviderProps<{
+  user: User | undefined | null;
+  identityProvider?: string;
+  logout: () => Promise<void>;
+  AuthComponent: IdentityComponent<User>;
+  getUser: () => Promise<User | null>;
+  auth: ReactElement;
+}>;
+
+export function useIdentityProviderProps(): IIdentityProviderProps {
+  return {
+    user: undefined,
+    logout: async () => {
+      throw new Error(
+        '@reactionable/core does not provide logout function, please install a "@reactionable/identity-*" package'
+      );
+    },
+    identityProvider: undefined,
+    AuthComponent: (props: PropsWithChildren<IAuthComponentProps<IUser>>) => <></>,
+    getUser: async () => {
+      throw new Error(
+        '@reactionable/core does not provide getUser function, please install a "@reactionable/identity-*" package'
+      );
+    },
+    auth: <></>,
+  };
 }
+
+export const {
+  Context: IdentityContext,
+  ContextProvider: IdentityContextProvider,
+  useContext: useIdentityContext,
+} = createProvider<IIdentityProviderProps>(useIdentityProviderProps());

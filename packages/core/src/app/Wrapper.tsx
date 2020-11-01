@@ -1,24 +1,29 @@
 import React, { PropsWithChildren, StrictMode } from 'react';
 
-import { IIdentityContextProviderProps, IdentityContextProvider } from '../identity/Identity';
+import { IIdentityProviderProps, IdentityContextProvider } from '../identity/Identity';
 import { IRouterProviderProps, RouterContextProvider } from '../router/Router';
 import { IUIContextProviderProps, UIContextProvider } from '../ui/UI';
 
 export interface IWrapperProps<
-  ICP extends IIdentityContextProviderProps,
-  UICP extends IUIContextProviderProps,
-  RCP extends IRouterProviderProps
+  IdentityProviderProps extends IIdentityProviderProps,
+  UIProviderProps extends IUIContextProviderProps,
+  RouterProviderProps extends IRouterProviderProps
 > {
-  identity?: ICP;
-  ui?: UICP;
-  router?: RCP;
+  identity?: IdentityProviderProps;
+  ui?: UIProviderProps;
+  router?: RouterProviderProps;
 }
 
 export function Wrapper<
-  ICP extends IIdentityContextProviderProps = IIdentityContextProviderProps,
-  UICP extends IUIContextProviderProps = IUIContextProviderProps,
-  RCP extends IRouterProviderProps = IRouterProviderProps
->({ children, identity, ui, router }: PropsWithChildren<IWrapperProps<ICP, UICP, RCP>>) {
+  IdentityProviderProps extends IIdentityProviderProps = IIdentityProviderProps,
+  UIProviderProps extends IUIContextProviderProps = IUIContextProviderProps,
+  RouterProviderProps extends IRouterProviderProps = IRouterProviderProps
+>({
+  children,
+  identity,
+  ui,
+  router,
+}: PropsWithChildren<IWrapperProps<IdentityProviderProps, UIProviderProps, RouterProviderProps>>) {
   let wrapped = children;
 
   if (router) {

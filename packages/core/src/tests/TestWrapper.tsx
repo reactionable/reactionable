@@ -1,20 +1,24 @@
 import React, { PropsWithChildren } from 'react';
 
 import { IWrapperProps, Wrapper } from '../app/Wrapper';
-import { IIdentityContextProviderProps } from '../identity/Identity';
+import { IIdentityProviderProps } from '../identity/Identity';
 import { IRouterProviderProps } from '../router/Router';
 import { IUIContextProviderProps } from '../ui/UI';
 
 export type ITestWrapperProps<
-  ICP extends IIdentityContextProviderProps,
-  UICP extends IUIContextProviderProps,
-  RCP extends IRouterProviderProps
-> = IWrapperProps<ICP, UICP, RCP>;
+  IdentityProviderProps extends IIdentityProviderProps,
+  UIProviderProps extends IUIContextProviderProps,
+  RouterProviderProps extends IRouterProviderProps
+> = IWrapperProps<IdentityProviderProps, UIProviderProps, RouterProviderProps>;
 
 export function TestWrapper<
-  ICP extends IIdentityContextProviderProps = IIdentityContextProviderProps,
-  UICP extends IUIContextProviderProps = IUIContextProviderProps,
-  RCP extends IRouterProviderProps = IRouterProviderProps
->(props: PropsWithChildren<ITestWrapperProps<ICP, UICP, RCP>>) {
+  IdentityProviderProps extends IIdentityProviderProps = IIdentityProviderProps,
+  UIProviderProps extends IUIContextProviderProps = IUIContextProviderProps,
+  RouterProviderProps extends IRouterProviderProps = IRouterProviderProps
+>(
+  props: PropsWithChildren<
+    ITestWrapperProps<IdentityProviderProps, UIProviderProps, RouterProviderProps>
+  >
+) {
   return <Wrapper {...props} />;
 }

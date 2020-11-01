@@ -30,11 +30,11 @@ const UserLoggedHeaderNav = () => {
 
 const UserUnloggedHeaderNav = () => {
   const { t } = useTranslation();
-  const { user, component } = useIdentityContext();
+  const { user, auth } = useIdentityContext();
   const { modal, openModal, closeModal } = useModal({
     Component: Modal,
     title: t('Sign In / Sign Up'),
-    body: component,
+    body: auth,
   });
 
   useEffect(() => {

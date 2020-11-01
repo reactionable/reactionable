@@ -1,6 +1,6 @@
 import React, { LazyExoticComponent, PropsWithChildren } from 'react';
 
-import { IIdentityContextProviderProps } from '../identity/Identity';
+import { IIdentityProviderProps } from '../identity/Identity';
 import { IRouteProps } from '../router/Route';
 import { IRouterProviderProps } from '../router/Router';
 import { IUseLayoutProps } from '../ui/layout/Layout';
@@ -8,25 +8,25 @@ import { IUIContextProviderProps } from '../ui/UI';
 import { Wrapper } from './Wrapper';
 
 export interface IAppProps<
-  ICP extends IIdentityContextProviderProps,
-  UICP extends IUIContextProviderProps,
-  LP extends IUseLayoutProps,
-  RCP extends IRouterProviderProps
+  IdentityProviderProps extends IIdentityProviderProps,
+  UIProviderProps extends IUIContextProviderProps,
+  UseLayoutProps extends IUseLayoutProps,
+  RouterProviderProps extends IRouterProviderProps
 > {
   routes: Array<IRouteProps>;
   HomeComponent?: LazyExoticComponent<any>;
   NotFoundComponent?: LazyExoticComponent<any>;
-  identity?: ICP;
-  ui?: UICP;
-  layout?: LP;
-  router?: RCP;
+  identity?: IdentityProviderProps;
+  ui?: UIProviderProps;
+  layout?: UseLayoutProps;
+  router?: RouterProviderProps;
 }
 
 export function App<
-  ICP extends IIdentityContextProviderProps = IIdentityContextProviderProps,
-  UICP extends IUIContextProviderProps = IUIContextProviderProps,
-  LP extends IUseLayoutProps = IUseLayoutProps,
-  RCP extends IRouterProviderProps = IRouterProviderProps
+  IdentityProviderProps extends IIdentityProviderProps = IIdentityProviderProps,
+  UIProviderProps extends IUIContextProviderProps = IUIContextProviderProps,
+  UseLayoutProps extends IUseLayoutProps = IUseLayoutProps,
+  RouterProviderProps extends IRouterProviderProps = IRouterProviderProps
 >({
   routes = [],
   HomeComponent,
@@ -35,7 +35,9 @@ export function App<
   ui,
   router,
   children,
-}: PropsWithChildren<IAppProps<ICP, UICP, LP, RCP>>) {
+}: PropsWithChildren<
+  IAppProps<IdentityProviderProps, UIProviderProps, UseLayoutProps, RouterProviderProps>
+>) {
   if (router) {
     if (HomeComponent) {
       routes.unshift({ component: HomeComponent, exact: true, path: '/', privateRoute: false });

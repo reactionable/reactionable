@@ -1,4 +1,4 @@
-import { IIdentityContextProviderProps } from '@reactionable/core/lib/identity/Identity';
+import { IIdentityProviderProps } from '@reactionable/core/lib/identity/Identity';
 import { IRouterProviderProps } from '@reactionable/core/lib/router/Router';
 import {
   TestWrapper as CoreTestWrapper,
@@ -9,9 +9,13 @@ import React, { PropsWithChildren } from 'react';
 import { IUIContextProviderProps, useUIContextProviderProps } from '../UI';
 
 export function TestWrapper<
-  ICP extends IIdentityContextProviderProps = IIdentityContextProviderProps,
-  UICP extends IUIContextProviderProps = IUIContextProviderProps,
-  RCP extends IRouterProviderProps = IRouterProviderProps
->(props: PropsWithChildren<ITestWrapperProps<ICP, UICP, RCP>>) {
+  IdentityProviderProps extends IIdentityProviderProps = IIdentityProviderProps,
+  UIProviderProps extends IUIContextProviderProps = IUIContextProviderProps,
+  RouterProviderProps extends IRouterProviderProps = IRouterProviderProps
+>(
+  props: PropsWithChildren<
+    ITestWrapperProps<IdentityProviderProps, UIProviderProps, RouterProviderProps>
+  >
+) {
   return <CoreTestWrapper ui={useUIContextProviderProps()} {...props} />;
 }

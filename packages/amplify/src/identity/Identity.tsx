@@ -1,10 +1,9 @@
 import { Auth } from '@aws-amplify/auth';
 import {
-  IdentityComponent as CoreIdentityComponent,
   IdentityContextProvider as CoreIdentityContextProvider,
-  IIdentityContextProviderProps as ICoreIdentityContextProviderProps,
+  IAuthComponentProps,
+  IIdentityProviderProps as ICoreIdentityProviderProps,
   IUser as ICoreUser,
-  IIdentityComponentProps,
 } from '@reactionable/core';
 import {
   Authenticator,
@@ -44,10 +43,10 @@ const dataToUser = (data?: {
   } as IUser;
 };
 
-function IdentityComponent({
+function AuthComponent({
   setUser,
   ...props
-}: PropsWithChildren<IIdentityComponentProps<IUser> & IAuthenticatorProps>) {
+}: PropsWithChildren<IAuthComponentProps<IUser> & IAuthenticatorProps>) {
   const { t } = useTranslation();
 
   const authenticatorProps = Object.assign(
@@ -88,26 +87,27 @@ function IdentityComponent({
   );
 }
 
-export type IIdentityContextProviderProps = ICoreIdentityContextProviderProps<IUser> &
-  IAuthenticatorProps;
+export type IIdentityProviderProps = ICoreIdentityProviderProps<IUser> & IAuthenticatorProps;
 
 export const useIdentityContextProviderProps = (
-  props: Partial<IIdentityContextProviderProps> = {}
-): IIdentityContextProviderProps => {
+  props: Partial<IIdentityProviderProps> = {}
+): IIdentityProviderProps => {
   return {
     identityProvider: 'Amplify',
     logout: async () => await Auth.signOut(),
+    AuthComponent,
     getUser: async () => {
       const data = await Auth.currentUserInfo();
       return dataToUser(data);
     },
-    Component: IdentityComponent as CoreIdentityComponent<IUser>,
+    auth: <></>,
+    user: undefined,
     ...props,
   };
 };
 
 export const IdentityContextProvider = (
-  props?: PropsWithChildren<Partial<IIdentityContextProviderProps>>
+  props?: PropsWithChildren<Partial<IIdentityProviderProps>>
 ) => {
   return <CoreIdentityContextProvider {...useIdentityContextProviderProps()} {...props} />;
 };
