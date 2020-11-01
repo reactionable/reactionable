@@ -6,16 +6,16 @@ import {
 } from '@reactionable/core/lib/tests/TestWrapper';
 import React, { PropsWithChildren } from 'react';
 
-import { IUIContextProviderProps, useUIContextProviderProps } from '../UI';
+import { IUIProviderProps, useUIProviderProps } from '../UI';
 
 export function TestWrapper<
   IdentityProviderProps extends IIdentityProviderProps = IIdentityProviderProps,
-  UIProviderProps extends IUIContextProviderProps = IUIContextProviderProps,
+  UIProviderProps extends IUIProviderProps = IUIProviderProps,
   RouterProviderProps extends IRouterProviderProps = IRouterProviderProps
 >(
   props: PropsWithChildren<
     ITestWrapperProps<IdentityProviderProps, UIProviderProps, RouterProviderProps>
   >
 ) {
-  return <CoreTestWrapper ui={useUIContextProviderProps()} {...props} />;
+  return <CoreTestWrapper ui={useUIProviderProps()} {...props} />;
 }

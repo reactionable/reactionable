@@ -2,11 +2,11 @@ import React, { PropsWithChildren, StrictMode } from 'react';
 
 import { IIdentityProviderProps, IdentityContextProvider } from '../identity/Identity';
 import { IRouterProviderProps, RouterContextProvider } from '../router/Router';
-import { IUIContextProviderProps, UIContextProvider } from '../ui/UI';
+import { IUIProviderProps, UIContextProvider } from '../ui/UI';
 
 export interface IWrapperProps<
   IdentityProviderProps extends IIdentityProviderProps,
-  UIProviderProps extends IUIContextProviderProps,
+  UIProviderProps extends IUIProviderProps,
   RouterProviderProps extends IRouterProviderProps
 > {
   identity?: IdentityProviderProps;
@@ -16,7 +16,7 @@ export interface IWrapperProps<
 
 export function Wrapper<
   IdentityProviderProps extends IIdentityProviderProps = IIdentityProviderProps,
-  UIProviderProps extends IUIContextProviderProps = IUIContextProviderProps,
+  UIProviderProps extends IUIProviderProps = IUIProviderProps,
   RouterProviderProps extends IRouterProviderProps = IRouterProviderProps
 >({
   children,

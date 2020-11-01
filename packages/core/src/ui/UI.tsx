@@ -1,5 +1,4 @@
-import React, { ConsumerProps, PropsWithChildren, createContext, useContext } from 'react';
-
+import { IProviderProps, createProvider } from '../app/Provider';
 import { Form, IUseForm, IUseFormProps, useForm } from '../form/Form';
 import { Alert } from './alert/Alert';
 import { ErrorAlert, IUseErrorAlert, IUseErrorAlertProps, useErrorAlert } from './alert/ErrorAlert';
@@ -30,7 +29,7 @@ import {
   useSuccessNotification,
 } from './notification/SuccessNotification';
 
-export type IUIContext<
+export type IUIProviderProps<
   LO extends IUseLoaderProps = IUseLoaderProps,
   SN extends IUseSuccessNotificationProps = IUseSuccessNotificationProps,
   EN extends IUseErrorNotificationProps = IUseErrorNotificationProps,
@@ -41,7 +40,7 @@ export type IUIContext<
   FO extends IUseFormProps = IUseFormProps,
   MO extends IUseModalProps = IUseModalProps,
   MF extends IUseModalFormProps = IUseModalFormProps
-> = {
+> = IProviderProps<{
   useLoader: IUseLoader<LO>;
   useSuccessNotification: IUseSuccessNotification<SN>;
   useErrorNotification: IUseErrorNotification<EN>;
@@ -52,94 +51,9 @@ export type IUIContext<
   useForm: IUseForm<FO>;
   useModal: IUseModal<MO>;
   useModalForm: IUseModalForm<MF>;
-};
+}>;
 
-export const UIContext = createContext<
-  IUIContext<any, any, any, any, any, any, any, any, any, any>
->({
-  useLoader,
-  useSuccessNotification,
-  useErrorNotification,
-  useErrorAlert,
-  useWarningAlert,
-  useConfirmation,
-  useLayout,
-  useForm,
-  useModal,
-  useModalForm,
-});
-
-export type IUIContextProviderProps<
-  LO extends IUseLoaderProps = IUseLoaderProps,
-  SN extends IUseSuccessNotificationProps = IUseSuccessNotificationProps,
-  EN extends IUseErrorNotificationProps = IUseErrorNotificationProps,
-  EA extends IUseErrorAlertProps = IUseErrorAlertProps,
-  WA extends IUseWarningAlertProps = IUseWarningAlertProps,
-  CO extends IUseConfirmationProps = IUseConfirmationProps,
-  LA extends IUseLayoutProps = IUseLayoutProps,
-  FO extends IUseFormProps = IUseFormProps,
-  MO extends IUseModalProps = IUseModalProps,
-  MF extends IUseModalFormProps = IUseModalFormProps
-> = PropsWithChildren<IUIContext<LO, SN, EN, EA, WA, CO, LA, FO, MO, MF>>;
-
-export function UIContextProvider<
-  LO extends IUseLoaderProps,
-  SN extends IUseSuccessNotificationProps,
-  EN extends IUseErrorNotificationProps,
-  EA extends IUseErrorAlertProps,
-  WA extends IUseWarningAlertProps,
-  CO extends IUseConfirmationProps,
-  LA extends IUseLayoutProps,
-  FO extends IUseFormProps,
-  MO extends IUseModalProps,
-  MF extends IUseModalFormProps
->(
-  props?: PropsWithChildren<
-    Partial<IUIContextProviderProps<LO, SN, EN, EA, WA, CO, LA, FO, MO, MF>>
-  >
-) {
-  return (
-    <UIContext.Provider
-      value={{
-        ...useUIContextProviderProps(),
-        ...props,
-      }}
-      children={props?.children}
-    />
-  );
-}
-
-export function UIContextConsumer<
-  LO extends IUseLoaderProps,
-  SN extends IUseSuccessNotificationProps,
-  EN extends IUseErrorNotificationProps,
-  EA extends IUseErrorAlertProps,
-  WA extends IUseWarningAlertProps,
-  CO extends IUseConfirmationProps,
-  LA extends IUseLayoutProps,
-  FO extends IUseFormProps,
-  MO extends IUseModalProps,
-  MF extends IUseModalFormProps
->(props: ConsumerProps<IUIContextProviderProps<LO, SN, EN, EA, WA, CO, LA, FO, MO, MF>>) {
-  return <UIContext.Consumer {...props} />;
-}
-
-export function useUIContext<
-  LO extends IUseLoaderProps,
-  SN extends IUseSuccessNotificationProps,
-  EN extends IUseErrorNotificationProps,
-  EA extends IUseErrorAlertProps,
-  WA extends IUseWarningAlertProps,
-  CO extends IUseConfirmationProps,
-  LA extends IUseLayoutProps,
-  FO extends IUseFormProps,
-  MO extends IUseModalProps,
-  MF extends IUseModalFormProps
->() {
-  return useContext<IUIContext<LO, SN, EN, EA, WA, CO, LA, FO, MO, MF>>(UIContext);
-}
-
-export function useUIContextProviderProps(): IUIContextProviderProps {
+export function useUIProviderProps(): IUIProviderProps {
   return {
     useLoader: (props) => useLoader({ Component: Loader, ...props }),
     useSuccessNotification: (props) =>
@@ -160,3 +74,9 @@ export function useUIContextProviderProps(): IUIContextProviderProps {
     useModalForm,
   };
 }
+
+export const {
+  Context: UIContext,
+  ContextProvider: UIContextProvider,
+  useContext: useUIContext,
+} = createProvider<IUIProviderProps>(useUIProviderProps());

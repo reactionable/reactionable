@@ -4,12 +4,12 @@ import { IIdentityProviderProps } from '../identity/Identity';
 import { IRouteProps } from '../router/Route';
 import { IRouterProviderProps } from '../router/Router';
 import { IUseLayoutProps } from '../ui/layout/Layout';
-import { IUIContextProviderProps } from '../ui/UI';
+import { IUIProviderProps } from '../ui/UI';
 import { Wrapper } from './Wrapper';
 
 export interface IAppProps<
   IdentityProviderProps extends IIdentityProviderProps,
-  UIProviderProps extends IUIContextProviderProps,
+  UIProviderProps extends IUIProviderProps,
   UseLayoutProps extends IUseLayoutProps,
   RouterProviderProps extends IRouterProviderProps
 > {
@@ -24,7 +24,7 @@ export interface IAppProps<
 
 export function App<
   IdentityProviderProps extends IIdentityProviderProps = IIdentityProviderProps,
-  UIProviderProps extends IUIContextProviderProps = IUIContextProviderProps,
+  UIProviderProps extends IUIProviderProps = IUIProviderProps,
   UseLayoutProps extends IUseLayoutProps = IUseLayoutProps,
   RouterProviderProps extends IRouterProviderProps = IRouterProviderProps
 >({

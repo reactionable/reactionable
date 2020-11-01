@@ -1,11 +1,10 @@
 import { IUseLoaderProps } from '@reactionable/core/lib/ui/loader/useLoader';
 import {
   UIContextProvider as CoreUIContextProvider,
-  IUIContextProviderProps as ICoreUIContextProviderProps,
-  UIContext,
-  useUIContext as useCoreUIContext,
+  IUIProviderProps as ICoreUIContextProviderProps,
+  useUIProviderProps as useCoreUIProviderProps,
 } from '@reactionable/core/lib/ui/UI';
-import React, { ConsumerProps, PropsWithChildren } from 'react';
+import React, { PropsWithChildren } from 'react';
 
 import { IUseErrorAlertProps, useErrorAlert } from './alert/ErrorAlert';
 import { IUseWarningAlertProps, useWarningAlert } from './alert/WarningAlert';
@@ -21,7 +20,7 @@ import {
   useSuccessNotification,
 } from './notification/SuccessNotification';
 
-export type IUIContextProviderProps = ICoreUIContextProviderProps<
+export type IUIProviderProps = ICoreUIContextProviderProps<
   IUseLoaderProps,
   IUseSuccessNotificationProps,
   IUseErrorNotificationProps,
@@ -34,23 +33,9 @@ export type IUIContextProviderProps = ICoreUIContextProviderProps<
   IUseModalFormProps
 >;
 
-export function useUIContext() {
-  return useCoreUIContext<
-    IUseLoaderProps,
-    IUseSuccessNotificationProps,
-    IUseErrorNotificationProps,
-    IUseErrorAlertProps,
-    IUseWarningAlertProps,
-    IUseConfirmationProps,
-    IUseLayoutProps,
-    IUseFormProps,
-    IUseModalProps,
-    IUseModalFormProps
-  >();
-}
-
-export function useUIContextProviderProps(): IUIContextProviderProps {
+export function useUIProviderProps(): IUIProviderProps {
   return {
+    ...useCoreUIProviderProps(),
     useLoader,
     useSuccessNotification,
     useErrorNotification,
@@ -64,10 +49,6 @@ export function useUIContextProviderProps(): IUIContextProviderProps {
   };
 }
 
-export const UIContextProvider = (props?: PropsWithChildren<Partial<IUIContextProviderProps>>) => {
-  return <CoreUIContextProvider {...useUIContextProviderProps()} {...props} />;
+export const UIContextProvider = (props?: PropsWithChildren<Partial<IUIProviderProps>>) => {
+  return <CoreUIContextProvider {...useUIProviderProps()} {...props} />;
 };
-
-export function UIContextConsumer(props: ConsumerProps<IUIContextProviderProps>) {
-  return <UIContext.Consumer {...props} />;
-}
