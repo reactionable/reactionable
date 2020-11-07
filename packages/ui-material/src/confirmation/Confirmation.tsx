@@ -19,7 +19,7 @@ import React, { PropsWithChildren } from 'react';
 import Draggable from 'react-draggable';
 import { useTranslation } from 'react-i18next';
 
-import { IIconProps, Icon } from '../icon/icon';
+import { IIconProps, Icon } from '../icon/Icon';
 
 export type IConfirmationProps = ICoreConfirmationProps;
 
