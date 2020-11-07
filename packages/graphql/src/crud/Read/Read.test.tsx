@@ -38,7 +38,7 @@ describe('Read', () => {
         { wrapper }
       );
 
-      expect(result.current.data).toBe(null);
+      expect(result.current.data).toBeUndefined();
 
       await waitForNextUpdate();
 

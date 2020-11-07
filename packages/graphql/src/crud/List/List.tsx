@@ -15,7 +15,7 @@ export function useListQuery<TData = any, TVariables = IOperationVariables>(
 
   return {
     isLoading: !!loading,
-    data: [],
+    data: (data || []) as TData[],
     ...result,
   };
 }

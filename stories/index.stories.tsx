@@ -310,10 +310,31 @@ export const Dev = () => {
             <dd className="col-sm-9">
               <pre>
                 <code>
-                  for package in react react-dom aws-amplify \ <br />
-                  @reactionable/core @reactionable/ui-bootstrap @reactionable/amplify; \ <br />
-                  do yarn link $package; \ <br />
-                  done;
+                  for package in react react-dom @reactionable/core @reactionable/[...];do yarn link
+                  $package;done;
+                </code>
+              </pre>
+              <div className="alert alert-warning" role="alert">
+                <ul>
+                  <li>
+                    If <code>@reactionable/ui-material</code> is used, link must be done with{' '}
+                    <code>@material-ui/styles</code>
+                  </li>
+                  <li>
+                    If <code>@reactionable/amplify</code> is used, link must be done with{' '}
+                    <code>amplify</code>
+                  </li>
+                </ul>
+              </div>
+            </dd>
+            <dt className="col-sm-3">
+              3. Then ensure that there is only one version of react, react-dom...
+            </dt>
+            <dd className="col-sm-9">
+              <pre>
+                <code>
+                  for package in react react-dom @reactionable/core @reactionable/[...]; do yarn why
+                  $package; done;
                   <br />
                   yarn start;
                 </code>
@@ -323,12 +344,24 @@ export const Dev = () => {
             <dd className="col-sm-9">
               <pre>
                 <code>
-                  for package in react react-dom aws-amplify \<br />
-                  @reactionable/core @reactionable/ui-bootstrap @reactionable/amplify; \<br />
+                  for package in react react-dom \<br />
+                  @reactionable/core @reactionable/[...]; \<br />
                   do yarn unlink $package; \<br />
                   done;
                 </code>
               </pre>
+              <div className="alert alert-warning" role="alert">
+                <ul>
+                  <li>
+                    If <code>@reactionable/ui-material</code> is used, unlink must be done also with{' '}
+                    <code>yarn unlink @material-ui/styles</code>
+                  </li>
+                  <li>
+                    If <code>@reactionable/amplify</code> is used, unlink must be done also with{' '}
+                    <code>yarn unlink amplify</code>
+                  </li>
+                </ul>
+              </div>
             </dd>
           </dl>
           <h2>Tests</h2>

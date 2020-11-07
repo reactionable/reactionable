@@ -95,7 +95,66 @@ export const Usage = () => (
       </div>
     </div>
     <div className="row">
-      <div className="col"></div>
+      <h2 className="mb-5">Setup I18n</h2>
+      <dl className="row">
+        <dt className="col-12 mb-3">
+          1. Create file <code>i18n/i18n.ts</code> in the <code>src</code> folder of your app
+        </dt>
+        <dd className="col-12">
+          <pre>
+            <code>{`import { initializeI18n } from '@reactionable/core/lib/i18n/I18n';
+
+import en from './locales/en/translation.json';
+import fr from './locales/fr/translation.json';
+
+initializeI18n({
+  resources: {
+    en: { translation: en },
+    fr: { translation: fr },
+  },
+  lng: 'en',
+  fallbackLng: 'en',
+});
+`}</code>
+          </pre>
+        </dd>
+        <dt className="col-12 mb-3">
+          2. Create locales files <code>i18n/locales/{'{en,fr}'}/translation.json</code>
+        </dt>
+        <dd className="col-12">
+          <pre>
+            <code>{`{
+  "translation:key": "Translation value"
+}`}</code>
+          </pre>
+        </dd>
+        <dt className="col-12 mb-3">
+          3. Import i18n config file the application root file (E.g: <code>index.tsx</code>):
+        </dt>
+        <dd className="col-12">
+          <pre>
+            <code>{`{
+import './i18n/i18n';
+}`}</code>
+          </pre>
+        </dd>
+      </dl>
+      <h2 className="mb-5">Setup App</h2>
+      <dl className="row">
+        <dt className="col-12 mb-3">
+          1. Import i18n config file the application root file (E.g: <code>index.tsx</code>):
+        </dt>
+        <dd className="col-12">
+          <pre>
+            <code>{`import { App } from '@reactionable/core';
+
+const App = () => {
+  return <Core />;
+};
+export default App;`}</code>
+          </pre>
+        </dd>
+      </dl>
     </div>
   </div>
 );
