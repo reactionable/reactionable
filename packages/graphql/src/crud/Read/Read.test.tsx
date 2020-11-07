@@ -3,10 +3,10 @@ import { gql } from '@apollo/react-hooks';
 import { renderHook } from '@testing-library/react-hooks';
 import React from 'react';
 
-import { useReadCallback } from './Read';
+import { useReadQuery } from './Read';
 
 describe('Read', () => {
-  describe('useReadCallback', () => {
+  describe('useReadQuery', () => {
     const testId = 'test-id';
     const testData = { id: testId, name: 'Buck' };
     const getTestQuery = `query GetTest($id: String) { test(id: $id){ id, name } }`;
@@ -34,7 +34,7 @@ describe('Read', () => {
 
     it('should get fetched data', async () => {
       const { result, waitForNextUpdate } = renderHook(
-        () => useReadCallback(getTestQuery, { id: testId }),
+        () => useReadQuery(getTestQuery, { variables: { id: testId } }),
         { wrapper }
       );
 
@@ -47,7 +47,7 @@ describe('Read', () => {
 
     it('should update loading state to true when data is fetched', async () => {
       const { result, waitForNextUpdate } = renderHook(
-        () => useReadCallback(getTestQuery, { id: testId }),
+        () => useReadQuery(getTestQuery, { variables: { id: testId } }),
         { wrapper }
       );
 

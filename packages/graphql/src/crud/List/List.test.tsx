@@ -3,10 +3,10 @@ import { gql } from '@apollo/react-hooks';
 import { renderHook } from '@testing-library/react-hooks';
 import React from 'react';
 
-import { useListCallback } from './List';
+import { useListQuery } from './List';
 
 describe('List', () => {
-  describe('useListCallback', () => {
+  describe('useListQuery', () => {
     const testsData = [
       { id: 'test-id-1', name: 'Buck' },
       { id: 'test-id-2', name: 'Sam' },
@@ -32,7 +32,7 @@ describe('List', () => {
     );
 
     it('should get fetched data', async () => {
-      const { result, waitForNextUpdate } = renderHook(() => useListCallback(getTestsQuery), {
+      const { result, waitForNextUpdate } = renderHook(() => useListQuery(getTestsQuery), {
         wrapper,
       });
 
@@ -44,7 +44,7 @@ describe('List', () => {
     });
 
     it('should update loading state to true when data is fetched', async () => {
-      const { result, waitForNextUpdate } = renderHook(() => useListCallback(getTestsQuery), {
+      const { result, waitForNextUpdate } = renderHook(() => useListQuery(getTestsQuery), {
         wrapper,
       });
 

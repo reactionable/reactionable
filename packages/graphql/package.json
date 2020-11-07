@@ -8,8 +8,8 @@
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
-    "start": "yarn build:barrelsby && tsc",
-    "test": "jest --passWithNoTests",
+    "start": "yarn build:barrelsby && tsc --watch",
+    "test": "jest",
     "test:coverage": "yarn test --coverage",
     "build": "yarn build:clean && yarn build:barrelsby && tsc --pretty",
     "build:clean": "rimraf lib",
