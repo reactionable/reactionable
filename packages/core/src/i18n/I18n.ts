@@ -2,6 +2,8 @@ import i18n, { InitOptions } from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
 
+export { useTranslation } from 'react-i18next';
+
 export async function initializeI18n(options: InitOptions) {
   await i18n
     // detect user language
@@ -13,8 +15,13 @@ export async function initializeI18n(options: InitOptions) {
     // for all options read: https://www.i18next.com/overview/configuration-options
     .init({
       fallbackLng: options.resources ? Object.keys(options.resources)[0] : undefined,
-      debug: process.env.NODE_ENV === 'development',
+      debug: false,
       interpolation: { escapeValue: false },
+      nsSeparator: '::',
+      keySeparator: '..',
+      supportedLngs: [options.lng, options.fallbackLng, Object.keys(options.resources || {})]
+        .filter((language) => !!language)
+        .filter((value, index, self) => self.indexOf(value) === index) as string[],
       ...options,
     });
   return i18n;

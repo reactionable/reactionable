@@ -35,6 +35,7 @@ export * from './ui/alert/ErrorAlert';
 export * from './ui/alert/WarningAlert';
 export * from './ui/alert/useAlert';
 export * from './ui/confirmation/Confirmation';
+export * from './ui/i18n/LanguageSelector';
 export * from './ui/layout/Layout';
 export * from './ui/layout/body/Body';
 export * from './ui/layout/footer/Footer';
