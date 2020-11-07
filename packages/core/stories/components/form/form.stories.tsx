@@ -2,9 +2,9 @@ import { action } from '@storybook/addon-actions';
 import React from 'react';
 import { string } from 'yup';
 
-import { Form } from '../../src/form/Form';
-import { FormField } from '../../src/form/FormField';
-import { UIContextProvider, useUIProviderProps } from '../../src/ui/UI';
+import { Form } from '../../../src/form/Form';
+import { FormField } from '../../../src/form/FormField';
+import { UIContextProvider, useUIProviderProps } from '../../../src/ui/UI';
 
 export default {
   title: 'Core/Components/Form',
@@ -15,6 +15,44 @@ export default {
 interface IFormValues {
   test: string;
 }
+
+export const Introduction = () => {
+  return (
+    <div className="container">
+      <div className="row">
+        <div className="col">
+          <div className="jumbotron">
+            <h1 className="display-4">
+              <code>@reactionable/core</code> - <code>Form</code>
+            </h1>
+            <hr />
+            <p className="lead">
+              Form component helps to render Form and fields, manage form state and validation
+            </p>
+            <p>
+              It is based on <a href="https://formik.org/">Formik</a> and{' '}
+              <a href="https://github.com/jquense/yup">Yup</a>
+            </p>
+            <h5>How to render a form (template): </h5>
+            <p>
+              <pre className="border shadow-sm rounded bg-white p-2">
+                <code>{`import { Form } from "@reactionable/ui-material/lib/form/Form";
+import { FormField } from "@reactionable/ui-material/lib/form/FormField";
+import { ... } from 'yup';
+
+const MyForm = () => (
+  <Form {Form props}>
+    <FormField {Form field props} />
+  </Form>
+);`}</code>
+              </pre>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export const SimpleForm = () => (
   <UIContextProvider {...useUIProviderProps()}>

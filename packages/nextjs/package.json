@@ -9,7 +9,7 @@
   "typings": "lib/index.d.ts",
   "scripts": {
     "start": "yarn build:barrelsby && tsc --watch",
-    "test": "jest",
+    "test": "jest --passWithNoTests",
     "test:coverage": "yarn test --coverage",
     "build": "yarn build:clean && yarn build:barrelsby && tsc --pretty",
     "build:clean": "rimraf lib",
@@ -33,6 +33,7 @@
   },
   "homepage": "https://github.com/reactionable/reactionable#readme",
   "dependencies": {
+    "@reactionable/core": "^0.24.11",
     "next": "10.0.1"
   },
   "devDependencies": {
@@ -41,7 +42,7 @@
     "@testing-library/react-hooks": "^3.4.2",
     "@types/jest": "^26.0.15",
     "@types/node": "^14.14.2",
-    "@types/react": "^16.9.51",
+    "@types/react": "^16.9.56",
     "barrelsby": "^2.2.0",
     "jest": "^26.5.2",
     "react": "^17.0.1",
