@@ -1,0 +1,62 @@
+{
+  "name": "@reactionable/next",
+  "version": "0.24.11",
+  "description": "Reactionable package for NextJs integration",
+  "files": [
+    "lib"
+  ],
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "start": "yarn build:barrelsby && tsc --watch",
+    "test": "jest",
+    "test:coverage": "yarn test --coverage",
+    "build": "yarn build:clean && yarn build:barrelsby && tsc --pretty",
+    "build:clean": "rimraf lib",
+    "build:barrelsby": "barrelsby -d src --exclude \".+\\.test\\..+\" --delete -q",
+    "lint": "eslint \"{src,stories}/**/*.{ts,tsx}\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reactionable/reactionable.git"
+  },
+  "keywords": [
+    "reactionable",
+    "react",
+    "framework",
+    "NextJs"
+  ],
+  "author": "ESCEMI <developer@escemi.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/reactionable/reactionable/issues"
+  },
+  "homepage": "https://github.com/reactionable/reactionable#readme",
+  "dependencies": {
+    "next": "10.0.1"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.0.4",
+    "@testing-library/react-hooks": "^3.4.2",
+    "@types/jest": "^26.0.15",
+    "@types/node": "^14.14.2",
+    "@types/react": "^16.9.51",
+    "barrelsby": "^2.2.0",
+    "jest": "^26.5.2",
+    "react": "^17.0.1",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^26.4.1",
+    "typescript": "^4.0.3"
+  },
+  "resolutions": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  },
+  "jest": {
+    "preset": "ts-jest"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
