@@ -40,6 +40,7 @@ function ModalFormChildren<Values, Data>({
   const submit = renderSubmitButton({
     submitButton,
     disabled: formikProps.isSubmitting,
+    fullWidth: false,
   });
 
   return (

@@ -13,7 +13,9 @@ export function Read<Data>({ children, ...props }: IReadProps<Data>) {
       {...props}
       children={(data: Data) => (
         <Grid container>
-          <Grid item>{children(data)}</Grid>
+          <Grid item xs>
+            {children(data)}
+          </Grid>
         </Grid>
       )}
     />

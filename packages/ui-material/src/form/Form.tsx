@@ -13,13 +13,7 @@ export type IFormProps<Values, Data> = ICoreFormProps<Values, Data>;
 export type IOnSubmitForm<Values, Data> = ICoreOnSubmitForm<Values, Data>;
 
 export function Form<Values, Data>(props: PropsWithChildren<IFormProps<Values, Data>>) {
-  return (
-    <CoreForm<Values, Data>
-      {...props}
-      form={{ className: 'needs-validation mb-1' }}
-      submitButtonComponent={SubmitButton}
-    />
-  );
+  return <CoreForm<Values, Data> {...props} submitButtonComponent={SubmitButton} />;
 }
 
 export type IUseFormProps<Values = any, Data = any> = PropsWithChildren<IFormProps<Values, Data>>;

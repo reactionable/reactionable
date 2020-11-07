@@ -44,12 +44,10 @@ export function RenderFormField<
 }: IFormFieldPropsEnhanced<FieldElementProps, Value>) {
   let fieldContent: ReactNode;
 
-  const fieldProps = {
-    ...field,
-    error: isInvalid,
-  };
+  const fieldProps = field;
 
   switch (true) {
+    case field.as === 'checkbox':
     case field.type === 'checkbox':
       fieldContent = (
         <FormControlLabel control={<Checkbox {...(fieldProps as CheckboxProps)} />} label={label} />
@@ -64,7 +62,9 @@ export function RenderFormField<
       break;
 
     default:
-      fieldContent = <TextField {...(fieldProps as TextFieldProps)} label={label} />;
+      fieldContent = (
+        <TextField margin="normal" {...(fieldProps as TextFieldProps)} label={label} />
+      );
   }
 
   if (field.type === 'hidden') {
@@ -82,7 +82,7 @@ export function RenderFormField<
 
   return (
     <FormGroup>
-      <FormControl error={isInvalid} disabled={field.disabled}>
+      <FormControl error={isInvalid} disabled={field.disabled} required={field.required}>
         {fieldContent}
       </FormControl>
     </FormGroup>
