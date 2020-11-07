@@ -18,7 +18,13 @@ export type IOnSubmitForm<Values, Data> = (
   formikHelpers: FormikHelpers<Values>
 ) => Promise<Data>;
 
-export interface IFormProps<Values, Data> extends FormikConfig<Values> {
+export type IFormComponentProps = ComponentProps<typeof FormikForm> & { 'data-testid'?: string };
+
+export interface IFormProps<
+  Values,
+  Data,
+  FormComponentProps extends IFormComponentProps = IFormComponentProps
+> extends FormikConfig<Values> {
   title: string;
   validationSchema: object;
   onSubmit: IOnSubmitForm<Values, Data>;
@@ -26,7 +32,7 @@ export interface IFormProps<Values, Data> extends FormikConfig<Values> {
   submitButtonComponent?: ComponentType<ISubmitButtonProps<any>>;
   successMessage?: string;
   onSuccess?: (result: Data) => void;
-  form?: ComponentProps<typeof FormikForm>;
+  form?: FormComponentProps;
 }
 
 export type IFormChildrenProps<Values> = FormikProps<Values>;

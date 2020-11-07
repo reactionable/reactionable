@@ -16,7 +16,7 @@ export function Form<Values, Data>(props: PropsWithChildren<IFormProps<Values, D
   return (
     <CoreForm<Values, Data>
       {...props}
-      form={{ className: 'needs-validation mb-1' }}
+      form={{ className: 'needs-validation mb-1', ...props.form }}
       submitButtonComponent={SubmitButton}
     />
   );

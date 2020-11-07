@@ -13,7 +13,7 @@ export interface IAppProps<
   UseLayoutProps extends IUseLayoutProps,
   RouterProviderProps extends IRouterProviderProps
 > {
-  routes: Array<IRouteProps>;
+  routes?: Array<IRouteProps>;
   HomeComponent?: LazyExoticComponent<any>;
   NotFoundComponent?: LazyExoticComponent<any>;
   identity?: IdentityProviderProps;
