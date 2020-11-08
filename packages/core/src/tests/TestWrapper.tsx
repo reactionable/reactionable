@@ -22,7 +22,7 @@ export function TestWrapper<
 ) {
   return (
     <Wrapper
-      identity={useIdentityProviderProps()}
+      identity={useIdentityProviderProps({ getUser: async () => null })}
       router={useRouterProviderProps()}
       ui={useUIProviderProps()}
       {...props}

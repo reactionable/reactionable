@@ -23,7 +23,7 @@ describe('Create', () => {
       <TestWrapper>
         <Create<ITestValues, ITestData>
           form={{
-            onSuccess: () => {},
+            onSuccess: jest.fn(),
             title: 'Create a new test',
             onSubmit: async (values) => values,
             initialValues: {
@@ -45,7 +45,7 @@ describe('Create', () => {
         <Create<ITestValues, ITestData>
           modal
           form={{
-            onSuccess: () => {},
+            onSuccess: jest.fn(),
             title: 'Create a new test',
             onSubmit: async (values) => values,
             initialValues: {

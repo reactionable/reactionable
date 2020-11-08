@@ -1,4 +1,4 @@
-import pathToRegexp from 'path-to-regexp';
+import { compile } from 'path-to-regexp';
 import React, { AnchorHTMLAttributes, ComponentType, ReactNode, forwardRef } from 'react';
 
 import { useRouterContext } from './Router';
@@ -62,7 +62,7 @@ let cacheCount = 0;
 function compilePath(path: string) {
   if (cache[path]) return cache[path];
 
-  const generator = pathToRegexp.compile(path);
+  const generator = compile(path);
 
   if (cacheCount < cacheLimit) {
     cache[path] = generator;

@@ -25,7 +25,9 @@ export type IIdentityProviderProps<User extends IUser = IUser> = IProviderProps<
   auth: ReactElement;
 }>;
 
-export function useIdentityProviderProps(): IIdentityProviderProps {
+export function useIdentityProviderProps(
+  props?: Partial<IIdentityProviderProps>
+): IIdentityProviderProps {
   return {
     user: undefined,
     logout: async () => {
@@ -41,6 +43,7 @@ export function useIdentityProviderProps(): IIdentityProviderProps {
       );
     },
     auth: <></>,
+    ...props,
   };
 }
 
