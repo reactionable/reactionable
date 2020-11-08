@@ -1,4 +1,4 @@
-import { QueryResult } from '@apollo/react-hooks';
+import { QueryResult } from '@apollo/client';
 import { IListProps } from '@reactionable/core';
 
 import { IOperationVariables } from '../../Client';

@@ -3,7 +3,7 @@ import {
   MutationHookOptions,
   MutationOptions,
   useMutation as useMutationHook,
-} from '@apollo/react-hooks';
+} from '@apollo/client';
 
 import { IOperationVariables, extractGqlData, stringToGQL } from './Client';
 

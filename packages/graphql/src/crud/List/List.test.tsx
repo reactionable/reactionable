@@ -1,5 +1,5 @@
+import { gql } from '@apollo/client';
 import { MockedProvider } from '@apollo/client/testing';
-import { gql } from '@apollo/react-hooks';
 import { renderHook } from '@testing-library/react-hooks';
 import React from 'react';
 

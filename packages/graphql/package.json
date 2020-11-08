@@ -33,8 +33,9 @@
   },
   "homepage": "https://github.com/reactionable/reactionable#readme",
   "dependencies": {
-    "@apollo/react-hooks": "^4.0.0",
-    "@reactionable/core": "^0.24.13"
+    "@apollo/client": "^3.2.5",
+    "@reactionable/core": "^0.24.13",
+    "graphql": "^15.4.0"
   },
   "devDependencies": {
     "@testing-library/react-hooks": "^3.4.2",

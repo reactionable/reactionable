@@ -1,5 +1,4 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
 import {
   ApolloProvider,
   HttpOptions,
@@ -7,10 +6,11 @@ import {
   createHttpLink,
   gql,
   useApolloClient,
-} from '@apollo/react-hooks';
+} from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 import React, { PropsWithChildren, useMemo } from 'react';
 
-export { gql } from '@apollo/react-hooks';
+export { gql } from '@apollo/client';
 
 export type IGraphqlClient = ApolloClient<any>;
 export type IGraphqlClientUri = HttpOptions['uri'];

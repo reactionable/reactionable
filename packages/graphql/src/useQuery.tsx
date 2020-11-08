@@ -3,7 +3,7 @@ import {
   QueryHookOptions,
   QueryOptions,
   useQuery as useQueryHook,
-} from '@apollo/react-hooks';
+} from '@apollo/client';
 
 import { IOperationVariables, extractGqlData, stringToGQL } from './Client';
 
