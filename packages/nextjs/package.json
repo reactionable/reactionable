@@ -1,6 +1,6 @@
 {
   "name": "@reactionable/next",
-  "version": "0.24.13",
+  "version": "0.24.14",
   "description": "Reactionable package for NextJs integration",
   "files": [
     "lib"
@@ -33,7 +33,7 @@
   },
   "homepage": "https://github.com/reactionable/reactionable#readme",
   "dependencies": {
-    "@reactionable/core": "^0.24.13",
+    "@reactionable/core": "^0.24.14",
     "next": "10.0.1"
   },
   "devDependencies": {

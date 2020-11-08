@@ -1,6 +1,6 @@
 {
   "name": "@reactionable/graphql",
-  "version": "0.24.13",
+  "version": "0.24.14",
   "description": "Reactionable GraphQL package",
   "files": [
     "lib"
@@ -34,7 +34,7 @@
   "homepage": "https://github.com/reactionable/reactionable#readme",
   "dependencies": {
     "@apollo/client": "^3.2.5",
-    "@reactionable/core": "^0.24.13",
+    "@reactionable/core": "^0.24.14",
     "graphql": "^15.4.0"
   },
   "devDependencies": {
