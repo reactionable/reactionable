@@ -1,24 +1,28 @@
-import { FastField, Field, FieldInputProps, FieldProps, getIn } from 'formik';
+import { FastField, Field, FieldInputProps, FieldProps, getIn } from "formik";
 import React, {
   ComponentType,
   HTMLProps,
+  ReactElement,
+  ReactNode,
   RefObject,
   createElement,
   useEffect,
   useRef,
-} from 'react';
+} from "react";
 
 export type IFormFieldValue = string;
-export type IFieldElementProps<InputElement extends HTMLElement = HTMLInputElement> = HTMLProps<
-  InputElement
->;
+export type IFieldElementProps<
+  FieldProps extends HTMLProps<HTMLInputElement> = HTMLProps<HTMLInputElement>
+> = FieldProps & {
+  label?: ReactNode | string;
+};
 
 export type IFieldInputPropsEnhanced<
   FieldElementProps extends IFieldElementProps,
   Value extends IFormFieldValue
 > = FieldElementProps &
   FieldInputProps<Value> & {
-    ref: RefObject<any>;
+    ref: RefObject<unknown>;
   };
 
 export type IFormFieldPropsEnhanced<
@@ -47,14 +51,27 @@ export type IFormFieldProps<
 export function RenderFormField<
   FieldElementProps extends IFieldElementProps = IFieldElementProps,
   Value extends IFormFieldValue = IFormFieldValue
->({ field: { as, ...props } }: IFormFieldPropsEnhanced<FieldElementProps, Value>) {
-  return createElement(as || 'input', props);
+>({
+  field: { as, label, ...props },
+}: IFormFieldPropsEnhanced<FieldElementProps, Value>): ReactElement {
+  const formField = createElement(as || "input", props);
+
+  if (!label) {
+    return formField;
+  }
+
+  return (
+    <label>
+      {label}
+      {formField}
+    </label>
+  );
 }
 
 type IFormFieldChildrenProps<
   FieldElementProps extends IFieldElementProps,
   Value extends IFormFieldValue
-> = Pick<IFormFieldProps<FieldElementProps, Value>, 'render' | 'as' | 'autoFocus'> & {
+> = Pick<IFormFieldProps<FieldElementProps, Value>, "render" | "as" | "autoFocus"> & {
   fieldProps: FieldProps<Value>;
 };
 export function FormFieldChildren<
@@ -65,8 +82,8 @@ export function FormFieldChildren<
   render,
   autoFocus,
   fieldProps: { field, ...fieldProps },
-}: IFormFieldChildrenProps<FieldElementProps, Value>) {
-  const inputRef = useRef<any>(null);
+}: IFormFieldChildrenProps<FieldElementProps, Value>): ReactElement {
+  const inputRef = useRef<{ focus: () => void }>(null);
   useEffect(() => {
     if (autoFocus === true && inputRef && inputRef.current) {
       inputRef.current.focus();
@@ -105,7 +122,7 @@ export function FormField<
   autoFocus,
   as,
   ...props
-}: IFormFieldProps<FieldElementProps, Value>) {
+}: IFormFieldProps<FieldElementProps, Value>): ReactElement {
   const FieldComponent = fastField ? FastField : Field;
 
   const renderChildren = (fieldProps: FieldProps<Value>) => (
@@ -123,5 +140,5 @@ export function FormField<
     />
   );
 
-  return <FieldComponent name={props.name} children={renderChildren} />;
+  return <FieldComponent name={props.name}>{renderChildren}</FieldComponent>;
 }

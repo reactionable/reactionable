@@ -1,36 +1,38 @@
-import { ExoticComponent, ReactNode } from 'react';
+import { ExoticComponent, ReactElement } from "react";
 
 export type IRouteProps = {
   privateRoute?: boolean;
   exact?: boolean;
   path?: string;
-  component: ExoticComponent<any>;
+  component: ExoticComponent<never>;
 };
 
-export type IRouteMatch<Params extends { [K in keyof Params]?: string } = {}> = {
-  params: Params;
+export type IRouteMatchParams = Record<string, string | string[] | undefined>;
+export type IRouteMatch<RouteMatchParams extends IRouteMatchParams = IRouteMatchParams> = {
+  params: RouteMatchParams;
   isExact: boolean;
   path: string;
   url: string;
 };
 
 export type IUseRouteMatch<
-  Params extends { [K in keyof Params]?: string } = {}
-> = () => IRouteMatch<Params>;
+  RouteMatchParams extends IRouteMatchParams = IRouteMatchParams
+> = () => IRouteMatch<RouteMatchParams>;
 
 export function useRouteMatchCore<
-  Params extends { [K in keyof Params]?: string } = {}
->(): IRouteMatch<Params> {
-  return { params: {} as Params, isExact: true, path: '', url: '' };
+  RouteMatchParams extends IRouteMatchParams = IRouteMatchParams
+>(): IRouteMatch<RouteMatchParams> {
+  return { params: {} as RouteMatchParams, isExact: true, path: "", url: "" };
 }
 
 export type IRenderRoutes<RouteProps extends IRouteProps = IRouteProps> = (
   routes: RouteProps[]
-) => ReactNode;
+) => ReactElement;
 
 export function renderRoutes<RouteProps extends IRouteProps = IRouteProps>(
   routes: RouteProps[]
 ): never {
+  routes;
   throw new Error(
     '@reactionable/core does not provide routes rendering function, please install a "@reactionable/router-*" package'
   );

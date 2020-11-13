@@ -1,34 +1,38 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import { IError } from '../error/IError';
-import { useDeepCompareEffect } from '../hooks/useDeepCompareEffect';
+import { IError } from "../error/IError";
+import { useDeepCompareEffect } from "../hooks/useDeepCompareEffect";
 
-export type IVariables = { [key: string]: any };
+export type IData = unknown;
+export type IVariables = Record<string, unknown>;
 
-export type IQueryOptions<Variables extends IVariables = {}> = {
+export type IQueryOptions<Variables extends IVariables = IVariables> = {
   variables?: Variables;
 };
 
-export interface IUseQueryResult<Data> {
+export interface IUseQueryResult<Data extends IData = IData> {
   isLoading: boolean;
   error?: IError;
   data?: Data;
   refetch: () => void;
 }
 
-export type IUseQueryOptions<Data extends {}, O extends IQueryOptions = IQueryOptions<any>> = O & {
-  handleQuery: (queryOptions: O) => Promise<Data>;
+export type IUseQueryOptions<
+  Data extends IData,
+  Options extends IQueryOptions = IQueryOptions
+> = Options & {
+  handleQuery: (queryOptions: Options) => Promise<Data>;
 };
 
-export function useQuery<Data extends {}, O extends IQueryOptions = IQueryOptions<any>>({
-  handleQuery,
-  ...queryOptions
-}: IUseQueryOptions<Data, O>): IUseQueryResult<Data> {
+export function useQuery<
+  Data extends IData = IData,
+  Options extends IQueryOptions = IQueryOptions
+>({ handleQuery, ...queryOptions }: IUseQueryOptions<Data, Options>): IUseQueryResult<Data> {
   const [isLoading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<IError | undefined>(undefined);
   const [data, setData] = useState<Data | undefined>(undefined);
 
-  const fetchQuery = async (queryOptions: O) => {
+  const fetchQuery = async (queryOptions: Options) => {
     try {
       setLoading(true);
       const data = await handleQuery(queryOptions);
@@ -41,11 +45,11 @@ export function useQuery<Data extends {}, O extends IQueryOptions = IQueryOption
   };
 
   const refetch = () => {
-    fetchQuery((queryOptions as unknown) as O);
+    fetchQuery((queryOptions as unknown) as Options);
   };
 
   useDeepCompareEffect(() => {
-    fetchQuery((queryOptions as unknown) as O);
+    fetchQuery((queryOptions as unknown) as Options);
   }, [queryOptions]);
 
   return {

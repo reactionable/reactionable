@@ -1,50 +1,52 @@
-import React, { ComponentType, PropsWithChildren, ReactNode, useState } from 'react';
+import React, { ComponentType, ReactElement, useState } from "react";
 
-import { IError } from '../../error/IError';
-import { Alert, IAlertProps } from './Alert';
+import { IError, printError } from "../../error/IError";
+import { Alert, IAlertProps } from "./Alert";
 
-export function isIError(arg: any): arg is IError {
-  return arg.name !== undefined && arg.message !== undefined;
-}
-
-export type IErrorAlertProps<AlertProps extends IAlertProps = IAlertProps> = AlertProps;
-
-export type ErrorAlertComponent<AlertProps extends IAlertProps = IAlertProps> = ComponentType<
-  IUseErrorAlertProps<AlertProps>
->;
-
-export function printError(error?: IError): ReactNode {
-  return error ? error.message : <></>;
-}
-
-export const ErrorAlert: ErrorAlertComponent = ({ children, ...props }) => {
-  return <Alert {...props} children={printError(children)} />;
-};
-
-export type IUseErrorAlertProps<AlertProps extends IAlertProps = IAlertProps> = Omit<
-  PropsWithChildren<AlertProps>,
-  'children'
+export type IErrorAlertProps<AlertProps extends IAlertProps = IAlertProps> = Omit<
+  AlertProps,
+  "children"
 > & {
   children?: IError;
 };
 
+export type ErrorAlertComponent<AlertProps extends IAlertProps = IAlertProps> = ComponentType<
+  IErrorAlertProps<AlertProps>
+>;
+
+export function ErrorAlert<AlertProps extends IAlertProps = IAlertProps>({
+  children,
+  ...props
+}: IErrorAlertProps<AlertProps>): ReactElement {
+  return <Alert {...props}>{printError(children)}</Alert>;
+}
+
+export type IUseErrorAlertProps<
+  ErrorAlertProps extends IErrorAlertProps = IErrorAlertProps
+> = ErrorAlertProps & {
+  Component?: ErrorAlertComponent;
+};
+
 export interface IUseErrorAlertResult {
-  errorAlert: ReactNode;
+  errorAlert: ReactElement | null;
   setErrorAlert: (alert?: IError) => void;
 }
 
-export type IUseErrorAlert<P extends IUseErrorAlertProps> = (props?: P) => IUseErrorAlertResult;
-export function useErrorAlert<P extends IUseErrorAlertProps>(
-  { Component, ...props }: P & { Component: ErrorAlertComponent } = {
-    ...({ children: undefined } as P),
-    Component: ErrorAlert,
-  }
+export type IUseErrorAlert<UseErrorAlertProps extends IUseErrorAlertProps> = (
+  props?: UseErrorAlertProps
+) => IUseErrorAlertResult;
+
+export function useErrorAlert<UseErrorAlertProps extends IUseErrorAlertProps>(
+  { Component, ...props }: UseErrorAlertProps = { Component: ErrorAlert } as UseErrorAlertProps
 ): IUseErrorAlertResult {
-  const [errorAlert, setErrorAlert] = useState<IError | undefined>(
-    props.children ? props.children : undefined
-  );
+  const error = props.children || undefined;
+  const [errorAlert, setErrorAlert] = useState<IError | undefined>(error);
+  if (!Component) {
+    Component = ErrorAlert;
+  }
+
   return {
-    errorAlert: <>{errorAlert && <Component {...props} children={errorAlert} />}</>,
+    errorAlert: errorAlert ? <Component {...props}>{errorAlert}</Component> : null,
     setErrorAlert: (alert?: IError) => {
       setErrorAlert(alert);
     },

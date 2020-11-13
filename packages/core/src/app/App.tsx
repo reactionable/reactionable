@@ -1,11 +1,11 @@
-import React, { LazyExoticComponent, PropsWithChildren } from 'react';
+import React, { ComponentType, LazyExoticComponent, PropsWithChildren, ReactElement } from "react";
 
-import { IIdentityProviderProps } from '../identity/Identity';
-import { IRouteProps } from '../router/Route';
-import { IRouterProviderProps } from '../router/Router';
-import { IUseLayoutProps } from '../ui/layout/Layout';
-import { IUIProviderProps } from '../ui/UI';
-import { Wrapper } from './Wrapper';
+import { IIdentityProviderProps } from "../identity/Identity";
+import { IRouteProps } from "../router/Route";
+import { IRouterProviderProps } from "../router/Router";
+import { IUseLayoutProps } from "../ui/layout/Layout";
+import { IUIProviderProps } from "../ui/UI";
+import { Wrapper } from "./Wrapper";
 
 export interface IAppProps<
   IdentityProviderProps extends IIdentityProviderProps,
@@ -14,8 +14,8 @@ export interface IAppProps<
   RouterProviderProps extends IRouterProviderProps
 > {
   routes?: Array<IRouteProps>;
-  HomeComponent?: LazyExoticComponent<any>;
-  NotFoundComponent?: LazyExoticComponent<any>;
+  HomeComponent?: LazyExoticComponent<ComponentType>;
+  NotFoundComponent?: LazyExoticComponent<ComponentType>;
   identity?: IdentityProviderProps;
   ui?: UIProviderProps;
   layout?: UseLayoutProps;
@@ -37,10 +37,10 @@ export function App<
   children,
 }: PropsWithChildren<
   IAppProps<IdentityProviderProps, UIProviderProps, UseLayoutProps, RouterProviderProps>
->) {
+>): ReactElement {
   if (router) {
     if (HomeComponent) {
-      routes.unshift({ component: HomeComponent, exact: true, path: '/', privateRoute: false });
+      routes.unshift({ component: HomeComponent, exact: true, path: "/", privateRoute: false });
     }
     if (NotFoundComponent) {
       routes.push({ component: NotFoundComponent, privateRoute: false });
@@ -49,5 +49,9 @@ export function App<
     children = router.renderRoutes(routes);
   }
 
-  return <Wrapper identity={identity} ui={ui} router={router} children={children} />;
+  return (
+    <Wrapper identity={identity} ui={ui} router={router}>
+      {children}
+    </Wrapper>
+  );
 }

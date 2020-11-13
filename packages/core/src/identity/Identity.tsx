@@ -1,7 +1,7 @@
-import React, { ReactElement, useEffect, useState } from 'react';
-import { ComponentType, PropsWithChildren } from 'react';
+import React, { ReactElement, useEffect, useState } from "react";
+import { ComponentType, PropsWithChildren } from "react";
 
-import { IProviderProps, createProvider } from '../app/Provider';
+import { IProviderProps, createProvider } from "../app/Provider";
 
 export type IUser = {
   displayName: () => string;
@@ -22,8 +22,12 @@ export type IIdentityProviderProps<User extends IUser = IUser> = IProviderProps<
   logout: () => Promise<void>;
   AuthComponent: AuthComponent<User>;
   getUser: () => Promise<User | null>;
-  auth: ReactElement;
+  auth: ReactElement | null;
 }>;
+
+export function NullAuthComponent(): null {
+  return null;
+}
 
 export function useIdentityProviderProps(
   props?: Partial<IIdentityProviderProps>
@@ -36,13 +40,13 @@ export function useIdentityProviderProps(
       );
     },
     identityProvider: undefined,
-    AuthComponent: (props: PropsWithChildren<IAuthComponentProps<IUser>>) => <></>,
+    AuthComponent: NullAuthComponent,
     getUser: async () => {
       throw new Error(
         '@reactionable/core does not provide getUser function, please install a "@reactionable/identity-*" package'
       );
     },
-    auth: <></>,
+    auth: null,
     ...props,
   };
 }
@@ -57,12 +61,16 @@ function IdentityContextProvider<User extends IUser>({
   logout,
   identityProvider,
   ...props
-}: PropsWithChildren<IIdentityProviderProps<User>>) {
+}: PropsWithChildren<IIdentityProviderProps<User>>): ReactElement {
   const [user, setUser] = useState<User | null | undefined>(undefined);
 
   useEffect(() => {
     if (user === undefined) {
-      getUser().then((user) => setUser(user));
+      getUser().then((fetchedUser) => {
+        if (user !== fetchedUser) {
+          setUser(fetchedUser);
+        }
+      });
     }
   }, [user]);
 
@@ -71,7 +79,7 @@ function IdentityContextProvider<User extends IUser>({
     setUser(null);
   };
 
-  const providerProps = {
+  const ProviderProps = {
     ...props,
     user,
     logout: logoutHandler,
@@ -79,13 +87,13 @@ function IdentityContextProvider<User extends IUser>({
     getUser,
     AuthComponent,
   };
-  const auth = <AuthComponent setUser={setUser} {...providerProps} />;
+  const auth = <AuthComponent setUser={setUser} {...ProviderProps} />;
 
   return (
     <IdentityContext.Provider
       value={
         {
-          ...providerProps,
+          ...ProviderProps,
           AuthComponent,
           auth,
         } as IIdentityProviderProps<IUser>

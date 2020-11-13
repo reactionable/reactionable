@@ -1,9 +1,10 @@
-import React, { ComponentType, PropsWithChildren } from 'react';
-export interface IBodyProps {}
+import React, { ComponentType, PropsWithChildren, ReactElement } from "react";
+
+export type IBodyProps = Record<string, unknown>;
 export type BodyComponent<BodyProps extends IBodyProps = IBodyProps> = ComponentType<BodyProps>;
 
 export function Body<BodyProps extends IBodyProps = IBodyProps>({
   children,
-}: PropsWithChildren<BodyProps>) {
+}: PropsWithChildren<BodyProps>): ReactElement {
   return <main>{children}</main>;
 }

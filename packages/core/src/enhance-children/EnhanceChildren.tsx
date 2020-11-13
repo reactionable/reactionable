@@ -1,11 +1,11 @@
-import React, { Children, PropsWithChildren, cloneElement } from 'react';
+import React, { Children, PropsWithChildren, ReactElement, cloneElement } from "react";
 
-export type IEnhanceChildrenProps = { enhance: { [key: string]: any } };
-export const EnhanceChildren = (props: PropsWithChildren<IEnhanceChildrenProps>) => {
+export type IEnhanceChildrenProps = { enhance: Record<string, unknown> };
+export const EnhanceChildren = (props: PropsWithChildren<IEnhanceChildrenProps>): ReactElement => {
   const { children, enhance } = props;
 
-  const newChildren = Children.map(children, (child, i) => {
-    if (typeof child === 'object' && child !== null && 'type' in child) {
+  const newChildren = Children.map(children, (child) => {
+    if (typeof child === "object" && child !== null && "type" in child) {
       return cloneElement(child, { ...enhance });
     }
     return child;

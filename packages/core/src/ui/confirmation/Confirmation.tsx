@@ -1,8 +1,15 @@
-import React, { ComponentType, PropsWithChildren, ReactNode, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import React, {
+  ComponentType,
+  PropsWithChildren,
+  ReactElement,
+  ReactNode,
+  useEffect,
+  useState,
+} from "react";
 
-import { EnhanceChildren } from '../../enhance-children/EnhanceChildren';
-import { useUIContext } from '../UI';
+import { EnhanceChildren } from "../../enhance-children/EnhanceChildren";
+import { useTranslation } from "../../i18n/I18n";
+import { useUIContext } from "../UI";
 
 export type IConfirmationProps = {
   title: string;
@@ -11,36 +18,46 @@ export type IConfirmationProps = {
 
 export type ConfirmationComponent = ComponentType<IConfirmationProps>;
 
-export const Confirmation: ConfirmationComponent = ({ callback, children, title }) => {
+export const Confirmation: ConfirmationComponent = ({
+  callback,
+  children,
+  title,
+}: PropsWithChildren<IConfirmationProps>) => {
   const { t } = useTranslation();
 
   return (
     <div>
-      <div>{title || t('Confirm ?')}</div>
+      <div>{title || t("Confirm ?")}</div>
       <div>{children}</div>
       <div>
-        <button onClick={() => callback(false)}>{t('Cancel')} </button>
-        <button onClick={() => callback(true)}>{t('OK')}</button>
+        <button onClick={() => callback(false)}>{t("Cancel")} </button>
+        <button onClick={() => callback(true)}>{t("OK")}</button>
       </div>
     </div>
   );
 };
 
-export type IUseConfirmationProps = PropsWithChildren<IConfirmationProps>;
+export type IUseConfirmationProps = PropsWithChildren<
+  IConfirmationProps & { Component?: ConfirmationComponent }
+>;
 
 export interface IUseConfirmationResult {
   confirmation: ReactNode;
   setConfirmation: (confirmation: boolean) => void;
 }
 
-export type IUseConfirmation<P extends IUseConfirmationProps> = (
-  props: P
+export type IUseConfirmation<UseConfirmationProps extends IUseConfirmationProps> = (
+  props: UseConfirmationProps
 ) => IUseConfirmationResult;
-export function useConfirmation<P extends IUseConfirmationProps>({
+
+export function useConfirmation<UseConfirmationProps extends IUseConfirmationProps>({
   Component,
   callback,
   ...props
-}: P & { Component: ConfirmationComponent }): IUseConfirmationResult {
+}: UseConfirmationProps): IUseConfirmationResult {
+  if (!Component) {
+    Component = Confirmation;
+  }
   const [confirmation, setConfirmation] = useState<boolean>(false);
 
   const confirmCallback = (confirm: boolean) => {
@@ -49,7 +66,7 @@ export function useConfirmation<P extends IUseConfirmationProps>({
   };
 
   return {
-    confirmation: <>{confirmation && <Component callback={confirmCallback} {...props} />}</>,
+    confirmation: confirmation ? <Component callback={confirmCallback} {...props} /> : null,
     setConfirmation,
   };
 }
@@ -64,7 +81,9 @@ export interface IConfirmationActionProps<Data> {
 
 export type ConfirmationActionComponent<Data> = ComponentType<IConfirmationActionProps<Data>>;
 
-export function ConfirmationAction<Data>(props: PropsWithChildren<IConfirmationActionProps<Data>>) {
+export function ConfirmationAction<Data>(
+  props: PropsWithChildren<IConfirmationActionProps<Data>>
+): ReactElement {
   const {
     useLoader,
     useSuccessNotification,
@@ -122,7 +141,7 @@ export function ConfirmationAction<Data>(props: PropsWithChildren<IConfirmationA
 
   return (
     <>
-      <EnhanceChildren children={props.children} enhance={{ onClick, disabled: isLoading }} />
+      <EnhanceChildren enhance={{ onClick, disabled: isLoading }}>{props.children}</EnhanceChildren>
       {successNotification}
       {errorNotification}
       {confirmation}

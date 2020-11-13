@@ -1,37 +1,37 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { ReactElement, ReactNode, useEffect, useState } from "react";
 
-import { IUseErrorAlertResult } from '../ui/alert/ErrorAlert';
-import { IUseWarningAlertResult } from '../ui/alert/WarningAlert';
-import { IUseLoaderResult } from '../ui/loader/useLoader';
-import { useUIContext } from '../ui/UI';
-import { IUseQueryResult } from './Query';
+import { IUseErrorAlertResult } from "../ui/alert/ErrorAlert";
+import { IUseWarningAlertResult } from "../ui/alert/WarningAlert";
+import { IUseLoaderResult } from "../ui/loader/useLoader";
+import { useUIContext } from "../ui/UI";
+import { IData, IUseQueryResult } from "./Query";
 
-export type IQueryWrapperProps<UQR extends IUseQueryResult<any> = IUseQueryResult<any>> = Pick<
+export type IQueryWrapperProps<UQR extends IUseQueryResult = IUseQueryResult> = Pick<
   UQR,
-  'isLoading' | 'error' | 'data'
+  "isLoading" | "error" | "data"
 > & {
   noData?: ReactNode;
   children: (props: IQueryWrapperChildrenProps<UQR>) => ReactNode;
 };
 
-export type IQueryWrapperChildrenProps<UQR extends IUseQueryResult<any>> = Omit<UQR, 'data'> & {
+export type IQueryWrapperChildrenProps<UQR extends IUseQueryResult> = Omit<UQR, "data"> & {
   data: DataPropsType<UQR>;
-} & Pick<IUseLoaderResult, 'setLoading'> &
-  Pick<IUseErrorAlertResult, 'setErrorAlert'> &
-  Pick<IUseWarningAlertResult, 'setWarningAlert'>;
+} & Pick<IUseLoaderResult, "setLoading"> &
+  Pick<IUseErrorAlertResult, "setErrorAlert"> &
+  Pick<IUseWarningAlertResult, "setWarningAlert">;
 
-type DataPropsType<UQR extends IUseQueryResult<any>> = UQR extends IUseQueryResult<infer Data>
-  ? Data extends {}
+type DataPropsType<UQR extends IUseQueryResult> = UQR extends IUseQueryResult<infer Data>
+  ? Data extends IData
     ? Data
     : never
   : never;
 
-function checkHasData(data: any) {
+function checkHasData(data: unknown) {
   if (Array.isArray(data)) {
     return data.length > 0;
   }
 
-  if (typeof data === 'object') {
+  if (data && typeof data === "object") {
     return Object.keys(data).length > 0;
   }
 
@@ -39,9 +39,9 @@ function checkHasData(data: any) {
 }
 
 export function QueryWrapper<
-  Data extends {},
+  Data extends IData = IData,
   UQR extends IUseQueryResult<Data> = IUseQueryResult<Data>
->({ children, data, ...props }: IQueryWrapperProps<UQR>) {
+>({ children, data, ...props }: IQueryWrapperProps<UQR>): ReactElement {
   const { isLoading, error, noData } = props;
   const { useLoader, useErrorAlert, useWarningAlert } = useUIContext();
   const { loader, setLoading } = useLoader({ isLoading });

@@ -1,52 +1,67 @@
-import React, { AnchorHTMLAttributes, ChangeEvent, ComponentType, useState } from 'react';
+import React, {
+  AnchorHTMLAttributes,
+  ChangeEvent,
+  ComponentType,
+  ReactElement,
+  useState,
+} from "react";
 
-export type IPaginationEllipsisProps = {};
+export type IPaginationEllipsisProps = React.DetailedHTMLProps<
+  React.HTMLAttributes<HTMLSpanElement>,
+  HTMLSpanElement
+>;
 export type IPaginationEllipsisComponent = ComponentType<IPaginationEllipsisProps>;
-export function PaginationEllipsis(props: IPaginationEllipsisProps) {
+export function PaginationEllipsis(props: IPaginationEllipsisProps): ReactElement {
   return <span {...props}>...</span>;
 }
 
-export type IPaginationLinkProps = Pick<AnchorHTMLAttributes<HTMLAnchorElement>, 'onClick'> & {
+export type IPaginationLinkProps = Pick<AnchorHTMLAttributes<HTMLAnchorElement>, "onClick"> & {
   disabled?: boolean;
   active?: boolean;
 };
 
 export type IPaginationLinkComponent = ComponentType<IPaginationLinkProps>;
-export function PaginationLink({ disabled, active, onClick, ...props }: IPaginationLinkProps) {
+export function PaginationLink({
+  onClick,
+  disabled,
+  active,
+  ...props
+}: IPaginationLinkProps): ReactElement {
   return (
     <a
       href="#"
+      className={active ? "active" : ""}
       {...props}
       onClick={(event) => {
         event.preventDefault();
-        onClick && onClick(event);
+        !disabled && onClick && onClick(event);
       }}
     />
   );
 }
 
-export function PaginationLinkFirst(props: IPaginationLinkProps) {
-  return <PaginationLink {...props}>{'<<'}</PaginationLink>;
+export function PaginationLinkFirst(props: IPaginationLinkProps): ReactElement {
+  return <PaginationLink {...props}>{"<<"}</PaginationLink>;
 }
-export function PaginationLinkPrev(props: IPaginationLinkProps) {
-  return <PaginationLink {...props}>{'<'}</PaginationLink>;
+export function PaginationLinkPrev(props: IPaginationLinkProps): ReactElement {
+  return <PaginationLink {...props}>{"<"}</PaginationLink>;
 }
-export function PaginationLinkNext(props: IPaginationLinkProps) {
-  return <PaginationLink {...props}>{'>'}</PaginationLink>;
+export function PaginationLinkNext(props: IPaginationLinkProps): ReactElement {
+  return <PaginationLink {...props}>{">"}</PaginationLink>;
 }
-export function PaginationLinkLast(props: IPaginationLinkProps) {
-  return <PaginationLink {...props}>{'>>'}</PaginationLink>;
+export function PaginationLinkLast(props: IPaginationLinkProps): ReactElement {
+  return <PaginationLink {...props}>{">>"}</PaginationLink>;
 }
 
 export type IPaginationLinksProps = Pick<
   IPaginationProps,
-  | 'onChange'
-  | 'pageCount'
-  | 'currentPage'
-  | 'pageRangeDisplayed'
-  | 'marginPagesDisplayed'
-  | 'PaginationLinkComponent'
-  | 'PaginationEllipsisComponent'
+  | "onChange"
+  | "pageCount"
+  | "currentPage"
+  | "pageRangeDisplayed"
+  | "marginPagesDisplayed"
+  | "PaginationLinkComponent"
+  | "PaginationEllipsisComponent"
 >;
 export type IPaginationLinksComponent = ComponentType<IPaginationLinksProps>;
 export function PaginationLinks({
@@ -57,7 +72,7 @@ export function PaginationLinks({
   marginPagesDisplayed = 3,
   PaginationLinkComponent = PaginationLink,
   PaginationEllipsisComponent = PaginationEllipsis,
-}: IPaginationLinksProps) {
+}: IPaginationLinksProps): ReactElement {
   const items = [];
 
   const renderLink = (page: number) => (
@@ -66,8 +81,9 @@ export function PaginationLinks({
       active={currentPage === page}
       disabled={currentPage === page}
       onClick={(event) => currentPage !== page && onChange(event, page)}
-      children={page}
-    />
+    >
+      {page}
+    </PaginationLinkComponent>
   );
 
   if (pageCount <= pageRangeDisplayed) {
@@ -138,7 +154,7 @@ export function PaginationLinks({
 
 export type IPaginationProps = Pick<
   IPaginatorProps,
-  'onChange' | 'currentPage' | 'pageRangeDisplayed' | 'marginPagesDisplayed'
+  "onChange" | "currentPage" | "pageRangeDisplayed" | "marginPagesDisplayed"
 > & {
   pageCount: number;
   PaginationLinkComponent?: IPaginationLinkComponent;
@@ -161,7 +177,7 @@ export function Pagination({
   PaginationLinkPrevComponent = PaginationLinkPrev,
   PaginationLinkNextComponent = PaginationLinkNext,
   PaginationLinkLastComponent = PaginationLinkLast,
-}: IPaginationProps) {
+}: IPaginationProps): ReactElement {
   const handleFirstPage = (event: ChangeEvent<unknown>) => {
     currentPage > 1 && onChange(event, 1);
   };
@@ -214,7 +230,7 @@ export function Paginator({
   pageRangeDisplayed,
   marginPagesDisplayed,
   PaginationComponent = Pagination,
-}: IPaginatorProps) {
+}: IPaginatorProps): ReactElement {
   const pageCount = Math.round(totalCount / perPage) + (totalCount % perPage ? 1 : 0);
   const [currentPage, setCurrentPage] = useState(defaultCurrentPage);
   const onChange = (event: ChangeEvent<unknown>, page: number) => {

@@ -1,118 +1,81 @@
-import { Formik, FormikConfig, Form as FormikForm, FormikHelpers, FormikProps } from 'formik';
-import React, {
-  ComponentProps,
-  ComponentType,
-  PropsWithChildren,
-  ReactNode,
-  useEffect,
-  useState,
-} from 'react';
-import { useTranslation } from 'react-i18next';
-import { object } from 'yup';
+import { Formik, FormikConfig, FormikHelpers, FormikProps } from "formik";
+import React, { ComponentType, ReactElement, ReactNode, useEffect, useState } from "react";
+import { ObjectSchemaDefinition, object as yupObject } from "yup";
 
-import { useUIContext } from '../ui/UI';
-import { ISubmitButtonProps, SubmitButton, renderSubmitButton } from './SubmitButton';
+import { useTranslation } from "../i18n/I18n";
+import { useUIContext } from "../ui/UI";
+import { IFormButtonProps } from "./FormButton";
+import { FormWrapper, IFormWrapperProps } from "./FormWrapper";
 
-export type IOnSubmitForm<Values, Data> = (
+export type IOnSubmitForm<Values extends IFormValues, Data extends IFormData> = (
   values: Values,
   formikHelpers: FormikHelpers<Values>
 ) => Promise<Data>;
 
-export type IFormComponentProps = ComponentProps<typeof FormikForm> & { 'data-testid'?: string };
+export type IFormValue = string | boolean | File;
+export type IComposedFormValues = IFormValue | Array<IFormValue> | { [key: string]: IFormValue };
+export type INestedFormValues =
+  | IComposedFormValues
+  | Array<IComposedFormValues>
+  | { [key: string]: IComposedFormValues };
+
+// eslint-disable-next-line @typescript-eslint/ban-types
+export type IFormValues = {};
+// eslint-disable-next-line @typescript-eslint/ban-types
+export type IFormData = {};
 
 export interface IFormProps<
-  Values,
-  Data,
-  FormComponentProps extends IFormComponentProps = IFormComponentProps
+  Values extends IFormValues,
+  Data extends IFormData,
+  FormButtonProps extends IFormButtonProps
 > extends FormikConfig<Values> {
-  title: string;
-  validationSchema: object;
+  title?: ReactNode;
+  validationSchema: ObjectSchemaDefinition<typeof yupObject, Values>;
+  successMessage?: ReactNode;
   onSubmit: IOnSubmitForm<Values, Data>;
-  submitButton?: true | string | ReactNode;
-  submitButtonComponent?: ComponentType<ISubmitButtonProps<any>>;
-  successMessage?: string;
   onSuccess?: (result: Data) => void;
-  form?: FormComponentProps;
+  children: IFormWrapperProps<Values, FormButtonProps>["children"];
+  form?: IFormWrapperProps<Values, FormButtonProps>["form"];
+  submitButton?: IFormWrapperProps<Values, FormButtonProps>["submitButton"];
+  FormButtonComponent?: IFormWrapperProps<Values, FormButtonProps>["FormButtonComponent"];
 }
 
-export type IFormChildrenProps<Values> = FormikProps<Values>;
+export type FormComponent<
+  Values extends IFormValues,
+  Data extends IFormData,
+  FormButtonProps extends IFormButtonProps
+> = ComponentType<IFormProps<Values, Data, FormButtonProps>>;
 
-type IRenderFormChildrenProps<Values, Data> = Pick<
-  IFormProps<Values, Data>,
-  'children' | 'submitButton' | 'form' | 'submitButtonComponent'
-> & {
-  formikProps: IFormChildrenProps<Values>;
-  errorAlert: ReactNode;
-  loader: ReactNode;
-  successNotification: ReactNode;
-};
-
-export function FormFieldsChildren<Values, Data>({
-  children,
-  formikProps,
-}: {
-  children: IFormProps<Values, Data>['children'];
-  formikProps: IFormChildrenProps<Values>;
-}) {
-  return children ? ('function' === typeof children ? children(formikProps) : children) : undefined;
-}
-
-export function FormChildren<Values, Data>({
-  children,
-  submitButton,
-  form,
-  formikProps,
-  errorAlert,
-  loader,
-  successNotification,
-  submitButtonComponent,
-}: IRenderFormChildrenProps<Values, Data>) {
-  const formFields = <FormFieldsChildren children={children} formikProps={formikProps} />;
-
-  const submit = submitButton
-    ? renderSubmitButton({
-        submitButton,
-        Component: submitButtonComponent || SubmitButton,
-        disabled: formikProps.isSubmitting,
-      })
-    : undefined;
-
-  return (
-    <FormikForm {...form}>
-      {errorAlert}
-      {loader}
-      {successNotification}
-      {formFields}
-      {submit}
-    </FormikForm>
-  );
-}
-
-export type FormComponent<P extends IFormProps<any, any> = IFormProps<any, any>> = ComponentType<P>;
-export function Form<Values, Data>({
+export function Form<
+  Values extends IFormValues,
+  Data extends IFormData,
+  FormButtonProps extends IFormButtonProps
+>({
   title,
-  onSubmit,
-  onSuccess,
-  successMessage,
   validationSchema,
+  successMessage,
+  onSuccess,
   form,
   submitButton,
-  submitButtonComponent,
+  FormButtonComponent,
   children,
+  onSubmit,
   ...formikConfig
-}: IFormProps<Values, Data>) {
+}: IFormProps<Values, Data, FormButtonProps>): ReactElement {
   const { t } = useTranslation();
   const { useLoader, useSuccessNotification, useErrorAlert } = useUIContext();
   const { loader, setLoading } = useLoader({});
   const { errorAlert, setErrorAlert } = useErrorAlert({});
   const { successNotification, setSuccessNotification } = useSuccessNotification({ title });
   const [success, setSuccess] = useState<Data>();
-  validationSchema = object().shape(validationSchema);
+  const shapedvalidationSchema = yupObject().shape(validationSchema);
 
   useEffect(() => {
     if (success) {
       if (successMessage) {
-        setSuccessNotification(t(successMessage, success));
+        setSuccessNotification(
+          "string" === typeof successMessage ? t(successMessage, success) : successMessage
+        );
       }
       if (onSuccess) {
         setSuccess(undefined);
@@ -122,16 +85,17 @@ export function Form<Values, Data>({
   }, [success, onSuccess]);
 
   const renderFormChildren = (formikProps: FormikProps<Values>) => (
-    <FormChildren<Values, Data>
-      children={children}
+    <FormWrapper<Values, FormButtonProps>
       form={form}
       submitButton={submitButton}
       formikProps={formikProps}
       loader={loader}
       errorAlert={errorAlert}
       successNotification={successNotification}
-      submitButtonComponent={submitButtonComponent}
-    />
+      FormButtonComponent={FormButtonComponent}
+    >
+      {children}
+    </FormWrapper>
   );
 
   const onSubmitCallback = async (values: Values, formikHelpers: FormikHelpers<Values>) => {
@@ -151,28 +115,8 @@ export function Form<Values, Data>({
   };
 
   return (
-    <Formik
-      onSubmit={onSubmitCallback}
-      validationSchema={validationSchema}
-      children={renderFormChildren}
-      {...formikConfig}
-    />
+    <Formik onSubmit={onSubmitCallback} validationSchema={shapedvalidationSchema} {...formikConfig}>
+      {renderFormChildren}
+    </Formik>
   );
-}
-
-export type IUseFormProps<
-  P extends IFormProps<any, any> = IFormProps<any, any>
-> = PropsWithChildren<P>;
-
-export type IUseFormResult = ReactNode;
-
-export type IUseForm<P extends IUseFormProps> = (props: P) => IUseFormResult;
-
-export function useForm<P extends IUseFormProps>({
-  Component,
-  ...props
-}: P & {
-  Component: FormComponent<any>;
-}): IUseFormResult {
-  return <Component {...props} />;
 }

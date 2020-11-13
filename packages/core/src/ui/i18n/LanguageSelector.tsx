@@ -1,7 +1,7 @@
-import React, { ChangeEvent, ReactNode, useState } from 'react';
-import { ComponentType, PropsWithChildren } from 'react';
+import React, { ChangeEvent, ReactElement, ReactNode, useState } from "react";
+import { ComponentType, PropsWithChildren } from "react";
 
-import { useTranslation } from '../../i18n/I18n';
+import { useTranslation } from "../../i18n/I18n";
 
 export type ILanguageSelectorItemComponentProps<
   LanguageSelectorItemComponentProps extends { children?: ReactNode } = { children?: ReactNode }
@@ -13,7 +13,7 @@ export type LanguageSelectorItemComponent<
 
 export function LanguageSelectorItemComponent(
   props: PropsWithChildren<ILanguageSelectorItemComponentProps>
-) {
+): ReactElement {
   return <option value={`${props.children}`} {...props} />;
 }
 
@@ -23,7 +23,7 @@ export type ILanguageSelectorComponentProps<
   languages: string[];
   current: string;
   ItemComponent?: LanguageSelectorItemComponent<LanguageSelectorItemComponentProps>;
-} & Required<Pick<ILanguageSelectorProps, 'onSelectLanguage'>>;
+} & Required<Pick<ILanguageSelectorProps, "onSelectLanguage">>;
 
 export type LanguageSelectorComponent<
   LanguageSelectorComponentProps extends ILanguageSelectorComponentProps = ILanguageSelectorComponentProps
@@ -34,7 +34,7 @@ export function LanguageSelectorComponent({
   languages,
   onSelectLanguage,
   ItemComponent = LanguageSelectorItemComponent,
-}: PropsWithChildren<ILanguageSelectorComponentProps>) {
+}: PropsWithChildren<ILanguageSelectorComponentProps>): ReactElement {
   const handleOnChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const language = event.target.value;
     onSelectLanguage(language);
@@ -42,9 +42,9 @@ export function LanguageSelectorComponent({
 
   return (
     <select value={current} onChange={handleOnChange}>
-      <ItemComponent children={current} />
+      <ItemComponent>{current}</ItemComponent>
       {languages.map((language) => (
-        <ItemComponent key={language} children={language} />
+        <ItemComponent key={language}>{language}</ItemComponent>
       ))}
     </select>
   );
@@ -58,7 +58,7 @@ export function LanguageSelector({
   Component = LanguageSelectorComponent,
   onSelectLanguage,
   ...props
-}: ILanguageSelectorProps) {
+}: ILanguageSelectorProps): ReactElement {
   const {
     i18n: { languages, language, changeLanguage },
   } = useTranslation();

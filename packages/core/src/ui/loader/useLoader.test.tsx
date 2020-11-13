@@ -1,19 +1,19 @@
-import { act, renderHook } from '@testing-library/react-hooks';
+import { act, renderHook } from "@testing-library/react-hooks";
 
-import { i18nTestInstance } from '../../tests/I18n';
-import { useLoader } from './useLoader';
+import { i18nTestInstance } from "../../tests/I18n";
+import { useLoader } from "./useLoader";
 
-describe('useLoader', () => {
+describe("useLoader", () => {
   beforeAll(i18nTestInstance);
 
-  it('should render unloading by default', () => {
+  it("should render unloading by default", () => {
     const { result } = renderHook(() => useLoader());
 
     expect(result.current.isLoading).toEqual(false);
-    expect(result.current.loader.props.children).toEqual(false);
+    expect(result.current.loader).toBeNull();
   });
 
-  it('should display loader state when isLoading is true', () => {
+  it("should display loader state when isLoading is true", () => {
     const { result } = renderHook(() => useLoader());
 
     act(() => {
@@ -21,6 +21,6 @@ describe('useLoader', () => {
     });
 
     expect(result.current.isLoading).toEqual(true);
-    expect(result.current.loader.props.children).not.toBeNull();
+    expect(result.current.loader).not.toBeNull();
   });
 });

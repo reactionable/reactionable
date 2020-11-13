@@ -1,7 +1,8 @@
-import React, { ComponentType, Context, PropsWithChildren, createContext, useContext } from 'react';
+import React, { ComponentType, Context, PropsWithChildren, createContext, useContext } from "react";
 
-export type IProviderProps<ExtraProps extends Object = {}> = {
-  Component?: ComponentType<any>;
+type IProviderExtraProps = Record<string, unknown>;
+export type IProviderProps<ExtraProps extends IProviderExtraProps = IProviderExtraProps> = {
+  Component?: ComponentType;
 } & ExtraProps;
 
 export type ICreateProviderResult<ProviderProps extends IProviderProps> = {
@@ -13,9 +14,10 @@ export function createProvider<ProviderProps extends IProviderProps = IProviderP
   props: ProviderProps
 ): ICreateProviderResult<ProviderProps> {
   const CreatedContext = createContext<ProviderProps>(props);
+
   const ContextProvider = ({ children, Component, ...props }: PropsWithChildren<ProviderProps>) => {
     if (Component) {
-      const ProviderComponent = Component as ComponentType<any>;
+      const ProviderComponent = Component as ComponentType;
       children = <ProviderComponent {...props}>{children}</ProviderComponent>;
     }
 

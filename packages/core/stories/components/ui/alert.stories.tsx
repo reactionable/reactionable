@@ -1,13 +1,13 @@
-import { text, withKnobs } from '@storybook/addon-knobs';
-import React from 'react';
+import { text, withKnobs } from "@storybook/addon-knobs";
+import React, { ReactElement } from "react";
 
-import { Alert } from '../../../src/ui/alert/Alert';
-import { ErrorAlert, useErrorAlert } from '../../../src/ui/alert/ErrorAlert';
-import { useAlert } from '../../../src/ui/alert/useAlert';
-import { WarningAlert, useWarningAlert } from '../../../src/ui/alert/WarningAlert';
+import { Alert } from "../../../src/ui/alert/Alert";
+import { ErrorAlert, useErrorAlert } from "../../../src/ui/alert/ErrorAlert";
+import { useAlert } from "../../../src/ui/alert/useAlert";
+import { WarningAlert, useWarningAlert } from "../../../src/ui/alert/WarningAlert";
 
 export default {
-  title: 'Core/Components/UI/Alert',
+  title: "Core/Components/UI/Alert",
   parameters: {
     info: { inline: true },
     options: { showPanel: true },
@@ -17,10 +17,10 @@ export default {
   decorators: [withKnobs],
 };
 
-export const alert = () => <Alert>Test alert</Alert>;
+export const alert = (): ReactElement => <Alert>Test alert</Alert>;
 
-export const UseAlert = () => {
-  const content = text('Content', 'This is the alert content');
+export const UseAlert = (): ReactElement => {
+  const content = text("Content", "This is the alert content");
 
   const { alert, setAlert } = useAlert();
 
@@ -33,10 +33,12 @@ export const UseAlert = () => {
   );
 };
 
-export const errorAlert = () => <ErrorAlert children={new Error('Test error alert')} />;
+export const errorAlert = (): ReactElement => (
+  <ErrorAlert>{new Error("Test error alert")}</ErrorAlert>
+);
 
-export const UseErrorAlert = () => {
-  const content = text('Content', 'This is the error alert content');
+export const UseErrorAlert = (): ReactElement => {
+  const content = text("Content", "This is the error alert content");
 
   const { errorAlert, setErrorAlert } = useErrorAlert();
 
@@ -49,10 +51,10 @@ export const UseErrorAlert = () => {
   );
 };
 
-export const warningAlert = () => <WarningAlert>Test warning alert</WarningAlert>;
+export const warningAlert = (): ReactElement => <WarningAlert>Test warning alert</WarningAlert>;
 
-export const UseWarningAlert = () => {
-  const content = text('Content', 'This is the warning alert content');
+export const UseWarningAlert = (): ReactElement => {
+  const content = text("Content", "This is the warning alert content");
 
   const { warningAlert, setWarningAlert } = useWarningAlert();
 

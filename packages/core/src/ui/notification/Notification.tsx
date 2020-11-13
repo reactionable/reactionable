@@ -1,5 +1,6 @@
-import React, { ComponentType, PropsWithChildren, ReactNode, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import React, { ComponentType, PropsWithChildren, ReactNode, useState } from "react";
+
+import { useTranslation } from "../../i18n/I18n";
 
 export interface INotificationProps {
   title: ReactNode;
@@ -9,11 +10,15 @@ export interface INotificationProps {
 
 export type NotificationComponent = ComponentType<INotificationProps>;
 
-export const Notification: NotificationComponent = ({ children, title, show = true }) => {
+export const Notification: NotificationComponent = ({
+  children,
+  title,
+  show = true,
+}: PropsWithChildren<INotificationProps>) => {
   const { t } = useTranslation();
   return (
     <div hidden={!show}>
-      <div>{'string' === typeof title ? t(title) : title}</div>
+      <div>{"string" === typeof title ? t(title) : title}</div>
       <div>{children}</div>
     </div>
   );
@@ -21,11 +26,11 @@ export const Notification: NotificationComponent = ({ children, title, show = tr
 
 export type IUseNotificationProps<
   NotificationProps extends INotificationProps = INotificationProps
-> = PropsWithChildren<NotificationProps>;
+> = PropsWithChildren<NotificationProps & { Component?: NotificationComponent }>;
 
 export interface IUseNotificationResult {
   notification: ReactNode;
-  setNotification: (message?: string) => void;
+  setNotification: (message?: ReactNode) => void;
 }
 
 export type IUseNotification<P extends IUseNotificationProps> = (
@@ -34,20 +39,18 @@ export type IUseNotification<P extends IUseNotificationProps> = (
 export function useNotification<P extends IUseNotificationProps>({
   Component,
   ...props
-}: P & { Component: NotificationComponent }): IUseNotificationResult {
-  const [notification, setNotification] = useState<string | undefined>(undefined);
+}: P): IUseNotificationResult {
+  const [notification, setNotification] = useState<ReactNode | undefined>(undefined);
+
+  if (!Component) {
+    Component = Notification;
+  }
+
   return {
     notification: (
-      <>
-        {
-          <Component
-            {...props}
-            children={notification}
-            onClose={() => setNotification(undefined)}
-            show={!!notification}
-          />
-        }
-      </>
+      <Component {...props} onClose={() => setNotification(undefined)} show={!!notification}>
+        {notification}
+      </Component>
     ),
     setNotification,
   };

@@ -1,21 +1,21 @@
-import { Auth } from '@aws-amplify/auth';
+import { Auth } from "@aws-amplify/auth";
 import {
   IdentityContextProvider as CoreIdentityContextProvider,
   IAuthComponentProps,
   IIdentityProviderProps as ICoreIdentityProviderProps,
   IUser as ICoreUser,
-} from '@reactionable/core';
+} from "@reactionable/core";
 import {
   Authenticator,
   ConfirmSignIn,
   ForgotPassword,
   SignIn,
   VerifyContact,
-} from 'aws-amplify-react';
-import { IAuthenticatorProps } from 'aws-amplify-react/lib-esm/Auth/Authenticator';
-import { UsernameAttributes } from 'aws-amplify-react/lib-esm/Auth/common/types';
-import React, { PropsWithChildren } from 'react';
-import { useTranslation } from 'react-i18next';
+} from "aws-amplify-react";
+import { IAuthenticatorProps } from "aws-amplify-react/lib-esm/Auth/Authenticator";
+import { UsernameAttributes } from "aws-amplify-react/lib-esm/Auth/common/types";
+import React, { PropsWithChildren } from "react";
+import { useTranslation } from "react-i18next";
 
 export type IUser = ICoreUser;
 
@@ -26,7 +26,7 @@ export {
   ForgotPassword,
   SignUp,
   SignOut,
-} from 'aws-amplify-react';
+} from "aws-amplify-react";
 
 const dataToUser = (data?: {
   id: string;
@@ -39,7 +39,7 @@ const dataToUser = (data?: {
     return null;
   }
   return {
-    displayName: () => data?.attributes?.email || '',
+    displayName: () => data?.attributes?.email || "",
   } as IUser;
 };
 
@@ -57,18 +57,18 @@ function AuthComponent({
         hideAllDefaults: true,
         signUpFields: [
           {
-            label: 'Email',
-            key: 'email',
+            label: "Email",
+            key: "email",
             required: true,
             displayOrder: 1,
-            type: 'string',
+            type: "string",
           },
           {
-            label: 'Password',
-            key: 'password',
+            label: "Password",
+            key: "password",
             required: true,
             displayOrder: 2,
-            type: 'password',
+            type: "password",
           },
         ],
       },
@@ -80,7 +80,7 @@ function AuthComponent({
     <Authenticator
       {...authenticatorProps}
       onStateChange={(authState: string, data?) => {
-        setUser(authState !== 'signedIn' ? null : dataToUser(data));
+        setUser(authState !== "signedIn" ? null : dataToUser(data));
       }}
       children={[SignIn, ConfirmSignIn, VerifyContact, ForgotPassword]}
     />
@@ -93,14 +93,14 @@ export const useIdentityContextProviderProps = (
   props: Partial<IIdentityProviderProps> = {}
 ): IIdentityProviderProps => {
   return {
-    identityProvider: 'Amplify',
+    identityProvider: "Amplify",
     logout: async () => await Auth.signOut(),
     AuthComponent,
     getUser: async () => {
       const data = await Auth.currentUserInfo();
       return dataToUser(data);
     },
-    auth: <></>,
+    auth: null,
     user: undefined,
     ...props,
   };

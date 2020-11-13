@@ -1,10 +1,29 @@
-import React, { ComponentType, PropsWithChildren } from 'react';
+import React, { ComponentType, PropsWithChildren, ReactElement } from "react";
 
-import { Create, ICreateProps } from '../create/Create';
+import { IFormData, IFormValues } from "../../form/Form";
+import { IFormButtonProps } from "../../form/FormButton";
+import { IModalProps } from "../../ui/modal/Modal";
+import { Create, ICreateProps } from "../create/Create";
 
-export interface IUpdateProps<Values, Data> extends ICreateProps<Values, Data> {}
+export type IUpdateProps<
+  Values extends IFormValues,
+  Data extends IFormData,
+  FormButtonProps extends IFormButtonProps,
+  ModalProps extends IModalProps
+> = ICreateProps<Values, Data, FormButtonProps, ModalProps>;
 
-export type UpdateComponent<Values, Data> = ComponentType<IUpdateProps<Values, Data>>;
-export function Update<Values, Data>(props: PropsWithChildren<IUpdateProps<Values, Data>>) {
-  return <Create<Values, Data> {...props} />;
+export type UpdateComponent<
+  Values extends IFormValues,
+  Data extends IFormData,
+  FormButtonProps extends IFormButtonProps,
+  ModalProps extends IModalProps
+> = ComponentType<IUpdateProps<Values, Data, FormButtonProps, ModalProps>>;
+
+export function Update<
+  Values extends IFormValues = IFormValues,
+  Data extends IFormData = IFormData,
+  FormButtonProps extends IFormButtonProps = IFormButtonProps,
+  ModalProps extends IModalProps = IModalProps
+>(props: PropsWithChildren<IUpdateProps<Values, Data, FormButtonProps, ModalProps>>): ReactElement {
+  return <Create<Values, Data, FormButtonProps> {...props} />;
 }

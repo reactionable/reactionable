@@ -1,5 +1,7 @@
-import React, { ComponentType, PropsWithChildren, ReactNode } from 'react';
-import { useTranslation } from 'react-i18next';
+import React, { ComponentType, PropsWithChildren, ReactElement, ReactNode } from "react";
+
+import { useTranslation } from "../../../i18n/I18n";
+
 export interface IFooterProps {
   brand?: ReactNode | string;
   sponsor?: boolean;
@@ -11,7 +13,7 @@ export type FooterComponent<FooterProps extends IFooterProps = IFooterProps> = C
 export function Footer<FooterProps extends IFooterProps = IFooterProps>({
   brand,
   sponsor = true,
-}: PropsWithChildren<FooterProps>) {
+}: PropsWithChildren<FooterProps>): ReactElement {
   const { t } = useTranslation();
 
   const currentYear = new Date().getFullYear();
@@ -19,7 +21,7 @@ export function Footer<FooterProps extends IFooterProps = IFooterProps>({
   return (
     <footer>
       <div>
-        {t('Copyright')} &copy; {currentYear} {brand}
+        {t("Copyright")} &copy; {currentYear} {brand}
       </div>
       {sponsor && (
         <div>
@@ -30,15 +32,16 @@ export function Footer<FooterProps extends IFooterProps = IFooterProps>({
   );
 }
 
-export const SponsorFooter = () => {
+export const SponsorFooter = (): ReactElement => {
   const { t } = useTranslation();
   return (
     <>
-      <span title={t('Powered by')}>⚡ by </span>
+      <span title={t("Powered by")}>⚡ by </span>
       <a
         href="https://github.com/reactionable/reactionable"
+        rel="noreferrer"
         target="_blank"
-        title={t('Reactionable - An effective toolkit for React')}
+        title={t("Reactionable - An effective toolkit for React")}
       >
         Reactionable
       </a>

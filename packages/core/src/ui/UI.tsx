@@ -1,56 +1,88 @@
-import { IProviderProps, createProvider } from '../app/Provider';
-import { Form, IUseForm, IUseFormProps, useForm } from '../form/Form';
-import { Alert } from './alert/Alert';
-import { ErrorAlert, IUseErrorAlert, IUseErrorAlertProps, useErrorAlert } from './alert/ErrorAlert';
-import { IUseWarningAlert, IUseWarningAlertProps, useWarningAlert } from './alert/WarningAlert';
+import { IProviderProps, createProvider } from "../app/Provider";
+import { Form, IFormData, IFormValues } from "../form/Form";
+import { IFormButtonProps } from "../form/FormButton";
+import { IUseFormProps, IUseFormResult, useForm } from "../form/useForm";
+import { Alert } from "./alert/Alert";
+import {
+  ErrorAlert,
+  IUseErrorAlertProps,
+  IUseErrorAlertResult,
+  useErrorAlert,
+} from "./alert/ErrorAlert";
+import {
+  IUseWarningAlertProps,
+  IUseWarningAlertResult,
+  useWarningAlert,
+} from "./alert/WarningAlert";
 import {
   Confirmation,
-  IUseConfirmation,
   IUseConfirmationProps,
+  IUseConfirmationResult,
   useConfirmation,
-} from './confirmation/Confirmation';
-import { Body } from './layout/body/Body';
-import { Footer } from './layout/footer/Footer';
-import { Header } from './layout/header/Header';
-import { IUseLayout, IUseLayoutProps, useLayout } from './layout/Layout';
-import { Loader } from './loader/Loader';
-import { IUseLoader, IUseLoaderProps, useLoader } from './loader/useLoader';
-import { IUseModal, IUseModalProps, Modal, useModal } from './modal/Modal';
-import { IUseModalForm, IUseModalFormProps, useModalForm } from './modal/useModalForm';
+} from "./confirmation/Confirmation";
+import { Body } from "./layout/body/Body";
+import { Footer } from "./layout/footer/Footer";
+import { Header } from "./layout/header/Header";
+import { IUseLayoutProps, IUseLayoutResult, useLayout } from "./layout/Layout";
+import { Loader } from "./loader/Loader";
+import { IUseLoaderProps, IUseLoaderResult, useLoader } from "./loader/useLoader";
+import { IModalProps, IUseModalProps, IUseModalResult, Modal, useModal } from "./modal/Modal";
+import { IUseModalFormProps, useModalForm } from "./modal/useModalForm";
 import {
-  IUseErrorNotification,
   IUseErrorNotificationProps,
+  IUseErrorNotificationResult,
   useErrorNotification,
-} from './notification/ErrorNotification';
-import { Notification } from './notification/Notification';
+} from "./notification/ErrorNotification";
+import { Notification } from "./notification/Notification";
 import {
-  IUseSuccessNotification,
   IUseSuccessNotificationProps,
+  IUseSuccessNotificationResult,
   useSuccessNotification,
-} from './notification/SuccessNotification';
+} from "./notification/SuccessNotification";
 
 export type IUIProviderProps<
-  LO extends IUseLoaderProps = IUseLoaderProps,
-  SN extends IUseSuccessNotificationProps = IUseSuccessNotificationProps,
-  EN extends IUseErrorNotificationProps = IUseErrorNotificationProps,
-  EA extends IUseErrorAlertProps = IUseErrorAlertProps,
-  WA extends IUseWarningAlertProps = IUseWarningAlertProps,
-  CO extends IUseConfirmationProps = IUseConfirmationProps,
-  LA extends IUseLayoutProps = IUseLayoutProps,
-  FO extends IUseFormProps = IUseFormProps,
-  MO extends IUseModalProps = IUseModalProps,
-  MF extends IUseModalFormProps = IUseModalFormProps
+  UseLoaderProps extends IUseLoaderProps = IUseLoaderProps,
+  UseSuccessNotificationProps extends IUseSuccessNotificationProps = IUseSuccessNotificationProps,
+  UseErrorNotificationProps extends IUseErrorNotificationProps = IUseErrorNotificationProps,
+  UseErrorAlertProps extends IUseErrorAlertProps = IUseErrorAlertProps,
+  UseWarningAlertProps extends IUseWarningAlertProps = IUseWarningAlertProps,
+  UseConfirmationProps extends IUseConfirmationProps = IUseConfirmationProps,
+  UseLayoutProps extends IUseLayoutProps = IUseLayoutProps,
+  UseModalProps extends IUseModalProps = IUseModalProps
 > = IProviderProps<{
-  useLoader: IUseLoader<LO>;
-  useSuccessNotification: IUseSuccessNotification<SN>;
-  useErrorNotification: IUseErrorNotification<EN>;
-  useErrorAlert: IUseErrorAlert<EA>;
-  useWarningAlert: IUseWarningAlert<WA>;
-  useConfirmation: IUseConfirmation<CO>;
-  useLayout: IUseLayout<LA>;
-  useForm: IUseForm<FO>;
-  useModal: IUseModal<MO>;
-  useModalForm: IUseModalForm<MF>;
+  useLoader: <Props extends UseLoaderProps = UseLoaderProps>(props: Props) => IUseLoaderResult;
+  useSuccessNotification: <Props extends UseSuccessNotificationProps = UseSuccessNotificationProps>(
+    props: Props
+  ) => IUseSuccessNotificationResult;
+  useErrorNotification: <Props extends UseErrorNotificationProps = UseErrorNotificationProps>(
+    props: Props
+  ) => IUseErrorNotificationResult;
+  useErrorAlert: <Props extends UseErrorAlertProps = UseErrorAlertProps>(
+    props?: Props
+  ) => IUseErrorAlertResult;
+  useWarningAlert: <Props extends UseWarningAlertProps = UseWarningAlertProps>(
+    props?: Props
+  ) => IUseWarningAlertResult;
+  useConfirmation: <Props extends UseConfirmationProps = UseConfirmationProps>(
+    props: Props
+  ) => IUseConfirmationResult;
+  useLayout: <Props extends UseLayoutProps = UseLayoutProps>(props: Props) => IUseLayoutResult;
+  useForm: <
+    Values extends IFormValues,
+    Data extends IFormData,
+    FormButtonProps extends IFormButtonProps
+  >(
+    props: IUseFormProps<Values, Data, FormButtonProps>
+  ) => IUseFormResult;
+  useModal: <Props extends UseModalProps = UseModalProps>(props: Props) => IUseModalResult;
+  useModalForm: <
+    Values extends IFormValues = IFormValues,
+    Data extends IFormData = IFormData,
+    FormButtonProps extends IFormButtonProps = IFormButtonProps,
+    ModalProps extends IModalProps = IModalProps
+  >(
+    props: IUseModalFormProps<Values, Data, FormButtonProps, ModalProps>
+  ) => IUseModalResult;
 }>;
 
 export function useUIProviderProps(): IUIProviderProps {

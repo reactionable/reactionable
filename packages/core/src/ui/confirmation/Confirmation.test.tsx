@@ -1,18 +1,18 @@
-import { render } from '@testing-library/react';
-import React from 'react';
+import { render } from "@testing-library/react";
+import React from "react";
 
-import { i18nTestInstance } from '../../tests/I18n';
-import { UIContextProvider, useUIProviderProps } from '../UI';
-import { ConfirmationAction } from './Confirmation';
+import { i18nTestInstance } from "../../tests/I18n";
+import { UIContextProvider, useUIProviderProps } from "../UI";
+import { ConfirmationAction } from "./Confirmation";
 
-describe('ConfirmationAction', () => {
+describe("ConfirmationAction", () => {
   beforeAll(i18nTestInstance);
 
-  it('should render without crashing', async () => {
+  it("should render without crashing", async () => {
     const onConfirm = jest.fn();
     const onSuccess = jest.fn();
 
-    render(
+    const result = render(
       <UIContextProvider {...useUIProviderProps()}>
         <ConfirmationAction
           title="test title"
@@ -23,5 +23,7 @@ describe('ConfirmationAction', () => {
         />
       </UIContextProvider>
     );
+
+    expect(result).toBeTruthy();
   });
 });

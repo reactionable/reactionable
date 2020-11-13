@@ -1,7 +1,15 @@
-import { compile } from 'path-to-regexp';
-import React, { AnchorHTMLAttributes, ComponentType, ReactNode, forwardRef } from 'react';
+import { compile } from "path-to-regexp";
+import React, {
+  AnchorHTMLAttributes,
+  ComponentType,
+  DetailedHTMLProps,
+  PropsWithChildren,
+  ReactElement,
+  ReactNode,
+} from "react";
 
-import { useRouterContext } from './Router';
+import { IRouteMatchParams } from "./Route";
+import { useRouterContext } from "./Router";
 
 export function isLinkProps<LinkProps extends ILinkProps>(
   props: ReactNode | LinkProps
@@ -9,32 +17,16 @@ export function isLinkProps<LinkProps extends ILinkProps>(
   return (props as ILinkProps).href !== undefined;
 }
 
-export type ILinkProps = Pick<
-  AnchorHTMLAttributes<HTMLAnchorElement>,
-  'href' | 'onClick' | 'title'
->;
-
-export type IRouterLinkComponent<LinkProps extends ILinkProps> = ComponentType<LinkProps>;
-
-export function RouterLink<LinkProps extends ILinkProps>(props: LinkProps) {
-  return <a {...props} />;
-}
-
-export const Link = forwardRef<any, any>((props, ref) => {
-  const { RouterLink } = useRouterContext();
-  return <RouterLink ref={ref} {...props} />;
-});
-
 const normalizePath = (path: string): string => {
   path = path.trim();
-  const separator = '/';
+  const separator = "/";
   const normalizedPathParts: string[] = [];
   path.split(separator).forEach((part) => {
     part = part.trim();
     if (!part.length) {
       return;
     }
-    if (part === '..') {
+    if (part === "..") {
       normalizedPathParts.pop();
       return;
     }
@@ -42,7 +34,7 @@ const normalizePath = (path: string): string => {
   });
 
   if (!normalizedPathParts.length) {
-    return '/';
+    return "/";
   }
 
   let normalizedPath = normalizedPathParts.join(separator);
@@ -72,19 +64,38 @@ function compilePath(path: string) {
   return generator;
 }
 
-export function generatePath(
-  pattern: string,
-  ...params: Array<{ [paramName: string]: string | number | boolean | undefined }>
-): string {
+export function generatePath(pattern: string, ...params: IRouteMatchParams[]): string {
   const parsedParams = params.reduce((previous, current) => {
     return { ...previous, ...current };
   }, {});
 
   const path = normalizePath(pattern);
 
-  if (path === '/') {
+  if (path === "/") {
     return path;
   }
 
   return compilePath(path)(parsedParams, { pretty: true });
+}
+
+type AnchorProps = DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;
+export type ILinkProps = {
+  href: AnchorProps["href"];
+  children: AnchorProps["children"];
+  title?: AnchorProps["title"];
+  "data-testid"?: string;
+};
+
+export type LinkComponent<LinkProps extends ILinkProps> = ComponentType<LinkProps>;
+
+export function Link<LinkProps extends ILinkProps>({
+  href,
+  ...props
+}: PropsWithChildren<LinkProps>): ReactElement {
+  const { RouterLink } = useRouterContext();
+  return (
+    <RouterLink href={href}>
+      <a {...props} />
+    </RouterLink>
+  );
 }

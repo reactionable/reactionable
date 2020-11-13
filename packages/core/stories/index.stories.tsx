@@ -1,20 +1,20 @@
-import 'bootstrap/dist/css/bootstrap.css';
+import "bootstrap/dist/css/bootstrap.css";
 
-import { linkTo } from '@storybook/addon-links';
-import React from 'react';
+import { linkTo } from "@storybook/addon-links";
+import React, { ReactElement } from "react";
 
 export default {
-  title: 'Core/Home',
+  title: "Core/Home",
   parameters: {
     info: { inline: true },
     options: { showPanel: false },
     previewTabs: {
-      'storybook/docs/panel': { hidden: true },
+      "storybook/docs/panel": { hidden: true },
     },
   },
 };
 
-export const Presentation = () => (
+export const Presentation = (): ReactElement => (
   <div className="container">
     <div className="row">
       <div className="col">
@@ -27,17 +27,17 @@ export const Presentation = () => (
         </div>
         <ul className="list-group">
           <li className="list-group-item">
-            <button onClick={linkTo('Core/Home', 'Installation')} className="btn btn-link btn-sm">
+            <button onClick={linkTo("Core/Home", "Installation")} className="btn btn-link btn-sm">
               🚀 Installation
             </button>
           </li>
           <li className="list-group-item">
-            <button onClick={linkTo('Core/Home', 'Usage')} className="btn btn-link btn-sm">
+            <button onClick={linkTo("Core/Home", "Usage")} className="btn btn-link btn-sm">
               🧾 Usage
             </button>
           </li>
           <li className="list-group-item">
-            <button onClick={linkTo('Core/Components/App')} className="btn btn-link btn-sm">
+            <button onClick={linkTo("Core/Components/App")} className="btn btn-link btn-sm">
               📖 Components
             </button>
           </li>
@@ -47,7 +47,7 @@ export const Presentation = () => (
   </div>
 );
 
-export const Installation = () => (
+export const Installation = (): ReactElement => (
   <div className="container">
     <div className="row">
       <div className="col">
@@ -81,7 +81,7 @@ export const Installation = () => (
   </div>
 );
 
-export const Usage = () => (
+export const Usage = (): ReactElement => (
   <div className="container">
     <div className="row">
       <div className="col">
@@ -119,7 +119,7 @@ initializeI18n({
           </pre>
         </dd>
         <dt className="col-12 mb-3">
-          2. Create locales files <code>i18n/locales/{'{en,fr}'}/translation.json</code>
+          2. Create locales files <code>i18n/locales/{"{en,fr}"}/translation.json</code>
         </dt>
         <dd className="col-12">
           <pre>
@@ -148,7 +148,7 @@ import './i18n/i18n';
           <pre>
             <code>{`import { App } from '@reactionable/core';
 
-const App = () => {
+const App = (): ReactElement => {
   return <Core />;
 };
 export default App;`}</code>

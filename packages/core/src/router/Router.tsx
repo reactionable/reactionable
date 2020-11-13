@@ -1,12 +1,14 @@
-import { IProviderProps, createProvider } from '../app/Provider';
-import { ILinkProps, IRouterLinkComponent, RouterLink } from './Link';
+import { IProviderProps, createProvider } from "../app/Provider";
+import { ILinkProps } from "./Link";
 import {
   IRenderRoutes,
   IRouteMatch,
+  IRouteMatchParams,
   IUseRouteMatch,
   renderRoutes,
   useRouteMatchCore,
-} from './Route';
+} from "./Route";
+import { IRouterLinkComponent, RouterLink } from "./RouterLink";
 
 export type IRouterProviderProps<LinkProps extends ILinkProps = ILinkProps> = IProviderProps<{
   RouterLink: IRouterLinkComponent<LinkProps>;
@@ -28,9 +30,9 @@ export const {
   useContext: useRouterContext,
 } = createProvider<IRouterProviderProps>(useRouterProviderProps());
 
-export function useRouteMatch<Params extends { [K in keyof Params]?: string } = {}>(): IRouteMatch<
-  Params
-> {
+export function useRouteMatch<
+  RouteMatchParams extends IRouteMatchParams = IRouteMatchParams
+>(): IRouteMatch<RouteMatchParams> {
   const { useRouteMatch } = useRouterContext();
-  return useRouteMatch() as IRouteMatch<Params>;
+  return useRouteMatch() as IRouteMatch<RouteMatchParams>;
 }

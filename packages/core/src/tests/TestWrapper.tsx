@@ -1,9 +1,9 @@
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, ReactElement } from "react";
 
-import { IWrapperProps, Wrapper } from '../app/Wrapper';
-import { IIdentityProviderProps, useIdentityProviderProps } from '../identity/Identity';
-import { IRouterProviderProps, useRouterProviderProps } from '../router/Router';
-import { IUIProviderProps, useUIProviderProps } from '../ui/UI';
+import { IWrapperProps, Wrapper } from "../app/Wrapper";
+import { IIdentityProviderProps } from "../identity/Identity";
+import { IRouterProviderProps, useRouterProviderProps } from "../router/Router";
+import { IUIProviderProps, useUIProviderProps } from "../ui/UI";
 
 export type ITestWrapperProps<
   IdentityProviderProps extends IIdentityProviderProps,
@@ -19,13 +19,6 @@ export function TestWrapper<
   props: PropsWithChildren<
     ITestWrapperProps<IdentityProviderProps, UIProviderProps, RouterProviderProps>
   >
-) {
-  return (
-    <Wrapper
-      identity={useIdentityProviderProps({ getUser: async () => null })}
-      router={useRouterProviderProps()}
-      ui={useUIProviderProps()}
-      {...props}
-    />
-  );
+): ReactElement {
+  return <Wrapper router={useRouterProviderProps()} ui={useUIProviderProps()} {...props} />;
 }

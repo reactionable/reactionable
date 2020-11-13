@@ -1,31 +1,39 @@
-import { generatePath } from './Link';
+import { render } from "@testing-library/react";
+import React from "react";
 
-describe('Link', () => {
-  describe('generatePath', () => {
-    it('generate absolute path with duplicated separators', () => {
-      for (const path of ['/', '/', '/test/..', '/test/../', '//test//..//']) {
+import { Link, generatePath } from "./Link";
+
+describe("Link", () => {
+  it("should render without crashing", async () => {
+    const result = render(<Link href="/test">test</Link>);
+
+    expect(result).toBeTruthy();
+  });
+  describe("generatePath", () => {
+    it("generate absolute path with duplicated separators", () => {
+      for (const path of ["/", "/", "/test/..", "/test/../", "//test//..//"]) {
         const value = generatePath(path);
-        expect(value).toBe('/');
+        expect(value).toBe("/");
       }
     });
 
-    it('generate absolute path with parent directory pattern', () => {
+    it("generate absolute path with parent directory pattern", () => {
       for (const path of [
-        '/test/:id/child/:childId/sub-child/..',
-        '/test//:id/child//:childId/sub-child/..',
+        "/test/:id/child/:childId/sub-child/..",
+        "/test//:id/child//:childId/sub-child/..",
       ]) {
-        const value = generatePath(path, { id: '1' }, { childId: 2 });
-        expect(value).toBe('/test/1/child/2');
+        const value = generatePath(path, { id: "1" }, { childId: "2" });
+        expect(value).toBe("/test/1/child/2");
       }
     });
 
-    it('generate relative path with parent directory pattern', () => {
+    it("generate relative path with parent directory pattern", () => {
       for (const path of [
-        'test/:id/child/:childId/sub-child/..',
-        'test//:id/child//:childId/sub-child/..',
+        "test/:id/child/:childId/sub-child/..",
+        "test//:id/child//:childId/sub-child/..",
       ]) {
-        const value = generatePath(path, { id: '1' }, { childId: 2 });
-        expect(value).toBe('test/1/child/2');
+        const value = generatePath(path, { id: "1" }, { childId: "2" });
+        expect(value).toBe("test/1/child/2");
       }
     });
   });

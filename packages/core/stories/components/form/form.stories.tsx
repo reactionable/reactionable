@@ -1,13 +1,13 @@
-import { action } from '@storybook/addon-actions';
-import React from 'react';
-import { string } from 'yup';
+import { action } from "@storybook/addon-actions";
+import React, { ReactElement } from "react";
+import { string } from "yup";
 
-import { Form } from '../../../src/form/Form';
-import { FormField } from '../../../src/form/FormField';
-import { UIContextProvider, useUIProviderProps } from '../../../src/ui/UI';
+import { Form } from "../../../src/form/Form";
+import { FormField } from "../../../src/form/FormField";
+import { UIContextProvider, useUIProviderProps } from "../../../src/ui/UI";
 
 export default {
-  title: 'Core/Components/Form',
+  title: "Core/Components/Form",
   parameters: { info: { inline: true }, options: { showPanel: true }, component: Form },
   subComponents: [FormField],
 };
@@ -16,7 +16,7 @@ interface IFormValues {
   test: string;
 }
 
-export const Introduction = () => {
+export const Introduction = (): ReactElement => {
   return (
     <div className="container">
       <div className="row">
@@ -30,23 +30,21 @@ export const Introduction = () => {
               Form component helps to render Form and fields, manage form state and validation
             </p>
             <p>
-              It is based on <a href="https://formik.org/">Formik</a> and{' '}
+              It is based on <a href="https://formik.org/">Formik</a> and{" "}
               <a href="https://github.com/jquense/yup">Yup</a>
             </p>
             <h5>How to render a form (template): </h5>
-            <p>
-              <pre className="border shadow-sm rounded bg-white p-2">
-                <code>{`import { Form } from "@reactionable/ui-material/lib/form/Form";
+            <pre className="border shadow-sm rounded bg-white p-2">
+              <code>{`import { Form } from "@reactionable/ui-material/lib/form/Form";
 import { FormField } from "@reactionable/ui-material/lib/form/FormField";
 import { ... } from 'yup';
 
-const MyForm = () => (
+const MyForm = (): ReactElement => (
   <Form {Form props}>
     <FormField {Form field props} />
   </Form>
 );`}</code>
-              </pre>
-            </p>
+            </pre>
           </div>
         </div>
       </div>
@@ -54,58 +52,59 @@ const MyForm = () => (
   );
 };
 
-export const SimpleForm = () => (
+export const SimpleForm = (): ReactElement => (
   <UIContextProvider {...useUIProviderProps()}>
     <Form
       title="Simple form"
       submitButton
       onSubmit={async (values) => {
-        action('Form submitted...')(values);
+        action("Form submitted...")(values);
         await new Promise((resolve) => setTimeout(resolve, 1000));
         return values;
       }}
-      onSuccess={action('Form submit succeed')}
-      validationSchema={{ test: string().required('Test is required') }}
-      initialValues={{ test: '' }}
-      children={() => <FormField name="test" autoFocus placeholder="Simple form input" />}
-    />
+      onSuccess={action("Form submit succeed")}
+      validationSchema={{ test: string().required("Test is required") }}
+      initialValues={{ test: "" }}
+    >
+      {() => <FormField name="test" autoFocus placeholder="Simple form input" />}
+    </Form>
   </UIContextProvider>
 );
 
-export const FormWithTextArea = () => (
+export const FormWithTextArea = (): ReactElement => (
   <UIContextProvider {...useUIProviderProps()}>
     <Form
       title="Form with textarea"
       submitButton
       onSubmit={async (values: IFormValues) => {
-        action('Form submitted...')(values);
+        action("Form submitted...")(values);
         await new Promise((resolve) => setTimeout(resolve, 1000));
         return values;
       }}
-      onSuccess={action('Form submit succeed')}
-      validationSchema={{ test: string().required('Test is required') }}
-      initialValues={{ test: '' }}
-      children={() => (
-        <FormField as="textarea" name="test" autoFocus placeholder="Text area form input" />
-      )}
-    />
+      onSuccess={action("Form submit succeed")}
+      validationSchema={{ test: string().required("Test is required") }}
+      initialValues={{ test: "" }}
+    >
+      {() => <FormField as="textarea" name="test" autoFocus placeholder="Text area form input" />}
+    </Form>
   </UIContextProvider>
 );
 
-export const FormWithSelect = () => (
+export const FormWithSelect = (): ReactElement => (
   <UIContextProvider {...useUIProviderProps()}>
     <Form
       title="Form with select"
       submitButton
       onSubmit={async (values: IFormValues) => {
-        action('Form submitted...')(values);
+        action("Form submitted...")(values);
         await new Promise((resolve) => setTimeout(resolve, 1000));
         return values;
       }}
-      onSuccess={action('Form submit succeed')}
-      validationSchema={{ test: string().required('Test is required') }}
-      initialValues={{ test: '' }}
-      children={() => (
+      onSuccess={action("Form submit succeed")}
+      validationSchema={{ test: string().required("Test is required") }}
+      initialValues={{ test: "" }}
+    >
+      {() => (
         <FormField as="select" name="test" autoFocus>
           <>
             <option value="">Choose an option</option>
@@ -114,24 +113,25 @@ export const FormWithSelect = () => (
           </>
         </FormField>
       )}
-    />
+    </Form>
   </UIContextProvider>
 );
 
-export const FormWithCheckbox = () => (
+export const FormWithCheckbox = (): ReactElement => (
   <UIContextProvider {...useUIProviderProps()}>
     <Form
       title="Form with select"
       submitButton
       onSubmit={async (values: IFormValues) => {
-        action('Form submitted...')(values);
+        action("Form submitted...")(values);
         await new Promise((resolve) => setTimeout(resolve, 1000));
         return values;
       }}
-      onSuccess={action('Form submit succeed')}
-      validationSchema={{ test: string().required('Test is required') }}
-      initialValues={{ test: '' }}
-      children={() => <FormField type="checkbox" name="test" autoFocus />}
-    />
+      onSuccess={action("Form submit succeed")}
+      validationSchema={{ test: string().required("Test is required") }}
+      initialValues={{ test: "" }}
+    >
+      {() => <FormField type="checkbox" name="test" autoFocus />}
+    </Form>
   </UIContextProvider>
 );

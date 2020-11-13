@@ -1,26 +1,30 @@
-import { render } from '@testing-library/react';
-import React from 'react';
+import { render } from "@testing-library/react";
+import React from "react";
 
-import { i18nTestInstance } from '../tests/I18n';
-import { QueryWrapper } from './QueryWrapper';
+import { i18nTestInstance } from "../tests/I18n";
+import { QueryWrapper } from "./QueryWrapper";
 
-describe('QueryWrapper', () => {
+describe("QueryWrapper", () => {
   beforeAll(i18nTestInstance);
 
-  it('should render without crashing', async () => {
+  it("should render without crashing", async () => {
     const children = jest.fn();
 
-    render(<QueryWrapper isLoading={false} children={children} />);
+    render(<QueryWrapper isLoading={false}>{children}</QueryWrapper>);
 
     expect(children).not.toHaveBeenCalled();
   });
 
-  it('should render render children only when data is defined', async () => {
+  it("should render render children only when data is defined", async () => {
     const children = jest.fn();
 
-    const data = 'test';
+    const data = "test";
 
-    render(<QueryWrapper isLoading={false} children={children} data={data} />);
+    render(
+      <QueryWrapper isLoading={false} data={data}>
+        {children}
+      </QueryWrapper>
+    );
 
     expect(children).toHaveBeenCalledWith({
       data,

@@ -1,16 +1,21 @@
-import React, { ComponentType, PropsWithChildren, ReactNode, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import React, { ComponentType, PropsWithChildren, ReactElement, ReactNode, useState } from "react";
 
-import { IError } from '../../error/IError';
-import { INotificationProps } from './Notification';
+import { IError, printError } from "../../error/IError";
+import { useTranslation } from "../../i18n/I18n";
+import { INotificationProps, Notification } from "./Notification";
 
 export type IErrorNotificationProps = INotificationProps & {
   children?: IError;
 };
 export type ErrorNotificationComponent = ComponentType<IErrorNotificationProps>;
 
+export function ErrorNotification({ children, ...props }: IErrorNotificationProps): ReactElement {
+  return <Notification {...props}>{printError(children)}</Notification>;
+}
+
 export type IUseErrorNotificationProps = PropsWithChildren<INotificationProps> & {
   children?: IError;
+  Component?: ErrorNotificationComponent;
 };
 
 export interface IUseErrorNotificationResult {
@@ -18,32 +23,31 @@ export interface IUseErrorNotificationResult {
   setErrorNotification: (error?: IError) => void;
 }
 
-export type IUseErrorNotification<P extends IUseErrorNotificationProps> = (
-  props: P
+export type IUseErrorNotification<UseErrorNotificationProps extends IUseErrorNotificationProps> = (
+  props: UseErrorNotificationProps
 ) => IUseErrorNotificationResult;
-export function useErrorNotification<P extends IUseErrorNotificationProps>({
+
+export function useErrorNotification<UseErrorNotificationProps extends IUseErrorNotificationProps>({
   Component,
   title,
   ...props
-}: P & { Component: ErrorNotificationComponent }): IUseErrorNotificationResult {
+}: UseErrorNotificationProps): IUseErrorNotificationResult {
   const [errorNotification, setErrorNotification] = useState<IError | undefined>(undefined);
   const { t } = useTranslation();
   if (!title) {
-    title = t('An error has occured');
+    title = t("An error has occured");
   }
+
+  if (!Component) {
+    Component = ErrorNotification;
+  }
+
   return {
-    errorNotification: (
-      <>
-        {errorNotification && (
-          <Component
-            {...props}
-            title={title}
-            children={errorNotification}
-            onClose={() => setErrorNotification(undefined)}
-          />
-        )}
-      </>
-    ),
+    errorNotification: errorNotification ? (
+      <Component {...props} title={title} onClose={() => setErrorNotification(undefined)}>
+        {errorNotification}
+      </Component>
+    ) : undefined,
     setErrorNotification,
   };
 }

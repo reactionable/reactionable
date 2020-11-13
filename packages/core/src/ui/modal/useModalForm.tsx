@@ -1,55 +1,59 @@
-import React from 'react';
+import { FormikHelpers } from "formik";
+import React from "react";
 
-import { IFormProps } from '../../form/Form';
-import { useUIContext } from '../UI';
-import { IUseModalProps, IUseModalResult } from './Modal';
-import { IModalFormComponentProps, IModalFormProps, ModalFormComponent } from './ModalForm';
+import { IFormData, IFormProps, IFormValues } from "../../form/Form";
+import { IFormButtonProps } from "../../form/FormButton";
+import { useUIContext } from "../UI";
+import { IModalProps, IUseModalProps, IUseModalResult } from "./Modal";
+import { ModalForm, ModalFormComponent } from "./ModalForm";
 
-export type IUseModalFormProps<MFP extends IModalFormProps = IModalFormProps> = IUseModalProps<MFP>;
+export type IUseModalFormProps<
+  Values extends IFormValues,
+  Data extends IFormData,
+  FormButtonProps extends IFormButtonProps,
+  ModalProps extends IModalProps
+> = ModalProps & { form: IFormProps<Values, Data, FormButtonProps> } & {
+  Component?: ModalFormComponent<Values, Data, FormButtonProps>;
+};
 
-export type IUseModalForm<P extends IUseModalFormProps> = (props: P) => IUseModalResult;
-
-type IFormPropsType<MFP extends IModalFormProps> = MFP extends IModalFormProps<infer F>
-  ? F extends IFormProps<any, any>
-    ? F
-    : never
-  : never;
-
-type IModalFormPropsType<UMFP extends IUseModalFormProps> = UMFP extends IUseModalFormProps<
-  infer MFP
->
-  ? MFP extends IModalFormProps
-    ? MFP
-    : never
-  : never;
-
-export function useModalForm<P extends IUseModalFormProps>({
-  form: { onSubmit, onSuccess, ...form },
-  FormComponent,
+export function useModalForm<
+  Values extends IFormValues,
+  Data extends IFormData,
+  FormButtonProps extends IFormButtonProps,
+  ModalProps extends IModalProps
+>({
+  form: { onSuccess, onSubmit, ...form },
+  title,
+  Component,
   ...modalProps
-}: P & {
-  FormComponent?: ModalFormComponent<any>;
-}): IUseModalResult {
-  const { useForm, useModal } = useUIContext();
+}: IUseModalFormProps<Values, Data, FormButtonProps, ModalProps>): IUseModalResult {
+  const { useModal } = useUIContext();
+
   const formProps = {
     ...form,
-    onSubmit: async (values, formikHelpers) => {
+    title,
+    onSubmit: async (values: Values, formikHelpers: FormikHelpers<Values>) => {
       const result = await onSubmit(values, formikHelpers);
       return result;
     },
-    onSuccess: (data) => {
+    onSuccess: (data: Data) => {
       if (onSuccess) {
         onSuccess(data);
       }
       useModalResult.closeModal();
     },
     closeModal: () => useModalResult.closeModal(),
-  } as IModalFormComponentProps<IFormPropsType<IModalFormPropsType<P>>>;
+  };
 
-  const formElement = FormComponent ? <FormComponent {...formProps} /> : useForm(formProps);
+  if (!Component) {
+    Component = ModalForm;
+  }
+
+  const formElement = <Component {...formProps} />;
 
   const useModalProps: IUseModalProps = {
-    ...(modalProps as IUseModalProps),
+    ...modalProps,
+    title,
     children: formElement,
   };
 
