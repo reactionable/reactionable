@@ -1,7 +1,7 @@
-import { GraphQLAPI } from '@aws-amplify/api-graphql';
-import { act, renderHook } from '@testing-library/react-hooks';
+import { GraphQLAPI } from "@aws-amplify/api-graphql";
+import { act, renderHook } from "@testing-library/react-hooks";
 
-import { queryList, useQueryList } from './QueryList';
+import { queryList, useQueryList } from "./QueryList";
 
 type IItemData = {
   id: string;
@@ -9,7 +9,7 @@ type IItemData = {
 };
 
 type ListItemsQueryVariables = {
-  filter?: {} | null;
+  filter?: Record<string, unknown> | null;
   limit?: number | null;
   nextToken?: string | null;
 };
@@ -26,20 +26,20 @@ const listItems = `query ListItems($filter: ModelImageFilterInput, $limit: Int, 
 
 const graphqlMock = GraphQLAPI.graphql as jest.MockedFunction<typeof GraphQLAPI.graphql>;
 
-describe('QueryList', () => {
+describe("QueryList", () => {
   // Load first page
   const expectedItems = [
-    { id: '1', label: 'item 1' },
-    { id: '2', label: 'item 2' },
+    { id: "1", label: "item 1" },
+    { id: "2", label: "item 2" },
   ];
-  const nextToken = 'test-next-token';
+  const nextToken = "test-next-token";
 
   beforeEach(() => {
     graphqlMock.mockReset();
   });
 
-  describe('queryList', () => {
-    it('should query all items', async () => {
+  describe("queryList", () => {
+    it("should query all items", async () => {
       graphqlMock.mockResolvedValueOnce({
         data: { listItems: { items: expectedItems, nextToken } },
       });
@@ -62,7 +62,7 @@ describe('QueryList', () => {
       expect(graphqlMock).toHaveBeenCalledWith({ query: listItems, variables: { nextToken } });
     });
 
-    it('should query expected items limit', async () => {
+    it("should query expected items limit", async () => {
       graphqlMock.mockResolvedValueOnce({
         data: { listItems: { items: expectedItems, nextToken } },
       });
@@ -90,8 +90,8 @@ describe('QueryList', () => {
     });
   });
 
-  describe('useQueryList', () => {
-    it('should return an error if graphql result is undefined', async () => {
+  describe("useQueryList", () => {
+    it("should return an error if graphql result is undefined", async () => {
       const { result, waitForNextUpdate } = renderHook(() =>
         useQueryList<IItemData, ListItemsQueryVariables>({
           query: listItems,
@@ -100,10 +100,10 @@ describe('QueryList', () => {
 
       await act(waitForNextUpdate);
 
-      expect(result.current.error).toEqual(new Error('No data'));
+      expect(result.current.error).toEqual(new Error("No data"));
     });
 
-    it('should return graphql result data', async () => {
+    it("should return graphql result data", async () => {
       graphqlMock.mockResolvedValueOnce({
         data: { listItems: { items: expectedItems, nextToken } },
       });
@@ -123,8 +123,8 @@ describe('QueryList', () => {
       expect(result.current.next).toBeInstanceOf(Function);
     });
 
-    it('should paginate through items', async () => {
-      const nextToken = 'test-next-token';
+    it("should paginate through items", async () => {
+      const nextToken = "test-next-token";
 
       graphqlMock.mockResolvedValueOnce({
         data: { listItems: { items: expectedItems, nextToken } },

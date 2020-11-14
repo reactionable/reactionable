@@ -1,12 +1,12 @@
-import { I18n } from '@aws-amplify/core';
-import { initializeI18n as coreInitializeI18n } from '@reactionable/core/lib/i18n/I18n';
-import { InitOptions } from 'i18next';
+import { I18n } from "@aws-amplify/core";
+import { initializeI18n as coreInitializeI18n } from "@reactionable/core/lib/i18n/I18n";
+import { i18n as I18nType, InitOptions } from "i18next";
 
 function extractLanguage(language: string) {
-  return language.split('-').shift();
+  return language.split("-").shift();
 }
 
-export async function initializeI18n(options: InitOptions) {
+export async function initializeI18n(options: InitOptions): Promise<I18nType> {
   const i18n = await coreInitializeI18n(options);
   I18n.setLanguage(extractLanguage(i18n.language));
 
@@ -21,7 +21,7 @@ export async function initializeI18n(options: InitOptions) {
     }
   }
 
-  i18n.on('languageChanged', (language) => I18n.setLanguage(extractLanguage(language)));
+  i18n.on("languageChanged", (language) => I18n.setLanguage(extractLanguage(language)));
 
   return i18n;
 }

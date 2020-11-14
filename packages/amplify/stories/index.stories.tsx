@@ -1,20 +1,20 @@
-import 'bootstrap/dist/css/bootstrap.css';
+import "bootstrap/dist/css/bootstrap.css";
 
-import { linkTo } from '@storybook/addon-links';
-import React from 'react';
+import { linkTo } from "@storybook/addon-links";
+import React, { ReactElement } from "react";
 
 export default {
-  title: 'Amplify/Home',
+  title: "Amplify/Home",
   parameters: {
     info: { inline: true },
     options: { showPanel: false },
     previewTabs: {
-      'storybook/docs/panel': { hidden: true },
+      "storybook/docs/panel": { hidden: true },
     },
   },
 };
 
-export const Presentation = () => (
+export const Presentation = (): ReactElement => (
   <div className="container">
     <div className="row">
       <div className="col">
@@ -24,29 +24,29 @@ export const Presentation = () => (
           </h1>
           <hr />
           <p className="lead">
-            Backend package for{' '}
-            <a href="https://docs.amplify.aws/" target="_blank">
+            Backend package for{" "}
+            <a href="https://docs.amplify.aws/" target="_blank" rel="noreferrer">
               AWS Amplify
-            </a>{' '}
+            </a>{" "}
             integration
           </p>
         </div>
         <ul className="list-group">
           <li className="list-group-item">
             <button
-              onClick={linkTo('Amplify/Home', 'Installation')}
+              onClick={linkTo("Amplify/Home", "Installation")}
               className="btn btn-link btn-sm"
             >
               🚀 Installation
             </button>
           </li>
           <li className="list-group-item">
-            <button onClick={linkTo('Amplify/Home', 'Usage')} className="btn btn-link btn-sm">
+            <button onClick={linkTo("Amplify/Home", "Usage")} className="btn btn-link btn-sm">
               🧾 Usage
             </button>
           </li>
           <li className="list-group-item">
-            <button onClick={linkTo('Amplify/Components/Identity')} className="btn btn-link btn-sm">
+            <button onClick={linkTo("Amplify/Components/Identity")} className="btn btn-link btn-sm">
               📖 Components
             </button>
           </li>
@@ -56,7 +56,7 @@ export const Presentation = () => (
   </div>
 );
 
-export const Installation = () => (
+export const Installation = (): ReactElement => (
   <div className="container">
     <div className="row">
       <div className="col">
@@ -90,7 +90,7 @@ export const Installation = () => (
   </div>
 );
 
-export const Usage = () => (
+export const Usage = (): ReactElement => (
   <div className="container">
     <div className="row">
       <div className="col">
@@ -108,10 +108,10 @@ export const Usage = () => (
         <h2>FAQ</h2>
         <h3>Customize amplify theme</h3>
         <p>
-          You can customize your css through{' '}
+          You can customize your css through{" "}
           <a href="https://docs.amplify.aws/ui/customization/theming/q/framework/react">Theming</a>,
           or via function <code>useIdentityContextProviderProps</code> which accept all options
-          supported by{' '}
+          supported by{" "}
           <a href="https://docs.amplify.aws/lib/auth/customui/q/platform/js#customize-ui-theme">
             AWS Amplify UI theme
           </a>

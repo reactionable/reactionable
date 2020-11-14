@@ -1,22 +1,22 @@
-import '../config';
+import "../config";
 
-import { useIdentityContext } from '@reactionable/core';
-import React from 'react';
+import { useIdentityContext } from "@reactionable/core";
+import React, { ReactElement } from "react";
 
-import { IdentityContextProvider, SignUp } from '../../src/identity/Identity';
+import { IdentityContextProvider, SignUp } from "../../src/identity/Identity";
 
 export default {
-  title: 'Amplify/Components/Identity',
+  title: "Amplify/Components/Identity",
   parameters: { info: { inline: true }, options: { showPanel: true } },
   component: IdentityContextProvider,
 };
 
-export const UseIdentityContext = () => {
+export const UseIdentityContext = (): ReactElement => {
   const Authentication = () => {
     const { auth, user } = useIdentityContext();
     return (
       <>
-        <p>User signed-in: {user ? user.displayName() : 'No user'}</p>
+        <p>User signed-in: {user ? user.displayName() : "No user"}</p>
         {auth}
       </>
     );
@@ -29,7 +29,7 @@ export const UseIdentityContext = () => {
   );
 };
 
-export const HideSignUpForm = () => {
+export const HideSignUpForm = (): ReactElement => {
   const Authentication = () => {
     const { auth } = useIdentityContext();
     return auth;

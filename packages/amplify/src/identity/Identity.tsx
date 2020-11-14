@@ -4,6 +4,7 @@ import {
   IAuthComponentProps,
   IIdentityProviderProps as ICoreIdentityProviderProps,
   IUser as ICoreUser,
+  useTranslation,
 } from "@reactionable/core";
 import {
   Authenticator,
@@ -14,8 +15,7 @@ import {
 } from "aws-amplify-react";
 import { IAuthenticatorProps } from "aws-amplify-react/lib-esm/Auth/Authenticator";
 import { UsernameAttributes } from "aws-amplify-react/lib-esm/Auth/common/types";
-import React, { PropsWithChildren } from "react";
-import { useTranslation } from "react-i18next";
+import React, { PropsWithChildren, ReactElement } from "react";
 
 export type IUser = ICoreUser;
 
@@ -82,8 +82,9 @@ function AuthComponent({
       onStateChange={(authState: string, data?) => {
         setUser(authState !== "signedIn" ? null : dataToUser(data));
       }}
-      children={[SignIn, ConfirmSignIn, VerifyContact, ForgotPassword]}
-    />
+    >
+      {[SignIn, ConfirmSignIn, VerifyContact, ForgotPassword]}
+    </Authenticator>
   );
 }
 
@@ -108,6 +109,6 @@ export const useIdentityContextProviderProps = (
 
 export const IdentityContextProvider = (
   props?: PropsWithChildren<Partial<IIdentityProviderProps>>
-) => {
+): ReactElement => {
   return <CoreIdentityContextProvider {...useIdentityContextProviderProps()} {...props} />;
 };

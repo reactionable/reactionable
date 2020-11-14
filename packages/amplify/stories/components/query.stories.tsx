@@ -1,12 +1,12 @@
-import '../config';
+import "../config";
 
-import { List, UIContextProvider, useUIProviderProps } from '@reactionable/core';
-import React from 'react';
+import { List, UIContextProvider, useUIProviderProps } from "@reactionable/core";
+import React, { ReactElement } from "react";
 
-import { useQueryList } from '../../src/query/QueryList';
+import { useQueryList } from "../../src/query/QueryList";
 
 export default {
-  title: 'Amplify/Components/Query',
+  title: "Amplify/Components/Query",
   parameters: { info: { inline: true }, options: { showPanel: true } },
 };
 
@@ -16,7 +16,7 @@ type IItemData = {
 };
 
 type ListItemsQueryVariables = {
-  filter?: {} | null;
+  filter?: Record<string, unknown> | null;
   limit?: number | null;
   nextToken?: string | null;
 };
@@ -31,7 +31,7 @@ const listItems = `query ListItems($filter: ModelImageFilterInput, $limit: Int, 
   }
 }`;
 
-export const UseQueryList = () => {
+export const UseQueryList = (): ReactElement => {
   const ListItems = () => {
     const { isLoading, error, data, refetch, next, previous } = useQueryList<
       IItemData,
@@ -44,7 +44,7 @@ export const UseQueryList = () => {
       return (
         <table>
           {data.map((item) => (
-            <tr key={'item-' + item.id}>
+            <tr key={"item-" + item.id}>
               <td>{item.label}</td>
             </tr>
           ))}
@@ -71,9 +71,10 @@ export const UseQueryList = () => {
           error={error}
           data={data}
           isLoading={isLoading}
-          children={renderChildren}
           noData="There is no existing item"
-        />
+        >
+          {renderChildren}
+        </List>
       </>
     );
   };

@@ -1,10 +1,10 @@
-import { GraphQLAPI } from '@aws-amplify/api-graphql';
+import { GraphQLAPI } from "@aws-amplify/api-graphql";
 
-import { IQueryOptions, query } from './Query';
+import { IData, IQueryOptions, IVariables, query } from "./Query";
 
-type ITestData = {};
+type ITestData = IData;
 
-type TestVariables = {};
+type TestVariables = IVariables;
 
 const testQuery = `query Test() {
     test() { }
@@ -12,14 +12,14 @@ const testQuery = `query Test() {
 
 const graphqlMock = GraphQLAPI.graphql as jest.MockedFunction<typeof GraphQLAPI.graphql>;
 
-describe('Query', () => {
+describe("Query", () => {
   beforeEach(() => {
     graphqlMock.mockReset();
   });
 
-  describe('query', () => {
-    it('should return the retrieve graphql error', async () => {
-      const expectedError = 'test graphql error';
+  describe("query", () => {
+    it("should return the retrieve graphql error", async () => {
+      const expectedError = "test graphql error";
       graphqlMock.mockRejectedValueOnce({
         data: undefined,
         errors: [

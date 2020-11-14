@@ -1,22 +1,23 @@
 import {
   IUseQueryListOptions as ICoreUseQueryListOptions,
   IUseQueryListResult as ICoreUseQueryListResult,
-  IVariables,
   useQuery as useQueryCore,
-} from '@reactionable/core';
-import { useEffect, useState } from 'react';
+} from "@reactionable/core";
+import { useEffect, useState } from "react";
 
-import { IQueryOptions, IUseQueryOptions, query } from './Query';
+import { IData, IQueryOptions, IVariables, query } from "./Query";
+import { IUseQueryOptions } from "./useQuery";
+
+export type IListVariables = IVariables & {
+  limit?: number | null;
+  nextToken?: UndefinedType<string>;
+};
 
 export type UndefinedType<T> = T | null | undefined;
 
 export type IUseQueryListResult<Data> = ICoreUseQueryListResult<Data>;
 
-export type IQueryListOptions<Variables extends IVariables> = IQueryOptions<
-  Variables & {
-    nextToken?: UndefinedType<string>;
-  }
-> & {
+export type IQueryListOptions<Variables extends IListVariables> = IQueryOptions<Variables> & {
   queryAll?: boolean;
 };
 
@@ -25,12 +26,13 @@ export type AmplifyListType<Data> = {
   nextToken?: UndefinedType<string>;
 };
 
-export async function queryList<Data extends {}, Variables extends IVariables>(
+export async function queryList<Data extends IData, Variables extends IListVariables>(
   options: IQueryListOptions<Variables>
 ): Promise<AmplifyListType<Data>> {
   const items: Array<Data> = [];
   let tmpOptions = Object.assign({}, options);
-  while (true) {
+  let shouldFetchMore = true;
+  while (shouldFetchMore) {
     const result = await query<Data, IQueryListOptions<Variables>>({
       ...tmpOptions,
       rawData: true,
@@ -41,10 +43,10 @@ export async function queryList<Data extends {}, Variables extends IVariables>(
     items.push(...data.items);
 
     // Aws do not apply filters before applying limit
-    const hasLimitVariable = !!options?.variables?.limit;
-    const limitNotReached = hasLimitVariable && items.length - 1 < options.variables!.limit;
+    const limitVariable = options?.variables?.limit;
+    const limitNotReached = limitVariable && items.length - 1 < limitVariable;
 
-    const shouldFetchMore = data.nextToken && (tmpOptions.queryAll || limitNotReached);
+    shouldFetchMore = !!(data.nextToken && (tmpOptions.queryAll || limitNotReached));
     if (!shouldFetchMore) {
       return { ...data, items };
     }
@@ -57,15 +59,15 @@ export async function queryList<Data extends {}, Variables extends IVariables>(
       },
     });
   }
+  return { items };
 }
 
-export type IUseQueryListOptions<Data extends {}, Variables extends IVariables> = IUseQueryOptions<
-  Data,
-  Variables
-> &
-  Omit<ICoreUseQueryListOptions<Variables>, 'handleQuery'>;
+export type IUseQueryListOptions<
+  Data extends IData,
+  Variables extends IListVariables
+> = IUseQueryOptions<Data, Variables> & Omit<ICoreUseQueryListOptions<Variables>, "handleQuery">;
 
-export const useQueryList = <Data extends {}, Variables extends {}>(
+export const useQueryList = <Data extends IData, Variables extends IListVariables>(
   options: IUseQueryListOptions<Data, Variables>
 ): IUseQueryListResult<Data> => {
   const [currentToken, setCurrentToken] = useState<UndefinedType<string>>();
@@ -81,7 +83,7 @@ export const useQueryList = <Data extends {}, Variables extends {}>(
     variables: {
       ...options.variables,
       nextToken: currentToken,
-    },
+    } as Variables,
     handleQuery: (queryOptions) => queryList<Data, Variables>(queryOptions),
   });
 
@@ -113,17 +115,21 @@ export const useQueryList = <Data extends {}, Variables extends {}>(
   };
 };
 
-function extractListData<Data extends {}>(result: any): AmplifyListType<Data> {
+type IDataWithItems<Data extends IData> =
+  | { [key: string]: IDataWithItems<Data> | unknown }
+  | AmplifyListType<Data>;
+function extractListData<Data extends IData>(result: IDataWithItems<Data>): AmplifyListType<Data> {
   if (!result) {
-    throw new Error('No data');
+    throw new Error("No data");
   }
 
-  let data: any = result;
+  let data: IDataWithItems<Data> = result;
   while (data.items === undefined) {
     data = data[Object.keys(data)[0]];
     if (!data) {
-      throw new Error('No data found in result');
+      throw new Error("No data found in result");
     }
   }
-  return data;
+
+  return data as AmplifyListType<Data>;
 }
