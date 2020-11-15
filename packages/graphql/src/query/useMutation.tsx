@@ -1,31 +1,44 @@
 import {
+  FetchResult,
   MutationFunctionOptions,
   MutationHookOptions,
   MutationOptions,
+  MutationResult,
   useMutation as useMutationHook,
-} from '@apollo/client';
+} from "@apollo/client";
 
-import { IOperationVariables, extractGqlData, stringToGQL } from './Client';
+import { IData, IVariables, extractGqlData, stringToGQL } from "../Client";
 
-export type IMutationOptions<T = any, TVariables = IOperationVariables> = Omit<
-  MutationOptions<T, TVariables>,
-  'mutation'
+export type IMutationOptions<TData = IData, TVariables = IVariables> = Omit<
+  MutationOptions<TData, TVariables>,
+  "mutation"
 >;
 
 export type IMutationFunctionOptions<
-  TData = any,
-  TVariables = IOperationVariables
+  TData = IData,
+  TVariables = IVariables
 > = MutationFunctionOptions<TData, TVariables>;
 
-export type IMutationHookOptions<
-  TData = any,
-  TVariables = IOperationVariables
-> = MutationHookOptions<TData, TVariables>;
+export type IMutationHookOptions<TData = IData, TVariables = IVariables> = MutationHookOptions<
+  TData,
+  TVariables
+>;
 
-export function useMutation<TData = any, TVariables = IOperationVariables>(
+export type IUseMutationResult<TData = IData, TVariables = IVariables> = MutationResult<TData> & {
+  data: TData | undefined;
+  mutate: (
+    options?: IMutationFunctionOptions<TData, TVariables>
+  ) => Promise<
+    FetchResult<TData> & {
+      data: TData | undefined;
+    }
+  >;
+};
+
+export function useMutation<TData = IData, TVariables = IVariables>(
   mutation: string,
   options?: IMutationHookOptions<TData, TVariables>
-) {
+): IUseMutationResult<TData, TVariables> {
   const gqlQuery = stringToGQL(mutation);
   const [mutate, { error, data, ...result }] = useMutationHook<TData, TVariables>(
     gqlQuery,

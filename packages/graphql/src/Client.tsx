@@ -1,4 +1,4 @@
-import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { ApolloClient, DocumentNode, InMemoryCache } from "@apollo/client";
 import {
   ApolloProvider,
   HttpOptions,
@@ -6,16 +6,18 @@ import {
   createHttpLink,
   gql,
   useApolloClient,
-} from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
-import React, { PropsWithChildren, useMemo } from 'react';
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
+import { IData as ICoreData } from "@reactionable/core";
+import fetch from "cross-fetch";
+import React, { PropsWithChildren, ReactElement, useMemo } from "react";
+export { gql } from "@apollo/client";
 
-export { gql } from '@apollo/client';
-
-export type IGraphqlClient = ApolloClient<any>;
-export type IGraphqlClientUri = HttpOptions['uri'];
-export type IGraphqlClientState = any | undefined;
-export type IOperationVariables = OperationVariables;
+export type IGraphqlClient = ApolloClient<IGraphqlClientState>;
+export type IGraphqlClientUri = HttpOptions["uri"];
+export type IGraphqlClientState = Record<string, unknown>;
+export type IVariables = OperationVariables;
+export type IData = ICoreData;
 
 let graphqlClient: IGraphqlClient | undefined;
 function getGraphqlClient() {
@@ -25,33 +27,35 @@ function getGraphqlClient() {
 function createGraphqlClient(uri: IGraphqlClientUri) {
   const httpLink = createHttpLink({
     uri,
-    credentials: 'include', // Additional fetch() options like `credentials` or `headers`,
+    fetch,
+    credentials: "include", // Additional fetch() options like `credentials` or `headers`,
   });
 
   const authLink = setContext((_, prevContext) => {
-    console.log({ prevContext });
-
     const { headers } = prevContext;
 
     // get the authentication token from local storage if it exists
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     // return the headers to the context so httpLink can read them
     return {
       headers: {
         ...headers,
-        authorization: token ? `Bearer ${token}` : '',
+        authorization: token ? `Bearer ${token}` : "",
       },
     };
   });
 
   return new ApolloClient({
-    ssrMode: typeof window === 'undefined',
+    ssrMode: typeof window === "undefined",
     link: authLink.concat(httpLink),
     cache: new InMemoryCache(),
   });
 }
 
-export function initializeGraphqlClient(uri: IGraphqlClientUri, initialState: IGraphqlClientState) {
+export function initializeGraphqlClient(
+  uri: IGraphqlClientUri,
+  initialState: IGraphqlClientState
+): IGraphqlClient {
   const _graphqlClient = getGraphqlClient() || createGraphqlClient(uri);
 
   // If your page has Next.js data fetching methods that use Apollo Client, the initial state
@@ -64,18 +68,21 @@ export function initializeGraphqlClient(uri: IGraphqlClientUri, initialState: IG
     _graphqlClient.cache.restore({ ...existingCache, ...initialState });
   }
   // For SSG and SSR always create a new Apollo Client
-  if (typeof window === 'undefined') return _graphqlClient;
+  if (typeof window === "undefined") return _graphqlClient;
 
   return _graphqlClient;
 }
 
-export function useInitGraphqlClient(uri: IGraphqlClientUri, initialState: IGraphqlClientState) {
+export function useInitGraphqlClient(
+  uri: IGraphqlClientUri,
+  initialState: IGraphqlClientState
+): IGraphqlClient {
   const store = useMemo(() => initializeGraphqlClient(uri, initialState), [initialState]);
   return store;
 }
 
-export function useGraphqlClient() {
-  return useApolloClient();
+export function useGraphqlClient(): IGraphqlClient {
+  return useApolloClient() as IGraphqlClient;
 }
 
 export type IApolloProviderProps = {
@@ -87,18 +94,18 @@ export function GraphqlProvider({
   uri,
   initialState,
   children,
-}: PropsWithChildren<IApolloProviderProps>) {
+}: PropsWithChildren<IApolloProviderProps>): ReactElement {
   const graphqlClient = useInitGraphqlClient(uri, initialState);
-  return <ApolloProvider client={graphqlClient} children={children} />;
+  return <ApolloProvider client={graphqlClient}>{children}</ApolloProvider>;
 }
 
-export function stringToGQL(query: string) {
+export function stringToGQL(query: string): DocumentNode {
   return gql`
     ${query}
   `;
 }
 
-export function extractGqlData<Data>(result: any): Data | undefined {
-  const data = result[Object.keys(result)[0]];
+export function extractGqlData<Data>(result: IData): Data | undefined {
+  const data = result && "object" === typeof result ? result[Object.keys(result)[0]] : result;
   return data as Data | undefined;
 }

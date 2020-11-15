@@ -3,9 +3,5 @@
  */
 
 export * from './Client';
-export * from './useMutation';
-export * from './useQuery';
-export * from './crud/List/List';
-export * from './crud/Read/Read';
-export * from './crud/create/Create';
-export * from './crud/delete/Delete';
+export * from './query/useMutation';
+export * from './query/useQuery';
