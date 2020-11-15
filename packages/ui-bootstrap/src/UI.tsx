@@ -1,24 +1,23 @@
-import { IUseLoaderProps } from '@reactionable/core/lib/ui/loader/useLoader';
 import {
   UIContextProvider as CoreUIContextProvider,
   IUIProviderProps as ICoreUIContextProviderProps,
   useUIProviderProps as useCoreUIProviderProps,
-} from '@reactionable/core/lib/ui/UI';
-import React, { PropsWithChildren } from 'react';
+} from "@reactionable/core/lib/ui/UI";
+import React, { PropsWithChildren, ReactElement } from "react";
 
-import { IUseErrorAlertProps, useErrorAlert } from './alert/ErrorAlert';
-import { IUseWarningAlertProps, useWarningAlert } from './alert/WarningAlert';
-import { IUseConfirmationProps, useConfirmation } from './confirmation/Confirmation';
-import { IUseFormProps, useForm } from './form/Form';
-import { IUseLayoutProps, useLayout } from './layout/Layout';
-import { useLoader } from './loader/Loader';
-import { IUseModalProps, useModal } from './modal/Modal';
-import { IUseModalFormProps, useModalForm } from './modal/useModalForm';
-import { IUseErrorNotificationProps, useErrorNotification } from './notification/ErrorNotification';
+import { IUseErrorAlertProps, useErrorAlert } from "./alert/ErrorAlert";
+import { IUseWarningAlertProps, useWarningAlert } from "./alert/WarningAlert";
+import { IUseConfirmationProps, useConfirmation } from "./confirmation/Confirmation";
+import { useForm } from "./form/useForm";
+import { IUseLayoutProps, useLayout } from "./layout/Layout";
+import { IUseLoaderProps, useLoader } from "./loader/Loader";
+import { IUseModalProps, useModal } from "./modal/Modal";
+import { useModalForm } from "./modal/useModalForm";
+import { IUseErrorNotificationProps, useErrorNotification } from "./notification/ErrorNotification";
 import {
   IUseSuccessNotificationProps,
   useSuccessNotification,
-} from './notification/SuccessNotification';
+} from "./notification/SuccessNotification";
 
 export type IUIProviderProps = ICoreUIContextProviderProps<
   IUseLoaderProps,
@@ -28,9 +27,7 @@ export type IUIProviderProps = ICoreUIContextProviderProps<
   IUseWarningAlertProps,
   IUseConfirmationProps,
   IUseLayoutProps,
-  IUseFormProps,
-  IUseModalProps,
-  IUseModalFormProps
+  IUseModalProps
 >;
 
 export function useUIProviderProps(): IUIProviderProps {
@@ -49,6 +46,13 @@ export function useUIProviderProps(): IUIProviderProps {
   };
 }
 
-export const UIContextProvider = (props?: PropsWithChildren<Partial<IUIProviderProps>>) => {
-  return <CoreUIContextProvider {...useUIProviderProps()} {...props} />;
+export const UIContextProvider = (
+  props?: PropsWithChildren<Partial<IUIProviderProps>>
+): ReactElement => {
+  const uiContextProviderProps = {
+    ...useUIProviderProps(),
+    ...props,
+  } as IUIProviderProps;
+
+  return <CoreUIContextProvider {...uiContextProviderProps} />;
 };

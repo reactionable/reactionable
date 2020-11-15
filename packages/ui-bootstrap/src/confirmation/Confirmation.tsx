@@ -1,21 +1,26 @@
+import { useTranslation } from "@reactionable/core/lib/i18n/I18n";
 import {
   ConfirmationComponent,
   ConfirmationAction as CoreConfirmationAction,
   IConfirmationActionProps as ICoreConfirmationActionProps,
   IConfirmationProps as ICoreConfirmationProps,
   IUseConfirmationProps as ICoreUseConfirmationProps,
+  IUseConfirmationResult,
   useConfirmation as useConfirmationCore,
-} from '@reactionable/core/lib/ui/confirmation/Confirmation';
-import React, { PropsWithChildren } from 'react';
-import Button, { ButtonProps } from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import { useTranslation } from 'react-i18next';
+} from "@reactionable/core/lib/ui/confirmation/Confirmation";
+import React, { PropsWithChildren, ReactElement } from "react";
+import Button, { ButtonProps } from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 
-import { IIconProps, Icon } from '../icon/icon';
+import { IIconProps, Icon } from "../icon/icon";
 
 export type IConfirmationProps = ICoreConfirmationProps;
 
-export const Confirmation: ConfirmationComponent = ({ callback, children, title }) => {
+export const Confirmation: ConfirmationComponent = ({
+  callback,
+  children,
+  title,
+}: PropsWithChildren<IConfirmationProps>) => {
   const { t } = useTranslation();
   const handleCancel = () => callback(false);
   const handleOk = () => callback(true);
@@ -29,15 +34,15 @@ export const Confirmation: ConfirmationComponent = ({ callback, children, title 
       onHide={handleCancel}
     >
       <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">{title || t('Confirm ?')}</Modal.Title>
+        <Modal.Title id="contained-modal-title-vcenter">{title || t("Confirm ?")}</Modal.Title>
       </Modal.Header>
       <Modal.Body>{children}</Modal.Body>
       <Modal.Footer>
         <Button variant="outline-primary" onClick={handleCancel}>
-          {t('Cancel')}
+          {t("Cancel")}
         </Button>
         <Button variant="primary" onClick={handleOk}>
-          {t('OK')}
+          {t("OK")}
         </Button>
       </Modal.Footer>
     </Modal>
@@ -56,12 +61,12 @@ export function ConfirmationAction<Data>({
   icon,
   children,
   ...props
-}: PropsWithChildren<IConfirmationActionProps<Data>>) {
+}: PropsWithChildren<IConfirmationActionProps<Data>>): ReactElement {
   return (
     <CoreConfirmationAction<Data> {...props}>
       {children}
       {button && (
-        <Button title={props.title || ''} {...button}>
+        <Button title={props.title || ""} {...button}>
           {icon && <Icon {...icon} />}
           {label}
         </Button>
@@ -70,7 +75,7 @@ export function ConfirmationAction<Data>({
   );
 }
 
-export type IUseConfirmationProps = ICoreUseConfirmationProps & {};
-export const useConfirmation = (props: IUseConfirmationProps) => {
+export type IUseConfirmationProps = ICoreUseConfirmationProps;
+export const useConfirmation = (props: IUseConfirmationProps): IUseConfirmationResult => {
   return useConfirmationCore<IConfirmationProps>({ Component: Confirmation, ...props });
 };

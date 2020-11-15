@@ -1,15 +1,15 @@
-import '../config';
+import "../config";
 
-import { action } from '@storybook/addon-actions';
-import { text, withKnobs } from '@storybook/addon-knobs';
-import React from 'react';
-import Button from 'react-bootstrap/Button';
+import { action } from "@storybook/addon-actions";
+import { text, withKnobs } from "@storybook/addon-knobs";
+import React, { ReactElement } from "react";
+import Button from "react-bootstrap/Button";
 
-import { ConfirmationAction, useConfirmation } from '../../src/confirmation/Confirmation';
-import { UIContextProvider } from '../../src/UI';
+import { ConfirmationAction, useConfirmation } from "../../src/confirmation/Confirmation";
+import { UIContextProvider } from "../../src/UI";
 
 export default {
-  title: 'UI Bootstrap/Components/Confirmation',
+  title: "UI Bootstrap/Components/Confirmation",
   parameters: {
     info: { inline: true },
     options: { showPanel: true },
@@ -19,33 +19,36 @@ export default {
   decorators: [withKnobs],
 };
 
-export const confirmationAction = () => (
+export const confirmationAction = (): ReactElement => (
   <UIContextProvider>
     <ConfirmationAction
       title="Confirm?"
       confirmationMessage="Do you want to perform this action"
       successMessage="The action has been confirmed"
-      children={<Button>Click on me</Button>}
       onConfirm={async () => {
         await new Promise((resolve) => setTimeout(resolve, 1000));
-        action('Action confirmed')();
-        return 'ok';
+        action("Action confirmed")();
+        return "ok";
       }}
-      onSuccess={action('Action succeed')}
-    />
+      onSuccess={action("Action succeed")}
+    >
+      <Button>Click on me</Button>
+    </ConfirmationAction>
   </UIContextProvider>
 );
 
-export const UseConfirmation = () => {
-  const title = text('Title', 'This is a confirmation');
-  const content = text('Content', 'This is a confirmation content');
+export const UseConfirmation = (): ReactElement => {
+  const title = text("Title", "This is a confirmation");
+  const content = text("Content", "This is a confirmation content");
 
   const { confirmation, setConfirmation } = useConfirmation({
     title,
     children: content,
     callback: async (confirm: boolean) => {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      action(confirm ? 'Action confirmed' : 'Action canceled')();
+      if (!confirm) {
+        return action("Action canceled");
+      }
+      action("Action confirmed")();
     },
   });
 

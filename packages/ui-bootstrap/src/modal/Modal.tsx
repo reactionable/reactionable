@@ -1,10 +1,11 @@
 import {
   IModalProps as ICoreModalProps,
   IUseModalProps as ICoreUseModalProps,
+  IUseModalResult,
   useModal as useCoreModal,
-} from '@reactionable/core/lib/ui/modal/Modal';
-import React, { ComponentType, ReactNode } from 'react';
-import BootstrapModal, { ModalProps } from 'react-bootstrap/Modal';
+} from "@reactionable/core/lib/ui/modal/Modal";
+import React, { ComponentType, ReactElement, ReactNode } from "react";
+import BootstrapModal, { ModalProps } from "react-bootstrap/Modal";
 
 export type IModalProps = ICoreModalProps &
   ModalProps & {
@@ -13,7 +14,14 @@ export type IModalProps = ICoreModalProps &
   };
 
 export type ModalComponent = ComponentType<IModalProps>;
-export const Modal: ModalComponent = ({ title, children, body, footer, onHide, ...modalProps }) => {
+export const Modal = ({
+  title,
+  children,
+  body,
+  footer,
+  onHide,
+  ...modalProps
+}: IModalProps): ReactElement => {
   const handleOnClose = () => {
     onHide && onHide();
   };
@@ -32,7 +40,7 @@ export const Modal: ModalComponent = ({ title, children, body, footer, onHide, .
 
 export type IUseModalProps = ICoreUseModalProps<IModalProps>;
 
-export function useModal(props: IUseModalProps) {
+export function useModal(props: IUseModalProps): IUseModalResult {
   return useCoreModal<IModalProps>({
     Component: Modal,
     ...props,

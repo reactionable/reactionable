@@ -3,21 +3,21 @@ import {
   Paginator as CorePaginator,
   IPaginationProps as ICorePaginationProps,
   IPaginatorProps as ICorePaginatorProps,
-} from '@reactionable/core/lib/ui/paginator/Paginator';
-import React from 'react';
-import BootstrapPagination from 'react-bootstrap/Pagination';
+} from "@reactionable/core/lib/ui/paginator/Paginator";
+import React, { ReactElement } from "react";
+import BootstrapPagination from "react-bootstrap/Pagination";
 
 export type IPaginationProps = Omit<
   ICorePaginationProps,
-  | 'PaginationLinkComponent'
-  | 'PaginationEllipsisComponent'
-  | 'PaginationLinkFirstComponent'
-  | 'PaginationLinkPrevComponent'
-  | 'PaginationLinkNextComponent'
-  | 'PaginationLinkLastComponent'
+  | "PaginationLinkComponent"
+  | "PaginationEllipsisComponent"
+  | "PaginationLinkFirstComponent"
+  | "PaginationLinkPrevComponent"
+  | "PaginationLinkNextComponent"
+  | "PaginationLinkLastComponent"
 >;
 
-export function Pagination(props: IPaginationProps) {
+export function Pagination(props: IPaginationProps): ReactElement {
   return (
     <BootstrapPagination>
       <CorePagination
@@ -33,7 +33,7 @@ export function Pagination(props: IPaginationProps) {
   );
 }
 
-export type IPaginatorProps = Omit<ICorePaginatorProps, 'PaginationComponent'>;
-export function Paginator(props: IPaginatorProps) {
+export type IPaginatorProps = Omit<ICorePaginatorProps, "PaginationComponent">;
+export function Paginator(props: IPaginatorProps): ReactElement {
   return <CorePaginator {...props} PaginationComponent={Pagination} />;
 }

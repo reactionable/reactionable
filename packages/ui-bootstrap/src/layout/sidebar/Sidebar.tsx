@@ -1,33 +1,27 @@
+import { useTranslation } from "@reactionable/core/lib/i18n/I18n";
+import { INavItemsProps } from "@reactionable/core/lib/nav/NavItem";
+import { INavItemsProviderProps } from "@reactionable/core/lib/nav/NavItemsContextProvider";
 import {
-  INavItemsContext,
-  INavItemsProps,
-  createNavItemContextProvider,
-} from '@reactionable/core/lib/nav/NavItem';
-import React, { ComponentType, PropsWithChildren, useEffect, useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col';
-import Collapse from 'react-bootstrap/Collapse';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import { useTranslation } from 'react-i18next';
+  Sidebar as CoreSidebar,
+  useSidebarContext as coreUseSidebarContext,
+} from "@reactionable/core/lib/ui/layout/sidebar/Sidebar";
+import React, { PropsWithChildren, ReactElement, useState } from "react";
+import { Nav } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
+import Collapse from "react-bootstrap/Collapse";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
 
-import { INavItemProps, navItemToComponent } from '../../nav/NavItem';
+import { INavItemProps, NavItems } from "../../nav/NavItem";
 
-export type ISidebarNavItem = INavItemProps;
+export type ISidebarProps = Partial<INavItemsProviderProps<INavItemsProps<INavItemProps>>>;
 
-export interface ISidebarProps extends INavItemsProps<ISidebarNavItem> {}
+export function useSidebarContext(): INavItemsProviderProps<INavItemsProps<INavItemProps>> {
+  return coreUseSidebarContext();
+}
 
-export type ISidebarContext = INavItemsContext<ISidebarNavItem>;
-
-const contextProvider = createNavItemContextProvider<ISidebarProps>({});
-
-export const {
-  NavItemContextProvider: SidebarContextProvider,
-  useNavItemContext: useSidebarContext,
-  NavItemContextConsumer: SidebarContextConsumer,
-} = contextProvider;
-
-const SidebarItems: ComponentType = ({ children }) => {
+const SidebarItems = ({ children }: PropsWithChildren<unknown>): ReactElement => {
   const { t } = useTranslation();
   const [open, setOpen] = useState(true);
   const { navItems } = useSidebarContext();
@@ -39,9 +33,9 @@ const SidebarItems: ComponentType = ({ children }) => {
           xs="auto"
           className="sidebar-left-side"
           style={{
-            borderRight: 'solid 1px',
-            height: '93vh',
-            paddingTop: '1vh',
+            borderRight: "solid 1px",
+            height: "93vh",
+            paddingTop: "1vh",
             paddingLeft: 0,
             paddingRight: 0,
           }}
@@ -49,23 +43,25 @@ const SidebarItems: ComponentType = ({ children }) => {
           {!open && (
             <Button
               onClick={() => setOpen(!open)}
-              aria-controls={t('Collapse sidebar')}
+              aria-controls={t("Collapse sidebar")}
               aria-expanded={open}
             >
-              {t('Collapse sidebar')}
+              {t("Collapse sidebar")}
             </Button>
           )}
-          {navItems?.map(navItemToComponent)}
+          <Nav className="flex-column">
+            <NavItems navItems={navItems} />
+          </Nav>
         </Col>
       </Collapse>
-      <Col className="sidebar-right-side" style={{ height: '89vh', overflow: 'auto' }}>
+      <Col className="sidebar-right-side" style={{ height: "89vh", overflow: "auto" }}>
         {children}
       </Col>
     </>
   );
 };
 
-export function Sidebar({ children }: PropsWithChildren<ISidebarProps>) {
+export function SidebarComponent({ children }: PropsWithChildren<ISidebarProps>): ReactElement {
   return (
     <Container
       fluid
@@ -76,18 +72,12 @@ export function Sidebar({ children }: PropsWithChildren<ISidebarProps>) {
       }}
     >
       <Row>
-        <SidebarContextProvider>
-          <SidebarItems children={children} />
-        </SidebarContextProvider>
+        <SidebarItems>{children}</SidebarItems>
       </Row>
     </Container>
   );
 }
 
-export function setSidebarNavItems(navItems: Array<INavItemProps>) {
-  const { setNavItems } = useSidebarContext();
-
-  useEffect(() => {
-    setNavItems(navItems);
-  }, navItems);
+export function Sidebar(props: PropsWithChildren<ISidebarProps>): ReactElement {
+  return <CoreSidebar Component={SidebarComponent} {...props} />;
 }

@@ -5,22 +5,20 @@ import {
   IFormFieldPropsEnhanced as ICoreFormFieldPropsEnhanced,
   IFormFieldValue,
   IRenderFormField,
-} from '@reactionable/core/lib/form/FormField';
-import React, { ReactNode } from 'react';
-import Feedback from 'react-bootstrap/Feedback';
-import FormCheck, { FormCheckProps } from 'react-bootstrap/FormCheck';
-import FormControl, { FormControlProps } from 'react-bootstrap/FormControl';
-import FormGroup from 'react-bootstrap/FormGroup';
-import FormLabel from 'react-bootstrap/FormLabel';
+} from "@reactionable/core/lib/form/FormField";
+import React, { ReactElement, ReactNode } from "react";
+import Feedback from "react-bootstrap/Feedback";
+import FormCheck, { FormCheckProps } from "react-bootstrap/FormCheck";
+import FormControl, { FormControlProps } from "react-bootstrap/FormControl";
+import FormGroup from "react-bootstrap/FormGroup";
+import FormLabel from "react-bootstrap/FormLabel";
 
-export type IFieldElementProps = ICoreFieldElementProps & {
-  label?: ReactNode | string;
-};
+export type IFieldElementProps = ICoreFieldElementProps;
 
 export type IFormFieldProps<
   FieldElement extends IFieldElementProps,
   Value extends IFormFieldValue
-> = Omit<ICoreFormFieldProps<FieldElement, Value>, 'children'> & {
+> = Omit<ICoreFormFieldProps<FieldElement, Value>, "children"> & {
   children?: IRenderFormField<IFieldElementProps, Value> | ReactNode;
 };
 
@@ -32,8 +30,13 @@ export type IFormFieldPropsEnhanced<
 export function RenderFormField<
   FieldElementProps extends IFieldElementProps = IFieldElementProps,
   Value extends IFormFieldValue = IFormFieldValue
->({ error, isValid, isInvalid, field }: IFormFieldPropsEnhanced<FieldElementProps, Value>) {
-  let fieldContent: ReactNode;
+>({
+  error,
+  isValid,
+  isInvalid,
+  field,
+}: IFormFieldPropsEnhanced<FieldElementProps, Value>): ReactElement {
+  let fieldContent: ReactElement;
 
   const fieldProps = {
     ...field,
@@ -41,7 +44,7 @@ export function RenderFormField<
     isInvalid,
   };
 
-  if (field.type === 'checkbox') {
+  if (field.type === "checkbox") {
     fieldContent = <FormCheck {...(fieldProps as FormCheckProps)} />;
   } else {
     fieldContent = <FormControl {...(fieldProps as FormControlProps)} />;
@@ -64,7 +67,7 @@ export function RenderFormField<
     );
   }
 
-  if (field.type === 'hidden') {
+  if (field.type === "hidden") {
     return fieldContent;
   }
 
@@ -72,8 +75,8 @@ export function RenderFormField<
 }
 
 export function FormField<
-  FieldElement extends IFieldElementProps = IFieldElementProps,
-  Value extends IFormFieldValue = string
->(props: IFormFieldProps<FieldElement, Value>) {
-  return <CoreFormField<any, Value> {...props} render={RenderFormField} />;
+  FieldElementProps extends IFieldElementProps = IFieldElementProps,
+  Value extends IFormFieldValue = IFormFieldValue
+>(props: IFormFieldProps<FieldElementProps, Value>): ReactElement {
+  return <CoreFormField<ICoreFieldElementProps, Value> {...props} render={RenderFormField} />;
 }

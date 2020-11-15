@@ -1,20 +1,19 @@
-import '../../config';
+import "../../config";
 
-import { faImages } from '@fortawesome/free-solid-svg-icons';
-import { generatePath, useRouteMatch } from '@reactionable/core';
-import React, { FC } from 'react';
-import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col';
-import Container from 'react-bootstrap/Container';
-import Jumbotron from 'react-bootstrap/Jumbotron';
-import Row from 'react-bootstrap/Row';
-import { useTranslation } from 'react-i18next';
+import { faImages } from "@fortawesome/free-solid-svg-icons";
+import { generatePath, useRouteMatch, useTranslation } from "@reactionable/core";
+import React, { FC, ReactElement } from "react";
+import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
+import Jumbotron from "react-bootstrap/Jumbotron";
+import Row from "react-bootstrap/Row";
 
-import { Sidebar, setSidebarNavItems } from '../../../src/layout/sidebar/Sidebar';
-import { UIContextProvider } from '../../../src/UI';
+import { Sidebar, useSidebarContext } from "../../../src/layout/sidebar/Sidebar";
+import { UIContextProvider } from "../../../src/UI";
 
 export default {
-  title: 'UI Bootstrap/Components/Layout/Sidebar',
+  title: "UI Bootstrap/Components/Layout/Sidebar",
   parameters: { info: { inline: true }, options: { showPanel: true }, component: Sidebar },
 };
 
@@ -22,12 +21,13 @@ const SampleComponent: FC = () => {
   const { t } = useTranslation();
   const match = useRouteMatch();
 
-  setSidebarNavItems([
+  const { setNavItems } = useSidebarContext();
+  setNavItems([
     {
       href: generatePath(`${match.path}/sample`, match.params),
-      title: t('Go to sample page'),
+      title: t("Go to sample page"),
       icon: { icon: faImages },
-      children: t('Sample'),
+      children: t("Sample"),
     },
   ]);
 
@@ -38,8 +38,14 @@ const SampleComponent: FC = () => {
           <Jumbotron>
             <h1>Hello, world!</h1>
             <p>
-              This is a simple hero unit, a simple jumbotron-style component for calling extra
-              attention to featured content or information.
+              <b>Lorem Ipsum</b> is simply dummy text of the printing and typesetting industry.{" "}
+              <b>Lorem Ipsum</b> has been the industry&apos; standard dummy text ever since the
+              1500s, when an unknown printer took a galley of type and scrambled it to make a type
+              specimen book. It has survived not only five centuries, but also the leap into
+              electronic typesetting, remaining essentially unchanged. It was popularised in the
+              1960s with the release of Letraset sheets containing <b>Lorem Ipsum</b> passages, and
+              more recently with desktop publishing software like Aldus PageMaker including versions
+              of <b>Lorem Ipsum</b>
             </p>
             <p>
               <Button variant="primary">Learn more</Button>
@@ -51,7 +57,7 @@ const SampleComponent: FC = () => {
   );
 };
 
-export const SimpleSidebar = () => (
+export const SimpleSidebar = (): ReactElement => (
   <UIContextProvider>
     <Sidebar>
       <SampleComponent />

@@ -1,20 +1,20 @@
-import 'bootstrap/dist/css/bootstrap.css';
+import "bootstrap/dist/css/bootstrap.css";
 
-import { linkTo } from '@storybook/addon-links';
-import React from 'react';
+import { linkTo } from "@storybook/addon-links";
+import React, { ReactElement } from "react";
 
 export default {
-  title: 'UI Bootstrap/Home',
+  title: "UI Bootstrap/Home",
   parameters: {
     info: { inline: true },
     options: { showPanel: false },
     previewTabs: {
-      'storybook/docs/panel': { hidden: true },
+      "storybook/docs/panel": { hidden: true },
     },
   },
 };
 
-export const Presentation = () => (
+export const Presentation = (): ReactElement => (
   <div className="container">
     <div className="row">
       <div className="col">
@@ -24,30 +24,30 @@ export const Presentation = () => (
           </h1>
           <hr />
           <p className="lead">
-            UI package for{' '}
-            <a href="https://react-bootstrap.github.io/" target="_blank">
+            UI package for{" "}
+            <a href="https://react-bootstrap.github.io/" target="_blank" rel="noreferrer">
               React Bootstrap
-            </a>{' '}
+            </a>{" "}
             integration
           </p>
         </div>
         <ul className="list-group">
           <li className="list-group-item">
             <button
-              onClick={linkTo('UI Bootstrap/Home', 'Installation')}
+              onClick={linkTo("UI Bootstrap/Home", "Installation")}
               className="btn btn-link btn-sm"
             >
               🚀 Installation
             </button>
           </li>
           <li className="list-group-item">
-            <button onClick={linkTo('UI Bootstrap/Home', 'Usage')} className="btn btn-link btn-sm">
+            <button onClick={linkTo("UI Bootstrap/Home", "Usage")} className="btn btn-link btn-sm">
               🧾 Usage
             </button>
           </li>
           <li className="list-group-item">
             <button
-              onClick={linkTo('UI Bootstrap/Components/Alert')}
+              onClick={linkTo("UI Bootstrap/Components/Alert")}
               className="btn btn-link btn-sm"
             >
               📖 Components
@@ -59,7 +59,7 @@ export const Presentation = () => (
   </div>
 );
 
-export const Installation = () => (
+export const Installation = (): ReactElement => (
   <div className="container">
     <div className="row">
       <div className="col">
@@ -93,7 +93,7 @@ export const Installation = () => (
   </div>
 );
 
-export const Usage = () => (
+export const Usage = (): ReactElement => (
   <div className="container">
     <div className="row">
       <div className="col">

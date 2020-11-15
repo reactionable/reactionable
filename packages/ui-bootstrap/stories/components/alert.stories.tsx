@@ -1,16 +1,16 @@
-import '../config';
+import "../config";
 
-import { faAtom } from '@fortawesome/free-solid-svg-icons';
-import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
-import React from 'react';
-import Button from 'react-bootstrap/Button';
+import { faAtom } from "@fortawesome/free-solid-svg-icons";
+import { boolean, select, text, withKnobs } from "@storybook/addon-knobs";
+import React, { ReactElement } from "react";
+import Button from "react-bootstrap/Button";
 
-import { Alert, useAlert } from '../../src/alert/Alert';
-import { ErrorAlert, useErrorAlert } from '../../src/alert/ErrorAlert';
-import { WarningAlert, useWarningAlert } from '../../src/alert/WarningAlert';
+import { Alert, useAlert } from "../../src/alert/Alert";
+import { ErrorAlert, useErrorAlert } from "../../src/alert/ErrorAlert";
+import { WarningAlert, useWarningAlert } from "../../src/alert/WarningAlert";
 
 export default {
-  title: 'UI Bootstrap/Components/Alert',
+  title: "UI Bootstrap/Components/Alert",
   parameters: {
     info: { inline: true },
     options: { showPanel: true },
@@ -20,13 +20,13 @@ export default {
   decorators: [withKnobs],
 };
 
-export const alert = (args) => {
+export const alert = (): ReactElement => {
   const variant = select(
-    'Variant',
-    ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'dark', 'light', undefined],
-    'primary'
+    "Variant",
+    ["primary", "secondary", "success", "danger", "warning", "info", "dark", "light", undefined],
+    "primary"
   );
-  const icon = boolean('Icon', false);
+  const icon = boolean("Icon", false);
 
   return (
     <Alert variant={variant} icon={icon && { icon: faAtom }}>
@@ -35,15 +35,15 @@ export const alert = (args) => {
   );
 };
 
-export const UseAlert = () => {
-  const content = text('Content', 'This is the alert content');
+export const UseAlert = (): ReactElement => {
+  const content = text("Content", "This is the alert content");
   const variant = select(
-    'Variant',
-    ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'dark', 'light', undefined],
-    'primary'
+    "Variant",
+    ["primary", "secondary", "success", "danger", "warning", "info", "dark", "light", undefined],
+    "primary"
   );
 
-  const icon = boolean('Icon', false);
+  const icon = boolean("Icon", false);
 
   const { alert, setAlert } = useAlert({
     variant,
@@ -59,10 +59,12 @@ export const UseAlert = () => {
   );
 };
 
-export const errorAlert = () => <ErrorAlert children={new Error('Test error alert')} />;
+export const errorAlert = (): ReactElement => (
+  <ErrorAlert>{new Error("Test error alert")}</ErrorAlert>
+);
 
-export const UseErrorAlert = () => {
-  const content = text('Content', 'This is the error alert content');
+export const UseErrorAlert = (): ReactElement => {
+  const content = text("Content", "This is the error alert content");
 
   const { errorAlert, setErrorAlert } = useErrorAlert();
 
@@ -75,10 +77,10 @@ export const UseErrorAlert = () => {
   );
 };
 
-export const warningAlert = () => <WarningAlert>Test warning alert</WarningAlert>;
+export const warningAlert = (): ReactElement => <WarningAlert>Test warning alert</WarningAlert>;
 
-export const UseWarningAlert = () => {
-  const content = text('Content', 'This is the warning alert content');
+export const UseWarningAlert = (): ReactElement => {
+  const content = text("Content", "This is the warning alert content");
 
   const { warningAlert, setWarningAlert } = useWarningAlert();
 

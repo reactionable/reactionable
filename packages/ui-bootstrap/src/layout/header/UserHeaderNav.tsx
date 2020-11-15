@@ -1,15 +1,15 @@
+import { useRouterContext, useTranslation } from "@reactionable/core";
 import { useIdentityContext } from "@reactionable/core/lib/identity/Identity";
-import { Link } from "@reactionable/core/lib/router/Link";
 import React, { ComponentType, useEffect } from "react";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import { useTranslation } from "react-i18next";
 
 import { Modal, useModal } from "../../modal/Modal";
 
 const UserLoggedHeaderNav = () => {
   const { user, logout } = useIdentityContext();
   const { t } = useTranslation();
+  const { RouterLink } = useRouterContext();
 
   if (!user) {
     return null;
@@ -17,11 +17,11 @@ const UserLoggedHeaderNav = () => {
 
   return (
     <NavDropdown key="userNav" id="userNav" title={user.displayName()}>
-      <NavDropdown.Item as={Link} href="/account">
+      <NavDropdown.Item as={RouterLink} href="/account">
         {t("My account")}
       </NavDropdown.Item>
       <NavDropdown.Divider />
-      <NavDropdown.Item as={Link} href="#" onClick={logout}>
+      <NavDropdown.Item as={RouterLink} href="#" onClick={logout}>
         {t("Log out")}
       </NavDropdown.Item>
     </NavDropdown>
@@ -29,6 +29,7 @@ const UserLoggedHeaderNav = () => {
 };
 
 const UserUnloggedHeaderNav = () => {
+  const { RouterLink } = useRouterContext();
   const { t } = useTranslation();
   const { user, auth } = useIdentityContext();
   const { modal, openModal, closeModal } = useModal({
@@ -51,14 +52,16 @@ const UserUnloggedHeaderNav = () => {
   return (
     <>
       {modal}
-      <Nav.Link as={Link} href="#" key="signup_signin" onClick={handleOnClick}>
-        {t("Sign In / Sign Up")}
-      </Nav.Link>
+      <RouterLink href="#">
+        <Nav.Link key="signup_signin" onClick={handleOnClick}>
+          {t("Sign In / Sign Up")}
+        </Nav.Link>
+      </RouterLink>
     </>
   );
 };
 
-export type IUserHeaderProps = {};
+export type IUserHeaderProps = Record<string, unknown>;
 export type UserHeaderNavComponent<H extends IUserHeaderProps = IUserHeaderProps> = ComponentType<
   H
 >;

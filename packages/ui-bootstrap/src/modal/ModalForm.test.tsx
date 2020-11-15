@@ -1,35 +1,36 @@
-import { i18nTestInstance } from '@reactionable/core/lib/tests/I18n';
-import { render } from '@testing-library/react';
-import React from 'react';
-import { string } from 'yup';
+import { i18nTestInstance } from "@reactionable/core/lib/tests/I18n";
+import { render } from "@testing-library/react";
+import React from "react";
+import { string } from "yup";
 
-import { FormField } from '../form/FormField';
-import { TestWrapper } from '../tests/TestWrapper';
-import { ModalForm } from './ModalForm';
+import { FormField } from "../form/FormField";
+import { TestWrapper } from "../tests/TestWrapper";
+import { ModalForm } from "./ModalForm";
 
-describe('ModalForm', () => {
+describe("ModalForm", () => {
   beforeAll(i18nTestInstance);
 
-  it('should render without crashing', () => {
+  it("should render without crashing", () => {
     const closeModal = jest.fn();
     const onSubmit = jest.fn();
 
-    render(
+    const result = render(
       <TestWrapper>
         <ModalForm
-          title="Test modal form"
           submitButton="Submit modal form"
           closeModal={closeModal}
           onSubmit={onSubmit}
           validationSchema={{
-            test: string().required('Test is required'),
+            test: string().required("Test is required"),
           }}
           initialValues={{
-            test: '',
+            test: "",
           }}
-          children={() => <FormField name="test" />}
-        />
+        >
+          <FormField name="test" />
+        </ModalForm>
       </TestWrapper>
     );
+    expect(result).toBeTruthy();
   });
 });

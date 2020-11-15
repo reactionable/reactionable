@@ -55,5 +55,13 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "1301e652cf34ddf0e2e42509f49b059f34c492a9"
+  "gitHead": "1301e652cf34ddf0e2e42509f49b059f34c492a9",
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "jsdom",
+    "testMatch": [
+      "**/__tests__/**/*.[jt]s?(x)",
+      "**/?(*.)+(spec|test).+(ts|tsx|js)"
+    ]
+  }
 }

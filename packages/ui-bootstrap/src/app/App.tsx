@@ -5,14 +5,14 @@ import { IRouterProviderProps } from '@reactionable/core/lib/router/Router';
 import { IUseLayoutProps } from '../layout/Layout';
 import { IUIProviderProps } from '../UI';
 
-export interface IAppProps<
+export type IAppProps<
   IdentityProviderProps extends IIdentityProviderProps,
   UIProviderProps extends IUIProviderProps = IUIProviderProps,
   UseLayoutProps extends IUseLayoutProps = IUseLayoutProps,
   RouterProviderProp extends IRouterProviderProps = IRouterProviderProps
-> extends ICoreAppProps<
+> = ICoreAppProps<
     IdentityProviderProps,
     UIProviderProps,
     UseLayoutProps,
     RouterProviderProp
-  > {}
+  >

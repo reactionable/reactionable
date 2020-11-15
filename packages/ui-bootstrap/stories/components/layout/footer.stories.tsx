@@ -1,12 +1,12 @@
-import '../../config';
+import "../../config";
 
-import React from 'react';
+import React, { ReactElement } from "react";
 
-import { Footer } from '../../../src/layout/footer/Footer';
+import { Footer } from "../../../src/layout/footer/Footer";
 
 export default {
-  title: 'UI Bootstrap/Components/Layout/Footer',
+  title: "UI Bootstrap/Components/Layout/Footer",
   parameters: { info: { inline: true }, options: { showPanel: true }, component: Footer },
 };
 
-export const SimpleFooter = () => <Footer />;
+export const SimpleFooter = (): ReactElement => <Footer />;
