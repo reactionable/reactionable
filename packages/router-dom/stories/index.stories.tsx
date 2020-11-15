@@ -1,20 +1,20 @@
-import 'bootstrap/dist/css/bootstrap.css';
+import "bootstrap/dist/css/bootstrap.css";
 
-import { linkTo } from '@storybook/addon-links';
-import React from 'react';
+import { linkTo } from "@storybook/addon-links";
+import React, { ReactElement } from "react";
 
 export default {
-  title: 'Router DOM/Home',
+  title: "Router DOM/Home",
   parameters: {
     info: { inline: true },
     options: { showPanel: false },
     previewTabs: {
-      'storybook/docs/panel': { hidden: true },
+      "storybook/docs/panel": { hidden: true },
     },
   },
 };
 
-export const Presentation = () => (
+export const Presentation = (): ReactElement => (
   <div className="container">
     <div className="row">
       <div className="col">
@@ -24,29 +24,33 @@ export const Presentation = () => (
           </h1>
           <hr />
           <p className="lead">
-            Router package for{' '}
-            <a href="https://reactrouter.com/web/guides/quick-start" target="_blank">
+            Router package for{" "}
+            <a
+              href="https://reactrouter.com/web/guides/quick-start"
+              target="_blank"
+              rel="noreferrer"
+            >
               React Router DOM
-            </a>{' '}
+            </a>{" "}
             integration
           </p>
         </div>
         <ul className="list-group">
           <li className="list-group-item">
             <button
-              onClick={linkTo('Router DOM/Home', 'Installation')}
+              onClick={linkTo("Router DOM/Home", "Installation")}
               className="btn btn-link btn-sm"
             >
               🚀 Installation
             </button>
           </li>
           <li className="list-group-item">
-            <button onClick={linkTo('Router DOM/Home', 'Usage')} className="btn btn-link btn-sm">
+            <button onClick={linkTo("Router DOM/Home", "Usage")} className="btn btn-link btn-sm">
               🧾 Usage
             </button>
           </li>
           <li className="list-group-item">
-            <button onClick={linkTo('Router DOM/Components/Link')} className="btn btn-link btn-sm">
+            <button onClick={linkTo("Router DOM/Components/Link")} className="btn btn-link btn-sm">
               📖 Components
             </button>
           </li>
@@ -56,7 +60,7 @@ export const Presentation = () => (
   </div>
 );
 
-export const Installation = () => (
+export const Installation = (): ReactElement => (
   <div className="container">
     <div className="row">
       <div className="col">
@@ -90,7 +94,7 @@ export const Installation = () => (
   </div>
 );
 
-export const Usage = () => (
+export const Usage = (): ReactElement => (
   <div className="container">
     <div className="row">
       <div className="col">

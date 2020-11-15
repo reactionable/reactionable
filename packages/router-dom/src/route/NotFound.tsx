@@ -1,16 +1,34 @@
-import { lazyLoad } from '@reactionable/core/lib/ui/loader/Loader';
-import React, { LazyExoticComponent } from 'react';
-import { Redirect, RouteComponentProps, useLocation, withRouter } from 'react-router-dom';
+import { lazyLoad } from "@reactionable/core/lib/ui/loader/Loader";
+import React, { ComponentType, LazyExoticComponent, PropsWithChildren, ReactElement } from "react";
+import { Redirect, RouteComponentProps, useLocation, withRouter } from "react-router-dom";
 
-export const RouteNotFound = () => <Redirect to={{ state: { notFoundError: true } }} />;
+export const RouteNotFound = (): ReactElement => (
+  <Redirect to={{ state: { notFoundError: true } }} />
+);
 
-export const useCaptureRouteNotFound = (notFoundComponent: LazyExoticComponent<any>) =>
-  withRouter(({ children }: RouteComponentProps & { children: any }) => {
+function CaptureRouteNotFound({
+  notFoundComponent,
+  children,
+}: PropsWithChildren<{
+  notFoundComponent: LazyExoticComponent<ComponentType>;
+}>): ReactElement | null {
+  const location = useLocation<{ notFoundError: boolean }>();
+
+  const shouldDisplayNotFoundComponent = location && location.state && location.state.notFoundError;
+  if (shouldDisplayNotFoundComponent) {
     const NotFoundComponent = lazyLoad(notFoundComponent);
-    const location = useLocation<{ notFoundError: boolean }>();
-    return location && location.state && location.state.notFoundError ? (
-      <NotFoundComponent />
-    ) : children ? (
-      children
-    ) : null;
-  });
+    return <NotFoundComponent />;
+  }
+  if (children) {
+    return <>{children}</>;
+  }
+
+  return null;
+}
+
+export const useCaptureRouteNotFound = (
+  notFoundComponent: LazyExoticComponent<ComponentType>
+): ReturnType<typeof withRouter> =>
+  withRouter(({ children }: PropsWithChildren<RouteComponentProps>) => (
+    <CaptureRouteNotFound notFoundComponent={notFoundComponent}>{children}</CaptureRouteNotFound>
+  ));
