@@ -1,19 +1,19 @@
-import { i18nTestInstance } from '@reactionable/core/lib/tests/I18n';
-import { render } from '@testing-library/react';
-import React from 'react';
+import { i18nTestInstance } from "@reactionable/core/lib/tests/I18n";
+import { render } from "@testing-library/react";
+import React from "react";
 
-import { TestWrapper } from '../../tests/TestWrapper';
-import { Delete } from './Delete';
+import { TestWrapper } from "../../tests/TestWrapper";
+import { Delete } from "./Delete";
 
 interface ITestData {
   test: string;
 }
 
-describe('Delete', () => {
+describe("Delete", () => {
   beforeAll(i18nTestInstance);
 
-  it('should render without crashing', () => {
-    render(
+  it("should render without crashing", () => {
+    const result = render(
       <TestWrapper>
         <Delete<ITestData>
           title="Test delete"
@@ -23,5 +23,6 @@ describe('Delete', () => {
         />
       </TestWrapper>
     );
+    expect(result).toBeTruthy();
   });
 });

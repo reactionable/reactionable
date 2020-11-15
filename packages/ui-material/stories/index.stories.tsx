@@ -1,20 +1,20 @@
-import 'bootstrap/dist/css/bootstrap.css';
+import "bootstrap/dist/css/bootstrap.css";
 
-import { linkTo } from '@storybook/addon-links';
-import React from 'react';
+import { linkTo } from "@storybook/addon-links";
+import React, { ReactElement } from "react";
 
 export default {
-  title: 'UI Material/Home',
+  title: "UI Material/Home",
   parameters: {
     info: { inline: true },
     options: { showPanel: false },
     previewTabs: {
-      'storybook/docs/panel': { hidden: true },
+      "storybook/docs/panel": { hidden: true },
     },
   },
 };
 
-export const Presentation = () => (
+export const Presentation = (): ReactElement => (
   <div className="container">
     <div className="row">
       <div className="col">
@@ -24,30 +24,30 @@ export const Presentation = () => (
           </h1>
           <hr />
           <p className="lead">
-            UI package for{' '}
-            <a href="https://material-ui.com/" target="_blank">
+            UI package for{" "}
+            <a href="https://material-ui.com/" target="_blank" rel="noreferrer">
               Material-UI
-            </a>{' '}
+            </a>{" "}
             integration
           </p>
         </div>
         <ul className="list-group">
           <li className="list-group-item">
             <button
-              onClick={linkTo('UI Material/Home', 'Installation')}
+              onClick={linkTo("UI Material/Home", "Installation")}
               className="btn btn-link btn-sm"
             >
               🚀 Installation
             </button>
           </li>
           <li className="list-group-item">
-            <button onClick={linkTo('UI Material/Home', 'Usage')} className="btn btn-link btn-sm">
+            <button onClick={linkTo("UI Material/Home", "Usage")} className="btn btn-link btn-sm">
               🧾 Usage
             </button>
           </li>
           <li className="list-group-item">
             <button
-              onClick={linkTo('UI Material/Components/Alert')}
+              onClick={linkTo("UI Material/Components/Alert")}
               className="btn btn-link btn-sm"
             >
               📖 Components
@@ -59,7 +59,7 @@ export const Presentation = () => (
   </div>
 );
 
-export const Installation = () => (
+export const Installation = (): ReactElement => (
   <div className="container">
     <div className="row">
       <div className="col">
@@ -93,7 +93,7 @@ export const Installation = () => (
   </div>
 );
 
-export const Usage = () => (
+export const Usage = (): ReactElement => (
   <div className="container">
     <div className="row">
       <div className="col">
@@ -110,7 +110,7 @@ export const Usage = () => (
       <h2 className="mb-5">Setup App</h2>
       <dl className="row">
         <dt className="col-12 mb-3">
-          1. Wrap the root component of you application in Reactionable App (E.g:{' '}
+          1. Wrap the root component of you application in Reactionable App (E.g:{" "}
           <code>index.tsx</code>):
         </dt>
         <dd className="col-12">
@@ -126,7 +126,7 @@ export default App;`}</code>
         </dd>
         <dt className="col-12 mb-3">
           2. It is possible to custom UI Context provider props (
-          <button className="btn btn-link btn-sm" onClick={linkTo('UI Material/Components/UI')}>
+          <button className="btn btn-link btn-sm" onClick={linkTo("UI Material/Components/UI")}>
             Documentation
           </button>
           )

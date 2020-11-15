@@ -1,11 +1,11 @@
-import Button from '@material-ui/core/Button/Button';
-import Paper from '@material-ui/core/Paper/Paper';
-import React from 'react';
+import Button from "@material-ui/core/Button/Button";
+import Paper from "@material-ui/core/Paper/Paper";
+import React, { ReactElement } from "react";
 
-import { UIContextProvider } from '../../src/UI';
+import { UIContextProvider } from "../../src/UI";
 
 export default {
-  title: 'UI Material/Components/Context Provider',
+  title: "UI Material/Components/Context Provider",
   parameters: {
     info: { inline: true },
     options: { showPanel: true },
@@ -13,7 +13,7 @@ export default {
   },
 };
 
-export const SimpleUIContextProvider = () => (
+export const SimpleUIContextProvider = (): ReactElement => (
   <UIContextProvider>
     <Paper elevation={3}>
       <h1>Hello, world!</h1>

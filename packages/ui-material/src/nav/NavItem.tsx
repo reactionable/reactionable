@@ -1,20 +1,36 @@
-import { SvgIcon } from '@material-ui/core';
-import Link, { LinkProps } from '@material-ui/core/Link/Link';
-import { INavItemProps as ICoreNavItemProps } from '@reactionable/core/lib/nav/NavItem';
-import { Link as CoreLink } from '@reactionable/core/lib/router/Link';
-import React, { ReactNode } from 'react';
+import { SvgIcon } from "@material-ui/core";
+import { LinkProps } from "@material-ui/core/Link/Link";
+import ListItem from "@material-ui/core/ListItem/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText/ListItemText";
+import {
+  NavItem as CoreNavItem,
+  NavItems as CoreNavItems,
+  INavItemProps as ICoreNavItemProps,
+  INavItemsComponentProps,
+} from "@reactionable/core/lib/nav/NavItem";
+import React, { ReactElement } from "react";
 
-export type INavItemProps = ICoreNavItemProps<LinkProps & { icon?: typeof SvgIcon }>;
+import { Icon } from "../icon/Icon";
 
-export function navItemToComponent(props: INavItemProps): ReactNode {
-  const { icon, ...linkProps } = props;
-  const key = `${linkProps.href}`;
-  if (icon) {
-    linkProps.children = (
-      <>
-        {icon} {linkProps.children}
-      </>
-    );
-  }
-  return <Link key={key} component={CoreLink} {...linkProps} />;
+export type INavItemProps = ICoreNavItemProps & LinkProps & { icon?: typeof SvgIcon };
+
+export function NavItem(props: INavItemProps): ReactElement {
+  const { icon, children, href, ...linkProps } = props;
+  return (
+    <CoreNavItem href={href}>
+      <ListItem button component="a" {...linkProps}>
+        {icon && (
+          <ListItemIcon>
+            <Icon icon={icon} />
+          </ListItemIcon>
+        )}
+        <ListItemText primary={children} />
+      </ListItem>
+    </CoreNavItem>
+  );
+}
+
+export function NavItems(props: INavItemsComponentProps<INavItemProps>): ReactElement | null {
+  return <CoreNavItems<INavItemProps> Component={NavItem} {...props} />;
 }

@@ -2,25 +2,28 @@ import {
   Form as CoreForm,
   IFormProps as ICoreFormProps,
   IOnSubmitForm as ICoreOnSubmitForm,
-  useForm as useCoreForm,
-} from '@reactionable/core/lib/form/Form';
-import React, { PropsWithChildren } from 'react';
+  IFormData,
+  IFormValues,
+} from "@reactionable/core/lib/form/Form";
+import React, { ReactElement } from "react";
 
-import { SubmitButton } from './SubmitButton';
+import { FormButton, IFormButtonProps } from "./FormButton";
 
-export type IFormProps<Values, Data> = ICoreFormProps<Values, Data>;
+export type IFormProps<
+  Values extends IFormValues,
+  Data extends IFormData,
+  FormButtonProps extends IFormButtonProps
+> = ICoreFormProps<Values, Data, FormButtonProps>;
 
-export type IOnSubmitForm<Values, Data> = ICoreOnSubmitForm<Values, Data>;
+export type IOnSubmitForm<Values extends IFormValues, Data extends IFormData> = ICoreOnSubmitForm<
+  Values,
+  Data
+>;
 
-export function Form<Values, Data>(props: PropsWithChildren<IFormProps<Values, Data>>) {
-  return <CoreForm<Values, Data> {...props} submitButtonComponent={SubmitButton} />;
-}
-
-export type IUseFormProps<Values = any, Data = any> = PropsWithChildren<IFormProps<Values, Data>>;
-
-export function useForm<Values, Data>(props: IUseFormProps<Values, Data>) {
-  return useCoreForm<IUseFormProps<Values, Data>>({
-    Component: Form,
-    ...props,
-  });
+export function Form<
+  Values extends IFormValues,
+  Data extends IFormData,
+  FormButtonProps extends IFormButtonProps
+>(props: IFormProps<Values, Data, FormButtonProps>): ReactElement {
+  return <CoreForm<Values, Data, FormButtonProps> {...props} FormButtonComponent={FormButton} />;
 }

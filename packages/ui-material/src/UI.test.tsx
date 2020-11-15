@@ -1,23 +1,24 @@
-import '@testing-library/jest-dom/extend-expect';
+import "@testing-library/jest-dom/extend-expect";
 
-import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
-import useTheme from '@material-ui/core/styles/useTheme';
-import { i18nTestInstance } from '@reactionable/core/src/tests/I18n';
-import { useUIContext } from '@reactionable/core/src/ui/UI';
-import { render } from '@testing-library/react';
-import React from 'react';
+import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
+import useTheme from "@material-ui/core/styles/useTheme";
+import { i18nTestInstance } from "@reactionable/core/src/tests/I18n";
+import { useUIContext } from "@reactionable/core/src/ui/UI";
+import { render } from "@testing-library/react";
+import React from "react";
 
-import { UIContextProvider, useUIProviderProps } from './UI';
+import { UIContextProvider, useUIProviderProps } from "./UI";
 
-describe('UI', () => {
+describe("UI", () => {
   beforeAll(i18nTestInstance);
-  describe('UIContextProvider', () => {
-    it('should render without crashing', async () => {
-      render(<UIContextProvider {...useUIProviderProps()}>test</UIContextProvider>);
+  describe("UIContextProvider", () => {
+    it("should render without crashing", async () => {
+      const result = render(<UIContextProvider {...useUIProviderProps()}>test</UIContextProvider>);
+      expect(result).toBeTruthy();
     });
 
-    it('should initialize a theme with given options', async () => {
-      const primaryColor = '#FF0000';
+    it("should initialize a theme with given options", async () => {
+      const primaryColor = "#FF0000";
 
       const TestComponent = () => {
         const theme = useTheme();
@@ -32,13 +33,13 @@ describe('UI', () => {
         </UIContextProvider>
       );
 
-      const testColor = getByTestId('test-color');
+      const testColor = getByTestId("test-color");
       expect(testColor).toBeDefined();
       expect(testColor).toHaveTextContent(primaryColor);
     });
 
-    it('should initialize a theme with a given theme', async () => {
-      const primaryColor = '#FF0000';
+    it("should initialize a theme with a given theme", async () => {
+      const primaryColor = "#FF0000";
       const theme = createMuiTheme({ palette: { primary: { main: primaryColor } } });
 
       const TestComponent = () => {
@@ -51,22 +52,24 @@ describe('UI', () => {
         </UIContextProvider>
       );
 
-      const testColor = getByTestId('test-color');
+      const testColor = getByTestId("test-color");
       expect(testColor).toBeDefined();
       expect(testColor).toHaveTextContent(primaryColor);
     });
 
-    it('should use UI hook', async () => {
+    it("should use UI hook", async () => {
       const TestComponent = () => {
         const { useLoader } = useUIContext();
         const { loader } = useLoader({ isLoading: true });
-        return <>{loader}</>;
+        return loader;
       };
-      render(
+
+      const result = render(
         <UIContextProvider {...useUIProviderProps()}>
           <TestComponent />
         </UIContextProvider>
       );
+      expect(result).toBeTruthy();
     });
   });
 });

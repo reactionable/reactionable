@@ -1,16 +1,16 @@
-import Button from '@material-ui/core/Button/Button';
-import { text, withKnobs } from '@storybook/addon-knobs';
-import React from 'react';
+import Button from "@material-ui/core/Button/Button";
+import { text, withKnobs } from "@storybook/addon-knobs";
+import React, { ReactElement } from "react";
 
-import { ErrorNotification, useErrorNotification } from '../../src/notification/ErrorNotification';
-import { Notification, useNotification } from '../../src/notification/Notification';
+import { ErrorNotification, useErrorNotification } from "../../src/notification/ErrorNotification";
+import { Notification, useNotification } from "../../src/notification/Notification";
 import {
   SuccessNotification,
   useSuccessNotification,
-} from '../../src/notification/SuccessNotification';
+} from "../../src/notification/SuccessNotification";
 
 export default {
-  title: 'UI Material/Components/Notification',
+  title: "UI Material/Components/Notification",
   parameters: {
     info: { inline: true },
     options: { showPanel: true },
@@ -20,31 +20,31 @@ export default {
   decorators: [withKnobs],
 };
 
-export const SimpleNotification = () => {
-  const title = text('Title', 'This is a notification');
-  const content = text('Content', 'This is the notification content');
+export const SimpleNotification = (): ReactElement => {
+  const title = text("Title", "This is a notification");
+  const content = text("Content", "This is the notification content");
 
   return <Notification title={title}>{content}</Notification>;
 };
 
-export const NotificationWithComplexContent = () => {
+export const NotificationWithComplexContent = (): ReactElement => {
   const content = (
     <>
-      <b>Lorem Ipsum</b> is simply dummy text of the printing and typesetting industry.{' '}
-      <b>Lorem Ipsum</b> has been the industry's standard dummy text ever since the 1500s, when an
-      unknown printer took a galley of type and scrambled it to make a type specimen book. It has
+      <b>Lorem Ipsum</b> is simply dummy text of the printing and typesetting industry.{" "}
+      <b>Lorem Ipsum</b> has been the industry&apos; standard dummy text ever since the 1500s, when
+      an unknown printer took a galley of type and scrambled it to make a type specimen book. It has
       survived not only five centuries, but also the leap into electronic typesetting, remaining
       essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
       containing <b>Lorem Ipsum</b> passages, and more recently with desktop publishing software
       like Aldus PageMaker including versions of <b>Lorem Ipsum</b>
     </>
   );
-  return <Notification title="Notification With Complex Content" children={content} />;
+  return <Notification title="Notification With Complex Content">{content}</Notification>;
 };
 
-export const UseNotification = () => {
-  const title = text('Title', 'This is a notification');
-  const content = text('Content', 'This is the notification content');
+export const UseNotification = (): ReactElement => {
+  const title = text("Title", "This is a notification");
+  const content = text("Content", "This is the notification content");
 
   const { notification, setNotification } = useNotification({ title, children: content });
 
@@ -56,16 +56,16 @@ export const UseNotification = () => {
   );
 };
 
-export const successNotification = () => {
-  const title = text('Title', 'This is a success notification');
-  const content = text('Content', 'This is the success notification content');
+export const successNotification = (): ReactElement => {
+  const title = text("Title", "This is a success notification");
+  const content = text("Content", "This is the success notification content");
 
-  return <SuccessNotification title={title} children={content} />;
+  return <SuccessNotification title={title}>{content}</SuccessNotification>;
 };
 
-export const UseSuccessNotification = () => {
-  const title = text('Title', 'This is a success notification');
-  const content = text('Content', 'This is the success notification content');
+export const UseSuccessNotification = (): ReactElement => {
+  const title = text("Title", "This is a success notification");
+  const content = text("Content", "This is the success notification content");
 
   const { successNotification, setSuccessNotification } = useSuccessNotification({
     title,
@@ -79,16 +79,16 @@ export const UseSuccessNotification = () => {
   );
 };
 
-export const errorNotification = () => {
-  const title = text('Title', 'This is an error notification');
-  const content = text('Content', 'This is an error notification content');
+export const errorNotification = (): ReactElement => {
+  const title = text("Title", "This is an error notification");
+  const content = text("Content", "This is an error notification content");
 
-  return <ErrorNotification title={title} children={new Error(content)} />;
+  return <ErrorNotification title={title}>{new Error(content)}</ErrorNotification>;
 };
 
-export const UseErrorNotification = () => {
-  const title = text('Title', 'This is a success notification');
-  const content = text('Content', 'This is the success notification content');
+export const UseErrorNotification = (): ReactElement => {
+  const title = text("Title", "This is a success notification");
+  const content = text("Content", "This is the success notification content");
 
   const { errorNotification, setErrorNotification } = useErrorNotification({
     title,

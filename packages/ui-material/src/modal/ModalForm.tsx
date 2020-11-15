@@ -1,82 +1,95 @@
-import Button from '@material-ui/core/Button/Button';
-import DialogActions from '@material-ui/core/DialogActions/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent/DialogContent';
-import { FormFieldsChildren, IFormChildrenProps } from '@reactionable/core/lib/form/Form';
+import DialogActions from "@material-ui/core/DialogActions/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent/DialogContent";
+import { IFormData, IFormValues } from "@reactionable/core/lib/form/Form";
+import { FormFields, IFormFieldsProps } from "@reactionable/core/lib/form/FormFields";
+import { IFormWrapperProps } from "@reactionable/core/lib/form/FormWrapper";
+import { useTranslation } from "@reactionable/core/lib/i18n/I18n";
 import {
-  IModalFormComponentProps as ICoreModalFormComponentProps,
+  ModalForm as CoreModalForm,
   IModalFormProps as ICoreModalFormProps,
-} from '@reactionable/core/lib/ui/modal/ModalForm';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
+} from "@reactionable/core/lib/ui/modal/ModalForm";
+import React, { ReactElement } from "react";
 
-import { Form, IFormProps } from '../form/Form';
-import { renderSubmitButton } from '../form/SubmitButton';
-import { IModalProps } from './Modal';
+import { IFormButtonProps, useFormButton, useSubmitFormButton } from "../form/FormButton";
 
-export interface IModalFormProps<Values = any, Data = any>
-  extends ICoreModalFormProps<IFormProps<Values, Data>, IModalProps> {}
+export type IModalFormProps<
+  Values extends IFormValues,
+  Data extends IFormData,
+  FormButtonProps extends IFormButtonProps
+> = ICoreModalFormProps<Values, Data, FormButtonProps>;
 
-export type IModalFormComponentProps<Values, Data> = ICoreModalFormComponentProps<
-  IFormProps<Values, Data>
-> & {
-  submitButton?: string;
-  cancelButton?: string;
+type IModalFormChildrenProps<
+  Values extends IFormValues,
+  Data extends IFormData,
+  FormButtonProps extends IFormButtonProps
+> = {
+  submitButton: IModalFormProps<Values, Data, FormButtonProps>["submitButton"];
+  cancelButton: IModalFormProps<Values, Data, FormButtonProps>["cancelButton"];
+  children: IModalFormProps<Values, Data, FormButtonProps>["children"];
+  closeModal: IModalFormProps<Values, Data, FormButtonProps>["closeModal"];
+  formikProps: IFormFieldsProps<Values>["formikProps"];
 };
 
-type IModalFormChildrenProps<Values, Data> = Pick<
-  IModalFormComponentProps<Values, Data>,
-  'submitButton' | 'cancelButton' | 'closeModal' | 'children'
-> & { formikProps: IFormChildrenProps<Values> };
-
-function ModalFormChildren<Values, Data>({
-  submitButton,
+function ModalFormChildren<
+  Values extends IFormValues,
+  Data extends IFormData,
+  FormButtonProps extends IFormButtonProps
+>({
   cancelButton,
-  closeModal,
+  submitButton,
   children,
+  closeModal,
   formikProps,
-}: IModalFormChildrenProps<Values, Data>) {
+}: IModalFormChildrenProps<Values, Data, FormButtonProps>) {
   const { t } = useTranslation();
 
-  const submit = renderSubmitButton({
-    submitButton,
+  const submit = useSubmitFormButton({
+    children: submitButton,
     disabled: formikProps.isSubmitting,
+    fullWidth: false,
+  });
+
+  const cancel = useFormButton({
+    children: cancelButton || t("Cancel"),
+    disabled: formikProps.isSubmitting,
+    onClick: closeModal,
+    color: "default",
     fullWidth: false,
   });
 
   return (
     <>
       <DialogContent>
-        <FormFieldsChildren children={children} formikProps={formikProps} />
+        <FormFields<Values> formikProps={formikProps}>{children}</FormFields>
       </DialogContent>
       <DialogActions>
-        <Button disabled={formikProps.isSubmitting} onClick={closeModal}>
-          {cancelButton ? cancelButton : t('Cancel')}
-        </Button>
+        {cancel}
         {submit}
       </DialogActions>
     </>
   );
 }
 
-export function ModalForm<Values, Data>({
+export function ModalForm<
+  Values extends IFormValues,
+  Data extends IFormData,
+  FormButtonProps extends IFormButtonProps
+>({
+  children,
   submitButton,
   cancelButton,
-  closeModal,
-  children,
-  ...formProps
-}: IModalFormComponentProps<Values, Data>) {
-  return (
-    <Form
-      {...formProps}
-      children={(formikProps) => (
-        <ModalFormChildren
-          submitButton={submitButton}
-          cancelButton={cancelButton}
-          closeModal={closeModal}
-          children={children}
-          formikProps={formikProps}
-        />
-      )}
-    />
+  ...props
+}: IModalFormProps<Values, Data, FormButtonProps>): ReactElement {
+  const formChildren: IFormWrapperProps<Values, FormButtonProps>["children"] = (formikProps) => (
+    <ModalFormChildren<Values, Data, FormButtonProps>
+      cancelButton={cancelButton}
+      submitButton={submitButton}
+      closeModal={props.closeModal}
+      formikProps={formikProps}
+    >
+      {children}
+    </ModalFormChildren>
   );
+
+  return <CoreModalForm<Values, Data, FormButtonProps> {...props}>{formChildren}</CoreModalForm>;
 }

@@ -1,12 +1,12 @@
-import { i18nTestInstance } from '@reactionable/core/src/tests/I18n';
-import { action } from '@storybook/addon-actions';
-import React from 'react';
+import { i18nTestInstance } from "@reactionable/core/src/tests/I18n";
+import { action } from "@storybook/addon-actions";
+import React, { ReactElement } from "react";
 
-import { LanguageSelector } from '../../src/i18n/LanguageSelector';
-import { UIContextProvider } from '../../src/UI';
+import { LanguageSelector } from "../../src/i18n/LanguageSelector";
+import { UIContextProvider } from "../../src/UI";
 
 export default {
-  title: 'UI Material/Components/I18n',
+  title: "UI Material/Components/I18n",
   parameters: {
     info: { inline: true },
     options: { showPanel: true },
@@ -14,11 +14,11 @@ export default {
   },
 };
 
-export const SimpleLanguageSelector = () => {
+export const SimpleLanguageSelector = (): ReactElement => {
   i18nTestInstance();
   return (
     <UIContextProvider>
-      <LanguageSelector onSelectLanguage={action('Language has changed')} />
+      <LanguageSelector onSelectLanguage={action("Language has changed")} />
     </UIContextProvider>
   );
 };

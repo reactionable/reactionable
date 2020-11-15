@@ -1,25 +1,26 @@
-import Button, { ButtonProps } from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog/Dialog';
-import DialogActions from '@material-ui/core/DialogActions/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle/DialogTitle';
-import Paper, { PaperProps } from '@material-ui/core/Paper/Paper';
-import useTheme from '@material-ui/core/styles/useTheme';
-import useMediaQuery from '@material-ui/core/useMediaQuery/useMediaQuery';
+import Button, { ButtonProps } from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog/Dialog";
+import DialogActions from "@material-ui/core/DialogActions/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle/DialogTitle";
+import Paper, { PaperProps } from "@material-ui/core/Paper/Paper";
+import useTheme from "@material-ui/core/styles/useTheme";
+import useMediaQuery from "@material-ui/core/useMediaQuery/useMediaQuery";
+import { useTranslation } from "@reactionable/core/lib/i18n/I18n";
 import {
   ConfirmationComponent,
   ConfirmationAction as CoreConfirmationAction,
   IConfirmationActionProps as ICoreConfirmationActionProps,
   IConfirmationProps as ICoreConfirmationProps,
   IUseConfirmationProps as ICoreUseConfirmationProps,
+  IUseConfirmationResult,
   useConfirmation as useConfirmationCore,
-} from '@reactionable/core/lib/ui/confirmation/Confirmation';
-import React, { PropsWithChildren } from 'react';
-import Draggable from 'react-draggable';
-import { useTranslation } from 'react-i18next';
+} from "@reactionable/core/lib/ui/confirmation/Confirmation";
+import React, { PropsWithChildren, ReactElement } from "react";
+import Draggable from "react-draggable";
 
-import { IIconProps, Icon } from '../icon/Icon';
+import { IIconProps, Icon } from "../icon/Icon";
 
 export type IConfirmationProps = ICoreConfirmationProps;
 
@@ -31,10 +32,14 @@ function PaperComponent(props: PaperProps) {
   );
 }
 
-export const Confirmation: ConfirmationComponent = ({ callback, children, title }) => {
+export const Confirmation: ConfirmationComponent = ({
+  callback,
+  children,
+  title,
+}: PropsWithChildren<IConfirmationProps>) => {
   const { t } = useTranslation();
   const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const handleCancel = () => callback(false);
   const handleOk = () => callback(true);
 
@@ -47,18 +52,18 @@ export const Confirmation: ConfirmationComponent = ({ callback, children, title 
       fullScreen={fullScreen}
       fullWidth
     >
-      <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
-        {title || t('Confirm ?')}
+      <DialogTitle style={{ cursor: "move" }} id="draggable-dialog-title">
+        {title || t("Confirm ?")}
       </DialogTitle>
       <DialogContent>
         <DialogContentText>{children}</DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button onClick={handleCancel} color="primary">
-          {t('Cancel')}
+          {t("Cancel")}
         </Button>
         <Button onClick={handleOk} color="primary">
-          {t('OK')}
+          {t("OK")}
         </Button>
       </DialogActions>
     </Dialog>
@@ -77,12 +82,12 @@ export function ConfirmationAction<Data>({
   icon,
   children,
   ...props
-}: PropsWithChildren<IConfirmationActionProps<Data>>) {
+}: PropsWithChildren<IConfirmationActionProps<Data>>): ReactElement {
   return (
     <CoreConfirmationAction<Data> {...props}>
       {children}
       {button && (
-        <Button title={props.title || ''} {...button}>
+        <Button title={props.title || ""} {...button}>
           {icon && <Icon {...icon} />}
           {label}
         </Button>
@@ -91,7 +96,7 @@ export function ConfirmationAction<Data>({
   );
 }
 
-export type IUseConfirmationProps = ICoreUseConfirmationProps & {};
-export const useConfirmation = (props: IUseConfirmationProps) => {
+export type IUseConfirmationProps = ICoreUseConfirmationProps;
+export const useConfirmation = (props: IUseConfirmationProps): IUseConfirmationResult => {
   return useConfirmationCore<IConfirmationProps>({ Component: Confirmation, ...props });
 };

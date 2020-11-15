@@ -1,13 +1,14 @@
-import { i18nTestInstance } from '@reactionable/core/src/tests/I18n';
-import { render } from '@testing-library/react';
-import React from 'react';
+import { i18nTestInstance } from "@reactionable/core/src/tests/I18n";
+import { render } from "@testing-library/react";
+import React from "react";
 
-import { LanguageSelector } from './LanguageSelector';
+import { LanguageSelector } from "./LanguageSelector";
 
-describe('LanguageSelector', () => {
+describe("LanguageSelector", () => {
   beforeAll(i18nTestInstance);
 
-  it('should render without crashing', () => {
-    render(<LanguageSelector />);
+  it("should render without crashing", () => {
+    const result = render(<LanguageSelector />);
+    expect(result).toBeTruthy();
   });
 });

@@ -1,12 +1,12 @@
-import { IIdentityProviderProps } from '@reactionable/core/lib/identity/Identity';
-import { IRouterProviderProps } from '@reactionable/core/lib/router/Router';
+import { IIdentityProviderProps } from "@reactionable/core/lib/identity/Identity";
+import { IRouterProviderProps } from "@reactionable/core/lib/router/Router";
 import {
   TestWrapper as CoreTestWrapper,
   ITestWrapperProps,
-} from '@reactionable/core/lib/tests/TestWrapper';
-import React, { PropsWithChildren } from 'react';
+} from "@reactionable/core/lib/tests/TestWrapper";
+import React, { PropsWithChildren, ReactElement } from "react";
 
-import { IUIProviderProps, useUIProviderProps } from '../UI';
+import { IUIProviderProps, useUIProviderProps } from "../UI";
 
 export function TestWrapper<
   IdentityProviderProps extends IIdentityProviderProps = IIdentityProviderProps,
@@ -16,6 +16,6 @@ export function TestWrapper<
   props: PropsWithChildren<
     ITestWrapperProps<IdentityProviderProps, UIProviderProps, RouterProviderProps>
   >
-) {
+): ReactElement {
   return <CoreTestWrapper ui={useUIProviderProps()} {...props} />;
 }

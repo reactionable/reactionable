@@ -1,15 +1,25 @@
-import { Create as CreateCore } from '@reactionable/core/lib/crud/create/Create';
-import React, { PropsWithChildren } from 'react';
+import {
+  Create as CreateCore,
+  ICreateProps as ICoreCreateProps,
+} from "@reactionable/core/lib/crud/create/Create";
+import { IFormData, IFormValues } from "@reactionable/core/lib/form/Form";
+import React, { PropsWithChildren, ReactElement } from "react";
 
-import { IFormProps } from '../../form/Form';
-import { IModalFormProps } from '../../modal/ModalForm';
-import { IUseModalFormProps } from '../../modal/useModalForm';
+import { IFormButtonProps } from "../../form/FormButton";
+import { IModalProps } from "../../modal/Modal";
 
-export interface ICreateProps<Values, Data> {
-  modal?: Omit<IUseModalFormProps<IModalFormProps<Values, Data>>, 'form' | 'title'> | true;
-  form: IFormProps<Values, Data>;
-}
+export type ICreateProps<
+  Values extends IFormValues,
+  Data extends IFormData,
+  FormButtonProps extends IFormButtonProps,
+  ModalProps extends IModalProps
+> = ICoreCreateProps<Values, Data, FormButtonProps, ModalProps>;
 
-export function Create<Values, Data>(props: PropsWithChildren<ICreateProps<Values, Data>>) {
-  return <CreateCore<Values, Data> {...props} />;
+export function Create<
+  Values extends IFormValues = IFormValues,
+  Data extends IFormData = IFormData,
+  FormButtonProps extends IFormButtonProps = IFormButtonProps,
+  ModalProps extends IModalProps = IModalProps
+>(props: PropsWithChildren<ICreateProps<Values, Data, FormButtonProps, ModalProps>>): ReactElement {
+  return <CreateCore<Values, Data, FormButtonProps, ModalProps> {...props} />;
 }

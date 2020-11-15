@@ -2,14 +2,15 @@ import IconButton from "@material-ui/core/IconButton/IconButton";
 import Menu from "@material-ui/core/Menu/Menu";
 import MenuItem from "@material-ui/core/MenuItem/MenuItem";
 import { AccountCircle } from "@material-ui/icons";
+import { useTranslation } from "@reactionable/core/lib/i18n/I18n";
 import { useIdentityContext } from "@reactionable/core/lib/identity/Identity";
-import { Link } from "@reactionable/core/lib/router/Link";
+import { useRouterContext } from "@reactionable/core/lib/router/Router";
 import { UserUnloggedHeaderNav } from "@reactionable/core/lib/ui/layout/header/UserHeaderNav";
 import React, { ComponentType, MouseEvent, useState } from "react";
-import { useTranslation } from "react-i18next";
 
 const UserLoggedHeaderNav = () => {
   const { user, logout } = useIdentityContext();
+  const { RouterLink } = useRouterContext();
   const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -45,7 +46,7 @@ const UserLoggedHeaderNav = () => {
         onClose={handleClose}
       >
         <MenuItem onClick={handleClose}>
-          <Link href="/account">{t("My account")}</Link>
+          <RouterLink href="/account">{t("My account")}</RouterLink>
         </MenuItem>
         <hr />
         <MenuItem onClick={logout}>{t("Log out")}</MenuItem>
@@ -54,7 +55,7 @@ const UserLoggedHeaderNav = () => {
   );
 };
 
-export type IUserHeaderProps = {};
+export type IUserHeaderProps = Record<string, unknown>;
 export type UserHeaderNavComponent<H extends IUserHeaderProps = IUserHeaderProps> = ComponentType<
   H
 >;

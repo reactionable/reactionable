@@ -1,24 +1,25 @@
-import Dialog, { DialogProps } from '@material-ui/core/Dialog/Dialog';
-import DialogActions from '@material-ui/core/DialogActions/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle/DialogTitle';
-import IconButton from '@material-ui/core/IconButton/IconButton';
-import { Theme } from '@material-ui/core/styles/createMuiTheme';
-import createStyles from '@material-ui/core/styles/createStyles';
-import makeStyles from '@material-ui/core/styles/makeStyles';
-import useTheme from '@material-ui/core/styles/useTheme';
-import useMediaQuery from '@material-ui/core/useMediaQuery/useMediaQuery';
-import CloseIcon from '@material-ui/icons/Close';
+import Dialog, { DialogProps } from "@material-ui/core/Dialog/Dialog";
+import DialogActions from "@material-ui/core/DialogActions/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle/DialogTitle";
+import IconButton from "@material-ui/core/IconButton/IconButton";
+import { Theme } from "@material-ui/core/styles/createMuiTheme";
+import createStyles from "@material-ui/core/styles/createStyles";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+import useTheme from "@material-ui/core/styles/useTheme";
+import useMediaQuery from "@material-ui/core/useMediaQuery/useMediaQuery";
+import CloseIcon from "@material-ui/icons/Close";
 import {
   IModalProps as ICoreModalProps,
   IUseModalProps as ICoreUseModalProps,
+  IUseModalResult,
   useModal as useCoreModal,
-} from '@reactionable/core/lib/ui/modal/Modal';
-import React, { ComponentType, ReactNode } from 'react';
+} from "@reactionable/core/lib/ui/modal/Modal";
+import React, { ComponentType, ReactNode } from "react";
 
 export type IModalProps = ICoreModalProps &
-  Omit<DialogProps, 'open'> & {
+  Omit<DialogProps, "open" | "title"> & {
     body?: ReactNode;
     footer?: ReactNode;
   };
@@ -26,7 +27,7 @@ export type IModalProps = ICoreModalProps &
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     closeButton: {
-      position: 'absolute',
+      position: "absolute",
       right: theme.spacing(1),
       top: theme.spacing(1),
       color: theme.palette.grey[500],
@@ -43,10 +44,10 @@ export const Modal: ModalComponent = ({
   onHide,
   show: open,
   ...dialogProps
-}) => {
+}: IModalProps) => {
   const classes = useStyles();
   const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
   const handleOnClose = () => {
     onHide && onHide();
@@ -80,7 +81,7 @@ export const Modal: ModalComponent = ({
 
 export type IUseModalProps = ICoreUseModalProps<IModalProps>;
 
-export function useModal(props: IUseModalProps) {
+export function useModal(props: IUseModalProps): IUseModalResult {
   return useCoreModal<IModalProps>({
     Component: Modal,
     ...props,

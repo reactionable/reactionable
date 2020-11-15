@@ -1,25 +1,26 @@
-import { SnackbarProps } from '@material-ui/core/Snackbar/Snackbar';
+import { SnackbarProps } from "@material-ui/core/Snackbar/Snackbar";
 import {
   ISuccessNotificationProps as ICoreSuccessNotificationProps,
   IUseSuccessNotificationProps as ICoreUseSuccessNotificationProps,
+  IUseSuccessNotificationResult,
   useSuccessNotification as useCoreSuccessNotification,
-} from '@reactionable/core/lib/ui/notification/SuccessNotification';
-import React, { PropsWithChildren } from 'react';
+} from "@reactionable/core/lib/ui/notification/SuccessNotification";
+import React, { PropsWithChildren, ReactElement } from "react";
 
-import { Alert, IAlertProps } from '../alert/Alert';
-import { Notification } from './Notification';
+import { Alert, IAlertProps } from "../alert/Alert";
+import { Notification } from "./Notification";
 
 export type ISuccessNotificationProps = ICoreSuccessNotificationProps &
-  Omit<SnackbarProps, 'children' | 'title'> & { alert?: IAlertProps };
+  Omit<SnackbarProps, "children" | "title"> & { alert?: IAlertProps };
 
 export const SuccessNotification = ({
   children,
   title,
   alert,
   ...props
-}: PropsWithChildren<ISuccessNotificationProps>) => {
+}: PropsWithChildren<ISuccessNotificationProps>): ReactElement => {
   return (
-    <Notification {...props} title={<>{title}</>}>
+    <Notification {...props} title={title}>
       <Alert
         severity="success"
         title={title}
@@ -27,15 +28,18 @@ export const SuccessNotification = ({
         variant="filled"
         {...alert}
         onClose={props.onClose}
-        children={children}
-      />
+      >
+        {children}
+      </Alert>
     </Notification>
   );
 };
 
 export type IUseSuccessNotificationProps = ICoreUseSuccessNotificationProps &
   ISuccessNotificationProps;
-export const useSuccessNotification = (props: IUseSuccessNotificationProps) => {
+export const useSuccessNotification = (
+  props: IUseSuccessNotificationProps
+): IUseSuccessNotificationResult => {
   return useCoreSuccessNotification<ISuccessNotificationProps>({
     ...props,
     Component: SuccessNotification,

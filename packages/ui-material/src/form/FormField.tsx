@@ -1,13 +1,13 @@
-import Checkbox, { CheckboxProps } from '@material-ui/core/Checkbox/Checkbox';
-import FormControl from '@material-ui/core/FormControl/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel/FormControlLabel';
-import FormGroup from '@material-ui/core/FormGroup/FormGroup';
-import FormHelperText from '@material-ui/core/FormHelperText/FormHelperText';
-import Select, { SelectProps } from '@material-ui/core/Select/Select';
+import Checkbox, { CheckboxProps } from "@material-ui/core/Checkbox/Checkbox";
+import FormControl from "@material-ui/core/FormControl/FormControl";
+import FormControlLabel from "@material-ui/core/FormControlLabel/FormControlLabel";
+import FormGroup from "@material-ui/core/FormGroup/FormGroup";
+import FormHelperText from "@material-ui/core/FormHelperText/FormHelperText";
+import Select, { SelectProps } from "@material-ui/core/Select/Select";
 import TextareaAutosize, {
   TextareaAutosizeProps,
-} from '@material-ui/core/TextareaAutosize/TextareaAutosize';
-import TextField, { TextFieldProps } from '@material-ui/core/TextField/TextField';
+} from "@material-ui/core/TextareaAutosize/TextareaAutosize";
+import TextField, { TextFieldProps } from "@material-ui/core/TextField/TextField";
 import {
   FormField as CoreFormField,
   IFieldElementProps as ICoreFieldElementProps,
@@ -15,8 +15,8 @@ import {
   IFormFieldPropsEnhanced as ICoreFormFieldPropsEnhanced,
   IFormFieldValue,
   IRenderFormField,
-} from '@reactionable/core/lib/form/FormField';
-import React, { ReactNode } from 'react';
+} from "@reactionable/core/lib/form/FormField";
+import React, { ReactElement, ReactNode } from "react";
 
 export type IFieldElementProps = ICoreFieldElementProps & {
   label?: ReactNode | string;
@@ -25,7 +25,7 @@ export type IFieldElementProps = ICoreFieldElementProps & {
 export type IFormFieldProps<
   FieldElement extends IFieldElementProps,
   Value extends IFormFieldValue
-> = Omit<ICoreFormFieldProps<FieldElement, Value>, 'children'> & {
+> = Omit<ICoreFormFieldProps<FieldElement, Value>, "children"> & {
   children?: IRenderFormField<IFieldElementProps, Value> | ReactNode;
 };
 
@@ -41,23 +41,23 @@ export function RenderFormField<
   error,
   isInvalid,
   field: { label, ...field },
-}: IFormFieldPropsEnhanced<FieldElementProps, Value>) {
-  let fieldContent: ReactNode;
+}: IFormFieldPropsEnhanced<FieldElementProps, Value>): ReactElement {
+  let fieldContent: ReactElement;
 
   const fieldProps = field;
 
   switch (true) {
-    case field.as === 'checkbox':
-    case field.type === 'checkbox':
+    case field.as === "checkbox":
+    case field.type === "checkbox":
       fieldContent = (
         <FormControlLabel control={<Checkbox {...(fieldProps as CheckboxProps)} />} label={label} />
       );
       break;
-    case field.as === 'select':
+    case field.as === "select":
       fieldContent = <Select {...(fieldProps as SelectProps)} />;
       break;
 
-    case field.as === 'textarea':
+    case field.as === "textarea":
       fieldContent = <TextareaAutosize {...(fieldProps as TextareaAutosizeProps)} />;
       break;
 
@@ -67,7 +67,7 @@ export function RenderFormField<
       );
   }
 
-  if (field.type === 'hidden') {
+  if (field.type === "hidden") {
     return fieldContent;
   }
 
@@ -90,8 +90,8 @@ export function RenderFormField<
 }
 
 export function FormField<
-  FieldElement extends IFieldElementProps = IFieldElementProps,
-  Value extends IFormFieldValue = string
->(props: IFormFieldProps<FieldElement, Value>) {
-  return <CoreFormField<any, Value> {...props} render={RenderFormField} />;
+  FieldElementProps extends IFieldElementProps = IFieldElementProps,
+  Value extends IFormFieldValue = IFormFieldValue
+>(props: IFormFieldProps<FieldElementProps, Value>): ReactElement {
+  return <CoreFormField<ICoreFieldElementProps, Value> {...props} render={RenderFormField} />;
 }

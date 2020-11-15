@@ -1,25 +1,25 @@
-import Button from '@material-ui/core/Button/Button';
-import Menu from '@material-ui/core/Menu/Menu';
-import MenuItem from '@material-ui/core/MenuItem/MenuItem';
-import { Theme } from '@material-ui/core/styles/createMuiTheme';
-import createStyles from '@material-ui/core/styles/createStyles';
-import makeStyles from '@material-ui/core/styles/makeStyles';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import Translate from '@material-ui/icons/Translate';
+import Button from "@material-ui/core/Button/Button";
+import Menu from "@material-ui/core/Menu/Menu";
+import MenuItem from "@material-ui/core/MenuItem/MenuItem";
+import { Theme } from "@material-ui/core/styles/createMuiTheme";
+import createStyles from "@material-ui/core/styles/createStyles";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
+import Translate from "@material-ui/icons/Translate";
 import {
   LanguageSelector as CoreLanguageSelector,
   ILanguageSelectorComponentProps as ICoreLanguageSelectorComponentProps,
   ILanguageSelectorItemComponentProps as ICoreLanguageSelectorItemComponentProps,
   ILanguageSelectorProps as ICoreLanguageSelectorProps,
-} from '@reactionable/core/lib/ui/i18n/LanguageSelector';
-import React, { ComponentProps, ComponentType, PropsWithChildren } from 'react';
+} from "@reactionable/core/lib/ui/i18n/LanguageSelector";
+import React, { ComponentProps, ComponentType, PropsWithChildren, ReactElement } from "react";
 
 export type ILanguageSelectorItemComponentProps = ICoreLanguageSelectorItemComponentProps<
   ComponentProps<typeof MenuItem>
 >;
 
 export type ILanguageSelectorComponentProps = ComponentProps<typeof Button> &
-  Omit<ICoreLanguageSelectorComponentProps, 'ItemComponent'>;
+  Omit<ICoreLanguageSelectorComponentProps, "ItemComponent">;
 
 export type LanguageSelectorComponent = ComponentType<ILanguageSelectorComponentProps>;
 
@@ -35,7 +35,7 @@ export function LanguageSelectorComponent({
   languages,
   onSelectLanguage,
   ...props
-}: PropsWithChildren<ILanguageSelectorComponentProps>) {
+}: PropsWithChildren<ILanguageSelectorComponentProps>): ReactElement {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
@@ -63,8 +63,9 @@ export function LanguageSelectorComponent({
         onClick={handleClick}
         startIcon={<Translate />}
         endIcon={<ArrowDropDownIcon />}
-        children={current}
-      />
+      >
+        {current}
+      </Button>
       <Menu
         id="language-selector-menu"
         anchorEl={anchorEl}
@@ -72,17 +73,19 @@ export function LanguageSelectorComponent({
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem className={classes.item} children={current} />
+        <MenuItem className={classes.item}>{current}</MenuItem>
         {languages.map((language) => (
-          <MenuItem key={language} onClick={() => handleItemClick(language)} children={language} />
+          <MenuItem key={language} onClick={() => handleItemClick(language)}>
+            {language}
+          </MenuItem>
         ))}
       </Menu>
     </>
   );
 }
 
-export type ILanguageSelectorProps = Omit<ICoreLanguageSelectorProps, 'Component'> &
+export type ILanguageSelectorProps = Omit<ICoreLanguageSelectorProps, "Component"> &
   ComponentProps<typeof Button>;
-export function LanguageSelector(props: ILanguageSelectorProps) {
+export function LanguageSelector(props: ILanguageSelectorProps): ReactElement {
   return <CoreLanguageSelector Component={LanguageSelectorComponent} {...props} />;
 }

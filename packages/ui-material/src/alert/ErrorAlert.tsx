@@ -1,22 +1,27 @@
+import { printError } from "@reactionable/core/lib/error/IError";
 import {
   ErrorAlertComponent as CoreErrorAlertComponent,
   IErrorAlertProps as ICoreErrorAlertProps,
   IUseErrorAlertProps as ICoreUseErrorAlertProps,
-  printError,
+  IUseErrorAlertResult,
   useErrorAlert as useCoreErrorAlert,
-} from '@reactionable/core/lib/ui/alert/ErrorAlert';
-import React from 'react';
+} from "@reactionable/core/lib/ui/alert/ErrorAlert";
+import React from "react";
 
-import { Alert, IAlertProps } from './Alert';
+import { Alert, IAlertProps } from "./Alert";
 
 export type IErrorAlertProps = ICoreErrorAlertProps<IAlertProps>;
 export type ErrorAlertComponent = CoreErrorAlertComponent<IErrorAlertProps>;
-export const ErrorAlert: ErrorAlertComponent = ({ children, ...props }) => {
-  return <Alert severity="error" children={printError(children)} {...props} />;
+export const ErrorAlert: ErrorAlertComponent = ({ children, ...props }: IErrorAlertProps) => {
+  return (
+    <Alert severity="error" {...props}>
+      {printError(children)}
+    </Alert>
+  );
 };
 
 export type IUseErrorAlertProps = ICoreUseErrorAlertProps & IAlertProps;
-export const useErrorAlert = (props?: IUseErrorAlertProps) => {
+export const useErrorAlert = (props?: IUseErrorAlertProps): IUseErrorAlertResult => {
   return useCoreErrorAlert<IUseErrorAlertProps>({
     Component: ErrorAlert,
     ...props,

@@ -1,11 +1,11 @@
-import Grid from '@material-ui/core/Grid/Grid';
-import { IBodyProps as ICoreBodyProps } from '@reactionable/core/lib/ui/layout/body/Body';
-import React, { ComponentType, PropsWithChildren } from 'react';
+import Grid from "@material-ui/core/Grid/Grid";
+import { IBodyProps as ICoreBodyProps } from "@reactionable/core/lib/ui/layout/body/Body";
+import React, { ComponentType, PropsWithChildren, ReactElement } from "react";
 
-export interface IBodyProps extends ICoreBodyProps {}
+export type IBodyProps = ICoreBodyProps;
 export type BodyComponent = ComponentType<IBodyProps>;
 
-export function Body({ children }: PropsWithChildren<IBodyProps>) {
+export function Body({ children }: PropsWithChildren<IBodyProps>): ReactElement {
   return (
     <main>
       <Grid container>
