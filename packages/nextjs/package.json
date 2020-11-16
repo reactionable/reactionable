@@ -9,7 +9,7 @@
   "typings": "lib/index.d.ts",
   "scripts": {
     "start": "yarn build:barrelsby && tsc --watch",
-    "test": "jest --passWithNoTests",
+    "test": "jest",
     "test:coverage": "yarn test --coverage",
     "build": "yarn build:clean && yarn build:barrelsby && tsc --pretty",
     "build:clean": "rimraf lib",
@@ -48,5 +48,13 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "jsdom",
+    "testMatch": [
+      "**/__tests__/**/*.[jt]s?(x)",
+      "**/?(*.)+(spec|test).+(ts|tsx|js)"
+    ]
   }
 }
