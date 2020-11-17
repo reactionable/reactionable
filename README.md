@@ -30,6 +30,7 @@
 | [@reactionable/ui-material](https://reactionable.github.io/reactionable/?path=/story/ui-material-home--presentation)   | [![Npm](https://img.shields.io/npm/v/@reactionable/ui-material)](https://www.npmjs.com/package/@reactionable/ui-material)   | UI package for [Material-UI](https://material-ui.com/) integration                                 |
 | **Router Packages**                                                                                                    |                                                                                                                             |
 | [@reactionable/router-dom](https://reactionable.github.io/reactionable/?path=/story/router-dom-home--presentation)     | [![Npm](https://img.shields.io/npm/v/@reactionable/router-dom)](https://www.npmjs.com/package/@reactionable/router-dom)     | Router package for [React Router DOM](https://reactrouter.com/web/guides/quick-start/) integration |
+| [@reactionable/nextjs](https://reactionable.github.io/reactionable/?path=/story/nextjs-home--presentation)             | [![Npm](https://img.shields.io/npm/v/@reactionable/nextjs)](https://www.npmjs.com/package/@reactionable/nextjs)             | Router package for [NextJs](https://nextjs.org/) integration                                       |
 | **Backend Packages**                                                                                                   |                                                                                                                             |
 | [@reactionable/amplify](https://reactionable.github.io/reactionable/?path=/story/amplify-home--presentation)           | [![Npm](https://img.shields.io/npm/v/@reactionable/amplify)](https://www.npmjs.com/package/@reactionable/amplify)           | Backend package for [AWS Amplify](https://docs.amplify.aws/) integration                           |
 
@@ -53,4 +54,4 @@
 ## License
 
 📝 Copyright © 2020 [ESCEMI <contact@escemi.com>](https://www.escemi.com).<br />
-This project is [MIT](https://github.com/reactionable/reactionable-cli/blob/master/LICENSE) licensed.
+This project is [MIT](https://github.com/reactionable/reactionable/blob/master/LICENSE) licensed.
