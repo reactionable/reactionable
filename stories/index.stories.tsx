@@ -1,23 +1,23 @@
-import 'bootstrap/dist/css/bootstrap.css';
+import "bootstrap/dist/css/bootstrap.css";
 
-import { linkTo } from '@storybook/addon-links';
-import React from 'react';
+import { linkTo } from "@storybook/addon-links";
+import React, { ReactElement } from "react";
 
 export default {
-  title: 'Home',
+  title: "Home",
   parameters: {
     info: { inline: true },
     options: { showPanel: false },
     previewTabs: {
-      'storybook/docs/panel': { hidden: true },
+      "storybook/docs/panel": { hidden: true },
     },
   },
 };
 
-export const Presentation = () => (
+export const Presentation = (): ReactElement => (
   <div>
     <p className="text-center">
-      <a href="/" target="_blank">
+      <a href="/" target="_blank" rel="noreferrer">
         <img
           src="https://repository-images.githubusercontent.com/215304880/02830f80-f11d-11e9-893a-20a50b13e17c"
           width="600"
@@ -28,6 +28,7 @@ export const Presentation = () => (
       <a
         href="https://github.com/reactionable/reactionable/actions?query=workflow%3A%22Continuous+Integration%22"
         target="_blank"
+        rel="noreferrer"
         className="mr-1"
       >
         <img
@@ -35,7 +36,12 @@ export const Presentation = () => (
           src="https://github.com/reactionable/reactionable/workflows/Continuous%20Integration/badge.svg"
         />
       </a>
-      <a href="https://codecov.io/gh/reactionable/reactionable" target="_blank" className="mr-1">
+      <a
+        href="https://codecov.io/gh/reactionable/reactionable"
+        target="_blank"
+        rel="noreferrer"
+        className="mr-1"
+      >
         <img
           alt="Coverage Status"
           src="https://codecov.io/gh/reactionable/reactionable/branch/master/graph/badge.svg"
@@ -44,11 +50,17 @@ export const Presentation = () => (
       <a
         href="https://github.com/reactionable/reactionable/blob/master/LICENSE"
         target="_blank"
+        rel="noreferrer"
         className="mr-1"
       >
         <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
       </a>
-      <a href="https://www.npmjs.com/search?q=%40reactionable" target="_blank" className="mr-1">
+      <a
+        href="https://www.npmjs.com/search?q=%40reactionable"
+        rel="noreferrer"
+        target="_blank"
+        className="mr-1"
+      >
         <img alt="npm" src="https://img.shields.io/npm/v/@reactionable/core" />
       </a>
       <a href="CONTRIBUTING.md" target="_blank" className="mr-1">
@@ -68,14 +80,14 @@ export const Presentation = () => (
     <div className="container">
       <div className="row">
         <div className="col">
-          <h3 style={{ marginBottom: '1em' }}>Getting started</h3>
-          <h4 style={{ marginBottom: '1em' }}>Installation</h4>
+          <h3 style={{ marginBottom: "1em" }}>Getting started</h3>
+          <h4 style={{ marginBottom: "1em" }}>Installation</h4>
           <div className="alert alert-info" role="alert">
-            <button onClick={linkTo('Core/Home')} className="btn btn-link btn-sm">
+            <button onClick={linkTo("Core/Home")} className="btn btn-link btn-sm">
               <b>
                 <code>@reactionable/core</code>
               </b>
-            </button>{' '}
+            </button>{" "}
             is the main package of <b>Reactionable</b>, it may be enhanced with additionnal third
             party packages:
             <br />
@@ -91,12 +103,12 @@ export const Presentation = () => (
                 <b>Backend</b>: integrate with third party backend service (authentication, api...).
               </li>
             </ul>
-            Each of them are requiring <code>@reactionable/core</code>, so it don't need to install
-            the Core package if a third party package is installed
+            Each of them are requiring <code>@reactionable/core</code>, so it don&apos;t need to
+            install the Core package if a third party package is installed
           </div>
           <hr />
-          Install only{' '}
-          <button onClick={linkTo('Core/Home')} className="btn btn-outline-dark btn-sm">
+          Install only{" "}
+          <button onClick={linkTo("Core/Home")} className="btn btn-outline-dark btn-sm">
             <b>
               <code>@reactionable/core</code>
             </b>
@@ -104,56 +116,60 @@ export const Presentation = () => (
           , or install a third party package:
           <hr />
           <div className="card-deck mb-5">
-            <div className="card" style={{ width: '18rem' }}>
+            <div className="card" style={{ width: "18rem" }}>
               <div className="card-header">UI Packages</div>
               <ul className="list-group list-group-flush">
                 <li className="list-group-item">
-                  <button onClick={linkTo('UI Bootstrap/Home')} className="btn btn-link btn-sm">
+                  <button onClick={linkTo("UI Bootstrap/Home")} className="btn btn-link btn-sm">
                     UI Bootstrap
                   </button>
-                  <a href="https://react-bootstrap.github.io/" target="_blank">
+                  <a href="https://react-bootstrap.github.io/" rel="noreferrer" target="_blank">
                     <span className="badge badge-secondary">React Bootstrap</span>
                   </a>
                 </li>
                 <li className="list-group-item">
-                  <button onClick={linkTo('UI Material/Home')} className="btn btn-link btn-sm">
+                  <button onClick={linkTo("UI Material/Home")} className="btn btn-link btn-sm">
                     UI Material
                   </button>
-                  <a href="https://material-ui.com/" target="_blank">
+                  <a href="https://material-ui.com/" rel="noreferrer" target="_blank">
                     <span className="badge badge-secondary">Material-UI</span>
                   </a>
                 </li>
               </ul>
             </div>
-            <div className="card" style={{ width: '18rem' }}>
+            <div className="card" style={{ width: "18rem" }}>
               <div className="card-header">Router Packages</div>
               <ul className="list-group list-group-flush">
                 <li className="list-group-item">
-                  <button onClick={linkTo('Router Dom/Home')} className="btn btn-link btn-sm">
+                  <button onClick={linkTo("Router Dom/Home")} className="btn btn-link btn-sm">
                     Router DOM
                   </button>
-                  <a href="https://reactrouter.com/web/guides/quick-start" target="_blank">
+                  <a
+                    href="https://reactrouter.com/web/guides/quick-start"
+                    rel="noreferrer"
+                    target="_blank"
+                  >
                     <span className="badge badge-secondary">React Router DOM</span>
                   </a>
                 </li>
                 <li className="list-group-item">
-                  <button onClick={linkTo('Router Next/Home')} className="btn btn-link btn-sm">
+                  <button onClick={linkTo("Router Next/Home")} className="btn btn-link btn-sm">
                     Router Next
                   </button>
-                  <a href="https://nextjs.org/" target="_blank">
+                  <a href="https://nextjs.org/" rel="noreferrer" target="_blank">
                     <span className="badge badge-secondary">NextJS</span>
                   </a>
                 </li>
               </ul>
             </div>
-            <div className="card" style={{ width: '18rem' }}>
+            <div className="card" style={{ width: "18rem" }}>
               <div className="card-header">Backend Packages</div>
               <ul className="list-group list-group-flush">
                 <li className="list-group-item">
-                  <button onClick={linkTo('Amplify/Home')} className="btn btn-link btn-sm">
+                  <button onClick={linkTo("Amplify/Home")} className="btn btn-link btn-sm">
                     Amplify
                   </button>
-                  <a href="https://docs.amplify.aws/" target="_blank">
+                  <a href="https://docs.amplify.aws/" rel="noreferrer" target="_blank">
                     <span className="badge badge-secondary">AWS Amplify</span>
                   </a>
                 </li>
@@ -230,15 +246,15 @@ export const Presentation = () => (
           <h3 className="mt-5 mb-5">Helping Project</h3>
           <p>
             ❤️ If this project helps you reduce time to develop and/or you want to help the
-            maintainer of this project. You can{' '}
+            maintainer of this project. You can{" "}
             <a href="https://github.com/sponsors/neilime">sponsor</a> him. Thank you !
           </p>
           <h3 className="mt-5 mb-5">Contributing</h3>
           <p>
-            👍 If you wish to contribute to <b>Reactionable</b>, please read the{' '}
+            👍 If you wish to contribute to <b>Reactionable</b>, please read the{" "}
             <a href="https://github.com/reactionable/reactionable/blob/master/CONTRIBUTING.md">
               CONTRIBUTING.md
-            </a>{' '}
+            </a>{" "}
             file, PRs are Welcome !
           </p>
         </div>
@@ -265,10 +281,10 @@ export const Presentation = () => (
           <p>
             📝 Copyright © 2020 <a href="https://www.escemi.com">ESCEMI</a>.
             <br />
-            This project is{' '}
+            This project is{" "}
             <a href="https://github.com/reactionable/reactionable-cli/blob/master/LICENSE">
               MIT
-            </a>{' '}
+            </a>{" "}
             licensed.
           </p>
         </div>
@@ -277,7 +293,7 @@ export const Presentation = () => (
   </div>
 );
 
-export const Dev = () => {
+export const Development = (): ReactElement => {
   return (
     <div className="container">
       <div className="row">
@@ -317,11 +333,11 @@ export const Dev = () => {
               <div className="alert alert-warning" role="alert">
                 <ul>
                   <li>
-                    If <code>@reactionable/ui-material</code> is used, link must be done with{' '}
+                    If <code>@reactionable/ui-material</code> is used, link must be done with{" "}
                     <code>@material-ui/styles</code>
                   </li>
                   <li>
-                    If <code>@reactionable/amplify</code> is used, link must be done with{' '}
+                    If <code>@reactionable/amplify</code> is used, link must be done with{" "}
                     <code>amplify</code>
                   </li>
                 </ul>
@@ -353,11 +369,11 @@ export const Dev = () => {
               <div className="alert alert-warning" role="alert">
                 <ul>
                   <li>
-                    If <code>@reactionable/ui-material</code> is used, unlink must be done also with{' '}
+                    If <code>@reactionable/ui-material</code> is used, unlink must be done also with{" "}
                     <code>yarn unlink @material-ui/styles</code>
                   </li>
                   <li>
-                    If <code>@reactionable/amplify</code> is used, unlink must be done also with{' '}
+                    If <code>@reactionable/amplify</code> is used, unlink must be done also with{" "}
                     <code>yarn unlink amplify</code>
                   </li>
                 </ul>

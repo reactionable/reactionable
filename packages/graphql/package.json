@@ -33,7 +33,7 @@
   },
   "homepage": "https://github.com/reactionable/reactionable#readme",
   "dependencies": {
-    "@apollo/client": "^3.2.5",
+    "@apollo/client": "^3.2.7",
     "@reactionable/core": "^0.24.14",
     "cross-fetch": "^3.0.6",
     "graphql": "^15.4.0"
