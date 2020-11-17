@@ -94,7 +94,7 @@ export const Presentation = (): ReactElement => (
             <br />
             <ul>
               <li className="mb-2">
-                <b>UI</b>: add third party styling to user interface composants.
+                <b>UI</b>: add third party styling to user interface components.
               </li>
               <li className="mb-2">
                 <b>Router</b>: integrate with third party routing (Link, navigation...).
@@ -141,6 +141,14 @@ export const Presentation = (): ReactElement => (
               <div className="card-header">Router Packages</div>
               <ul className="list-group list-group-flush">
                 <li className="list-group-item">
+                  <button onClick={linkTo("Router Next/Home")} className="btn btn-link btn-sm">
+                    Router Next
+                  </button>
+                  <a href="https://nextjs.org/" rel="noreferrer" target="_blank">
+                    <span className="badge badge-secondary">NextJS</span>
+                  </a>
+                </li>
+                <li className="list-group-item">
                   <button onClick={linkTo("Router Dom/Home")} className="btn btn-link btn-sm">
                     Router DOM
                   </button>
@@ -150,14 +158,6 @@ export const Presentation = (): ReactElement => (
                     target="_blank"
                   >
                     <span className="badge badge-secondary">React Router DOM</span>
-                  </a>
-                </li>
-                <li className="list-group-item">
-                  <button onClick={linkTo("Router Next/Home")} className="btn btn-link btn-sm">
-                    Router Next
-                  </button>
-                  <a href="https://nextjs.org/" rel="noreferrer" target="_blank">
-                    <span className="badge badge-secondary">NextJS</span>
                   </a>
                 </li>
               </ul>
@@ -171,6 +171,18 @@ export const Presentation = (): ReactElement => (
                   </button>
                   <a href="https://docs.amplify.aws/" rel="noreferrer" target="_blank">
                     <span className="badge badge-secondary">AWS Amplify</span>
+                  </a>
+                </li>
+                <li className="list-group-item">
+                  <button onClick={linkTo("Graphql/Home")} className="btn btn-link btn-sm">
+                    GraphQL
+                  </button>
+                  <a
+                    href="https://www.apollographql.com/docs/react/"
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    <span className="badge badge-secondary">Apollo GraphQL</span>
                   </a>
                 </li>
               </ul>
