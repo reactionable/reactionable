@@ -1,3 +1,4 @@
+import CssBaseline from "@material-ui/core/CssBaseline";
 import { ThemeProvider } from "@material-ui/core/styles";
 import createMuiTheme, { Theme, ThemeOptions } from "@material-ui/core/styles/createMuiTheme";
 import {
@@ -23,14 +24,21 @@ import {
 
 export type IUIComponentProps = {
   theme?: Theme | ThemeOptions;
+  cssBaseline?: boolean;
 };
 
 export function UIComponent({
   children,
   theme = {},
+  cssBaseline = true,
 }: PropsWithChildren<IUIComponentProps>): ReactElement {
   const providerTheme = createMuiTheme(theme);
-  return <ThemeProvider theme={providerTheme}>{children || <></>}</ThemeProvider>;
+  return (
+    <ThemeProvider theme={providerTheme}>
+      {cssBaseline && <CssBaseline />}
+      {children || <></>}
+    </ThemeProvider>
+  );
 }
 
 export type IUIProviderProps = ICoreUIContextProviderProps<
