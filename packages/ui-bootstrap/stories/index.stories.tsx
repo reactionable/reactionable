@@ -107,7 +107,28 @@ export const Usage = (): ReactElement => (
       </div>
     </div>
     <div className="row">
-      <div className="col"></div>
+      <div className="col">
+        <h2 className="mb-5">Setup App</h2>
+        <dl className="row">
+          <dt className="col-12 mb-3">
+            1. Wrap the root component of you application in Reactionable App (E.g:{" "}
+            <code>index.tsx</code>):
+          </dt>
+          <dd className="col-12">
+            <pre>
+              <code>{`import React, { ReactElement } from 'react';
+import { App } from '@reactionable/core';
+import { useUIProviderProps } from '@reactionable/ui-bootstrap';
+
+const MyApp = (): ReactElement => {
+  return <App ui={useUIProviderProps()} />;
+};
+
+export default MyApp;`}</code>
+            </pre>
+          </dd>
+        </dl>
+      </div>
     </div>
   </div>
 );

@@ -107,38 +107,40 @@ export const Usage = (): ReactElement => (
       </div>
     </div>
     <div className="row">
-      <h2 className="mb-5">Setup App</h2>
-      <dl className="row">
-        <dt className="col-12 mb-3">
-          1. Wrap the root component of you application in Reactionable App (E.g:{" "}
-          <code>index.tsx</code>):
-        </dt>
-        <dd className="col-12">
-          <pre>
-            <code>{`import { App } from '@reactionable/core';
-import { useUIProviderProps } from '@reactionable/ui-material/lib/UI';
+      <div className="col">
+        <h2 className="mb-5">Setup App</h2>
+        <dl className="row">
+          <dt className="col-12 mb-3">
+            1. Wrap the root component of you application in Reactionable App (E.g:{" "}
+            <code>index.tsx</code>):
+          </dt>
+          <dd className="col-12">
+            <pre>
+              <code>{`import React, { ReactElement } from 'react';
+import { App } from '@reactionable/core';
+import { useUIProviderProps } from '@reactionable/ui-material';
 
-const App = () => {
-  return <Core ui={useUIProviderProps()} />;
+const MyApp = (): ReactElement => {
+  return <App ui={useUIProviderProps()} />;
 };
-export default App;`}</code>
-          </pre>
-        </dd>
-        <dt className="col-12 mb-3">
-          2. It is possible to custom UI Context provider props (
-          <button className="btn btn-link btn-sm" onClick={linkTo("UI Material/Components/UI")}>
-            Documentation
-          </button>
-          )
-        </dt>
-        <dd className="col-12">
-          <pre>
-            <code>{`import '../i18n/i18n';
-import { App } from '@reactionable/core/lib/app/App';
-import { useUIProviderProps, IUIProviderProps } from '@reactionable/ui-material/lib/UI';
 
+export default MyApp;`}</code>
+            </pre>
+          </dd>
+          <dt className="col-12 mb-3">
+            2. It is possible to custom UI Context provider props (
+            <button className="btn btn-link btn-sm" onClick={linkTo("UI Material/Components/UI")}>
+              Documentation
+            </button>
+            )
+          </dt>
+          <dd className="col-12">
+            <pre>
+              <code>{`import React, { ReactElement } from 'react';
+import { App } from '@reactionable/core';
+import { useUIProviderProps, IUIProviderProps } from '@reactionable/ui-material';
 
-function MyApp({ Component, pageProps }) {
+const MyApp = (): ReactElement => {
 
   const ui: IUIProviderProps = {
     ...useUIProviderProps(),
@@ -149,14 +151,14 @@ function MyApp({ Component, pageProps }) {
     }
   };
 
-  return <App ui={ui}><Component {...pageProps} /></App>
+  return <App ui={ui} />
 }
 
-export default MyApp
-`}</code>
-          </pre>
-        </dd>
-      </dl>
+export default MyApp;`}</code>
+            </pre>
+          </dd>
+        </dl>
+      </div>
     </div>
   </div>
 );

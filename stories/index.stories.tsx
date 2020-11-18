@@ -82,6 +82,11 @@ export const Presentation = (): ReactElement => (
         <div className="col">
           <h3 style={{ marginBottom: "1em" }}>Getting started</h3>
           <h4 style={{ marginBottom: "1em" }}>Installation</h4>
+          <h5 style={{ marginBottom: "1em" }}>
+            🤖 Installation with [Reactionable
+            CLI](https://reactionable.github.io/reactionable-cli/)
+          </h5>
+          <h5 style={{ marginBottom: "1em" }}>✍️ Manual Installation</h5>
           <div className="alert alert-info" role="alert">
             <button onClick={linkTo("Core/Home")} className="btn btn-link btn-sm">
               <b>
