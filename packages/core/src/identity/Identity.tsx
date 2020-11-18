@@ -35,16 +35,13 @@ export function useIdentityProviderProps(
   return {
     user: undefined,
     logout: async () => {
-      throw new Error(
-        '@reactionable/core does not provide logout function, please install a "@reactionable/identity-*" package'
-      );
+      // Do nothing
     },
     identityProvider: undefined,
     AuthComponent: NullAuthComponent,
     getUser: async () => {
-      throw new Error(
-        '@reactionable/core does not provide getUser function, please install a "@reactionable/identity-*" package'
-      );
+      // Do nothing
+      return null;
     },
     auth: null,
     ...props,
