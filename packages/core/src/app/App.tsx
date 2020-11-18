@@ -46,7 +46,9 @@ export function App<
       routes.push({ component: NotFoundComponent, privateRoute: false });
     }
 
-    children = router.renderRoutes(routes);
+    if (routes.length) {
+      children = router.renderRoutes(routes);
+    }
   }
 
   return (
