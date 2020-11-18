@@ -1,5 +1,5 @@
-import { useTranslation } from "@reactionable/core/lib/i18n/I18n";
 import {
+  CopyrightFooter,
   IFooterProps as ICoreFooterProps,
   SponsorFooter,
 } from "@reactionable/core/lib/ui/layout/footer/Footer";
@@ -19,10 +19,6 @@ export function Footer({
   sponsor = true,
   ...footerProps
 }: PropsWithChildren<IFooterProps>): ReactElement {
-  const { t } = useTranslation();
-
-  const currentYear = new Date().getFullYear();
-
   footerProps.style = {
     position: "absolute",
     bottom: 0,
@@ -37,7 +33,7 @@ export function Footer({
       <Container>
         <Row className="justify-content-between">
           <Col>
-            {t("Copyright")} &copy; {currentYear} {brand}
+            <CopyrightFooter brand={brand} />
           </Col>
           {sponsor && (
             <Col className="text-right">

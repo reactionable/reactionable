@@ -1,8 +1,8 @@
 import Grid from "@material-ui/core/Grid/Grid";
 import createStyles from "@material-ui/core/styles/createStyles";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import { useTranslation } from "@reactionable/core/lib/i18n/I18n";
 import {
+  CopyrightFooter,
   IFooterProps as ICoreFooterProps,
   SponsorFooter,
 } from "@reactionable/core/lib/ui/layout/footer/Footer";
@@ -28,16 +28,13 @@ export function Footer({
   sponsor = true,
   ...footerProps
 }: PropsWithChildren<IFooterProps>): ReactElement {
-  const { t } = useTranslation();
   const classes = useStyles();
-
-  const currentYear = new Date().getFullYear();
 
   return (
     <footer className={classes.footer} {...footerProps}>
       <Grid container direction="row" justify="space-between" alignItems="center">
         <Grid item>
-          {t("Copyright")} &copy; {currentYear} {brand}
+          <CopyrightFooter brand={brand} />
         </Grid>
         {sponsor && (
           <Grid item>

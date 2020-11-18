@@ -11,17 +11,13 @@ export type FooterComponent<FooterProps extends IFooterProps = IFooterProps> = C
 >;
 
 export function Footer<FooterProps extends IFooterProps = IFooterProps>({
-  brand,
   sponsor = true,
+  ...props
 }: PropsWithChildren<FooterProps>): ReactElement {
-  const { t } = useTranslation();
-
-  const currentYear = new Date().getFullYear();
-
   return (
     <footer>
       <div>
-        {t("Copyright")} &copy; {currentYear} {brand}
+        <CopyrightFooter {...props} />
       </div>
       {sponsor && (
         <div>
@@ -32,13 +28,26 @@ export function Footer<FooterProps extends IFooterProps = IFooterProps>({
   );
 }
 
+export function CopyrightFooter<FooterProps extends IFooterProps = IFooterProps>({
+  brand,
+}: PropsWithChildren<Pick<FooterProps, "brand">>): ReactElement {
+  const { t } = useTranslation();
+
+  const currentYear = new Date().getFullYear();
+  return (
+    <>
+      {t("Copyright")} &copy; {currentYear} {brand}
+    </>
+  );
+}
+
 export const SponsorFooter = (): ReactElement => {
   const { t } = useTranslation();
   return (
     <>
-      <span title={t("Powered by")}>⚡ by </span>
+      <span title={t("Powered by")}>{t("⚡ by")} </span>
       <a
-        href="https://github.com/reactionable/reactionable"
+        href="https://reactionable.github.io/reactionable/"
         rel="noreferrer"
         target="_blank"
         title={t("Reactionable - An effective toolkit for React")}
