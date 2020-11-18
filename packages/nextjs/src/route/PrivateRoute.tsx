@@ -11,7 +11,7 @@ export function PrivateRoute({
   redirectTo = "/",
 }: PropsWithChildren<IPrivateRouteProps>): ReactElement | null {
   const { user } = useIdentityContext();
-  const { t } = useTranslation();
+  const { t } = useTranslation("identity");
   const { errorAlert } = useUIContext().useErrorAlert({
     children: t("You are not allowed to reach this page"),
   });

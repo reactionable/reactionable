@@ -73,7 +73,9 @@ export function LanguageSelectorComponent({
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem className={classes.item}>{current}</MenuItem>
+        <MenuItem className={classes.item} disabled selected>
+          {current}
+        </MenuItem>
         {languages.map((language) => (
           <MenuItem key={language} onClick={() => handleItemClick(language)}>
             {language}

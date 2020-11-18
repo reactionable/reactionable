@@ -11,7 +11,7 @@ import React, { ComponentType, MouseEvent, useState } from "react";
 const UserLoggedHeaderNav = () => {
   const { user, logout } = useIdentityContext();
   const { RouterLink } = useRouterContext();
-  const { t } = useTranslation();
+  const { t } = useTranslation("identity");
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   if (!user) {

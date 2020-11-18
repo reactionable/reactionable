@@ -59,20 +59,23 @@ export function LanguageSelector({
   onSelectLanguage,
   ...props
 }: ILanguageSelectorProps): ReactElement {
-  const {
-    i18n: { languages, language, changeLanguage },
-  } = useTranslation();
-  const [current, setLanguage] = useState(language);
+  const { i18n } = useTranslation();
+
+  const [current, setLanguage] = useState(i18n.language);
 
   const handleOnSelectLanguage = (language: string) => {
     setLanguage(language);
-    changeLanguage(language);
+    i18n.changeLanguage(language);
     onSelectLanguage && onSelectLanguage(language);
   };
 
+  const languages = i18n.options.supportedLngs
+    ? i18n.options.supportedLngs.filter((lng) => ![current, "cimode"].includes(lng))
+    : [];
+
   return (
     <Component
-      languages={languages.filter((lng) => language !== lng)}
+      languages={languages}
       current={current}
       onSelectLanguage={handleOnSelectLanguage}
       {...props}

@@ -8,7 +8,7 @@ import { Modal, useModal } from "../../modal/Modal";
 
 const UserLoggedHeaderNav = () => {
   const { user, logout } = useIdentityContext();
-  const { t } = useTranslation();
+  const { t } = useTranslation("identity");
   const { RouterLink } = useRouterContext();
 
   if (!user) {
@@ -30,7 +30,7 @@ const UserLoggedHeaderNav = () => {
 
 const UserUnloggedHeaderNav = () => {
   const { RouterLink } = useRouterContext();
-  const { t } = useTranslation();
+  const { t } = useTranslation("identity");
   const { user, auth } = useIdentityContext();
   const { modal, openModal, closeModal } = useModal({
     Component: Modal,
