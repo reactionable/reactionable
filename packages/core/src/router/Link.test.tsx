@@ -9,6 +9,7 @@ describe("Link", () => {
 
     expect(result).toBeTruthy();
   });
+
   describe("generatePath", () => {
     it("generate absolute path with duplicated separators", () => {
       for (const path of ["/", "/", "/test/..", "/test/../", "//test//..//"]) {

@@ -1,11 +1,13 @@
 import { compile } from "path-to-regexp";
 import React, {
   AnchorHTMLAttributes,
+  Children,
   ComponentType,
   DetailedHTMLProps,
   PropsWithChildren,
   ReactElement,
   ReactNode,
+  isValidElement,
 } from "react";
 
 import { IRouteMatchParams } from "./Route";
@@ -90,12 +92,22 @@ export type LinkComponent<LinkProps extends ILinkProps> = ComponentType<LinkProp
 
 export function Link<LinkProps extends ILinkProps>({
   href,
+  children,
   ...props
 }: PropsWithChildren<LinkProps>): ReactElement {
   const { RouterLink } = useRouterContext();
-  return (
-    <RouterLink href={href}>
-      <a {...props} />
-    </RouterLink>
-  );
+
+  let link: ReactElement;
+  if (
+    children &&
+    Children.count(children) === 1 &&
+    typeof children !== "string" &&
+    isValidElement(children)
+  ) {
+    link = children;
+  } else {
+    link = <a {...props}>{children}</a>;
+  }
+
+  return <RouterLink href={href}>{link}</RouterLink>;
 }
