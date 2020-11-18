@@ -1,5 +1,5 @@
 {
-  "name": "@reactionable/next",
+  "name": "@reactionable/nextjs",
   "version": "0.24.15",
   "description": "Reactionable package for NextJs integration",
   "files": [
