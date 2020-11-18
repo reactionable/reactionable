@@ -12,7 +12,9 @@ jobs:
       - uses: actions/stale@v3.0.13
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-          stale-issue-message: "Stale issue message"
-          stale-pr-message: "Stale pull request message"
+          stale-issue-message: "This issue is stale"
+          stale-pr-message: "This PR is stale"
           stale-issue-label: "no-issue-activity"
+          exempt-issue-labels: "awaiting-approval,work-in-progress"
           stale-pr-label: "no-pr-activity"
+          exempt-pr-labels: "awaiting-approval,work-in-progress"
