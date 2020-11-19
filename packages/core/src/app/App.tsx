@@ -3,14 +3,12 @@ import React, { ComponentType, LazyExoticComponent, PropsWithChildren, ReactElem
 import { IIdentityProviderProps } from "../identity/Identity";
 import { IRouteProps } from "../router/Route";
 import { IRouterProviderProps } from "../router/Router";
-import { IUseLayoutProps } from "../ui/layout/Layout";
 import { IUIProviderProps } from "../ui/UI";
 import { Wrapper } from "./Wrapper";
 
 export interface IAppProps<
   IdentityProviderProps extends IIdentityProviderProps,
   UIProviderProps extends IUIProviderProps,
-  UseLayoutProps extends IUseLayoutProps,
   RouterProviderProps extends IRouterProviderProps
 > {
   routes?: Array<IRouteProps>;
@@ -18,14 +16,12 @@ export interface IAppProps<
   NotFoundComponent?: LazyExoticComponent<ComponentType>;
   identity?: IdentityProviderProps;
   ui?: UIProviderProps;
-  layout?: UseLayoutProps;
   router?: RouterProviderProps;
 }
 
 export function App<
   IdentityProviderProps extends IIdentityProviderProps = IIdentityProviderProps,
   UIProviderProps extends IUIProviderProps = IUIProviderProps,
-  UseLayoutProps extends IUseLayoutProps = IUseLayoutProps,
   RouterProviderProps extends IRouterProviderProps = IRouterProviderProps
 >({
   routes = [],
@@ -36,7 +32,7 @@ export function App<
   router,
   children,
 }: PropsWithChildren<
-  IAppProps<IdentityProviderProps, UIProviderProps, UseLayoutProps, RouterProviderProps>
+  IAppProps<IdentityProviderProps, UIProviderProps, RouterProviderProps>
 >): ReactElement {
   if (router) {
     if (HomeComponent) {
