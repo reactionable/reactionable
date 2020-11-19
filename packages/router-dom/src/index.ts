@@ -3,6 +3,7 @@
  */
 
 export * from "./app/App";
+export * from "./head/Head";
 export * from "./route/LazyRoute";
 export * from "./route/NotFound";
 export * from "./route/PrivateRoute";

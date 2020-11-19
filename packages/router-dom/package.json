@@ -35,9 +35,11 @@
   "homepage": "https://github.com/reactionable/reactionable#readme",
   "dependencies": {
     "@reactionable/core": "^0.24.17",
+    "react-helmet": "^6.1.0",
     "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
+    "@types/react-helmet": "^6.1.0",
     "@types/react-router-dom": "^5.1.6",
     "barrelsby": "^2.2.0",
     "react": "^17.0.1",
