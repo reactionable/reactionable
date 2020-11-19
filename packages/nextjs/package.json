@@ -34,7 +34,7 @@
   "homepage": "https://github.com/reactionable/reactionable#readme",
   "dependencies": {
     "@reactionable/core": "^0.24.17",
-    "next": "10.0.1"
+    "next": "10.0.2"
   },
   "devDependencies": {
     "barrelsby": "^2.2.0",

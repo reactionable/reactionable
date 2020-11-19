@@ -17,7 +17,6 @@ function RouterComponent({ children }: PropsWithChildren<unknown>): ReactElement
     App: jest.fn(),
     Component: jest.fn(),
     subscription: jest.fn().mockImplementation(() => Promise.resolve(undefined)),
-    initialStyleSheets: [],
     wrapApp: jest.fn(),
     isFallback: false,
   });
