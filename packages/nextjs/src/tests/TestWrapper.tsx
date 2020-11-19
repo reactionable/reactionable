@@ -1,6 +1,6 @@
-import { Wrapper } from "@reactionable/core/lib/app/Wrapper";
+import { IWrapperProps } from "@reactionable/core/lib/app/Wrapper";
 import { IIdentityProviderProps } from "@reactionable/core/lib/identity/Identity";
-import { ITestWrapperProps } from "@reactionable/core/lib/tests/TestWrapper";
+import { TestWrapper as CoreTestWrapper } from "@reactionable/core/lib/tests/TestWrapper";
 import { IUIProviderProps } from "@reactionable/core/lib/ui/UI";
 import { RouterContext } from "next/dist/next-server/lib/router-context";
 import { createRouter } from "next/router";
@@ -23,6 +23,12 @@ function RouterComponent({ children }: PropsWithChildren<unknown>): ReactElement
   return <RouterContext.Provider value={router}>{children}</RouterContext.Provider>;
 }
 
+export type ITestWrapperProps<
+  IdentityProviderProps extends IIdentityProviderProps,
+  UIProviderProps extends IUIProviderProps,
+  RouterProviderProps extends IRouterProviderProps
+> = IWrapperProps<IdentityProviderProps, UIProviderProps, RouterProviderProps>;
+
 export function TestWrapper<
   IdentityProviderProps extends IIdentityProviderProps = IIdentityProviderProps,
   UIProviderProps extends IUIProviderProps = IUIProviderProps,
@@ -34,5 +40,5 @@ export function TestWrapper<
   ITestWrapperProps<IdentityProviderProps, UIProviderProps, RouterProviderProps>
 >): ReactElement {
   router = { ...router, Component: RouterComponent } as RouterProviderProps;
-  return <Wrapper {...props} router={router} />;
+  return <CoreTestWrapper {...props} router={router} />;
 }
