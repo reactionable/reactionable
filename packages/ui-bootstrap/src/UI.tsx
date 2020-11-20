@@ -30,9 +30,8 @@ export type IUIProviderProps = ICoreUIContextProviderProps<
   IUseModalProps
 >;
 
-export function useUIProviderProps(): IUIProviderProps {
-  return {
-    ...useCoreUIProviderProps(),
+export function useUIProviderProps(props?: Partial<IUIProviderProps>): IUIProviderProps {
+  return useCoreUIProviderProps({
     useLoader,
     useSuccessNotification,
     useErrorNotification,
@@ -43,9 +42,9 @@ export function useUIProviderProps(): IUIProviderProps {
     useForm,
     useModal,
     useModalForm,
-  };
+    ...props,
+  });
 }
-
 export const UIContextProvider = (
   props?: PropsWithChildren<Partial<IUIProviderProps>>
 ): ReactElement => {

@@ -3,8 +3,13 @@ import { LazyExoticComponent, PropsWithChildren, ReactElement } from "react";
 import { IFormData } from "../form/Form";
 import { IRouteProps } from "../router/Route";
 import { useRouterContext } from "../router/Router";
+import { ICreateProps } from "./create/Create";
+import { IDeleteProps } from "./delete/Delete";
 import { ListComponent } from "./list/List";
+import { IUseListQuery } from "./list/useList";
 import { ReadComponent } from "./read/Read";
+import { IUseReadQuery } from "./read/useRead";
+import { IUpdateProps } from "./update/Update";
 
 export interface ICrudProp<Data extends IFormData = IFormData> {
   name: string;
@@ -55,3 +60,19 @@ export function Crud<Data extends IFormData = IFormData>({
 
   return renderRoutes(routes);
 }
+
+export type IUseCrudConfigResult<
+  CreateProps extends ICreateProps = ICreateProps,
+  UpdateProps extends IUpdateProps = IUpdateProps,
+  DeleteProps extends IDeleteProps = IDeleteProps,
+  UseReadQuery extends IUseReadQuery = IUseReadQuery,
+  UseListQuery extends IUseListQuery = IUseListQuery
+> = {
+  onCreate: CreateProps["form"]["onSubmit"];
+  onUpdate: UpdateProps["form"]["onSubmit"];
+  onDelete: DeleteProps["onConfirm"];
+  useRead: UseReadQuery;
+  useList: UseListQuery;
+  validationSchema: CreateProps["form"]["validationSchema"];
+  formChildren: CreateProps["form"]["children"];
+};

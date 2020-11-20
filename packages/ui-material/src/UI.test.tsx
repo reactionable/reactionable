@@ -60,7 +60,7 @@ describe("UI", () => {
     it("should use UI hook", async () => {
       const TestComponent = () => {
         const { useLoader } = useUIContext();
-        const { loader } = useLoader({ isLoading: true });
+        const { loader } = useLoader({ loading: true });
         return loader;
       };
 

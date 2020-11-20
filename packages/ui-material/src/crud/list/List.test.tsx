@@ -17,7 +17,12 @@ describe("List", () => {
   it("should render without crashing", () => {
     const result = render(
       <TestWrapper>
-        <List<ITestData> head={["test"]} data={[{ test: "" }]} isLoading={false}>
+        <List<ITestData>
+          head={["test"]}
+          data={{ items: [{ test: "" }], count: 1 }}
+          loading={false}
+          refetch={jest.fn()}
+        >
           {(data) => (
             <TableRow key={data.test}>
               <TableCell>{data.test}</TableCell>

@@ -4,6 +4,7 @@ import TableCell from "@material-ui/core/TableCell/TableCell";
 import TableContainer from "@material-ui/core/TableContainer/TableContainer";
 import TableHead from "@material-ui/core/TableHead/TableHead";
 import TableRow from "@material-ui/core/TableRow/TableRow";
+import { IData } from "@reactionable/core";
 import {
   List as CoreList,
   IListProps as ICoreListProps,
@@ -11,13 +12,14 @@ import {
 import { useTranslation } from "@reactionable/core/lib/i18n/I18n";
 import React, { ComponentType, PropsWithChildren, ReactElement, ReactNode } from "react";
 
-export interface IListProps<Data> extends Omit<ICoreListProps<Data>, "children"> {
+export interface IListProps<Data extends IData = IData>
+  extends Omit<ICoreListProps<Data>, "children"> {
   head: Array<ReactNode | string>;
   children: (data: Data) => ReactNode;
 }
 
-export type ListComponent<Data> = ComponentType<IListProps<Data>>;
-export function List<Data>({
+export type ListComponent<Data extends IData = IData> = ComponentType<IListProps<Data>>;
+export function List<Data extends IData = IData>({
   head,
   children,
   ...props
@@ -26,7 +28,7 @@ export function List<Data>({
 
   return (
     <CoreList<Data> {...props}>
-      {(data) => (
+      {({ data }) => (
         <TableContainer>
           <Table>
             <TableHead>
@@ -36,7 +38,7 @@ export function List<Data>({
                 )}
               </TableRow>
             </TableHead>
-            <TableBody>{data.map((item) => children(item))}</TableBody>
+            <TableBody>{data.items.map((item) => children(item))}</TableBody>
           </Table>
         </TableContainer>
       )}

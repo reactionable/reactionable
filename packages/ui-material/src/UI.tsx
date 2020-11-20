@@ -53,9 +53,8 @@ export type IUIProviderProps = ICoreUIContextProviderProps<
 > &
   IUIComponentProps;
 
-export function useUIProviderProps(): IUIProviderProps {
-  return {
-    ...useCoreUIProviderProps(),
+export function useUIProviderProps(props?: Partial<IUIProviderProps>): IUIProviderProps {
+  return useCoreUIProviderProps({
     Component: UIComponent,
     useLoader,
     useSuccessNotification,
@@ -67,7 +66,8 @@ export function useUIProviderProps(): IUIProviderProps {
     useForm,
     useModal,
     useModalForm,
-  };
+    ...props,
+  });
 }
 
 export const UIContextProvider = (

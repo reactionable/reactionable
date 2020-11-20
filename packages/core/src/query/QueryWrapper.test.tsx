@@ -10,7 +10,7 @@ describe("QueryWrapper", () => {
   it("should render without crashing", async () => {
     const children = jest.fn();
 
-    render(<QueryWrapper isLoading={false}>{children}</QueryWrapper>);
+    render(<QueryWrapper loading={false}>{children}</QueryWrapper>);
 
     expect(children).not.toHaveBeenCalled();
   });
@@ -21,14 +21,14 @@ describe("QueryWrapper", () => {
     const data = "test";
 
     render(
-      <QueryWrapper isLoading={false} data={data}>
+      <QueryWrapper loading={false} data={data}>
         {children}
       </QueryWrapper>
     );
 
     expect(children).toHaveBeenCalledWith({
       data,
-      isLoading: false,
+      loading: false,
       setErrorAlert: expect.any(Function),
       setLoading: expect.any(Function),
       setWarningAlert: expect.any(Function),

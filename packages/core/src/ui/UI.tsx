@@ -85,7 +85,7 @@ export type IUIProviderProps<
   ) => IUseModalResult;
 }>;
 
-export function useUIProviderProps(): IUIProviderProps {
+export function useUIProviderProps(props?: Partial<IUIProviderProps>): IUIProviderProps {
   return {
     useLoader: (props) => useLoader({ Component: Loader, ...props }),
     useSuccessNotification: (props) =>
@@ -104,6 +104,7 @@ export function useUIProviderProps(): IUIProviderProps {
     useForm: (props) => useForm({ Component: Form, ...props }),
     useModal: (props) => useModal({ Component: Modal, ...props }),
     useModalForm,
+    ...props,
   };
 }
 

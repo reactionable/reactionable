@@ -1,19 +1,35 @@
-import { IData, IUseQueryOptions, IUseQueryResult, IVariables } from "./Query";
+import {
+  IData,
+  IQueryOptions,
+  IUseQueryOptions,
+  IUseQueryResult,
+  IVariables,
+  useQuery,
+} from "./Query";
 
-export type IUseQueryListOptions<Variables extends IVariables = IVariables> = IUseQueryOptions<
-  Variables
-> & {
-  queryAll?: boolean;
+export type IListData<Data extends IData = IData> = {
+  items: Data[];
+  count: number;
 };
 
-export interface IUseQueryListResult<Data extends IData = IData>
-  extends Omit<IUseQueryResult<Data>, "data"> {
-  data: Array<Data>;
-  next?: () => void;
-  previous?: () => void;
-}
+export type IListVariables<Variables extends IVariables> = Variables & {
+  offset?: number;
+  limit?: number;
+};
 
-export type IUseQueryList<
-  Data extends IData = IData,
-  Options extends IUseQueryListOptions = IUseQueryListOptions
-> = (options?: Options) => IUseQueryListResult<Data>;
+export type IQueryListOptions<Variables extends IVariables = IVariables> = IQueryOptions<
+  IListVariables<Variables>
+>;
+
+export type IUseQueryListOptions<
+  Data extends IData,
+  Variables extends IVariables
+> = IUseQueryOptions<IListData<Data>, IListVariables<Variables>>;
+
+export type IUseQueryListResult<Data extends IData = IData> = IUseQueryResult<IListData<Data>>;
+
+export function useQueryList<Data extends IData = IData, Variables extends IVariables = IVariables>(
+  options: IUseQueryListOptions<Data, Variables>
+): IUseQueryListResult<Data> {
+  return useQuery<IListData<Data>, IListVariables<Variables>>(options);
+}
