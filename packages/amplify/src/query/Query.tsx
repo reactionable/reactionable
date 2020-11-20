@@ -10,8 +10,10 @@ export type IData = {};
 export type IVariables = ICoreVariables;
 
 function isGraphQLResult(arg: unknown): arg is GraphQLResult {
-  return (
-    arg && "object" === typeof arg && (arg["data"] !== undefined || arg["errors"] !== undefined)
+  return !!(
+    arg &&
+    "object" === typeof arg &&
+    (arg["data"] !== undefined || arg["errors"] !== undefined)
   );
 }
 
