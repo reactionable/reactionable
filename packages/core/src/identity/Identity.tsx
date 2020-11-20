@@ -29,9 +29,9 @@ export function NullAuthComponent(): null {
   return null;
 }
 
-export function useIdentityProviderProps(
-  props?: Partial<IIdentityProviderProps>
-): IIdentityProviderProps {
+export function useIdentityProviderProps<User extends IUser = IUser>(
+  props?: Partial<IIdentityProviderProps<User>>
+): IIdentityProviderProps<User> {
   return {
     user: undefined,
     logout: async () => {
@@ -39,7 +39,7 @@ export function useIdentityProviderProps(
     },
     identityProvider: undefined,
     AuthComponent: NullAuthComponent,
-    getUser: async () => {
+    getUser: async (): Promise<User | null> => {
       // Do nothing
       return null;
     },

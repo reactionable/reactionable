@@ -8,12 +8,12 @@ import Button from "react-bootstrap/Button";
 
 import { IIconProps, Icon } from "../../icon/icon";
 
-export interface IDeleteProps<Data> extends ICoreDeleteProps<Data> {
+export interface IDeleteProps<Data = unknown> extends ICoreDeleteProps<Data> {
   label?: ReactNode;
   icon?: IIconProps;
 }
 
-export function Delete<Data>({
+export function Delete<Data = unknown>({
   label,
   icon = { icon: faTrashAlt },
   ...props

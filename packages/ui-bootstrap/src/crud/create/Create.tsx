@@ -9,17 +9,13 @@ import { IFormButtonProps } from "../../form/FormButton";
 import { IModalProps } from "../../modal/Modal";
 
 export type ICreateProps<
-  Values extends IFormValues,
-  Data extends IFormData,
-  FormButtonProps extends IFormButtonProps,
-  ModalProps extends IModalProps
-> = ICoreCreateProps<Values, Data, FormButtonProps, ModalProps>;
+  Values extends IFormValues = IFormValues,
+  Data extends IFormData = IFormValues
+> = ICoreCreateProps<Values, Data, IFormButtonProps, IModalProps>;
 
 export function Create<
   Values extends IFormValues = IFormValues,
-  Data extends IFormData = IFormData,
-  FormButtonProps extends IFormButtonProps = IFormButtonProps,
-  ModalProps extends IModalProps = IModalProps
->(props: PropsWithChildren<ICreateProps<Values, Data, FormButtonProps, ModalProps>>): ReactElement {
-  return <CreateCore<Values, Data, FormButtonProps, ModalProps> {...props} />;
+  Data extends IFormData = IFormData
+>(props: PropsWithChildren<ICreateProps<Values, Data>>): ReactElement {
+  return <CreateCore<Values, Data, IFormButtonProps, IModalProps> {...props} />;
 }
