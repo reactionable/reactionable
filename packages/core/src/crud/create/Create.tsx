@@ -16,10 +16,10 @@ export type FormInModal<
 > = Omit<IUseModalFormProps<Values, Data, FormButtonProps, ModalProps>, "form" | "title"> | true;
 
 export interface ICreateProps<
-  Values extends IFormValues,
-  Data extends IFormData,
-  FormButtonProps extends IFormButtonProps,
-  ModalProps extends IModalProps
+  Values extends IFormValues = IFormValues,
+  Data extends IFormData = IFormData,
+  FormButtonProps extends IFormButtonProps = IFormButtonProps,
+  ModalProps extends IModalProps = IModalProps
 > {
   modal?: FormInModal<Values, Data, FormButtonProps, ModalProps>;
   form: IUseFormProps<Values, Data, FormButtonProps>;

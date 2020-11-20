@@ -10,19 +10,23 @@ export default {
   decorators: [withKnobs],
 };
 
-export const list = (): ReactElement => {
-  const isLoading = boolean("Is loading?", false);
+export const SimpleList = (): ReactElement => {
+  const loading = boolean("Is loading?", false);
   const hasError = boolean("Has error?", false);
   return (
     <UIContextProvider>
       <List
         head={["ID", "Label"]}
-        isLoading={isLoading}
+        loading={loading}
         error={hasError && new Error("An error has occured")}
-        data={[
-          { id: "1", label: "Data 1" },
-          { id: "2", label: "Data 2" },
-        ]}
+        data={{
+          count: 2,
+          items: [
+            { id: "1", label: "Data 1" },
+            { id: "2", label: "Data 2" },
+          ],
+        }}
+        refetch={() => null}
       >
         {(data) => (
           <tr key={data.id}>

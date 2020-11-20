@@ -15,7 +15,7 @@ describe("Read", () => {
   it("should render without crashing", () => {
     const result = render(
       <TestWrapper>
-        <Read<ITestData> data={{ test: "" }} isLoading={false}>
+        <Read<ITestData> data={{ test: "" }} loading={false} refetch={jest.fn()}>
           {jest.fn()}
         </Read>
       </TestWrapper>

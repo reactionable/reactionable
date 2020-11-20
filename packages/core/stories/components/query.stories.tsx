@@ -12,7 +12,7 @@ export default {
 };
 
 export const queryWrapper = (): ReactElement => {
-  const isLoading = boolean("Is loading?", false);
+  const loading = boolean("Is loading?", false);
   const hasError = boolean("Has error?", false);
   const hasData = boolean("Has data?", false);
   const content = text("Content", "This is the data content");
@@ -25,7 +25,7 @@ export const queryWrapper = (): ReactElement => {
     <UIContextProvider {...useUIProviderProps()}>
       <h3>Query result</h3>
       <QueryWrapper<{ content: string }>
-        isLoading={isLoading}
+        loading={loading}
         error={hasError && new Error("An error has occured")}
         data={hasData ? { content } : undefined}
         noData={<>There is not data</>}

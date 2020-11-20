@@ -6,10 +6,10 @@ import { IModalProps } from "../../ui/modal/Modal";
 import { Create, ICreateProps } from "../create/Create";
 
 export type IUpdateProps<
-  Values extends IFormValues,
-  Data extends IFormData,
-  FormButtonProps extends IFormButtonProps,
-  ModalProps extends IModalProps
+  Values extends IFormValues = IFormValues,
+  Data extends IFormData = IFormData,
+  FormButtonProps extends IFormButtonProps = IFormButtonProps,
+  ModalProps extends IModalProps = IModalProps
 > = ICreateProps<Values, Data, FormButtonProps, ModalProps>;
 
 export type UpdateComponent<

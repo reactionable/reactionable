@@ -8,12 +8,12 @@ import React, { PropsWithChildren, ReactElement, ReactNode } from "react";
 
 import { IIconProps, Icon } from "../../icon/Icon";
 
-export interface IDeleteProps<Data> extends ICoreDeleteProps<Data> {
+export interface IDeleteProps<Data = unknown> extends ICoreDeleteProps<Data> {
   label?: ReactNode;
   icon?: IIconProps;
 }
 
-export function Delete<Data>({
+export function Delete<Data = unknown>({
   label,
   icon = DeleteIcon,
   ...props

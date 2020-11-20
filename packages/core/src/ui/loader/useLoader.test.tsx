@@ -9,18 +9,18 @@ describe("useLoader", () => {
   it("should render unloading by default", () => {
     const { result } = renderHook(() => useLoader());
 
-    expect(result.current.isLoading).toEqual(false);
+    expect(result.current.loading).toEqual(false);
     expect(result.current.loader).toBeNull();
   });
 
-  it("should display loader state when isLoading is true", () => {
+  it("should display loader state when loading is true", () => {
     const { result } = renderHook(() => useLoader());
 
     act(() => {
       result.current.setLoading(true);
     });
 
-    expect(result.current.isLoading).toEqual(true);
+    expect(result.current.loading).toEqual(true);
     expect(result.current.loader).not.toBeNull();
   });
 });

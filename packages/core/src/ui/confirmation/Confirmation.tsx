@@ -91,7 +91,7 @@ export function ConfirmationAction<Data>(
     useConfirmation,
   } = useUIContext();
 
-  const { loader, isLoading, setLoading } = useLoader({});
+  const { loader, loading, setLoading } = useLoader({});
   const { successNotification, setSuccessNotification } = useSuccessNotification({
     title: props.title,
   });
@@ -141,7 +141,7 @@ export function ConfirmationAction<Data>(
 
   return (
     <>
-      <EnhanceChildren enhance={{ onClick, disabled: isLoading }}>{props.children}</EnhanceChildren>
+      <EnhanceChildren enhance={{ onClick, disabled: loading }}>{props.children}</EnhanceChildren>
       {successNotification}
       {errorNotification}
       {confirmation}

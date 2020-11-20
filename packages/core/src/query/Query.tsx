@@ -10,29 +10,27 @@ export type IQueryOptions<Variables extends IVariables = IVariables> = {
   variables?: Variables;
 };
 
+export type IUseQueryOptions<Data extends IData, Variables extends IVariables> = IQueryOptions<
+  Variables
+> & {
+  handleQuery: (queryOptions: IQueryOptions<Variables>) => Promise<Data>;
+};
 export interface IUseQueryResult<Data extends IData = IData> {
-  isLoading: boolean;
+  loading: boolean;
   error?: IError;
   data?: Data;
   refetch: () => void;
 }
 
-export type IUseQueryOptions<
-  Data extends IData,
-  Options extends IQueryOptions = IQueryOptions
-> = Options & {
-  handleQuery: (queryOptions: Options) => Promise<Data>;
-};
-
-export function useQuery<
-  Data extends IData = IData,
-  Options extends IQueryOptions = IQueryOptions
->({ handleQuery, ...queryOptions }: IUseQueryOptions<Data, Options>): IUseQueryResult<Data> {
-  const [isLoading, setLoading] = useState<boolean>(true);
+export function useQuery<Data extends IData = IData, Variables extends IVariables = IVariables>({
+  handleQuery,
+  ...queryOptions
+}: IUseQueryOptions<Data, Variables>): IUseQueryResult<Data> {
+  const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<IError | undefined>(undefined);
   const [data, setData] = useState<Data | undefined>(undefined);
 
-  const fetchQuery = async (queryOptions: Options) => {
+  const fetchQuery = async (queryOptions: IQueryOptions<Variables>) => {
     try {
       setLoading(true);
       const data = await handleQuery(queryOptions);
@@ -45,15 +43,15 @@ export function useQuery<
   };
 
   const refetch = () => {
-    fetchQuery((queryOptions as unknown) as Options);
+    fetchQuery(queryOptions as IQueryOptions<Variables>);
   };
 
   useDeepCompareEffect(() => {
-    fetchQuery((queryOptions as unknown) as Options);
+    fetchQuery(queryOptions as IQueryOptions<Variables>);
   }, [queryOptions]);
 
   return {
-    isLoading,
+    loading,
     data,
     error,
     refetch,

@@ -1,32 +1,13 @@
-import React, { ReactElement, ReactNode, useEffect, useState } from "react";
+import React, { PropsWithChildren, ReactElement, ReactNode, useEffect, useState } from "react";
 
+import { IError } from "../error/IError";
 import { IUseErrorAlertResult } from "../ui/alert/ErrorAlert";
 import { IUseWarningAlertResult } from "../ui/alert/WarningAlert";
 import { IUseLoaderResult } from "../ui/loader/useLoader";
 import { useUIContext } from "../ui/UI";
-import { IData, IUseQueryResult } from "./Query";
+import { IData } from "./Query";
 
-export type IQueryWrapperProps<UQR extends IUseQueryResult = IUseQueryResult> = Pick<
-  UQR,
-  "isLoading" | "error" | "data"
-> & {
-  noData?: ReactNode;
-  children: (props: IQueryWrapperChildrenProps<UQR>) => ReactNode;
-};
-
-export type IQueryWrapperChildrenProps<UQR extends IUseQueryResult> = Omit<UQR, "data"> & {
-  data: DataPropsType<UQR>;
-} & Pick<IUseLoaderResult, "setLoading"> &
-  Pick<IUseErrorAlertResult, "setErrorAlert"> &
-  Pick<IUseWarningAlertResult, "setWarningAlert">;
-
-type DataPropsType<UQR extends IUseQueryResult> = UQR extends IUseQueryResult<infer Data>
-  ? Data extends IData
-    ? Data
-    : never
-  : never;
-
-function checkHasData(data: unknown) {
+function isNotEmptyData<Data extends IData = IData>(data: unknown): data is Data {
   if (Array.isArray(data)) {
     return data.length > 0;
   }
@@ -38,37 +19,55 @@ function checkHasData(data: unknown) {
   return data !== null && data !== undefined;
 }
 
-export function QueryWrapper<
-  Data extends IData = IData,
-  UQR extends IUseQueryResult<Data> = IUseQueryResult<Data>
->({ children, data, ...props }: IQueryWrapperProps<UQR>): ReactElement {
-  const { isLoading, error, noData } = props;
+export type IQueryWrapperChildrenProps<Data extends IData = IData> = Omit<
+  IQueryWrapperProps<Data>,
+  "children" | "data"
+> &
+  Required<Pick<IQueryWrapperProps<Data>, "data">> & {
+    setLoading: IUseLoaderResult["setLoading"];
+    setErrorAlert: IUseErrorAlertResult["setErrorAlert"];
+    setWarningAlert: IUseWarningAlertResult["setWarningAlert"];
+  };
+
+export type IQueryWrapperProps<Data extends IData = IData> = {
+  loading: boolean;
+  data?: Data;
+  error?: IError;
+  noData?: ReactNode;
+  children: (props: IQueryWrapperChildrenProps<Data>) => ReactNode;
+};
+
+export function QueryWrapper<Data extends IData = IData>({
+  children,
+  data,
+  ...props
+}: PropsWithChildren<IQueryWrapperProps<Data>>): ReactElement {
+  const { loading, error, noData } = props;
   const { useLoader, useErrorAlert, useWarningAlert } = useUIContext();
-  const { loader, setLoading } = useLoader({ isLoading });
+  const { loader, setLoading } = useLoader({ loading });
   const { warningAlert, setWarningAlert } = useWarningAlert();
   const { errorAlert, setErrorAlert } = useErrorAlert();
   const [childrenData, setChildrenData] = useState<ReactNode>();
 
   useEffect(() => {
-    setLoading(isLoading);
-    setErrorAlert(!isLoading && error ? error : undefined);
+    setLoading(loading);
+    setErrorAlert(!loading && error ? error : undefined);
 
-    const hasData = checkHasData(data);
+    let displayChildren: ReactNode = undefined;
+    const hasData = isNotEmptyData<Data>(data);
+    if (data && hasData && !loading && !error) {
+      displayChildren = children({
+        data,
+        setLoading,
+        setErrorAlert,
+        setWarningAlert,
+        ...props,
+      });
+    }
+    setChildrenData(displayChildren);
 
-    setChildrenData(
-      !isLoading && !error && hasData
-        ? children({
-            data,
-            setLoading,
-            setErrorAlert,
-            setWarningAlert,
-            ...props,
-          } as IQueryWrapperChildrenProps<UQR>)
-        : undefined
-    );
-
-    setWarningAlert(error || isLoading || !noData || hasData ? undefined : noData);
-  }, [isLoading, error, data]);
+    setWarningAlert(error || loading || !noData || hasData ? undefined : noData);
+  }, [loading, error, data]);
 
   return (
     <>

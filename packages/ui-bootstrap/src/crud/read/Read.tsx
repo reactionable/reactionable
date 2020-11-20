@@ -1,3 +1,4 @@
+import { IData } from "@reactionable/core";
 import {
   Read as CoreRead,
   IReadProps as ICoreReadProps,
@@ -7,15 +8,18 @@ import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 
-export type IReadProps<Data> = ICoreReadProps<Data>;
+export type IReadProps<Data extends IData = IData> = ICoreReadProps<Data>;
 
-export function Read<Data>({ children, ...props }: IReadProps<Data>): ReactElement {
+export function Read<Data extends IData = IData>({
+  children,
+  ...props
+}: IReadProps<Data>): ReactElement {
   return (
     <CoreRead<Data> {...props}>
-      {(data: Data) => (
+      {(props) => (
         <Container fluid>
           <Row>
-            <Col>{children(data)}</Col>
+            <Col>{children(props)}</Col>
           </Row>
         </Container>
       )}

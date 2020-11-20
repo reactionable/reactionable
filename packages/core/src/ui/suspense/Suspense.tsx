@@ -16,7 +16,7 @@ export const Suspense: ComponentType<ISuspenseProps> = (props: ISuspenseProps) =
   if (props.fallback !== undefined) {
     fallback = props.fallback;
   } else {
-    const { loader } = useUIContext().useLoader({ isLoading: true });
+    const { loader } = useUIContext().useLoader({ loading: true });
     fallback = loader;
   }
 
