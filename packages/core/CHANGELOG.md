@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.25.2 (2020-11-21)
+
+
+### Bug Fixes
+
+* **core:** add missing noData property to List and Read crud components ([76f2d56](https://github.com/reactionable/reactionable/commit/76f2d56db80634fe9b23ade17355e568d6595d86))
+
+
+
+
+
 ## 0.25.1 (2020-11-21)
 
 
