@@ -1,10 +1,11 @@
 import { LazyExoticComponent, PropsWithChildren, ReactElement } from "react";
 
-import { IFormData } from "../form/Form";
+import { IFormData, IFormValues } from "../form/Form";
+import { IFormButtonProps } from "../form/FormButton";
 import { IRouteProps } from "../router/Route";
 import { useRouterContext } from "../router/Router";
+import { IModalProps } from "../ui/modal/Modal";
 import { ICreateProps } from "./create/Create";
-import { IDeleteProps } from "./delete/Delete";
 import { ListComponent } from "./list/List";
 import { IUseListQuery } from "./list/useList";
 import { ReadComponent } from "./read/Read";
@@ -62,17 +63,22 @@ export function Crud<Data extends IFormData = IFormData>({
 }
 
 export type IUseCrudConfigResult<
-  CreateProps extends ICreateProps = ICreateProps,
-  UpdateProps extends IUpdateProps = IUpdateProps,
-  DeleteProps extends IDeleteProps = IDeleteProps,
-  UseReadQuery extends IUseReadQuery = IUseReadQuery,
-  UseListQuery extends IUseListQuery = IUseListQuery
+  Values extends IFormValues = IFormValues,
+  Data extends IFormData = IFormData,
+  FormButtonProps extends IFormButtonProps = IFormButtonProps,
+  ModalProps extends IModalProps = IModalProps
 > = {
-  onCreate: CreateProps["form"]["onSubmit"];
-  onUpdate: UpdateProps["form"]["onSubmit"];
-  onDelete: DeleteProps["onConfirm"];
-  useRead: UseReadQuery;
-  useList: UseListQuery;
-  validationSchema: CreateProps["form"]["validationSchema"];
-  formChildren: CreateProps["form"]["children"];
+  onCreate: ICreateProps<Values, Data, FormButtonProps, ModalProps>["form"]["onSubmit"];
+  onUpdate: IUpdateProps<Values, Data, FormButtonProps, ModalProps>["form"]["onSubmit"];
+  onDelete: (id: string | number) => unknown;
+  useRead: IUseReadQuery<Data>;
+  useList: IUseListQuery<Data>;
+  initialValues: ICreateProps<Values, Data, FormButtonProps, ModalProps>["form"]["initialValues"];
+  validationSchema: ICreateProps<
+    Values,
+    Data,
+    FormButtonProps,
+    ModalProps
+  >["form"]["validationSchema"];
+  formChildren: ICreateProps<Values, Data, FormButtonProps, ModalProps>["form"]["children"];
 };
