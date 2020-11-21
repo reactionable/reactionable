@@ -7,6 +7,7 @@ import { IUseListResult } from "./useList";
 
 export type IListProps<Data extends IData = IData> = IUseListResult<Data> & {
   children: IQueryWrapperProps<IListData<Data>>["children"];
+  noData?: IQueryWrapperProps<IListData<Data>>["noData"];
 };
 
 export type ListComponent<Data extends IData = IData> = ComponentType<IListProps<Data>>;

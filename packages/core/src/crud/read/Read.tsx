@@ -6,6 +6,7 @@ import { IUseReadResult } from "./useRead";
 
 export type IReadProps<Data extends IData = IData> = IUseReadResult<Data> & {
   children: IQueryWrapperProps<Data>["children"];
+  noData?: IQueryWrapperProps<Data>["noData"];
 };
 
 export type ReadComponent<Data extends IData = IData> = ComponentType<IReadProps<Data>>;
