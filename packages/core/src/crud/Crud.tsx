@@ -7,9 +7,9 @@ import { useRouterContext } from "../router/Router";
 import { IModalProps } from "../ui/modal/Modal";
 import { ICreateProps } from "./create/Create";
 import { ListComponent } from "./list/List";
-import { IUseListQuery } from "./list/useList";
+import { IUseListOptions, IUseListResult } from "./list/useList";
 import { ReadComponent } from "./read/Read";
-import { IUseReadQuery } from "./read/useRead";
+import { IUseReadOptions, IUseReadResult } from "./read/useRead";
 import { IUpdateProps } from "./update/Update";
 
 export interface ICrudProp<Data extends IFormData = IFormData> {
@@ -70,9 +70,9 @@ export type IUseCrudConfigResult<
 > = {
   onCreate: ICreateProps<Values, Data, FormButtonProps, ModalProps>["form"]["onSubmit"];
   onUpdate: IUpdateProps<Values, Data, FormButtonProps, ModalProps>["form"]["onSubmit"];
-  onDelete: (id: string | number) => unknown;
-  useRead: IUseReadQuery<Data>;
-  useList: IUseListQuery<Data>;
+  onDelete: (id: string | number) => Promise<unknown>;
+  useRead: (variables?: IUseReadOptions<Data>["variables"]) => IUseReadResult<Data>;
+  useList: (variables?: IUseListOptions<Data>["variables"]) => IUseListResult<Data>;
   initialValues: ICreateProps<Values, Data, FormButtonProps, ModalProps>["form"]["initialValues"];
   validationSchema: ICreateProps<
     Values,

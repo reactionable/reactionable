@@ -7,10 +7,6 @@ export type IUseReadOptions<
 
 export type IUseReadResult<Data extends IData = IData> = IUseQueryResult<Data>;
 
-export type IUseReadQuery<Data extends IData = IData, Variables extends IVariables = IVariables> = (
-  options: IUseReadOptions<Data, Variables>
-) => IUseReadResult<Data>;
-
 export function useRead<Data extends IData = IData, Variables extends IVariables = IVariables>(
   options: IUseReadOptions<Data, Variables>
 ): IUseReadResult<Data> {
