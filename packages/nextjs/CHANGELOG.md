@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.25.0 (2020-11-21)
+
+
+### Features
+
+* **deps:** upgrade dependencies ([44af117](https://github.com/reactionable/reactionable/commit/44af1177f505c96ba35ba2879f5abc5273391e19))
+
+
+
+
+
 ## 0.24.19 (2020-11-20)
 
 **Note:** Version bump only for package @reactionable/nextjs
