@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.25.1 (2020-11-21)
+
+
+### Bug Fixes
+
+* **crud:** fix typings for Crud components ([976b561](https://github.com/reactionable/reactionable/commit/976b5616f2e5e959410c7a9ffee20d4578ab3667))
+
+
+
+
+
 # 0.25.0 (2020-11-21)
 
 
