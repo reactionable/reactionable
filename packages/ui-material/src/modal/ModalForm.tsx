@@ -91,5 +91,9 @@ export function ModalForm<
     </ModalFormChildren>
   );
 
-  return <CoreModalForm<Values, Data, FormButtonProps> {...props}>{formChildren}</CoreModalForm>;
+  return (
+    <CoreModalForm<Values, Data, FormButtonProps> {...props} submitButton={false}>
+      {formChildren}
+    </CoreModalForm>
+  );
 }
