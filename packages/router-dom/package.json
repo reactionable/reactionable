@@ -1,6 +1,6 @@
 {
   "name": "@reactionable/router-dom",
-  "version": "0.25.2",
+  "version": "0.25.3",
   "description": "Reactionable Router package for react-router-dom",
   "files": [
     "lib"
@@ -34,7 +34,7 @@
   },
   "homepage": "https://github.com/reactionable/reactionable#readme",
   "dependencies": {
-    "@reactionable/core": "^0.25.2",
+    "@reactionable/core": "^0.25.3",
     "react-helmet": "^6.1.0",
     "react-router-dom": "^5.2.0"
   },
