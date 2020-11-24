@@ -1,3 +1,4 @@
+import { makeStyles } from "@material-ui/core";
 import UiAlert, { AlertProps } from "@material-ui/lab/Alert";
 import AlertTitle from "@material-ui/lab/AlertTitle/AlertTitle";
 import { IAlertProps as IAlertPropsCore } from "@reactionable/core/lib/ui/alert/Alert";
@@ -14,17 +15,25 @@ export type IAlertProps = IAlertPropsCore &
 
 export type AlertComponent = ComponentType<IAlertProps>;
 
+const useStyles = makeStyles(() => ({
+  message: {
+    width: "100%",
+  },
+}));
+
 export const Alert: AlertComponent = ({ children, title, icon, ...props }: IAlertProps) => {
+  const classes = useStyles();
+
   let iconProp: AlertProps["icon"];
 
   if (!icon || typeof icon === "boolean") {
     iconProp = icon;
   } else {
-    iconProp = <Icon {...(icon as IIconProps)} />;
+    iconProp = <Icon {...(icon as IIconProps)} fontSize="inherit" />;
   }
 
   return (
-    <UiAlert {...props} icon={iconProp}>
+    <UiAlert icon={iconProp} classes={classes} {...props}>
       {title && <AlertTitle>{title}</AlertTitle>}
       {children}
     </UiAlert>

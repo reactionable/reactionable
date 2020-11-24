@@ -13,6 +13,8 @@ import React, {
   ReactElement,
   SyntheticEvent,
   isValidElement,
+  useEffect,
+  useState,
 } from "react";
 
 export type INotificationProps = ICoreNotificationProps & Omit<SnackbarProps, "children" | "title">;
@@ -36,6 +38,14 @@ export const Notification = ({
     children = <SnackbarContent message={children} />;
   }
 
+  const [open, setOpen] = useState<boolean>();
+
+  useEffect(() => {
+    if (show !== open) {
+      setOpen(show);
+    }
+  }, [open, show]);
+
   let firstClickAway = true;
   const handleClose = (event: SyntheticEvent | MouseEvent, reason?: string) => {
     if (reason === "clickaway") {
@@ -44,12 +54,13 @@ export const Notification = ({
         return;
       }
     }
+    setOpen(false);
 
     onClose && onClose();
   };
 
   return (
-    <Snackbar open={show} autoHideDuration={6000} onClose={handleClose} {...props}>
+    <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} {...props}>
       {children as ReactElement}
     </Snackbar>
   );

@@ -15,8 +15,8 @@ export type IFormButtonProps = ICoreFormButtonProps & ButtonProps;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    margin: {
-      margin: theme.spacing(6, 0, 2),
+    root: {
+      margin: theme.spacing(5, 0, 2),
     },
   })
 );
@@ -28,7 +28,7 @@ export function FormButton(props: IFormButtonProps): ReactElement {
       color="primary"
       fullWidth
       variant="contained"
-      className={classes.margin}
+      classes={classes}
       size="large"
       {...props}
     />

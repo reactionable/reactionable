@@ -20,7 +20,7 @@ export const SuccessNotification = ({
   ...props
 }: PropsWithChildren<ISuccessNotificationProps>): ReactElement => {
   return (
-    <Notification {...props} title={title}>
+    <Notification title={title} {...props}>
       <Alert
         severity="success"
         title={title}

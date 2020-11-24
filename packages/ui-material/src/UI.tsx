@@ -4,6 +4,7 @@ import createMuiTheme, { Theme, ThemeOptions } from "@material-ui/core/styles/cr
 import {
   UIContextProvider as CoreUIContextProvider,
   IUIProviderProps as ICoreUIContextProviderProps,
+  useUIContext as coreUseUIContext,
   useUIProviderProps as useCoreUIProviderProps,
 } from "@reactionable/core/lib/ui/UI";
 import React, { PropsWithChildren, ReactElement } from "react";
@@ -80,3 +81,7 @@ export const UIContextProvider = (
 
   return <CoreUIContextProvider {...uiContextProviderProps} />;
 };
+
+export function useUIContext(): IUIProviderProps {
+  return coreUseUIContext();
+}
