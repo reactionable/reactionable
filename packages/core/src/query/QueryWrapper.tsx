@@ -71,10 +71,10 @@ export function QueryWrapper<Data extends IData = IData>({
 
   return (
     <>
-      {loader}
-      {errorAlert}
-      {warningAlert}
-      {childrenData}
+      {loader && loader}
+      {errorAlert && errorAlert}
+      {warningAlert && warningAlert}
+      {childrenData && childrenData}
     </>
   );
 }
