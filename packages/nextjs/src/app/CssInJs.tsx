@@ -4,7 +4,7 @@ import createEmotionServer from "@emotion/server/create-instance";
 import NextDocument, { Head, Html, Main, NextScript } from "next/document";
 import React, { Children, PropsWithChildren, ReactElement, ReactNode, useEffect } from "react";
 
-export const cache = createCache({ key: "css" });
+export const cssInJsCache = createCache({ key: "css" });
 
 export const CssInJsWrapper = ({ children }: PropsWithChildren<unknown>): ReactElement => {
   useEffect(() => {
@@ -15,10 +15,10 @@ export const CssInJsWrapper = ({ children }: PropsWithChildren<unknown>): ReactE
     }
   }, []);
 
-  return <CacheProvider value={cache}>{children}</CacheProvider>;
+  return <CacheProvider value={cssInJsCache}>{children}</CacheProvider>;
 };
 
-const { extractCritical } = createEmotionServer(cache);
+const { extractCritical } = createEmotionServer(cssInJsCache);
 
 export type IDocumentStyleSheets = {
   collect(children: ReactNode, options?: unknown): ReactElement;
@@ -27,9 +27,10 @@ export type IDocumentStyleSheets = {
 
 export class Document extends NextDocument {
   render(): ReactElement {
+    const head = this.getHead();
     return (
       <Html lang="en">
-        <Head>{Document.getHead()}</Head>
+        {head && <Head>{head}</Head>}
         <body>
           <Main />
           <NextScript />
@@ -38,12 +39,12 @@ export class Document extends NextDocument {
     );
   }
 
-  static getHead(): ReactElement | null {
+  getHead(): ReactElement | null {
     return null;
   }
 
-  static getStyleSheets(): IDocumentStyleSheets | null {
-    return null;
+  static getStyleSheets(): IDocumentStyleSheets | undefined {
+    return undefined;
   }
 }
 
