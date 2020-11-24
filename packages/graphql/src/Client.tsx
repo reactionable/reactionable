@@ -3,12 +3,12 @@ import {
   ApolloProvider,
   HttpOptions,
   OperationVariables,
-  createHttpLink,
   gql,
   useApolloClient,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { IData as ICoreData } from "@reactionable/core";
+import { createUploadLink } from "apollo-upload-client";
 import fetch from "cross-fetch";
 import React, { PropsWithChildren, ReactElement, useMemo } from "react";
 export { gql } from "@apollo/client";
@@ -25,7 +25,7 @@ function getGraphqlClient() {
 }
 
 function createGraphqlClient(uri: IGraphqlClientUri) {
-  const httpLink = createHttpLink({
+  const httpLink = createUploadLink({
     uri,
     fetch,
     credentials: "include", // Additional fetch() options like `credentials` or `headers`,
