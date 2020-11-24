@@ -48,9 +48,9 @@ export function useIdentityProviderProps<User extends IUser = IUser>(
   };
 }
 
-const { Context: IdentityContext, useContext: useIdentityContext } = createProvider<
-  IIdentityProviderProps
->(useIdentityProviderProps());
+const { Context: IdentityContext, useContext } = createProvider<IIdentityProviderProps>(
+  useIdentityProviderProps()
+);
 
 function IdentityContextProvider<User extends IUser>({
   AuthComponent,
@@ -101,4 +101,8 @@ function IdentityContextProvider<User extends IUser>({
   );
 }
 
-export { IdentityContext, useIdentityContext, IdentityContextProvider };
+export function useIdentityContext<User extends IUser>(): IIdentityProviderProps<User> {
+  return useContext() as IIdentityProviderProps<User>;
+}
+
+export { IdentityContext, IdentityContextProvider };
