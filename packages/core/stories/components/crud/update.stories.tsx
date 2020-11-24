@@ -21,12 +21,12 @@ export const update = (): ReactElement => {
       <Update
         form={{
           title: "Update form",
-          submitButton: true,
           onSubmit: async (values: IFormValues) => {
             await new Promise((resolve) => setTimeout(resolve, 1000));
             action("Form submit")(values);
             return values;
           },
+          successMessage: "Update succeed",
           onSuccess: action("Form submit succeed"),
           validationSchema: { test: string().required("Test is required") },
           initialValues: { test: "test value" },
@@ -44,12 +44,12 @@ export const updateInModal = (): ReactElement => {
         modal
         form={{
           title: "Update form",
-          submitButton: true,
           onSubmit: async (values: IFormValues) => {
             await new Promise((resolve) => setTimeout(resolve, 1000));
             action("Form submit")(values);
             return values;
           },
+          successMessage: "Update succeed",
           onSuccess: action("Form submit succeed"),
           validationSchema: { test: string().required("Test is required") },
           initialValues: { test: "test value" },

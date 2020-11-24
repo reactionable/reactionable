@@ -73,16 +73,18 @@ export function Form<
   useEffect(() => {
     if (success) {
       if (successMessage) {
-        setSuccessNotification(
-          "string" === typeof successMessage ? t(successMessage, success) : successMessage
-        );
+        setSuccessNotification(successMessage);
       }
+      setSuccess(undefined);
       if (onSuccess) {
-        setSuccess(undefined);
         onSuccess(success);
       }
     }
   }, [success, onSuccess]);
+
+  if (submitButton === undefined) {
+    submitButton = t("Save");
+  }
 
   const renderFormChildren = (formikProps: FormikProps<Values>) => (
     <FormWrapper<Values, FormButtonProps>
@@ -103,9 +105,7 @@ export function Form<
 
     try {
       const data = await onSubmit(values, formikHelpers);
-      if (onSuccess) {
-        setSuccess(data);
-      }
+      setSuccess(data);
     } catch (error) {
       setErrorAlert(error);
     }

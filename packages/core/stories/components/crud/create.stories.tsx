@@ -21,12 +21,12 @@ export const SimpleCreate = (): ReactElement => {
       <Create
         form={{
           title: "Create form",
-          submitButton: true,
           onSubmit: async (values: IFormValues) => {
             await new Promise((resolve) => setTimeout(resolve, 1000));
             action("Form submit")(values);
             return values;
           },
+          successMessage: "Creation succeed",
           onSuccess: action("Form submit succeed"),
           validationSchema: { test: string().required("Test is required") },
           initialValues: { test: "" },
@@ -44,12 +44,12 @@ export const CreateInModal = (): ReactElement => {
         modal
         form={{
           title: "Create form",
-          submitButton: true,
           onSubmit: async (values: IFormValues) => {
             await new Promise((resolve) => setTimeout(resolve, 1000));
             action("Form submit")(values);
             return values;
           },
+          successMessage: "Creation succeed",
           onSuccess: action("Form submit succeed"),
           validationSchema: { test: string().required("Test is required") },
           initialValues: { test: "" },
