@@ -1,0 +1,107 @@
+#!/usr/bin/env node
+
+const { spawn } = require("child_process");
+const { existsSync, readdirSync } = require("fs");
+const { resolve, basename } = require("path");
+
+const externalPackagesToLink = [
+  "react",
+  "react-dom",
+  "react-router-dom",
+  "aws-amplify",
+  "@material-ui/styles",
+  "@emotion/react",
+];
+
+const command = process.argv[2];
+if (!command || !["link", "unlink"].includes(command)) {
+  console.error(
+    `${basename(__filename)} expect to be called with a command argument: "link" or "unlink"`
+  );
+  process.exit(1);
+}
+
+execCommand(command);
+
+async function execCommand(command) {
+  const commandName = `${command.charAt(0).toUpperCase() + command.slice(1)}ing`;
+  console.info(`${commandName}ing for dev...`);
+
+  for (const packageToLink of externalPackagesToLink) {
+    const packagePath = resolve(__dirname, "node_modules", packageToLink);
+    if (!existsSync(packagePath)) {
+      console.error(`${packageToLink} does not exist (Must be "${packagePath}")`);
+      process.exit(1);
+    }
+    await execCmd(["yarn", command], packagePath);
+  }
+
+  await execCmd(["lerna exec yarn", command], __dirname);
+
+  console.info(`${commandName} done!`);
+
+  const internalPackages = readdirSync(resolve(__dirname, "packages")).map(
+    (file) => `@reactionable/${file}`
+  );
+
+  if (command !== "link") {
+    return;
+  }
+
+  console.info(`You can run now the following command in your project:`);
+  console.info(`\n-----------------------------------------------------\n`);
+  console.info(
+    `for package in ${[...internalPackages, ...externalPackagesToLink].join(
+      " "
+    )};do yarn ${command} $package;done;`
+  );
+  console.info(`\n-----------------------------------------------------\n`);
+}
+
+function execCmd(args, cwd, silent = false) {
+  if (!args.length) {
+    throw new Error("Command args must not be empty");
+  }
+
+  if (cwd && !existsSync(cwd)) {
+    throw new Error(`Directory "${cwd}" does not exist`);
+  }
+
+  let cmd;
+  if (Array.isArray(args)) {
+    cmd = args.shift() || "";
+  } else {
+    cmd = args;
+    args = [];
+  }
+
+  return new Promise((resolve, reject) => {
+    const child = spawn(cmd, args, {
+      stdio: silent ? "pipe" : "inherit",
+      shell: true,
+      windowsVerbatimArguments: true,
+      cwd,
+    });
+
+    let output = "";
+    let error = "";
+
+    child.on("exit", function (code) {
+      if (code) {
+        return reject(error);
+      }
+      resolve(output);
+    });
+
+    if (child.stdout) {
+      child.stdout.on("data", (data) => {
+        output += `\n${data}`;
+      });
+    }
+    if (child.stderr) {
+      child.stderr.on("data", (data) => {
+        error += `\n${data}`;
+      });
+    }
+  });
+}

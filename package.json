@@ -11,8 +11,8 @@
     "build": "lerna run --stream build --",
     "build:doc": "rimraf -rf build/docs && typedoc",
     "publish": "lerna publish --yes",
-    "link": "for package in react react-dom react-router-dom aws-amplify @material-ui/styles; do cd node_modules/$package && yarn link && cd ../..; done && lerna exec yarn link",
-    "unlink": "for package in react react-dom react-router-dom aws-amplify @material-ui/styles; do cd node_modules/$package && yarn unlink && cd ../..; done && lerna exec yarn unlink",
+    "link": "node dev-link link",
+    "unlink": "node dev-link unlink",
     "storybook": "start-storybook -p 6006",
     "storybook:build": "yarn storybook:deploy --dry-run",
     "storybook:deploy": "rimraf -rf build/storybook && storybook-to-ghpages -o build/storybook --ci",
@@ -107,7 +107,8 @@
   },
   "importSort": {
     ".js, .jsx, .ts, .tsx": {
-      "style": "module"
+      "style": "module",
+      "parser": "typescript"
     }
   },
   "jest": {
