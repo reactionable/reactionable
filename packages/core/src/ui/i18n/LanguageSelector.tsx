@@ -1,4 +1,4 @@
-import React, { ChangeEvent, ReactElement, ReactNode, useState } from "react";
+import React, { ChangeEvent, ReactElement, ReactNode, useEffect, useState } from "react";
 import { ComponentType, PropsWithChildren } from "react";
 
 import { useTranslation } from "../../i18n/I18n";
@@ -21,7 +21,7 @@ export type ILanguageSelectorComponentProps<
   LanguageSelectorItemComponentProps extends ILanguageSelectorItemComponentProps = ILanguageSelectorItemComponentProps
 > = {
   languages: string[];
-  current: string;
+  current?: string;
   ItemComponent?: LanguageSelectorItemComponent<LanguageSelectorItemComponentProps>;
 } & Required<Pick<ILanguageSelectorProps, "onSelectLanguage">>;
 
@@ -61,17 +61,26 @@ export function LanguageSelector({
 }: ILanguageSelectorProps): ReactElement {
   const { i18n } = useTranslation();
 
-  const [current, setLanguage] = useState(i18n.language);
+  const i18nLanguage = i18n.language;
+  const supportedLngs = i18n.options.supportedLngs;
+
+  const [current, setLanguage] = useState<string>();
+  const [languages, setLanguages] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (i18nLanguage !== current) {
+      setLanguage(i18nLanguage);
+      setLanguages(
+        supportedLngs ? supportedLngs.filter((lng) => ![current, "cimode"].includes(lng)) : []
+      );
+    }
+  }, [i18nLanguage, supportedLngs]);
 
   const handleOnSelectLanguage = (language: string) => {
     setLanguage(language);
     i18n.changeLanguage(language);
     onSelectLanguage && onSelectLanguage(language);
   };
-
-  const languages = i18n.options.supportedLngs
-    ? i18n.options.supportedLngs.filter((lng) => ![current, "cimode"].includes(lng))
-    : [];
 
   return (
     <Component
