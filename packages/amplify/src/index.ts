@@ -8,4 +8,3 @@ export * from "./identity/Identity.stories";
 export * from "./identity/Identity";
 export * from "./query/Mutation";
 export * from "./query/Query";
-export * from "./query/__mocks__/@aws-amplify/api-graphql";

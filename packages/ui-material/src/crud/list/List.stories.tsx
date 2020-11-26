@@ -1,3 +1,4 @@
+import { TableCell, TableRow } from "@material-ui/core";
 import { boolean, withKnobs } from "@storybook/addon-knobs";
 import React, { ReactElement } from "react";
 
@@ -72,10 +73,10 @@ export const BasicListTable = (): ReactElement => {
         refetch={() => null}
       >
         {(data) => (
-          <tr key={data.id}>
-            <td>{data.id}</td>
-            <td>{data.label}</td>
-          </tr>
+          <TableRow key={data.id}>
+            <TableCell>{data.id}</TableCell>
+            <TableCell>{data.label}</TableCell>
+          </TableRow>
         )}
       </ListTable>
     </UIContextProvider>
