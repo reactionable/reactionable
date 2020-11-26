@@ -28,17 +28,8 @@
     "isolatedModules": false,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "baseUrl": "src"
+    "baseUrl": "src",
   },
-  "include": ["packages/*/src"],
-  "exclude": [
-    "**/*.test.ts",
-    "**/*.test.tsx",
-    "**/test.config.ts",
-    "node_modules",
-    "**/lib/*",
-    "**/*.d.ts"
-  ],
   "paths": {
     "@reactionable/*": ["packages/*"]
   }

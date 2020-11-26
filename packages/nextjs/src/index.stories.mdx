@@ -1,0 +1,46 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="NextJs/Home" />
+
+# **`@reactionable/nextjs`**
+
+## Package for [NextJs](https://nextjs.org/) integration
+
+<br />
+
+### 🚀 Installation
+
+<br />
+
+#### NPM
+
+```sh
+npm install @reactionable/nextjs
+```
+
+#### Yarn
+
+```sh
+yarn add @reactionable/nextjs
+```
+
+### 🧾 Usage
+
+#### Setup App
+
+```tsx
+import { App } from "@reactionable/core";
+import { CssInJsWrapper, useRouterProviderProps } from "@reactionable/nextjs";
+import React, { ReactElement } from "react";
+
+const MyApp = ({ Component, pageProps }): ReactElement => {
+  return (
+    <CssInJsWrapper>
+      <App router={useRouterProviderProps()}>
+        <Component {...pageProps} />
+      </App>
+    </CssInJsWrapper>
+  );
+};
+export default MyApp;
+```

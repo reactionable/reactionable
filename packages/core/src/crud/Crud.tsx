@@ -62,15 +62,23 @@ export function Crud<Data extends IFormData = IFormData>({
   return renderRoutes(routes);
 }
 
+export type IId = string;
+
 export type IUseCrudConfigResult<
   Values extends IFormValues = IFormValues,
   Data extends IFormData = IFormData,
+  Id extends IId = IId,
   FormButtonProps extends IFormButtonProps = IFormButtonProps,
   ModalProps extends IModalProps = IModalProps
 > = {
   onCreate: ICreateProps<Values, Data, FormButtonProps, ModalProps>["form"]["onSubmit"];
-  onUpdate: IUpdateProps<Values, Data, FormButtonProps, ModalProps>["form"]["onSubmit"];
-  onDelete: (id: string | number) => Promise<unknown>;
+  onUpdate: IUpdateProps<
+    Values & { id: Id },
+    Data,
+    FormButtonProps,
+    ModalProps
+  >["form"]["onSubmit"];
+  onDelete: (id: Id) => Promise<unknown>;
   useRead: (variables?: IUseReadOptions<Data>["variables"]) => IUseReadResult<Data>;
   useList: (variables?: IUseListOptions<Data>["variables"]) => IUseListResult<Data>;
   initialValues: ICreateProps<Values, Data, FormButtonProps, ModalProps>["form"]["initialValues"];

@@ -5,6 +5,7 @@ import {
   IIdentityProviderProps as ICoreIdentityProviderProps,
   IUser as ICoreUser,
   useTranslation,
+  useIdentityProviderProps as coreUseIdentityProviderProps,
 } from "@reactionable/core";
 import {
   Authenticator,
@@ -94,6 +95,7 @@ export const useIdentityContextProviderProps = (
   props: Partial<IIdentityProviderProps> = {}
 ): IIdentityProviderProps => {
   return {
+    ...coreUseIdentityProviderProps(),
     identityProvider: "Amplify",
     logout: async () => await Auth.signOut(),
     AuthComponent,
@@ -101,8 +103,6 @@ export const useIdentityContextProviderProps = (
       const data = await Auth.currentUserInfo();
       return dataToUser(data);
     },
-    auth: null,
-    user: undefined,
     ...props,
   };
 };

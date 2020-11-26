@@ -1,0 +1,42 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Router Dom/Home" />
+
+# **`@reactionable/router-dom`**
+
+## Router package for [React Router Dom](https://reactrouter.com/web/guides/quick-start) integration
+
+<br />
+
+### 🚀 Installation
+
+<br />
+
+#### NPM
+
+```sh
+npm install @reactionable/router-dom
+```
+
+#### Yarn
+
+```sh
+yarn add @reactionable/router-dom
+```
+
+### 🧾 Usage
+
+#### Setup App
+
+###### In a React App
+
+```tsx
+import { App } from "@reactionable/core";
+import { useRouterProviderProps } from "@reactionable/router-dom";
+import React, { ReactElement } from "react";
+
+const MyApp = (): ReactElement => {
+  return <App router={useRouterProviderProps()} />;
+};
+export default MyApp;
+```

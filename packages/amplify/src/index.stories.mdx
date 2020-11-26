@@ -1,0 +1,45 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Amplify/Home" />
+
+# **`@reactionable/amplify`**
+
+## Backend package for [AWS Amplify](https://docs.amplify.aws/) integration
+
+<br />
+
+### 🚀 Installation
+
+<br />
+
+#### NPM
+
+```sh
+npm install @reactionable/amplify
+```
+
+#### Yarn
+
+```sh
+yarn add @reactionable/amplify
+```
+
+### 🧾 Usage
+
+#### FAQ
+
+##### Customize amplify theme
+
+You can customize your css through [Theming](https://docs.amplify.aws/ui/customization/theming/q/framework/react),
+or via function `useIdentityContextProviderProps` which accept all options supported by [AWS Amplify UI theme](https://docs.amplify.aws/lib/auth/customui/q/platform/js#customize-ui-theme):
+
+```ts
+useIdentityContextProviderProps({
+  theme: {
+    button: {
+      backgroundColor: "#6918b4",
+      borderColor: "#6918b4",
+    },
+  },
+});
+```

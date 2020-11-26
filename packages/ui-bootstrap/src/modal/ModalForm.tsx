@@ -40,12 +40,12 @@ function ModalFormChildren<
   closeModal,
   formikProps,
 }: IModalFormChildrenProps<Values, Data, FormButtonProps>) {
+  const { t } = useTranslation();
   const submit = useSubmitFormButton({
-    children: submitButton,
+    children: submitButton ?? true,
     disabled: formikProps.isSubmitting,
   });
 
-  const { t } = useTranslation();
   const cancel = useFormButton({
     children: cancelButton || t("Cancel"),
     disabled: formikProps.isSubmitting,
@@ -60,7 +60,7 @@ function ModalFormChildren<
       </BootstrapModal.Body>
       <BootstrapModal.Footer>
         {cancel}
-        {submit}
+        {submitButton !== false && submit}
       </BootstrapModal.Footer>
     </>
   );

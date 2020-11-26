@@ -1,13 +1,19 @@
-import { render } from "@testing-library/react";
 import React from "react";
 
+import { render } from "@testing-library/react";
+import "@testing-library/jest-dom/extend-expect";
+
+import { BasicHeader } from "./Header.stories";
 import { i18nTestInstance } from "../../../tests/I18n";
-import { Header } from "./Header";
 
 describe("Header", () => {
   beforeAll(i18nTestInstance);
-  it("should render without crashing", () => {
-    const result = render(<Header />);
-    expect(result).toBeTruthy();
+
+  describe("BasicHeader", () => {
+    it("should render without crashing", () => {
+      const result = render(<BasicHeader />);
+
+      expect(result).toBeTruthy();
+    });
   });
 });

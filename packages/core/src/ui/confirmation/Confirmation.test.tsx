@@ -1,29 +1,19 @@
-import { render } from "@testing-library/react";
 import React from "react";
 
-import { i18nTestInstance } from "../../tests/I18n";
-import { UIContextProvider, useUIProviderProps } from "../UI";
-import { ConfirmationAction } from "./Confirmation";
+import { render } from "@testing-library/react";
+import "@testing-library/jest-dom/extend-expect";
 
-describe("ConfirmationAction", () => {
+import { BasicConfirmationAction } from "./Confirmation.stories";
+import { i18nTestInstance } from "../../tests/I18n";
+
+describe("Confirmation", () => {
   beforeAll(i18nTestInstance);
 
-  it("should render without crashing", async () => {
-    const onConfirm = jest.fn();
-    const onSuccess = jest.fn();
+  describe("BasicConfirmationAction", () => {
+    it("should render without crashing", () => {
+      const result = render(<BasicConfirmationAction />);
 
-    const result = render(
-      <UIContextProvider {...useUIProviderProps()}>
-        <ConfirmationAction
-          title="test title"
-          successMessage="test success message"
-          confirmationMessage="test confirmation message"
-          onConfirm={onConfirm}
-          onSuccess={onSuccess}
-        />
-      </UIContextProvider>
-    );
-
-    expect(result).toBeTruthy();
+      expect(result).toBeTruthy();
+    });
   });
 });

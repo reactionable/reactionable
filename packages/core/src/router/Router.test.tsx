@@ -1,14 +1,27 @@
-import { render } from "@testing-library/react";
 import React from "react";
 
-import { RouterContextProvider, useRouterProviderProps } from "./Router";
+import { render } from "@testing-library/react";
+import "@testing-library/jest-dom/extend-expect";
+
+import { BasicRouterContextProvider, BasicLink } from "./Router.stories";
+import { i18nTestInstance } from "../tests/I18n";
 
 describe("Router", () => {
-  it("should render without crashing", async () => {
-    const result = render(
-      <RouterContextProvider {...useRouterProviderProps()}>test</RouterContextProvider>
-    );
+  beforeAll(i18nTestInstance);
 
-    expect(result).toBeTruthy();
+  describe("BasicRouterContextProvider", () => {
+    it("should render without crashing", () => {
+      const result = render(<BasicRouterContextProvider />);
+
+      expect(result).toBeTruthy();
+    });
+  });
+
+  describe("BasicLink", () => {
+    it("should render without crashing", () => {
+      const result = render(<BasicLink />);
+
+      expect(result).toBeTruthy();
+    });
   });
 });

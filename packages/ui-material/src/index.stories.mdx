@@ -1,0 +1,85 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import LinkTo from "@storybook/addon-links/react";
+
+<Meta title="UI Material/Home" />
+
+# **`@reactionable/ui-material`**
+
+## UI package for [Material-UI](https://material-ui.com) integration
+
+<br />
+
+### 🚀 Installation
+
+<br />
+
+#### NPM
+
+```sh
+npm install @reactionable/ui-material
+```
+
+#### Yarn
+
+```sh
+yarn add @reactionable/ui-material
+```
+
+### 🧾 Usage
+
+#### Setup App
+
+###### In a React App
+
+```tsx
+import { App } from "@reactionable/core";
+import { useUIProviderProps } from "@reactionable/ui-material";
+import React, { ReactElement } from "react";
+
+const MyApp = (): ReactElement => {
+  return <App ui={useUIProviderProps()} />;
+};
+export default MyApp;
+```
+
+###### In a NextJs App
+
+```tsx
+import { App } from "@reactionable/core";
+import { useUIProviderProps } from "@reactionable/ui-material";
+import React, { ReactElement } from "react";
+
+const MyApp = ({ Component, pageProps }): ReactElement => {
+  return (
+    <App ui={useUIProviderProps()}>
+      <Component {...pageProps} />
+    </App>
+  );
+};
+export default MyApp;
+```
+
+#### FAQ
+
+##### It is possible to custom UI Context provider props (<LinkTo kind="UI Material/Components/UI">Documentation</LinkTo>)
+
+```tsx
+import React, { ReactElement } from "react";
+import { App } from "@reactionable/core";
+import { useUIProviderProps, IUIProviderProps } from "@reactionable/ui-material";
+
+const MyApp = (): ReactElement => {
+  const ui: IUIProviderProps = {
+    ...useUIProviderProps(),
+    theme: {
+      palette: {
+        primary: { main: "#FF0000" },
+      },
+    },
+  };
+
+  return <App ui={ui} />;
+};
+
+export default MyApp;
+```

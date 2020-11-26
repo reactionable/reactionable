@@ -1,16 +1,21 @@
-import "@testing-library/jest-dom";
-
-import { render } from "@testing-library/react";
 import React from "react";
 
-import { i18nTestInstance } from "../../../../lib/tests/I18n";
+import { render } from "@testing-library/react";
+import "@testing-library/jest-dom/extend-expect";
+
+import { BasicSidebar } from "./Sidebar.stories";
+import { i18nTestInstance } from "../../../tests/I18n";
 import { Sidebar, useSidebarContext } from "./Sidebar";
 
 describe("Sidebar", () => {
   beforeAll(i18nTestInstance);
-  it("should render without crashing", () => {
-    const result = render(<Sidebar />);
-    expect(result).toBeTruthy();
+
+  describe("BasicSidebar", () => {
+    it("should render without crashing", () => {
+      const result = render(<BasicSidebar />);
+
+      expect(result).toBeTruthy();
+    });
   });
 
   it("should display nav items", () => {

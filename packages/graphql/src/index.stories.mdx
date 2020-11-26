@@ -1,0 +1,71 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="GraphQL/Home" />
+
+# **`@reactionable/graphql`**
+
+## Backend package for [AWS GraphQL](https://docs.graphql.aws/) integration
+
+<br />
+
+### 🚀 Installation
+
+<br />
+
+#### NPM
+
+```sh
+npm install @reactionable/graphql
+```
+
+#### Yarn
+
+```sh
+yarn add @reactionable/graphql
+```
+
+### 🧾 Usage
+
+#### Setup GraphQL Client
+
+##### 1. Wrap the root component of you application in Reactionable App (E.g: `index.tsx`):
+
+###### In a React App
+
+```tsx
+import { App } from "@reactionable/core";
+import { GraphqlProvider } from "@reactionable/graphql/lib/Client";
+import React, { ReactElement } from "react";
+
+const graphqlUri = "http://localhost/graphql";
+
+const MyApp = (): ReactElement => {
+  return (
+    <GraphqlProvider uri={graphqlUri}>
+      <App />
+    </GraphqlProvider>
+  );
+};
+export default MyApp;
+```
+
+###### In a NextJs App
+
+```tsx
+import { App } from "@reactionable/core";
+import { GraphqlProvider } from "@reactionable/graphql/lib/Client";
+import React, { ReactElement } from "react";
+
+const graphqlUri = "http://localhost/graphql";
+
+const MyApp = ({ Component, pageProps }): ReactElement => {
+  return (
+    <GraphqlProvider uri={graphqlUri}>
+      <App>
+        <Component {...pageProps} />
+      </App>
+    </GraphqlProvider>
+  );
+};
+export default MyApp;
+```

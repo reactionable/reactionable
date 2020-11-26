@@ -1,9 +1,19 @@
-import { render } from "@testing-library/react";
 import React from "react";
 
-import { Body } from "./Body";
+import { render } from "@testing-library/react";
+import "@testing-library/jest-dom/extend-expect";
 
-it("should render without crashing", () => {
-  const result = render(<Body />);
-  expect(result).toBeTruthy();
+import { BasicBody } from "./Body.stories";
+import { i18nTestInstance } from "../../../tests/I18n";
+
+describe("Body", () => {
+  beforeAll(i18nTestInstance);
+
+  describe("BasicBody", () => {
+    it("should render without crashing", () => {
+      const result = render(<BasicBody />);
+
+      expect(result).toBeTruthy();
+    });
+  });
 });

@@ -1,0 +1,59 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="UI Bootstrap/Home" />
+
+# **`@reactionable/ui-bootstrap`**
+
+## UI package for [React Bootstrap](https://react-bootstrap.github.io) integration
+
+<br />
+
+### 🚀 Installation
+
+<br />
+
+#### NPM
+
+```sh
+npm install @reactionable/ui-bootstrap
+```
+
+#### Yarn
+
+```sh
+yarn add @reactionable/ui-bootstrap
+```
+
+### 🧾 Usage
+
+#### Setup App
+
+###### In a React App
+
+```tsx
+import { App } from "@reactionable/core";
+import { useUIProviderProps } from "@reactionable/ui-bootstrap";
+import React, { ReactElement } from "react";
+
+const MyApp = (): ReactElement => {
+  return <App ui={useUIProviderProps()} />;
+};
+export default MyApp;
+```
+
+###### In a NextJs App
+
+```tsx
+import { App } from "@reactionable/core";
+import { useUIProviderProps } from "@reactionable/ui-bootstrap";
+import React, { ReactElement } from "react";
+
+const MyApp = ({ Component, pageProps }): ReactElement => {
+  return (
+    <App ui={useUIProviderProps()}>
+      <Component {...pageProps} />
+    </App>
+  );
+};
+export default MyApp;
+```

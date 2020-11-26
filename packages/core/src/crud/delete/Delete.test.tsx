@@ -1,29 +1,19 @@
-import { render } from "@testing-library/react";
 import React from "react";
 
-import { i18nTestInstance } from "../../tests/I18n";
-import { TestWrapper } from "../../tests/TestWrapper";
-import { Delete } from "./Delete";
+import { render } from "@testing-library/react";
+import "@testing-library/jest-dom/extend-expect";
 
-interface ITestData {
-  test: string;
-}
+import { BasicDelete } from "./Delete.stories";
+import { i18nTestInstance } from "../../tests/I18n";
 
 describe("Delete", () => {
   beforeAll(i18nTestInstance);
 
-  it("should render without crashing", () => {
-    const result = render(
-      <TestWrapper>
-        <Delete<ITestData>
-          title="Test delete"
-          confirmationMessage="Test confirm success message"
-          successMessage="Test delete success message"
-          onConfirm={jest.fn()}
-        />
-      </TestWrapper>
-    );
+  describe("BasicDelete", () => {
+    it("should render without crashing", () => {
+      const result = render(<BasicDelete />);
 
-    expect(result).toBeTruthy();
+      expect(result).toBeTruthy();
+    });
   });
 });

@@ -1,6 +1,6 @@
 import { useTranslation } from "@reactionable/core/lib/i18n/I18n";
 import { INavItemsProps } from "@reactionable/core/lib/nav/NavItem";
-import { INavItemsProviderProps } from "@reactionable/core/lib/nav/NavItemsContextProvider";
+import { INavItemsProviderProps as ICoreNavItemsProviderProps } from "@reactionable/core/lib/nav/NavItemsContextProvider";
 import {
   Sidebar as CoreSidebar,
   useSidebarContext as coreUseSidebarContext,
@@ -15,9 +15,11 @@ import Row from "react-bootstrap/Row";
 
 import { INavItemProps, NavItems } from "../../nav/NavItem";
 
-export type ISidebarProps = Partial<INavItemsProviderProps<INavItemsProps<INavItemProps>>>;
+export type INavItemsProviderProps = ICoreNavItemsProviderProps<INavItemsProps<INavItemProps>>;
 
-export function useSidebarContext(): INavItemsProviderProps<INavItemsProps<INavItemProps>> {
+export type ISidebarProps = Partial<INavItemsProviderProps>;
+
+export function useSidebarContext(): INavItemsProviderProps {
   return coreUseSidebarContext();
 }
 

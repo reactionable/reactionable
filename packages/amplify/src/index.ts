@@ -4,6 +4,7 @@
 
 export * from "./Amplify";
 export * from "./i18n/I18n";
+export * from "./identity/Identity.stories";
 export * from "./identity/Identity";
 export * from "./query/Mutation";
 export * from "./query/Query";

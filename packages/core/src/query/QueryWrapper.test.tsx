@@ -1,18 +1,20 @@
-import { render } from "@testing-library/react";
 import React from "react";
 
+import { render } from "@testing-library/react";
+import "@testing-library/jest-dom/extend-expect";
+import { BasicQueryWrapper } from "./QueryWrapper.stories";
 import { i18nTestInstance } from "../tests/I18n";
 import { QueryWrapper } from "./QueryWrapper";
 
 describe("QueryWrapper", () => {
   beforeAll(i18nTestInstance);
 
-  it("should render without crashing", async () => {
-    const children = jest.fn();
+  describe("BasicQueryWrapper", () => {
+    it("should render without crashing", () => {
+      const result = render(<BasicQueryWrapper />);
 
-    render(<QueryWrapper loading={false}>{children}</QueryWrapper>);
-
-    expect(children).not.toHaveBeenCalled();
+      expect(result).toBeTruthy();
+    });
   });
 
   it("should render render children only when data is defined", async () => {

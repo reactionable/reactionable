@@ -10,18 +10,23 @@ import Toolbar from "@material-ui/core/Toolbar/Toolbar";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import { INavItemsProps } from "@reactionable/core/lib/nav/NavItem";
-import { INavItemsProviderProps } from "@reactionable/core/lib/nav/NavItemsContextProvider";
+import { INavItemsProviderProps as ICoreNavItemsProviderProps } from "@reactionable/core/lib/nav/NavItemsContextProvider";
 import {
   Sidebar as CoreSidebar,
-  useSidebarContext,
+  useSidebarContext as coreUseSidebarContext,
 } from "@reactionable/core/lib/ui/layout/sidebar/Sidebar";
 import clsx from "clsx";
 import React, { PropsWithChildren, ReactElement, useState } from "react";
 
 import { INavItemProps, NavItems } from "../../nav/NavItem";
 
-export type ISidebarProps = Partial<INavItemsProviderProps<INavItemsProps<INavItemProps>>>;
-export { useSidebarContext };
+export type INavItemsProviderProps = ICoreNavItemsProviderProps<INavItemsProps<INavItemProps>>;
+
+export type ISidebarProps = Partial<INavItemsProviderProps>;
+
+export function useSidebarContext(): INavItemsProviderProps {
+  return coreUseSidebarContext();
+}
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

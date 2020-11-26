@@ -5,6 +5,7 @@ import {
   IUseListResult,
   IUseReadOptions,
   IUseReadResult,
+  IId,
 } from "@reactionable/core";
 
 import { ICreateProps } from "./create/Create";
@@ -12,11 +13,12 @@ import { IUpdateProps } from "./update/Update";
 
 export type IUseCrudConfigResult<
   Values extends IFormValues = IFormValues,
-  Data extends IFormData = IFormData
+  Data extends IFormData = IFormData,
+  Id extends IId = IId
 > = {
   onCreate: ICreateProps<Values, Data>["form"]["onSubmit"];
-  onUpdate: IUpdateProps<Values, Data>["form"]["onSubmit"];
-  onDelete: (id: string | number) => Promise<unknown>;
+  onUpdate: IUpdateProps<Values & { id: Id }, Data>["form"]["onSubmit"];
+  onDelete: (id: Id) => Promise<unknown>;
   useRead: (variables?: IUseReadOptions<Data>["variables"]) => IUseReadResult<Data>;
   useList: (variables?: IUseListOptions<Data>["variables"]) => IUseListResult<Data>;
   initialValues: ICreateProps<Values, Data>["form"]["initialValues"];

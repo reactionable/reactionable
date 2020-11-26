@@ -60,8 +60,10 @@
     "preset": "ts-jest",
     "testEnvironment": "jsdom",
     "testMatch": [
-      "**/__tests__/**/*.[jt]s?(x)",
-      "**/?(*.)+(spec|test).+(ts|tsx|js)"
-    ]
+      "**/src/**/?(*.)+(spec|test).+(ts|tsx)"
+    ],
+    "moduleNameMapper": {
+      "\\.(css)$": "<rootDir>/__tests__/styleMock.js"
+    }
   }
 }

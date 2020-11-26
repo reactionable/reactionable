@@ -24,7 +24,7 @@ describe("useModalForm", () => {
           onSuccess,
           validationSchema: { test: string().required("Test is required") },
           initialValues: { test: "" },
-          children: <FormField name="test" autoFocus placeholder="Simple form input" />,
+          children: <FormField name="test" autoFocus placeholder="Basic form input" />,
         },
       })
     );

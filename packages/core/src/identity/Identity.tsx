@@ -22,6 +22,7 @@ export type IIdentityProviderProps<User extends IUser = IUser> = IProviderProps<
   logout: () => Promise<void>;
   AuthComponent: AuthComponent<User>;
   getUser: () => Promise<User | null>;
+  setUser: (user: User | null | undefined) => void;
   auth: ReactElement | null;
 }>;
 
@@ -43,6 +44,10 @@ export function useIdentityProviderProps<User extends IUser = IUser>(
       // Do nothing
       return null;
     },
+    setUser: (user: User | null | undefined) => {
+      // Do nothing
+      user;
+    },
     auth: null,
     ...props,
   };
@@ -59,7 +64,11 @@ function IdentityContextProvider<User extends IUser>({
   identityProvider,
   ...props
 }: PropsWithChildren<IIdentityProviderProps<User>>): ReactElement {
-  const [user, setUser] = useState<User | null | undefined>(undefined);
+  const [user, setUserState] = useState<User | null | undefined>(undefined);
+
+  const setUser = (user: User | null | undefined) => {
+    setUserState(user);
+  };
 
   useEffect(() => {
     if (user === undefined) {
@@ -84,7 +93,7 @@ function IdentityContextProvider<User extends IUser>({
     getUser,
     AuthComponent,
   };
-  const auth = <AuthComponent setUser={setUser} {...ProviderProps} />;
+  const auth = <AuthComponent {...ProviderProps} setUser={setUser} />;
 
   return (
     <IdentityContext.Provider

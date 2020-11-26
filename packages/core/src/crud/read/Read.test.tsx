@@ -1,25 +1,19 @@
-import { render } from "@testing-library/react";
 import React from "react";
 
-import { i18nTestInstance } from "../../tests/I18n";
-import { TestWrapper } from "../../tests/TestWrapper";
-import { Read } from "./Read";
+import { render } from "@testing-library/react";
+import "@testing-library/jest-dom/extend-expect";
 
-interface ITestData {
-  test: string;
-}
+import { BasicRead } from "./Read.stories";
+import { i18nTestInstance } from "../../tests/I18n";
 
 describe("Read", () => {
   beforeAll(i18nTestInstance);
 
-  it("should render without crashing", () => {
-    const result = render(
-      <TestWrapper>
-        <Read<ITestData> data={{ test: "" }} loading={false} refetch={jest.fn()}>
-          {jest.fn()}
-        </Read>
-      </TestWrapper>
-    );
-    expect(result).toBeTruthy();
+  describe("BasicRead", () => {
+    it("should render without crashing", () => {
+      const result = render(<BasicRead />);
+
+      expect(result).toBeTruthy();
+    });
   });
 });

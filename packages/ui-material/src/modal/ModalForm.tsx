@@ -44,13 +44,13 @@ function ModalFormChildren<
   const { t } = useTranslation();
 
   const submit = useSubmitFormButton({
-    children: submitButton,
+    children: submitButton ?? true,
     disabled: formikProps.isSubmitting,
     fullWidth: false,
   });
 
   const cancel = useFormButton({
-    children: cancelButton || t("Cancel"),
+    children: cancelButton ?? t("Cancel"),
     disabled: formikProps.isSubmitting,
     onClick: closeModal,
     color: "default",
@@ -64,7 +64,7 @@ function ModalFormChildren<
       </DialogContent>
       <DialogActions>
         {cancel}
-        {submit}
+        {submitButton !== false && submit}
       </DialogActions>
     </>
   );

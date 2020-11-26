@@ -8,7 +8,7 @@ import { TestWrapper } from "../tests/TestWrapper";
 import { Form } from "./Form";
 
 const formProps = {
-  title: "Simple form",
+  title: "Basic form",
   initialValues: { test: "" },
   onSubmit: jest.fn(),
   validationSchema: { test: string().required("Test is required") },
@@ -21,7 +21,7 @@ describe("FormField", () => {
     const result = render(
       <TestWrapper>
         <Form {...formProps}>
-          <FormField label="Test" name="test" autoFocus placeholder="Simple form input" />
+          <FormField label="Test" name="test" autoFocus placeholder="Basic form input" />
         </Form>
       </TestWrapper>
     );

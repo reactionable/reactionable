@@ -2,7 +2,6 @@ import { Formik, FormikConfig, FormikHelpers, FormikProps } from "formik";
 import React, { ComponentType, ReactElement, ReactNode, useEffect, useState } from "react";
 import { ObjectSchemaDefinition, object as yupObject } from "yup";
 
-import { useTranslation } from "../i18n/I18n";
 import { useUIContext } from "../ui/UI";
 import { IFormButtonProps } from "./FormButton";
 import { FormWrapper, IFormWrapperProps } from "./FormWrapper";
@@ -62,7 +61,6 @@ export function Form<
   onSubmit,
   ...formikConfig
 }: IFormProps<Values, Data, FormButtonProps>): ReactElement {
-  const { t } = useTranslation();
   const { useLoader, useSuccessNotification, useErrorAlert } = useUIContext();
   const { loader, setLoading } = useLoader({});
   const { errorAlert, setErrorAlert } = useErrorAlert({});
@@ -83,7 +81,7 @@ export function Form<
   }, [success, onSuccess]);
 
   if (submitButton === undefined) {
-    submitButton = t("Save");
+    submitButton = true;
   }
 
   const renderFormChildren = (formikProps: FormikProps<Values>) => (

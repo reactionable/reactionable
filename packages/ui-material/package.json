@@ -52,7 +52,11 @@
     "react-dom": "^17.0.1"
   },
   "jest": {
-    "preset": "ts-jest"
+    "preset": "ts-jest",
+    "testEnvironment": "jsdom",
+    "testMatch": [
+      "**/src/**/?(*.)+(spec|test).+(ts|tsx)"
+    ]
   },
   "publishConfig": {
     "access": "public"

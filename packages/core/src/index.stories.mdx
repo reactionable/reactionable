@@ -1,0 +1,93 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Core/Home" />
+
+# **`@reactionable/core`**
+
+## Main package of Reactionnable
+
+<br />
+
+### 🚀 Installation
+
+<br />
+
+#### NPM
+
+```sh
+npm install @reactionable/core
+```
+
+#### Yarn
+
+```sh
+yarn add @reactionable/core
+```
+
+### 🧾 Usage
+
+#### Setup I18n
+
+##### 1. Create file `i18n/i18n.ts` in the source folder (`src`) of your app
+
+```ts
+import { initializeI18n } from "@reactionable/core/lib/i18n/I18n";
+
+import enCommon from "./locales/en/common.json";
+import frCommon from "./locales/fr/common.json";
+
+const resources = {
+  en: {
+    common: enCommon,
+  },
+  fr: {
+    common: frCommon,
+  },
+};
+
+initializeI18n({ resources });
+```
+
+##### 2. Create locales files `i18n/locales/{en,fr}/common.json`
+
+```json
+{
+  "translation key": "Translation value"
+}
+```
+
+##### 3. Import i18n config file the application root file (E.g: `index.tsx`):
+
+```ts
+import "./i18n/i18n";
+```
+
+#### Setup App
+
+###### In a React App
+
+```tsx
+import { App } from "@reactionable/core";
+import React, { ReactElement } from "react";
+
+const MyApp = (): ReactElement => {
+  return <App />;
+};
+export default MyApp;
+```
+
+###### In a NextJs App
+
+```tsx
+import { App } from "@reactionable/core";
+import React, { ReactElement } from "react";
+
+const MyApp = ({ Component, pageProps }): ReactElement => {
+  return (
+    <App>
+      <Component {...pageProps} />
+    </App>
+  );
+};
+export default MyApp;
+```
