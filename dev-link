@@ -33,10 +33,14 @@ async function execCommand(command) {
       console.error(`${packageToLink} does not exist (Must be "${packagePath}")`);
       process.exit(1);
     }
-    await execCmd(["yarn", command], packagePath);
+    try {
+      await execCmd(["yarn", command], packagePath);
+    } catch (error) {}
   }
 
-  await execCmd(["lerna exec yarn", command], __dirname);
+  try {
+    await execCmd(["lerna exec yarn", command], __dirname);
+  } catch (error) {}
 
   console.info(`${commandName} done!`);
 
@@ -44,16 +48,12 @@ async function execCommand(command) {
     (file) => `@reactionable/${file}`
   );
 
-  if (command !== "link") {
-    return;
-  }
-
   console.info(`You can run now the following command in your project:`);
   console.info(`\n-----------------------------------------------------\n`);
   console.info(
     `for package in ${[...internalPackages, ...externalPackagesToLink].join(
       " "
-    )};do yarn ${command} $package;done;`
+    )};do yarn ${command} $package || true;done;`
   );
   console.info(`\n-----------------------------------------------------\n`);
 }
