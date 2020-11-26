@@ -1,4 +1,4 @@
-import React, { ComponentType, PropsWithChildren, ReactElement } from "react";
+import React, { ComponentType, ReactElement } from "react";
 
 import { IData } from "../../query/Query";
 import { IListData } from "../../query/QueryList";
@@ -12,8 +12,6 @@ export type IListProps<Data extends IData = IData> = IUseListResult<Data> & {
 
 export type ListComponent<Data extends IData = IData> = ComponentType<IListProps<Data>>;
 
-export function List<Data extends IData = IData>(
-  props: PropsWithChildren<IListProps<Data>>
-): ReactElement {
+export function List<Data extends IData = IData>(props: IListProps<Data>): ReactElement {
   return <QueryWrapper<IListData<Data>> {...props} />;
 }

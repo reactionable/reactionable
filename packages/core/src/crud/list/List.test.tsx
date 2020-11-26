@@ -1,26 +1,27 @@
+import "@testing-library/jest-dom/extend-expect";
+
 import { render } from "@testing-library/react";
 import React from "react";
 
 import { i18nTestInstance } from "../../tests/I18n";
-import { TestWrapper } from "../../tests/TestWrapper";
-import { List } from "./List";
-
-interface ITestData {
-  test: string;
-}
+import { BasicList, BasicListTable } from "./List.stories";
 
 describe("List", () => {
   beforeAll(i18nTestInstance);
 
-  it("should render without crashing", () => {
-    const result = render(
-      <TestWrapper>
-        <List<ITestData> data={{ items: [], count: 0 }} loading={false} refetch={jest.fn()}>
-          {jest.fn()}
-        </List>
-      </TestWrapper>
-    );
+  describe("BasicList", () => {
+    it("should render without crashing", () => {
+      const result = render(<BasicList />);
 
-    expect(result).toBeTruthy();
+      expect(result).toBeTruthy();
+    });
+  });
+
+  describe("BasicListTable", () => {
+    it("should render without crashing", () => {
+      const result = render(<BasicListTable />);
+
+      expect(result).toBeTruthy();
+    });
   });
 });
