@@ -13,9 +13,9 @@
     "publish": "lerna publish --yes",
     "link": "node dev-link link",
     "unlink": "node dev-link unlink",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -p 6006 -s .storybook/public",
     "storybook:build": "yarn storybook:deploy --dry-run",
-    "storybook:deploy": "rimraf -rf build/storybook && storybook-to-ghpages -o build/storybook --ci",
+    "storybook:deploy": "rimraf -rf build/storybook && storybook-to-ghpages -s .storybook/public -o build/storybook --ci",
     "postinstall": "ts-dev-tools install"
   },
   "dependencies": {

@@ -13,7 +13,7 @@
     "test:coverage": "yarn test --coverage",
     "build": "yarn build:clean && yarn build:barrelsby && tsc --pretty",
     "build:clean": "rimraf lib",
-    "build:barrelsby": "barrelsby -d src --exclude \".+\\.test\\..+\" --delete -q && yarn prettier --write src/index.ts",
+    "build:barrelsby": "barrelsby -d src --exclude \".+\\.test\\..+\" --exclude \".+\\.stories\\..+\" --delete -q && yarn prettier --write src/index.ts",
     "lint": "eslint \"{src,stories}/**/*.{ts,tsx}\""
   },
   "repository": {
