@@ -40,10 +40,18 @@ export function useMutation<TData = IData, TVariables = IVariables>(
   options?: IMutationHookOptions<TData, TVariables>
 ): IUseMutationResult<TData, TVariables> {
   const gqlQuery = stringToGQL(mutation);
-  const [mutate, { error, data, ...result }] = useMutationHook<TData, TVariables>(
-    gqlQuery,
-    options
-  );
+
+  const update = options?.update;
+
+  const [mutate, { error, data, ...result }] = useMutationHook<TData, TVariables>(gqlQuery, {
+    ...options,
+    ...(update
+      ? {
+          update: (cache, { data, ...mutationResult }) =>
+            update(cache, { data: extractGqlData<TData>(data) as TData, ...mutationResult }),
+        }
+      : undefined),
+  });
 
   return {
     mutate: async (options?: IMutationFunctionOptions<TData, TVariables>) => {

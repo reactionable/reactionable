@@ -4,4 +4,5 @@
 
 export * from "./Client";
 export * from "./query/useMutation";
+export * from "./query/useMutationDelete";
 export * from "./query/useQuery";
