@@ -4,8 +4,8 @@ import SaveIcon from "@material-ui/icons/Save";
 import { generatePath, useRouteMatch, useTranslation } from "@reactionable/core";
 import React, { FC, ReactElement } from "react";
 
-import { Sidebar, useSidebarContext } from "./Sidebar";
 import { UIContextProvider } from "../../UI";
+import { Sidebar, useSidebarContext } from "./Sidebar";
 
 export default {
   title: "UI Material/Components/Layout/Sidebar",
@@ -47,7 +47,7 @@ const SampleComponent: FC = () => {
 
 export const BasicSidebar = (): ReactElement => (
   <UIContextProvider>
-    <Sidebar>
+    <Sidebar open={false}>
       <SampleComponent />
     </Sidebar>
   </UIContextProvider>

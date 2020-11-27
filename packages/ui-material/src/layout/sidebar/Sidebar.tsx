@@ -22,7 +22,7 @@ import { INavItemProps, NavItems } from "../../nav/NavItem";
 
 export type INavItemsProviderProps = ICoreNavItemsProviderProps<INavItemsProps<INavItemProps>>;
 
-export type ISidebarProps = Partial<INavItemsProviderProps>;
+export type ISidebarProps = Partial<INavItemsProviderProps> & ISidebarComponentProps;
 
 export function useSidebarContext(): INavItemsProviderProps {
   return coreUseSidebarContext();
@@ -63,14 +63,21 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export function SidebarComponent({ children }: PropsWithChildren<unknown>): ReactElement {
+export type ISidebarComponentProps = {
+  open?: boolean;
+};
+
+export function SidebarComponent({
+  children,
+  open = false,
+}: PropsWithChildren<ISidebarComponentProps>): ReactElement {
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = useState(true);
+  const [openState, setOpen] = useState(open);
   const { navItems } = useSidebarContext();
 
   const toggleSidebar = () => {
-    setOpen((open) => !open);
+    setOpen((openState) => !openState);
   };
 
   return (
@@ -78,25 +85,25 @@ export function SidebarComponent({ children }: PropsWithChildren<unknown>): Reac
       <Drawer
         variant="permanent"
         className={clsx(classes.drawer, {
-          [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open,
+          [classes.drawerOpen]: openState,
+          [classes.drawerClose]: !openState,
         })}
         classes={{
           paper: clsx({
-            [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open,
+            [classes.drawerOpen]: openState,
+            [classes.drawerClose]: !openState,
           }),
         }}
       >
         <Toolbar color="primary">
           <IconButton onClick={toggleSidebar} color="secondary">
             {theme.direction === "rtl" ? (
-              open ? (
+              openState ? (
                 <ChevronRightIcon />
               ) : (
                 <ChevronLeftIcon />
               )
-            ) : open ? (
+            ) : openState ? (
               <ChevronLeftIcon />
             ) : (
               <ChevronRightIcon />
