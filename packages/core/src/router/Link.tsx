@@ -106,6 +106,10 @@ export function Link<LinkProps extends ILinkProps>({
   ) {
     link = children;
   } else {
+    if (!props.title && typeof children === "string") {
+      props.title = children;
+    }
+
     link = <a {...props}>{children}</a>;
   }
 

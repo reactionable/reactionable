@@ -17,6 +17,11 @@ export type INavItemProps = ICoreNavItemProps & LinkProps & { icon?: typeof SvgI
 
 export function NavItem(props: INavItemProps): ReactElement {
   const { icon, children, href, ...linkProps } = props;
+
+  if (!linkProps.title && typeof children === "string") {
+    linkProps.title = children;
+  }
+
   return (
     <CoreNavItem href={href}>
       <ListItem button component="a" {...linkProps}>

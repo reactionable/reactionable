@@ -12,18 +12,22 @@ import { IIconProps, Icon } from "../icon/icon";
 export type INavItemProps = ICoreNavItemProps &
   Omit<NavLinkProps, "onSelect"> & { icon?: IIconProps };
 
-export function NavItem(props: INavItemProps): ReactElement {
-  const { icon, href, ...linkProps } = props;
+export function NavItem({ icon, href, children, ...linkProps }: INavItemProps): ReactElement {
+  if (!linkProps.title && typeof children === "string") {
+    const title: string = children as string;
+    linkProps.title = title;
+  }
+
   if (icon) {
-    linkProps.children = (
+    children = (
       <>
-        <Icon {...icon} /> {linkProps.children}
+        <Icon {...icon} /> {children}
       </>
     );
   }
   return (
     <CoreNavItem href={href}>
-      <NavLink {...linkProps} />
+      <NavLink {...linkProps}>{children}</NavLink>
     </CoreNavItem>
   );
 }
