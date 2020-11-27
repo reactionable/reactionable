@@ -8,6 +8,7 @@ const externalPackagesToLink = [
   "react",
   "react-dom",
   "react-router-dom",
+  "react-i18next",
   "aws-amplify",
   "@material-ui/styles",
   "@emotion/react",
