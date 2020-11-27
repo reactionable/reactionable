@@ -9,7 +9,7 @@ import { UserUnloggedHeaderNav } from "@reactionable/core/lib/ui/layout/header/U
 import React, { ComponentType, MouseEvent, useState } from "react";
 
 const UserLoggedHeaderNav = () => {
-  const { user, logout } = useIdentityContext();
+  const { user, logout, displayName } = useIdentityContext();
   const { RouterLink } = useRouterContext();
   const { t } = useTranslation("identity");
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -30,7 +30,7 @@ const UserLoggedHeaderNav = () => {
     <>
       <IconButton
         edge="end"
-        aria-label={user.displayName()}
+        aria-label={displayName()}
         aria-controls="user-menu"
         aria-haspopup="true"
         onClick={handleClick}
@@ -56,9 +56,9 @@ const UserLoggedHeaderNav = () => {
 };
 
 export type IUserHeaderProps = Record<string, unknown>;
-export type UserHeaderNavComponent<H extends IUserHeaderProps = IUserHeaderProps> = ComponentType<
-  H
->;
+export type UserHeaderNavComponent<
+  H extends IUserHeaderProps = IUserHeaderProps
+> = ComponentType<H>;
 
 export const UserHeaderNav: UserHeaderNavComponent = () => {
   const { identityProvider } = useIdentityContext();

@@ -2,10 +2,14 @@ import React, { ReactElement, useEffect, useState } from "react";
 import { ComponentType, PropsWithChildren } from "react";
 
 import { IProviderProps, createProvider } from "../app/Provider";
+import { useTranslation } from "../i18n/I18n";
+import { IUseQueryResult } from "../query/Query";
+import { QueryWrapper } from "../query/QueryWrapper";
+import { useUIContext } from "../ui/UI";
 
-export type IUser = {
-  displayName: () => string;
-};
+// eslint-disable-next-line @typescript-eslint/ban-types
+export type IUser = {};
+
 export interface ILoginFormValues {
   username: string;
   password: string;
@@ -19,11 +23,12 @@ export type AuthComponent<User extends IUser> = ComponentType<IAuthComponentProp
 export type IIdentityProviderProps<User extends IUser = IUser> = IProviderProps<{
   user: User | undefined | null;
   identityProvider?: string;
-  logout: () => Promise<void>;
   AuthComponent: AuthComponent<User>;
-  getUser: () => Promise<User | null>;
-  setUser: (user: User | null | undefined) => void;
   auth: ReactElement | null;
+  useFetchUser: () => IUseQueryResult<User | null>;
+  logout: () => Promise<void>;
+  setUser: (user: User | null | undefined) => void;
+  displayName: () => string;
 }>;
 
 export function NullAuthComponent(): null {
@@ -40,14 +45,12 @@ export function useIdentityProviderProps<User extends IUser = IUser>(
     },
     identityProvider: undefined,
     AuthComponent: NullAuthComponent,
-    getUser: async (): Promise<User | null> => {
-      // Do nothing
-      return null;
-    },
+    useFetchUser: () => ({ data: null, loading: false, refetch: () => null }),
     setUser: (user: User | null | undefined) => {
       // Do nothing
       user;
     },
+    displayName: () => "",
     auth: null,
     ...props,
   };
@@ -59,52 +62,62 @@ const { Context: IdentityContext, useContext } = createProvider<IIdentityProvide
 
 function IdentityContextProvider<User extends IUser>({
   AuthComponent,
-  getUser,
   logout,
   identityProvider,
+  useFetchUser,
   ...props
 }: PropsWithChildren<IIdentityProviderProps<User>>): ReactElement {
-  const [user, setUserState] = useState<User | null | undefined>(undefined);
+  const [userState, setUserState] = useState<User | null | undefined>();
+  const { data: user, loading, error } = useFetchUser();
+  const { useErrorNotification } = useUIContext();
+  const { t } = useTranslation("identity");
+  const { errorNotification, setErrorNotification } = useErrorNotification({
+    title: t("Authentication"),
+  });
 
-  const setUser = (user: User | null | undefined) => {
-    setUserState(user);
+  const setUser = (newUser: User | null | undefined) => {
+    setUserState((currentUser) => (currentUser === newUser ? currentUser : newUser));
   };
 
   useEffect(() => {
-    if (user === undefined) {
-      getUser().then((fetchedUser) => {
-        if (user !== fetchedUser) {
-          setUser(fetchedUser);
-        }
-      });
-    }
-  }, [user]);
+    setUser(loading ? undefined : user);
+  }, [user, loading]);
 
   const logoutHandler = async () => {
-    await logout();
-    setUser(null);
+    try {
+      logout();
+      setUserState(null);
+    } catch (error) {
+      setErrorNotification(error);
+    }
   };
 
-  const ProviderProps = {
+  const providerProps: IIdentityProviderProps<User> = {
     ...props,
-    user,
+    useFetchUser,
+    user: userState,
     logout: logoutHandler,
     identityProvider,
-    getUser,
     AuthComponent,
+    setUser,
   };
-  const auth = <AuthComponent {...ProviderProps} setUser={setUser} />;
+
+  const auth = (
+    <QueryWrapper loading={loading} data={true} error={error}>
+      {() => <AuthComponent {...providerProps} setUser={setUser} />}
+    </QueryWrapper>
+  );
 
   return (
     <IdentityContext.Provider
       value={
         {
-          ...ProviderProps,
-          AuthComponent,
+          ...providerProps,
           auth,
         } as IIdentityProviderProps<IUser>
       }
     >
+      {errorNotification}
       {props.children}
     </IdentityContext.Provider>
   );

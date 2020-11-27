@@ -4,8 +4,8 @@ import {
   IAuthComponentProps,
   IIdentityProviderProps as ICoreIdentityProviderProps,
   IUser as ICoreUser,
-  useTranslation,
   useIdentityProviderProps as coreUseIdentityProviderProps,
+  useTranslation,
 } from "@reactionable/core";
 import {
   Authenticator,
@@ -16,7 +16,7 @@ import {
 } from "aws-amplify-react";
 import { IAuthenticatorProps } from "aws-amplify-react/lib-esm/Auth/Authenticator";
 import { UsernameAttributes } from "aws-amplify-react/lib-esm/Auth/common/types";
-import React, { PropsWithChildren, ReactElement } from "react";
+import React, { PropsWithChildren, ReactElement, useEffect, useState } from "react";
 
 export type IUser = ICoreUser;
 
@@ -94,15 +94,27 @@ export type IIdentityProviderProps = ICoreIdentityProviderProps<IUser> & IAuthen
 export const useIdentityContextProviderProps = (
   props: Partial<IIdentityProviderProps> = {}
 ): IIdentityProviderProps => {
+  const user = props.user;
+  const [userState, setUser] = useState<IUser | undefined | null>();
+  useEffect(() => {
+    if (user && user !== userState) {
+      setUser(user);
+      return;
+    }
+
+    if (userState === undefined) {
+      Auth.currentUserInfo().then((data) => {
+        setUser(dataToUser(data));
+      });
+      return;
+    }
+  }, [user, userState]);
   return {
     ...coreUseIdentityProviderProps(),
     identityProvider: "Amplify",
     logout: async () => await Auth.signOut(),
     AuthComponent,
-    getUser: async () => {
-      const data = await Auth.currentUserInfo();
-      return dataToUser(data);
-    },
+    user,
     ...props,
   };
 };

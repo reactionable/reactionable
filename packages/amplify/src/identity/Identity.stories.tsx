@@ -1,12 +1,12 @@
 import "@aws-amplify/ui/dist/style.css";
 
-configure({ oauth: {} });
-
 import { useIdentityContext } from "@reactionable/core";
 import React, { ReactElement } from "react";
-import { configure } from "../Amplify";
 
+import { configure } from "../Amplify";
 import { IdentityContextProvider, SignUp } from "./Identity";
+
+configure({ oauth: {} });
 
 export default {
   title: "Amplify/Components/Identity",
@@ -16,10 +16,10 @@ export default {
 
 export const UseIdentityContext = (): ReactElement => {
   const Authentication = () => {
-    const { auth, user } = useIdentityContext();
+    const { auth, user, displayName } = useIdentityContext();
     return (
       <>
-        <p>User signed-in: {user ? user.displayName() : "No user"}</p>
+        <p>User signed-in: {user ? displayName() : "No user"}</p>
         {auth}
       </>
     );

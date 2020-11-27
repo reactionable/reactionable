@@ -18,10 +18,9 @@ function PrivateRouteWithoutUser({ user }: { user: undefined | null }) {
 export function PrivateRoute(props: PropsWithChildren<ILazyRouteProps>): ReactElement {
   const { user } = useIdentityContext();
 
-  if (user) {
-    return <LazyRoute {...props} />;
+  if (user === undefined || user === null) {
+    const renderPrivateRoute = () => <PrivateRouteWithoutUser user={user} />;
+    return <LazyRoute {...props} render={renderPrivateRoute} />;
   }
-
-  const renderPrivateRoute = () => <PrivateRouteWithoutUser user={user} />;
-  return <LazyRoute {...props} render={renderPrivateRoute} />;
+  return <LazyRoute {...props} />;
 }

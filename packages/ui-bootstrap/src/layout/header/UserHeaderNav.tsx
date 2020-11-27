@@ -7,7 +7,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import { Modal, useModal } from "../../modal/Modal";
 
 const UserLoggedHeaderNav = () => {
-  const { user, logout } = useIdentityContext();
+  const { user, logout, displayName } = useIdentityContext();
   const { t } = useTranslation("identity");
   const { RouterLink } = useRouterContext();
 
@@ -16,7 +16,7 @@ const UserLoggedHeaderNav = () => {
   }
 
   return (
-    <NavDropdown key="userNav" id="userNav" title={user.displayName()}>
+    <NavDropdown key="userNav" id="userNav" title={displayName()}>
       <NavDropdown.Item as={RouterLink} href="/account">
         {t("My account")}
       </NavDropdown.Item>
@@ -62,9 +62,9 @@ const UserUnloggedHeaderNav = () => {
 };
 
 export type IUserHeaderProps = Record<string, unknown>;
-export type UserHeaderNavComponent<H extends IUserHeaderProps = IUserHeaderProps> = ComponentType<
-  H
->;
+export type UserHeaderNavComponent<
+  H extends IUserHeaderProps = IUserHeaderProps
+> = ComponentType<H>;
 
 export const UserHeaderNav: UserHeaderNavComponent = () => {
   const { identityProvider } = useIdentityContext();

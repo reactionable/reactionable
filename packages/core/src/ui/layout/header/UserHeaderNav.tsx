@@ -6,7 +6,7 @@ import { Link } from "../../../router/Link";
 import { useUIContext } from "../../UI";
 
 export const UserLoggedHeaderNav = (): ReactElement | null => {
-  const { user, logout } = useIdentityContext();
+  const { user, logout, displayName } = useIdentityContext();
   const { t } = useTranslation();
 
   if (!user) {
@@ -14,7 +14,7 @@ export const UserLoggedHeaderNav = (): ReactElement | null => {
   }
 
   return (
-    <div key="userNav" id="userNav" title={user.displayName()}>
+    <div key="userNav" id="userNav" title={displayName()}>
       <Link href="/account">{t("My account")}</Link>
       <Link href="#" onClick={logout}>
         {t("Log out")}
@@ -55,9 +55,9 @@ export const UserUnloggedHeaderNav = (): ReactElement | null => {
 };
 
 export type IUserHeaderProps = Record<string, unknown>;
-export type UserHeaderNavComponent<H extends IUserHeaderProps = IUserHeaderProps> = ComponentType<
-  H
->;
+export type UserHeaderNavComponent<
+  H extends IUserHeaderProps = IUserHeaderProps
+> = ComponentType<H>;
 
 export const UserHeaderNav: UserHeaderNavComponent = () => {
   const { identityProvider } = useIdentityContext();
