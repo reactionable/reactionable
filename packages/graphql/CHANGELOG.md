@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.25.6 (2020-11-27)
+
+**Note:** Version bump only for package @reactionable/graphql
+
+
+
+
+
 ## 0.25.5 (2020-11-26)
 
 **Note:** Version bump only for package @reactionable/graphql
