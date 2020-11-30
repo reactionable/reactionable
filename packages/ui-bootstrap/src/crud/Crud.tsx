@@ -1,17 +1,17 @@
 import {
   IFormData,
   IFormValues,
+  IId,
   IUseListOptions,
   IUseListResult,
   IUseReadOptions,
   IUseReadResult,
-  IId,
 } from "@reactionable/core";
 
 import { ICreateProps } from "./create/Create";
 import { IUpdateProps } from "./update/Update";
 
-export type IUseCrudConfigResult<
+export type ICrudConfig<
   Values extends IFormValues = IFormValues,
   Data extends IFormData = IFormData,
   Id extends IId = IId

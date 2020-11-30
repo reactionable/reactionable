@@ -64,7 +64,7 @@ export function Crud<Data extends IFormData = IFormData>({
 
 export type IId = string;
 
-export type IUseCrudConfigResult<
+export type ICrudConfig<
   Values extends IFormValues = IFormValues,
   Data extends IFormData = IFormData,
   Id extends IId = IId,
