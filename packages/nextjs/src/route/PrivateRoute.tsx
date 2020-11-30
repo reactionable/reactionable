@@ -1,23 +1,35 @@
 import { useIdentityContext, useTranslation } from "@reactionable/core";
 import { useUIContext } from "@reactionable/core/lib/ui/UI";
 import Router from "next/router";
-import React, { PropsWithChildren, ReactElement, isValidElement, useEffect } from "react";
+import React, {
+  ComponentType,
+  PropsWithChildren,
+  ReactElement,
+  isValidElement,
+  useEffect,
+} from "react";
 
-export type IPrivateRouteProps = {
-  redirectTo?: string;
-};
-export function PrivateRoute({
-  children,
-  redirectTo = "/",
-}: PropsWithChildren<IPrivateRouteProps>): ReactElement | null {
-  const { user } = useIdentityContext();
+export function UnauthorizedComponent(): ReactElement | null {
   const { t } = useTranslation("identity");
   const { errorAlert } = useUIContext().useErrorAlert({
     children: new Error(t("You are not allowed to reach this page")),
   });
+  return errorAlert;
+}
+
+export type IPrivateRouteProps = {
+  redirectTo?: string;
+  Component?: ComponentType<unknown>;
+};
+export function PrivateRoute({
+  children,
+  redirectTo = "/",
+  Component = UnauthorizedComponent,
+}: PropsWithChildren<IPrivateRouteProps>): ReactElement | null {
+  const { user } = useIdentityContext();
 
   useEffect(() => {
-    if (user === null) {
+    if (redirectTo && user === null) {
       Router.push(redirectTo);
     }
   }, [redirectTo, user]);
@@ -26,7 +38,7 @@ export function PrivateRoute({
     return null;
   }
   if (user === null) {
-    return errorAlert;
+    return <Component />;
   }
   if (isValidElement(children)) {
     return children;
