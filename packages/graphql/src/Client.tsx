@@ -1,4 +1,4 @@
-import { ApolloClient, DocumentNode, InMemoryCache } from "@apollo/client";
+import { ApolloClient, DocumentNode, InMemoryCache, InMemoryCacheConfig } from "@apollo/client";
 import {
   ApolloProvider,
   HttpOptions,
@@ -24,7 +24,7 @@ function getGraphqlClient() {
   return graphqlClient;
 }
 
-function createGraphqlClient(uri: IGraphqlClientUri) {
+function createGraphqlClient(uri: IGraphqlClientUri, cacheConfig?: InMemoryCacheConfig) {
   const httpLink = createUploadLink({
     uri,
     fetch,
@@ -48,15 +48,16 @@ function createGraphqlClient(uri: IGraphqlClientUri) {
   return new ApolloClient({
     ssrMode: typeof window === "undefined",
     link: authLink.concat(httpLink),
-    cache: new InMemoryCache(),
+    cache: new InMemoryCache(cacheConfig),
   });
 }
 
 export function initializeGraphqlClient(
   uri: IGraphqlClientUri,
-  initialState: IGraphqlClientState
+  initialState: IGraphqlClientState,
+  cacheConfig?: InMemoryCacheConfig
 ): IGraphqlClient {
-  const _graphqlClient = getGraphqlClient() || createGraphqlClient(uri);
+  const _graphqlClient = getGraphqlClient() || createGraphqlClient(uri, cacheConfig);
 
   // If your page has Next.js data fetching methods that use Apollo Client, the initial state
   // gets hydrated here
@@ -75,9 +76,12 @@ export function initializeGraphqlClient(
 
 export function useInitGraphqlClient(
   uri: IGraphqlClientUri,
-  initialState: IGraphqlClientState
+  initialState: IGraphqlClientState,
+  cacheConfig?: InMemoryCacheConfig
 ): IGraphqlClient {
-  const store = useMemo(() => initializeGraphqlClient(uri, initialState), [initialState]);
+  const store = useMemo(() => initializeGraphqlClient(uri, initialState, cacheConfig), [
+    initialState,
+  ]);
   return store;
 }
 
@@ -88,14 +92,16 @@ export function useGraphqlClient(): IGraphqlClient {
 export type IApolloProviderProps = {
   uri: IGraphqlClientUri;
   initialState: IGraphqlClientState;
+  cacheConfig?: InMemoryCacheConfig;
 };
 
 export function GraphqlProvider({
   uri,
   initialState,
+  cacheConfig,
   children,
 }: PropsWithChildren<IApolloProviderProps>): ReactElement {
-  const graphqlClient = useInitGraphqlClient(uri, initialState);
+  const graphqlClient = useInitGraphqlClient(uri, initialState, cacheConfig);
   return <ApolloProvider client={graphqlClient}>{children}</ApolloProvider>;
 }
 
