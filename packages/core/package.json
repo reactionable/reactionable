@@ -42,11 +42,10 @@
     "i18next-browser-languagedetector": "^6.0.0",
     "path-to-regexp": "^6.2.0",
     "react-fast-compare": "^3.2.0",
-    "react-i18next": "^11.7.3",
-    "yup": "^0.31.0"
+    "react-i18next": "^11.7.4",
+    "yup": "^0.32.0"
   },
   "devDependencies": {
-    "@types/yup": "^0.29.8",
     "barrelsby": "^2.2.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -64,6 +63,9 @@
   "jest": {
     "preset": "ts-jest",
     "testEnvironment": "jsdom",
+    "modulePathIgnorePatterns": [
+      "<rootDir>/lib/"
+    ],
     "testMatch": [
       "**/__tests__/**/*.[jt]s?(x)",
       "**/?(*.)+(spec|test).+(ts|tsx|js)"
