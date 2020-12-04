@@ -26,6 +26,6 @@ const LazyHomeComponent = lazy(async () => ({
   default: HomeComponent,
 }));
 
-export const AppBasic = (): ReactElement => (
+export const BasicApp = (): ReactElement => (
   <App ui={useUIProviderProps()} HomeComponent={LazyHomeComponent} />
 );

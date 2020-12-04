@@ -18,7 +18,7 @@ export default {
   decorators: [withKnobs],
 };
 
-export const alert = (): ReactElement => {
+export const BasicAlert = (): ReactElement => {
   const severity = select(
     "Severity",
     ["success", "error", "warning", "info", undefined],
@@ -57,7 +57,7 @@ export const UseAlert = (): ReactElement => {
   );
 };
 
-export const errorAlert = (): ReactElement => (
+export const BasicErrorAlert = (): ReactElement => (
   <ErrorAlert>{new Error("Test error alert")}</ErrorAlert>
 );
 
@@ -75,7 +75,9 @@ export const UseErrorAlert = (): ReactElement => {
   );
 };
 
-export const warningAlert = (): ReactElement => <WarningAlert>Test warning alert</WarningAlert>;
+export const BasicWarningAlert = (): ReactElement => (
+  <WarningAlert>Test warning alert</WarningAlert>
+);
 
 export const UseWarningAlert = (): ReactElement => {
   const content = text("Content", "This is the warning alert content");

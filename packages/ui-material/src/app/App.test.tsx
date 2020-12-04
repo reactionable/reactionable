@@ -4,14 +4,14 @@ import { i18nTestInstance } from "@reactionable/core";
 import { render } from "@testing-library/react";
 import React from "react";
 
-import { BasicDelete } from "./Delete.stories";
+import { BasicApp } from "./App.stories";
 
-describe("Delete", () => {
+describe("App", () => {
   beforeAll(i18nTestInstance);
 
-  describe("BasicDelete", () => {
+  describe("BasicApp", () => {
     it("should render without crashing", () => {
-      const result = render(<BasicDelete />);
+      const result = render(<BasicApp />);
 
       expect(result).toBeTruthy();
     });

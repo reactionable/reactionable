@@ -5,8 +5,8 @@ import { text, withKnobs } from "@storybook/addon-knobs";
 import React, { ReactElement } from "react";
 import Button from "react-bootstrap/Button";
 
-import { ConfirmationAction, useConfirmation } from "./Confirmation";
 import { UIContextProvider } from "../UI";
+import { ConfirmationAction, useConfirmation } from "./Confirmation";
 
 export default {
   title: "UI Bootstrap/Components/Confirmation",
@@ -19,7 +19,7 @@ export default {
   decorators: [withKnobs],
 };
 
-export const confirmationAction = (): ReactElement => (
+export const BasicConfirmationAction = (): ReactElement => (
   <UIContextProvider>
     <ConfirmationAction
       title="Confirm?"
