@@ -3,8 +3,8 @@ import { action } from "@storybook/addon-actions";
 import { text, withKnobs } from "@storybook/addon-knobs";
 import React, { ReactElement } from "react";
 
-import { ConfirmationAction, useConfirmation } from "./Confirmation";
 import { UIContextProvider } from "../UI";
+import { ConfirmationAction, useConfirmation } from "./Confirmation";
 
 export default {
   title: "UI Material/Components/Confirmation",
@@ -17,7 +17,7 @@ export default {
   decorators: [withKnobs],
 };
 
-export const confirmationAction = (): ReactElement => (
+export const BasicConfirmationAction = (): ReactElement => (
   <UIContextProvider>
     <ConfirmationAction
       title="Confirm?"
