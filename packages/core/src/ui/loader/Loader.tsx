@@ -8,7 +8,7 @@ export type LoaderComponent = ComponentType<ILoaderProps>;
 
 export const Loader: LoaderComponent = () => {
   const { t } = useTranslation();
-  return t("Loading");
+  return <>{t("Loading")}</>;
 };
 
 export function lazyLoad<Component extends ComponentType = ComponentType>(

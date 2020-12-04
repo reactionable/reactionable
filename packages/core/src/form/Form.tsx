@@ -1,6 +1,6 @@
 import { Formik, FormikConfig, FormikHelpers, FormikProps } from "formik";
 import React, { ComponentType, ReactElement, ReactNode, useEffect, useState } from "react";
-import { ObjectSchemaDefinition, object as yupObject } from "yup";
+import { object as yupObject } from "yup";
 
 import { useUIContext } from "../ui/UI";
 import { IFormButtonProps } from "./FormButton";
@@ -23,13 +23,18 @@ export type IFormValues = {};
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type IFormData = {};
 
+export type IValidationSchema<Values extends IFormValues> = {
+  // FIXME: do not use any but real yup type
+  [field in keyof Values]: any;
+};
+
 export interface IFormProps<
   Values extends IFormValues,
   Data extends IFormData,
   FormButtonProps extends IFormButtonProps
 > extends FormikConfig<Values> {
   title?: ReactNode;
-  validationSchema: ObjectSchemaDefinition<typeof yupObject, Values>;
+  validationSchema: IValidationSchema<Values>;
   successMessage?: ReactNode;
   onSubmit: IOnSubmitForm<Values, Data>;
   onSuccess?: (result: Data) => void;
