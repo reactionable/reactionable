@@ -24,7 +24,7 @@
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@storybook/addon-actions": "^6.1.9",
-    "@storybook/addon-controls": "^6.1.9",
+    "@storybook/addon-controls": "^6.1.10",
     "@storybook/addon-docs": "^6.1.9",
     "@storybook/addon-info": "^6.0.0-alpha.2",
     "@storybook/addon-knobs": "^6.1.9",
