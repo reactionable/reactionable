@@ -1,23 +1,33 @@
 import AppBar, { AppBarProps } from "@material-ui/core/AppBar/AppBar";
-import IconButton from "@material-ui/core/IconButton/IconButton";
 import List from "@material-ui/core/List";
 import createStyles from "@material-ui/core/styles/createStyles";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Toolbar from "@material-ui/core/Toolbar/Toolbar";
 import Typography from "@material-ui/core/Typography/Typography";
-import MenuIcon from "@material-ui/icons/Menu";
+import { useUIContext } from "@reactionable/core";
 import { IHeaderProps as ICoreHeaderProps } from "@reactionable/core/lib/ui/layout/header/Header";
 import React, { ComponentType, PropsWithChildren, ReactElement, ReactNode } from "react";
 
+import { isLinkProps } from "../../link/Link";
 import { INavItemProps, NavItems } from "../../nav/NavItem";
-import { Link, isLinkProps } from "../../router/Link";
 import { UserHeaderNav } from "./UserHeaderNav";
 
 export type IHeaderProps = ICoreHeaderProps<INavItemProps> & AppBarProps;
 export type HeaderComponent = ComponentType<IHeaderProps>;
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme) =>
   createStyles({
+    title: {
+      marginRight: theme.spacing(5),
+    },
+    children: {
+      flexGrow: 1,
+    },
+    link: {
+      display: "flex",
+      justifyContent: "flex-start",
+      alignItems: "center",
+    },
     navItems: {},
     identityNav: {},
   })
@@ -26,33 +36,45 @@ const useStyles = makeStyles(() =>
 export const Header = ({
   brand,
   navItems = [],
+  UserHeaderNavComponent,
+  children,
   ...appBarProps
 }: PropsWithChildren<IHeaderProps>): ReactElement => {
   const classes = useStyles();
+  const { useLink } = useUIContext();
 
   let brandContent: ReactNode = null;
   if (brand) {
     const linkProps = isLinkProps(brand) ? brand : { href: "/", children: brand };
+    const link = useLink({
+      ...linkProps,
+      className: classes.link,
+    });
     brandContent = (
-      <Typography variant="h6">
-        <Link {...linkProps} />
+      <Typography variant="h6" className={classes.title}>
+        {link}
       </Typography>
     );
   }
 
+  if (!UserHeaderNavComponent) {
+    UserHeaderNavComponent = UserHeaderNav;
+  }
+
   return (
-    <AppBar position="static" {...appBarProps}>
+    <AppBar position="static" {...appBarProps} component="header">
       <Toolbar>
-        <IconButton edge="start" color="inherit" aria-label="menu">
-          <MenuIcon />
-        </IconButton>
         {brandContent}
-        <div className={classes.navItems}>
-          <List>
-            <NavItems navItems={navItems} />
-          </List>
-        </div>
-        <UserHeaderNav />
+        {children ? (
+          <div className={classes.children}>{children}</div>
+        ) : (
+          <div className={classes.navItems}>
+            <List>
+              <NavItems navItems={navItems} />
+            </List>
+          </div>
+        )}
+        <UserHeaderNavComponent />
       </Toolbar>
     </AppBar>
   );

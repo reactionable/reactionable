@@ -2,16 +2,20 @@ import IconButton from "@material-ui/core/IconButton/IconButton";
 import Menu from "@material-ui/core/Menu/Menu";
 import MenuItem from "@material-ui/core/MenuItem/MenuItem";
 import { AccountCircle } from "@material-ui/icons";
-import { useTranslation } from "@reactionable/core/lib/i18n/I18n";
 import { useIdentityContext } from "@reactionable/core/lib/identity/Identity";
-import { useRouterContext } from "@reactionable/core/lib/router/Router";
-import { UserUnloggedHeaderNav } from "@reactionable/core/lib/ui/layout/header/UserHeaderNav";
-import React, { ComponentType, MouseEvent, useState } from "react";
+import {
+  AccountLink,
+  LogoutLink,
+  UserUnloggedHeaderNav,
+} from "@reactionable/core/lib/ui/layout/header/UserHeaderNav";
+import React, { ComponentProps, MouseEvent, ReactElement, useState } from "react";
+
+export { UserUnloggedHeaderNav } from "@reactionable/core/lib/ui/layout/header/UserHeaderNav";
+
+type INavItemProps = ComponentProps<typeof MenuItem>;
 
 const UserLoggedHeaderNav = () => {
-  const { user, logout, displayName } = useIdentityContext();
-  const { RouterLink } = useRouterContext();
-  const { t } = useTranslation("identity");
+  const { user, displayName } = useIdentityContext();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   if (!user) {
@@ -45,22 +49,15 @@ const UserLoggedHeaderNav = () => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>
-          <RouterLink href="/account">{t("My account")}</RouterLink>
-        </MenuItem>
+        <AccountLink<INavItemProps> NavItemComponent={MenuItem} onClick={handleClose} />
         <hr />
-        <MenuItem onClick={logout}>{t("Log out")}</MenuItem>
+        <LogoutLink<INavItemProps> NavItemComponent={MenuItem} onClick={handleClose} />
       </Menu>
     </>
   );
 };
 
-export type IUserHeaderProps = Record<string, unknown>;
-export type UserHeaderNavComponent<
-  H extends IUserHeaderProps = IUserHeaderProps
-> = ComponentType<H>;
-
-export const UserHeaderNav: UserHeaderNavComponent = () => {
+export const UserHeaderNav = (): ReactElement | null => {
   const { identityProvider } = useIdentityContext();
 
   if (!identityProvider) {
@@ -69,8 +66,8 @@ export const UserHeaderNav: UserHeaderNavComponent = () => {
 
   return (
     <div>
-      <UserLoggedHeaderNav />,
-      <UserUnloggedHeaderNav />,
+      <UserLoggedHeaderNav />
+      <UserUnloggedHeaderNav />
     </div>
   );
 };

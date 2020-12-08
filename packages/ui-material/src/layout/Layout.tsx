@@ -1,7 +1,9 @@
+import { INavItemsProviderProps } from "@reactionable/core/lib/nav/NavItemsContextProvider";
 import {
   ILayoutProps as ICoreLayoutProps,
   IUseLayoutProps as ICoreUseLayoutProps,
   IUseLayoutResult,
+  useHeaderContext as coreUseHeaderContext,
   useLayout as useLayoutCore,
 } from "@reactionable/core/lib/ui/layout/Layout";
 
@@ -20,4 +22,8 @@ export function useLayout(props: IUseLayoutProps): IUseLayoutResult {
     BodyComponent: Body,
     FooterComponent: Footer,
   });
+}
+
+export function useHeaderContext(): INavItemsProviderProps<IHeaderProps> {
+  return coreUseHeaderContext<IHeaderProps>();
 }

@@ -80,13 +80,18 @@ function IdentityContextProvider<User extends IUser>({
   };
 
   useEffect(() => {
-    setUser(loading ? undefined : user);
+    if (loading) {
+      setUser(undefined);
+      return;
+    }
+
+    setUser(user);
   }, [user, loading]);
 
   const logoutHandler = async () => {
     try {
-      logout();
-      setUserState(null);
+      await logout();
+      setUser(null);
     } catch (error) {
       setErrorNotification(error);
     }

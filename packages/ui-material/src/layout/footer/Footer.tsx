@@ -8,17 +8,16 @@ import {
 } from "@reactionable/core/lib/ui/layout/footer/Footer";
 import React, { DetailedHTMLProps, HTMLAttributes, PropsWithChildren, ReactElement } from "react";
 
+import { ResponsiveContainer } from "../responsive-container/ResponsiveContainer";
+
 export type IFooterProps = ICoreFooterProps &
   Omit<DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>, "onSelect" | "ref">;
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme) =>
   createStyles({
     footer: {
       position: "absolute",
-      bottom: 0,
-      width: "100%",
-      height: "60px",
-      lineHeight: "60px",
+      bottom: theme.spacing(2),
     },
   })
 );
@@ -31,17 +30,22 @@ export function Footer({
   const classes = useStyles();
 
   return (
-    <footer className={classes.footer} {...footerProps}>
-      <Grid container direction="row" justify="space-between" alignItems="center">
+    <ResponsiveContainer
+      component="footer"
+      maxWidth="xl"
+      className={classes.footer}
+      {...footerProps}
+    >
+      <Grid container direction="row" justify="center" alignItems="center" spacing={4}>
         <Grid item>
           <CopyrightFooter brand={brand} />
         </Grid>
         {sponsor && (
           <Grid item>
-            <SponsorFooter />
+            - <SponsorFooter />
           </Grid>
         )}
       </Grid>
-    </footer>
+    </ResponsiveContainer>
   );
 }

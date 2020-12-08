@@ -1,10 +1,10 @@
 import React, { FC, ReactElement } from "react";
 
 import { useTranslation } from "../../../i18n/I18n";
-import { generatePath } from "../../../router/Link";
 import { useRouteMatch } from "../../../router/Router";
-import { Sidebar, useSidebarContext } from "./Sidebar";
+import { generatePath } from "../../../router/RouterLink";
 import { UIContextProvider, useUIProviderProps } from "../../UI";
+import { Sidebar, useSidebarContext } from "./Sidebar";
 
 export default {
   title: "Core/Components/UI/Layout/Sidebar",

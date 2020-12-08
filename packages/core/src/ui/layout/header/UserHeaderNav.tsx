@@ -1,36 +1,140 @@
-import React, { ComponentType, ReactElement, useEffect } from "react";
+import React, {
+  ComponentType,
+  ReactElement,
+  MouseEvent as ReactMouseEvent,
+  useEffect,
+} from "react";
 
 import { useTranslation } from "../../../i18n/I18n";
 import { useIdentityContext } from "../../../identity/Identity";
-import { Link } from "../../../router/Link";
+import { useRouterContext } from "../../../router/Router";
+import { ILinkProps } from "../../link/Link";
 import { useUIContext } from "../../UI";
 
-export const UserLoggedHeaderNav = (): ReactElement | null => {
-  const { user, logout, displayName } = useIdentityContext();
-  const { t } = useTranslation();
+type IWithNavItemComponentProps<LinkProps extends ILinkProps> = LinkProps & {
+  NavItemComponent?: ComponentType<LinkProps>;
+};
+
+export type IAccountLinkProps<LinkProps extends ILinkProps> = IWithNavItemComponentProps<LinkProps>;
+
+export function AccountLink<LinkProps extends ILinkProps = ILinkProps>({
+  NavItemComponent,
+  ...props
+}: IAccountLinkProps<LinkProps>): ReactElement {
+  const { useLink } = useUIContext();
+  const { t } = useTranslation("identity");
+
+  const linkComponentProps = {
+    children: t("My account"),
+    ...props,
+  } as LinkProps;
+
+  return useLink({
+    href: "/account",
+    ...(NavItemComponent
+      ? {
+          children: <NavItemComponent {...linkComponentProps} />,
+        }
+      : linkComponentProps),
+  });
+}
+
+export type ILogoutLinkProps<LinkProps extends ILinkProps> = IWithNavItemComponentProps<LinkProps>;
+
+export function LogoutLink<LinkProps extends ILinkProps = ILinkProps>({
+  NavItemComponent,
+  onClick,
+  ...props
+}: ILogoutLinkProps<LinkProps>): ReactElement {
+  const { logout } = useIdentityContext();
+  const { t } = useTranslation("identity");
+  const { useRouter } = useRouterContext();
+  const { useLoader, useErrorNotification } = useUIContext();
+  const { loader, setLoading } = useLoader({ loading: false });
+  const { errorNotification, setErrorNotification } = useErrorNotification({
+    title: t("Log out"),
+  });
+  const router = useRouter();
+  const { useLink } = useUIContext();
+
+  const handleLogout = (event: ReactMouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    setLoading(true);
+    setErrorNotification(undefined);
+
+    if (onClick) {
+      onClick(event);
+    }
+
+    logout()
+      .then(() => router.push("/"))
+      .catch(setErrorNotification)
+      .finally(() => setLoading(false));
+  };
+
+  const linkComponentProps = {
+    children: t("Log out"),
+    onClick: handleLogout,
+    ...props,
+  } as LinkProps;
+
+  const link = useLink({
+    href: "#",
+    ...(NavItemComponent
+      ? {
+          children: <NavItemComponent {...linkComponentProps} />,
+        }
+      : linkComponentProps),
+  });
+
+  return (
+    <>
+      {loader}
+      {errorNotification}
+      {link}
+    </>
+  );
+}
+
+export type IUserLoggedHeaderNavProps<LinkProps extends ILinkProps> = {
+  NavItemComponent?: ComponentType<LinkProps>;
+};
+
+export function UserLoggedHeaderNav<LinkProps extends ILinkProps = ILinkProps>({
+  NavItemComponent,
+}: IUserLoggedHeaderNavProps<LinkProps>): ReactElement | null {
+  const { user, displayName } = useIdentityContext();
 
   if (!user) {
     return null;
   }
 
+  const withNavItemComponentProps = {
+    NavItemComponent: NavItemComponent,
+  } as IWithNavItemComponentProps<LinkProps>;
+
   return (
     <div key="userNav" id="userNav" title={displayName()}>
-      <Link href="/account">{t("My account")}</Link>
-      <Link href="#" onClick={logout}>
-        {t("Log out")}
-      </Link>
+      <AccountLink<LinkProps> {...withNavItemComponentProps} />
+      <LogoutLink<LinkProps> {...withNavItemComponentProps} />
     </div>
   );
+}
+
+export type IUserUnloggedHeaderNavProps<LinkProps extends ILinkProps> = {
+  NavItemComponent?: ComponentType<LinkProps>;
 };
 
-export const UserUnloggedHeaderNav = (): ReactElement | null => {
+export function UserUnloggedHeaderNav<LinkProps extends ILinkProps = ILinkProps>({
+  NavItemComponent,
+}: IUserUnloggedHeaderNavProps<LinkProps>): ReactElement | null {
   const { t } = useTranslation();
-  const { user, AuthComponent } = useIdentityContext();
+  const { user, auth } = useIdentityContext();
   const { useModal } = useUIContext();
+  const { useLink } = useUIContext();
 
   const { modal, openModal, closeModal } = useModal({
     title: t("Sign In / Sign Up"),
-    children: AuthComponent,
+    body: auth,
   });
 
   useEffect(() => {
@@ -42,24 +146,31 @@ export const UserUnloggedHeaderNav = (): ReactElement | null => {
   if (user) {
     return null;
   }
-  const handleOnClick = () => openModal();
+
+  const linkComponentProps = {
+    children: t("Sign In / Sign Up"),
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    onClick: (event: ReactMouseEvent<HTMLAnchorElement, MouseEvent>) => openModal(),
+  } as LinkProps;
+
+  const link = useLink({
+    href: "#",
+    ...(NavItemComponent
+      ? {
+          children: <NavItemComponent {...linkComponentProps} />,
+        }
+      : linkComponentProps),
+  });
 
   return (
     <>
       {modal}
-      <Link href="#" key="signup_signin" onClick={handleOnClick}>
-        {t("Sign In / Sign Up")}
-      </Link>
+      {link}
     </>
   );
-};
+}
 
-export type IUserHeaderProps = Record<string, unknown>;
-export type UserHeaderNavComponent<
-  H extends IUserHeaderProps = IUserHeaderProps
-> = ComponentType<H>;
-
-export const UserHeaderNav: UserHeaderNavComponent = () => {
+export function UserHeaderNav<LinkProps extends ILinkProps = ILinkProps>(): ReactElement | null {
   const { identityProvider } = useIdentityContext();
 
   if (!identityProvider) {
@@ -68,8 +179,8 @@ export const UserHeaderNav: UserHeaderNavComponent = () => {
 
   return (
     <div>
-      <UserLoggedHeaderNav />,
-      <UserUnloggedHeaderNav />,
+      <UserLoggedHeaderNav<LinkProps> />
+      <UserUnloggedHeaderNav<LinkProps> />
     </div>
   );
-};
+}

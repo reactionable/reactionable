@@ -1,10 +1,13 @@
 import React, { ComponentType, PropsWithChildren, ReactElement } from "react";
 
 import { INavItemProps } from "../../nav/NavItem";
-import { createNavItemsContextProvider } from "../../nav/NavItemsContextProvider";
-import { BodyComponent, IBodyProps } from "./body/Body";
-import { FooterComponent, IFooterProps } from "./footer/Footer";
-import { HeaderComponent, IHeaderProps } from "./header/Header";
+import {
+  INavItemsProviderProps,
+  createNavItemsContextProvider,
+} from "../../nav/NavItemsContextProvider";
+import { Body, BodyComponent, IBodyProps } from "./body/Body";
+import { Footer, FooterComponent, IFooterProps } from "./footer/Footer";
+import { Header, HeaderComponent, IHeaderProps } from "./header/Header";
 
 export interface ILayoutProps<
   HeaderProps extends IHeaderProps<INavItemProps> = IHeaderProps<INavItemProps>,
@@ -14,14 +17,25 @@ export interface ILayoutProps<
   header?: HeaderProps;
   body?: BodyProps;
   footer?: FooterProps;
-  HeaderComponent: HeaderComponent<HeaderProps>;
-  BodyComponent: BodyComponent<BodyProps>;
-  FooterComponent: FooterComponent<FooterProps>;
+  HeaderComponent?: HeaderComponent<HeaderProps>;
+  BodyComponent?: BodyComponent<BodyProps>;
+  FooterComponent?: FooterComponent<FooterProps>;
 }
 
-export type LayoutComponent<LayoutProps extends ILayoutProps = ILayoutProps> = ComponentType<
-  LayoutProps
->;
+export type LayoutComponent<
+  LayoutProps extends ILayoutProps = ILayoutProps
+> = ComponentType<LayoutProps>;
+
+const { NavItemsContextProvider, useNavItemsContext } = createNavItemsContextProvider<
+  IHeaderProps<INavItemProps>
+>();
+
+export const HeaderContextProvider = NavItemsContextProvider;
+export function useHeaderContext<
+  HeaderProps extends IHeaderProps<INavItemProps>
+>(): INavItemsProviderProps<HeaderProps> {
+  return useNavItemsContext();
+}
 
 export function Layout<
   HeaderProps extends IHeaderProps<INavItemProps>,
@@ -34,14 +48,16 @@ export function Layout<
   footer,
   ...components
 }: PropsWithChildren<ILayoutProps<HeaderProps, BodyProps, FooterProps>>): ReactElement {
-  const Header = components.HeaderComponent;
-  const Body = components.BodyComponent;
-  const Footer = components.FooterComponent;
+  const HeaderComponent = components.HeaderComponent || Header;
+  const BodyComponent = components.BodyComponent || Body;
+  const FooterComponent = components.FooterComponent || Footer;
 
   const layoutContent = (
     <>
-      {(body || children) && <Body {...(body ?? ({} as BodyProps))}>{children}</Body>}
-      {footer && <Footer {...footer} />}
+      {(body || children) && (
+        <BodyComponent {...(body ?? ({} as BodyProps))}>{children}</BodyComponent>
+      )}
+      {footer && <FooterComponent {...footer} />}
     </>
   );
 
@@ -49,13 +65,10 @@ export function Layout<
     return layoutContent;
   }
 
-  const { NavItemsContextProvider: HeaderContextProvider } = createNavItemsContextProvider<
-    HeaderProps
-  >(header);
-
   return (
     <HeaderContextProvider>
-      <Header {...(header as HeaderProps)} /> {layoutContent}
+      <HeaderComponent {...(header as HeaderProps)} />
+      {layoutContent}
     </HeaderContextProvider>
   );
 }

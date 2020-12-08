@@ -1,72 +1,29 @@
-import { useRouterContext, useTranslation } from "@reactionable/core";
+import { AccountLink, LogoutLink, UserUnloggedHeaderNav } from "@reactionable/core";
 import { useIdentityContext } from "@reactionable/core/lib/identity/Identity";
-import React, { ComponentType, useEffect } from "react";
+import React, { ReactElement } from "react";
+import { NavLinkProps } from "react-bootstrap";
+import { DropdownItemProps } from "react-bootstrap/esm/DropdownItem";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
-import { Modal, useModal } from "../../modal/Modal";
+export { UserUnloggedHeaderNav } from "@reactionable/core/lib/ui/layout/header/UserHeaderNav";
 
 const UserLoggedHeaderNav = () => {
-  const { user, logout, displayName } = useIdentityContext();
-  const { t } = useTranslation("identity");
-  const { RouterLink } = useRouterContext();
-
+  const { user, displayName } = useIdentityContext();
   if (!user) {
     return null;
   }
 
   return (
     <NavDropdown key="userNav" id="userNav" title={displayName()}>
-      <NavDropdown.Item as={RouterLink} href="/account">
-        {t("My account")}
-      </NavDropdown.Item>
+      <AccountLink<DropdownItemProps> NavItemComponent={NavDropdown.Item} />
       <NavDropdown.Divider />
-      <NavDropdown.Item as={RouterLink} href="#" onClick={logout}>
-        {t("Log out")}
-      </NavDropdown.Item>
+      <LogoutLink<DropdownItemProps> NavItemComponent={NavDropdown.Item} />
     </NavDropdown>
   );
 };
 
-const UserUnloggedHeaderNav = () => {
-  const { RouterLink } = useRouterContext();
-  const { t } = useTranslation("identity");
-  const { user, auth } = useIdentityContext();
-  const { modal, openModal, closeModal } = useModal({
-    Component: Modal,
-    title: t("Sign In / Sign Up"),
-    body: auth,
-  });
-
-  useEffect(() => {
-    if (user) {
-      closeModal();
-    }
-  }, [user]);
-
-  if (user) {
-    return null;
-  }
-  const handleOnClick = () => openModal();
-
-  return (
-    <>
-      {modal}
-      <RouterLink href="#">
-        <Nav.Link key="signup_signin" onClick={handleOnClick}>
-          {t("Sign In / Sign Up")}
-        </Nav.Link>
-      </RouterLink>
-    </>
-  );
-};
-
-export type IUserHeaderProps = Record<string, unknown>;
-export type UserHeaderNavComponent<
-  H extends IUserHeaderProps = IUserHeaderProps
-> = ComponentType<H>;
-
-export const UserHeaderNav: UserHeaderNavComponent = () => {
+export const UserHeaderNav = (): ReactElement | null => {
   const { identityProvider } = useIdentityContext();
 
   if (!identityProvider) {
@@ -75,8 +32,8 @@ export const UserHeaderNav: UserHeaderNavComponent = () => {
 
   return (
     <div>
-      <UserLoggedHeaderNav />,
-      <UserUnloggedHeaderNav />,
+      <UserLoggedHeaderNav />
+      <UserUnloggedHeaderNav<NavLinkProps> NavItemComponent={Nav.Link} />
     </div>
   );
 };

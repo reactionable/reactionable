@@ -1,16 +1,14 @@
-import Grid from "@material-ui/core/Grid/Grid";
 import { IBodyProps as ICoreBodyProps } from "@reactionable/core/lib/ui/layout/body/Body";
 import React, { ComponentType, PropsWithChildren, ReactElement } from "react";
 
-export type IBodyProps = ICoreBodyProps;
+import {
+  IResponsiveContainerProps,
+  ResponsiveContainer,
+} from "../responsive-container/ResponsiveContainer";
+
+export type IBodyProps = ICoreBodyProps & IResponsiveContainerProps;
 export type BodyComponent = ComponentType<IBodyProps>;
 
-export function Body({ children }: PropsWithChildren<IBodyProps>): ReactElement {
-  return (
-    <main>
-      <Grid container>
-        <Grid item>{children}</Grid>
-      </Grid>
-    </main>
-  );
+export function Body(props: PropsWithChildren<IBodyProps>): ReactElement {
+  return <ResponsiveContainer {...props} component="main" />;
 }
