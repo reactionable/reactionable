@@ -1,18 +1,9 @@
-import { ILinkProps as ICoreLinkProps } from "@reactionable/core/lib/router/Link";
-import { IRouterLinkProps } from "@reactionable/core/lib/router/RouterLink";
-import Link, { LinkProps as NextLinkProps } from "next/link";
-import React, { PropsWithChildren, ReactElement } from "react";
+import { IRouterLinkProps as ICoreRouterLinkProps } from "@reactionable/core/lib/router/RouterLink";
+import Link, { LinkProps } from "next/link";
+import React, { ReactElement } from "react";
 
-export type ILinkProps = ICoreLinkProps & Omit<NextLinkProps, "href">;
+export type IRouterLinkProps = ICoreRouterLinkProps & LinkProps;
 
-export function RouterLink<LinkProps extends ILinkProps>({
-  href,
-  ...props
-}: PropsWithChildren<IRouterLinkProps<LinkProps>>): ReactElement {
-  const linkProps: NextLinkProps = {
-    ...props,
-    href: href || "",
-  };
-
-  return <Link {...linkProps} />;
+export function RouterLink(props: IRouterLinkProps): ReactElement {
+  return <Link {...props} />;
 }

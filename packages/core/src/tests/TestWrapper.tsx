@@ -20,5 +20,11 @@ export function TestWrapper<
     ITestWrapperProps<IdentityProviderProps, UIProviderProps, RouterProviderProps>
   >
 ): ReactElement {
-  return <Wrapper router={useRouterProviderProps()} ui={useUIProviderProps()} {...props} />;
+  return (
+    <Wrapper<IdentityProviderProps, UIProviderProps, RouterProviderProps>
+      router={useRouterProviderProps() as RouterProviderProps}
+      ui={useUIProviderProps() as UIProviderProps}
+      {...props}
+    />
+  );
 }

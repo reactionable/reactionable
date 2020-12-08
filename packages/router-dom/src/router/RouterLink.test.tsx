@@ -8,7 +8,9 @@ describe("RouterLink", () => {
   it("should render without crashing", () => {
     const result = render(
       <TestWrapper>
-        <RouterLink href="test">Test</RouterLink>
+        <RouterLink href="test">
+          <a>Test</a>
+        </RouterLink>
       </TestWrapper>
     );
 

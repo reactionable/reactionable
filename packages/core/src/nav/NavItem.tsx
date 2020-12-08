@@ -1,6 +1,7 @@
 import React, { ComponentType, ReactElement } from "react";
 
-import { ILinkProps, Link } from "../router/Link";
+import { ILinkProps } from "../ui/link/Link";
+import { useUIContext } from "../ui/UI";
 
 export type INavItemProps = ILinkProps;
 
@@ -11,12 +12,12 @@ export type INavItemsProps<NavItemProps extends INavItemProps> = {
 export function NavItem<NavItemProps extends INavItemProps>({
   ...props
 }: NavItemProps): ReactElement {
-  return <Link {...(props as NavItemProps)} />;
+  return useUIContext().useLink(props);
 }
 
-export type INavItemsComponentProps<NavItemProps extends INavItemProps> = INavItemsProps<
-  NavItemProps
-> & {
+export type INavItemsComponentProps<
+  NavItemProps extends INavItemProps
+> = INavItemsProps<NavItemProps> & {
   Component?: ComponentType<NavItemProps>;
 };
 

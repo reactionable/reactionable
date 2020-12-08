@@ -15,16 +15,6 @@ export type IRouteMatch<RouteMatchParams extends IRouteMatchParams = IRouteMatch
   url: string;
 };
 
-export type IUseRouteMatch<
-  RouteMatchParams extends IRouteMatchParams = IRouteMatchParams
-> = () => IRouteMatch<RouteMatchParams>;
-
-export function useRouteMatchCore<
-  RouteMatchParams extends IRouteMatchParams = IRouteMatchParams
->(): IRouteMatch<RouteMatchParams> {
-  return { params: {} as RouteMatchParams, isExact: true, path: "", url: "" };
-}
-
 export type IRenderRoutes<RouteProps extends IRouteProps = IRouteProps> = (
   routes: RouteProps[]
 ) => ReactElement;

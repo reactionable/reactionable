@@ -1,3 +1,4 @@
+import { compile } from "path-to-regexp";
 import React, {
   Children,
   ComponentType,
@@ -6,20 +7,21 @@ import React, {
   useCallback,
 } from "react";
 
-import { ILinkProps } from "./Link";
+import { IRouteMatchParams } from "./Route";
 
-export type IRouterLinkProps<LinkProps extends ILinkProps = ILinkProps> = LinkProps & {
+export type IRouterLinkProps = {
+  href: string;
   children: ReactElement;
 };
 
-export type IRouterLinkComponent<LinkProps extends ILinkProps = ILinkProps> = ComponentType<
-  IRouterLinkProps<LinkProps>
->;
+export type IRouterLinkComponent<
+  RouterLinkProps extends IRouterLinkProps
+> = ComponentType<RouterLinkProps>;
 
-export function RouterLink<LinkProps extends ILinkProps>({
+export function RouterLink({
   children,
   ...props
-}: PropsWithChildren<IRouterLinkProps<LinkProps>>): ReactElement {
+}: PropsWithChildren<IRouterLinkProps>): ReactElement {
   const child: ReactElement = Children.only<ReactElement>(children);
   const childRef: { current: Element } | ((el: Element) => void) =
     child && typeof child === "object" && child["ref"];
@@ -39,9 +41,70 @@ export function RouterLink<LinkProps extends ILinkProps>({
   const childProps = {
     ref: setRef,
     ...props,
-  } as IRouterLinkProps<LinkProps> & {
+  } as IRouterLinkProps & {
     ref?: (el: Element) => void;
   };
 
   return React.cloneElement(child, childProps);
+}
+
+const normalizePath = (path: string): string => {
+  path = path.trim();
+  const separator = "/";
+  const normalizedPathParts: string[] = [];
+  path.split(separator).forEach((part) => {
+    part = part.trim();
+    if (!part.length) {
+      return;
+    }
+    if (part === "..") {
+      normalizedPathParts.pop();
+      return;
+    }
+    normalizedPathParts.push(part);
+  });
+
+  if (!normalizedPathParts.length) {
+    return "/";
+  }
+
+  let normalizedPath = normalizedPathParts.join(separator);
+  if (path[0] === separator) {
+    normalizedPath = separator + normalizedPath;
+  }
+  if (path[path.length - 1] === separator) {
+    normalizedPath += separator;
+  }
+
+  return normalizedPath;
+};
+
+const cache = {};
+const cacheLimit = 10000;
+let cacheCount = 0;
+function compilePath(path: string) {
+  if (cache[path]) return cache[path];
+
+  const generator = compile(path);
+
+  if (cacheCount < cacheLimit) {
+    cache[path] = generator;
+    cacheCount++;
+  }
+
+  return generator;
+}
+
+export function generatePath(pattern: string, ...params: IRouteMatchParams[]): string {
+  const parsedParams = params.reduce((previous, current) => {
+    return { ...previous, ...current };
+  }, {});
+
+  const path = normalizePath(pattern);
+
+  if (path === "/") {
+    return path;
+  }
+
+  return compilePath(path)(parsedParams, { pretty: true });
 }

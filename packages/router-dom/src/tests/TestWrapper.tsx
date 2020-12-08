@@ -17,5 +17,10 @@ export function TestWrapper<
   ITestWrapperProps<IdentityProviderProps, UIProviderProps, RouterProviderProps>
 >): ReactElement {
   router = { ...router, Component: MemoryRouterComponent } as RouterProviderProps;
-  return <Wrapper {...props} router={router} />;
+  return (
+    <Wrapper<IdentityProviderProps, UIProviderProps, RouterProviderProps>
+      {...props}
+      router={router}
+    />
+  );
 }

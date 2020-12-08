@@ -1,15 +1,6 @@
-import { render } from "@testing-library/react";
-import React from "react";
+import { generatePath } from "./RouterLink";
 
-import { Link, generatePath } from "./Link";
-
-describe("Link", () => {
-  it("should render without crashing", async () => {
-    const result = render(<Link href="/test">test</Link>);
-
-    expect(result).toBeTruthy();
-  });
-
+describe("RouterLink", () => {
   describe("generatePath", () => {
     it("generate absolute path with duplicated separators", () => {
       for (const path of ["/", "/", "/test/..", "/test/../", "//test//..//"]) {

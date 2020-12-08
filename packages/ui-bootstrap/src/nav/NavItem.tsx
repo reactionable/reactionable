@@ -27,7 +27,7 @@ export function NavItem({ icon, href, children, ...linkProps }: INavItemProps): 
   }
   return (
     <CoreNavItem href={href}>
-      <NavLink {...linkProps}>{children}</NavLink>
+      <NavLink {...(linkProps as NavLinkProps)}>{children}</NavLink>
     </CoreNavItem>
   );
 }

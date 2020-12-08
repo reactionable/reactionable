@@ -1,3 +1,5 @@
+import { ReactElement } from "react";
+
 import { IProviderProps, createProvider } from "../app/Provider";
 import { Form, IFormData, IFormValues } from "../form/Form";
 import { IFormButtonProps } from "../form/FormButton";
@@ -24,6 +26,7 @@ import { Body } from "./layout/body/Body";
 import { Footer } from "./layout/footer/Footer";
 import { Header } from "./layout/header/Header";
 import { IUseLayoutProps, IUseLayoutResult, useLayout } from "./layout/Layout";
+import { ILinkProps, useLink } from "./link/Link";
 import { Loader } from "./loader/Loader";
 import { IUseLoaderProps, IUseLoaderResult, useLoader } from "./loader/useLoader";
 import { IModalProps, IUseModalProps, IUseModalResult, Modal, useModal } from "./modal/Modal";
@@ -83,6 +86,7 @@ export type IUIProviderProps<
   >(
     props: IUseModalFormProps<Values, Data, FormButtonProps, ModalProps>
   ) => IUseModalResult;
+  useLink: <LinkProps extends ILinkProps = ILinkProps>(props: LinkProps) => ReactElement;
 }>;
 
 export function useUIProviderProps(props?: Partial<IUIProviderProps>): IUIProviderProps {
@@ -104,6 +108,7 @@ export function useUIProviderProps(props?: Partial<IUIProviderProps>): IUIProvid
     useForm: (props) => useForm({ Component: Form, ...props }),
     useModal: (props) => useModal({ Component: Modal, ...props }),
     useModalForm,
+    useLink,
     ...props,
   };
 }

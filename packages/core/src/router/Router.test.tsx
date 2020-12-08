@@ -1,10 +1,10 @@
-import React from "react";
-
-import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 
-import { BasicRouterContextProvider, BasicLink } from "./Router.stories";
+import { render } from "@testing-library/react";
+import React from "react";
+
 import { i18nTestInstance } from "../tests/I18n";
+import { BasicRouterContextProvider, BasicRouterLink } from "./Router.stories";
 
 describe("Router", () => {
   beforeAll(i18nTestInstance);
@@ -17,9 +17,9 @@ describe("Router", () => {
     });
   });
 
-  describe("BasicLink", () => {
+  describe("BasicRouterLink", () => {
     it("should render without crashing", () => {
-      const result = render(<BasicLink />);
+      const result = render(<BasicRouterLink />);
 
       expect(result).toBeTruthy();
     });

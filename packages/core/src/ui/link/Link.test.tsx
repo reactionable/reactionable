@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
 import React from "react";
 
-import { Link } from "./router/Link";
+import { Link } from "./Link";
 
 describe("Link", () => {
   it("should render without crashing", async () => {
