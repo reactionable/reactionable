@@ -1,4 +1,10 @@
-import { ApolloClient, DocumentNode, InMemoryCache, InMemoryCacheConfig } from "@apollo/client";
+import {
+  ApolloClient,
+  ApolloLink,
+  DocumentNode,
+  InMemoryCache,
+  InMemoryCacheConfig,
+} from "@apollo/client";
 import {
   ApolloProvider,
   HttpOptions,
@@ -25,13 +31,13 @@ function getGraphqlClient() {
 }
 
 function createGraphqlClient(uri: IGraphqlClientUri, cacheConfig?: InMemoryCacheConfig) {
-  const httpLink = createUploadLink({
+  const httpLink: ApolloLink = createUploadLink({
     uri,
     fetch,
     credentials: "include", // Additional fetch() options like `credentials` or `headers`,
   });
 
-  const authLink = setContext((_, prevContext) => {
+  const authLink: ApolloLink = setContext((_, prevContext) => {
     const { headers } = prevContext;
 
     // get the authentication token from local storage if it exists
