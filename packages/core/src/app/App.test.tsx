@@ -1,10 +1,10 @@
-import React from "react";
-
-import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 
-import { BasicApp } from "./App.stories";
+import { render } from "@testing-library/react";
+import React from "react";
+
 import { i18nTestInstance } from "../tests/I18n";
+import { AppWithChildren, AppWithRoutes, BasicApp } from "./App.stories";
 
 describe("App", () => {
   beforeAll(i18nTestInstance);
@@ -12,6 +12,22 @@ describe("App", () => {
   describe("BasicApp", () => {
     it("should render without crashing", () => {
       const result = render(<BasicApp />);
+
+      expect(result).toBeTruthy();
+    });
+  });
+
+  describe("AppWithRoutes", () => {
+    it("should render without crashing", () => {
+      const result = render(<AppWithRoutes />);
+
+      expect(result).toBeTruthy();
+    });
+  });
+
+  describe("AppWithChildren", () => {
+    it("should render without crashing", () => {
+      const result = render(<AppWithChildren />);
 
       expect(result).toBeTruthy();
     });
