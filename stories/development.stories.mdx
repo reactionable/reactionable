@@ -1,0 +1,38 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import LinkTo from "@storybook/addon-links/react";
+import "bootstrap/dist/css/bootstrap.css";
+
+<Meta title="Home/Development" />
+
+---
+
+## Development
+
+### Use reactionable in local
+
+#### 1. In `reactionable` dir
+
+```sh
+yarn run link; # Will print the link command to run in the react application dir
+yarn start;
+```
+
+#### 2. In `react application` dir
+
+Execute the command printed by the previous `yarn run link` command
+
+### Tests
+
+```sh
+yarn test;
+```
+
+### Storybook
+
+#### 1. Execute <code>storybook
+
+```sh
+yarn storybook;
+```
+
+#### 2. Visit [http://localhost:6006/](http://localhost:6006/)
