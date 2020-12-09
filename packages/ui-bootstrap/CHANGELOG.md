@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.25.9 (2020-12-09)
+
+**Note:** Version bump only for package @reactionable/ui-bootstrap
+
+
+
+
+
 ## 0.25.8 (2020-12-08)
 
 **Note:** Version bump only for package @reactionable/ui-bootstrap
