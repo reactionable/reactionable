@@ -7,15 +7,12 @@ import {
   useIdentityProviderProps as coreUseIdentityProviderProps,
   useTranslation,
 } from "@reactionable/core";
-import {
-  Authenticator,
-  ConfirmSignIn,
-  ForgotPassword,
-  SignIn,
-  VerifyContact,
-} from "aws-amplify-react";
-import { IAuthenticatorProps } from "aws-amplify-react/lib-esm/Auth/Authenticator";
-import { UsernameAttributes } from "aws-amplify-react/lib-esm/Auth/common/types";
+import Authenticator, { IAuthenticatorProps } from "aws-amplify-react/lib/Auth/Authenticator";
+import { UsernameAttributes } from "aws-amplify-react/lib/Auth/common/types";
+import { ConfirmSignIn } from "aws-amplify-react/lib/Auth/ConfirmSignIn";
+import ForgotPassword from "aws-amplify-react/lib/Auth/ForgotPassword";
+import SignIn from "aws-amplify-react/lib/Auth/SignIn";
+import VerifyContact from "aws-amplify-react/lib/Auth/VerifyContact";
 import React, { PropsWithChildren, ReactElement, useEffect, useState } from "react";
 
 export type IUser = ICoreUser;
@@ -27,7 +24,7 @@ export {
   ForgotPassword,
   SignUp,
   SignOut,
-} from "aws-amplify-react";
+} from "aws-amplify-react/lib/Auth";
 
 const dataToUser = (data?: {
   id: string;

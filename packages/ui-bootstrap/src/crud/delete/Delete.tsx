@@ -6,7 +6,7 @@ import {
 import React, { PropsWithChildren, ReactElement, ReactNode } from "react";
 import Button from "react-bootstrap/Button";
 
-import { IIconProps, Icon } from "../../icon/icon";
+import { IIconProps, Icon } from "../../icon/Icon";
 
 export interface IDeleteProps<Data = unknown> extends ICoreDeleteProps<Data> {
   label?: ReactNode;

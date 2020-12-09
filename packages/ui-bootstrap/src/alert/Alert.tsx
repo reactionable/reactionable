@@ -6,7 +6,7 @@ import {
 import React, { ComponentType } from "react";
 import BootstrapAlert, { AlertProps } from "react-bootstrap/Alert";
 
-import { IIconProps, Icon } from "../icon/icon";
+import { IIconProps, Icon } from "../icon/Icon";
 
 export type IAlertProps = IAlertPropsCore &
   AlertProps & {

@@ -1,25 +1,27 @@
-import Star from "@material-ui/icons/Star";
-import { i18nTestInstance } from "@reactionable/core/src/tests/I18n";
+import "@testing-library/jest-dom/extend-expect";
+
+import { i18nTestInstance } from "@reactionable/core";
 import { render } from "@testing-library/react";
 import React from "react";
 
-import { Icon } from "./Icon";
+import { BasicIcon, IconWithComponentAsProp } from "./Icon.stories";
 
 describe("Icon", () => {
   beforeAll(i18nTestInstance);
 
-  it("should render with an icon prop", () => {
-    const result = render(<Icon icon={Star} />);
-    expect(result).toBeTruthy();
+  describe("BasicIcon", () => {
+    it("should render without crashing", () => {
+      const result = render(<BasicIcon />);
+
+      expect(result).toBeTruthy();
+    });
   });
 
-  it("should render with an icon prop and color", () => {
-    const result = render(<Icon icon={Star} color="secondary" />);
-    expect(result).toBeTruthy();
-  });
+  describe("IconWithComponentAsProp", () => {
+    it("should render without crashing", () => {
+      const result = render(<IconWithComponentAsProp />);
 
-  it("should render with a component as prop", () => {
-    const result = render(<Icon {...Star} />);
-    expect(result).toBeTruthy();
+      expect(result).toBeTruthy();
+    });
   });
 });

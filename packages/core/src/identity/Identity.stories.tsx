@@ -1,9 +1,6 @@
-import "@aws-amplify/ui/dist/style.css";
-
-import { useIdentityContext } from "@reactionable/core";
 import React, { ReactElement } from "react";
 
-import { IdentityContextProvider } from "./Identity";
+import { IdentityContextProvider, useIdentityContext } from "./Identity";
 
 export default {
   title: "Core/Components/Identity",

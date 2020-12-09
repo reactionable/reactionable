@@ -53,7 +53,7 @@ export const UseNotification = (): ReactElement => {
   );
 };
 
-export const successNotification = (): ReactElement => {
+export const BasicSuccessNotification = (): ReactElement => {
   const title = text("Title", "This is a success notification");
   const content = text("Content", "This is the success notification content");
 
@@ -76,7 +76,7 @@ export const UseSuccessNotification = (): ReactElement => {
   );
 };
 
-export const errorNotification = (): ReactElement => {
+export const BasicErrorNotification = (): ReactElement => {
   const title = text("Title", "This is an error notification");
   const content = text("Content", "This is an error notification content");
 

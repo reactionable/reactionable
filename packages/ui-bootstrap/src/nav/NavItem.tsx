@@ -7,7 +7,7 @@ import {
 import React, { ReactElement } from "react";
 import NavLink, { NavLinkProps } from "react-bootstrap/NavLink";
 
-import { IIconProps, Icon } from "../icon/icon";
+import { IIconProps, Icon } from "../icon/Icon";
 
 export type INavItemProps = ICoreNavItemProps &
   Omit<NavLinkProps, "onSelect"> & { icon?: IIconProps };

@@ -5,10 +5,10 @@ import React, { ReactElement } from "react";
 import { string } from "yup";
 
 import { FormField } from "../form/FormField";
+import { UIContextProvider } from "../UI";
 import { Modal, useModal } from "./Modal";
 import { ModalForm } from "./ModalForm";
 import { useModalForm } from "./useModalForm";
-import { UIContextProvider } from "../UI";
 
 export default {
   title: "UI Material/Components/Modal",
@@ -44,7 +44,7 @@ export const BasicModal = (): ReactElement => {
   );
 };
 
-export const useModalHook = (): ReactElement => {
+export const UseModalHook = (): ReactElement => {
   const ModalHook = () => {
     const { openModal, modal } = useModal({
       onHide: action("Modal closed"),

@@ -6,7 +6,11 @@ import React, { ReactElement } from "react";
 import { configure } from "../Amplify";
 import { IdentityContextProvider, SignUp } from "./Identity";
 
-configure({ oauth: {} });
+configure({
+  oauth: {},
+  userPoolId: "eu-west-1_test-user-pool-id",
+  userPoolWebClientId: "test-client-id",
+});
 
 export default {
   title: "Amplify/Components/Identity",
