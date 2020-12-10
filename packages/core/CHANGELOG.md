@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.26.0 (2020-12-10)
+
+
+### Features
+
+* migrate to React 17 ([5ffb061](https://github.com/reactionable/reactionable/commit/5ffb0615d6583ee3573fbcd7621a08a303904208))
+
+
+
+
+
 ## 0.25.9 (2020-12-09)
 
 **Note:** Version bump only for package @reactionable/core
