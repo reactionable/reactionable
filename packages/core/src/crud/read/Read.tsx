@@ -1,4 +1,4 @@
-import React, { ComponentType, PropsWithChildren, ReactElement } from "react";
+import { ComponentType, PropsWithChildren, ReactElement } from "react";
 
 import { IData } from "../../query/Query";
 import { IQueryWrapperProps, QueryWrapper } from "../../query/QueryWrapper";

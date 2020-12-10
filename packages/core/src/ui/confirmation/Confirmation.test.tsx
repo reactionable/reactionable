@@ -1,10 +1,9 @@
-import React from "react";
-
-import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 
-import { BasicConfirmationAction } from "./Confirmation.stories";
+import { render } from "@testing-library/react";
+
 import { i18nTestInstance } from "../../tests/I18n";
+import { BasicConfirmationAction } from "./Confirmation.stories";
 
 describe("Confirmation", () => {
   beforeAll(i18nTestInstance);

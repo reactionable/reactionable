@@ -1,4 +1,4 @@
-import React, { ComponentType, ReactElement } from "react";
+import { ComponentType, ReactElement } from "react";
 
 import { ILinkProps } from "../ui/link/Link";
 import { useUIContext } from "../ui/UI";

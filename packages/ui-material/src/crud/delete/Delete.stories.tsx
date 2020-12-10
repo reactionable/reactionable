@@ -1,5 +1,5 @@
 import { action } from "@storybook/addon-actions";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 import { UIContextProvider } from "../../UI";
 import { Delete } from "./Delete";

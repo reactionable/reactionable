@@ -1,10 +1,9 @@
-import React from "react";
-
-import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 
-import { BasicDelete } from "./Delete.stories";
+import { render } from "@testing-library/react";
+
 import { i18nTestInstance } from "../../tests/I18n";
+import { BasicDelete } from "./Delete.stories";
 
 describe("Delete", () => {
   beforeAll(i18nTestInstance);

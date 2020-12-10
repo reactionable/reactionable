@@ -1,9 +1,9 @@
 import { i18nTestInstance } from "@reactionable/core/src/tests/I18n";
 import { action } from "@storybook/addon-actions";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
-import { LanguageSelector } from "./LanguageSelector";
 import { UIContextProvider } from "../../UI";
+import { LanguageSelector } from "./LanguageSelector";
 
 export default {
   title: "UI Material/Components/I18n",

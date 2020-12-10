@@ -16,7 +16,7 @@ import {
   IUseModalResult,
   useModal as useCoreModal,
 } from "@reactionable/core/lib/ui/modal/Modal";
-import React, { ComponentType, ReactNode } from "react";
+import { ComponentType, ReactNode } from "react";
 
 export type IModalProps = ICoreModalProps &
   Omit<DialogProps, "open" | "title"> & {

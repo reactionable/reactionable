@@ -13,7 +13,7 @@ import { ConfirmSignIn } from "aws-amplify-react/lib/Auth/ConfirmSignIn";
 import ForgotPassword from "aws-amplify-react/lib/Auth/ForgotPassword";
 import SignIn from "aws-amplify-react/lib/Auth/SignIn";
 import VerifyContact from "aws-amplify-react/lib/Auth/VerifyContact";
-import React, { PropsWithChildren, ReactElement, useEffect, useState } from "react";
+import { PropsWithChildren, ReactElement, useEffect, useState } from "react";
 
 export type IUser = ICoreUser;
 

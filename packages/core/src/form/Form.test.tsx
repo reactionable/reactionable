@@ -1,13 +1,12 @@
-import React from "react";
-
-import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 
-import { FormWithCheckbox, FormWithSelect, FormWithTextArea, BasicForm } from "./Form.stories";
-import { Form } from "./Form";
-import { FormField } from "./FormField";
+import { render } from "@testing-library/react";
 import { string } from "yup";
+
 import { i18nTestInstance } from "../tests/I18n";
+import { Form } from "./Form";
+import { BasicForm, FormWithCheckbox, FormWithSelect, FormWithTextArea } from "./Form.stories";
+import { FormField } from "./FormField";
 
 describe("Form", () => {
   beforeAll(i18nTestInstance);

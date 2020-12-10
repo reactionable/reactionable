@@ -1,10 +1,9 @@
-import React from "react";
-
-import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 
-import { BasicModal, ModalWithForm, UseModalFormHook, UseModalHook } from "./Modal.stories";
 import { i18nTestInstance } from "@reactionable/core/lib/tests/I18n";
+import { render } from "@testing-library/react";
+
+import { BasicModal, ModalWithForm, UseModalFormHook, UseModalHook } from "./Modal.stories";
 
 describe("Modal", () => {
   beforeAll(i18nTestInstance);

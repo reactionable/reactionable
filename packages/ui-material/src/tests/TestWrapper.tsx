@@ -4,7 +4,7 @@ import {
   TestWrapper as CoreTestWrapper,
   ITestWrapperProps,
 } from "@reactionable/core/lib/tests/TestWrapper";
-import React, { PropsWithChildren, ReactElement } from "react";
+import { PropsWithChildren, ReactElement } from "react";
 
 import { IUIProviderProps, useUIProviderProps } from "../UI";
 

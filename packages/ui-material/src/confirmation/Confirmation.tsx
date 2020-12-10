@@ -17,7 +17,7 @@ import {
   IUseConfirmationResult,
   useConfirmation as useConfirmationCore,
 } from "@reactionable/core/lib/ui/confirmation/Confirmation";
-import React, { PropsWithChildren, ReactElement } from "react";
+import { PropsWithChildren, ReactElement } from "react";
 import Draggable from "react-draggable";
 
 import { IIconProps, Icon } from "../icon/Icon";

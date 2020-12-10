@@ -11,7 +11,7 @@ import {
   useRouterProviderProps as useCoreRouterProviderProps,
 } from "@reactionable/core/lib/router/Router";
 import { useRouter as nextUseRouter } from "next/router";
-import React, { PropsWithChildren, ReactElement } from "react";
+import { PropsWithChildren, ReactElement } from "react";
 
 import { IRouterLinkProps, RouterLink } from "./RouterLink";
 

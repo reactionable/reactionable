@@ -5,7 +5,7 @@ import {
   Delete as DeleteCore,
   IDeleteProps as ICoreDeleteProps,
 } from "@reactionable/core/lib/crud/delete/Delete";
-import React, { Children, PropsWithChildren, ReactElement } from "react";
+import { Children, PropsWithChildren, ReactElement } from "react";
 
 import { IIconProps, Icon } from "../../icon/Icon";
 

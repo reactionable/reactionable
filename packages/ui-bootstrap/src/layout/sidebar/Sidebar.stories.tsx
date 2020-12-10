@@ -2,15 +2,15 @@ import "../../../stories/config";
 
 import { faImages } from "@fortawesome/free-solid-svg-icons";
 import { generatePath, useRouteMatch, useTranslation } from "@reactionable/core";
-import React, { FC, ReactElement } from "react";
+import { FC, ReactElement } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Jumbotron from "react-bootstrap/Jumbotron";
 import Row from "react-bootstrap/Row";
 
-import { Sidebar, useSidebarContext } from "./Sidebar";
 import { UIContextProvider } from "../../UI";
+import { Sidebar, useSidebarContext } from "./Sidebar";
 
 export default {
   title: "UI Bootstrap/Components/Layout/Sidebar",

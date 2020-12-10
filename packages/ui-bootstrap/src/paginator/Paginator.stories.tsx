@@ -2,7 +2,7 @@ import "../../stories/config";
 
 import { action } from "@storybook/addon-actions";
 import { number, withKnobs } from "@storybook/addon-knobs";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 import { Paginator } from "./Paginator";
 

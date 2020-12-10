@@ -1,9 +1,9 @@
 import { List, ListItem, ListItemText } from "@material-ui/core";
 import { boolean, withKnobs } from "@storybook/addon-knobs";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
-import { Read } from "./Read";
 import { UIContextProvider } from "../../UI";
+import { Read } from "./Read";
 
 export default {
   title: "UI Material/Components/Crud/Read",

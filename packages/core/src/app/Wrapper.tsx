@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, ReactElement, StrictMode } from "react";
+import { PropsWithChildren, ReactElement, StrictMode } from "react";
 
 import { IIdentityProviderProps, IdentityContextProvider } from "../identity/Identity";
 import { IRouterProviderProps, RouterContextProvider } from "../router/Router";

@@ -1,4 +1,4 @@
-import React, { ReactElement, lazy } from "react";
+import { ReactElement, lazy } from "react";
 
 import { useUIProviderProps } from "../ui/UI";
 import { App } from "./App";

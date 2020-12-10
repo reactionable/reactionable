@@ -1,6 +1,5 @@
 import { i18nTestInstance } from "@reactionable/core/lib/tests/I18n";
 import { fireEvent, render } from "@testing-library/react";
-import React from "react";
 
 import { TestWrapper } from "../tests/TestWrapper";
 import { Confirmation } from "./Confirmation";

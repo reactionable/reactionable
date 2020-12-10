@@ -1,5 +1,5 @@
 import { text, withKnobs } from "@storybook/addon-knobs";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 import { Alert } from "./Alert";
 import { ErrorAlert, useErrorAlert } from "./ErrorAlert";

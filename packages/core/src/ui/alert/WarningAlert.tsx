@@ -1,4 +1,3 @@
-import React from "react";
 import { ComponentType, PropsWithChildren, ReactNode } from "react";
 
 import { Alert, IAlertProps } from "./Alert";

@@ -2,7 +2,7 @@ import Button from "@material-ui/core/Button/Button";
 import Paper from "@material-ui/core/Paper/Paper";
 import SaveIcon from "@material-ui/icons/Save";
 import { generatePath, useRouteMatch, useTranslation } from "@reactionable/core";
-import React, { FC, ReactElement } from "react";
+import { FC, ReactElement } from "react";
 
 import { UIContextProvider } from "../../UI";
 import { Sidebar, useSidebarContext } from "./Sidebar";

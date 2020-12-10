@@ -1,6 +1,6 @@
 import "../../../stories/config";
 
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 import { Footer } from "./Footer";
 

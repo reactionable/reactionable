@@ -2,7 +2,7 @@ import createCache from "@emotion/cache";
 import { CacheProvider } from "@emotion/react";
 import createEmotionServer from "@emotion/server/create-instance";
 import NextDocument, { Head, Html, Main, NextScript } from "next/document";
-import React, { Children, PropsWithChildren, ReactElement, ReactNode, useEffect } from "react";
+import { Children, PropsWithChildren, ReactElement, ReactNode, useEffect } from "react";
 
 export const cssInJsCache = createCache({ key: "css" });
 

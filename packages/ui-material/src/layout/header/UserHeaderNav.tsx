@@ -8,7 +8,7 @@ import {
   LogoutLink,
   UserUnloggedHeaderNav,
 } from "@reactionable/core/lib/ui/layout/header/UserHeaderNav";
-import React, { ComponentProps, MouseEvent, ReactElement, useState } from "react";
+import { ComponentProps, MouseEvent, ReactElement, useState } from "react";
 
 export { UserUnloggedHeaderNav } from "@reactionable/core/lib/ui/layout/header/UserHeaderNav";
 

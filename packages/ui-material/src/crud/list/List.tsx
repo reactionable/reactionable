@@ -4,7 +4,7 @@ import {
   IListProps as ICoreListProps,
 } from "@reactionable/core/lib/crud/list/List";
 import { IData } from "@reactionable/core/lib/query/Query";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 export type IListProps<Data extends IData = IData> = ICoreListProps<Data>;
 

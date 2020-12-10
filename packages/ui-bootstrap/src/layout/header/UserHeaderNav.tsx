@@ -1,6 +1,6 @@
 import { AccountLink, LogoutLink, UserUnloggedHeaderNav } from "@reactionable/core";
 import { useIdentityContext } from "@reactionable/core/lib/identity/Identity";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import { NavLinkProps } from "react-bootstrap";
 import { DropdownItemProps } from "react-bootstrap/esm/DropdownItem";
 import Nav from "react-bootstrap/Nav";

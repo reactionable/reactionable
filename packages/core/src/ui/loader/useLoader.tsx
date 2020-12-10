@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from "react";
+import { ReactElement, useState } from "react";
 
 import { ILoaderProps, Loader, LoaderComponent } from "./Loader";
 

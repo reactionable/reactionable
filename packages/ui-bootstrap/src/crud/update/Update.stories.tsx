@@ -1,13 +1,13 @@
 import "../../../stories/config";
 
 import { action } from "@storybook/addon-actions";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import Button from "react-bootstrap/Button";
 import { string } from "yup";
 
-import { Update } from "./Update";
 import { FormField } from "../../form/FormField";
 import { UIContextProvider } from "../../UI";
+import { Update } from "./Update";
 
 export default {
   title: "UI Bootstrap/Components/Crud/Update",

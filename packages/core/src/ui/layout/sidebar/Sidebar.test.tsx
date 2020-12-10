@@ -1,11 +1,10 @@
-import React from "react";
-
-import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 
-import { BasicSidebar } from "./Sidebar.stories";
+import { render } from "@testing-library/react";
+
 import { i18nTestInstance } from "../../../tests/I18n";
 import { Sidebar, useSidebarContext } from "./Sidebar";
+import { BasicSidebar } from "./Sidebar.stories";
 
 describe("Sidebar", () => {
   beforeAll(i18nTestInstance);

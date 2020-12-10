@@ -3,7 +3,7 @@ import {
   IListProps as ICoreListProps,
 } from "@reactionable/core/lib/crud/list/List";
 import { IData } from "@reactionable/core/lib/query/Query";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";

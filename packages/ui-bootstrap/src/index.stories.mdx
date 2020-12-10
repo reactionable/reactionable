@@ -33,7 +33,7 @@ yarn add @reactionable/ui-bootstrap
 ```tsx
 import { App } from "@reactionable/core";
 import { useUIProviderProps } from "@reactionable/ui-bootstrap";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 const MyApp = (): ReactElement => {
   return <App ui={useUIProviderProps()} />;
@@ -46,7 +46,7 @@ export default MyApp;
 ```tsx
 import { App } from "@reactionable/core";
 import { useUIProviderProps } from "@reactionable/ui-bootstrap";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 const MyApp = ({ Component, pageProps }): ReactElement => {
   return (

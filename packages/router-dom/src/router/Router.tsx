@@ -5,7 +5,7 @@ import {
   IRouter,
   useRouterProviderProps as useCoreRouterProviderProps,
 } from "@reactionable/core/lib/router/Router";
-import React, { PropsWithChildren, ReactElement } from "react";
+import { PropsWithChildren, ReactElement } from "react";
 import {
   BrowserRouter,
   MemoryRouter,

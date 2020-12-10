@@ -1,8 +1,8 @@
 import { boolean, select, withKnobs } from "@storybook/addon-knobs";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
-import { Header } from "./Header";
 import { UIContextProvider } from "../../UI";
+import { Header } from "./Header";
 
 export default {
   title: "UI Material/Components/Layout/Header",

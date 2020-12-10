@@ -1,10 +1,10 @@
-import React from "react";
+import "@testing-library/jest-dom/extend-expect";
 
 import { render } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
-import { BasicQueryWrapper } from "./QueryWrapper.stories";
+
 import { i18nTestInstance } from "../tests/I18n";
 import { QueryWrapper } from "./QueryWrapper";
+import { BasicQueryWrapper } from "./QueryWrapper.stories";
 
 describe("QueryWrapper", () => {
   beforeAll(i18nTestInstance);

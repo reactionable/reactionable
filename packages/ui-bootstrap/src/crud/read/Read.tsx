@@ -3,7 +3,7 @@ import {
   Read as CoreRead,
   IReadProps as ICoreReadProps,
 } from "@reactionable/core/lib/crud/read/Read";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";

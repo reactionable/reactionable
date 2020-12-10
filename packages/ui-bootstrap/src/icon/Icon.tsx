@@ -1,5 +1,5 @@
 import { FontAwesomeIcon, FontAwesomeIconProps } from "@fortawesome/react-fontawesome";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 export type IIconProps = FontAwesomeIconProps;
 

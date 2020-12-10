@@ -1,9 +1,10 @@
 import { compile } from "path-to-regexp";
-import React, {
+import {
   Children,
   ComponentType,
   PropsWithChildren,
   ReactElement,
+  cloneElement,
   useCallback,
 } from "react";
 
@@ -45,7 +46,7 @@ export function RouterLink({
     ref?: (el: Element) => void;
   };
 
-  return React.cloneElement(child, childProps);
+  return cloneElement(child, childProps);
 }
 
 const normalizePath = (path: string): string => {

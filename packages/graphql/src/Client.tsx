@@ -16,7 +16,7 @@ import { setContext } from "@apollo/client/link/context";
 import { IData as ICoreData } from "@reactionable/core";
 import { createUploadLink } from "apollo-upload-client";
 import fetch from "cross-fetch";
-import React, { PropsWithChildren, ReactElement, useMemo } from "react";
+import { PropsWithChildren, ReactElement, useMemo } from "react";
 export { gql } from "@apollo/client";
 
 export type IGraphqlClient = ApolloClient<IGraphqlClientState>;

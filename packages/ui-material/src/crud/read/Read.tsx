@@ -4,7 +4,7 @@ import {
   Read as CoreRead,
   IReadProps as ICoreReadProps,
 } from "@reactionable/core/lib/crud/read/Read";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 export type IReadProps<Data extends IData = IData> = ICoreReadProps<Data>;
 

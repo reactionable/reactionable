@@ -17,7 +17,7 @@ import {
   useSidebarContext as coreUseSidebarContext,
 } from "@reactionable/core/lib/ui/layout/sidebar/Sidebar";
 import clsx from "clsx";
-import React, { PropsWithChildren, ReactElement, useEffect, useState } from "react";
+import { PropsWithChildren, ReactElement, useEffect, useState } from "react";
 
 import { INavItemProps, NavItems } from "../../nav/NavItem";
 

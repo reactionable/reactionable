@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, ReactElement } from "react";
+import { PropsWithChildren, ReactElement } from "react";
 import { Route, RouteProps } from "react-router-dom";
 
 type ILazyRouteRendererProps = {

@@ -1,7 +1,7 @@
 import "@aws-amplify/ui/dist/style.css";
 
 import { useIdentityContext } from "@reactionable/core";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 import { configure } from "../Amplify";
 import { IdentityContextProvider, SignUp } from "./Identity";

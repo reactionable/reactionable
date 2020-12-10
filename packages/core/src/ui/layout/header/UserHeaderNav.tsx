@@ -1,9 +1,4 @@
-import React, {
-  ComponentType,
-  ReactElement,
-  MouseEvent as ReactMouseEvent,
-  useEffect,
-} from "react";
+import { ComponentType, ReactElement, MouseEvent as ReactMouseEvent, useEffect } from "react";
 
 import { useTranslation } from "../../../i18n/I18n";
 import { useIdentityContext } from "../../../identity/Identity";

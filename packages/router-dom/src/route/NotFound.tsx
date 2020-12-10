@@ -1,5 +1,5 @@
 import { lazyLoad } from "@reactionable/core/lib/ui/loader/Loader";
-import React, { ComponentType, LazyExoticComponent, PropsWithChildren, ReactElement } from "react";
+import { ComponentType, LazyExoticComponent, PropsWithChildren, ReactElement } from "react";
 import { Redirect, RouteComponentProps, useLocation, withRouter } from "react-router-dom";
 
 export const RouteNotFound = (): ReactElement => (

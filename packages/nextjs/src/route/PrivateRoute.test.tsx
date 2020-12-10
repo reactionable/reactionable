@@ -1,6 +1,5 @@
 import { i18nTestInstance } from "@reactionable/core";
 import { render } from "@testing-library/react";
-import React from "react";
 
 import { TestWrapper } from "../tests/TestWrapper";
 import { PrivateRoute } from "./PrivateRoute";

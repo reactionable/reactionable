@@ -1,6 +1,5 @@
 import { i18nTestInstance } from "@reactionable/core/src/tests/I18n";
 import { render } from "@testing-library/react";
-import React from "react";
 
 import { LanguageSelector } from "./LanguageSelector";
 

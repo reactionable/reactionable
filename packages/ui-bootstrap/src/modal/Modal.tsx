@@ -4,7 +4,7 @@ import {
   IUseModalResult,
   useModal as useCoreModal,
 } from "@reactionable/core/lib/ui/modal/Modal";
-import React, { ComponentType, ReactElement, ReactNode } from "react";
+import { ComponentType, ReactElement, ReactNode } from "react";
 import BootstrapModal, { ModalProps } from "react-bootstrap/Modal";
 
 export type IModalProps = ICoreModalProps &

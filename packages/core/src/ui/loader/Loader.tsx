@@ -1,4 +1,4 @@
-import React, { ComponentType, LazyExoticComponent, PropsWithChildren } from "react";
+import { ComponentType, LazyExoticComponent, PropsWithChildren } from "react";
 
 import { useTranslation } from "../../i18n/I18n";
 import { withSuspense } from "../suspense/Suspense";

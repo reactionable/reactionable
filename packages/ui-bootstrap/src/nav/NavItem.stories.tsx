@@ -1,6 +1,6 @@
-import React, { ReactElement } from "react";
-import { UIContextProvider } from "../UI";
+import { ReactElement } from "react";
 
+import { UIContextProvider } from "../UI";
 import { NavItem } from "./NavItem";
 
 export default {

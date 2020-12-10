@@ -34,7 +34,7 @@ yarn add @reactionable/ui-material
 ```tsx
 import { App } from "@reactionable/core";
 import { useUIProviderProps } from "@reactionable/ui-material";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 const MyApp = (): ReactElement => {
   return <App ui={useUIProviderProps()} />;
@@ -47,7 +47,7 @@ export default MyApp;
 ```tsx
 import { App } from "@reactionable/core";
 import { useUIProviderProps } from "@reactionable/ui-material";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 const MyApp = ({ Component, pageProps }): ReactElement => {
   return (
@@ -64,7 +64,7 @@ export default MyApp;
 ##### It is possible to custom UI Context provider props (<LinkTo kind="UI Material/Components/UI">Documentation</LinkTo>)
 
 ```tsx
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import { App } from "@reactionable/core";
 import { useUIProviderProps, IUIProviderProps } from "@reactionable/ui-material";
 

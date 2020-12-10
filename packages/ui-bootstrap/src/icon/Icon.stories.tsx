@@ -1,6 +1,6 @@
 import { faAtom } from "@fortawesome/free-solid-svg-icons";
 import { select, withKnobs } from "@storybook/addon-knobs";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 import { Icon } from "./Icon";
 

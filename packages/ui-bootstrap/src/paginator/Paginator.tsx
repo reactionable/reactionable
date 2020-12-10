@@ -4,7 +4,7 @@ import {
   IPaginationProps as ICorePaginationProps,
   IPaginatorProps as ICorePaginatorProps,
 } from "@reactionable/core/lib/ui/paginator/Paginator";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import BootstrapPagination from "react-bootstrap/Pagination";
 
 export type IPaginationProps = Omit<

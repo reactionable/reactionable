@@ -1,4 +1,4 @@
-import React, { ComponentType, ReactElement, ReactNode } from "react";
+import { ComponentType, ReactElement, ReactNode } from "react";
 
 import { IData } from "../../query/Query";
 import { IListProps, List } from "./List";

@@ -6,7 +6,7 @@ import {
   IFooterProps as ICoreFooterProps,
   SponsorFooter,
 } from "@reactionable/core/lib/ui/layout/footer/Footer";
-import React, { DetailedHTMLProps, HTMLAttributes, PropsWithChildren, ReactElement } from "react";
+import { DetailedHTMLProps, HTMLAttributes, PropsWithChildren, ReactElement } from "react";
 
 import { ResponsiveContainer } from "../responsive-container/ResponsiveContainer";
 

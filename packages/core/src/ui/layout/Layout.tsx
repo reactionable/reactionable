@@ -1,4 +1,4 @@
-import React, { ComponentType, PropsWithChildren, ReactElement } from "react";
+import { ComponentType, PropsWithChildren, ReactElement } from "react";
 
 import { INavItemProps } from "../../nav/NavItem";
 import {

@@ -1,7 +1,7 @@
 import "../../stories/config";
 
 import { App } from "@reactionable/core";
-import React, { ReactElement, lazy } from "react";
+import { ReactElement, lazy } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";

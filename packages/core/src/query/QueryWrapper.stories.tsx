@@ -1,8 +1,8 @@
 import { boolean, text, withKnobs } from "@storybook/addon-knobs";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
-import { QueryWrapper } from "./QueryWrapper";
 import { UIContextProvider, useUIProviderProps } from "../ui/UI";
+import { QueryWrapper } from "./QueryWrapper";
 
 export default {
   title: "Core/Components/Query/QueryWrapper",

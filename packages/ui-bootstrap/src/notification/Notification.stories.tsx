@@ -1,7 +1,7 @@
 import "../../stories/config";
 
 import { select, text, withKnobs } from "@storybook/addon-knobs";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import Button from "react-bootstrap/Button";
 
 import { ErrorNotification, useErrorNotification } from "./ErrorNotification";

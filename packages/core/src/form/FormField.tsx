@@ -1,5 +1,5 @@
 import { FastField, Field, FieldInputProps, FieldProps, getIn } from "formik";
-import React, {
+import {
   ComponentType,
   HTMLProps,
   ReactElement,

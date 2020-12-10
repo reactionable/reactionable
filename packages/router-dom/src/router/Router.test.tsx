@@ -1,8 +1,7 @@
-import { i18nTestInstance } from "@reactionable/core/lib/tests/I18n";
 import "@testing-library/jest-dom/extend-expect";
 
+import { i18nTestInstance } from "@reactionable/core/lib/tests/I18n";
 import { render } from "@testing-library/react";
-import React from "react";
 
 import { BasicRouterContextProvider, BasicRouterLink } from "./Router.stories";
 

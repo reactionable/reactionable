@@ -6,7 +6,6 @@ import {
   IUseErrorAlertResult,
   useErrorAlert as useCoreErrorAlert,
 } from "@reactionable/core/lib/ui/alert/ErrorAlert";
-import React from "react";
 
 import { Alert, IAlertProps } from "./Alert";
 

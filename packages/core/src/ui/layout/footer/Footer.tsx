@@ -1,4 +1,4 @@
-import React, { ComponentType, PropsWithChildren, ReactElement, ReactNode } from "react";
+import { ComponentType, PropsWithChildren, ReactElement, ReactNode } from "react";
 
 import { useTranslation } from "../../../i18n/I18n";
 
@@ -6,9 +6,9 @@ export interface IFooterProps {
   brand?: ReactNode | string;
   sponsor?: boolean;
 }
-export type FooterComponent<FooterProps extends IFooterProps = IFooterProps> = ComponentType<
-  FooterProps
->;
+export type FooterComponent<
+  FooterProps extends IFooterProps = IFooterProps
+> = ComponentType<FooterProps>;
 
 export function Footer<FooterProps extends IFooterProps = IFooterProps>({
   sponsor = true,

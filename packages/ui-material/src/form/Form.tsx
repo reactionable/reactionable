@@ -5,7 +5,7 @@ import {
   IFormData,
   IFormValues,
 } from "@reactionable/core/lib/form/Form";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 import { FormButton, IFormButtonProps } from "./FormButton";
 

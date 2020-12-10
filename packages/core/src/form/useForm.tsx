@@ -1,4 +1,3 @@
-import React from "react";
 import { ReactElement } from "react";
 
 import { Form, FormComponent, IFormData, IFormProps, IFormValues } from "./Form";

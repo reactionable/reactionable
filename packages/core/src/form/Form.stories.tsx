@@ -1,10 +1,10 @@
 import { action } from "@storybook/addon-actions";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import { string } from "yup";
 
+import { UIContextProvider, useUIProviderProps } from "../ui/UI";
 import { Form } from "./Form";
 import { FormField } from "./FormField";
-import { UIContextProvider, useUIProviderProps } from "../ui/UI";
 
 export default {
   title: "Core/Components/Form",

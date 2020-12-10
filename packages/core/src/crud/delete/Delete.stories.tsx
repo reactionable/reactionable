@@ -1,8 +1,8 @@
 import { action } from "@storybook/addon-actions";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
-import { Delete } from "./Delete";
 import { UIContextProvider, useUIProviderProps } from "../../ui/UI";
+import { Delete } from "./Delete";
 
 export default {
   title: "Core/Components/Crud/Delete",

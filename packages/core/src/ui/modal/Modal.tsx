@@ -1,4 +1,4 @@
-import React, { ComponentType, PropsWithChildren, ReactElement, ReactNode, useState } from "react";
+import { ComponentType, PropsWithChildren, ReactElement, ReactNode, useState } from "react";
 
 import { useTranslation } from "../../i18n/I18n";
 

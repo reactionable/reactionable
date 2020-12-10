@@ -6,7 +6,7 @@ import {
   ListTableHead,
 } from "@reactionable/core/lib/crud/list/ListTable";
 import { IData } from "@reactionable/core/lib/query/Query";
-import React, { PropsWithChildren, ReactElement } from "react";
+import { PropsWithChildren, ReactElement } from "react";
 import Table from "react-bootstrap/Table";
 
 export function ListTableComponent<Data extends IData = IData>({

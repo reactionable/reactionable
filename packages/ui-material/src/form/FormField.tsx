@@ -16,7 +16,7 @@ import {
   IFormFieldValue,
   IRenderFormField,
 } from "@reactionable/core/lib/form/FormField";
-import React, { ReactElement, ReactNode } from "react";
+import { ReactElement, ReactNode } from "react";
 
 export type IFieldElementProps = ICoreFieldElementProps & {
   label?: ReactNode | string;

@@ -3,7 +3,7 @@ import {
   IUseAlertResult,
   useAlert as useAlertCore,
 } from "@reactionable/core/lib/ui/alert/useAlert";
-import React, { ComponentType } from "react";
+import { ComponentType } from "react";
 import BootstrapAlert, { AlertProps } from "react-bootstrap/Alert";
 
 import { IIconProps, Icon } from "../icon/Icon";

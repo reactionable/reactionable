@@ -1,6 +1,5 @@
 import { i18nTestInstance } from "@reactionable/core/lib/tests/I18n";
 import { renderHook } from "@testing-library/react-hooks";
-import React from "react";
 import { string } from "yup";
 
 import { FormField } from "../form/FormField";

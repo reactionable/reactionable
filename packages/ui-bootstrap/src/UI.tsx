@@ -4,7 +4,7 @@ import {
   useUIContext as coreUseUIContext,
   useUIProviderProps as useCoreUIProviderProps,
 } from "@reactionable/core/lib/ui/UI";
-import React, { PropsWithChildren, ReactElement } from "react";
+import { PropsWithChildren, ReactElement } from "react";
 
 import { IUseErrorAlertProps, useErrorAlert } from "./alert/ErrorAlert";
 import { IUseWarningAlertProps, useWarningAlert } from "./alert/WarningAlert";

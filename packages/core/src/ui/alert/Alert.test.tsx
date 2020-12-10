@@ -1,8 +1,8 @@
-import React from "react";
-
-import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 
+import { render } from "@testing-library/react";
+
+import { i18nTestInstance } from "../../tests/I18n";
 import {
   BasicAlert,
   BasicErrorAlert,
@@ -11,7 +11,6 @@ import {
   UseErrorAlert,
   UseWarningAlert,
 } from "./Alert.stories";
-import { i18nTestInstance } from "../../tests/I18n";
 
 describe("Alert", () => {
   beforeAll(i18nTestInstance);

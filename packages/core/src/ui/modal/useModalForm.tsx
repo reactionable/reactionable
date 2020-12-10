@@ -1,5 +1,4 @@
 import { FormikHelpers } from "formik";
-import React from "react";
 
 import { IFormData, IFormProps, IFormValues } from "../../form/Form";
 import { IFormButtonProps } from "../../form/FormButton";

@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 import { useTranslation } from "../../../i18n/I18n";
 import { useUIContext } from "../../UI";

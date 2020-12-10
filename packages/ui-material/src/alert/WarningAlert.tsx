@@ -4,7 +4,6 @@ import {
   WarningAlertComponent,
   useWarningAlert as useCoreWarningAlert,
 } from "@reactionable/core/lib/ui/alert/WarningAlert";
-import React from "react";
 
 import { Alert, IAlertProps } from "./Alert";
 

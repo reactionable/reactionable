@@ -1,5 +1,5 @@
 import { IRouteProps as ICoreRouteProps } from "@reactionable/core/lib/router/Route";
-import React, { ComponentType, LazyExoticComponent, ReactElement, ReactNode } from "react";
+import { ComponentType, LazyExoticComponent, ReactElement, ReactNode } from "react";
 import { Switch } from "react-router-dom";
 
 import { ILazyRouteProps, LazyRoute } from "./LazyRoute";

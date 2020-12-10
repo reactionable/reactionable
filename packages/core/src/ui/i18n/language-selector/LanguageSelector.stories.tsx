@@ -1,9 +1,9 @@
 import { action } from "@storybook/addon-actions";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 import { i18nTestInstance } from "../../../tests/I18n";
-import { LanguageSelector } from "./LanguageSelector";
 import { UIContextProvider, useUIProviderProps } from "../../UI";
+import { LanguageSelector } from "./LanguageSelector";
 
 export default {
   title: "Core/Components/UI/I18n/LanguageSelector",

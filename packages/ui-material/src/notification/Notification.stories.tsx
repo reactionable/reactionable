@@ -1,6 +1,6 @@
 import Button from "@material-ui/core/Button/Button";
 import { text, withKnobs } from "@storybook/addon-knobs";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 import { ErrorNotification, useErrorNotification } from "./ErrorNotification";
 import { Notification, useNotification } from "./Notification";

@@ -6,7 +6,7 @@ import {
   IFormFieldValue,
   IRenderFormField,
 } from "@reactionable/core/lib/form/FormField";
-import React, { ReactElement, ReactNode } from "react";
+import { ReactElement, ReactNode } from "react";
 import Feedback from "react-bootstrap/Feedback";
 import FormCheck, { FormCheckProps } from "react-bootstrap/FormCheck";
 import FormControl, { FormControlProps } from "react-bootstrap/FormControl";

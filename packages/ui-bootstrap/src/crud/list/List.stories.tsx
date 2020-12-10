@@ -1,7 +1,7 @@
 import "../../../stories/config";
 
 import { boolean, withKnobs } from "@storybook/addon-knobs";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 import { UIContextProvider } from "../../UI";
 import { List } from "./List";

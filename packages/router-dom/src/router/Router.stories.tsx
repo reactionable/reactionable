@@ -1,6 +1,6 @@
-import React, { ReactElement } from "react";
-import { TestWrapper } from "../tests/TestWrapper";
+import { ReactElement } from "react";
 
+import { TestWrapper } from "../tests/TestWrapper";
 import { RouterContextProvider, useRouterProviderProps } from "./Router";
 import { RouterLink } from "./RouterLink";
 

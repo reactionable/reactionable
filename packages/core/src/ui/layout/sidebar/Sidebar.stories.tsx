@@ -1,4 +1,4 @@
-import React, { FC, ReactElement } from "react";
+import { FC, ReactElement } from "react";
 
 import { useTranslation } from "../../../i18n/I18n";
 import { useRouteMatch } from "../../../router/Router";

@@ -1,5 +1,5 @@
 import { boolean, withKnobs } from "@storybook/addon-knobs";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 import { UIContextProvider, useUIProviderProps } from "../../ui/UI";
 import { List } from "./List";

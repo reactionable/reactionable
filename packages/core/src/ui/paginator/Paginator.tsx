@@ -1,10 +1,4 @@
-import React, {
-  AnchorHTMLAttributes,
-  ChangeEvent,
-  ComponentType,
-  ReactElement,
-  useState,
-} from "react";
+import { AnchorHTMLAttributes, ChangeEvent, ComponentType, ReactElement, useState } from "react";
 
 export type IPaginationEllipsisProps = React.DetailedHTMLProps<
   React.HTMLAttributes<HTMLSpanElement>,

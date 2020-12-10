@@ -3,7 +3,7 @@ import {
   Delete as DeleteCore,
   IDeleteProps as ICoreDeleteProps,
 } from "@reactionable/core/lib/crud/delete/Delete";
-import React, { PropsWithChildren, ReactElement, ReactNode } from "react";
+import { PropsWithChildren, ReactElement, ReactNode } from "react";
 import Button from "react-bootstrap/Button";
 
 import { IIconProps, Icon } from "../../icon/Icon";

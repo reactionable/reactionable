@@ -1,8 +1,8 @@
 import { action } from "@storybook/addon-actions";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
-import { ConfirmationAction } from "./Confirmation";
 import { UIContextProvider, useUIProviderProps } from "../UI";
+import { ConfirmationAction } from "./Confirmation";
 
 export default {
   title: "Core/Components/UI/Confirmation",

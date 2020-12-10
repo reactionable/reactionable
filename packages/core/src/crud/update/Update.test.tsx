@@ -1,10 +1,9 @@
-import React from "react";
-
-import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 
-import { BasicUpdate, UpdateInModal } from "./Update.stories";
+import { render } from "@testing-library/react";
+
 import { i18nTestInstance } from "../../tests/I18n";
+import { BasicUpdate, UpdateInModal } from "./Update.stories";
 
 describe("Update", () => {
   beforeAll(i18nTestInstance);

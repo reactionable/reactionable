@@ -6,7 +6,7 @@ import {
   ModalForm as CoreModalForm,
   IModalFormProps as ICoreModalFormProps,
 } from "@reactionable/core/lib/ui/modal/ModalForm";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import BootstrapModal from "react-bootstrap/Modal";
 
 import { IFormButtonProps, useFormButton, useSubmitFormButton } from "../form/FormButton";

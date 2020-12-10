@@ -4,7 +4,7 @@ import { TestWrapper as CoreTestWrapper } from "@reactionable/core/lib/tests/Tes
 import { IUIProviderProps } from "@reactionable/core/lib/ui/UI";
 import { RouterContext } from "next/dist/next-server/lib/router-context";
 import { createRouter } from "next/router";
-import React, { PropsWithChildren, ReactElement } from "react";
+import { PropsWithChildren, ReactElement } from "react";
 
 import { IRouterProviderProps } from "../router/Router";
 

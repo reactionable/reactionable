@@ -1,4 +1,4 @@
-import React, { ComponentType, Context, PropsWithChildren, createContext, useContext } from "react";
+import { ComponentType, Context, PropsWithChildren, createContext, useContext } from "react";
 
 type IProviderExtraProps = Record<string, unknown>;
 export type IProviderProps<ExtraProps extends IProviderExtraProps = IProviderExtraProps> = {

@@ -1,5 +1,5 @@
 import { Formik, FormikConfig, FormikHelpers, FormikProps } from "formik";
-import React, { ComponentType, ReactElement, ReactNode, useEffect, useState } from "react";
+import { ComponentType, ReactElement, ReactNode, useEffect, useState } from "react";
 import { AnySchema, object as yupObject } from "yup";
 import Lazy from "yup/lib/Lazy";
 import Reference from "yup/lib/Reference";
@@ -25,10 +25,14 @@ export type IFormValues = {};
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type IFormData = {};
 
-export type IValidationSchema<Values extends IFormValues> = {
+export type IValidationSchema<Values extends IFormValues> = Record<
+  keyof Values,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [field in keyof Values]: AnySchema | Reference | Lazy<any, any>;
-};
+  AnySchema | Reference | Lazy<any, any>
+>;
+// export type IValidationSchema<Values extends IFormValues> = {
+//   [field in keyof Values]: AnySchema | Reference | Lazy<any, any>;
+// };
 
 export interface IFormProps<
   Values extends IFormValues,

@@ -5,7 +5,7 @@ import {
   IUseErrorNotificationResult,
   useErrorNotification as useCoreErrorNotification,
 } from "@reactionable/core/lib/ui/notification/ErrorNotification";
-import React, { PropsWithChildren, ReactElement } from "react";
+import { PropsWithChildren, ReactElement } from "react";
 
 import { ErrorAlert } from "../alert/ErrorAlert";
 import { Notification } from "./Notification";

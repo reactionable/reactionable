@@ -6,7 +6,7 @@ import {
   IUseAlertResult,
   useAlert as useAlertCore,
 } from "@reactionable/core/lib/ui/alert/useAlert";
-import React, { ComponentType, ReactNode } from "react";
+import { ComponentType, ReactNode } from "react";
 
 import { IIconProps, Icon } from "../icon/Icon";
 

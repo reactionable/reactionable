@@ -4,7 +4,7 @@ import {
   ILinkProps as ICoreLinkProps,
   isLinkProps as coreIsLinkProps,
 } from "@reactionable/core/lib/ui/link/Link";
-import React, { Children, ReactNode, isValidElement } from "react";
+import { Children, ReactNode, isValidElement } from "react";
 import { PropsWithChildren, ReactElement } from "react";
 
 export type ILinkProps = Omit<LinkProps, "children"> & ICoreLinkProps;

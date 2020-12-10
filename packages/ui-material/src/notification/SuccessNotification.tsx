@@ -5,7 +5,7 @@ import {
   IUseSuccessNotificationResult,
   useSuccessNotification as useCoreSuccessNotification,
 } from "@reactionable/core/lib/ui/notification/SuccessNotification";
-import React, { PropsWithChildren, ReactElement } from "react";
+import { PropsWithChildren, ReactElement } from "react";
 
 import { Alert, IAlertProps } from "../alert/Alert";
 import { Notification } from "./Notification";

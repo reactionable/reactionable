@@ -1,13 +1,7 @@
 import { useIdentityContext, useTranslation } from "@reactionable/core";
 import { useUIContext } from "@reactionable/core/lib/ui/UI";
 import Router from "next/router";
-import React, {
-  ComponentType,
-  PropsWithChildren,
-  ReactElement,
-  isValidElement,
-  useEffect,
-} from "react";
+import { ComponentType, PropsWithChildren, ReactElement, isValidElement, useEffect } from "react";
 
 export function UnauthorizedComponent(): ReactElement | null {
   const { t } = useTranslation("identity");

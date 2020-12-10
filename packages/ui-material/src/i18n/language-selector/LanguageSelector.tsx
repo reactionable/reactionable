@@ -12,7 +12,7 @@ import {
   ILanguageSelectorItemComponentProps as ICoreLanguageSelectorItemComponentProps,
   ILanguageSelectorProps as ICoreLanguageSelectorProps,
 } from "@reactionable/core/lib/ui/i18n/language-selector/LanguageSelector";
-import React, { ComponentProps, ComponentType, PropsWithChildren, ReactElement } from "react";
+import { ComponentProps, ComponentType, PropsWithChildren, ReactElement, useState } from "react";
 
 export type ILanguageSelectorItemComponentProps = ICoreLanguageSelectorItemComponentProps<
   ComponentProps<typeof MenuItem>
@@ -37,7 +37,7 @@ export function LanguageSelectorComponent({
   ...props
 }: PropsWithChildren<ILanguageSelectorComponentProps>): ReactElement {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);

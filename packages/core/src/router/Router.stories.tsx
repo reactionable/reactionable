@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 import { RouterContextProvider, useRouterProviderProps } from "./Router";
 import { RouterLink } from "./RouterLink";

@@ -1,6 +1,6 @@
 import { useIdentityContext } from "@reactionable/core/lib/identity/Identity";
 import { useUIContext } from "@reactionable/core/lib/ui/UI";
-import React, { PropsWithChildren, ReactElement } from "react";
+import { PropsWithChildren, ReactElement } from "react";
 import { Redirect } from "react-router-dom";
 
 import { ILazyRouteProps, LazyRoute } from "./LazyRoute";

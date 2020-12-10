@@ -1,5 +1,5 @@
 import { boolean, withKnobs } from "@storybook/addon-knobs";
-import React, { ReactElement, useEffect } from "react";
+import { ReactElement, useEffect } from "react";
 
 import { Loader, useLoader } from "./Loader";
 

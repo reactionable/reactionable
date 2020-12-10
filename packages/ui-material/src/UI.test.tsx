@@ -5,7 +5,6 @@ import useTheme from "@material-ui/core/styles/useTheme";
 import { i18nTestInstance } from "@reactionable/core/src/tests/I18n";
 import { useUIContext } from "@reactionable/core/src/ui/UI";
 import { render } from "@testing-library/react";
-import React from "react";
 
 import { UIContextProvider, useUIProviderProps } from "./UI";
 

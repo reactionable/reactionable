@@ -1,10 +1,9 @@
-import React from "react";
-
-import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 
-import { BasicPaginator } from "./Paginator.stories";
+import { render } from "@testing-library/react";
+
 import { i18nTestInstance } from "../../tests/I18n";
+import { BasicPaginator } from "./Paginator.stories";
 
 describe("Paginator", () => {
   beforeAll(i18nTestInstance);

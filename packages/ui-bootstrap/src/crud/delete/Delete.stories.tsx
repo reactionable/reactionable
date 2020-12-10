@@ -1,11 +1,11 @@
 import "../../../stories/config";
 
 import { action } from "@storybook/addon-actions";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import Button from "react-bootstrap/Button";
 
-import { Delete } from "./Delete";
 import { UIContextProvider } from "../../UI";
+import { Delete } from "./Delete";
 
 export default {
   title: "UI Bootstrap/Components/Crud/Delete",

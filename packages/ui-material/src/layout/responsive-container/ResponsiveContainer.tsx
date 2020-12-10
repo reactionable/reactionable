@@ -1,6 +1,6 @@
 import { Container } from "@material-ui/core";
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
-import React, { ComponentProps, ElementType, ReactElement } from "react";
+import { ComponentProps, ElementType, ReactElement } from "react";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

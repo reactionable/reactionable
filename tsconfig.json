@@ -19,7 +19,7 @@
     "noUnusedLocals": true,
     "strictNullChecks": true,
     "pretty": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "suppressImplicitAnyIndexErrors": true,
     "esModuleInterop": true,
     "importHelpers": true,
@@ -28,7 +28,7 @@
     "isolatedModules": false,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "baseUrl": "src",
+    "baseUrl": "src"
   },
   "paths": {
     "@reactionable/*": ["packages/*"]

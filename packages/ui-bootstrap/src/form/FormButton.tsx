@@ -5,7 +5,7 @@ import {
   useFormButton as coreUseFormButton,
   useSubmitFormButton as coreUseSubmitFormButton,
 } from "@reactionable/core/lib/form/FormButton";
-import React, { ReactElement, ReactNode } from "react";
+import { ReactElement, ReactNode } from "react";
 import Button, { ButtonProps } from "react-bootstrap/Button";
 
 export type IFormButtonProps = ICoreFormButtonProps & Omit<ButtonProps, "type">;

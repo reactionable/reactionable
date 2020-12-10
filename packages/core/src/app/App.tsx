@@ -1,4 +1,4 @@
-import React, { ComponentType, LazyExoticComponent, PropsWithChildren, ReactElement } from "react";
+import { ComponentType, LazyExoticComponent, PropsWithChildren, ReactElement } from "react";
 
 import { IIdentityProviderProps } from "../identity/Identity";
 import { IRouteProps } from "../router/Route";

@@ -3,7 +3,7 @@ import {
   IFooterProps as ICoreFooterProps,
   SponsorFooter,
 } from "@reactionable/core/lib/ui/layout/footer/Footer";
-import React, { ComponentType, DetailedHTMLProps, HTMLAttributes, ReactElement } from "react";
+import { ComponentType, DetailedHTMLProps, HTMLAttributes, ReactElement } from "react";
 import { PropsWithChildren } from "react";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";

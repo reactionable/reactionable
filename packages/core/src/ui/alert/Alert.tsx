@@ -1,4 +1,4 @@
-import React, { ComponentType, PropsWithChildren, ReactNode } from "react";
+import { ComponentType, PropsWithChildren, ReactNode } from "react";
 
 export type IAlertProps = { children?: ReactNode };
 

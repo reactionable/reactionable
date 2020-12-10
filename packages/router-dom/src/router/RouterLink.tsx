@@ -1,5 +1,5 @@
 import { IRouterLinkProps as ICoreRouterLinkProps } from "@reactionable/core/lib/router/RouterLink";
-import React, { Children, ReactElement, isValidElement } from "react";
+import { Children, ReactElement, isValidElement } from "react";
 import { Link, LinkProps } from "react-router-dom";
 
 export type IRouterLinkProps = ICoreRouterLinkProps & Omit<LinkProps, "to" | "href">;

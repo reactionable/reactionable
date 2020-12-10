@@ -5,7 +5,7 @@ import {
   Sidebar as CoreSidebar,
   useSidebarContext as coreUseSidebarContext,
 } from "@reactionable/core/lib/ui/layout/sidebar/Sidebar";
-import React, { PropsWithChildren, ReactElement, useState } from "react";
+import { PropsWithChildren, ReactElement, useState } from "react";
 import { Nav } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";

@@ -1,7 +1,7 @@
 import Button from "@material-ui/core/Button/Button";
 import { action } from "@storybook/addon-actions";
 import { text, withKnobs } from "@storybook/addon-knobs";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 import { UIContextProvider } from "../UI";
 import { ConfirmationAction, useConfirmation } from "./Confirmation";

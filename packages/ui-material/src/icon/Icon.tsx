@@ -1,5 +1,5 @@
 import SvgIcon from "@material-ui/core/SvgIcon/SvgIcon";
-import React, { ComponentProps, ReactElement } from "react";
+import { ComponentProps, ReactElement } from "react";
 
 type IIconPropsWithIcon = ComponentProps<typeof SvgIcon> & { icon: typeof SvgIcon };
 type IIconPropsWithMaybeIcon = Omit<IIconPropsWithIcon, "icon"> &

@@ -13,7 +13,7 @@ import {
 } from "@reactionable/core/lib/crud/list/ListTable";
 import { useTranslation } from "@reactionable/core/lib/i18n/I18n";
 import { IData } from "@reactionable/core/lib/query/Query";
-import React, { PropsWithChildren, ReactElement } from "react";
+import { PropsWithChildren, ReactElement } from "react";
 
 export function ListTableHead({ head }: IListTableHeadProps): ReactElement {
   const { t } = useTranslation();

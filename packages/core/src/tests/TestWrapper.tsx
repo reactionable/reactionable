@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, ReactElement } from "react";
+import { PropsWithChildren, ReactElement } from "react";
 
 import { IWrapperProps, Wrapper } from "../app/Wrapper";
 import { IIdentityProviderProps } from "../identity/Identity";

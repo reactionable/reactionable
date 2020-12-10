@@ -8,7 +8,7 @@ import {
   IUseConfirmationResult,
   useConfirmation as useConfirmationCore,
 } from "@reactionable/core/lib/ui/confirmation/Confirmation";
-import React, { PropsWithChildren, ReactElement } from "react";
+import { PropsWithChildren, ReactElement } from "react";
 import Button, { ButtonProps } from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 

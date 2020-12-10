@@ -1,4 +1,4 @@
-import React, { ComponentType, DetailedHTMLProps, ReactElement, ReactNode } from "react";
+import { ComponentType, DetailedHTMLProps, ReactElement, ReactNode } from "react";
 
 import { useTranslation } from "../i18n/I18n";
 

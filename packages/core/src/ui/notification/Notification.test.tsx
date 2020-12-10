@@ -1,10 +1,9 @@
-import React from "react";
-
-import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 
-import { BasicNotification, NotificationWithComplexContent } from "./Notification.stories";
+import { render } from "@testing-library/react";
+
 import { i18nTestInstance } from "../../tests/I18n";
+import { BasicNotification, NotificationWithComplexContent } from "./Notification.stories";
 
 describe("Notification", () => {
   beforeAll(i18nTestInstance);

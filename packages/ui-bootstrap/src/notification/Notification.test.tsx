@@ -1,7 +1,7 @@
-import React from "react";
-
-import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
+
+import { i18nTestInstance } from "@reactionable/core/lib/tests/I18n";
+import { render } from "@testing-library/react";
 
 import {
   BasicErrorNotification,
@@ -12,7 +12,6 @@ import {
   UseNotification,
   UseSuccessNotification,
 } from "./Notification.stories";
-import { i18nTestInstance } from "@reactionable/core/lib/tests/I18n";
 
 describe("Notification", () => {
   beforeAll(i18nTestInstance);

@@ -5,7 +5,7 @@ import {
   IUseLoader,
   useLoader as useLoaderCore,
 } from "@reactionable/core/lib/ui/loader/useLoader";
-import React, { ComponentType } from "react";
+import { ComponentType } from "react";
 import Spinner from "react-bootstrap/Spinner";
 
 export type ILoaderProps = ICoreLoaderProps & {

@@ -1,5 +1,5 @@
 import { IBodyProps as ICoreBodyProps } from "@reactionable/core/lib/ui/layout/body/Body";
-import React, { ComponentType, PropsWithChildren, ReactElement } from "react";
+import { ComponentType, PropsWithChildren, ReactElement } from "react";
 
 import {
   IResponsiveContainerProps,

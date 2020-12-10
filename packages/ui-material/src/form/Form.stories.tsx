@@ -1,11 +1,11 @@
 import MenuItem from "@material-ui/core/MenuItem/MenuItem";
 import { action } from "@storybook/addon-actions";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import { string } from "yup";
 
+import { UIContextProvider } from "../UI";
 import { Form } from "./Form";
 import { FormField } from "./FormField";
-import { UIContextProvider } from "../UI";
 
 export default {
   title: "UI Material/Components/Form",

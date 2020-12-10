@@ -1,10 +1,10 @@
 import { action } from "@storybook/addon-actions";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import { string } from "yup";
 
-import { Update } from "./Update";
 import { FormField } from "../../form/FormField";
 import { UIContextProvider, useUIProviderProps } from "../../ui/UI";
+import { Update } from "./Update";
 
 export default {
   title: "Core/Components/Crud/Update",

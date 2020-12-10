@@ -2,7 +2,7 @@ import "../../stories/config";
 
 import { faAtom } from "@fortawesome/free-solid-svg-icons";
 import { boolean, select, text, withKnobs } from "@storybook/addon-knobs";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import Button from "react-bootstrap/Button";
 
 import { Alert, useAlert } from "./Alert";

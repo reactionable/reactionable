@@ -7,7 +7,7 @@ import {
   IUseNotificationResult,
   useNotification as useCoreNotification,
 } from "@reactionable/core/lib/ui/notification/Notification";
-import React, {
+import {
   MouseEvent,
   PropsWithChildren,
   ReactElement,

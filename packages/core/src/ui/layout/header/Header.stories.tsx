@@ -1,5 +1,5 @@
 import { select, withKnobs } from "@storybook/addon-knobs";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 import { Header } from "./Header";
 
