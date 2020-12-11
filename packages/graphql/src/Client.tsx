@@ -60,7 +60,7 @@ function createGraphqlClient(uri: IGraphqlClientUri, cacheConfig?: InMemoryCache
 
 export function initializeGraphqlClient(
   uri: IGraphqlClientUri,
-  initialState: IGraphqlClientState,
+  initialState?: IGraphqlClientState,
   cacheConfig?: InMemoryCacheConfig
 ): IGraphqlClient {
   const _graphqlClient = getGraphqlClient() || createGraphqlClient(uri, cacheConfig);
@@ -82,7 +82,7 @@ export function initializeGraphqlClient(
 
 export function useInitGraphqlClient(
   uri: IGraphqlClientUri,
-  initialState: IGraphqlClientState,
+  initialState?: IGraphqlClientState,
   cacheConfig?: InMemoryCacheConfig
 ): IGraphqlClient {
   const store = useMemo(() => initializeGraphqlClient(uri, initialState, cacheConfig), [
@@ -97,7 +97,7 @@ export function useGraphqlClient(): IGraphqlClient {
 
 export type IApolloProviderProps = {
   uri: IGraphqlClientUri;
-  initialState: IGraphqlClientState;
+  initialState?: IGraphqlClientState;
   cacheConfig?: InMemoryCacheConfig;
 };
 
