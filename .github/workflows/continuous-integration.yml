@@ -45,7 +45,7 @@ jobs:
 
       - name: 🧪 Test
         run: |
-          yarn test:coverage
+          yarn test:coverage &
           yarn storybook:build
         env:
           CI: true
