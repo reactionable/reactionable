@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "start": "lerna run --parallel start --",
+    "start": "lerna bootstrap && lerna run --parallel start --",
     "test": "lerna run --stream test --",
     "test:coverage": "lerna run --stream test:coverage --",
     "format": "prettier --write \"**/*.ts\"  \"!**/lib/**\"",
@@ -46,9 +46,6 @@
   "resolutions": {
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
-  },
-  "engines": {
-    "yarn": ">=1.17.3"
   },
   "workspaces": [
     "packages/*"

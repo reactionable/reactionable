@@ -54,7 +54,7 @@ async function execCommand(command) {
   console.info(
     `for package in ${[...internalPackages, ...externalPackagesToLink].join(
       " "
-    )};do yarn ${command} $package || true;done;`
+    )};do (yarn ${command} $package || true);done;`
   );
   console.info(`\n-----------------------------------------------------\n`);
 }
