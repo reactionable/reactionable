@@ -22,7 +22,7 @@ export function Footer({
   footerProps.style = {
     position: "absolute",
     bottom: 0,
-    width: "100%",
+    width: "100vw",
     height: "60px",
     lineHeight: "60px",
     ...footerProps.style,
