@@ -1,9 +1,8 @@
 module.exports = {
   stories: [
-    "../stories/*.stories.tsx",
     "../stories/*.stories.mdx",
-    "../packages/**/*.stories.tsx",
     "../packages/**/*.stories.mdx",
+    "../packages/**/*.stories.tsx",
   ],
   addons: [
     "@storybook/addon-actions",

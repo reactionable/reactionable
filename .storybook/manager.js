@@ -7,7 +7,7 @@ addons.setConfig({
   showPanel: true,
   theme: {
     ...themes.light,
-    brandTitle: "Reactionable storybook",
+    brandTitle: "Reactionable",
     brandUrl: "https://reactionable.github.io/reactionable/",
     brandImage: logo,
   },
