@@ -13,4 +13,8 @@ module.exports = {
     "@storybook/addon-docs",
     "@storybook/addon-controls",
   ],
+  reactOptions: {
+    fastRefresh: true,
+    strictMode: true,
+  },
 };

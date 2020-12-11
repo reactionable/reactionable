@@ -34,16 +34,17 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
 
       - name: ⚙️ Install Dependencies
-        run: |
-          yarn
-          yarn bootstrap
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn
 
       - name: 🏗️ Build
         run: yarn build
 
+      - name: 👕 Lint
+        run: yarn lint
+
       - name: 🧪 Test
         run: |
-          yarn lint
           yarn test:coverage
           yarn storybook:build
         env:
@@ -79,6 +80,7 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
 
       - name: ⚙️ Install Dependencies
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn
 
       - name: 🏗️ Build
@@ -97,6 +99,6 @@ jobs:
 
       - name: 📦 Publish NPM packages
         env:
-          GH_TOKEN: ${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{secrets.NODE_AUTH_TOKEN}}
         run: yarn lerna publish --conventional-commits --create-release github --yes
