@@ -1,5 +1,7 @@
-import { ReactElement, lazy } from "react";
+import { ReactElement } from "react";
 
+import { useIdentityProviderProps } from "../identity/Identity";
+import { useRouterProviderProps } from "../router/Router";
 import { useUIProviderProps } from "../ui/UI";
 import { App } from "./App";
 
@@ -8,17 +10,20 @@ export default {
   parameters: { info: { inline: true }, options: { showPanel: true }, component: App },
 };
 
-export const BasicApp = (): ReactElement => <App ui={useUIProviderProps()} />;
+export const BasicApp = (): ReactElement => <App />;
 
-const HomeFromRoute = () => <div>Home from route</div>;
-const HomeComponent = lazy(async () => ({ default: HomeFromRoute }));
-export const AppWithRoutes = (): ReactElement => (
-  <App ui={useUIProviderProps()} routes={[{ component: HomeComponent, exact: true, path: "/" }]} />
+const Home = () => <div>Home</div>;
+
+export const AppWithChildren = (): ReactElement => (
+  <App>
+    <Home />
+  </App>
 );
 
-const HomeAsChildren = () => <div>Home as children</div>;
-export const AppWithChildren = (): ReactElement => (
-  <App ui={useUIProviderProps()}>
-    <HomeAsChildren />
-  </App>
+export const AppWithProviders = (): ReactElement => (
+  <App
+    ui={useUIProviderProps()}
+    identity={useIdentityProviderProps()}
+    router={useRouterProviderProps()}
+  />
 );

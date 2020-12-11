@@ -1,19 +1,14 @@
-import { ComponentType, LazyExoticComponent, PropsWithChildren, ReactElement } from "react";
+import { PropsWithChildren, ReactElement, StrictMode } from "react";
 
-import { IIdentityProviderProps } from "../identity/Identity";
-import { IRouteProps } from "../router/Route";
-import { IRouterProviderProps } from "../router/Router";
-import { IUIProviderProps } from "../ui/UI";
-import { Wrapper } from "./Wrapper";
+import { IIdentityProviderProps, IdentityContextProvider } from "../identity/Identity";
+import { IRouterProviderProps, RouterContextProvider } from "../router/Router";
+import { IUIProviderProps, UIContextProvider } from "../ui/UI";
 
 export interface IAppProps<
   IdentityProviderProps extends IIdentityProviderProps,
   UIProviderProps extends IUIProviderProps,
   RouterProviderProps extends IRouterProviderProps
 > {
-  routes?: Array<IRouteProps>;
-  HomeComponent?: LazyExoticComponent<ComponentType>;
-  NotFoundComponent?: LazyExoticComponent<ComponentType>;
   identity?: IdentityProviderProps;
   ui?: UIProviderProps;
   router?: RouterProviderProps;
@@ -24,9 +19,6 @@ export function App<
   UIProviderProps extends IUIProviderProps = IUIProviderProps,
   RouterProviderProps extends IRouterProviderProps = IRouterProviderProps
 >({
-  routes = [],
-  HomeComponent,
-  NotFoundComponent,
   identity,
   ui,
   router,
@@ -35,21 +27,16 @@ export function App<
   IAppProps<IdentityProviderProps, UIProviderProps, RouterProviderProps>
 >): ReactElement {
   if (router) {
-    if (HomeComponent) {
-      routes.unshift({ component: HomeComponent, exact: true, path: "/", privateRoute: false });
-    }
-    if (NotFoundComponent) {
-      routes.push({ component: NotFoundComponent, privateRoute: false });
-    }
-
-    if (routes.length) {
-      children = router.renderRoutes(routes);
-    }
+    children = <RouterContextProvider {...router}>{children}</RouterContextProvider>;
   }
 
-  return (
-    <Wrapper identity={identity} ui={ui} router={router}>
-      {children}
-    </Wrapper>
-  );
+  if (identity) {
+    children = <IdentityContextProvider {...identity}>{children}</IdentityContextProvider>;
+  }
+
+  if (ui) {
+    children = <UIContextProvider {...ui}>{children}</UIContextProvider>;
+  }
+
+  return <StrictMode>{children}</StrictMode>;
 }

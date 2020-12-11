@@ -1,4 +1,4 @@
-import { Wrapper } from "@reactionable/core/lib/app/Wrapper";
+import { App } from "@reactionable/core/lib/app/App";
 import { IIdentityProviderProps } from "@reactionable/core/lib/identity/Identity";
 import { ITestWrapperProps } from "@reactionable/core/lib/tests/TestWrapper";
 import { IUIProviderProps } from "@reactionable/core/lib/ui/UI";
@@ -18,9 +18,6 @@ export function TestWrapper<
 >): ReactElement {
   router = { ...router, Component: MemoryRouterComponent } as RouterProviderProps;
   return (
-    <Wrapper<IdentityProviderProps, UIProviderProps, RouterProviderProps>
-      {...props}
-      router={router}
-    />
+    <App<IdentityProviderProps, UIProviderProps, RouterProviderProps> {...props} router={router} />
   );
 }

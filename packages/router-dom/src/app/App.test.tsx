@@ -1,32 +1,32 @@
 import "@testing-library/jest-dom/extend-expect";
 
+import { i18nTestInstance } from "@reactionable/core/lib/tests/I18n";
 import { render } from "@testing-library/react";
 
-import { i18nTestInstance } from "../tests/I18n";
-import { AppWithChildren, AppWithProviders, BasicApp } from "./App.stories";
+import { AppWithHomeComponent, AppWithNotFoundComponent, AppWithRoutes } from "./App.stories";
 
 describe("App", () => {
   beforeAll(i18nTestInstance);
 
-  describe("BasicApp", () => {
+  describe("AppWithHomeComponent", () => {
     it("should render without crashing", () => {
-      const result = render(<BasicApp />);
+      const result = render(<AppWithHomeComponent />);
 
       expect(result).toBeTruthy();
     });
   });
 
-  describe("AppWithChildren", () => {
+  describe("AppWithNotFoundComponent", () => {
     it("should render without crashing", () => {
-      const result = render(<AppWithChildren />);
+      const result = render(<AppWithNotFoundComponent />);
 
       expect(result).toBeTruthy();
     });
   });
 
-  describe("AppWithProviders", () => {
+  describe("AppWithRoutes", () => {
     it("should render without crashing", () => {
-      const result = render(<AppWithProviders />);
+      const result = render(<AppWithRoutes />);
 
       expect(result).toBeTruthy();
     });

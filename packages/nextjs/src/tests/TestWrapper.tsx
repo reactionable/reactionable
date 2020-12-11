@@ -1,4 +1,4 @@
-import { IWrapperProps } from "@reactionable/core/lib/app/Wrapper";
+import { IAppProps } from "@reactionable/core/lib/app/App";
 import { IIdentityProviderProps } from "@reactionable/core/lib/identity/Identity";
 import { TestWrapper as CoreTestWrapper } from "@reactionable/core/lib/tests/TestWrapper";
 import { IUIProviderProps } from "@reactionable/core/lib/ui/UI";
@@ -27,7 +27,7 @@ export type ITestWrapperProps<
   IdentityProviderProps extends IIdentityProviderProps,
   UIProviderProps extends IUIProviderProps,
   RouterProviderProps extends IRouterProviderProps
-> = IWrapperProps<IdentityProviderProps, UIProviderProps, RouterProviderProps>;
+> = IAppProps<IdentityProviderProps, UIProviderProps, RouterProviderProps>;
 
 export function TestWrapper<
   IdentityProviderProps extends IIdentityProviderProps = IIdentityProviderProps,

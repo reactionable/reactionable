@@ -1,7 +1,7 @@
 import Button from "@material-ui/core/Button/Button";
 import Paper from "@material-ui/core/Paper/Paper";
 import { App } from "@reactionable/core";
-import { ReactElement, lazy } from "react";
+import React, { ReactElement } from "react";
 
 import { useUIProviderProps } from "../UI";
 
@@ -10,7 +10,7 @@ export default {
   parameters: { info: { inline: true }, options: { showPanel: true }, component: App },
 };
 
-const HomeComponent = () => (
+const Home = () => (
   <Paper elevation={3}>
     <h1>Hello, world!</h1>
     <p>
@@ -22,10 +22,9 @@ const HomeComponent = () => (
     </p>
   </Paper>
 );
-const LazyHomeComponent = lazy(async () => ({
-  default: HomeComponent,
-}));
 
-export const BasicApp = (): ReactElement => (
-  <App ui={useUIProviderProps()} HomeComponent={LazyHomeComponent} />
+export const AppWithProviders = (): ReactElement => (
+  <App ui={useUIProviderProps()}>
+    <Home />
+  </App>
 );

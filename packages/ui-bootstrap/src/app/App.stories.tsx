@@ -1,7 +1,7 @@
 import "../../stories/config";
 
 import { App } from "@reactionable/core";
-import { ReactElement, lazy } from "react";
+import { ReactElement } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
@@ -15,7 +15,7 @@ export default {
   parameters: { info: { inline: true }, options: { showPanel: true }, component: App },
 };
 
-const HomeComponent = (): ReactElement => (
+const Home = (): ReactElement => (
   <Container fluid>
     <Row>
       <Col>
@@ -34,10 +34,8 @@ const HomeComponent = (): ReactElement => (
   </Container>
 );
 
-const LazyHomeComponent = lazy(async () => ({
-  default: HomeComponent,
-}));
-
-export const BasicApp = (): ReactElement => (
-  <App ui={useUIProviderProps()} routes={[]} HomeComponent={LazyHomeComponent} />
+export const AppWithProviders = (): ReactElement => (
+  <App ui={useUIProviderProps()}>
+    <Home />
+  </App>
 );

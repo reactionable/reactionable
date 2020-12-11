@@ -1,6 +1,6 @@
 import { PropsWithChildren, ReactElement } from "react";
 
-import { IWrapperProps, Wrapper } from "../app/Wrapper";
+import { App, IAppProps } from "../app/App";
 import { IIdentityProviderProps } from "../identity/Identity";
 import { IRouterProviderProps, useRouterProviderProps } from "../router/Router";
 import { IUIProviderProps, useUIProviderProps } from "../ui/UI";
@@ -9,7 +9,7 @@ export type ITestWrapperProps<
   IdentityProviderProps extends IIdentityProviderProps,
   UIProviderProps extends IUIProviderProps,
   RouterProviderProps extends IRouterProviderProps
-> = IWrapperProps<IdentityProviderProps, UIProviderProps, RouterProviderProps>;
+> = IAppProps<IdentityProviderProps, UIProviderProps, RouterProviderProps>;
 
 export function TestWrapper<
   IdentityProviderProps extends IIdentityProviderProps = IIdentityProviderProps,
@@ -21,7 +21,7 @@ export function TestWrapper<
   >
 ): ReactElement {
   return (
-    <Wrapper<IdentityProviderProps, UIProviderProps, RouterProviderProps>
+    <App<IdentityProviderProps, UIProviderProps, RouterProviderProps>
       router={useRouterProviderProps() as RouterProviderProps}
       ui={useUIProviderProps() as UIProviderProps}
       {...props}

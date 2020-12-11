@@ -1,21 +1,51 @@
-import { PropsWithChildren, ReactElement } from "react";
-import { Route, RouteProps } from "react-router-dom";
+import { lazyLoad } from "@reactionable/core/lib/ui/loader/Loader";
+import {
+  ComponentType,
+  LazyExoticComponent,
+  PropsWithChildren,
+  ReactElement,
+  ReactNode,
+} from "react";
+import { Route, RouteComponentProps, RouteProps } from "react-router-dom";
 
-type ILazyRouteRendererProps = {
-  render: () => ReactElement;
+export type ILazyRouteProps = Omit<RouteProps, "component"> & {
+  component?: LazyExoticComponent<ComponentType>;
 };
 
-function LazyRouteRenderer({ render }: ILazyRouteRendererProps): ReactElement {
-  return render();
+export function renderLazyRoute({
+  component,
+  render,
+}: {
+  component?: LazyExoticComponent<ComponentType>;
+  render?: (props: RouteComponentProps) => ReactNode;
+}): (props: RouteComponentProps) => ReactNode {
+  const LazyRouteComponent = (props: RouteComponentProps): ReactElement => {
+    let rendered: ReactNode;
+    if (component) {
+      const Component = lazyLoad(component);
+      rendered = <Component {...props} />;
+    } else if (render) {
+      rendered = render(props);
+    }
+
+    return <>{rendered}</>;
+  };
+
+  return LazyRouteComponent;
 }
 
-export type ILazyRouteProps = Omit<RouteProps, "render"> & ILazyRouteRendererProps;
-
 export function LazyRoute({
+  component,
   render,
   ...routeProps
 }: PropsWithChildren<ILazyRouteProps>): ReactElement {
-  const renderLazyRoute = () => <LazyRouteRenderer render={render} />;
-
-  return <Route {...routeProps} render={renderLazyRoute} />;
+  return (
+    <Route
+      render={renderLazyRoute({
+        component,
+        render,
+      })}
+      {...routeProps}
+    />
+  );
 }

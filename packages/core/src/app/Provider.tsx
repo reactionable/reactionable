@@ -20,7 +20,6 @@ export function createProvider<ProviderProps extends IProviderProps = IProviderP
       const ProviderComponent = Component as ComponentType;
       children = <ProviderComponent {...props}>{children}</ProviderComponent>;
     }
-
     return (
       <CreatedContext.Provider value={{ ...props, Component } as ProviderProps}>
         {children}

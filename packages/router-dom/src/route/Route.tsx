@@ -19,7 +19,7 @@ export function renderRoute({ privateRoute, component, ...routeProps }: IRoutePr
 }
 
 export function renderRoutes(routes: IRouteProps[]): ReactNode {
-  let renderedRoutes: ReactNode = routes.map(renderRoute);
+  let children = <>{routes.map(renderRoute)}</>;
 
   const notFoundRoute = routes.find((route) => !route.path && route.component);
 
@@ -27,8 +27,8 @@ export function renderRoutes(routes: IRouteProps[]): ReactNode {
     const CaptureRouteNotFound = useCaptureRouteNotFound(
       notFoundRoute.component as LazyExoticComponent<ComponentType>
     );
-    renderedRoutes = <CaptureRouteNotFound>{renderedRoutes}</CaptureRouteNotFound>;
+    children = <CaptureRouteNotFound>{children}</CaptureRouteNotFound>;
   }
 
-  return <Switch>{renderedRoutes}</Switch>;
+  return <Switch>{children}</Switch>;
 }

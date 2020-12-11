@@ -4,7 +4,6 @@
 
 export * from "./app/App";
 export * from "./app/Provider";
-export * from "./app/Wrapper";
 export * from "./crud/Crud";
 export * from "./crud/create/Create";
 export * from "./crud/delete/Delete";
