@@ -10,7 +10,6 @@
     "lint": "lerna run --stream lint --",
     "build": "lerna run --stream build --",
     "build:doc": "rimraf -rf build/docs && typedoc",
-    "publish": "lerna publish --yes",
     "link": "node dev-link link",
     "unlink": "node dev-link unlink",
     "storybook": "start-storybook -p 6006 -s .storybook/public",

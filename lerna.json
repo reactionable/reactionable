@@ -1,12 +1,5 @@
 {
   "version": "0.26.0",
   "npmClient": "yarn",
-  "useWorkspaces": true,
-  "command": {
-    "publish": {
-      "conventionalCommits": true,
-      "github-release": true,
-      "yes": true
-    }
-  }
+  "useWorkspaces": true
 }
