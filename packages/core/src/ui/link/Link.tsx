@@ -1,11 +1,10 @@
 import {
-  Children,
   ComponentType,
-  PropsWithChildren,
   ReactElement,
   MouseEvent as ReactMouseEvent,
   ReactNode,
-  isValidElement,
+  Ref,
+  forwardRef,
 } from "react";
 
 import { useRouterContext } from "../../router/Router";
@@ -26,34 +25,15 @@ export type ILinkProps = {
   "data-testid"?: string;
 };
 
-export type LinkComponent<LinkProps extends ILinkProps> = ComponentType<LinkProps>;
+export type LinkComponent = ComponentType<ILinkProps>;
 
-export function Link<LinkProps extends ILinkProps>({
-  href,
-  children,
-  ...props
-}: PropsWithChildren<LinkProps>): ReactElement {
-  const { RouterLink } = useRouterContext();
-
-  let link: ReactElement;
-  if (
-    children &&
-    Children.count(children) === 1 &&
-    typeof children !== "string" &&
-    isValidElement(children)
-  ) {
-    link = children;
-  } else {
-    if (!props.title && typeof children === "string") {
-      props.title = children;
-    }
-
-    link = <a {...props}>{children}</a>;
-  }
-
-  return <RouterLink href={href || "#"}>{link}</RouterLink>;
-}
-
-export function useLink<LinkProps extends ILinkProps = ILinkProps>(props: LinkProps): ReactElement {
+export function useLink(props: ILinkProps): ReactElement {
   return <Link {...props} />;
 }
+
+function LinkComponent(props: ILinkProps, ref: Ref<ComponentType<ILinkProps>>) {
+  const { RouterLink } = useRouterContext();
+  return <RouterLink {...props} ref={ref} />;
+}
+
+export const Link = forwardRef(LinkComponent);

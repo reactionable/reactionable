@@ -1,10 +1,11 @@
 import { ReactElement, forwardRef } from "react";
 
-import { RouterContextProvider, useRouter, useRouterProviderProps } from "./Router";
+import { TestWrapper } from "../tests/TestWrapper";
+import { RouterContextProvider, useRouter } from "./Router";
 import { RouterLink } from "./RouterLink";
 
 export default {
-  title: "Core/Components/Router",
+  title: "NextJS/Components/Router",
   parameters: {
     info: { inline: true },
     options: { showPanel: true },
@@ -13,14 +14,14 @@ export default {
 };
 
 export const BasicRouterContextProvider = (): ReactElement => {
-  return <RouterContextProvider {...useRouterProviderProps()}>test</RouterContextProvider>;
+  return <RouterContextProvider>test</RouterContextProvider>;
 };
 
 export const BasicRouterLink = (): ReactElement => {
   return (
-    <RouterContextProvider {...useRouterProviderProps()}>
+    <TestWrapper>
       <RouterLink href="test">test</RouterLink>
-    </RouterContextProvider>
+    </TestWrapper>
   );
 };
 
@@ -33,11 +34,11 @@ export const RouterLinkCustomComponent = (): ReactElement => {
   CustomComponent.displayName = "CustomComponent";
 
   return (
-    <RouterContextProvider {...useRouterProviderProps()}>
+    <TestWrapper>
       <RouterLink href="test" Component={CustomComponent}>
         test
       </RouterLink>
-    </RouterContextProvider>
+    </TestWrapper>
   );
 };
 
@@ -57,8 +58,8 @@ export const UseRouter = (): ReactElement => {
   };
 
   return (
-    <RouterContextProvider {...useRouterProviderProps()}>
+    <TestWrapper>
       <RouterInfos />
-    </RouterContextProvider>
+    </TestWrapper>
   );
 };

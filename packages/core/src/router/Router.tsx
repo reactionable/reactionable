@@ -52,15 +52,22 @@ export function useRouterProviderProps<
   RouterLinkProps extends IRouterLinkProps = IRouterLinkProps
 >(): IRouterProviderProps<RouterLinkProps> {
   return {
-    RouterLink,
+    RouterLink: RouterLink as IRouterLinkComponent<RouterLinkProps>,
     useRouter,
     useRouteMatch,
     renderRoutes,
   };
 }
 
-export const {
-  Context: RouterContext,
-  ContextProvider: RouterContextProvider,
-  useContext: useRouterContext,
-} = createProvider<IRouterProviderProps<IRouterLinkProps>>(useRouterProviderProps());
+const { Context, ContextProvider, useContext } = createProvider<
+  IRouterProviderProps<IRouterLinkProps>
+>(useRouterProviderProps());
+
+export const RouterContextProvider = ContextProvider;
+export const RouterContext = Context;
+
+export function useRouterContext<
+  RouterLinkProps extends IRouterLinkProps = IRouterLinkProps
+>(): IRouterProviderProps<RouterLinkProps> {
+  return (useContext() as unknown) as IRouterProviderProps<RouterLinkProps>;
+}

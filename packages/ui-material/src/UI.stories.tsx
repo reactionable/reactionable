@@ -5,7 +5,7 @@ import { ReactElement } from "react";
 import { UIContextProvider } from "./UI";
 
 export default {
-  title: "UI Material/Components/UI/Context Provider",
+  title: "UI Material/Components/Context Provider",
   parameters: {
     info: { inline: true },
     options: { showPanel: true },

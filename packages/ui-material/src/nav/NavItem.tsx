@@ -4,11 +4,11 @@ import ListItem from "@material-ui/core/ListItem/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText/ListItemText";
 import {
-  NavItem as CoreNavItem,
   NavItems as CoreNavItems,
   INavItemProps as ICoreNavItemProps,
   INavItemsComponentProps,
 } from "@reactionable/core/lib/nav/NavItem";
+import { useRouterProviderProps } from "@reactionable/core/lib/router/Router";
 import { ReactElement } from "react";
 
 import { Icon } from "../icon/Icon";
@@ -16,23 +16,22 @@ import { Icon } from "../icon/Icon";
 export type INavItemProps = ICoreNavItemProps & LinkProps & { icon?: typeof SvgIcon };
 
 export function NavItem(props: INavItemProps): ReactElement {
-  const { icon, children, href, ...linkProps } = props;
+  const { RouterLink } = useRouterProviderProps();
+  const { icon, children, ...linkProps } = props;
 
   if (!linkProps.title && typeof children === "string") {
     linkProps.title = children;
   }
 
   return (
-    <CoreNavItem href={href}>
-      <ListItem button component="a" {...linkProps}>
-        {icon && (
-          <ListItemIcon>
-            <Icon icon={icon} />
-          </ListItemIcon>
-        )}
-        <ListItemText primary={children} />
-      </ListItem>
-    </CoreNavItem>
+    <ListItem button component={RouterLink} {...linkProps}>
+      {icon && (
+        <ListItemIcon>
+          <Icon icon={icon} />
+        </ListItemIcon>
+      )}
+      <ListItemText primary={children} />
+    </ListItem>
   );
 }
 

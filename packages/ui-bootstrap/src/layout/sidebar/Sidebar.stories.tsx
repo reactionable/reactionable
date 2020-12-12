@@ -1,6 +1,6 @@
 import "../../../stories/config";
 
-import { faImages } from "@fortawesome/free-solid-svg-icons";
+import { faAtom } from "@fortawesome/free-solid-svg-icons";
 import { generatePath, useRouteMatch, useTranslation } from "@reactionable/core";
 import { FC, ReactElement } from "react";
 import Button from "react-bootstrap/Button";
@@ -26,7 +26,7 @@ const SampleComponent: FC = () => {
     {
       href: generatePath(`${match.path}/sample`, match.params),
       title: t("Go to sample page"),
-      icon: { icon: faImages },
+      icon: { icon: faAtom },
       children: t("Sample"),
     },
   ]);

@@ -1,27 +1,14 @@
 import UILink, { LinkProps } from "@material-ui/core/Link";
-import {
-  Link as CoreLink,
-  ILinkProps as ICoreLinkProps,
-  isLinkProps as coreIsLinkProps,
-} from "@reactionable/core/lib/ui/link/Link";
-import { Children, ReactNode, isValidElement } from "react";
+import { isLinkProps as coreIsLinkProps } from "@reactionable/core/lib/ui/link/Link";
+import { useRouterProviderProps } from "@reactionable/core/src/router/Router";
+import { ReactNode } from "react";
 import { PropsWithChildren, ReactElement } from "react";
 
-export type ILinkProps = Omit<LinkProps, "children"> & ICoreLinkProps;
+export type ILinkProps = LinkProps;
 
-export function Link({ href, children, ...props }: PropsWithChildren<LinkProps>): ReactElement {
-  if (
-    !(
-      children &&
-      Children.count(children) === 1 &&
-      typeof children !== "string" &&
-      isValidElement(children)
-    )
-  ) {
-    children = <UILink {...props}>{children}</UILink>;
-  }
-
-  return <CoreLink href={href}>{children}</CoreLink>;
+export function Link(props: PropsWithChildren<ILinkProps>): ReactElement {
+  const { RouterLink } = useRouterProviderProps();
+  return <UILink component={RouterLink} {...props} />;
 }
 
 export function isLinkProps<LinkProps extends ILinkProps>(

@@ -9,9 +9,7 @@ export type INavItemsProps<NavItemProps extends INavItemProps> = {
   navItems?: Array<NavItemProps>;
 };
 
-export function NavItem<NavItemProps extends INavItemProps>({
-  ...props
-}: NavItemProps): ReactElement {
+export function NavItem<NavItemProps extends INavItemProps>(props: NavItemProps): ReactElement {
   return useUIContext().useLink(props);
 }
 

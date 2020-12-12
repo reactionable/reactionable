@@ -1,5 +1,5 @@
+import { useRouterProviderProps } from "@reactionable/core";
 import {
-  NavItem as CoreNavItem,
   NavItems as CoreNavItems,
   INavItemProps as ICoreNavItemProps,
   INavItemsComponentProps,
@@ -12,7 +12,8 @@ import { IIconProps, Icon } from "../icon/Icon";
 export type INavItemProps = ICoreNavItemProps &
   Omit<NavLinkProps, "onSelect"> & { icon?: IIconProps };
 
-export function NavItem({ icon, href, children, ...linkProps }: INavItemProps): ReactElement {
+export function NavItem({ icon, children, ...linkProps }: INavItemProps): ReactElement {
+  const { RouterLink } = useRouterProviderProps();
   if (!linkProps.title && typeof children === "string") {
     const title: string = children as string;
     linkProps.title = title;
@@ -26,9 +27,9 @@ export function NavItem({ icon, href, children, ...linkProps }: INavItemProps): 
     );
   }
   return (
-    <CoreNavItem href={href}>
-      <NavLink {...(linkProps as NavLinkProps)}>{children}</NavLink>
-    </CoreNavItem>
+    <NavLink {...(linkProps as NavLinkProps)} as={RouterLink}>
+      {children}
+    </NavLink>
   );
 }
 

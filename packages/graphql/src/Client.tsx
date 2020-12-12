@@ -31,18 +31,18 @@ function getGraphqlClient() {
 }
 
 function createGraphqlClient(uri: IGraphqlClientUri, cacheConfig?: InMemoryCacheConfig) {
-  const httpLink: ApolloLink = createUploadLink({
+  const httpLink: ApolloLink = (createUploadLink({
     uri,
     fetch,
-    credentials: "include", // Additional fetch() options like `credentials` or `headers`,
-  });
+    credentials: "include",
+  }) as unknown) as ApolloLink;
 
   const authLink: ApolloLink = setContext((_, prevContext) => {
     const { headers } = prevContext;
 
-    // get the authentication token from local storage if it exists
+    // Get the authentication token from local storage if it exists
     const token = localStorage.getItem("token");
-    // return the headers to the context so httpLink can read them
+    // Return the headers to the context so httpLink can read them
     return {
       headers: {
         ...headers,

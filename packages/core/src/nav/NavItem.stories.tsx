@@ -4,7 +4,7 @@ import { UIContextProvider, useUIProviderProps } from "../ui/UI";
 import { NavItem } from "./NavItem";
 
 export default {
-  title: "Core/Components/NavItem",
+  title: "Core/Components/Nav/NavItem",
   parameters: {
     info: { inline: true },
     options: { showPanel: true },
@@ -14,6 +14,6 @@ export default {
 
 export const BasicNavItem = (): ReactElement => (
   <UIContextProvider {...useUIProviderProps()}>
-    <NavItem>Test</NavItem>
+    <NavItem href="/test">Test</NavItem>
   </UIContextProvider>
 );

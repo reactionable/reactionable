@@ -1,24 +1,15 @@
 import { IRouterLinkProps as ICoreRouterLinkProps } from "@reactionable/core/lib/router/RouterLink";
-import { Children, ReactElement, isValidElement } from "react";
+import { ReactElement } from "react";
 import { Link, LinkProps } from "react-router-dom";
 
-export type IRouterLinkProps = ICoreRouterLinkProps & Omit<LinkProps, "to" | "href">;
+export type IRouterLinkProps = ICoreRouterLinkProps & Omit<LinkProps, "to" | "href" | "component">;
 
-export function RouterLink({ href, children, ...props }: IRouterLinkProps): ReactElement {
+export function RouterLink({ href, Component, ...props }: IRouterLinkProps): ReactElement {
   const linkProps: LinkProps = {
     ...props,
     to: href || "",
+    component: Component,
   };
 
-  if (
-    children &&
-    Children.count(children) === 1 &&
-    typeof children !== "string" &&
-    isValidElement(children) &&
-    children.type === "a"
-  ) {
-    children = children.props.children;
-  }
-
-  return <Link {...linkProps}>{children}</Link>;
+  return <Link {...linkProps} />;
 }

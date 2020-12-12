@@ -12,12 +12,12 @@ function RouterComponent({ children }: PropsWithChildren<unknown>): ReactElement
   const router = createRouter("", {}, "", {
     initialProps: {},
     pageLoader: {
-      getPageList: jest.fn(),
+      getPageList: () => [],
     },
-    App: jest.fn(),
-    Component: jest.fn(),
-    subscription: jest.fn().mockImplementation(() => Promise.resolve(undefined)),
-    wrapApp: jest.fn(),
+    App: () => null,
+    Component: () => null,
+    subscription: async () => undefined,
+    wrapApp: () => null,
     isFallback: false,
   });
   return <RouterContext.Provider value={router}>{children}</RouterContext.Provider>;

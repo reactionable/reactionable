@@ -1,5 +1,5 @@
 import { App } from "@reactionable/core/lib/app/App";
-import { NotFound } from "@reactionable/core/lib/ui/layout/notFound/NotFound";
+import { NotFound } from "@reactionable/core/lib/ui/layout/not-found/NotFound";
 import { ReactElement, lazy } from "react";
 
 import { useRouterProviderProps } from "../router/Router";

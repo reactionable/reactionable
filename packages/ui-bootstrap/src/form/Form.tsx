@@ -23,7 +23,7 @@ export type IOnSubmitForm<Values extends IFormValues, Data extends IFormData> = 
 export function Form<
   Values extends IFormValues,
   Data extends IFormData,
-  FormButtonProps extends IFormButtonProps
+  FormButtonProps extends IFormButtonProps = IFormButtonProps
 >(props: IFormProps<Values, Data, FormButtonProps>): ReactElement {
   return (
     <CoreForm<Values, Data, FormButtonProps>

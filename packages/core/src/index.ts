@@ -46,7 +46,7 @@ export * from "./ui/layout/body/Body";
 export * from "./ui/layout/footer/Footer";
 export * from "./ui/layout/header/Header";
 export * from "./ui/layout/header/UserHeaderNav";
-export * from "./ui/layout/notFound/NotFound";
+export * from "./ui/layout/not-found/NotFound";
 export * from "./ui/layout/sidebar/Sidebar";
 export * from "./ui/link/Link";
 export * from "./ui/loader/Loader";

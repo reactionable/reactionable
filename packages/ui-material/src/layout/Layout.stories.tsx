@@ -5,7 +5,7 @@ import { ReactElement } from "react";
 import { Layout, useLayout } from "./Layout";
 
 export default {
-  title: "UI Bootstrap/Components/Layout",
+  title: "UI Material/Components/Layout",
   parameters: {
     info: { inline: true },
     options: { showPanel: true },

@@ -1,53 +1,56 @@
 import { compile } from "path-to-regexp";
 import {
-  Children,
-  ComponentType,
-  PropsWithChildren,
-  ReactElement,
-  cloneElement,
-  useCallback,
+  ElementType,
+  ForwardRefExoticComponent,
+  PropsWithoutRef,
+  Ref,
+  RefAttributes,
+  createElement,
+  forwardRef,
 } from "react";
 
 import { IRouteMatchParams } from "./Route";
 
-export type IRouterLinkProps = {
-  href: string;
-  children: ReactElement;
+export type IRouterLinkPropsComponent<Props> = ForwardRefExoticComponent<Props>;
+
+export type IRouterLinkProps<
+  Props extends Record<string, unknown> = Record<string, unknown>
+> = Props & {
+  href?: string;
+  Component?: IRouterLinkPropsComponent<Props>;
 };
 
 export type IRouterLinkComponent<
   RouterLinkProps extends IRouterLinkProps
-> = ComponentType<RouterLinkProps>;
+> = ForwardRefExoticComponent<
+  PropsWithoutRef<RouterLinkProps> & RefAttributes<ElementType<ILinkAnchorProps<RouterLinkProps>>>
+>;
 
-export function RouterLink({
-  children,
-  ...props
-}: PropsWithChildren<IRouterLinkProps>): ReactElement {
-  const child: ReactElement = Children.only<ReactElement>(children);
-  const childRef: { current: Element } | ((el: Element) => void) =
-    child && typeof child === "object" && child["ref"];
+export type ILinkAnchorProps<RouterLinkProps extends IRouterLinkProps> = Omit<
+  RouterLinkProps,
+  "Component"
+>;
 
-  const setRef = useCallback(
-    (el: Element) => {
-      if (childRef) {
-        if (typeof childRef === "function") childRef(el);
-        else if (typeof childRef === "object") {
-          childRef.current = el;
-        }
-      }
-    },
-    [childRef]
-  );
-
-  const childProps = {
-    ref: setRef,
-    ...props,
-  } as IRouterLinkProps & {
-    ref?: (el: Element) => void;
-  };
-
-  return cloneElement(child, childProps);
+function LinkAnchorComponent<RouterLinkProps extends IRouterLinkProps>(
+  props: ILinkAnchorProps<RouterLinkProps>,
+  ref: Ref<HTMLAnchorElement>
+) {
+  return <a ref={ref} {...props} />;
 }
+
+export const LinkAnchor = forwardRef(LinkAnchorComponent);
+
+function RouterLinkComponent<RouterLinkProps extends IRouterLinkProps>(
+  { Component = LinkAnchor, ...props }: RouterLinkProps,
+  ref: Ref<ElementType<RouterLinkProps>>
+) {
+  return createElement(Component, { ...props, ref });
+}
+
+export const RouterLink = forwardRef<
+  ElementType<ILinkAnchorProps<IRouterLinkProps>>,
+  IRouterLinkProps
+>(RouterLinkComponent);
 
 const normalizePath = (path: string): string => {
   path = path.trim();

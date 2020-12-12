@@ -10,6 +10,7 @@ import {
   IRouter,
   useRouterProviderProps as useCoreRouterProviderProps,
 } from "@reactionable/core/lib/router/Router";
+import { IRouterLinkComponent } from "@reactionable/core/lib/router/RouterLink";
 import { useRouter as nextUseRouter } from "next/router";
 import { PropsWithChildren, ReactElement } from "react";
 
@@ -46,7 +47,7 @@ export const useRouterProviderProps = (
 ): IRouterProviderProps => {
   return {
     ...useCoreRouterProviderProps(),
-    RouterLink,
+    RouterLink: RouterLink as IRouterLinkComponent<IRouterLinkProps>,
     useRouter,
     renderRoutes: renderRoutes as IRenderRoutes,
     Component: undefined, // Next is providing its router context provider

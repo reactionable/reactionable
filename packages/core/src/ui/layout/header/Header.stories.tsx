@@ -1,6 +1,11 @@
-import { select, withKnobs } from "@storybook/addon-knobs";
+import { boolean, withKnobs } from "@storybook/addon-knobs";
 import { ReactElement } from "react";
 
+import {
+  IdentityContextProvider,
+  useIdentityContext,
+  useIdentityProviderProps,
+} from "../../../identity/Identity";
 import { Header } from "./Header";
 
 export default {
@@ -10,12 +15,14 @@ export default {
 };
 
 export const BasicHeader = (): ReactElement => {
-  const variant = select("Variant", ["dark", "light", undefined], undefined);
+  const user = boolean("Logged in user", false);
+  const { setUser } = useIdentityContext();
+
+  setUser(user ? { username: "User" } : null);
+
   return (
-    <Header
-      brand="Test brand header"
-      variant={variant}
-      navItems={[{ href: "/sample", children: "Sample link" }]}
-    />
+    <IdentityContextProvider {...useIdentityProviderProps()}>
+      <Header brand="Test brand header" navItems={[{ href: "/sample", children: "Sample link" }]} />
+    </IdentityContextProvider>
   );
 };

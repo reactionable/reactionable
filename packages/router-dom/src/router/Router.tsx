@@ -6,6 +6,7 @@ import {
   useRouterContext as useCoreRouterContext,
   useRouterProviderProps as useCoreRouterProviderProps,
 } from "@reactionable/core/lib/router/Router";
+import { IRouterLinkComponent } from "@reactionable/core/lib/router/RouterLink";
 import { ComponentType, LazyExoticComponent, PropsWithChildren, ReactElement } from "react";
 import {
   BrowserRouter,
@@ -91,7 +92,7 @@ export function useRouter<
 
   return {
     match,
-    push: history.push,
+    push: history.push.bind(history),
   };
 }
 
@@ -104,7 +105,7 @@ export const useRouterProviderProps = (
   return {
     ...useCoreRouterProviderProps(),
     Component: BrowserRouterComponent,
-    RouterLink,
+    RouterLink: RouterLink as IRouterLinkComponent<IRouterLinkProps>,
     useRouteMatch,
     renderRoutes: renderRoutes as IRenderRoutes,
     ...props,

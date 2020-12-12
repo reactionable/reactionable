@@ -1,11 +1,26 @@
+import "@testing-library/jest-dom/extend-expect";
+
+import { i18nTestInstance } from "@reactionable/core/lib/tests/I18n";
 import { render } from "@testing-library/react";
 
-import { Link } from "./Link";
+import { BasicLink, UseLink } from "./Link.stories";
 
 describe("Link", () => {
-  it("should render without crashing", async () => {
-    const result = render(<Link href="/test">test</Link>);
+  beforeAll(i18nTestInstance);
 
-    expect(result).toBeTruthy();
+  describe("BasicLink", () => {
+    it("should render without crashing", () => {
+      const result = render(<BasicLink />);
+
+      expect(result).toBeTruthy();
+    });
+  });
+
+  describe("UseLink", () => {
+    it("should render without crashing", () => {
+      const result = render(<UseLink />);
+
+      expect(result).toBeTruthy();
+    });
   });
 });

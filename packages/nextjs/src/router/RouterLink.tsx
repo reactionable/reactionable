@@ -4,6 +4,36 @@ import { ReactElement } from "react";
 
 export type IRouterLinkProps = ICoreRouterLinkProps & LinkProps;
 
-export function RouterLink(props: IRouterLinkProps): ReactElement {
+export function RouterLink({ Component, ...props }: IRouterLinkProps): ReactElement {
+  if (Component) {
+    const {
+      href,
+      as,
+      replace,
+      scroll,
+      shallow,
+      passHref,
+      prefetch,
+      locale,
+      ...componentProps
+    } = props;
+
+    const linkProps = {
+      href,
+      as,
+      replace,
+      scroll,
+      shallow,
+      passHref,
+      prefetch,
+      locale,
+    };
+
+    return (
+      <Link {...linkProps} passHref>
+        <Component {...componentProps} />
+      </Link>
+    );
+  }
   return <Link {...props} />;
 }
