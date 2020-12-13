@@ -12,6 +12,7 @@ export function renderRoute({ privateRoute, component, ...routeProps }: IRoutePr
   const key = `${routeProps.exact ? "exact" : "non-exact"}-${routeProps.path}-${
     privateRoute ? "private" : "public"
   }-${component.name}`;
+
   if (privateRoute) {
     return <PrivateRoute key={key} component={component} {...routeProps} />;
   }
@@ -19,7 +20,7 @@ export function renderRoute({ privateRoute, component, ...routeProps }: IRoutePr
 }
 
 export function renderRoutes(routes: IRouteProps[]): ReactNode {
-  let children = <>{routes.map(renderRoute)}</>;
+  let children = <>{routes.filter((route) => !route.path && route.component).map(renderRoute)}</>;
 
   const notFoundRoute = routes.find((route) => !route.path && route.component);
 

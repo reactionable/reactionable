@@ -1,3 +1,4 @@
+import { useLink } from "@reactionable/core";
 import { App } from "@reactionable/core/lib/app/App";
 import { NotFound } from "@reactionable/core/lib/ui/layout/not-found/NotFound";
 import { ReactElement, lazy } from "react";
@@ -9,30 +10,49 @@ export default {
   parameters: { info: { inline: true }, options: { showPanel: true }, component: App },
 };
 
-const Home = () => <div>Home</div>;
-const HomeComponent = lazy(async () => ({ default: Home }));
+export const BasicApp = (): ReactElement => {
+  const Home = () => <div>Home</div>;
+  const HomeComponent = lazy(async () => ({ default: Home }));
 
-export const AppWithHomeComponent = (): ReactElement => (
-  <App
-    router={useRouterProviderProps({
-      HomeComponent,
-    })}
-  />
-);
+  const NotFoundComponent = lazy(async () => ({ default: NotFound }));
 
-const NotFoundComponent = lazy(async () => ({ default: NotFound }));
-export const AppWithNotFoundComponent = (): ReactElement => (
-  <App
-    router={useRouterProviderProps({
-      NotFoundComponent,
-    })}
-  />
-);
+  return (
+    <App
+      router={useRouterProviderProps({
+        HomeComponent,
+        NotFoundComponent,
+      })}
+    />
+  );
+};
 
-export const AppWithRoutes = (): ReactElement => (
-  <App
-    router={useRouterProviderProps({
-      routes: [{ path: "/", component: HomeComponent }],
-    })}
-  />
-);
+export const AppWithCustomRoutes = (): ReactElement => {
+  const CustomRouteHome = () => {
+    const linkToCustomRoute = useLink({
+      href: "/custom-route",
+      children: "Go to custom route",
+    });
+    return (
+      <div>
+        <h1>Home</h1>
+        <p>{linkToCustomRoute}</p>
+      </div>
+    );
+  };
+  const CustomRouteHomeComponent = lazy(async () => ({ default: CustomRouteHome }));
+
+  const CustomRoutePage = () => <div>Custom route page</div>;
+  const CustomRoutePageComponent = lazy(async () => ({ default: CustomRoutePage }));
+
+  const NotFoundComponent = lazy(async () => ({ default: NotFound }));
+
+  return (
+    <App
+      router={useRouterProviderProps({
+        HomeComponent: CustomRouteHomeComponent,
+        NotFoundComponent,
+        routes: [{ path: "/custom-route", component: CustomRoutePageComponent }],
+      })}
+    />
+  );
+};
