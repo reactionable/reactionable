@@ -17,6 +17,7 @@ export * from "./enhance-children/EnhanceChildren";
 export * from "./error/IError";
 export * from "./form/Form";
 export * from "./form/FormButton";
+export * from "./form/FormErrorMessage";
 export * from "./form/FormField";
 export * from "./form/FormFields";
 export * from "./form/FormWrapper";

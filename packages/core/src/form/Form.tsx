@@ -30,9 +30,6 @@ export type IValidationSchema<Values extends IFormValues> = Record<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   AnySchema | Reference | Lazy<any, any>
 >;
-// export type IValidationSchema<Values extends IFormValues> = {
-//   [field in keyof Values]: AnySchema | Reference | Lazy<any, any>;
-// };
 
 export interface IFormProps<
   Values extends IFormValues,

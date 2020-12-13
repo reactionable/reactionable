@@ -5,7 +5,13 @@ import { string } from "yup";
 
 import { i18nTestInstance } from "../tests/I18n";
 import { Form } from "./Form";
-import { BasicForm, FormWithCheckbox, FormWithSelect, FormWithTextArea } from "./Form.stories";
+import {
+  BasicForm,
+  FormWithCheckbox,
+  FormWithFileAndPreview,
+  FormWithSelect,
+  FormWithTextArea,
+} from "./Form.stories";
 import { FormField } from "./FormField";
 
 describe("Form", () => {
@@ -38,6 +44,14 @@ describe("Form", () => {
   describe("FormWithCheckbox", () => {
     it("should render without crashing", () => {
       const result = render(<FormWithCheckbox />);
+
+      expect(result).toBeTruthy();
+    });
+  });
+
+  describe("FormWithFileAndPreview", () => {
+    it("should render without crashing", () => {
+      const result = render(<FormWithFileAndPreview />);
 
       expect(result).toBeTruthy();
     });

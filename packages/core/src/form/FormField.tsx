@@ -1,14 +1,18 @@
 import { FastField, Field, FieldInputProps, FieldProps, getIn } from "formik";
 import {
+  ChangeEvent,
   ComponentType,
   HTMLProps,
   ReactElement,
   ReactNode,
   RefObject,
   createElement,
+  forwardRef,
   useEffect,
   useRef,
 } from "react";
+
+import { FormErrorMessage } from "./FormErrorMessage";
 
 export type IFormFieldValue = string;
 export type IFieldElementProps<
@@ -48,24 +52,50 @@ export type IFormFieldProps<
   fastField?: boolean;
 };
 
+type IFormFieldInputProps<
+  FieldElementProps extends IFieldElementProps = IFieldElementProps,
+  Value extends IFormFieldValue = IFormFieldValue
+> = IFormFieldPropsEnhanced<FieldElementProps, Value>["field"];
+
+const FormFieldInput = forwardRef(function FormFieldInput(
+  { as = "input", ...props }: IFormFieldInputProps,
+  ref
+) {
+  return createElement(as || "input", { ...props, ref });
+});
+
 export function RenderFormField<
   FieldElementProps extends IFieldElementProps = IFieldElementProps,
   Value extends IFormFieldValue = IFormFieldValue
 >({
-  field: { as, label, ...props },
+  error,
+  field: { label, ...props },
 }: IFormFieldPropsEnhanced<FieldElementProps, Value>): ReactElement {
-  const formField = createElement(as || "input", props);
+  let fieldContent: ReactElement = <FormFieldInput {...props} />;
 
-  if (!label) {
-    return formField;
+  if (error) {
+    fieldContent = (
+      <>
+        {fieldContent}
+        <FormErrorMessage name={props.name} />
+      </>
+    );
   }
 
-  return (
-    <label>
-      {label}
-      {formField}
-    </label>
-  );
+  if (props.type === "hidden") {
+    return fieldContent;
+  }
+
+  if (!label) {
+    fieldContent = (
+      <label>
+        {label}
+        {fieldContent}
+      </label>
+    );
+  }
+
+  return <div>{fieldContent}</div>;
 }
 
 type IFormFieldChildrenProps<
@@ -135,6 +165,10 @@ export function FormField<
         field: {
           ...props,
           ...fieldProps.field,
+          onChange: (event: ChangeEvent<HTMLInputElement>) => {
+            props.onChange && props.onChange(event);
+            fieldProps.field.onChange && fieldProps.field.onChange(event);
+          },
         },
       }}
     />

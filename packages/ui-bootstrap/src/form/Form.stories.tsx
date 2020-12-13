@@ -1,5 +1,6 @@
 import { action } from "@storybook/addon-actions";
-import { ReactElement } from "react";
+import { ChangeEvent, ReactElement, useEffect, useState } from "react";
+import Image from "react-bootstrap/Image";
 import { string } from "yup";
 
 import { UIContextProvider } from "../UI";
@@ -27,10 +28,14 @@ export const BasicForm = (): ReactElement => (
         return values;
       }}
       onSuccess={action("Form submit succeed")}
-      validationSchema={{ test: string().required("Test is required") }}
-      initialValues={{ test: "" }}
+      validationSchema={{
+        firstname: string().required("Firstname is required"),
+        lastname: string().required("Lastname is required"),
+      }}
+      initialValues={{ firstname: "", lastname: "" }}
     >
-      <FormField name="test" autoFocus placeholder="Basic form input" />
+      <FormField name="firstname" autoFocus placeholder="Firstname" />
+      <FormField name="lastname" placeholder="Lastname" />
     </Form>
   </UIContextProvider>
 );
@@ -114,3 +119,64 @@ export const FormWithCheckbox = (): ReactElement => (
     </Form>
   </UIContextProvider>
 );
+
+export const FormWithFileAndPreview = (): ReactElement => {
+  const [filePreview, setFilePreview] = useState<string | null>(null);
+  const [file, setFile] = useState<File | null>(null);
+
+  function fileToDataSrc(file: File): Promise<string | undefined> {
+    // encode the file using the FileReader API
+    const reader = new FileReader();
+    return new Promise((resolve, reject) => {
+      try {
+        reader.onloadend = () => {
+          resolve(reader.result?.toString());
+        };
+        reader.readAsDataURL(file);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  useEffect(() => {
+    if (file) {
+      fileToDataSrc(file).then((src) => {
+        setFilePreview(src || null);
+      });
+    } else {
+      setFilePreview(null);
+    }
+  }, [file]);
+
+  return (
+    <UIContextProvider>
+      <Form
+        title="Form with file"
+        submitButton
+        onSubmit={async (values: IFormValues) => {
+          action("Form submitted...")(values);
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+          return values;
+        }}
+        onSuccess={action("Form submit succeed")}
+        validationSchema={{ test: string().required("Test is required") }}
+        initialValues={{ test: "" }}
+      >
+        <FormField
+          type="file"
+          name="test"
+          autoFocus
+          onChange={(event: ChangeEvent<HTMLInputElement>) =>
+            setFile(event?.target?.files?.length ? event.target.files[0] : null)
+          }
+        />
+        {filePreview && (
+          <p>
+            <Image thumbnail src={filePreview} height="200" width="200" />
+          </p>
+        )}
+      </Form>
+    </UIContextProvider>
+  );
+};

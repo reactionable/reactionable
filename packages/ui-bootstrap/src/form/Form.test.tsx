@@ -6,6 +6,7 @@ import { render } from "@testing-library/react";
 import {
   BasicForm,
   FormWithCheckbox,
+  FormWithFileAndPreview,
   FormWithLabelledInput,
   FormWithSelect,
   FormWithTextArea,
@@ -49,6 +50,14 @@ describe("Form", () => {
   describe("FormWithCheckbox", () => {
     it("should render without crashing", () => {
       const result = render(<FormWithCheckbox />);
+
+      expect(result).toBeTruthy();
+    });
+  });
+
+  describe("FormWithFileAndPreview", () => {
+    it("should render without crashing", () => {
+      const result = render(<FormWithFileAndPreview />);
 
       expect(result).toBeTruthy();
     });
