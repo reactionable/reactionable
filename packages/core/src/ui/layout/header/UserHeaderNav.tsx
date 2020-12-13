@@ -26,11 +26,8 @@ export function AccountLink<LinkProps extends ILinkProps = ILinkProps>({
 
   return useLink({
     href: "/account",
-    ...(NavItemComponent
-      ? {
-          children: <NavItemComponent {...linkComponentProps} />,
-        }
-      : linkComponentProps),
+    Component: NavItemComponent,
+    ...linkComponentProps,
   });
 }
 
@@ -74,11 +71,8 @@ export function LogoutLink<LinkProps extends ILinkProps = ILinkProps>({
 
   const link = useLink({
     href: "#",
-    ...(NavItemComponent
-      ? {
-          children: <NavItemComponent {...linkComponentProps} />,
-        }
-      : linkComponentProps),
+    Component: NavItemComponent,
+    ...linkComponentProps,
   });
 
   return (
@@ -150,11 +144,8 @@ export function UserUnloggedHeaderNav<LinkProps extends ILinkProps = ILinkProps>
 
   const link = useLink({
     href: "#",
-    ...(NavItemComponent
-      ? {
-          children: <NavItemComponent {...linkComponentProps} />,
-        }
-      : linkComponentProps),
+    Component: NavItemComponent,
+    ...linkComponentProps,
   });
 
   return (

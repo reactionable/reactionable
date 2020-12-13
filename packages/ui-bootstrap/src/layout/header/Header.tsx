@@ -23,9 +23,9 @@ export const Header = ({
   if (brand) {
     if (isLinkProps(brand)) {
       const { href, ...navbarBrandProps } = brand;
-      brandContent = useLink({ href, children: <Navbar.Brand {...navbarBrandProps} /> });
+      brandContent = useLink({ href, Component: Navbar.Brand, ...navbarBrandProps });
     } else {
-      brandContent = useLink({ href: "/", children: <Navbar.Brand>{brand}</Navbar.Brand> });
+      brandContent = useLink({ href: "/", Component: Navbar.Brand, children: brand });
     }
   }
 
