@@ -46,7 +46,7 @@ function createGraphqlClient(uri: IGraphqlClientUri, cacheConfig?: InMemoryCache
     return {
       headers: {
         ...headers,
-        authorization: token ? `Bearer ${token}` : "",
+        Authorization: token ? `Bearer ${token}` : "",
       },
     };
   });
