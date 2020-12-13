@@ -15,7 +15,7 @@ const UserLoggedHeaderNav = () => {
   }
 
   return (
-    <NavDropdown key="userNav" id="userNav" title={displayName()}>
+    <NavDropdown id="userLoggedHeaderNav" title={displayName()} alignRight>
       <AccountLink<DropdownItemProps> NavItemComponent={NavDropdown.Item} />
       <NavDropdown.Divider />
       <LogoutLink<DropdownItemProps> NavItemComponent={NavDropdown.Item} />
@@ -31,9 +31,9 @@ export const UserHeaderNav = (): ReactElement | null => {
   }
 
   return (
-    <div>
+    <>
       <UserLoggedHeaderNav />
       <UserUnloggedHeaderNav<NavLinkProps> NavItemComponent={Nav.Link} />
-    </div>
+    </>
   );
 };
