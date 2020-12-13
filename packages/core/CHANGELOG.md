@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.27.1 (2020-12-13)
+
+
+### Bug Fixes
+
+* **graphql:** set Authorization header capitalized ([9f3fd41](https://github.com/reactionable/reactionable/commit/9f3fd413d6aa5ba7f1a42ca6e0095a04cf5f31e1))
+
+
+
+
+
 # 0.27.0 (2020-12-12)
 
 
