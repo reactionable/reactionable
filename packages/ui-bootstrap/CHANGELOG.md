@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.27.2 (2020-12-13)
+
+
+### Bug Fixes
+
+* **ui-bootstrap:** improve display of user nav dropdown ([4d2d197](https://github.com/reactionable/reactionable/commit/4d2d1975f979249eebb458c0747e50488f47f610))
+
+
+
+
+
 ## 0.27.1 (2020-12-13)
 
 
