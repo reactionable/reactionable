@@ -20,7 +20,7 @@ export function renderRoute({ privateRoute, component, ...routeProps }: IRoutePr
 }
 
 export function renderRoutes(routes: IRouteProps[]): ReactNode {
-  let children = <>{routes.filter((route) => !route.path && route.component).map(renderRoute)}</>;
+  let children = <>{routes.filter((route) => route.path || !route.component).map(renderRoute)}</>;
 
   const notFoundRoute = routes.find((route) => !route.path && route.component);
 
