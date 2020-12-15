@@ -11,7 +11,7 @@ import { FormWrapper, IFormWrapperProps } from "./FormWrapper";
 export type IOnSubmitForm<Values extends IFormValues, Data extends IFormData> = (
   values: Values,
   formikHelpers: FormikHelpers<Values>
-) => Promise<Data>;
+) => Promise<Data | null>;
 
 export type IFormValue = string | boolean | File;
 export type IComposedFormValues = IFormValue | Array<IFormValue> | { [key: string]: IFormValue };
@@ -40,7 +40,7 @@ export interface IFormProps<
   validationSchema: IValidationSchema<Values>;
   successMessage?: ReactNode;
   onSubmit: IOnSubmitForm<Values, Data>;
-  onSuccess?: (result: Data) => void;
+  onSuccess?: (result: Data | null) => void;
   children: IFormWrapperProps<Values, FormButtonProps>["children"];
   form?: IFormWrapperProps<Values, FormButtonProps>["form"];
   submitButton?: IFormWrapperProps<Values, FormButtonProps>["submitButton"];
@@ -73,7 +73,7 @@ export function Form<
   const { loader, setLoading } = useLoader({});
   const { errorAlert, setErrorAlert } = useErrorAlert({});
   const { successNotification, setSuccessNotification } = useSuccessNotification({ title });
-  const [success, setSuccess] = useState<Data>();
+  const [success, setSuccess] = useState<Data | null>();
   const shapedvalidationSchema = yupObject().shape(validationSchema);
 
   useEffect(() => {
@@ -86,7 +86,7 @@ export function Form<
         onSuccess(success);
       }
     }
-  }, [success, onSuccess]);
+  }, [success]);
 
   if (submitButton === undefined) {
     submitButton = true;

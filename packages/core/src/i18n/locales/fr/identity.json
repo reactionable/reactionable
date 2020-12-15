@@ -2,5 +2,11 @@
   "My account": "Mon compte",
   "Log out": "Déconnexion",
   "Sign In / Sign Up": "Se connecter / S'inscrire",
-  "You are not allowed to reach this page": "Vous n'êtes pas autorisé à accéder à cette page"
+  "You are not allowed to reach this page": "Vous n'êtes pas autorisé à accéder à cette page",
+  "Username": "Identifiant",
+  "Password": "Mot de passe",
+  "Sign In": "Connexion",
+  "Username is not a valid email": "L'identifiant n'est pas une adresse email valide",
+  "Username is required": "L'identifiant est requis",
+  "Password is required": "Le mot de passe est requis"
 }

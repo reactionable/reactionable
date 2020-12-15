@@ -5,6 +5,7 @@ import { render } from "@testing-library/react";
 
 import {
   BasicForm,
+  FormSubmitError,
   FormWithCheckbox,
   FormWithFileAndPreview,
   FormWithLabelledInput,
@@ -58,6 +59,14 @@ describe("Form", () => {
   describe("FormWithFileAndPreview", () => {
     it("should render without crashing", () => {
       const result = render(<FormWithFileAndPreview />);
+
+      expect(result).toBeTruthy();
+    });
+  });
+
+  describe("FormSubmitError", () => {
+    it("should render without crashing", () => {
+      const result = render(<FormSubmitError />);
 
       expect(result).toBeTruthy();
     });

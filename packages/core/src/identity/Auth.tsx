@@ -15,14 +15,14 @@ export function Auth(): ReactElement {
     autoFocus: true,
     type: "email",
     name: "username",
-    label: t("Email"),
+    label: t("Username"),
     autoComplete: "email",
     required: true,
   });
 
   const password = useFormField({
     name: "password",
-    label: "Password",
+    label: t("Password"),
     type: "password",
     autoComplete: "current-password",
     required: true,
@@ -32,8 +32,10 @@ export function Auth(): ReactElement {
     title: t("Sign In"),
     submitButton: t("Sign In"),
     validationSchema: {
-      username: string().email(t("User email is not valid")).required(t("User email is required")),
-      password: string().required(t("User password is required")),
+      username: string()
+        .email(t("Username is not a valid email"))
+        .required(t("Username is required")),
+      password: string().required(t("Password is required")),
     },
     initialValues: { username: "", password: "" },
     onSubmit: login,

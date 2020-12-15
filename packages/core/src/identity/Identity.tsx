@@ -21,7 +21,7 @@ export type IIdentityProviderProps<User extends IUser = IUser> = IProviderProps<
   identityProvider?: string;
   AuthComponent: ComponentType;
   useFetchUser: () => IUseQueryResult<User | null>;
-  login: (values: ILoginFormValues) => Promise<User>;
+  login: (values: ILoginFormValues) => Promise<User | null>;
   logout: () => Promise<void>;
   displayName: (user: User) => string;
 }>;

@@ -180,3 +180,23 @@ export const FormWithFileAndPreview = (): ReactElement => {
     </UIContextProvider>
   );
 };
+
+export const FormSubmitError = (): ReactElement => (
+  <UIContextProvider>
+    <Form
+      title="Form submit error"
+      submitButton
+      onSubmit={async (values) => {
+        action("Form submitted...")(values);
+
+        throw new Error("Submit error");
+      }}
+      validationSchema={{
+        test: string().required("Test is required"),
+      }}
+      initialValues={{ test: "" }}
+    >
+      <FormField name="test" autoFocus label="Test" />
+    </Form>
+  </UIContextProvider>
+);

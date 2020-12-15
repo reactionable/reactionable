@@ -38,3 +38,10 @@ export const UseIdentityContext = (): ReactElement => {
 };
 
 export const BasicAuth = (): ReactElement => <Auth />;
+
+export const AuthSubmitError = (): ReactElement =>
+  withIdentityContext(() => <Auth />, {
+    login: async () => {
+      throw new Error("Username or password is wrong");
+    },
+  });

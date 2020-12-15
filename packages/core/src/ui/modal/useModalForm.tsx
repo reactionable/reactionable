@@ -35,7 +35,7 @@ export function useModalForm<
       const result = await onSubmit(values, formikHelpers);
       return result;
     },
-    onSuccess: (data: Data) => {
+    onSuccess: (data: Data | null) => {
       if (onSuccess) {
         onSuccess(data);
       }
