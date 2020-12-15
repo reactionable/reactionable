@@ -1,27 +1,36 @@
-import { ReactElement } from "react";
+import { boolean, withKnobs } from "@storybook/addon-knobs";
+import { ReactElement, useEffect } from "react";
 
-import { IdentityContextProvider, useIdentityContext } from "./Identity";
+import { IdentityContextProvider, useIdentityContext, withIdentityContext } from "./Identity";
 
 export default {
   title: "Core/Components/Identity",
-  parameters: { info: { inline: true }, options: { showPanel: true } },
   component: IdentityContextProvider,
+  decorators: [withKnobs],
 };
 
 export const UseIdentityContext = (): ReactElement => {
-  const Authentication = () => {
-    const { auth, user, displayName } = useIdentityContext();
-    return (
+  const userIsLoggedIn = boolean("User is logged in", false);
+
+  return withIdentityContext(() => {
+    const { auth, user, setUser, displayName } = useIdentityContext();
+
+    useEffect(() => {
+      setUser(userIsLoggedIn ? { username: "Test user" } : null);
+    }, [userIsLoggedIn]);
+
+    return user ? (
       <>
-        <p>User signed-in: {user ? displayName() : "No user"}</p>
-        {auth}
+        <h3>User signed-in: {displayName()}</h3>
+        <pre>
+          <code>{JSON.stringify(user, null, 2)}</code>
+        </pre>
+      </>
+    ) : (
+      <>
+        <h3>No user please login</h3>
+        <div>{auth}</div>
       </>
     );
-  };
-
-  return (
-    <IdentityContextProvider {...useIdentityContext()}>
-      <Authentication />
-    </IdentityContextProvider>
-  );
+  });
 };

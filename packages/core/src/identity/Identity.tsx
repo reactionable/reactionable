@@ -6,6 +6,7 @@ import { useTranslation } from "../i18n/I18n";
 import { IUseQueryResult } from "../query/Query";
 import { QueryWrapper } from "../query/QueryWrapper";
 import { useUIContext } from "../ui/UI";
+import { Auth } from "./Auth";
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type IUser = {};
@@ -14,57 +15,57 @@ export interface ILoginFormValues {
   username: string;
   password: string;
 }
-export type IAuthComponentProps<User extends IUser> = IIdentityProviderProps<User> & {
-  setUser: (user: User | null) => void;
-};
-
-export type AuthComponent<User extends IUser> = ComponentType<IAuthComponentProps<User>>;
 
 export type IIdentityProviderProps<User extends IUser = IUser> = IProviderProps<{
   user: User | undefined | null;
   identityProvider?: string;
-  AuthComponent: AuthComponent<User>;
-  auth: ReactElement | null;
+  AuthComponent: ComponentType;
   useFetchUser: () => IUseQueryResult<User | null>;
+  login: (values: ILoginFormValues) => Promise<User>;
   logout: () => Promise<void>;
-  setUser: (user: User | null | undefined) => void;
-  displayName: () => string;
+  displayName: (user: User) => string;
 }>;
 
-export function NullAuthComponent(): null {
-  return null;
-}
+export type IIdentityProviderValue<User extends IUser = IUser> = Omit<
+  IIdentityProviderProps<User>,
+  "displayName"
+> & {
+  displayName: () => string | null;
+  setUser: (user: User | null) => void;
+  auth: ReactElement | null;
+};
 
 export function useIdentityProviderProps<User extends IUser = IUser>(
   props?: Partial<IIdentityProviderProps<User>>
 ): IIdentityProviderProps<User> {
   return {
     user: undefined,
-    logout: async () => {
-      // Do nothing
+    login: async () => {
+      throw new Error("User does not exist");
     },
+    logout: async () => undefined,
     identityProvider: undefined,
-    AuthComponent: NullAuthComponent,
+    AuthComponent: Auth,
     useFetchUser: () => ({ data: null, loading: false, refetch: () => null }),
-    setUser: (user: User | null | undefined) => {
-      // Do nothing
-      user;
-    },
-    displayName: () => "",
-    auth: null,
+    displayName: (user: User) => user["username"] ?? "",
     ...props,
   };
 }
 
-const { Context: IdentityContext, useContext } = createProvider<IIdentityProviderProps>(
-  useIdentityProviderProps()
-);
+const { Context: IdentityContext, useContext } = createProvider<IIdentityProviderValue>({
+  ...useIdentityProviderProps(),
+  displayName: () => "",
+  setUser: () => null,
+  auth: null,
+});
 
 function IdentityContextProvider<User extends IUser>({
   AuthComponent,
   logout,
   identityProvider,
   useFetchUser,
+  displayName,
+  login,
   ...props
 }: PropsWithChildren<IIdentityProviderProps<User>>): ReactElement {
   const [userState, setUserState] = useState<User | null | undefined>();
@@ -88,6 +89,12 @@ function IdentityContextProvider<User extends IUser>({
     setUser(user);
   }, [user, loading]);
 
+  const loginHandler = async (values: ILoginFormValues) => {
+    const user = await login(values);
+    setUser(user);
+    return user;
+  };
+
   const logoutHandler = async () => {
     try {
       await logout();
@@ -97,39 +104,50 @@ function IdentityContextProvider<User extends IUser>({
     }
   };
 
-  const providerProps: IIdentityProviderProps<User> = {
-    ...props,
-    useFetchUser,
-    user: userState,
-    logout: logoutHandler,
-    identityProvider,
-    AuthComponent,
-    setUser,
+  const displayNameHandler = () => {
+    return userState ? displayName(userState) : null;
   };
 
   const auth = (
     <QueryWrapper loading={loading} data={true} error={error}>
-      {() => <AuthComponent {...providerProps} setUser={setUser} />}
+      {() => <AuthComponent />}
     </QueryWrapper>
   );
 
+  const providerValues: IIdentityProviderValue<User> = {
+    ...props,
+    displayName: displayNameHandler,
+    useFetchUser,
+    user: userState,
+    login: loginHandler,
+    logout: logoutHandler,
+    identityProvider,
+    AuthComponent,
+    setUser,
+    auth,
+  };
+
   return (
-    <IdentityContext.Provider
-      value={
-        {
-          ...providerProps,
-          auth,
-        } as IIdentityProviderProps<IUser>
-      }
-    >
+    <IdentityContext.Provider value={providerValues as IIdentityProviderValue<IUser>}>
       {errorNotification}
       {props.children}
     </IdentityContext.Provider>
   );
 }
 
-export function useIdentityContext<User extends IUser>(): IIdentityProviderProps<User> {
-  return useContext() as IIdentityProviderProps<User>;
+export function useIdentityContext<User extends IUser>(): IIdentityProviderValue<User> {
+  return useContext() as IIdentityProviderValue<User>;
+}
+
+export function withIdentityContext<User extends IUser>(
+  Component: ComponentType,
+  identityProviderProps?: Partial<IIdentityProviderProps<User>>
+): ReactElement {
+  return (
+    <IdentityContextProvider {...useIdentityProviderProps(identityProviderProps)}>
+      <Component />
+    </IdentityContextProvider>
+  );
 }
 
 export { IdentityContext, IdentityContextProvider };

@@ -1,21 +1,24 @@
 import { Auth } from "@aws-amplify/auth";
 import {
   IdentityContextProvider as CoreIdentityContextProvider,
-  IAuthComponentProps,
   IIdentityProviderProps as ICoreIdentityProviderProps,
+  IIdentityProviderValue as ICoreIdentityProviderValue,
   IUser as ICoreUser,
+  useIdentityContext as coreUseIdentityContext,
   useIdentityProviderProps as coreUseIdentityProviderProps,
   useTranslation,
 } from "@reactionable/core";
 import Authenticator, { IAuthenticatorProps } from "aws-amplify-react/lib/Auth/Authenticator";
 import { UsernameAttributes } from "aws-amplify-react/lib/Auth/common/types";
-import { ConfirmSignIn } from "aws-amplify-react/lib/Auth/ConfirmSignIn";
-import ForgotPassword from "aws-amplify-react/lib/Auth/ForgotPassword";
-import SignIn from "aws-amplify-react/lib/Auth/SignIn";
-import VerifyContact from "aws-amplify-react/lib/Auth/VerifyContact";
-import { PropsWithChildren, ReactElement, useEffect, useState } from "react";
+import { ComponentType, PropsWithChildren, ReactElement, useEffect, useState } from "react";
 
-export type IUser = ICoreUser;
+export type IUser = ICoreUser & {
+  id: string;
+  username: string;
+  attributes: {
+    email: string;
+  };
+};
 
 export {
   SignIn,
@@ -26,26 +29,16 @@ export {
   SignOut,
 } from "aws-amplify-react/lib/Auth";
 
-const dataToUser = (data?: {
-  id: string;
-  username: string;
-  attributes: {
-    email: string;
-  };
-}): IUser | null => {
+const dataToUser = (data?: IUser): IUser | null => {
   if (!data) {
     return null;
   }
-  return {
-    displayName: () => data?.attributes?.email || "",
-  } as IUser;
+  return data;
 };
 
-function AuthComponent({
-  setUser,
-  ...props
-}: PropsWithChildren<IAuthComponentProps<IUser> & IAuthenticatorProps>) {
+function AuthComponent(props: PropsWithChildren<IAuthenticatorProps>) {
   const { t } = useTranslation();
+  const { setUser, hide } = useIdentityContext();
 
   const authenticatorProps = Object.assign(
     {
@@ -68,10 +61,12 @@ function AuthComponent({
             displayOrder: 2,
             type: "password",
           },
+          ...(props?.signUpConfig?.signUpFields || []),
         ],
+        ...(props?.signUpConfig || {}),
       },
     },
-    props
+    hide
   );
 
   return (
@@ -80,15 +75,14 @@ function AuthComponent({
       onStateChange={(authState: string, data?) => {
         setUser(authState !== "signedIn" ? null : dataToUser(data));
       }}
-    >
-      {[SignIn, ConfirmSignIn, VerifyContact, ForgotPassword]}
-    </Authenticator>
+    />
   );
 }
 
 export type IIdentityProviderProps = ICoreIdentityProviderProps<IUser> & IAuthenticatorProps;
+export type IIdentityProviderValue = ICoreIdentityProviderValue<IUser> & IAuthenticatorProps;
 
-export const useIdentityContextProviderProps = (
+export const useIdentityProviderProps = (
   props: Partial<IIdentityProviderProps> = {}
 ): IIdentityProviderProps => {
   const user = props.user;
@@ -110,14 +104,38 @@ export const useIdentityContextProviderProps = (
     ...coreUseIdentityProviderProps(),
     identityProvider: "Amplify",
     logout: async () => await Auth.signOut(),
+    login: async (values) => {
+      const result = await Auth.signIn(values);
+      const user = dataToUser(result);
+      if (user) {
+        return user;
+      }
+
+      throw new Error("No user retrieved from signIn");
+    },
     AuthComponent,
     user,
     ...props,
   };
 };
 
+export function useIdentityContext(): IIdentityProviderValue {
+  return coreUseIdentityContext();
+}
+
+export function withIdentityContext(
+  Component: ComponentType,
+  identityProviderProps?: Partial<IIdentityProviderProps>
+): ReactElement {
+  return (
+    <IdentityContextProvider {...useIdentityProviderProps(identityProviderProps)}>
+      <Component />
+    </IdentityContextProvider>
+  );
+}
+
 export const IdentityContextProvider = (
   props?: PropsWithChildren<Partial<IIdentityProviderProps>>
 ): ReactElement => {
-  return <CoreIdentityContextProvider {...useIdentityContextProviderProps()} {...props} />;
+  return <CoreIdentityContextProvider {...useIdentityProviderProps(props)} />;
 };

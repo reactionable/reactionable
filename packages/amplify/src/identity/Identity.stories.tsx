@@ -1,10 +1,10 @@
 import "@aws-amplify/ui/dist/style.css";
 
-import { useIdentityContext } from "@reactionable/core";
-import { ReactElement } from "react";
+import { boolean, withKnobs } from "@storybook/addon-knobs";
+import { ReactElement, useEffect } from "react";
 
 import { configure } from "../Amplify";
-import { IdentityContextProvider, SignUp } from "./Identity";
+import { IdentityContextProvider, useIdentityContext, withIdentityContext } from "./Identity";
 
 configure({
   oauth: {},
@@ -14,37 +14,36 @@ configure({
 
 export default {
   title: "Amplify/Components/Identity",
-  parameters: { info: { inline: true }, options: { showPanel: true } },
   component: IdentityContextProvider,
+  decorators: [withKnobs],
 };
 
 export const UseIdentityContext = (): ReactElement => {
-  const Authentication = () => {
-    const { auth, user, displayName } = useIdentityContext();
-    return (
+  const userIsLoggedIn = boolean("User is logged in", false);
+
+  return withIdentityContext(() => {
+    const { auth, user, setUser, displayName } = useIdentityContext();
+
+    useEffect(() => {
+      setUser(
+        userIsLoggedIn
+          ? { id: "test-user-id", username: "Test user", attributes: { email: "test@test.com" } }
+          : null
+      );
+    }, [userIsLoggedIn]);
+
+    return user ? (
       <>
-        <p>User signed-in: {user ? displayName() : "No user"}</p>
-        {auth}
+        <h3>User signed-in: {displayName()}</h3>
+        <pre>
+          <code>{JSON.stringify(user, null, 2)}</code>
+        </pre>
+      </>
+    ) : (
+      <>
+        <h3>No user please login</h3>
+        <div>{auth}</div>
       </>
     );
-  };
-
-  return (
-    <IdentityContextProvider>
-      <Authentication />
-    </IdentityContextProvider>
-  );
-};
-
-export const HideSignUpForm = (): ReactElement => {
-  const Authentication = () => {
-    const { auth } = useIdentityContext();
-    return auth;
-  };
-
-  return (
-    <IdentityContextProvider hide={[SignUp]}>
-      <Authentication />
-    </IdentityContextProvider>
-  );
+  });
 };
