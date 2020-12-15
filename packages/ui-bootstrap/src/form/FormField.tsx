@@ -7,11 +7,12 @@ import {
   IRenderFormField,
 } from "@reactionable/core/lib/form/FormField";
 import { ReactElement, ReactNode } from "react";
-import Feedback from "react-bootstrap/Feedback";
 import FormCheck, { FormCheckProps } from "react-bootstrap/FormCheck";
 import FormControl, { FormControlProps } from "react-bootstrap/FormControl";
 import FormGroup from "react-bootstrap/FormGroup";
 import FormLabel from "react-bootstrap/FormLabel";
+
+import { FormErrorMessage } from "./FormErrorMessage";
 
 export type IFieldElementProps = ICoreFieldElementProps;
 
@@ -30,13 +31,8 @@ export type IFormFieldPropsEnhanced<
 export function RenderFormField<
   FieldElementProps extends IFieldElementProps = IFieldElementProps,
   Value extends IFormFieldValue = IFormFieldValue
->({
-  error,
-  isValid,
-  isInvalid,
-  field,
-}: IFormFieldPropsEnhanced<FieldElementProps, Value>): ReactElement {
-  let fieldContent: ReactElement;
+>({ isValid, isInvalid, field }: IFormFieldPropsEnhanced<FieldElementProps, Value>): ReactElement {
+  let input: ReactElement;
 
   const fieldProps = {
     ...field,
@@ -45,27 +41,25 @@ export function RenderFormField<
   };
 
   if (field.type === "checkbox") {
-    fieldContent = <FormCheck {...(fieldProps as FormCheckProps)} />;
+    input = <FormCheck {...(fieldProps as FormCheckProps)} />;
   } else {
-    fieldContent = <FormControl {...(fieldProps as FormControlProps)} />;
+    input = <FormControl {...(fieldProps as FormControlProps)} />;
     if (field.label) {
-      fieldContent = (
+      input = (
         <>
           <FormLabel>{field.label}</FormLabel>
-          {fieldContent}
+          {input}
         </>
       );
     }
   }
 
-  if (error) {
-    fieldContent = (
-      <>
-        {fieldContent}
-        <Feedback type="invalid">{error}</Feedback>
-      </>
-    );
-  }
+  const fieldContent = (
+    <>
+      {input}
+      <FormErrorMessage name={fieldProps.name} />
+    </>
+  );
 
   if (field.type === "hidden") {
     return fieldContent;

@@ -1,11 +1,13 @@
 import { boolean, withKnobs } from "@storybook/addon-knobs";
 import { ReactElement, useEffect } from "react";
 
+import { Auth } from "./Auth";
 import { IdentityContextProvider, useIdentityContext, withIdentityContext } from "./Identity";
 
 export default {
   title: "Core/Components/Identity",
   component: IdentityContextProvider,
+  sub_components: [Auth],
   decorators: [withKnobs],
 };
 
@@ -34,3 +36,5 @@ export const UseIdentityContext = (): ReactElement => {
     );
   });
 };
+
+export const BasicAuth = (): ReactElement => <Auth />;

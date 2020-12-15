@@ -17,6 +17,7 @@ export * from "./crud/read/Read";
 export * from "./crud/update/Update";
 export * from "./form/Form";
 export * from "./form/FormButton";
+export * from "./form/FormErrorMessage";
 export * from "./form/FormField";
 export * from "./form/useForm";
 export * from "./form/useFormField";

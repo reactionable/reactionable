@@ -67,20 +67,13 @@ const FormFieldInput = forwardRef(function FormFieldInput(
 export function RenderFormField<
   FieldElementProps extends IFieldElementProps = IFieldElementProps,
   Value extends IFormFieldValue = IFormFieldValue
->({
-  error,
-  field: { label, ...props },
-}: IFormFieldPropsEnhanced<FieldElementProps, Value>): ReactElement {
-  let fieldContent: ReactElement = <FormFieldInput {...props} />;
-
-  if (error) {
-    fieldContent = (
-      <>
-        {fieldContent}
-        <FormErrorMessage name={props.name} />
-      </>
-    );
-  }
+>({ field: { label, ...props } }: IFormFieldPropsEnhanced<FieldElementProps, Value>): ReactElement {
+  let fieldContent = (
+    <>
+      <FormFieldInput {...props} />
+      <FormErrorMessage name={props.name} />
+    </>
+  );
 
   if (props.type === "hidden") {
     return fieldContent;
