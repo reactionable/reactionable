@@ -1,10 +1,6 @@
-import {
-  IdentityContextProvider,
-  useIdentityContext,
-  useIdentityProviderProps,
-} from "@reactionable/core/lib/identity/Identity";
+import { useIdentityContext, withIdentityContext } from "@reactionable/core/lib/identity/Identity";
 import { boolean, select, withKnobs } from "@storybook/addon-knobs";
-import { ReactElement } from "react";
+import { ReactElement, useEffect } from "react";
 
 import { UIContextProvider } from "../../UI";
 import { Header } from "./Header";
@@ -23,20 +19,38 @@ export const BasicHeader = (): ReactElement => {
   );
 
   const dark = boolean("Dark Mode", false);
-  const user = boolean("Logged in user", false);
-  const { setUser } = useIdentityContext();
-
-  setUser(user ? { username: "User" } : null);
 
   return (
-    <IdentityContextProvider {...useIdentityProviderProps()}>
-      <UIContextProvider theme={{ palette: { type: dark ? "dark" : "light" } }}>
-        <Header
-          brand="Test brand header"
-          color={variant}
-          navItems={[{ href: "/sample", children: "Sample link" }]}
-        />
-      </UIContextProvider>
-    </IdentityContextProvider>
+    <UIContextProvider theme={{ palette: { type: dark ? "dark" : "light" } }}>
+      <Header
+        brand="Test brand header"
+        color={variant}
+        navItems={[{ href: "/sample", children: "Sample link" }]}
+      />
+    </UIContextProvider>
+  );
+};
+
+export const HeaderWithIdentity = (): ReactElement => {
+  const userIsLoggedIn = boolean("User is logged in", false);
+
+  return withIdentityContext(
+    () => {
+      const { setUser } = useIdentityContext();
+
+      useEffect(() => {
+        setUser(userIsLoggedIn ? { username: "Test user" } : null);
+      }, [userIsLoggedIn]);
+
+      return (
+        <UIContextProvider>
+          <Header
+            brand="Test brand header"
+            navItems={[{ href: "/sample", children: "Sample link" }]}
+          />
+        </UIContextProvider>
+      );
+    },
+    { identityProvider: "storybook" }
   );
 };

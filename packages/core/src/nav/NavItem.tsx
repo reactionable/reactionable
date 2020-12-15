@@ -10,7 +10,7 @@ export type INavItemsProps<NavItemProps extends INavItemProps> = {
 };
 
 export function NavItem<NavItemProps extends INavItemProps>(props: NavItemProps): ReactElement {
-  return useUIContext().useLink(props);
+  return <li>{useUIContext().useLink(props)}</li>;
 }
 
 export type INavItemsComponentProps<

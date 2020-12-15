@@ -34,7 +34,7 @@ const UserLoggedHeaderNav = () => {
     <>
       <IconButton
         edge="end"
-        aria-label={displayName()}
+        aria-label={displayName() || ""}
         aria-controls="user-menu"
         aria-haspopup="true"
         onClick={handleClick}
@@ -67,7 +67,7 @@ export const UserHeaderNav = (): ReactElement | null => {
   return (
     <div>
       <UserLoggedHeaderNav />
-      <UserUnloggedHeaderNav />
+      <UserUnloggedHeaderNav NavItemComponent={MenuItem} />
     </div>
   );
 };

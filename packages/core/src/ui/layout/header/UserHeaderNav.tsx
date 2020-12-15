@@ -2,6 +2,7 @@ import { ComponentType, ReactElement, MouseEvent as ReactMouseEvent, useEffect }
 
 import { useTranslation } from "../../../i18n/I18n";
 import { useIdentityContext } from "../../../identity/Identity";
+import { NavItem } from "../../../nav/NavItem";
 import { useRouterContext } from "../../../router/Router";
 import { ILinkProps } from "../../link/Link";
 import { useUIContext } from "../../UI";
@@ -14,10 +15,19 @@ export type IAccountLinkProps<LinkProps extends ILinkProps> = IWithNavItemCompon
 
 export function AccountLink<LinkProps extends ILinkProps = ILinkProps>({
   NavItemComponent,
+  onClick,
   ...props
 }: IAccountLinkProps<LinkProps>): ReactElement {
   const { useLink } = useUIContext();
   const { t } = useTranslation("identity");
+  const router = useRouterContext().useRouter();
+
+  const handleClick = (event: ReactMouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    if (onClick) {
+      onClick(event);
+    }
+    router.push("/account");
+  };
 
   const linkComponentProps = {
     children: t("My account"),
@@ -25,7 +35,7 @@ export function AccountLink<LinkProps extends ILinkProps = ILinkProps>({
   } as LinkProps;
 
   return useLink({
-    href: "/account",
+    onClick: handleClick,
     Component: NavItemComponent,
     ...linkComponentProps,
   });
@@ -34,19 +44,18 @@ export function AccountLink<LinkProps extends ILinkProps = ILinkProps>({
 export type ILogoutLinkProps<LinkProps extends ILinkProps> = IWithNavItemComponentProps<LinkProps>;
 
 export function LogoutLink<LinkProps extends ILinkProps = ILinkProps>({
-  NavItemComponent,
+  NavItemComponent = NavItem,
   onClick,
   ...props
 }: ILogoutLinkProps<LinkProps>): ReactElement {
   const { logout } = useIdentityContext();
   const { t } = useTranslation("identity");
-  const { useRouter } = useRouterContext();
+  const router = useRouterContext().useRouter();
   const { useLoader, useErrorNotification } = useUIContext();
   const { loader, setLoading } = useLoader({ loading: false });
   const { errorNotification, setErrorNotification } = useErrorNotification({
     title: t("Log out"),
   });
-  const router = useRouter();
   const { useLink } = useUIContext();
 
   const handleLogout = (event: ReactMouseEvent<HTMLAnchorElement, MouseEvent>) => {
@@ -70,7 +79,6 @@ export function LogoutLink<LinkProps extends ILinkProps = ILinkProps>({
   } as LinkProps;
 
   const link = useLink({
-    href: "#",
     Component: NavItemComponent,
     ...linkComponentProps,
   });
@@ -89,10 +97,9 @@ export type IUserLoggedHeaderNavProps<LinkProps extends ILinkProps> = {
 };
 
 export function UserLoggedHeaderNav<LinkProps extends ILinkProps = ILinkProps>({
-  NavItemComponent,
+  NavItemComponent = NavItem,
 }: IUserLoggedHeaderNavProps<LinkProps>): ReactElement | null {
   const { user, displayName } = useIdentityContext();
-
   if (!user) {
     return null;
   }
@@ -102,10 +109,10 @@ export function UserLoggedHeaderNav<LinkProps extends ILinkProps = ILinkProps>({
   } as IWithNavItemComponentProps<LinkProps>;
 
   return (
-    <div key="userNav" id="userNav" title={displayName()}>
+    <ul title={displayName() || ""}>
       <AccountLink<LinkProps> {...withNavItemComponentProps} />
       <LogoutLink<LinkProps> {...withNavItemComponentProps} />
-    </div>
+    </ul>
   );
 }
 
@@ -114,7 +121,7 @@ export type IUserUnloggedHeaderNavProps<LinkProps extends ILinkProps> = {
 };
 
 export function UserUnloggedHeaderNav<LinkProps extends ILinkProps = ILinkProps>({
-  NavItemComponent,
+  NavItemComponent = NavItem,
 }: IUserUnloggedHeaderNavProps<LinkProps>): ReactElement | null {
   const { t } = useTranslation();
   const { user, auth } = useIdentityContext();
@@ -143,7 +150,6 @@ export function UserUnloggedHeaderNav<LinkProps extends ILinkProps = ILinkProps>
   } as LinkProps;
 
   const link = useLink({
-    href: "#",
     Component: NavItemComponent,
     ...linkComponentProps,
   });
@@ -164,9 +170,9 @@ export function UserHeaderNav<LinkProps extends ILinkProps = ILinkProps>(): Reac
   }
 
   return (
-    <div>
+    <>
       <UserLoggedHeaderNav<LinkProps> />
       <UserUnloggedHeaderNav<LinkProps> />
-    </div>
+    </>
   );
 }

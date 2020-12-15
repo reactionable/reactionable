@@ -23,6 +23,7 @@ export type ILinkProps = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onClick?: (event: ReactMouseEvent<any, MouseEvent>) => void;
   "data-testid"?: string;
+  Component?: ComponentType<Omit<ILinkProps, "Component">>;
 };
 
 export type LinkComponent = ComponentType<ILinkProps>;
@@ -31,9 +32,17 @@ export function useLink(props: ILinkProps): ReactElement {
   return <Link {...props} />;
 }
 
-function LinkComponent(props: ILinkProps, ref: Ref<ComponentType<ILinkProps>>) {
-  const { RouterLink } = useRouterContext();
-  return <RouterLink {...props} ref={ref} />;
+function LinkComponent({ Component, ...props }: ILinkProps, ref: Ref<ComponentType<ILinkProps>>) {
+  if (props.href) {
+    const { RouterLink } = useRouterContext();
+    return <RouterLink {...props} ref={ref} Component={Component} />;
+  }
+
+  if (Component) {
+    return <Component {...props} />;
+  }
+
+  return <a {...props} />;
 }
 
 export const Link = forwardRef(LinkComponent);

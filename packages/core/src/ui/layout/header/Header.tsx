@@ -37,12 +37,12 @@ export function Header<
   return (
     <header {...navbarProps}>
       {brandContent}
-      <div>
-        <div>
+      <nav>
+        <ul>
           <NavItems navItems={navItems} />
-        </div>
+        </ul>
         <UserHeaderNavComponent />
-      </div>
+      </nav>
     </header>
   );
 }

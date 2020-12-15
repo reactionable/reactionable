@@ -28,8 +28,6 @@ const useStyles = makeStyles((theme) =>
       justifyContent: "flex-start",
       alignItems: "center",
     },
-    navItems: {},
-    identityNav: {},
   })
 );
 
@@ -62,18 +60,16 @@ export const Header = ({
   }
 
   return (
-    <AppBar position="static" {...appBarProps} component="header">
+    <AppBar position="static" color="default" {...appBarProps} component="header">
       <Toolbar>
         {brandContent}
-        {children ? (
-          <div className={classes.children}>{children}</div>
-        ) : (
-          <div className={classes.navItems}>
+        <div className={classes.children}>
+          {children || (
             <List>
               <NavItems navItems={navItems} />
             </List>
-          </div>
-        )}
+          )}
+        </div>
         <UserHeaderNavComponent />
       </Toolbar>
     </AppBar>
