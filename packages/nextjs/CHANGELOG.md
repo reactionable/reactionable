@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.27.5 (2020-12-15)
+
+
+### Bug Fixes
+
+* **identity:** attempt to fix authentication error handling ([bb136bb](https://github.com/reactionable/reactionable/commit/bb136bbd7ce919e288628300a1b849e4824a4182))
+
+
+
+
+
 ## 0.27.4 (2020-12-15)
 
 
