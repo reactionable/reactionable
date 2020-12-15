@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.27.4 (2020-12-15)
+
+
+### Bug Fixes
+
+* **form:** prevent loosing focus when field error state change ([8a95bee](https://github.com/reactionable/reactionable/commit/8a95bee1e94917b01cc5a2fa7ee3fefc0b1c0c73))
+
+
+
+
+
 ## 0.27.3 (2020-12-15)
 
 **Note:** Version bump only for package @reactionable/ui-bootstrap
