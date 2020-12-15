@@ -13,6 +13,7 @@ import { IUseErrorAlertProps, useErrorAlert } from "./alert/ErrorAlert";
 import { IUseWarningAlertProps, useWarningAlert } from "./alert/WarningAlert";
 import { IUseConfirmationProps, useConfirmation } from "./confirmation/Confirmation";
 import { useForm } from "./form/useForm";
+import { useFormField } from "./form/useFormField";
 import { IUseLayoutProps, useLayout } from "./layout/Layout";
 import { useLink } from "./link/Link";
 import { IUseLoaderProps, useLoader } from "./loader/Loader";
@@ -66,6 +67,7 @@ export function useUIProviderProps(props?: Partial<IUIProviderProps>): IUIProvid
     useConfirmation,
     useLayout,
     useForm,
+    useFormField,
     useModal,
     useModalForm,
     useLink,

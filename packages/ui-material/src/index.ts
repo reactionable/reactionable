@@ -19,6 +19,7 @@ export * from "./form/Form";
 export * from "./form/FormButton";
 export * from "./form/FormField";
 export * from "./form/useForm";
+export * from "./form/useFormField";
 export * from "./i18n/language-selector/LanguageSelector";
 export * from "./icon/Icon";
 export * from "./layout/Layout";

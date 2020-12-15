@@ -19,6 +19,7 @@ export * from "./form/Form";
 export * from "./form/FormButton";
 export * from "./form/FormField";
 export * from "./form/useForm";
+export * from "./form/useFormField";
 export * from "./icon/Icon";
 export * from "./layout/Layout";
 export * from "./layout/body/Body";

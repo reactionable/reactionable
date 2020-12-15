@@ -3,7 +3,9 @@ import { ReactElement } from "react";
 import { IProviderProps, createProvider } from "../app/Provider";
 import { Form, IFormData, IFormValues } from "../form/Form";
 import { IFormButtonProps } from "../form/FormButton";
+import { FormField } from "../form/FormField";
 import { IUseFormProps, IUseFormResult, useForm } from "../form/useForm";
+import { IUseFormFieldProps, IUseFormFieldResult, useFormField } from "../form/useFormField";
 import { Alert } from "./alert/Alert";
 import {
   ErrorAlert,
@@ -42,6 +44,7 @@ import {
   IUseSuccessNotificationResult,
   useSuccessNotification,
 } from "./notification/SuccessNotification";
+import { IFieldElementProps, IFormFieldValue } from "..";
 
 export type IUIProviderProps<
   UseLoaderProps extends IUseLoaderProps = IUseLoaderProps,
@@ -77,6 +80,12 @@ export type IUIProviderProps<
   >(
     props: IUseFormProps<Values, Data, FormButtonProps>
   ) => IUseFormResult;
+  useFormField: <
+    FieldElementProps extends IFieldElementProps = IFieldElementProps,
+    Value extends IFormFieldValue = IFormFieldValue
+  >(
+    props: IUseFormFieldProps<FieldElementProps, Value>
+  ) => IUseFormFieldResult;
   useModal: <Props extends UseModalProps = UseModalProps>(props: Props) => IUseModalResult;
   useModalForm: <
     Values extends IFormValues = IFormValues,
@@ -106,6 +115,7 @@ export function useUIProviderProps(props?: Partial<IUIProviderProps>): IUIProvid
         FooterComponent: Footer,
       }),
     useForm: (props) => useForm({ Component: Form, ...props }),
+    useFormField: (props) => useFormField({ Component: FormField, ...props }),
     useModal: (props) => useModal({ Component: Modal, ...props }),
     useModalForm,
     useLink,

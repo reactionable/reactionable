@@ -86,11 +86,10 @@ export function RenderFormField<
     return fieldContent;
   }
 
-  if (!label) {
+  if (label) {
     fieldContent = (
       <label>
-        {label}
-        {fieldContent}
+        {label} {fieldContent}
       </label>
     );
   }
