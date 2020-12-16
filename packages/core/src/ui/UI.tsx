@@ -56,7 +56,7 @@ export type IUIProviderProps<
   UseLayoutProps extends IUseLayoutProps = IUseLayoutProps,
   UseModalProps extends IUseModalProps = IUseModalProps
 > = IProviderProps<{
-  useLoader: <Props extends UseLoaderProps = UseLoaderProps>(props: Props) => IUseLoaderResult;
+  useLoader: <Props extends UseLoaderProps = UseLoaderProps>(props?: Props) => IUseLoaderResult;
   useSuccessNotification: <Props extends UseSuccessNotificationProps = UseSuccessNotificationProps>(
     props: Props
   ) => IUseSuccessNotificationResult;

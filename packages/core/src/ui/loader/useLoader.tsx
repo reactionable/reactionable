@@ -13,7 +13,7 @@ export type IUseLoaderResult = {
   setLoading: (loading: boolean) => void;
 };
 
-export type IUseLoader<P extends IUseLoaderProps> = (props: P) => IUseLoaderResult;
+export type IUseLoader<P extends IUseLoaderProps> = (props?: P) => IUseLoaderResult;
 
 export function useLoader<UseLoaderProps extends IUseLoaderProps = IUseLoaderProps>(
   { Component, loading, ...props }: UseLoaderProps = {

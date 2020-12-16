@@ -4,7 +4,6 @@ import { ComponentType, PropsWithChildren } from "react";
 import { IProviderProps, createProvider } from "../app/Provider";
 import { useTranslation } from "../i18n/I18n";
 import { IUseQueryResult } from "../query/Query";
-import { QueryWrapper } from "../query/QueryWrapper";
 import { useUIContext } from "../ui/UI";
 import { Auth } from "./Auth";
 
@@ -70,17 +69,21 @@ function IdentityContextProvider<User extends IUser>({
 }: PropsWithChildren<IIdentityProviderProps<User>>): ReactElement {
   const [userState, setUserState] = useState<User | null | undefined>();
   const { data: user, loading, error } = useFetchUser();
-  const { useErrorNotification } = useUIContext();
+  const { useErrorNotification, useErrorAlert, useLoader } = useUIContext();
   const { t } = useTranslation("identity");
   const { errorNotification, setErrorNotification } = useErrorNotification({
     title: t("Authentication"),
   });
+  const { errorAlert, setErrorAlert } = useErrorAlert();
+  const { loader, setLoading } = useLoader();
 
   const setUser = (newUser: User | null | undefined) => {
     setUserState((currentUser) => (currentUser === newUser ? currentUser : newUser));
   };
 
   useEffect(() => {
+    setLoading(loading);
+
     if (loading) {
       setUser(undefined);
       return;
@@ -88,6 +91,10 @@ function IdentityContextProvider<User extends IUser>({
 
     setUser(user);
   }, [user, loading]);
+
+  useEffect(() => {
+    setErrorAlert(error);
+  }, [error]);
 
   const loginHandler = async (values: ILoginFormValues) => {
     const user = await login(values);
@@ -108,11 +115,7 @@ function IdentityContextProvider<User extends IUser>({
     return userState ? displayName(userState) : null;
   };
 
-  const auth = (
-    <QueryWrapper loading={loading} data={true} error={error}>
-      {() => <AuthComponent />}
-    </QueryWrapper>
-  );
+  const auth = <AuthComponent />;
 
   const providerValues: IIdentityProviderValue<User> = {
     ...props,
@@ -129,7 +132,9 @@ function IdentityContextProvider<User extends IUser>({
 
   return (
     <IdentityContext.Provider value={providerValues as IIdentityProviderValue<IUser>}>
+      {loader}
       {errorNotification}
+      {errorAlert}
       {props.children}
     </IdentityContext.Provider>
   );
