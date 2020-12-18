@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.27.8 (2020-12-18)
+
+
+### Bug Fixes
+
+* **router:** use router context instead of router props ([6539396](https://github.com/reactionable/reactionable/commit/653939685fdd52c36bfde1b07f82423cd9ffef95))
+
+
+
+
+
 ## 0.27.7 (2020-12-18)
 
 **Note:** Version bump only for package @reactionable/ui-material
