@@ -1,6 +1,6 @@
 import UILink, { LinkProps } from "@material-ui/core/Link";
+import { useRouterProviderProps } from "@reactionable/core/lib/router/Router";
 import { isLinkProps as coreIsLinkProps } from "@reactionable/core/lib/ui/link/Link";
-import { useRouterProviderProps } from "@reactionable/core/src/router/Router";
 import { ReactNode } from "react";
 import { PropsWithChildren, ReactElement } from "react";
 

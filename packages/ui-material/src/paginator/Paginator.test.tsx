@@ -1,4 +1,4 @@
-import { i18nTestInstance } from "@reactionable/core/src/tests/I18n";
+import { i18nTestInstance } from "@reactionable/core/lib/tests/I18n";
 import { render } from "@testing-library/react";
 
 import { Paginator } from "./Paginator";
