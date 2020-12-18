@@ -1,10 +1,14 @@
 import { IRouterLinkProps as ICoreRouterLinkProps } from "@reactionable/core/lib/router/RouterLink";
 import Link, { LinkProps } from "next/link";
-import { ReactElement } from "react";
+import { Children, ReactElement, ReactNode } from "react";
 
 export type IRouterLinkProps = ICoreRouterLinkProps & LinkProps;
 
-export function RouterLink({ Component, ...props }: IRouterLinkProps): ReactElement {
+export function RouterLink({ Component, children, ...props }: IRouterLinkProps): ReactElement {
+  if (Children.count(children) > 1) {
+    children = <>{children}</>;
+  }
+
   if (Component) {
     const {
       href,
@@ -19,6 +23,7 @@ export function RouterLink({ Component, ...props }: IRouterLinkProps): ReactElem
     } = props;
 
     const linkProps = {
+      children,
       href,
       as,
       replace,
@@ -31,9 +36,13 @@ export function RouterLink({ Component, ...props }: IRouterLinkProps): ReactElem
 
     return (
       <Link {...linkProps} passHref>
-        <Component {...componentProps} />
+        <Component {...componentProps}>{children}</Component>
       </Link>
     );
   }
-  return <Link {...props} />;
+  return (
+    <Link {...props} passHref>
+      {children as ReactNode}
+    </Link>
+  );
 }

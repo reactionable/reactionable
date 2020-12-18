@@ -58,5 +58,5 @@ export const useRouterProviderProps = (
 export const RouterContextProvider = (
   props?: PropsWithChildren<Partial<IRouterProviderProps>>
 ): ReactElement => {
-  return <CoreRouterContextProvider {...useRouterProviderProps()} {...props} />;
+  return <CoreRouterContextProvider {...useRouterProviderProps(props)} />;
 };

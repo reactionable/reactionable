@@ -1,4 +1,4 @@
-import { useRouterProviderProps } from "@reactionable/core";
+import { useRouterContext } from "@reactionable/core";
 import {
   NavItems as CoreNavItems,
   INavItemProps as ICoreNavItemProps,
@@ -13,7 +13,7 @@ export type INavItemProps = ICoreNavItemProps &
   Omit<NavLinkProps, "onSelect"> & { icon?: IIconProps };
 
 export function NavItem({ icon, children, ...linkProps }: INavItemProps): ReactElement {
-  const { RouterLink } = useRouterProviderProps();
+  const { RouterLink } = useRouterContext();
   if (!linkProps.title && typeof children === "string") {
     const title: string = children as string;
     linkProps.title = title;

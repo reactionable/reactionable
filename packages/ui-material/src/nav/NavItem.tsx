@@ -8,15 +8,14 @@ import {
   INavItemProps as ICoreNavItemProps,
   INavItemsComponentProps,
 } from "@reactionable/core/lib/nav/NavItem";
-import { useRouterProviderProps } from "@reactionable/core/lib/router/Router";
 import { ReactElement } from "react";
 
 import { Icon } from "../icon/Icon";
+import { Link } from "../link/Link";
 
 export type INavItemProps = ICoreNavItemProps & LinkProps & { icon?: typeof SvgIcon };
 
 export function NavItem(props: INavItemProps): ReactElement {
-  const { RouterLink } = useRouterProviderProps();
   const { icon, children, ...linkProps } = props;
 
   if (!linkProps.title && typeof children === "string") {
@@ -24,7 +23,7 @@ export function NavItem(props: INavItemProps): ReactElement {
   }
 
   return (
-    <ListItem button component={RouterLink} {...linkProps}>
+    <ListItem button component={Link} {...linkProps}>
       {icon && (
         <ListItemIcon>
           <Icon icon={icon} />
