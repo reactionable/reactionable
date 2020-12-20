@@ -9,6 +9,7 @@
     "format": "prettier --write \"**/*.ts\"  \"!**/lib/**\"",
     "lint": "lerna run --stream lint --",
     "build": "lerna run --stream build --",
+    "build:ci": "yarn build -p tsconfig.build.json",
     "build:doc": "rimraf -rf build/docs && typedoc",
     "link": "node dev-link link",
     "unlink": "node dev-link unlink",
