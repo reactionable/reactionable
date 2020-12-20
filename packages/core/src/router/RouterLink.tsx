@@ -1,56 +1,30 @@
 import { compile } from "path-to-regexp";
-import {
-  ElementType,
-  ForwardRefExoticComponent,
-  PropsWithoutRef,
-  Ref,
-  RefAttributes,
-  createElement,
-  forwardRef,
-} from "react";
+import { ComponentType, ForwardedRef, ReactElement, forwardRef } from "react";
 
 import { IRouteMatchParams } from "./Route";
 
-export type IRouterLinkPropsComponent<Props> = ForwardRefExoticComponent<Props>;
-
 export type IRouterLinkProps<
   Props extends Record<string, unknown> = Record<string, unknown>
-> = Props & {
+> = Partial<Props> & {
   href?: string;
-  Component?: IRouterLinkPropsComponent<Props>;
+  Component: ComponentType<Partial<Props>>;
 };
 
 export type IRouterLinkComponent<
   RouterLinkProps extends IRouterLinkProps
-> = ForwardRefExoticComponent<
-  PropsWithoutRef<RouterLinkProps> & RefAttributes<ElementType<ILinkAnchorProps<RouterLinkProps>>>
->;
+> = ComponentType<RouterLinkProps>;
 
 export type ILinkAnchorProps<RouterLinkProps extends IRouterLinkProps> = Omit<
   RouterLinkProps,
   "Component"
 >;
 
-function LinkAnchorComponent<RouterLinkProps extends IRouterLinkProps>(
-  props: ILinkAnchorProps<RouterLinkProps>,
-  ref: Ref<HTMLAnchorElement>
-) {
-  return <a ref={ref} {...props} />;
-}
-
-export const LinkAnchor = forwardRef(LinkAnchorComponent);
-
-function RouterLinkComponent<RouterLinkProps extends IRouterLinkProps>(
-  { Component = LinkAnchor, ...props }: RouterLinkProps,
-  ref: Ref<ElementType<RouterLinkProps>>
-) {
-  return createElement(Component, { ...props, ref });
-}
-
-export const RouterLink = forwardRef<
-  ElementType<ILinkAnchorProps<IRouterLinkProps>>,
-  IRouterLinkProps
->(RouterLinkComponent);
+export const RouterLink = forwardRef(function RouterLink<RouterLinkProps extends IRouterLinkProps>(
+  { Component, ...props }: RouterLinkProps,
+  ref: ForwardedRef<unknown>
+): ReactElement {
+  return <Component {...props} ref={ref} />;
+});
 
 const normalizePath = (path: string): string => {
   path = path.trim();

@@ -1,48 +1,32 @@
 import { IRouterLinkProps as ICoreRouterLinkProps } from "@reactionable/core/lib/router/RouterLink";
 import Link, { LinkProps } from "next/link";
-import { Children, ReactElement, ReactNode } from "react";
+import { PropsWithChildren, ReactElement, forwardRef } from "react";
 
-export type IRouterLinkProps = ICoreRouterLinkProps & LinkProps;
+export type IRouterLinkProps = ICoreRouterLinkProps<
+  PropsWithChildren<Omit<LinkProps, "href" | "Component">>
+>;
 
-export function RouterLink({ Component, children, ...props }: IRouterLinkProps): ReactElement {
-  if (Children.count(children) > 1) {
-    children = <>{children}</>;
-  }
+export const RouterLink = forwardRef(function RouterLink(
+  { Component, children, href = "", ...props }: IRouterLinkProps,
+  ref
+): ReactElement {
+  const { as, replace, scroll, shallow, passHref, prefetch, locale, ...componentProps } = props;
 
-  if (Component) {
-    const {
-      href,
-      as,
-      replace,
-      scroll,
-      shallow,
-      passHref,
-      prefetch,
-      locale,
-      ...componentProps
-    } = props;
+  const linkProps = {
+    href,
+    as,
+    replace,
+    scroll,
+    shallow,
+    passHref,
+    prefetch,
+    locale,
+    ref,
+  };
 
-    const linkProps = {
-      children,
-      href,
-      as,
-      replace,
-      scroll,
-      shallow,
-      passHref,
-      prefetch,
-      locale,
-    };
-
-    return (
-      <Link {...linkProps} passHref>
-        <Component {...componentProps}>{children}</Component>
-      </Link>
-    );
-  }
   return (
-    <Link {...props} passHref>
-      {children as ReactNode}
+    <Link {...linkProps} passHref>
+      <Component {...componentProps}>{children}</Component>
     </Link>
   );
-}
+});

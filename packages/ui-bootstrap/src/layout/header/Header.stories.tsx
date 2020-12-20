@@ -4,7 +4,7 @@ import { useIdentityContext, withIdentityContext } from "@reactionable/core/lib/
 import { boolean, select, withKnobs } from "@storybook/addon-knobs";
 import { ReactElement, useEffect } from "react";
 
-import { UIContextProvider } from "../../UI";
+import { TestWrapper } from "../../tests/TestWrapper";
 import { Header } from "./Header";
 
 export default {
@@ -16,11 +16,13 @@ export default {
 export const BasicHeader = (): ReactElement => {
   const variant = select("Variant", ["dark", "light", undefined], undefined);
   return (
-    <Header
-      brand="Test brand header"
-      variant={variant}
-      navItems={[{ href: "/sample", children: "Sample link" }]}
-    />
+    <TestWrapper>
+      <Header
+        brand="Test brand header"
+        variant={variant}
+        navItems={[{ href: "/sample", children: "Sample link" }]}
+      />
+    </TestWrapper>
   );
 };
 
@@ -36,12 +38,12 @@ export const HeaderWithIdentity = (): ReactElement => {
       }, [userIsLoggedIn]);
 
       return (
-        <UIContextProvider>
+        <TestWrapper>
           <Header
             brand="Test brand header"
             navItems={[{ href: "/sample", children: "Sample link" }]}
           />
-        </UIContextProvider>
+        </TestWrapper>
       );
     },
     { identityProvider: "storybook" }

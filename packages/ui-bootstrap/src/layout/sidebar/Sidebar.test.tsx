@@ -4,12 +4,17 @@ import { i18nTestInstance } from "@reactionable/core/lib/tests/I18n";
 import { render } from "@testing-library/react";
 
 import { Sidebar, useSidebarContext } from "./Sidebar";
+import { BasicSidebar } from "./Sidebar.stories";
 
 describe("Sidebar", () => {
   beforeAll(i18nTestInstance);
-  it("should render without crashing", () => {
-    const result = render(<Sidebar />);
-    expect(result).toBeTruthy();
+
+  describe("BasicSidebar", () => {
+    it("should render without crashing", () => {
+      const result = render(<BasicSidebar />);
+
+      expect(result).toBeTruthy();
+    });
   });
 
   it("should display nav items", () => {

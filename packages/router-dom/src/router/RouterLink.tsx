@@ -1,25 +1,31 @@
 import { IRouterLinkProps as ICoreRouterLinkProps } from "@reactionable/core/lib/router/RouterLink";
-import { ComponentProps, ReactElement, forwardRef } from "react";
-import { Link, LinkProps } from "react-router-dom";
+import { ForwardedRef, ReactElement, forwardRef } from "react";
+import { LinkProps, Link as RouterDomLink } from "react-router-dom";
 
-export type IRouterLinkProps = ICoreRouterLinkProps & Omit<LinkProps, "to" | "href" | "component">;
+export type IRouterLinkProps = ICoreRouterLinkProps<
+  Partial<Omit<LinkProps, "to" | "href" | "component">>
+>;
 
-export function RouterLink({ href, Component, ...props }: IRouterLinkProps): ReactElement {
-  const component = Component
-    ? forwardRef(function LinkComponent(
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        { navigate, ...props }: ComponentProps<typeof Component>,
-        ref
-      ) {
-        return <Component {...props} ref={ref} />;
-      })
-    : undefined;
+export const RouterLink = forwardRef(function RouterLink(
+  { Component, href = "", ...props }: IRouterLinkProps,
+  ref: ForwardedRef<HTMLAnchorElement>
+): ReactElement {
+  const Link = forwardRef(function Link(
+    {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      navigate, // Do not inject this props provided by router-dom
+      ...props
+    }: IRouterLinkProps & { navigate: unknown },
+    ref
+  ): ReactElement {
+    return <Component {...{ ...props, ref }} />;
+  });
 
   const linkProps: LinkProps = {
     ...props,
-    to: href || "",
-    component,
+    to: href,
+    component: Link,
   };
 
-  return <Link {...linkProps} />;
-}
+  return <RouterDomLink {...linkProps} ref={ref} />;
+});

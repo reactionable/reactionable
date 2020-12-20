@@ -6,7 +6,7 @@ import { RouterContext } from "next/dist/next-server/lib/router-context";
 import { createRouter } from "next/router";
 import { PropsWithChildren, ReactElement } from "react";
 
-import { IRouterProviderProps } from "../router/Router";
+import { IRouterProviderProps, useRouterProviderProps } from "../router/Router";
 
 function RouterComponent({ children }: PropsWithChildren<unknown>): ReactElement {
   const router = createRouter("", {}, "", {
@@ -36,9 +36,12 @@ export function TestWrapper<
 >({
   router,
   ...props
-}: PropsWithChildren<
-  ITestWrapperProps<IdentityProviderProps, UIProviderProps, RouterProviderProps>
->): ReactElement {
-  router = { ...router, Component: RouterComponent } as RouterProviderProps;
-  return <CoreTestWrapper {...props} router={router} />;
+}: ITestWrapperProps<IdentityProviderProps, UIProviderProps, RouterProviderProps>): ReactElement {
+  router = useRouterProviderProps({ ...router, Component: RouterComponent }) as RouterProviderProps;
+  return (
+    <CoreTestWrapper<IdentityProviderProps, UIProviderProps, RouterProviderProps>
+      {...props}
+      router={router}
+    />
+  );
 }

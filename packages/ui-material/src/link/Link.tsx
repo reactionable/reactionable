@@ -1,18 +1,18 @@
 import UILink, { LinkProps } from "@material-ui/core/Link";
-import { useRouterContext } from "@reactionable/core/lib/router/Router";
-import { isLinkProps as coreIsLinkProps } from "@reactionable/core/lib/ui/link/Link";
-import { ForwardedRef, ReactNode, forwardRef } from "react";
-import { PropsWithChildren, ReactElement } from "react";
+import {
+  Link as CoreLink,
+  ILinkProps as ICoreLinkProps,
+  isLinkProps as coreIsLinkProps,
+} from "@reactionable/core/lib/ui/link/Link";
+import { ForwardedRef, ReactElement, ReactNode, forwardRef } from "react";
 
-export type ILinkProps = LinkProps;
+export type ILinkProps = LinkProps & ICoreLinkProps;
 
 export const Link = forwardRef(function Link(
-  props: PropsWithChildren<ILinkProps>,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  ref?: ForwardedRef<any>
+  props: ILinkProps,
+  ref: ForwardedRef<HTMLSpanElement>
 ): ReactElement {
-  const { RouterLink } = useRouterContext();
-  return <UILink component={RouterLink} {...props} ref={ref} />;
+  return <UILink component={CoreLink} {...props} ref={ref} />;
 });
 
 export function isLinkProps<LinkProps extends ILinkProps>(

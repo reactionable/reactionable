@@ -96,8 +96,7 @@ export function useRouter<
   };
 }
 
-export type IRouterProviderProps = ICoreRouterProviderProps<IRouterLinkProps> &
-  RouterComponentProps;
+export type IRouterProviderProps = ICoreRouterProviderProps<IRouterLinkProps, RouterComponentProps>;
 
 export const useRouterProviderProps = (
   props: Partial<IRouterProviderProps> = {}
@@ -115,7 +114,11 @@ export const useRouterProviderProps = (
 export const RouterContextProvider = (
   props?: PropsWithChildren<Partial<IRouterProviderProps>>
 ): ReactElement => {
-  return <CoreRouterContextProvider {...useRouterProviderProps(props)} />;
+  return (
+    <CoreRouterContextProvider
+      {...((useRouterProviderProps(props) as unknown) as ICoreRouterProviderProps)}
+    />
+  );
 };
 
 export function useRouterContext(): IRouterProviderProps {

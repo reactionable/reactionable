@@ -4,15 +4,15 @@ import { IIdentityProviderProps, IdentityContextProvider } from "../identity/Ide
 import { IRouterProviderProps, RouterContextProvider } from "../router/Router";
 import { IUIProviderProps, UIContextProvider } from "../ui/UI";
 
-export interface IAppProps<
+export type IAppProps<
   IdentityProviderProps extends IIdentityProviderProps,
   UIProviderProps extends IUIProviderProps,
   RouterProviderProps extends IRouterProviderProps
-> {
+> = PropsWithChildren<{
   identity?: IdentityProviderProps;
   ui?: UIProviderProps;
   router?: RouterProviderProps;
-}
+}>;
 
 export function App<
   IdentityProviderProps extends IIdentityProviderProps = IIdentityProviderProps,
@@ -23,9 +23,7 @@ export function App<
   ui,
   router,
   children,
-}: PropsWithChildren<
-  IAppProps<IdentityProviderProps, UIProviderProps, RouterProviderProps>
->): ReactElement {
+}: IAppProps<IdentityProviderProps, UIProviderProps, RouterProviderProps>): ReactElement {
   if (router) {
     children = <RouterContextProvider {...router}>{children}</RouterContextProvider>;
   }

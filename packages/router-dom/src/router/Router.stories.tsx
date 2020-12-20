@@ -1,45 +1,18 @@
-import { ReactElement, forwardRef } from "react";
+import { ReactElement } from "react";
 
 import { TestWrapper } from "../tests/TestWrapper";
-import { RouterContextProvider, useRouter } from "./Router";
-import { RouterLink } from "./RouterLink";
+import { RouterComponent, RouterContextProvider, useRouter } from "./Router";
 
 export default {
   title: "Router DOM/Components/Router",
   parameters: {
-    info: { inline: true },
-    options: { showPanel: true },
-    subcomponent: [RouterContextProvider, RouterLink, useRouter],
+    component: RouterComponent,
+    subcomponent: [RouterContextProvider, useRouter],
   },
 };
 
 export const BasicRouterContextProvider = (): ReactElement => {
   return <RouterContextProvider>test</RouterContextProvider>;
-};
-
-export const BasicRouterLink = (): ReactElement => {
-  return (
-    <TestWrapper>
-      <RouterLink href="test">test</RouterLink>
-    </TestWrapper>
-  );
-};
-
-export const RouterLinkCustomComponent = (): ReactElement => {
-  const CustomComponent = forwardRef<HTMLAnchorElement>(({ children, ...props }, ref) => (
-    <a ref={ref} {...props} className="custom-component">
-      <b>{children}</b>
-    </a>
-  ));
-  CustomComponent.displayName = "CustomComponent";
-
-  return (
-    <TestWrapper>
-      <RouterLink href="test" Component={CustomComponent}>
-        test
-      </RouterLink>
-    </TestWrapper>
-  );
 };
 
 export const UseRouter = (): ReactElement => {

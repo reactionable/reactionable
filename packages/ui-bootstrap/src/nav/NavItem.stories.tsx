@@ -1,7 +1,7 @@
 import { faAtom } from "@fortawesome/free-solid-svg-icons";
 import { ReactElement } from "react";
 
-import { UIContextProvider } from "../UI";
+import { TestWrapper } from "../tests/TestWrapper";
 import { NavItem } from "./NavItem";
 
 export default {
@@ -10,15 +10,15 @@ export default {
 };
 
 export const BasicNavItem = (): ReactElement => (
-  <UIContextProvider>
+  <TestWrapper>
     <NavItem href="/test">Test</NavItem>
-  </UIContextProvider>
+  </TestWrapper>
 );
 
 export const NavItemWithIcon = (): ReactElement => (
-  <UIContextProvider>
+  <TestWrapper>
     <NavItem href="/test" icon={{ icon: faAtom }}>
       Test
     </NavItem>
-  </UIContextProvider>
+  </TestWrapper>
 );

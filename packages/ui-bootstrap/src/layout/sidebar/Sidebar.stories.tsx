@@ -9,7 +9,7 @@ import Container from "react-bootstrap/Container";
 import Jumbotron from "react-bootstrap/Jumbotron";
 import Row from "react-bootstrap/Row";
 
-import { UIContextProvider } from "../../UI";
+import { TestWrapper } from "../../tests/TestWrapper";
 import { Sidebar, useSidebarContext } from "./Sidebar";
 
 export default {
@@ -58,9 +58,9 @@ const SampleComponent: FC = () => {
 };
 
 export const BasicSidebar = (): ReactElement => (
-  <UIContextProvider>
+  <TestWrapper>
     <Sidebar>
       <SampleComponent />
     </Sidebar>
-  </UIContextProvider>
+  </TestWrapper>
 );
