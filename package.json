@@ -97,9 +97,9 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "tsc --noEmit && lint-staged && pretty-quick --staged",
+      "pre-commit": "lint-staged && pretty-quick --staged",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-push": "yarn lint && yarn test"
+      "pre-push": "yarn lint && tsc --noEmit && yarn test"
     }
   },
   "lint-staged": {

@@ -84,7 +84,7 @@ jobs:
         run: yarn
 
       - name: 🏗️ Build
-        run: yarn build --project tsconfig.build.json
+        run: yarn build:ci
 
       - name: 🔖 Configure publish
         run: |
