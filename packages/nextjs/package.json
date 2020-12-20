@@ -45,6 +45,9 @@
   "jest": {
     "preset": "ts-jest",
     "testEnvironment": "jsdom",
+    "setupFilesAfterEnv": [
+      "<rootDir>/../../__tests__/jest.setup.ts"
+    ],
     "testMatch": [
       "**/__tests__/**/*.[jt]s?(x)",
       "**/?(*.)+(spec|test).+(ts|tsx|js)"
@@ -52,5 +55,8 @@
     "modulePathIgnorePatterns": [
       "<rootDir>/lib/"
     ]
+  },
+  "devDependencies": {
+    "@types/react-is": "^17.0.0"
   }
 }
