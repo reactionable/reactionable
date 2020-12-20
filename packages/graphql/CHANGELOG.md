@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.27.9 (2020-12-20)
+
+
+### Bug Fixes
+
+* **ci:** add missing build command ([2ef09a0](https://github.com/reactionable/reactionable/commit/2ef09a009559438119efa8cfbae8a4cc88b44b52))
+
+
+
+
+
 ## 0.27.8 (2020-12-18)
 
 
