@@ -8,11 +8,23 @@ import {
   LogoutLink,
   UserUnloggedHeaderNav,
 } from "@reactionable/core/lib/ui/layout/header/UserHeaderNav";
-import { ComponentProps, MouseEvent, ReactElement, useState } from "react";
+import { ForwardedRef, MouseEvent, ReactElement, forwardRef, useState } from "react";
+
+import { ILinkProps } from "../../link/Link";
 
 export { UserUnloggedHeaderNav } from "@reactionable/core/lib/ui/layout/header/UserHeaderNav";
 
-type INavItemProps = ComponentProps<typeof MenuItem>;
+const NavItemComponent = forwardRef(function NavItemComponent(
+  { children, onClick }: ILinkProps,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ref: ForwardedRef<any>
+) {
+  return (
+    <MenuItem button onClick={onClick} ref={ref}>
+      {children}
+    </MenuItem>
+  );
+});
 
 const UserLoggedHeaderNav = () => {
   const { user, displayName } = useIdentityContext();
@@ -49,9 +61,9 @@ const UserLoggedHeaderNav = () => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <AccountLink<INavItemProps> NavItemComponent={MenuItem} onClick={handleClose} />
+        <AccountLink NavItemComponent={NavItemComponent} onClick={handleClose} />
         <hr />
-        <LogoutLink<INavItemProps> NavItemComponent={MenuItem} onClick={handleClose} />
+        <LogoutLink NavItemComponent={NavItemComponent} onClick={handleClose} />
       </Menu>
     </>
   );
@@ -67,7 +79,7 @@ export const UserHeaderNav = (): ReactElement | null => {
   return (
     <div>
       <UserLoggedHeaderNav />
-      <UserUnloggedHeaderNav NavItemComponent={MenuItem} />
+      <UserUnloggedHeaderNav NavItemComponent={NavItemComponent} />
     </div>
   );
 };

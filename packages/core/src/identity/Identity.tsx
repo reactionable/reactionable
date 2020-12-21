@@ -31,7 +31,6 @@ export type IIdentityProviderValue<User extends IUser = IUser> = Omit<
 > & {
   displayName: () => string | null;
   setUser: (user: User | null) => void;
-  auth: ReactElement | null;
 };
 
 export function useIdentityProviderProps<User extends IUser = IUser>(
@@ -55,7 +54,6 @@ const { Context: IdentityContext, useContext } = createProvider<IIdentityProvide
   ...useIdentityProviderProps(),
   displayName: () => "",
   setUser: () => null,
-  auth: null,
 });
 
 function IdentityContextProvider<User extends IUser>({
@@ -68,7 +66,6 @@ function IdentityContextProvider<User extends IUser>({
   ...props
 }: PropsWithChildren<IIdentityProviderProps<User>>): ReactElement {
   const [userState, setUserState] = useState<User | null | undefined>();
-  const { data: user, loading, error } = useFetchUser();
   const { useErrorNotification, useErrorAlert, useLoader } = useUIContext();
   const { t } = useTranslation("identity");
   const { errorNotification, setErrorNotification } = useErrorNotification({
@@ -76,6 +73,7 @@ function IdentityContextProvider<User extends IUser>({
   });
   const { errorAlert, setErrorAlert } = useErrorAlert();
   const { loader, setLoading } = useLoader();
+  const { data: user, loading, error } = useFetchUser();
 
   const setUser = (newUser: User | null | undefined) => {
     setUserState((currentUser) => (currentUser === newUser ? currentUser : newUser));
@@ -86,6 +84,10 @@ function IdentityContextProvider<User extends IUser>({
 
     if (loading) {
       setUser(undefined);
+      return;
+    }
+
+    if (user && userState) {
       return;
     }
 
@@ -115,8 +117,6 @@ function IdentityContextProvider<User extends IUser>({
     return userState ? displayName(userState) : null;
   };
 
-  const auth = <AuthComponent />;
-
   const providerValues: IIdentityProviderValue<User> = {
     ...props,
     displayName: displayNameHandler,
@@ -127,7 +127,6 @@ function IdentityContextProvider<User extends IUser>({
     identityProvider,
     AuthComponent,
     setUser,
-    auth,
   };
 
   return (

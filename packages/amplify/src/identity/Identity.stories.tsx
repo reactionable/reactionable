@@ -22,7 +22,7 @@ export const UseIdentityContext = (): ReactElement => {
   const userIsLoggedIn = boolean("User is logged in", false);
 
   return withIdentityContext(() => {
-    const { auth, user, setUser, displayName } = useIdentityContext();
+    const { AuthComponent, user, setUser, displayName } = useIdentityContext();
 
     useEffect(() => {
       setUser(
@@ -42,7 +42,9 @@ export const UseIdentityContext = (): ReactElement => {
     ) : (
       <>
         <h3>No user please login</h3>
-        <div>{auth}</div>
+        <div>
+          <AuthComponent />
+        </div>
       </>
     );
   });

@@ -21,7 +21,7 @@ export type ILinkAnchorProps<RouterLinkProps extends IRouterLinkProps> = Omit<
 
 export const RouterLink = forwardRef(function RouterLink<RouterLinkProps extends IRouterLinkProps>(
   { Component, ...props }: RouterLinkProps,
-  ref: ForwardedRef<unknown>
+  ref: ForwardedRef<HTMLAnchorElement>
 ): ReactElement {
   return <Component {...props} ref={ref} />;
 });

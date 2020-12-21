@@ -23,6 +23,7 @@ export type ILinkProps = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onClick?: (event: ReactMouseEvent<any, MouseEvent>) => void;
   "data-testid"?: string;
+  ref?: ForwardedRef<HTMLAnchorElement>;
   Component?: LinkComponent;
 };
 
@@ -35,7 +36,7 @@ export const LinkAnchor = forwardRef(function LinkAnchor(
 
 export const Link = forwardRef(function Link(
   { Component = LinkAnchor, ...props }: ILinkProps,
-  ref
+  ref: ForwardedRef<HTMLAnchorElement>
 ): ReactElement {
   if (props.href) {
     const { RouterLink } = useRouterContext();

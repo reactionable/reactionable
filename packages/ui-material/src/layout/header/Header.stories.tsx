@@ -2,7 +2,7 @@ import { useIdentityContext, withIdentityContext } from "@reactionable/core/lib/
 import { boolean, select, withKnobs } from "@storybook/addon-knobs";
 import { ReactElement, useEffect } from "react";
 
-import { TestWrapper } from "../../tests/TestWrapper";
+import { TestWrapper } from "../../testing/TestWrapper";
 import { UIContextProvider } from "../../UI";
 import { Header } from "./Header";
 
@@ -32,8 +32,17 @@ export const BasicHeader = (): ReactElement => {
   );
 };
 
-export const HeaderWithIdentity = (): ReactElement => {
-  const userIsLoggedIn = boolean("User is logged in", false);
+export const HeaderWithIdentity = ({
+  defaultUserIsLoggedIn = false,
+}: {
+  defaultUserIsLoggedIn?: boolean;
+}): ReactElement => {
+  const userIsLoggedIn = boolean("User is logged in", defaultUserIsLoggedIn);
+  const useFetchUser = () => ({
+    loading: false,
+    data: defaultUserIsLoggedIn ? { username: "Test user" } : null,
+    refetch: () => null,
+  });
 
   return withIdentityContext(
     () => {
@@ -52,6 +61,9 @@ export const HeaderWithIdentity = (): ReactElement => {
         </UIContextProvider>
       );
     },
-    { identityProvider: "storybook" }
+    {
+      identityProvider: "storybook",
+      useFetchUser,
+    }
   );
 };

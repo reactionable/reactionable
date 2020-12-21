@@ -10,7 +10,7 @@ export type ILinkProps = LinkProps & ICoreLinkProps;
 
 export const Link = forwardRef(function Link(
   props: ILinkProps,
-  ref: ForwardedRef<HTMLSpanElement>
+  ref: ForwardedRef<HTMLAnchorElement>
 ): ReactElement {
   return <UILink component={CoreLink} {...props} ref={ref} />;
 });

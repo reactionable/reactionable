@@ -1,5 +1,9 @@
-import { AccountLink, LogoutLink, UserUnloggedHeaderNav } from "@reactionable/core";
 import { useIdentityContext } from "@reactionable/core/lib/identity/Identity";
+import {
+  AccountLink,
+  LogoutLink,
+  UserUnloggedHeaderNav,
+} from "@reactionable/core/lib/ui/layout/header/UserHeaderNav";
 import { ReactElement } from "react";
 import { NavLinkProps } from "react-bootstrap";
 import { DropdownItemProps } from "react-bootstrap/esm/DropdownItem";
@@ -16,7 +20,7 @@ const UserLoggedHeaderNav = () => {
 
   return (
     <NavDropdown id="userLoggedHeaderNav" title={displayName()} alignRight>
-      <AccountLink<DropdownItemProps> NavItemComponent={NavDropdown.Item} />
+      <AccountLink NavItemComponent={NavDropdown.Item} />
       <NavDropdown.Divider />
       <LogoutLink<DropdownItemProps> NavItemComponent={NavDropdown.Item} />
     </NavDropdown>

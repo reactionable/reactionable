@@ -1,4 +1,11 @@
-import { ComponentType, ReactElement, MouseEvent as ReactMouseEvent, useEffect } from "react";
+import {
+  ComponentType,
+  ForwardedRef,
+  ReactElement,
+  MouseEvent as ReactMouseEvent,
+  forwardRef,
+  useEffect,
+} from "react";
 
 import { useTranslation } from "../../../i18n/I18n";
 import { useIdentityContext } from "../../../identity/Identity";
@@ -13,11 +20,13 @@ type IWithNavItemComponentProps<LinkProps extends ILinkProps> = LinkProps & {
 
 export type IAccountLinkProps<LinkProps extends ILinkProps> = IWithNavItemComponentProps<LinkProps>;
 
-export function AccountLink<LinkProps extends ILinkProps = ILinkProps>({
-  NavItemComponent,
-  onClick,
-  ...props
-}: IAccountLinkProps<LinkProps>): ReactElement {
+export const AccountLink = forwardRef(function AccountLink<
+  LinkProps extends ILinkProps = ILinkProps
+>(
+  // eslint-disable-next-line react/prop-types
+  { NavItemComponent, onClick, ...props }: IAccountLinkProps<LinkProps>,
+  ref: ForwardedRef<HTMLAnchorElement>
+): ReactElement {
   const { useLink } = useUIContext();
   const { t } = useTranslation("identity");
   const router = useRouterContext().useRouter();
@@ -37,9 +46,10 @@ export function AccountLink<LinkProps extends ILinkProps = ILinkProps>({
   return useLink({
     onClick: handleClick,
     Component: NavItemComponent,
+    ref,
     ...linkComponentProps,
   });
-}
+});
 
 export type ILogoutLinkProps<LinkProps extends ILinkProps> = IWithNavItemComponentProps<LinkProps>;
 
@@ -110,7 +120,7 @@ export function UserLoggedHeaderNav<LinkProps extends ILinkProps = ILinkProps>({
 
   return (
     <ul title={displayName() || ""}>
-      <AccountLink<LinkProps> {...withNavItemComponentProps} />
+      <AccountLink {...(withNavItemComponentProps as ILinkProps)} />
       <LogoutLink<LinkProps> {...withNavItemComponentProps} />
     </ul>
   );
@@ -124,18 +134,18 @@ export function UserUnloggedHeaderNav<LinkProps extends ILinkProps = ILinkProps>
   NavItemComponent = NavItem,
 }: IUserUnloggedHeaderNavProps<LinkProps>): ReactElement | null {
   const { t } = useTranslation();
-  const { user, auth } = useIdentityContext();
+  const { user, AuthComponent } = useIdentityContext();
   const { useModal } = useUIContext();
   const { useLink } = useUIContext();
 
-  const { modal, openModal, closeModal } = useModal({
+  const { modal, openModal } = useModal({
     title: t("Sign In / Sign Up"),
-    body: auth,
+    body: <AuthComponent />,
   });
 
   useEffect(() => {
     if (user) {
-      closeModal();
+      // closeModal();
     }
   }, [user]);
 

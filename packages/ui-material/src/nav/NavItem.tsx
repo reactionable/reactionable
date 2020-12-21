@@ -1,19 +1,20 @@
 import { SvgIcon } from "@material-ui/core";
-import { LinkProps } from "@material-ui/core/Link/Link";
-import ListItem from "@material-ui/core/ListItem/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText/ListItemText";
+import Button from "@material-ui/core/Button";
 import {
   NavItems as CoreNavItems,
   INavItemProps as ICoreNavItemProps,
   INavItemsComponentProps,
 } from "@reactionable/core/lib/nav/NavItem";
-import { ReactElement } from "react";
+import { ForwardedRef, ReactElement, forwardRef } from "react";
 
 import { Icon } from "../icon/Icon";
 import { Link } from "../link/Link";
 
-export type INavItemProps = ICoreNavItemProps & LinkProps & { icon?: typeof SvgIcon };
+export type INavItemProps = ICoreNavItemProps & { icon?: typeof SvgIcon };
+
+const ButtonLink = forwardRef(function ButtonLink(props, ref: ForwardedRef<HTMLAnchorElement>) {
+  return <Link {...props} ref={ref} />;
+});
 
 export function NavItem(props: INavItemProps): ReactElement {
   const { icon, children, ...linkProps } = props;
@@ -23,14 +24,13 @@ export function NavItem(props: INavItemProps): ReactElement {
   }
 
   return (
-    <ListItem button component={Link} {...linkProps}>
-      {icon && (
-        <ListItemIcon>
-          <Icon icon={icon} />
-        </ListItemIcon>
-      )}
-      <ListItemText primary={children} />
-    </ListItem>
+    <Button
+      component={ButtonLink}
+      {...linkProps}
+      startIcon={icon ? <Icon icon={icon} /> : undefined}
+    >
+      {children}
+    </Button>
   );
 }
 

@@ -4,7 +4,7 @@ import { useIdentityContext, withIdentityContext } from "@reactionable/core/lib/
 import { boolean, select, withKnobs } from "@storybook/addon-knobs";
 import { ReactElement, useEffect } from "react";
 
-import { TestWrapper } from "../../tests/TestWrapper";
+import { TestWrapper } from "../../testing/TestWrapper";
 import { Header } from "./Header";
 
 export default {
@@ -26,8 +26,17 @@ export const BasicHeader = (): ReactElement => {
   );
 };
 
-export const HeaderWithIdentity = (): ReactElement => {
-  const userIsLoggedIn = boolean("User is logged in", false);
+export const HeaderWithIdentity = ({
+  defaultUserIsLoggedIn = false,
+}: {
+  defaultUserIsLoggedIn?: boolean;
+}): ReactElement => {
+  const userIsLoggedIn = boolean("User is logged in", defaultUserIsLoggedIn);
+  const useFetchUser = () => ({
+    loading: false,
+    data: defaultUserIsLoggedIn ? { username: "Test user" } : null,
+    refetch: () => null,
+  });
 
   return withIdentityContext(
     () => {
@@ -38,14 +47,15 @@ export const HeaderWithIdentity = (): ReactElement => {
       }, [userIsLoggedIn]);
 
       return (
-        <TestWrapper>
-          <Header
-            brand="Test brand header"
-            navItems={[{ href: "/sample", children: "Sample link" }]}
-          />
-        </TestWrapper>
+        <Header
+          brand="Test brand header"
+          navItems={[{ href: "/sample", children: "Sample link" }]}
+        />
       );
     },
-    { identityProvider: "storybook" }
+    {
+      identityProvider: "storybook",
+      useFetchUser,
+    }
   );
 };

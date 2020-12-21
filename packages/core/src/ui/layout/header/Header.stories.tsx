@@ -16,8 +16,17 @@ export const BasicHeader = (): ReactElement => {
   );
 };
 
-export const HeaderWithIdentity = (): ReactElement => {
-  const userIsLoggedIn = boolean("User is logged in", false);
+export const HeaderWithIdentity = ({
+  defaultUserIsLoggedIn = false,
+}: {
+  defaultUserIsLoggedIn?: boolean;
+}): ReactElement => {
+  const userIsLoggedIn = boolean("User is logged in", defaultUserIsLoggedIn);
+  const useFetchUser = () => ({
+    loading: false,
+    data: defaultUserIsLoggedIn ? { username: "Test user" } : null,
+    refetch: () => null,
+  });
 
   return withIdentityContext(
     () => {
@@ -34,6 +43,9 @@ export const HeaderWithIdentity = (): ReactElement => {
         />
       );
     },
-    { identityProvider: "storybook" }
+    {
+      identityProvider: "storybook",
+      useFetchUser,
+    }
   );
 };

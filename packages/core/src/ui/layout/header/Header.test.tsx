@@ -2,7 +2,7 @@ import "@testing-library/jest-dom/extend-expect";
 
 import { render } from "@testing-library/react";
 
-import { i18nTestInstance } from "../../../tests/I18n";
+import { i18nTestInstance } from "../../../testing/I18n";
 import { BasicHeader, HeaderWithIdentity } from "./Header.stories";
 
 describe("Header", () => {
@@ -17,8 +17,14 @@ describe("Header", () => {
   });
 
   describe("HeaderWithIdentity", () => {
-    it("should render without crashing", () => {
+    it("should render without crashing when no user is logged in", () => {
       const result = render(<HeaderWithIdentity />);
+
+      expect(result).toBeTruthy();
+    });
+
+    it("should render without crashing when a user is logged in", () => {
+      const result = render(<HeaderWithIdentity defaultUserIsLoggedIn />);
 
       expect(result).toBeTruthy();
     });
