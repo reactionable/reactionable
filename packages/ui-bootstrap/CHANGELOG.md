@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.27.10 (2020-12-21)
+
+
+### Bug Fixes
+
+* **router:** enhance router link integration ([8da9965](https://github.com/reactionable/reactionable/commit/8da9965bb5ac8f95899ab990f35191b016f6d239))
+
+
+
+
+
 ## 0.27.9 (2020-12-20)
 
 
