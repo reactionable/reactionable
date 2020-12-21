@@ -1,4 +1,5 @@
 import { Auth } from "@aws-amplify/auth";
+import { useTranslation } from "@reactionable/core/lib/i18n/I18n";
 import {
   IdentityContextProvider as CoreIdentityContextProvider,
   IIdentityProviderProps as ICoreIdentityProviderProps,
@@ -6,8 +7,7 @@ import {
   IUser as ICoreUser,
   useIdentityContext as coreUseIdentityContext,
   useIdentityProviderProps as coreUseIdentityProviderProps,
-  useTranslation,
-} from "@reactionable/core";
+} from "@reactionable/core/lib/identity/Identity";
 import Authenticator, { IAuthenticatorProps } from "aws-amplify-react/lib/Auth/Authenticator";
 import { UsernameAttributes } from "aws-amplify-react/lib/Auth/common/types";
 import { ComponentType, PropsWithChildren, ReactElement, useEffect, useState } from "react";

@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom/extend-expect";
 
-import { i18nTestInstance } from "@reactionable/core/lib/tests/I18n";
+import { i18nTestInstance } from "@reactionable/core/lib/testing/I18n";
 import { render } from "@testing-library/react";
 
 import { Sidebar, useSidebarContext } from "./Sidebar";

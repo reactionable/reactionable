@@ -1,9 +1,9 @@
-import { i18nTestInstance } from "@reactionable/core/lib/tests/I18n";
+import { i18nTestInstance } from "@reactionable/core/lib/testing/I18n";
 import { render } from "@testing-library/react";
 import { string } from "yup";
 
 import { FormField } from "../form/FormField";
-import { TestWrapper } from "../tests/TestWrapper";
+import { TestWrapper } from "../testing/TestWrapper";
 import { ModalForm } from "./ModalForm";
 
 describe("ModalForm", () => {

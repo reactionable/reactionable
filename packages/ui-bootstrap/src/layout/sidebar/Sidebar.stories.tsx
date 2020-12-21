@@ -1,7 +1,9 @@
 import "../../../stories/config";
 
 import { faAtom } from "@fortawesome/free-solid-svg-icons";
-import { generatePath, useRouteMatch, useTranslation } from "@reactionable/core";
+import { useTranslation } from "@reactionable/core/lib/i18n/I18n";
+import { useRouteMatch } from "@reactionable/core/lib/router/Router";
+import { generatePath } from "@reactionable/core/lib/router/RouterLink";
 import { FC, ReactElement } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
@@ -9,7 +11,7 @@ import Container from "react-bootstrap/Container";
 import Jumbotron from "react-bootstrap/Jumbotron";
 import Row from "react-bootstrap/Row";
 
-import { TestWrapper } from "../../tests/TestWrapper";
+import { TestWrapper } from "../../testing/TestWrapper";
 import { Sidebar, useSidebarContext } from "./Sidebar";
 
 export default {

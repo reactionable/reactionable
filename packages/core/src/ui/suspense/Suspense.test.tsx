@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
 
-import { i18nTestInstance } from "../../tests/I18n";
-import { TestWrapper } from "../../tests/TestWrapper";
+import { i18nTestInstance } from "../../testing/I18n";
+import { TestWrapper } from "../../testing/TestWrapper";
 import { Suspense } from "./Suspense";
 
 describe("Suspense", () => {

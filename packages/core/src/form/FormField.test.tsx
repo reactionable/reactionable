@@ -2,8 +2,8 @@ import { render } from "@testing-library/react";
 import { string } from "yup";
 
 import { FormField } from "../form/FormField";
-import { i18nTestInstance } from "../tests/I18n";
-import { TestWrapper } from "../tests/TestWrapper";
+import { i18nTestInstance } from "../testing/I18n";
+import { TestWrapper } from "../testing/TestWrapper";
 import { Form } from "./Form";
 
 const formProps = {

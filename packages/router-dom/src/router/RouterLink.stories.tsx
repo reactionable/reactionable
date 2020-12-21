@@ -2,7 +2,7 @@ import { ILinkProps, LinkAnchor } from "@reactionable/core/lib/ui/link/Link";
 import { useUIContext } from "@reactionable/core/lib/ui/UI";
 import { AnchorHTMLAttributes, DetailedHTMLProps, ReactElement } from "react";
 
-import { TestWrapper } from "../tests/TestWrapper";
+import { TestWrapper } from "../testing/TestWrapper";
 import { RouterLink } from "./RouterLink";
 
 export default {

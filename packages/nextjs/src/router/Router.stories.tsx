@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 
-import { TestWrapper } from "../tests/TestWrapper";
+import { TestWrapper } from "../testing/TestWrapper";
 import { RouterContextProvider, useRouter } from "./Router";
 
 export default {

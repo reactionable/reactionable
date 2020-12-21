@@ -1,6 +1,6 @@
 import { IAppProps } from "@reactionable/core/lib/app/App";
 import { IIdentityProviderProps } from "@reactionable/core/lib/identity/Identity";
-import { TestWrapper as CoreTestWrapper } from "@reactionable/core/lib/tests/TestWrapper";
+import { TestWrapper as CoreTestWrapper } from "@reactionable/core/lib/testing/TestWrapper";
 import { IUIProviderProps } from "@reactionable/core/lib/ui/UI";
 import { RouterContext } from "next/dist/next-server/lib/router-context";
 import { createRouter } from "next/router";

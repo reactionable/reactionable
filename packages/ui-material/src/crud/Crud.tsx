@@ -1,12 +1,7 @@
-import {
-  IFormData,
-  IFormValues,
-  IId,
-  IUseListOptions,
-  IUseListResult,
-  IUseReadOptions,
-  IUseReadResult,
-} from "@reactionable/core";
+import { IId } from "@reactionable/core/lib/crud/Crud";
+import { IUseListOptions, IUseListResult } from "@reactionable/core/lib/crud/list/useList";
+import { IUseReadOptions, IUseReadResult } from "@reactionable/core/lib/crud/read/useRead";
+import { IFormData, IFormValues } from "@reactionable/core/lib/form/Form";
 
 import { ICreateProps } from "./create/Create";
 import { IUpdateProps } from "./update/Update";

@@ -4,8 +4,8 @@ import createStyles from "@material-ui/core/styles/createStyles";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Toolbar from "@material-ui/core/Toolbar/Toolbar";
 import Typography from "@material-ui/core/Typography/Typography";
-import { useUIContext } from "@reactionable/core";
 import { IHeaderProps as ICoreHeaderProps } from "@reactionable/core/lib/ui/layout/header/Header";
+import { useUIContext } from "@reactionable/core/lib/ui/UI";
 import { ComponentType, PropsWithChildren, ReactElement, ReactNode } from "react";
 
 import { isLinkProps } from "../../link/Link";

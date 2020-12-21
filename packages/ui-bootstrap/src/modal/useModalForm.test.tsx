@@ -1,4 +1,4 @@
-import { i18nTestInstance } from "@reactionable/core/lib/tests/I18n";
+import { i18nTestInstance } from "@reactionable/core/lib/testing/I18n";
 import { renderHook } from "@testing-library/react-hooks";
 import { string } from "yup";
 

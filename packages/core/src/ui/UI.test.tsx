@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 
-import { i18nTestInstance } from "../tests/I18n";
+import { i18nTestInstance } from "../testing/I18n";
 import { UIContextProvider, useUIContext, useUIProviderProps } from "./UI";
 
 describe("UI", () => {

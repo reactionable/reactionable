@@ -1,6 +1,6 @@
 import { act, renderHook } from "@testing-library/react-hooks";
 
-import { i18nTestInstance } from "../../tests/I18n";
+import { i18nTestInstance } from "../../testing/I18n";
 import { useLoader } from "./useLoader";
 
 describe("useLoader", () => {

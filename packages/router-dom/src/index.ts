@@ -9,4 +9,4 @@ export * from "./route/PrivateRoute";
 export * from "./route/Route";
 export * from "./router/Router";
 export * from "./router/RouterLink";
-export * from "./tests/TestWrapper";
+export * from "./testing/TestWrapper";

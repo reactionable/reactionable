@@ -7,4 +7,4 @@ export * from "./head/Head";
 export * from "./route/PrivateRoute";
 export * from "./router/Router";
 export * from "./router/RouterLink";
-export * from "./tests/TestWrapper";
+export * from "./testing/TestWrapper";

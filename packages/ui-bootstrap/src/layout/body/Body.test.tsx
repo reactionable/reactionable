@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom/extend-expect";
 
-import { i18nTestInstance } from "@reactionable/core";
+import { i18nTestInstance } from "@reactionable/core/lib/testing/I18n";
 import { render } from "@testing-library/react";
 
 import { BasicBody } from "./Body.stories";

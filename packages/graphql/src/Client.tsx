@@ -13,7 +13,7 @@ import {
   useApolloClient,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-import { IData as ICoreData } from "@reactionable/core";
+import { IData as ICoreData } from "@reactionable/core/lib/query/Query";
 import { createUploadLink } from "apollo-upload-client";
 import fetch from "cross-fetch";
 import { PropsWithChildren, ReactElement, useMemo } from "react";

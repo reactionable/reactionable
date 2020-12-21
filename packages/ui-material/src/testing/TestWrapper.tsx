@@ -3,7 +3,7 @@ import { IRouterProviderProps } from "@reactionable/core/lib/router/Router";
 import {
   TestWrapper as CoreTestWrapper,
   ITestWrapperProps,
-} from "@reactionable/core/lib/tests/TestWrapper";
+} from "@reactionable/core/lib/testing/TestWrapper";
 import { ReactElement } from "react";
 
 import { IUIProviderProps, useUIProviderProps } from "../UI";

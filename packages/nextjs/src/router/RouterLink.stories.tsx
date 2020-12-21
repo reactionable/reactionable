@@ -8,7 +8,7 @@ import {
   forwardRef,
 } from "react";
 
-import { TestWrapper } from "../tests/TestWrapper";
+import { TestWrapper } from "../testing/TestWrapper";
 import { RouterLink } from "./RouterLink";
 
 export default {

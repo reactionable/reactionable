@@ -1,6 +1,6 @@
 import "../../stories/config";
 
-import { App } from "@reactionable/core";
+import { App } from "@reactionable/core/lib/app/App";
 import { ReactElement } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";

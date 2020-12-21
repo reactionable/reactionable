@@ -1,6 +1,6 @@
 import { AnchorHTMLAttributes, DetailedHTMLProps, ReactElement } from "react";
 
-import { TestWrapper } from "../tests/TestWrapper";
+import { TestWrapper } from "../testing/TestWrapper";
 import { LinkAnchor } from "../ui/link/Link";
 import { useUIContext } from "../ui/UI";
 import { RouterLink } from "./RouterLink";

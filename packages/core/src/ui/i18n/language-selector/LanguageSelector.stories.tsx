@@ -1,7 +1,7 @@
 import { action } from "@storybook/addon-actions";
 import { ReactElement } from "react";
 
-import { i18nTestInstance } from "../../../tests/I18n";
+import { i18nTestInstance } from "../../../testing/I18n";
 import { UIContextProvider, useUIProviderProps } from "../../UI";
 import { LanguageSelector } from "./LanguageSelector";
 

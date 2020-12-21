@@ -1,7 +1,7 @@
 import SaveIcon from "@material-ui/icons/Save";
 import { ReactElement } from "react";
 
-import { TestWrapper } from "../tests/TestWrapper";
+import { TestWrapper } from "../testing/TestWrapper";
 import { NavItem } from "./NavItem";
 
 export default {

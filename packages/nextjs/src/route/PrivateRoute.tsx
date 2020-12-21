@@ -1,4 +1,5 @@
-import { useIdentityContext, useTranslation } from "@reactionable/core";
+import { useTranslation } from "@reactionable/core/lib/i18n/I18n";
+import { useIdentityContext } from "@reactionable/core/lib/identity/Identity";
 import { useUIContext } from "@reactionable/core/lib/ui/UI";
 import Router from "next/router";
 import { ComponentType, PropsWithChildren, ReactElement, isValidElement, useEffect } from "react";

@@ -1,4 +1,4 @@
-import { i18nTestInstance } from "@reactionable/core/lib/tests/I18n";
+import { i18nTestInstance } from "@reactionable/core/lib/testing/I18n";
 import { action } from "@storybook/addon-actions";
 import { ReactElement } from "react";
 

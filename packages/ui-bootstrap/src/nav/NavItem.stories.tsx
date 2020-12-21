@@ -1,7 +1,7 @@
 import { faAtom } from "@fortawesome/free-solid-svg-icons";
 import { ReactElement } from "react";
 
-import { TestWrapper } from "../tests/TestWrapper";
+import { TestWrapper } from "../testing/TestWrapper";
 import { NavItem } from "./NavItem";
 
 export default {
