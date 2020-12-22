@@ -29,6 +29,7 @@ export * from "./layout/header/Header";
 export * from "./layout/header/UserHeaderNav";
 export * from "./layout/responsive-container/ResponsiveContainer";
 export * from "./layout/sidebar/Sidebar";
+export * from "./layout/sidebar/SidebarNavItem";
 export * from "./link/Link";
 export * from "./loader/Loader";
 export * from "./modal/Modal";

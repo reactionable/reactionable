@@ -5,16 +5,12 @@ import {
   INavItemProps as ICoreNavItemProps,
   INavItemsComponentProps,
 } from "@reactionable/core/lib/nav/NavItem";
-import { ForwardedRef, ReactElement, forwardRef } from "react";
+import { ReactElement } from "react";
 
 import { Icon } from "../icon/Icon";
 import { Link } from "../link/Link";
 
 export type INavItemProps = ICoreNavItemProps & { icon?: typeof SvgIcon };
-
-const ButtonLink = forwardRef(function ButtonLink(props, ref: ForwardedRef<HTMLAnchorElement>) {
-  return <Link {...props} ref={ref} />;
-});
 
 export function NavItem(props: INavItemProps): ReactElement {
   const { icon, children, ...linkProps } = props;
@@ -24,11 +20,7 @@ export function NavItem(props: INavItemProps): ReactElement {
   }
 
   return (
-    <Button
-      component={ButtonLink}
-      {...linkProps}
-      startIcon={icon ? <Icon icon={icon} /> : undefined}
-    >
+    <Button component={Link} {...linkProps} startIcon={icon ? <Icon icon={icon} /> : undefined}>
       {children}
     </Button>
   );

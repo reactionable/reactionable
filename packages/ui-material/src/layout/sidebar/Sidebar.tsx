@@ -19,9 +19,11 @@ import {
 import clsx from "clsx";
 import { PropsWithChildren, ReactElement, useEffect, useState } from "react";
 
-import { INavItemProps, NavItems } from "../../nav/NavItem";
+import { ISidebarNavItemProps, SidebarNavItems } from "./SidebarNavItem";
 
-export type INavItemsProviderProps = ICoreNavItemsProviderProps<INavItemsProps<INavItemProps>>;
+export type INavItemsProviderProps = ICoreNavItemsProviderProps<
+  INavItemsProps<ISidebarNavItemProps>
+>;
 
 export type ISidebarProps = Partial<INavItemsProviderProps> & ISidebarComponentProps;
 
@@ -118,7 +120,7 @@ export function SidebarComponent({
         </Toolbar>
         <Divider />
         <List>
-          <NavItems navItems={navItems} />
+          <SidebarNavItems navItems={navItems} />
         </List>
       </Drawer>
       <main className={classes.content}>{children}</main>
