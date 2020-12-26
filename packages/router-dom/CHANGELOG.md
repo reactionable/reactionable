@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.27.12 (2020-12-26)
+
+**Note:** Version bump only for package @reactionable/router-dom
+
+
+
+
+
 ## 0.27.11 (2020-12-22)
 
 **Note:** Version bump only for package @reactionable/router-dom
