@@ -31,7 +31,7 @@ export function SidebarNavItem(props: ISidebarNavItemProps): ReactElement {
     listItemChildren = (
       <>
         <ListItemIcon>
-          <Icon icon={icon} />
+          <Icon icon={icon} color="primary" />
         </ListItemIcon>
         {listItemChildren}
       </>

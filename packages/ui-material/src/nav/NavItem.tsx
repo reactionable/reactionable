@@ -1,4 +1,4 @@
-import { SvgIcon } from "@material-ui/core";
+import { LinkProps, SvgIcon } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import {
   NavItems as CoreNavItems,
@@ -10,7 +10,8 @@ import { ReactElement } from "react";
 import { Icon } from "../icon/Icon";
 import { Link } from "../link/Link";
 
-export type INavItemProps = ICoreNavItemProps & { icon?: typeof SvgIcon };
+export type INavItemProps = ICoreNavItemProps &
+  Pick<LinkProps, "className"> & { icon?: typeof SvgIcon };
 
 export function NavItem(props: INavItemProps): ReactElement {
   const { icon, children, ...linkProps } = props;
