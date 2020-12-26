@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.28.0 (2020-12-26)
+
+
+### Features
+
+* **ui-material:** improve sidebar rendering ([1f9f6e7](https://github.com/reactionable/reactionable/commit/1f9f6e72da9c17d3f21ca24d0385d9bc9f6af638))
+
+
+
+
+
 ## 0.27.12 (2020-12-26)
 
 **Note:** Version bump only for package @reactionable/ui-material
