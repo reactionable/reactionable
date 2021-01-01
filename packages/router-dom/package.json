@@ -41,7 +41,7 @@
   },
   "devDependencies": {
     "@types/react-helmet": "^6.1.0",
-    "@types/react-router-dom": "^5.1.6"
+    "@types/react-router-dom": "^5.1.7"
   },
   "publishConfig": {
     "access": "public"
