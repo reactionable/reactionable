@@ -10,6 +10,7 @@ import {
   FormSubmitError,
   FormWithCheckbox,
   FormWithFileAndPreview,
+  FormWithLabelledInput,
   FormWithSelect,
   FormWithTextArea,
 } from "./Form.stories";
@@ -21,6 +22,14 @@ describe("Form", () => {
   describe("BasicForm", () => {
     it("should render without crashing", () => {
       const result = render(<BasicForm />);
+
+      expect(result).toBeTruthy();
+    });
+  });
+
+  describe("FormWithLabelledInput", () => {
+    it("should render without crashing", () => {
+      const result = render(<FormWithLabelledInput />);
 
       expect(result).toBeTruthy();
     });

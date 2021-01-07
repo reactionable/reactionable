@@ -34,8 +34,8 @@ export const BasicForm = (): ReactElement => (
       }}
       initialValues={{ firstname: "", lastname: "" }}
     >
-      <FormField name="firstname" autoFocus placeholder="Firstname" />
-      <FormField name="lastname" placeholder="Lastname" />
+      <FormField name="firstname" autoFocus placeholder="Firstname" required />
+      <FormField name="lastname" placeholder="Lastname" required />
     </Form>
   </UIContextProvider>
 );
@@ -54,7 +54,7 @@ export const FormWithLabelledInput = (): ReactElement => (
       validationSchema={{ test: string().required("Test is required") }}
       initialValues={{ test: "" }}
     >
-      <FormField label="Test" name="test" autoFocus placeholder="Basic form input" />
+      <FormField label="Test" name="test" autoFocus placeholder="Basic form input" required />
     </Form>
   </UIContextProvider>
 );
@@ -73,7 +73,7 @@ export const FormWithTextArea = (): ReactElement => (
       validationSchema={{ test: string().required("Test is required") }}
       initialValues={{ test: "" }}
     >
-      <FormField as="textarea" name="test" autoFocus placeholder="Text area form input" />
+      <FormField as="textarea" name="test" autoFocus placeholder="Text area form input" required />
     </Form>
   </UIContextProvider>
 );
@@ -92,7 +92,7 @@ export const FormWithSelect = (): ReactElement => (
       validationSchema={{ test: string().required("Test is required") }}
       initialValues={{ test: "" }}
     >
-      <FormField as="select" name="test" autoFocus>
+      <FormField as="select" name="test" label="Test" autoFocus required>
         <option value="">Choose an option</option>
         <option value="1">First option</option>
         <option value="2">Second option</option>
@@ -115,7 +115,7 @@ export const FormWithCheckbox = (): ReactElement => (
       validationSchema={{ test: string().required("Test is required") }}
       initialValues={{ test: "" }}
     >
-      <FormField label="Test" type="checkbox" name="test" autoFocus />
+      <FormField label="Test" type="checkbox" name="test" autoFocus required />
     </Form>
   </UIContextProvider>
 );
@@ -125,7 +125,7 @@ export const FormWithFileAndPreview = (): ReactElement => {
   const [file, setFile] = useState<File | null>(null);
 
   function fileToDataSrc(file: File): Promise<string | undefined> {
-    // encode the file using the FileReader API
+    // Encode the file using the FileReader API
     const reader = new FileReader();
     return new Promise((resolve, reject) => {
       try {
@@ -167,6 +167,7 @@ export const FormWithFileAndPreview = (): ReactElement => {
           type="file"
           name="test"
           autoFocus
+          required
           onChange={(event: ChangeEvent<HTMLInputElement>) =>
             setFile(event?.target?.files?.length ? event.target.files[0] : null)
           }
@@ -196,7 +197,7 @@ export const FormSubmitError = (): ReactElement => (
       }}
       initialValues={{ test: "" }}
     >
-      <FormField name="test" autoFocus label="Test" />
+      <FormField name="test" autoFocus label="Test" required />
     </Form>
   </UIContextProvider>
 );

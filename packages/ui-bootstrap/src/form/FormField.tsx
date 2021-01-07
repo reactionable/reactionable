@@ -5,6 +5,7 @@ import {
   IFormFieldPropsEnhanced as ICoreFormFieldPropsEnhanced,
   IFormFieldValue,
   IRenderFormField,
+  getFormFieldLabelContent,
 } from "@reactionable/core/lib/form/FormField";
 import { ReactElement, ReactNode } from "react";
 import FormCheck, { FormCheckProps } from "react-bootstrap/FormCheck";
@@ -31,7 +32,11 @@ export type IFormFieldPropsEnhanced<
 export function RenderFormField<
   FieldElementProps extends IFieldElementProps = IFieldElementProps,
   Value extends IFormFieldValue = IFormFieldValue
->({ isValid, isInvalid, field }: IFormFieldPropsEnhanced<FieldElementProps, Value>): ReactElement {
+>({
+  isValid,
+  isInvalid,
+  field: { label, ...field },
+}: IFormFieldPropsEnhanced<FieldElementProps, Value>): ReactElement {
   let input: ReactElement;
 
   const fieldProps = {
@@ -40,14 +45,16 @@ export function RenderFormField<
     isInvalid,
   };
 
+  const labelContent = getFormFieldLabelContent(label, field.required);
+
   if (field.type === "checkbox") {
-    input = <FormCheck {...(fieldProps as FormCheckProps)} />;
+    input = <FormCheck {...(fieldProps as FormCheckProps)} label={labelContent} />;
   } else {
     input = <FormControl {...(fieldProps as FormControlProps)} />;
-    if (field.label) {
+    if (labelContent) {
       input = (
         <>
-          <FormLabel>{field.label}</FormLabel>
+          <FormLabel>{labelContent}</FormLabel>
           {input}
         </>
       );

@@ -64,6 +64,28 @@ const FormFieldInput = forwardRef(function FormFieldInput(
   return createElement(as || "input", { ...props, ref });
 });
 
+export function getFormFieldLabelContent(
+  label?: ReactNode,
+  required?: boolean
+): ReactNode | undefined {
+  if (!label) {
+    return undefined;
+  }
+  if (!required) {
+    return label;
+  }
+
+  if ("string" === typeof label) {
+    return label + " \u00a0*";
+  }
+  return (
+    <>
+      {label}
+      {"\u00a0*"}
+    </>
+  );
+}
+
 export function RenderFormField<
   FieldElementProps extends IFieldElementProps = IFieldElementProps,
   Value extends IFormFieldValue = IFormFieldValue
@@ -79,10 +101,12 @@ export function RenderFormField<
     return fieldContent;
   }
 
-  if (label) {
+  const labelContent = getFormFieldLabelContent(label, props.required);
+
+  if (labelContent) {
     fieldContent = (
       <label>
-        {label} {fieldContent}
+        {labelContent} {fieldContent}
       </label>
     );
   }
@@ -106,11 +130,13 @@ export function FormFieldChildren<
   fieldProps: { field, ...fieldProps },
 }: IFormFieldChildrenProps<FieldElementProps, Value>): ReactElement {
   const inputRef = useRef<{ focus: () => void }>(null);
+
   useEffect(() => {
     if (autoFocus === true && inputRef && inputRef.current) {
       inputRef.current.focus();
     }
   }, [inputRef, autoFocus]);
+
   const touch = getIn(fieldProps.form.touched, field.name);
   const error = getIn(fieldProps.form.errors, field.name);
   const isValid = !!(touch && !error);

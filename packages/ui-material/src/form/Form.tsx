@@ -12,7 +12,7 @@ import { FormButton, IFormButtonProps } from "./FormButton";
 export type IFormProps<
   Values extends IFormValues,
   Data extends IFormData,
-  FormButtonProps extends IFormButtonProps
+  FormButtonProps extends IFormButtonProps = IFormButtonProps
 > = ICoreFormProps<Values, Data, FormButtonProps>;
 
 export type IOnSubmitForm<Values extends IFormValues, Data extends IFormData> = ICoreOnSubmitForm<

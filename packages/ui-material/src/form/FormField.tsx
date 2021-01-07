@@ -15,6 +15,7 @@ import {
   IFormFieldPropsEnhanced as ICoreFormFieldPropsEnhanced,
   IFormFieldValue,
   IRenderFormField,
+  getFormFieldLabelContent,
 } from "@reactionable/core/lib/form/FormField";
 import { ReactElement, ReactNode } from "react";
 
@@ -49,7 +50,7 @@ export function RenderFormField<
 
   const fieldProps = field;
 
-  const labelContent: ReactNode | undefined = label ?? undefined;
+  const labelContent = getFormFieldLabelContent(label, field.required);
 
   switch (true) {
     case field.as === "checkbox":
@@ -64,7 +65,18 @@ export function RenderFormField<
       break;
 
     case field.as === "select":
+      // eslint-disable-next-line no-case-declarations
       fieldContent = <Select {...(fieldProps as SelectProps)} label={labelContent} />;
+      if (labelContent) {
+        fieldContent = (
+          <>
+            <InputLabel htmlFor={field.id} id={inputLabelId}>
+              {labelContent}
+            </InputLabel>
+            {fieldContent}
+          </>
+        );
+      }
       break;
 
     case field.as === "textarea":
@@ -74,7 +86,6 @@ export function RenderFormField<
           <>
             <InputLabel htmlFor={field.id} id={inputLabelId}>
               {labelContent}
-              {field.required && "\u00a0*"}
             </InputLabel>
             {fieldContent}
           </>
@@ -83,7 +94,7 @@ export function RenderFormField<
       break;
 
     default:
-      fieldContent = <TextField {...(fieldProps as TextFieldProps)} label={labelContent} />;
+      fieldContent = <TextField {...(fieldProps as TextFieldProps)} label={label} />;
   }
 
   fieldContent = (
