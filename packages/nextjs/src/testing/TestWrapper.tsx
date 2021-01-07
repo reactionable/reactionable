@@ -3,12 +3,26 @@ import { IIdentityProviderProps } from "@reactionable/core/lib/identity/Identity
 import { TestWrapper as CoreTestWrapper } from "@reactionable/core/lib/testing/TestWrapper";
 import { IUIProviderProps } from "@reactionable/core/lib/ui/UI";
 import { RouterContext } from "next/dist/next-server/lib/router-context";
+import { NEXT_DATA } from "next/dist/next-server/lib/utils";
 import { createRouter } from "next/router";
 import { PropsWithChildren, ReactElement } from "react";
 
 import { IRouterProviderProps, useRouterProviderProps } from "../router/Router";
 
+declare global {
+  interface Window {
+    /* prod */
+    __NEXT_DATA__: NEXT_DATA;
+  }
+}
+
 function RouterComponent({ children }: PropsWithChildren<unknown>): ReactElement {
+  window.__NEXT_DATA__ = {
+    props: {},
+    page: "",
+    query: {},
+    buildId: ",",
+  };
   const router = createRouter("", {}, "", {
     initialProps: {},
     pageLoader: {
