@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.28.2 (2021-01-25)
+
+**Note:** Version bump only for package @reactionable/ui-material
+
+
+
+
+
 ## 0.28.1 (2021-01-07)
 
 **Note:** Version bump only for package @reactionable/ui-material
