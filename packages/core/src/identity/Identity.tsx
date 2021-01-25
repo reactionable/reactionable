@@ -87,12 +87,8 @@ function IdentityContextProvider<User extends IUser>({
       return;
     }
 
-    if (user && userState) {
-      return;
-    }
-
     setUser(user);
-  }, [user, loading]);
+  }, [user, userState, loading]);
 
   useEffect(() => {
     setErrorAlert(error);

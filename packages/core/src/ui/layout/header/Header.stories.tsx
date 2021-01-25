@@ -22,9 +22,12 @@ export const HeaderWithIdentity = ({
   defaultUserIsLoggedIn?: boolean;
 }): ReactElement => {
   const userIsLoggedIn = boolean("User is logged in", defaultUserIsLoggedIn);
+
+  const user = { username: "Test user" };
+
   const useFetchUser = () => ({
     loading: false,
-    data: defaultUserIsLoggedIn ? { username: "Test user" } : null,
+    data: defaultUserIsLoggedIn ? user : null,
     refetch: () => null,
   });
 
@@ -33,7 +36,7 @@ export const HeaderWithIdentity = ({
       const { setUser } = useIdentityContext();
 
       useEffect(() => {
-        setUser(userIsLoggedIn ? { username: "Test user" } : null);
+        setUser(userIsLoggedIn ? user : null);
       }, [userIsLoggedIn]);
 
       return (
