@@ -16,8 +16,7 @@ export type IFooterProps = ICoreFooterProps &
 const useStyles = makeStyles((theme) =>
   createStyles({
     footer: {
-      position: "absolute",
-      bottom: theme.spacing(2),
+      marginTop: theme.spacing(1),
     },
   })
 );

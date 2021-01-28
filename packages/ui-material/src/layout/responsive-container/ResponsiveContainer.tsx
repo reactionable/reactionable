@@ -1,5 +1,6 @@
 import { Container } from "@material-ui/core";
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
+import clsx from "clsx";
 import { ComponentProps, ElementType, ReactElement } from "react";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -15,16 +16,18 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export type IResponsiveContainerProps = Partial<ComponentProps<typeof Container>> & {
   component?: ElementType;
+  classes?: ReturnType<typeof useStyles>;
 };
 
 export const ResponsiveContainer = ({
   children,
+  classes: overrideClasses,
   ...props
 }: IResponsiveContainerProps): ReactElement => {
   const classes = useStyles();
 
   return (
-    <Container maxWidth="xl" className={classes.main} {...props}>
+    <Container maxWidth="xl" className={clsx(classes.main, overrideClasses?.main)} {...props}>
       {children || <></>}
     </Container>
   );

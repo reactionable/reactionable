@@ -6,13 +6,13 @@ import {
   IUseLoader,
   useLoader as useLoaderCore,
 } from "@reactionable/core/lib/ui/loader/useLoader";
-import { ComponentType } from "react";
+import { ReactElement } from "react";
 
 export type ILoaderProps = ICoreLoaderProps & {
   overlay?: boolean;
 };
 
-export const Loader: ComponentType<ILoaderProps> = ({ overlay = true }) => {
+export const Loader = ({ overlay = true }: ILoaderProps): ReactElement => {
   const { t } = useTranslation();
   const spinnerElement = <CircularProgress title={t("Loading")} />;
   if (!overlay) {

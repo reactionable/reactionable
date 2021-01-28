@@ -52,25 +52,43 @@ export function Layout<
   const BodyComponent = components.BodyComponent || Body;
   const FooterComponent = components.FooterComponent || Footer;
 
-  const layoutContent = (
-    <>
-      {(body || children) && (
-        <BodyComponent {...(body ?? ({} as BodyProps))}>{children}</BodyComponent>
-      )}
-      {footer && <FooterComponent {...footer} />}
-    </>
-  );
+  let layoutElement: ReactElement = <></>;
 
-  if (!header) {
-    return layoutContent;
+  if (header) {
+    const headerElement = <HeaderComponent {...(header as HeaderProps)} />;
+    layoutElement = (
+      <>
+        {layoutElement}
+        {headerElement}
+      </>
+    );
   }
 
-  return (
-    <HeaderContextProvider>
-      <HeaderComponent {...(header as HeaderProps)} />
-      {layoutContent}
-    </HeaderContextProvider>
-  );
+  if (body || children) {
+    const bodyElement = <BodyComponent {...(body ?? ({} as BodyProps))}>{children}</BodyComponent>;
+    layoutElement = (
+      <>
+        {layoutElement}
+        {bodyElement}
+      </>
+    );
+  }
+
+  if (footer) {
+    const footerElement = <FooterComponent {...footer} />;
+    layoutElement = (
+      <>
+        {layoutElement}
+        {footerElement}
+      </>
+    );
+  }
+
+  if (header) {
+    layoutElement = <HeaderContextProvider>{layoutElement}</HeaderContextProvider>;
+  }
+
+  return layoutElement;
 }
 
 export type IUseLayoutProps<LayoutProps extends ILayoutProps = ILayoutProps> = PropsWithChildren<

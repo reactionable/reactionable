@@ -3,7 +3,13 @@ import "@testing-library/jest-dom/extend-expect";
 import { render } from "@testing-library/react";
 
 import { i18nTestInstance } from "../../testing/I18n";
-import { BasicLayout, LayoutWithFooter, LayoutWithHeader, UseLayout } from "./Layout.stories";
+import {
+  BasicLayout,
+  LayoutWithFooter,
+  LayoutWithHeader,
+  LayoutWithHeaderAndFooter,
+  UseLayout,
+} from "./Layout.stories";
 
 describe("Layout", () => {
   beforeAll(i18nTestInstance);
@@ -27,6 +33,14 @@ describe("Layout", () => {
   describe("LayoutWithHeader", () => {
     it("should render without crashing", () => {
       const result = render(<LayoutWithHeader />);
+
+      expect(result).toBeTruthy();
+    });
+  });
+
+  describe("LayoutWithHeaderAndFooter", () => {
+    it("should render without crashing", () => {
+      const result = render(<LayoutWithHeaderAndFooter />);
 
       expect(result).toBeTruthy();
     });

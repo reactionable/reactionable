@@ -41,15 +41,6 @@ export const BasicLayout = (): ReactElement => (
   </Layout>
 );
 
-export const UseLayout = (): ReactElement => {
-  return useLayout({
-    children: <LayoutContent />,
-    header: {
-      brand: "My App",
-    },
-  });
-};
-
 export const LayoutWithHeader = (): ReactElement => (
   <Layout header={{ brand: "My App" }}>
     <LayoutContent />
@@ -61,3 +52,18 @@ export const LayoutWithFooter = (): ReactElement => (
     <LayoutContent />
   </Layout>
 );
+
+export const LayoutWithHeaderAndFooter = (): ReactElement => (
+  <Layout header={{ brand: "My App" }} footer={{ brand: "My App" }}>
+    <LayoutContent />
+  </Layout>
+);
+
+export const UseLayout = (): ReactElement => {
+  return useLayout({
+    children: <LayoutContent />,
+    header: {
+      brand: "My App",
+    },
+  });
+};

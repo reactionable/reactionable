@@ -1,7 +1,7 @@
 import Button from "@material-ui/core/Button/Button";
 import Paper from "@material-ui/core/Paper/Paper";
 import { App } from "@reactionable/core/lib/app/App";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 import { useUIProviderProps } from "../UI";
 
