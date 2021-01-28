@@ -14,7 +14,7 @@ export type BodyComponent = ComponentType<IBodyProps>;
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     main: {
-      minHeight: `calc(100% - ${theme.spacing(17)}px)`,
+      minHeight: `calc(100% - ${theme.spacing(18)}px)`,
     },
   })
 );

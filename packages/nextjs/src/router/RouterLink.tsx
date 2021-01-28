@@ -1,9 +1,11 @@
 import { IRouterLinkProps as ICoreRouterLinkProps } from "@reactionable/core/lib/router/RouterLink";
 import Link, { LinkProps } from "next/link";
-import { PropsWithChildren, ReactElement, forwardRef } from "react";
+import { ForwardedRef, PropsWithChildren, ReactElement, forwardRef } from "react";
 
 export type IRouterLinkProps = ICoreRouterLinkProps<
-  PropsWithChildren<Omit<LinkProps, "href" | "Component">>
+  PropsWithChildren<
+    Omit<LinkProps, "href" | "Component"> & { ref: ForwardedRef<HTMLAnchorElement> }
+  >
 >;
 
 export const RouterLink = forwardRef(function RouterLink(
@@ -21,12 +23,13 @@ export const RouterLink = forwardRef(function RouterLink(
     passHref,
     prefetch,
     locale,
-    ref,
   };
 
   return (
     <Link {...linkProps} passHref>
-      <Component {...componentProps}>{children}</Component>
+      <Component {...componentProps} ref={ref as ForwardedRef<HTMLAnchorElement>}>
+        {children}
+      </Component>
     </Link>
   );
 });
