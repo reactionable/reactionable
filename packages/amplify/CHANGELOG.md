@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.28.4 (2021-01-28)
+
+
+### Bug Fixes
+
+* **nextjs:** handle ref properly in RouterLink ([5bd51d5](https://github.com/reactionable/reactionable/commit/5bd51d55aca2772834a81431cca1f5a493effb27))
+
+
+
+
+
 ## 0.28.3 (2021-01-28)
 
 
