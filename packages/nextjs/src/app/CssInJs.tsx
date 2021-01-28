@@ -34,7 +34,7 @@ export class Document extends NextDocument {
         <body>
           <Main />
           <NextScript />
-          <style jsx global>{`
+          <style>{`
             html,
             body,
             #__next {
