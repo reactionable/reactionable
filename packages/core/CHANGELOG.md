@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.28.3 (2021-01-28)
+
+
+### Bug Fixes
+
+* **layout:** improve sticky footer ([9ea5716](https://github.com/reactionable/reactionable/commit/9ea571610f4bbf52fdc34c5308158cb6f6b641c2))
+
+
+
+
+
 ## 0.28.2 (2021-01-25)
 
 **Note:** Version bump only for package @reactionable/core
