@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.28.5 (2021-01-28)
+
+
+### Bug Fixes
+
+* **graphql:** add missing manadotry dependency ([5c9b8e8](https://github.com/reactionable/reactionable/commit/5c9b8e85bebea173266095379a8a7da1afd4cd24))
+
+
+
+
+
 ## 0.28.4 (2021-01-28)
 
 
