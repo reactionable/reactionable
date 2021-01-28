@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useCallback, useEffect, useState } from "react";
 import { ComponentType, PropsWithChildren } from "react";
 
 import { IProviderProps, createProvider } from "../app/Provider";
@@ -75,15 +75,23 @@ function IdentityContextProvider<User extends IUser>({
   const { loader, setLoading } = useLoader();
   const { data: user, loading, error } = useFetchUser();
 
-  const setUser = (newUser: User | null | undefined) => {
+  const setUser = useCallback((newUser: User | null | undefined) => {
     setUserState((currentUser) => (currentUser === newUser ? currentUser : newUser));
-  };
+  }, []);
 
   useEffect(() => {
     setLoading(loading);
 
     if (loading) {
       setUser(undefined);
+      return;
+    }
+
+    const userHasLoggedIn = user === null && userState;
+    const userHasLoggedOut = user && userState === null;
+
+    // If state is due to login or logout, do not update user
+    if (userHasLoggedIn || userHasLoggedOut) {
       return;
     }
 
@@ -94,24 +102,27 @@ function IdentityContextProvider<User extends IUser>({
     setErrorAlert(error);
   }, [error]);
 
-  const loginHandler = async (values: ILoginFormValues) => {
-    const user = await login(values);
-    setUser(user);
-    return user;
-  };
+  const loginHandler = useCallback(
+    async (values: ILoginFormValues) => {
+      const user = await login(values);
+      setUser(user);
+      return user;
+    },
+    [login]
+  );
 
-  const logoutHandler = async () => {
+  const logoutHandler = useCallback(async () => {
     try {
       await logout();
       setUser(null);
     } catch (error) {
       setErrorNotification(error);
     }
-  };
+  }, [logout]);
 
-  const displayNameHandler = () => {
+  const displayNameHandler = useCallback(() => {
     return userState ? displayName(userState) : null;
-  };
+  }, [userState, displayName]);
 
   const providerValues: IIdentityProviderValue<User> = {
     ...props,
