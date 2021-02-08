@@ -24,7 +24,7 @@
   "devDependencies": {
     "@babel/core": "^7.12.13",
     "@storybook/addon-actions": "^6.1.17",
-    "@storybook/addon-controls": "^6.1.15",
+    "@storybook/addon-controls": "^6.1.17",
     "@storybook/addon-docs": "^6.1.17",
     "@storybook/addon-info": "^6.0.0-alpha.2",
     "@storybook/addon-knobs": "^6.1.17",
@@ -41,7 +41,7 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "rimraf": "^3.0.2",
-    "typedoc": "^0.20.20",
+    "typedoc": "^0.20.23",
     "typedoc-plugin-nojekyll": "^1.0.1"
   },
   "resolutions": {
