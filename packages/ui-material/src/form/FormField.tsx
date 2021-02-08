@@ -21,6 +21,7 @@ import { ReactElement, ReactNode } from "react";
 
 export type IFieldElementProps = ICoreFieldElementProps & {
   label?: ReactNode | string;
+  multiline?: TextFieldProps["multiline"];
 };
 
 export type IFormFieldProps<
