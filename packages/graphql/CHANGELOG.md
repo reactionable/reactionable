@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.28.6 (2021-02-08)
+
+
+### Bug Fixes
+
+* **ui-material:** add more allowed props type to FormField ([67b44f7](https://github.com/reactionable/reactionable/commit/67b44f7e69c4110730f0cbd97f48458eef666b97))
+
+
+
+
+
 ## 0.28.5 (2021-01-28)
 
 
