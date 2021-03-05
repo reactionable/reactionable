@@ -30,7 +30,7 @@
     "@storybook/addon-links": "^6.1.20",
     "@storybook/addon-storysource": "^6.1.21",
     "@storybook/addons": "^6.1.21",
-    "@storybook/react": "^6.1.20",
+    "@storybook/react": "^6.1.21",
     "@storybook/storybook-deployer": "^2.8.7",
     "@storybook/theming": "^6.1.20",
     "@ts-dev-tools/react": "^1.4.8",
