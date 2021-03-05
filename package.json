@@ -39,7 +39,7 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "rimraf": "^3.0.2",
-    "typedoc": "^0.20.28",
+    "typedoc": "^0.20.29",
     "typedoc-plugin-nojekyll": "^1.0.1"
   },
   "resolutions": {
