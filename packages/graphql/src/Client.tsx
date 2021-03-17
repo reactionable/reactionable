@@ -14,7 +14,7 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { IData as ICoreData } from "@reactionable/core/lib/query/Query";
-import { createUploadLink } from "apollo-upload-client";
+import { UploadLinkOptions, createUploadLink } from "apollo-upload-client";
 import fetch from "cross-fetch";
 import { PropsWithChildren, ReactElement, useMemo } from "react";
 export { gql } from "@apollo/client";
@@ -33,7 +33,7 @@ function getGraphqlClient() {
 function createGraphqlClient(uri: IGraphqlClientUri, cacheConfig?: InMemoryCacheConfig) {
   const httpLink: ApolloLink = (createUploadLink({
     uri,
-    fetch,
+    fetch: fetch as UploadLinkOptions["fetch"],
     credentials: "include",
   }) as unknown) as ApolloLink;
 
