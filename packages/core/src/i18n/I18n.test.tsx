@@ -34,8 +34,11 @@ describe("I18n", () => {
       });
 
       await i18nInstance.changeLanguage("fr");
-      const translation = i18nInstance.t("Cancel");
-      expect(translation).toEqual(overrideTranslation);
+      const overridedTranslation = i18nInstance.t("Cancel");
+      expect(overridedTranslation).toEqual(overrideTranslation);
+
+      const unchangedTranslation = i18nInstance.t("Powered by");
+      expect(unchangedTranslation).toEqual("Propulsé par");
     });
   });
 });

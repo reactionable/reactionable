@@ -1,5 +1,10 @@
-import deepmerge from "deepmerge";
-import i18n, { i18n as I18nType, InitOptions } from "i18next";
+import i18n, {
+  i18n as I18nType,
+  InitOptions,
+  Resource,
+  ResourceKey,
+  ResourceLanguage,
+} from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
 
@@ -21,8 +26,26 @@ const builtInResources = {
   },
 };
 
+// Merge a `source` object to a `target` recursively
+function mergeResources<MergableResource extends Resource | ResourceLanguage | ResourceKey>(
+  target: MergableResource,
+  source: MergableResource
+): MergableResource {
+  // Iterate through `source` properties and if an `Object` set property to merge of `target` and `source` properties
+  for (const key of Object.keys(source)) {
+    if (source[key] instanceof Object) {
+      const mergedResources = mergeResources(target[key], source[key]);
+      Object.assign(source[key], mergedResources);
+    }
+  }
+
+  // Join `target` and modified `source`
+  Object.assign(target || {}, source);
+  return target;
+}
+
 export async function initializeI18n(options: InitOptions = {}): Promise<I18nType> {
-  options.resources = deepmerge(builtInResources, options.resources ?? {});
+  options.resources = mergeResources(builtInResources, options.resources ?? {});
 
   const resourcesLanguages = Object.keys(options.resources);
   const supportedLngs = [options.lng, options.fallbackLng, ...resourcesLanguages]
