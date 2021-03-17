@@ -33,7 +33,7 @@
     "@storybook/react": "^6.1.21",
     "@storybook/storybook-deployer": "^2.8.7",
     "@storybook/theming": "^6.1.20",
-    "@ts-dev-tools/react": "^1.4.8",
+    "@ts-dev-tools/react": "^1.4.10",
     "barrelsby": "^2.2.0",
     "lerna": "^4.0.0",
     "react": "^17.0.1",
@@ -76,7 +76,7 @@
     },
     "settings": {
       "react": {
-        "version": "17.0.1"
+        "version": "detect"
       }
     },
     "rules": {
@@ -93,13 +93,6 @@
     "extends": [
       "@commitlint/config-conventional"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged && pretty-quick --staged",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-push": "yarn lint && tsc --noEmit && yarn test"
-    }
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [
