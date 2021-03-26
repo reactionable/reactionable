@@ -16,7 +16,7 @@
     "storybook": "start-storybook -p 6006 -s .storybook/public",
     "storybook:build": "yarn storybook:deploy --dry-run",
     "storybook:deploy": "rimraf -rf build/storybook && storybook-to-ghpages -s .storybook/public -o build/storybook --ci",
-    "prepare": "ts-dev-tools install && husky install"
+    "prepare": "ts-dev-tools install"
   },
   "dependencies": {
     "typescript": "^4.2.3"
@@ -33,7 +33,7 @@
     "@storybook/react": "^6.1.21",
     "@storybook/storybook-deployer": "^2.8.7",
     "@storybook/theming": "^6.1.20",
-    "@ts-dev-tools/react": "^1.4.10",
+    "@ts-dev-tools/react": "^1.5.1",
     "barrelsby": "^2.2.0",
     "lerna": "^4.0.0",
     "react": "^17.0.1",
