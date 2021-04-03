@@ -64,7 +64,7 @@ export async function initializeI18n(options: InitOptions = {}): Promise<I18nTyp
       fallbackLng: Object.keys(resourcesLanguages)[0] ?? undefined,
       debug: false,
       interpolation: {
-        escapeValue: false, // not needed for react
+        escapeValue: false, // react already safes from xss
       },
       nsSeparator: "::",
       keySeparator: "..",
