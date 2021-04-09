@@ -55,8 +55,5 @@
     "modulePathIgnorePatterns": [
       "<rootDir>/lib/"
     ]
-  },
-  "devDependencies": {
-    "@types/react-is": "^17.0.0"
   }
 }
