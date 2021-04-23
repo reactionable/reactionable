@@ -5089,18 +5089,18 @@
   dependencies:
     core-js "^3.8.2"
 
-"@storybook/react@^6.2.8":
-  version "6.2.8"
-  resolved "https://registry.yarnpkg.com/@storybook/react/-/react-6.2.8.tgz#7b3fb79f30a696856e8bb98b2dc6a2b3a48cbdba"
-  integrity sha512-n8nQmuclm+KvwOKWpZfTFeeUWISZuEUcHQc6MGoi0fzXDnJDPSk4KI6kvIMlr1kSDh41+iZfbbBTil+XWORaRA==
+"@storybook/react@^6.2.9":
+  version "6.2.9"
+  resolved "https://registry.yarnpkg.com/@storybook/react/-/react-6.2.9.tgz#84f42b3d9a5c8de814f71ae186886076ba377d2c"
+  integrity sha512-glvw+o/Vek2oapYIXCYDK6gm3cuSnx0XdOpiJVcXk3KLb8JfLbdzGYYp6dcWUbyOBqGcGFRpXIgMmkcwgn+fvQ==
   dependencies:
     "@babel/preset-flow" "^7.12.1"
     "@babel/preset-react" "^7.12.10"
     "@pmmmwh/react-refresh-webpack-plugin" "^0.4.3"
-    "@storybook/addons" "6.2.8"
-    "@storybook/core" "6.2.8"
-    "@storybook/core-common" "6.2.8"
-    "@storybook/node-logger" "6.2.8"
+    "@storybook/addons" "6.2.9"
+    "@storybook/core" "6.2.9"
+    "@storybook/core-common" "6.2.9"
+    "@storybook/node-logger" "6.2.9"
     "@storybook/semver" "^7.3.2"
     "@types/webpack-env" "^1.16.0"
     babel-plugin-add-react-displayname "^0.0.5"
