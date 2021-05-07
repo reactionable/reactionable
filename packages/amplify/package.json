@@ -35,7 +35,7 @@
   "dependencies": {
     "@reactionable/core": "^0.28.10",
     "aws-amplify": "^3.3.27",
-    "aws-amplify-react": "^4.2.31"
+    "aws-amplify-react": "^4.2.32"
   },
   "publishConfig": {
     "access": "public"
