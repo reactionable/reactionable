@@ -40,7 +40,7 @@
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@reactionable/core": "^0.28.10",
     "bootstrap": "^5.0.0",
-    "react-bootstrap": "^1.5.2"
+    "react-bootstrap": "^1.6.0"
   },
   "publishConfig": {
     "access": "public"
