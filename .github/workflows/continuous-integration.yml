@@ -17,9 +17,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - run: echo ::set-output name=NVMRC::$(cat .nvmrc)
+        id: nvm
 
       - name: Setup Node.js
-        uses: actions/setup-node@v2.1.5
+        uses: actions/setup-node@v2.2.0
+        with:
+          node-version: "${{ steps.nvm.outputs.NVMRC }}"
 
       - name: ♻️ Get yarn cache directory path
         id: yarn-cache-dir-path
@@ -81,7 +85,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Setup Node.js
-        uses: actions/setup-node@v2.1.5
+        uses: actions/setup-node@v2.2.0
         with:
           registry-url: https://registry.npmjs.org/
 
