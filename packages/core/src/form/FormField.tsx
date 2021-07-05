@@ -175,7 +175,7 @@ export function FormField<
 
   const renderChildren = (fieldProps: FieldProps<Value>) => (
     <FormFieldChildren<FieldElementProps, Value>
-      render={render}
+      render={render as IFormFieldChildrenProps<FieldElementProps, Value>["render"]}
       autoFocus={autoFocus}
       as={as}
       fieldProps={{
