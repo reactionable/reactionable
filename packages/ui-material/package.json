@@ -37,7 +37,7 @@
   "dependencies": {
     "@material-ui/core": "^4.11.4",
     "@material-ui/icons": "^4.11.2",
-    "@material-ui/lab": "^4.0.0-alpha.58",
+    "@material-ui/lab": "^4.0.0-alpha.60",
     "@reactionable/core": "^0.28.11",
     "react-draggable": "^4.4.3"
   },
