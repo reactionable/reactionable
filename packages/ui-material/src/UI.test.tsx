@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom/extend-expect";
 
-import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
+import createTheme from "@material-ui/core/styles/createTheme";
 import useTheme from "@material-ui/core/styles/useTheme";
 import { i18nTestInstance } from "@reactionable/core/lib/testing/I18n";
 import { useUIContext } from "@reactionable/core/lib/ui/UI";
@@ -39,7 +39,7 @@ describe("UI", () => {
 
     it("should initialize a theme with a given theme", async () => {
       const primaryColor = "#FF0000";
-      const theme = createMuiTheme({ palette: { primary: { main: primaryColor } } });
+      const theme = createTheme({ palette: { primary: { main: primaryColor } } });
 
       const TestComponent = () => {
         const theme = useTheme();

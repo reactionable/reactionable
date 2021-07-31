@@ -1,6 +1,6 @@
 import Button, { ButtonProps } from "@material-ui/core/Button/Button";
-import { Theme } from "@material-ui/core/styles/createMuiTheme";
 import createStyles from "@material-ui/core/styles/createStyles";
+import { Theme } from "@material-ui/core/styles/createTheme";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {
   IFormButtonProps as ICoreFormButtonProps,

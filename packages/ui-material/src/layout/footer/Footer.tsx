@@ -35,7 +35,7 @@ export function Footer({
       className={classes.footer}
       {...footerProps}
     >
-      <Grid container direction="row" justify="center" alignItems="center" spacing={4}>
+      <Grid container direction="row" justifyContent="center" alignItems="center" spacing={4}>
         <Grid item>
           <CopyrightFooter brand={brand} />
         </Grid>
