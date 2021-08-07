@@ -47,8 +47,12 @@ export function useMutation<TData = IData, TVariables = IVariables>(
     ...options,
     ...(update
       ? {
-          update: (cache, { data, ...mutationResult }) =>
-            update(cache, { data: extractGqlData<TData>(data) as TData, ...mutationResult }),
+          update: (cache, { data, ...mutationResult }, ...othersArguments) =>
+            update(
+              cache,
+              { data: extractGqlData<TData>(data) as TData, ...mutationResult },
+              ...othersArguments
+            ),
         }
       : undefined),
   });
