@@ -9,8 +9,9 @@
   "typings": "lib/index.d.ts",
   "scripts": {
     "start": "yarn build:barrelsby && tsc --watch",
-    "test": "jest",
-    "test:coverage": "yarn test --coverage",
+    "jest": "jest --detectOpenHandles --forceExit",
+    "test": "yarn jest --maxWorkers=50%",
+    "test:coverage": "yarn jest --coverage",
     "build": "yarn build:clean && yarn build:barrelsby && tsc --pretty",
     "build:clean": "rimraf lib",
     "build:barrelsby": "barrelsby -d src --exclude \".+\\.test\\..+\" --exclude \".+__mocks__..+\" --exclude \".+\\.stories\\..+\" --delete -q && yarn prettier --write src/index.ts",

@@ -9,8 +9,9 @@
   "typings": "lib/index.d.ts",
   "scripts": {
     "start": "yarn build:barrelsby && tsc --watch",
-    "test": "jest",
-    "test:coverage": "yarn test --coverage",
+    "jest": "jest --detectOpenHandles --forceExit",
+    "test": "yarn jest --maxWorkers=50%",
+    "test:coverage": "yarn jest --coverage",
     "build": "yarn build:clean && yarn build:barrelsby && tsc --pretty",
     "build:clean": "rimraf lib",
     "build:barrelsby": "barrelsby -d src --exclude \".+\\.test\\..+\" --exclude \".+\\.stories\\..+\" --delete -q && yarn prettier --write src/index.ts",
@@ -34,7 +35,7 @@
   },
   "homepage": "https://github.com/reactionable/reactionable#readme",
   "dependencies": {
-    "@apollo/client": "^3.3.21",
+    "@apollo/client": "^3.4.5",
     "@reactionable/core": "^0.28.11",
     "apollo-upload-client": "^16.0.0",
     "cross-fetch": "^3.1.3",
