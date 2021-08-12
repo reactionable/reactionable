@@ -1,7 +1,7 @@
 import Button from "@material-ui/core/Button/Button";
 import Menu from "@material-ui/core/Menu/Menu";
 import MenuItem from "@material-ui/core/MenuItem/MenuItem";
-import { Theme } from "@material-ui/core/styles/createMuiTheme";
+import { Theme } from "@material-ui/core/styles/createTheme";
 import createStyles from "@material-ui/core/styles/createStyles";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";

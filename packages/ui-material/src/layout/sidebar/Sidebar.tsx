@@ -2,7 +2,7 @@ import Divider from "@material-ui/core/Divider/Divider";
 import Drawer from "@material-ui/core/Drawer/Drawer";
 import IconButton from "@material-ui/core/IconButton/IconButton";
 import List from "@material-ui/core/List";
-import { Theme } from "@material-ui/core/styles/createMuiTheme";
+import { Theme } from "@material-ui/core/styles/createTheme";
 import createStyles from "@material-ui/core/styles/createStyles";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import useTheme from "@material-ui/core/styles/useTheme";

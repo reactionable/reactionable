@@ -1,6 +1,6 @@
 import Avatar from "@material-ui/core/Avatar";
 import MenuItem from "@material-ui/core/MenuItem/MenuItem";
-import { Theme } from "@material-ui/core/styles/createMuiTheme";
+import { Theme } from "@material-ui/core/styles/createTheme";
 import createStyles from "@material-ui/core/styles/createStyles";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import { action } from "@storybook/addon-actions";
