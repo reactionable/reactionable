@@ -5662,22 +5662,6 @@
     core-js "^3.6.5"
     find-up "^4.1.0"
 
-"@storybook/source-loader@6.3.6":
-  version "6.3.6"
-  resolved "https://registry.yarnpkg.com/@storybook/source-loader/-/source-loader-6.3.6.tgz#2d3d01919baad7a40f67d1150c74e41dea5f1d4c"
-  integrity sha512-om3iS3a+D287FzBrbXB/IXB6Z5Ql2yc4dFKTy6FPe5v4N3U0p5puWOKUYWWbTX1JbcpRj0IXXo7952G68tcC1g==
-  dependencies:
-    "@storybook/addons" "6.3.6"
-    "@storybook/client-logger" "6.3.6"
-    "@storybook/csf" "0.0.1"
-    core-js "^3.8.2"
-    estraverse "^5.2.0"
-    global "^4.4.0"
-    loader-utils "^2.0.0"
-    lodash "^4.17.20"
-    prettier "~2.2.1"
-    regenerator-runtime "^0.13.7"
-
 "@storybook/source-loader@6.3.7":
   version "6.3.7"
   resolved "https://registry.yarnpkg.com/@storybook/source-loader/-/source-loader-6.3.7.tgz#cc348305df3c2d8d716c0bab7830c9f537b859ff"
@@ -7201,10 +7185,10 @@ available-typed-arrays@^1.0.2:
   dependencies:
     array-filter "^1.0.0"
 
-aws-amplify-react@^5.0.8:
-  version "5.0.8"
-  resolved "https://registry.yarnpkg.com/aws-amplify-react/-/aws-amplify-react-5.0.8.tgz#d56187c03f5ea29f82041bb7f45a068f12dd49f6"
-  integrity sha512-cwfVthMs5W9iUiaFaLJ3L30Yc8aGRA98JnngNnMgKZbhMouf6k3FMvs4Hxo7hGdV+ptkTfctMvD+tzjR4Nr/DQ==
+aws-amplify-react@^5.0.9:
+  version "5.0.9"
+  resolved "https://registry.yarnpkg.com/aws-amplify-react/-/aws-amplify-react-5.0.9.tgz#d962d8bcc0b2c0d2bb42ccf83c45547be2e3d8f7"
+  integrity sha512-sC1Fxl5/3i2WwzNrsIfFpuCGnWY19WtUiK9xx8neyxyrffHZhqQ+sfFpdj9Q1p6dVz2ZbOKmHS8PWsDGyUX3EQ==
   dependencies:
     qrcode.react "^0.8.0"
     regenerator-runtime "^0.11.1"
