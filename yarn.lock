@@ -4357,17 +4357,17 @@
     util-deprecate "^1.0.2"
     uuid-browser "^3.1.0"
 
-"@storybook/addon-controls@^6.3.6":
-  version "6.3.6"
-  resolved "https://registry.yarnpkg.com/@storybook/addon-controls/-/addon-controls-6.3.6.tgz#2f8071e5b521375aace60af96e33a19f016581c9"
-  integrity sha512-wTWmnZl2qEAUqgLh8a7TL5f6w37Q51lAoJNlwxFFBSKtGS7xFUnou4qTUArNy5iKu1cWoVvofJ9RnP1maGByYA==
+"@storybook/addon-controls@^6.3.7":
+  version "6.3.7"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-controls/-/addon-controls-6.3.7.tgz#ac8fa5ec055f09fd5187998358b5188fed54a528"
+  integrity sha512-VHOv5XZ0MQ45k6X7AUrMIxGkm7sgIiPwsvajnoeMe7UwS3ngbTb0Q0raLqI/L5jLM/jyQwfpUO9isA6cztGTEQ==
   dependencies:
-    "@storybook/addons" "6.3.6"
-    "@storybook/api" "6.3.6"
-    "@storybook/client-api" "6.3.6"
-    "@storybook/components" "6.3.6"
-    "@storybook/node-logger" "6.3.6"
-    "@storybook/theming" "6.3.6"
+    "@storybook/addons" "6.3.7"
+    "@storybook/api" "6.3.7"
+    "@storybook/client-api" "6.3.7"
+    "@storybook/components" "6.3.7"
+    "@storybook/node-logger" "6.3.7"
+    "@storybook/theming" "6.3.7"
     core-js "^3.8.2"
     ts-dedent "^2.0.0"
 
@@ -5661,22 +5661,6 @@
   dependencies:
     core-js "^3.6.5"
     find-up "^4.1.0"
-
-"@storybook/source-loader@6.3.6":
-  version "6.3.6"
-  resolved "https://registry.yarnpkg.com/@storybook/source-loader/-/source-loader-6.3.6.tgz#2d3d01919baad7a40f67d1150c74e41dea5f1d4c"
-  integrity sha512-om3iS3a+D287FzBrbXB/IXB6Z5Ql2yc4dFKTy6FPe5v4N3U0p5puWOKUYWWbTX1JbcpRj0IXXo7952G68tcC1g==
-  dependencies:
-    "@storybook/addons" "6.3.6"
-    "@storybook/client-logger" "6.3.6"
-    "@storybook/csf" "0.0.1"
-    core-js "^3.8.2"
-    estraverse "^5.2.0"
-    global "^4.4.0"
-    loader-utils "^2.0.0"
-    lodash "^4.17.20"
-    prettier "~2.2.1"
-    regenerator-runtime "^0.13.7"
 
 "@storybook/source-loader@6.3.7":
   version "6.3.7"
