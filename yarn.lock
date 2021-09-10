@@ -6917,10 +6917,10 @@ available-typed-arrays@^1.0.2:
   dependencies:
     array-filter "^1.0.0"
 
-aws-amplify-react@^5.0.12:
-  version "5.0.12"
-  resolved "https://registry.yarnpkg.com/aws-amplify-react/-/aws-amplify-react-5.0.12.tgz#94fd1d953abebbfce0e55b0442a208069b9ebbfa"
-  integrity sha512-Pa4QidVhe8ubcqT9R8s0vLN2TucjEqE/hwvQ0okzfwxzSFF3MtAxTl2XzRgv7fuIUzN2f9jUWdQk5E+2zABAig==
+aws-amplify-react@^5.0.15:
+  version "5.0.15"
+  resolved "https://registry.yarnpkg.com/aws-amplify-react/-/aws-amplify-react-5.0.15.tgz#f44685a46efb0372fb7d631028bbd2c731a9edea"
+  integrity sha512-0g/b2EwPSTCbyqXbPOBZ/VBrdGXcDPiH57+LL2Co1d2g3sLyz19CyNHnme+IWYl2CYPDkZ8sXEe2igw6WH57dw==
   dependencies:
     qrcode.react "^0.8.0"
     regenerator-runtime "^0.11.1"
