@@ -94,9 +94,17 @@ export const useIdentityProviderProps = (
     }
 
     if (userState === undefined) {
-      Auth.currentUserInfo().then((data) => {
-        setUser(dataToUser(data));
-      });
+      Auth.currentAuthenticatedUser()
+        .then((data) => {
+          setUser(dataToUser(data));
+        })
+        .catch((error) => {
+          if (error === "The user is not authenticated") {
+            setUser(null);
+          } else {
+            throw error;
+          }
+        });
       return;
     }
   }, [user, userState]);

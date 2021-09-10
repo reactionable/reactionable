@@ -10,9 +10,10 @@ export type IQueryOptions<Variables extends IVariables = IVariables> = {
   variables?: Variables;
 };
 
-export type IUseQueryOptions<Data extends IData, Variables extends IVariables> = IQueryOptions<
-  Variables
-> & {
+export type IUseQueryOptions<
+  Data extends IData,
+  Variables extends IVariables
+> = IQueryOptions<Variables> & {
   handleQuery: (queryOptions: IQueryOptions<Variables>) => Promise<Data>;
 };
 export interface IUseQueryResult<Data extends IData = IData> {
@@ -36,7 +37,7 @@ export function useQuery<Data extends IData = IData, Variables extends IVariable
       const data = await handleQuery(queryOptions);
       setData(data);
     } catch (error) {
-      setError(error);
+      setError(error as IError);
     } finally {
       setLoading(false);
     }

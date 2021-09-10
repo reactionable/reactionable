@@ -3,6 +3,7 @@ import { ComponentType, ReactElement, ReactNode, useEffect, useState } from "rea
 import { AnySchema, object as yupObject } from "yup";
 import Lazy from "yup/lib/Lazy";
 import Reference from "yup/lib/Reference";
+import { IError } from "../error/IError";
 
 import { useUIContext } from "../ui/UI";
 import { IFormButtonProps } from "./FormButton";
@@ -113,7 +114,7 @@ export function Form<
       const data = await onSubmit(values, formikHelpers);
       setSuccess(data);
     } catch (error) {
-      setErrorAlert(error);
+      setErrorAlert(error as IError);
     }
 
     setLoading(false);
