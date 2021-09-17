@@ -2,6 +2,7 @@ import { ReactElement, useCallback, useEffect, useState } from "react";
 import { ComponentType, PropsWithChildren } from "react";
 
 import { IProviderProps, createProvider } from "../app/Provider";
+import { IError } from "../error/IError";
 import { useTranslation } from "../i18n/I18n";
 import { IUseQueryResult } from "../query/Query";
 import { useUIContext } from "../ui/UI";
@@ -116,7 +117,7 @@ function IdentityContextProvider<User extends IUser>({
       await logout();
       setUser(null);
     } catch (error) {
-      setErrorNotification(error);
+      setErrorNotification(error as IError);
     }
   }, [logout]);
 

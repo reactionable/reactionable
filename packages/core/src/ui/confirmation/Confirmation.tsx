@@ -8,6 +8,7 @@ import {
 } from "react";
 
 import { EnhanceChildren } from "../../enhance-children/EnhanceChildren";
+import { IError } from "../../error/IError";
 import { useTranslation } from "../../i18n/I18n";
 import { useUIContext } from "../UI";
 
@@ -127,7 +128,7 @@ export function ConfirmationAction<Data>(
       } catch (error) {
         setLoading(false);
         setSuccessNotification(undefined);
-        setErrorNotification(error);
+        setErrorNotification(error as IError);
       }
     },
   });
