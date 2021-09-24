@@ -61,7 +61,7 @@ export function LanguageSelector({
 }: ILanguageSelectorProps): ReactElement {
   const { i18n } = useTranslation();
 
-  const i18nLanguage = i18n.language;
+  const i18nLanguage = i18n.resolvedLanguage;
   const supportedLngs = i18n.options.supportedLngs;
 
   const [current, setLanguage] = useState<string>();
