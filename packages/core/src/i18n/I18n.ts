@@ -66,8 +66,6 @@ export async function initializeI18n(options: InitOptions = {}): Promise<I18nTyp
       interpolation: {
         escapeValue: false, // react already safes from xss
       },
-      nsSeparator: "::",
-      keySeparator: "..",
       supportedLngs,
       defaultNS: "common",
       ...options,
