@@ -21,7 +21,7 @@ jobs:
         id: nvm
 
       - name: Setup Node.js
-        uses: actions/setup-node@v2.4.0
+        uses: actions/setup-node@v2.4.1
         with:
           node-version: "${{ steps.nvm.outputs.NVMRC }}"
           cache: "yarn"
@@ -74,7 +74,8 @@ jobs:
         id: nvm
 
       - name: Setup Node.js
-        uses: actions/setup-node@v2.4.0
+        uses: actions/setup-node@v2.4.1
+        id: setup-node
         with:
           node-version: "${{ steps.nvm.outputs.NVMRC }}"
           cache: "yarn"
@@ -82,6 +83,7 @@ jobs:
           registry-url: https://registry.npmjs.org/
 
       - name: ⚙️ Install Dependencies
+        if: steps.setup-node.outputs.cache-hit != 'true'
         run: yarn
 
       - name: 🏗️ Build
