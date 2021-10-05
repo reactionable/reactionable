@@ -5,4 +5,14 @@
     "declarationDir": "lib"
   },
   "include": ["src"],
+  "typedocOptions": {
+    "out": "../../build/storybook/docs/router-dom",
+    "entryPoints": ["src/index.ts"],
+    "hideGenerator": true,
+    "githubPages": true,
+    "includeVersion": true,
+    "readme": "none",
+    "excludeExternals": true,
+    "excludePrivate": true
+  }
 }

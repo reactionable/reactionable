@@ -15,6 +15,7 @@
     "build": "yarn build:clean && yarn build:barrelsby && tsc --pretty",
     "build:clean": "rimraf lib",
     "build:barrelsby": "barrelsby -d src --exclude \".+\\.test\\..+\" --exclude \".+\\.stories\\..+\" --delete -q && yarn prettier --write src/index.ts",
+    "build:docs": "typedoc",
     "lint": "eslint \"{src,stories}/**/*.{ts,tsx}\""
   },
   "repository": {
