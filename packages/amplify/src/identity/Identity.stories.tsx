@@ -8,8 +8,8 @@ import { IdentityContextProvider, useIdentityContext, withIdentityContext } from
 
 configure({
   oauth: {},
-  userPoolId: "eu-west-1_test-user-pool-id",
-  userPoolWebClientId: "test-client-id",
+  userPoolId: "eu-west-1_testuserpoolid",
+  userPoolWebClientId: "test_clientid",
 });
 
 export default {
