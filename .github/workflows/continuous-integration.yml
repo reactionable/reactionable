@@ -76,8 +76,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GH_PRIVATE_ACCESS_TOKEN }}
 
-      - uses: actions/checkout@v2
       - run: echo ::set-output name=NVMRC::$(cat .nvmrc)
         id: nvm
 
