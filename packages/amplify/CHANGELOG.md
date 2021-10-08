@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.28.12 (2021-10-08)
+
+**Note:** Version bump only for package @reactionable/amplify
+
+
+
+
+
 ## 0.28.11 (2021-07-05)
 
 **Note:** Version bump only for package @reactionable/amplify
