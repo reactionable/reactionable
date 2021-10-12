@@ -16,26 +16,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - run: echo ::set-output name=NVMRC::$(cat .nvmrc)
-        id: nvm
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v2.4.1
-        id: setup-node
-        with:
-          node-version: "${{ steps.nvm.outputs.NVMRC }}"
-          cache: "yarn"
-          cache-dependency-path: "**/yarn.lock"
-
-      - name: ⚙️ Install Dependencies
-        run: yarn install --frozen-lockfile
-
-      - name: 👕 Lint
-        run: yarn lint
-
-      - name: 🏗️ Build
-        run: yarn build
+      - uses: escemi-tech/actions-node@v1.0.0
 
       - name: ♻️ Storybook cache
         uses: actions/cache@v2.1.6
@@ -46,27 +27,6 @@ jobs:
 
       - name: 📖 Build storybook
         run: yarn storybook:build
-
-      - name: ♻️ Get Jest cache dir
-        id: jest-cache-dir-path
-        run: |
-          JEST_CACHE_DIR=$(yarn jest --showConfig | grep -oP '(?<="cacheDirectory": ")[^"]+(?=")')
-          echo "::set-output name=dir::$JEST_CACHE_DIR"
-
-      - name: ♻️ Test cache
-        uses: actions/cache@v2.1.6
-        with:
-          path: ${{ steps.jest-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-test-${{ github.sha }}
-          restore-keys: ${{ runner.os }}-test-
-
-      - name: 🧪 Test
-        run: yarn test:coverage
-        env:
-          CI: true
-
-      - name: 📊 Code coverage
-        uses: codecov/codecov-action@v2.1.0
 
   publish:
     needs: continuous-integration
