@@ -5,7 +5,7 @@
     "bootstrap": "lerna bootstrap",
     "start": "lerna bootstrap && lerna run --parallel start --",
     "test": "lerna run --stream test --",
-    "test:coverage": "lerna run --stream test:coverage --",
+    "test:ci": "lerna run --stream test:coverage --",
     "format": "prettier --write \"**/*.ts\"  \"!**/lib/**\"",
     "lint": "lerna run --stream lint --",
     "build": "lerna run --stream build --",
