@@ -1,12 +1,11 @@
 import Divider from "@mui/material/Divider";
-import Drawer from "@mui/material/Drawer";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
 import { useTheme } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import {
   INavItemsProps,
   INavItemsProviderProps as ICoreNavItemsProviderProps,
@@ -16,8 +15,11 @@ import {
 } from "@reactionable/core";
 import { PropsWithChildren, ReactElement, useEffect, useState } from "react";
 
-import { ISidebarNavItemProps, SidebarNavItems } from "./SidebarNavItem";
 import { INavItemProps } from "../../nav/NavItem";
+import { Drawer } from "./Drawer";
+import { DrawerHeader } from "./DrawerHeader";
+import { ISidebarNavItemProps, SidebarNavItems } from "./SidebarNavItem";
+import Box from "@mui/material/Box";
 
 export type INavItemsProviderProps = ICoreNavItemsProviderProps<
   INavItemsProps<ISidebarNavItemProps>
@@ -31,7 +33,14 @@ export function useSidebarContext(): INavItemsProviderProps {
   return coreUseSidebarContext();
 }
 
-export function SidebarComponent({ children, open = true }: ISidebarProps): ReactElement {
+export type ISidebarComponentProps = {
+  open?: boolean;
+};
+
+export function SidebarComponent({
+  children,
+  open = true,
+}: PropsWithChildren<ISidebarComponentProps>): ReactElement {
   const theme = useTheme();
 
   const [openState, setOpen] = useState<boolean>(open);
@@ -42,30 +51,35 @@ export function SidebarComponent({ children, open = true }: ISidebarProps): Reac
   };
 
   return (
-    <div>
-      <Drawer variant="permanent">
-        <Toolbar color="primary">
-          <IconButton onClick={toggleSidebar} color="secondary" size="large">
-            {theme.direction === "rtl" ? (
-              openState ? (
-                <ChevronRightIcon />
-              ) : (
+    <Box sx={{ display: "flex" }}>
+      <Drawer variant="permanent" open={openState}>
+        <DrawerHeader>
+          <Toolbar color="primary">
+            <IconButton onClick={toggleSidebar} color="secondary">
+              {theme.direction === "rtl" ? (
+                openState ? (
+                  <ChevronRightIcon />
+                ) : (
+                  <ChevronLeftIcon />
+                )
+              ) : openState ? (
                 <ChevronLeftIcon />
-              )
-            ) : openState ? (
-              <ChevronLeftIcon />
-            ) : (
-              <ChevronRightIcon />
-            )}
-          </IconButton>
-        </Toolbar>
+              ) : (
+                <ChevronRightIcon />
+              )}
+            </IconButton>
+          </Toolbar>
+        </DrawerHeader>
         <Divider />
         <List>
           <SidebarNavItems navItems={navItems} />
         </List>
       </Drawer>
-      <main>{children}</main>
-    </div>
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <DrawerHeader />
+        {children}
+      </Box>
+    </Box>
   );
 }
 

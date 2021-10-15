@@ -1,4 +1,4 @@
-import { Container } from "@mui/material";
+import Container from "@mui/material/Container";
 import { deepmerge } from "@mui/utils";
 import { ComponentProps, ElementType, ReactElement } from "react";
 
