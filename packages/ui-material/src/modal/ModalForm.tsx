@@ -55,7 +55,7 @@ function ModalFormChildren<
     children: cancelButton ?? t("Cancel"),
     disabled: formikProps.isSubmitting,
     onClick: closeModal,
-    color: "inherit",
+    color: "secondary",
     fullWidth: false,
   });
 

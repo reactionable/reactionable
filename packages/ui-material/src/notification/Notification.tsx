@@ -1,4 +1,4 @@
-import Snackbar, { SnackbarProps } from "@mui/material/Snackbar";
+import Snackbar, { SnackbarCloseReason, SnackbarProps } from "@mui/material/Snackbar";
 import SnackbarContent from "@mui/material/SnackbarContent";
 import Typography from "@mui/material/Typography";
 import {
@@ -60,7 +60,7 @@ export const Notification = ({
   }, [open, show]);
 
   let firstClickAway = true;
-  const handleClose: SnackbarProps["onClose"] = (event, reason?: string) => {
+  const handleClose: SnackbarProps["onClose"] = (event, reason?: SnackbarCloseReason) => {
     if (reason === "clickaway") {
       if (firstClickAway) {
         firstClickAway = false;

@@ -1,3 +1,4 @@
+import CloseIcon from "@mui/icons-material/Close";
 import Dialog, { DialogProps } from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -6,7 +7,6 @@ import DialogTitle from "@mui/material/DialogTitle";
 import IconButton from "@mui/material/IconButton";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import CloseIcon from "@mui/icons-material/Close";
 import {
   IModalProps as ICoreModalProps,
   IUseModalProps as ICoreUseModalProps,
@@ -54,7 +54,6 @@ export const Modal: ModalComponent = ({
         <IconButton
           aria-label="close"
           onClick={handleOnClose}
-          size="large"
           sx={{
             position: "absolute",
             right: (theme) => theme.spacing(1),

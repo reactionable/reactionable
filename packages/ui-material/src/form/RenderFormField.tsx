@@ -1,10 +1,9 @@
 import FormControl from "@mui/material/FormControl";
 import FormGroup from "@mui/material/FormGroup";
 import FormHelperText from "@mui/material/FormHelperText";
-import { IFormFieldValue } from "@reactionable/core";
 import { ReactElement } from "react";
 
-import { IFieldElementProps, IFormFieldPropsEnhanced } from "./FormField";
+import { IFieldElementProps, IFormFieldPropsEnhanced, IFormFieldValue } from "./FormField";
 import { RenderFormFieldCheckbox } from "./RenderFormFieldCheckbox";
 import { RenderFormFieldSelect } from "./RenderFormFieldSelect";
 import { RenderFormFieldText } from "./RenderFormFieldText";
