@@ -1,4 +1,4 @@
-import { SnackbarProps } from "@material-ui/core/Snackbar/Snackbar";
+import { SnackbarProps } from "@mui/material/Snackbar/Snackbar";
 import { useTranslation } from "@reactionable/core/lib/i18n/I18n";
 import {
   ErrorNotificationComponent,
@@ -28,7 +28,7 @@ export const ErrorNotification: ErrorNotificationComponent = ({
   }
 
   return (
-    <Notification {...props} title={title}>
+    <Notification {...props} title="">
       <ErrorAlert title={title} elevation={6} variant="filled" {...alert} onClose={props.onClose}>
         {children}
       </ErrorAlert>

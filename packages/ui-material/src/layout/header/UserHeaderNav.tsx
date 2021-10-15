@@ -1,7 +1,7 @@
-import IconButton from "@material-ui/core/IconButton/IconButton";
-import Menu from "@material-ui/core/Menu/Menu";
-import MenuItem from "@material-ui/core/MenuItem/MenuItem";
-import { AccountCircle } from "@material-ui/icons";
+import { AccountCircle } from "@mui/icons-material";
+import IconButton from "@mui/material/IconButton";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 import { useIdentityContext } from "@reactionable/core/lib/identity/Identity";
 import {
   AccountLink,
@@ -20,7 +20,7 @@ const NavItemComponent = forwardRef(function NavItemComponent(
   ref: ForwardedRef<any>
 ) {
   return (
-    <MenuItem button onClick={onClick} ref={ref}>
+    <MenuItem onClick={onClick} ref={ref}>
       {children}
     </MenuItem>
   );

@@ -1,4 +1,4 @@
-import Star from "@material-ui/icons/Star";
+import Star from "@mui/icons-material/Star";
 import { select, withKnobs } from "@storybook/addon-knobs";
 import { ReactElement } from "react";
 
@@ -27,7 +27,7 @@ export const Introduction = (): ReactElement => {
             </p>
             <h5>How to render an icon (template): </h5>
             <pre className="border shadow-sm rounded bg-white p-2">
-              <code>{`import { [Icon Name] } from '@material-ui/icons';
+              <code>{`import { [Icon Name] } from '@mui/icons-material';
 import { Icon } from '@reactionable/ui-material/lib/icon/Icon';
   
 const MyIcon = () => (
@@ -49,8 +49,4 @@ export const BasicIcon = (): ReactElement => {
   );
 
   return <Icon color={color} icon={Star} />;
-};
-
-export const IconWithComponentAsProp = (): ReactElement => {
-  return <Icon {...Star} />;
 };

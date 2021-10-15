@@ -22,7 +22,7 @@ export const BasicHeader = (): ReactElement => {
   const dark = boolean("Dark Mode", false);
 
   return (
-    <TestWrapper ui={{ theme: { palette: { type: dark ? "dark" : "light" } } }}>
+    <TestWrapper ui={{ theme: { palette: { mode: dark ? "dark" : "light" } } }}>
       <Header
         brand="Test brand header"
         color={variant}

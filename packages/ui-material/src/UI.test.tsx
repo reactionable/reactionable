@@ -1,7 +1,6 @@
 import "@testing-library/jest-dom/extend-expect";
 
-import createTheme from "@material-ui/core/styles/createTheme";
-import useTheme from "@material-ui/core/styles/useTheme";
+import { createTheme, useTheme } from "@mui/material/styles";
 import { i18nTestInstance } from "@reactionable/core/lib/testing/I18n";
 import { useUIContext } from "@reactionable/core/lib/ui/UI";
 import { render } from "@testing-library/react";

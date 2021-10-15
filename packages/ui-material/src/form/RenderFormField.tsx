@@ -1,90 +1,42 @@
-import { InputLabel, TextField, TextFieldProps } from "@material-ui/core";
-import Checkbox, { CheckboxProps } from "@material-ui/core/Checkbox/Checkbox";
-import FormControl from "@material-ui/core/FormControl/FormControl";
-import FormControlLabel from "@material-ui/core/FormControlLabel/FormControlLabel";
-import FormGroup from "@material-ui/core/FormGroup/FormGroup";
-import FormHelperText from "@material-ui/core/FormHelperText/FormHelperText";
-import Select, { SelectProps } from "@material-ui/core/Select/Select";
-import TextareaAutosize, {
-  TextareaAutosizeProps,
-} from "@material-ui/core/TextareaAutosize/TextareaAutosize";
-import { IFormFieldValue } from "@reactionable/core/lib/form/FormField";
-import { getFormFieldLabelContent } from "@reactionable/core/lib/form/RenderFormField";
+import FormControl from "@mui/material/FormControl";
+import FormGroup from "@mui/material/FormGroup";
+import FormHelperText from "@mui/material/FormHelperText";
 import { ReactElement } from "react";
 
-import { IFieldElementProps, IFormFieldPropsEnhanced } from "./FormField";
+import { IFieldElementProps, IFormFieldPropsEnhanced, IFormFieldValue } from "./FormField";
+import { RenderFormFieldCheckbox } from "./RenderFormFieldCheckbox";
+import { RenderFormFieldSelect } from "./RenderFormFieldSelect";
+import { RenderFormFieldText } from "./RenderFormFieldText";
+import { RenderFormFieldTextarea } from "./RenderFormFieldTextarea";
 
 export function RenderFormField<
   FieldElementProps extends IFieldElementProps = IFieldElementProps,
   Value extends IFormFieldValue = IFormFieldValue
->({
-  error,
-  isInvalid,
-  field: { label, children, ...field },
-}: IFormFieldPropsEnhanced<FieldElementProps, Value>): ReactElement {
+>({ error, isInvalid, field }: IFormFieldPropsEnhanced<FieldElementProps, Value>): ReactElement {
   let fieldContent: ReactElement;
 
-  if (typeof children === "function") {
-    fieldContent = <>{children(field)}</>;
+  if (typeof field.children === "function") {
+    fieldContent = <>{field.children(field)}</>;
   } else {
     const inputLabelId = field.id ? `${field.id}-label` : undefined;
     const helperTextId = field.id ? `${field.id}-helper-text` : undefined;
 
-    const fieldProps = field;
-
-    const labelContent = getFormFieldLabelContent(label, field.required);
-
     switch (true) {
       case field.as === "checkbox":
       case field.type === "checkbox":
-        fieldContent = (
-          <FormControlLabel
-            disabled={field.disabled}
-            control={<Checkbox {...(fieldProps as CheckboxProps)} />}
-            label={labelContent}
-          />
-        );
+        fieldContent = <RenderFormFieldCheckbox field={field} />;
         break;
 
       case field.as === "select":
-        // eslint-disable-next-line no-case-declarations
-        fieldContent = (
-          <Select {...(fieldProps as SelectProps)} label={labelContent}>
-            {children}
-          </Select>
-        );
-        if (labelContent) {
-          fieldContent = (
-            <>
-              <InputLabel htmlFor={field.id} id={inputLabelId}>
-                {labelContent}
-              </InputLabel>
-              {fieldContent}
-            </>
-          );
-        }
+        fieldContent = <RenderFormFieldSelect field={field} labelId={inputLabelId} />;
         break;
 
       case field.as === "textarea":
-        fieldContent = <TextareaAutosize {...(fieldProps as TextareaAutosizeProps)} />;
-        if (labelContent) {
-          fieldContent = (
-            <>
-              <InputLabel htmlFor={field.id} id={inputLabelId}>
-                {labelContent}
-              </InputLabel>
-              {fieldContent}
-            </>
-          );
-        }
+        fieldContent = <RenderFormFieldTextarea field={field} labelId={inputLabelId} />;
         break;
 
       default:
-        fieldContent = (
-          <TextField {...(fieldProps as TextFieldProps)} label={label}>
-            {children}
-          </TextField>
-        );
+        fieldContent = <RenderFormFieldText field={field} />;
     }
 
     fieldContent = (

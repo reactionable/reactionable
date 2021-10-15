@@ -1,7 +1,4 @@
-import Button, { ButtonProps } from "@material-ui/core/Button/Button";
-import createStyles from "@material-ui/core/styles/createStyles";
-import { Theme } from "@material-ui/core/styles/createTheme";
-import makeStyles from "@material-ui/core/styles/makeStyles";
+import Button, { ButtonProps } from "@mui/material/Button";
 import {
   IFormButtonProps as ICoreFormButtonProps,
   IUseFormButtonProps as ICoreUseFormButtonProps,
@@ -13,23 +10,16 @@ import { ReactElement, ReactNode } from "react";
 
 export type IFormButtonProps = ICoreFormButtonProps & ButtonProps;
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      margin: theme.spacing(5, 0, 2),
-    },
-  })
-);
-
 export function FormButton(props: IFormButtonProps): ReactElement {
-  const classes = useStyles();
   return (
     <Button
       color="primary"
       fullWidth
       variant="contained"
-      classes={classes}
       size="large"
+      sx={{
+        margin: (theme) => theme.spacing(5, 0, 2),
+      }}
       {...props}
     />
   );

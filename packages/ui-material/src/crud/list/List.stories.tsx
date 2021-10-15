@@ -1,4 +1,4 @@
-import { TableCell, TableRow } from "@material-ui/core";
+import { TableCell, TableRow } from "@mui/material";
 import { boolean, withKnobs } from "@storybook/addon-knobs";
 import { ReactElement } from "react";
 

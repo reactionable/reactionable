@@ -1,4 +1,4 @@
-import { List, ListItem, ListItemText } from "@material-ui/core";
+import { List, ListItem, ListItemText } from "@mui/material";
 import { boolean, withKnobs } from "@storybook/addon-knobs";
 import { ReactElement } from "react";
 

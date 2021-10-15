@@ -1,5 +1,5 @@
-import DialogActions from "@material-ui/core/DialogActions/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
 import { IFormData, IFormValues } from "@reactionable/core/lib/form/Form";
 import { FormFields, IFormFieldsProps } from "@reactionable/core/lib/form/FormFields";
 import { IFormWrapperProps } from "@reactionable/core/lib/form/FormWrapper";
@@ -53,7 +53,7 @@ function ModalFormChildren<
     children: cancelButton ?? t("Cancel"),
     disabled: formikProps.isSubmitting,
     onClick: closeModal,
-    color: "default",
+    color: "secondary",
     fullWidth: false,
   });
 

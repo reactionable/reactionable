@@ -21,4 +21,7 @@ module.exports = {
     disableTelemetry: true,
     builder: "webpack5",
   },
+  features: {
+    postcss: false,
+  },
 };

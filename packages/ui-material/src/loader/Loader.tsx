@@ -1,4 +1,4 @@
-import CircularProgress from "@material-ui/core/CircularProgress/CircularProgress";
+import CircularProgress from "@mui/material/CircularProgress";
 import { useTranslation } from "@reactionable/core/lib/i18n/I18n";
 import { ILoaderProps as ICoreLoaderProps } from "@reactionable/core/lib/ui/loader/Loader";
 import {

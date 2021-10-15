@@ -1,6 +1,5 @@
-import Button from "@material-ui/core/Button/Button";
-import makeStyles from "@material-ui/core/styles/makeStyles";
-import DeleteIcon from "@material-ui/icons/Delete";
+import DeleteIcon from "@mui/icons-material/Delete";
+import Button from "@mui/material/Button";
 import {
   Delete as DeleteCore,
   IDeleteProps as ICoreDeleteProps,
@@ -13,38 +12,47 @@ export interface IDeleteProps<Data = unknown> extends ICoreDeleteProps<Data> {
   icon?: IIconProps;
 }
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    marginLeft: theme.spacing(1),
-    backgroundColor: theme.palette.error.main,
-    color: theme.palette.error.contrastText,
-    "&:hover": {
-      backgroundColor: theme.palette.error.dark,
-    },
-    "&:disabled": {
-      backgroundColor: theme.palette.error.light,
-    },
-  },
-}));
-
 export function Delete<Data = unknown>({
   children,
-  icon = DeleteIcon,
+  icon = { icon: DeleteIcon },
   ...props
 }: PropsWithChildren<IDeleteProps<Data>>): ReactElement {
-  const classes = useStyles();
   if (!children || !Children.count(children)) {
     children = (
-      <Button classes={classes} variant="contained" title={props.title || ""}>
-        <Icon {...icon} />
+      <Button
+        sx={{
+          marginLeft: (theme) => theme.spacing(1),
+          backgroundColor: (theme) => theme.palette.error.main,
+          color: (theme) => theme.palette.error.contrastText,
+          "&:hover": {
+            backgroundColor: (theme) => theme.palette.error.dark,
+          },
+          "&:disabled": {
+            backgroundColor: (theme) => theme.palette.error.light,
+          },
+        }}
+        variant="contained"
+        title={props.title || ""}
+      >
+        {Boolean(icon) && <Icon {...icon} />}
       </Button>
     );
   } else if (typeof children === "string") {
     children = (
       <Button
-        classes={classes}
         variant="contained"
         title={props.title || children}
+        sx={{
+          marginLeft: (theme) => theme.spacing(1),
+          backgroundColor: (theme) => theme.palette.error.main,
+          color: (theme) => theme.palette.error.contrastText,
+          "&:hover": {
+            backgroundColor: (theme) => theme.palette.error.dark,
+          },
+          "&:disabled": {
+            backgroundColor: (theme) => theme.palette.error.light,
+          },
+        }}
         startIcon={icon ? <Icon {...icon} /> : undefined}
       >
         {children}

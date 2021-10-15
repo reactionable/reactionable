@@ -1,19 +1,21 @@
-import { TextFieldProps } from "@material-ui/core";
+import { CheckboxProps, SelectProps, TextFieldProps, TextareaAutosizeProps } from "@mui/material";
 import {
   FormField as CoreFormField,
   IFieldElementProps as ICoreFieldElementProps,
   IFormFieldProps as ICoreFormFieldProps,
   IFormFieldPropsEnhanced as ICoreFormFieldPropsEnhanced,
-  IFormFieldValue,
+  IFormFieldValue as ICoreFormFieldValue,
 } from "@reactionable/core/lib/form/FormField";
 import { IRenderFormField } from "@reactionable/core/lib/form/RenderFormField";
 import { ReactElement, ReactNode } from "react";
+
 import { RenderFormField } from "./RenderFormField";
 
-export type IFieldElementProps = ICoreFieldElementProps & {
-  label?: ReactNode | string;
-  multiline?: TextFieldProps["multiline"];
-};
+type MaterialFieldProps = TextFieldProps | CheckboxProps | SelectProps | TextareaAutosizeProps;
+
+export type IFieldElementProps = ICoreFieldElementProps & MaterialFieldProps;
+
+export type IFormFieldValue = ICoreFormFieldValue;
 
 export type IFormFieldProps<
   FieldElement extends IFieldElementProps,

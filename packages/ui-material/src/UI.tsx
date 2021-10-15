@@ -1,6 +1,5 @@
-import CssBaseline from "@material-ui/core/CssBaseline";
-import { ThemeProvider } from "@material-ui/core/styles";
-import createTheme, { Theme, ThemeOptions } from "@material-ui/core/styles/createTheme";
+import CssBaseline from "@mui/material/CssBaseline";
+import { Theme, ThemeOptions, ThemeProvider, createTheme } from "@mui/material/styles";
 import {
   UIContextProvider as CoreUIContextProvider,
   IUIProviderProps as ICoreUIContextProviderProps,

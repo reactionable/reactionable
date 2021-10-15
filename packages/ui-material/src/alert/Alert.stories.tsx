@@ -1,5 +1,5 @@
-import Button from "@material-ui/core/Button/Button";
-import AnnouncementIcon from "@material-ui/icons/Announcement";
+import { Button } from "@mui/material";
+import AnnouncementIcon from "@mui/icons-material/Announcement";
 import { boolean, select, text, withKnobs } from "@storybook/addon-knobs";
 import { ReactElement } from "react";
 

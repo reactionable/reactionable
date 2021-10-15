@@ -1,27 +1,25 @@
-import Divider from "@material-ui/core/Divider/Divider";
-import Drawer from "@material-ui/core/Drawer/Drawer";
-import IconButton from "@material-ui/core/IconButton/IconButton";
-import List from "@material-ui/core/List";
-import { Theme } from "@material-ui/core/styles/createTheme";
-import createStyles from "@material-ui/core/styles/createStyles";
-import makeStyles from "@material-ui/core/styles/makeStyles";
-import useTheme from "@material-ui/core/styles/useTheme";
-import Toolbar from "@material-ui/core/Toolbar/Toolbar";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import Box from "@mui/material/Box";
+import Divider from "@mui/material/Divider";
+import IconButton from "@mui/material/IconButton";
+import List from "@mui/material/List";
+import { useTheme } from "@mui/material/styles";
+import Toolbar from "@mui/material/Toolbar";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import { INavItemsProps } from "@reactionable/core/lib/nav/NavItem";
 import { INavItemsProviderProps as ICoreNavItemsProviderProps } from "@reactionable/core/lib/nav/NavItemsProviderProps";
 import {
   Sidebar as CoreSidebar,
-  useSidebarContext as coreUseSidebarContext,
   ISidebarProps as ICoreSidebarProps,
+  useSidebarContext as coreUseSidebarContext,
 } from "@reactionable/core/lib/ui/layout/sidebar/Sidebar";
-import clsx from "clsx";
 import { PropsWithChildren, ReactElement, useEffect, useState } from "react";
 
-import { ISidebarNavItemProps, SidebarNavItems } from "./SidebarNavItem";
 import { INavItemProps } from "../../nav/NavItem";
+import { Drawer } from "./Drawer";
+import { DrawerHeader } from "./DrawerHeader";
+import { ISidebarNavItemProps, SidebarNavItems } from "./SidebarNavItem";
 
 export type INavItemsProviderProps = ICoreNavItemsProviderProps<
   INavItemsProps<ISidebarNavItemProps>
@@ -35,45 +33,14 @@ export function useSidebarContext(): INavItemsProviderProps {
   return coreUseSidebarContext();
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      display: "flex",
-    },
-    content: {
-      flexGrow: 1,
-    },
-    drawer: {
-      width: theme.spacing(25),
-      flexShrink: 0,
-      whiteSpace: "nowrap",
-    },
-    drawerPaper: {
-      marginTop: theme.spacing(8) + 1,
-    },
-    drawerOpen: {
-      width: theme.spacing(25),
-      transition: theme.transitions.create("width", {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
-    },
-    drawerClose: {
-      transition: theme.transitions.create("width", {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
-      overflowX: "hidden",
-      width: theme.spacing(7) + 1,
-      [theme.breakpoints.up("sm")]: {
-        width: theme.spacing(9) + 1,
-      },
-    },
-  })
-);
+export type ISidebarComponentProps = {
+  open?: boolean;
+};
 
-export function SidebarComponent({ children, open = true }: ISidebarProps): ReactElement {
-  const classes = useStyles();
+export function SidebarComponent({
+  children,
+  open = true,
+}: PropsWithChildren<ISidebarComponentProps>): ReactElement {
   const theme = useTheme();
 
   const [openState, setOpen] = useState<boolean>(open);
@@ -84,43 +51,35 @@ export function SidebarComponent({ children, open = true }: ISidebarProps): Reac
   };
 
   return (
-    <div className={classes.root}>
-      <Drawer
-        variant="permanent"
-        className={clsx(classes.drawer, {
-          [classes.drawerOpen]: openState,
-          [classes.drawerClose]: !openState,
-        })}
-        classes={{
-          paper: clsx({
-            [classes.drawerPaper]: true,
-            [classes.drawerOpen]: openState,
-            [classes.drawerClose]: !openState,
-          }),
-        }}
-      >
-        <Toolbar color="primary">
-          <IconButton onClick={toggleSidebar} color="secondary">
-            {theme.direction === "rtl" ? (
-              openState ? (
-                <ChevronRightIcon />
-              ) : (
+    <Box sx={{ display: "flex" }}>
+      <Drawer variant="permanent" open={openState}>
+        <DrawerHeader>
+          <Toolbar color="primary">
+            <IconButton onClick={toggleSidebar} color="secondary">
+              {theme.direction === "rtl" ? (
+                openState ? (
+                  <ChevronRightIcon />
+                ) : (
+                  <ChevronLeftIcon />
+                )
+              ) : openState ? (
                 <ChevronLeftIcon />
-              )
-            ) : openState ? (
-              <ChevronLeftIcon />
-            ) : (
-              <ChevronRightIcon />
-            )}
-          </IconButton>
-        </Toolbar>
+              ) : (
+                <ChevronRightIcon />
+              )}
+            </IconButton>
+          </Toolbar>
+        </DrawerHeader>
         <Divider />
         <List>
           <SidebarNavItems navItems={navItems} />
         </List>
       </Drawer>
-      <main className={classes.content}>{children}</main>
-    </div>
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <DrawerHeader />
+        {children}
+      </Box>
+    </Box>
   );
 }
 

@@ -1,4 +1,4 @@
-import { SnackbarProps } from "@material-ui/core/Snackbar/Snackbar";
+import { SnackbarProps } from "@mui/material/Snackbar/Snackbar";
 import {
   ISuccessNotificationProps as ICoreSuccessNotificationProps,
   IUseSuccessNotificationProps as ICoreUseSuccessNotificationProps,
@@ -20,7 +20,7 @@ export const SuccessNotification = ({
   ...props
 }: PropsWithChildren<ISuccessNotificationProps>): ReactElement => {
   return (
-    <Notification title={title} {...props}>
+    <Notification title="" {...props}>
       <Alert
         severity="success"
         title={title}

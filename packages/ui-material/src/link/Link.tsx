@@ -1,4 +1,4 @@
-import UILink, { LinkProps } from "@material-ui/core/Link";
+import UILink, { LinkProps } from "@mui/material/Link";
 import {
   Link as CoreLink,
   ILinkProps as ICoreLinkProps,
