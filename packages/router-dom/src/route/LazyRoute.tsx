@@ -6,7 +6,7 @@ import {
   ReactElement,
   ReactNode,
 } from "react";
-import { Route, RouteComponentProps, RouteProps } from "react-router-dom";
+import { Route, RouteProps } from "react-router-dom";
 
 export type ILazyRouteProps = Omit<RouteProps, "component"> & {
   component?: LazyExoticComponent<ComponentType>;
@@ -14,36 +14,30 @@ export type ILazyRouteProps = Omit<RouteProps, "component"> & {
 
 export function renderLazyRoute({
   component,
-  render,
+  element,
 }: {
   component?: LazyExoticComponent<ComponentType>;
-  render?: (props: RouteComponentProps) => ReactNode;
-}): (props: RouteComponentProps) => ReactNode {
-  const LazyRouteComponent = (props: RouteComponentProps): ReactElement => {
-    let rendered: ReactNode;
-    if (component) {
-      const Component = lazyLoad(component);
-      rendered = <Component {...props} />;
-    } else if (render) {
-      rendered = render(props);
-    }
+  element?: ReactElement;
+}): ReactElement {
+  let rendered: ReactNode = <></>;
+  if (component) {
+    const Component = lazyLoad(component);
+    rendered = <Component />;
+  } else if (element) {
+    rendered = element;
+  }
 
-    return <>{rendered}</>;
-  };
-
-  return LazyRouteComponent;
+  return <>{rendered}</>;
 }
 
 export function LazyRoute({
   component,
-  render,
   ...routeProps
 }: PropsWithChildren<ILazyRouteProps>): ReactElement {
   return (
     <Route
-      render={renderLazyRoute({
+      element={renderLazyRoute({
         component,
-        render,
       })}
       {...routeProps}
     />

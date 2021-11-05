@@ -3,3 +3,4 @@ packages/*/lib
 build/
 coverage/
 yarn-error.log
+storybook-static

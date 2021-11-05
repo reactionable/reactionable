@@ -8,12 +8,7 @@ import {
 } from "@reactionable/core/lib/router/Router";
 import { IRouterLinkComponent } from "@reactionable/core/lib/router/RouterLink";
 import { ComponentType, LazyExoticComponent, PropsWithChildren, ReactElement } from "react";
-import {
-  BrowserRouter,
-  MemoryRouter,
-  useHistory,
-  useRouteMatch as useRouteMatchRouterDom,
-} from "react-router-dom";
+import { BrowserRouter, MemoryRouter, useNavigate, useParams } from "react-router-dom";
 
 import { IRouteProps, renderRoutes } from "../route/Route";
 import { IRouterLinkProps, RouterLink } from "./RouterLink";
@@ -81,18 +76,19 @@ export function MemoryRouterComponent(
 export function useRouteMatch<
   RouteMatchParams extends IRouteMatchParams = IRouteMatchParams
 >(): IRouteMatch<RouteMatchParams> {
-  return useRouteMatchRouterDom() as IRouteMatch<RouteMatchParams>;
+  // FIXME: typing is wrong for useParams
+  return (useParams() as unknown) as IRouteMatch<RouteMatchParams>;
 }
 
 export function useRouter<
   RouteMatchParams extends IRouteMatchParams = IRouteMatchParams
 >(): IRouter<RouteMatchParams> {
   const match = useRouteMatch() as IRouteMatch<RouteMatchParams>;
-  const history = useHistory();
+  const navigate = useNavigate();
 
   return {
     match,
-    push: history.push.bind(history),
+    push: navigate.bind(navigate),
   };
 }
 

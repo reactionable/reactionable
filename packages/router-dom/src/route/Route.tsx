@@ -1,6 +1,6 @@
 import { IRouteProps as ICoreRouteProps } from "@reactionable/core/lib/router/Route";
 import { ComponentType, LazyExoticComponent, ReactElement, ReactNode } from "react";
-import { Switch } from "react-router-dom";
+import { Routes } from "react-router-dom";
 
 import { ILazyRouteProps, LazyRoute } from "./LazyRoute";
 import { useCaptureRouteNotFound } from "./NotFound";
@@ -31,5 +31,5 @@ export function renderRoutes(routes: IRouteProps[]): ReactNode {
     children = <CaptureRouteNotFound>{children}</CaptureRouteNotFound>;
   }
 
-  return <Switch>{children}</Switch>;
+  return <Routes>{children}</Routes>;
 }
