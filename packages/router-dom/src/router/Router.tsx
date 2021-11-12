@@ -76,7 +76,6 @@ export function MemoryRouterComponent(
 export function useRouteMatch<
   RouteMatchParams extends IRouteMatchParams = IRouteMatchParams
 >(): IRouteMatch<RouteMatchParams> {
-  // FIXME: typing is wrong for useParams
   return (useParams() as unknown) as IRouteMatch<RouteMatchParams>;
 }
 
