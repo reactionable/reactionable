@@ -19,7 +19,7 @@ jobs:
       - uses: escemi-tech/actions-node@v1.0.0
 
       - name: ♻️ Storybook cache
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v2.1.7
         with:
           path: node_modules/.cache/storybook
           key: ${{ runner.os }}-storybook-${{ github.sha }}
@@ -69,7 +69,7 @@ jobs:
         run: yarn lerna publish --conventional-commits --create-release github --yes
 
       - name: ♻️ Storybook cache
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v2.1.7
         with:
           path: |
             node_modules/.cache/storybook
