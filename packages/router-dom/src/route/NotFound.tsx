@@ -9,7 +9,7 @@ export const useCaptureRouteNotFound = (
     const location = useLocation();
 
     const shouldDisplayNotFoundComponent =
-      location && location.state && location.state.notFoundError;
+      location && location.state && (location.state as { notFoundError ?: string} ).notFoundError;
     if (shouldDisplayNotFoundComponent) {
       const NotFoundComponent = lazyLoad(notFoundComponent);
       return <NotFoundComponent />;
