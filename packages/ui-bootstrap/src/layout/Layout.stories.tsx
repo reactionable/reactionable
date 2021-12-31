@@ -1,8 +1,8 @@
 import { ReactElement } from "react";
 import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
-import Jumbotron from "react-bootstrap/Jumbotron";
 import Row from "react-bootstrap/Row";
 
 import { Layout, useLayout } from "./Layout";
@@ -21,7 +21,7 @@ const LayoutContent = () => (
   <Container fluid>
     <Row>
       <Col>
-        <Jumbotron>
+        <Card body>
           <h1>Hello, world!</h1>
           <p>
             <b>Lorem Ipsum</b> is simply dummy text of the printing and typesetting industry.{" "}
@@ -36,7 +36,7 @@ const LayoutContent = () => (
           <p>
             <Button variant="primary">Learn more</Button>
           </p>
-        </Jumbotron>
+        </Card>
       </Col>
     </Row>
   </Container>

@@ -19,7 +19,7 @@ const UserLoggedHeaderNav = () => {
   }
 
   return (
-    <NavDropdown id="userLoggedHeaderNav" title={displayName()} alignRight>
+    <NavDropdown id="userLoggedHeaderNav" title={displayName()} className="justify-content-end">
       <AccountLink NavItemComponent={NavDropdown.Item} />
       <NavDropdown.Divider />
       <LogoutLink<DropdownItemProps> NavItemComponent={NavDropdown.Item} />
