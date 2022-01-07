@@ -44,7 +44,7 @@
     "i18next-browser-languagedetector": "^6.1.2",
     "path-to-regexp": "^6.2.0",
     "react-fast-compare": "^3.2.0",
-    "react-i18next": "^11.15.2",
+    "react-i18next": "^11.15.3",
     "yup": "^0.32.11"
   },
   "publishConfig": {
