@@ -8,7 +8,7 @@ import { PropsWithChildren, ReactElement } from "react";
 import Toast, { ToastProps } from "react-bootstrap/Toast";
 
 export type INotificationProps = ICoreNotificationProps &
-  ToastProps & {
+  Omit<ToastProps, "title"> & {
     variant?: string;
   };
 
@@ -33,7 +33,7 @@ export function Notification({
       {...props}
     >
       <Toast.Header className={variant ? "text-" + variant : ""}>
-        <strong className="mr-auto">{title}</strong>
+        <strong className="me-auto">{title}</strong>
       </Toast.Header>
       <Toast.Body>{children}</Toast.Body>
     </Toast>

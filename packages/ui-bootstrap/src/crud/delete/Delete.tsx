@@ -21,7 +21,7 @@ export function Delete<Data = unknown>({
   return (
     <DeleteCore<Data> {...props}>
       <Button variant="danger" title={props.title || ""}>
-        {icon && <Icon className={label ? "mr-2" : ""} {...icon} />}
+        {icon && <Icon className={label ? "me-2" : ""} {...icon} />}
         {label}
       </Button>
     </DeleteCore>

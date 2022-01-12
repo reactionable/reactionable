@@ -18,7 +18,7 @@ export type AlertComponent = ComponentType<IAlertProps>;
 export const Alert: AlertComponent = ({ children, icon, ...props }: IAlertProps) => {
   return (
     <BootstrapAlert {...props}>
-      {icon && <Icon className="mr-2" {...icon} />}
+      {icon && <Icon className="me-2" {...icon} />}
       {children}
     </BootstrapAlert>
   );

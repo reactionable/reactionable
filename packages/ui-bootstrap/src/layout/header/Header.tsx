@@ -38,7 +38,7 @@ export const Header = ({
       {brandContent}
       <Navbar.Toggle aria-controls="main-navbar-nav" />
       <Navbar.Collapse id="main-navbar-nav">
-        <Nav className="mr-auto">
+        <Nav className="me-auto">
           <NavItems navItems={navItems} />
         </Nav>
         <UserHeaderNavComponent />
