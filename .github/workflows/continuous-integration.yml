@@ -3,62 +3,43 @@ name: Continuous Integration
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
-    paths-ignore:
-      - "**.md"
+    branches:
+      - main
   workflow_dispatch:
     branches:
-      - master
+      - main
 
 jobs:
   continuous-integration:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: escemi-tech/actions-node@v1.2.0
-
-      - name: ♻️ Storybook cache
-        uses: actions/cache@v2.1.7
+      - uses: escemi-tech/actions-node@main
         with:
-          path: node_modules/.cache/storybook
-          key: ${{ runner.os }}-storybook-${{ github.sha }}
-          restore-keys: ${{ runner.os }}-storybook-
+          checks: true
+          build: build:ci
 
       - name: 📖 Build storybook
         run: yarn storybook:build
 
   publish:
     needs: continuous-integration
-    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/master'
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     environment: github-pages
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: escemi-tech/actions-node@main
         with:
           token: ${{ secrets.GH_PRIVATE_ACCESS_TOKEN }}
-
-      - run: echo ::set-output name=NVMRC::$(cat .nvmrc)
-        id: nvm
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v2.5.1
-        id: setup-node
-        with:
-          node-version: "${{ steps.nvm.outputs.NVMRC }}"
-          cache: "yarn"
-          cache-dependency-path: "**/yarn.lock"
-          registry-url: https://registry.npmjs.org/
-
-      - name: ⚙️ Install Dependencies
-        run: yarn install --frozen-lockfile
-
-      - name: 🏗️ Build
-        run: yarn build:ci
+          build: build:ci
 
       - name: 🔖 Configure publish
         run: |
+          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
+
           git config --local user.email "${{ github.actor }}@users.noreply.github.com"
           git config --local user.name "${{ github.actor }}"
 
@@ -67,15 +48,6 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_PRIVATE_ACCESS_TOKEN }}
           NODE_AUTH_TOKEN: ${{secrets.NODE_AUTH_TOKEN}}
         run: yarn lerna publish --conventional-commits --create-release github --yes
-
-      - name: ♻️ Storybook cache
-        uses: actions/cache@v2.1.7
-        with:
-          path: |
-            node_modules/.cache/storybook
-            node_modules/.cache/terser-webpack-plugin
-          key: ${{ runner.os }}-storybook-${{ github.sha }}
-          restore-keys: ${{ runner.os }}-storybook-
 
       - name: 📖 Build docs
         run: |
