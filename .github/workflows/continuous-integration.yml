@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: escemi-tech/actions-node@v1.2.0
+      - uses: escemi-tech/actions-node@v1.3.0
 
       - name: ♻️ Storybook cache
         uses: actions/cache@v2.1.7
