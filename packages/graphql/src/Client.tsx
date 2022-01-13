@@ -12,7 +12,7 @@ import {
   gql,
   useApolloClient,
 } from "@apollo/client";
-import { setContext } from "@apollo/client/link/context";
+import { ContextSetter, setContext as setApolloContext } from "@apollo/client/link/context";
 import { IData as ICoreData } from "@reactionable/core/lib/query/Query";
 import { createUploadLink } from "apollo-upload-client";
 import fetch from "cross-fetch";
@@ -22,6 +22,16 @@ export { gql } from "@apollo/client";
 export type IGraphqlClient = ApolloClient<IGraphqlClientState>;
 export type IGraphqlClientUri = HttpOptions["uri"];
 export type IGraphqlClientState = Record<string, unknown>;
+export type IGraphqlClientLinkContextSetter = ContextSetter;
+export type IGraphqlClientAuthorizationGetter = () => string;
+export type IGraphqlClientConfig = {
+  uri: IGraphqlClientUri;
+  initialState?: IGraphqlClientState;
+  cacheConfig?: InMemoryCacheConfig;
+  getAuthorization?: IGraphqlClientAuthorizationGetter;
+  setContext?: IGraphqlClientLinkContextSetter;
+};
+
 export type IVariables = OperationVariables;
 export type IData = ICoreData;
 
@@ -30,25 +40,30 @@ function getGraphqlClient() {
   return graphqlClient;
 }
 
-function createGraphqlClient(uri: IGraphqlClientUri, cacheConfig?: InMemoryCacheConfig) {
-  const httpLink: ApolloLink = (createUploadLink({
+function createGraphqlClient({
+  uri,
+  cacheConfig,
+  getAuthorization,
+  setContext,
+}: IGraphqlClientConfig) {
+  const httpLink: ApolloLink = createUploadLink({
     uri,
     fetch,
     credentials: "include",
-  }) as unknown) as ApolloLink;
+  }) as unknown as ApolloLink;
 
-  const authLink: ApolloLink = setContext((_, prevContext) => {
-    const { headers } = prevContext;
+  const authLink: ApolloLink = setApolloContext((_, prevContext) => {
+    if (getAuthorization) {
+      prevContext = {
+        ...prevContext,
+        headers: {
+          ...(prevContext?.headers || {}),
+          Authorization: getAuthorization(),
+        },
+      };
+    }
 
-    // Get the authentication token from local storage if it exists
-    const token = localStorage.getItem("token");
-    // Return the headers to the context so httpLink can read them
-    return {
-      headers: {
-        ...headers,
-        Authorization: token ? `Bearer ${token}` : "",
-      },
-    };
+    return setContext ? setContext(_, prevContext) : prevContext;
   });
 
   return new ApolloClient({
@@ -58,12 +73,11 @@ function createGraphqlClient(uri: IGraphqlClientUri, cacheConfig?: InMemoryCache
   });
 }
 
-export function initializeGraphqlClient(
-  uri: IGraphqlClientUri,
-  initialState?: IGraphqlClientState,
-  cacheConfig?: InMemoryCacheConfig
-): IGraphqlClient {
-  const _graphqlClient = getGraphqlClient() || createGraphqlClient(uri, cacheConfig);
+export function initializeGraphqlClient({
+  initialState,
+  ...graphqlClientConfig
+}: IGraphqlClientConfig): IGraphqlClient {
+  const _graphqlClient = getGraphqlClient() || createGraphqlClient(graphqlClientConfig);
 
   // If your page has Next.js data fetching methods that use Apollo Client, the initial state
   // gets hydrated here
@@ -80,14 +94,11 @@ export function initializeGraphqlClient(
   return _graphqlClient;
 }
 
-export function useInitGraphqlClient(
-  uri: IGraphqlClientUri,
-  initialState?: IGraphqlClientState,
-  cacheConfig?: InMemoryCacheConfig
-): IGraphqlClient {
-  const store = useMemo(() => initializeGraphqlClient(uri, initialState, cacheConfig), [
-    initialState,
-  ]);
+export function useInitGraphqlClient(graphqlClientConfig: IGraphqlClientConfig): IGraphqlClient {
+  const store = useMemo(
+    () => initializeGraphqlClient(graphqlClientConfig),
+    graphqlClientConfig.initialState ? [graphqlClientConfig.initialState] : []
+  );
   return store;
 }
 
@@ -95,19 +106,11 @@ export function useGraphqlClient(): IGraphqlClient {
   return useApolloClient() as IGraphqlClient;
 }
 
-export type IApolloProviderProps = {
-  uri: IGraphqlClientUri;
-  initialState?: IGraphqlClientState;
-  cacheConfig?: InMemoryCacheConfig;
-};
-
 export function GraphqlProvider({
-  uri,
-  initialState,
-  cacheConfig,
   children,
-}: PropsWithChildren<IApolloProviderProps>): ReactElement {
-  const graphqlClient = useInitGraphqlClient(uri, initialState, cacheConfig);
+  ...graphqlClientConfig
+}: PropsWithChildren<IGraphqlClientConfig>): ReactElement {
+  const graphqlClient = useInitGraphqlClient(graphqlClientConfig);
   return <ApolloProvider client={graphqlClient}>{children}</ApolloProvider>;
 }
 
