@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: escemi-tech/actions-node@main
+      - uses: escemi-tech/actions-node@v1.4.0
         with:
           checks: true
           build: build:ci
@@ -29,11 +29,10 @@ jobs:
     if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     environment: github-pages
-
     steps:
-      - uses: escemi-tech/actions-node@main
+      - uses: escemi-tech/actions-node@v1.4.0
         with:
-          token: ${{ secrets.GH_PRIVATE_ACCESS_TOKEN }}
+          checkout-token: ${{ secrets.GH_PRIVATE_ACCESS_TOKEN }}
           build: build:ci
 
       - name: 🔖 Configure publish
@@ -55,6 +54,6 @@ jobs:
           yarn docs:build
 
       - name: 🌐 Publish to gh-pages
-        run: yarn storybook:deploy
+        run: yarn storybook:deploy --host-token-env-variable=GH_TOKEN
         env:
           GH_TOKEN: ${{ secrets.GH_PRIVATE_ACCESS_TOKEN }}
