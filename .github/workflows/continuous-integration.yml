@@ -53,6 +53,6 @@ jobs:
           yarn docs:build
 
       - name: 🌐 Publish to gh-pages
-        run: yarn storybook:deploy --host-token-env-variable=GH_TOKEN
+        run: yarn storybook:deploy --host-token-env-variable=GH_TOKEN --source-branch=${{ github.event.repository.default_branch }}
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
