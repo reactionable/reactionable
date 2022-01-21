@@ -1,5 +1,6 @@
 import {
   ApolloClient,
+  ApolloClientOptions,
   ApolloLink,
   DocumentNode,
   InMemoryCache,
@@ -30,7 +31,8 @@ export type IGraphqlClientConfig = {
   cacheConfig?: InMemoryCacheConfig;
   getAuthorization?: IGraphqlClientAuthorizationGetter;
   setContext?: IGraphqlClientLinkContextSetter;
-};
+} & // eslint-disable-next-line @typescript-eslint/no-explicit-any
+Partial<ApolloClientOptions<any>>;
 
 export type IVariables = OperationVariables;
 export type IData = ICoreData;
@@ -45,12 +47,13 @@ function createGraphqlClient({
   cacheConfig,
   getAuthorization,
   setContext,
+  ...apolloProps
 }: IGraphqlClientConfig) {
   const httpLink: ApolloLink = createUploadLink({
     uri,
     fetch,
     credentials: "include",
-  }) as unknown as ApolloLink;
+  });
 
   const authLink: ApolloLink = setApolloContext((_, prevContext) => {
     if (getAuthorization) {
@@ -70,6 +73,7 @@ function createGraphqlClient({
     ssrMode: typeof window === "undefined",
     link: authLink.concat(httpLink),
     cache: new InMemoryCache(cacheConfig),
+    ...apolloProps,
   });
 }
 
