@@ -1,6 +1,6 @@
 {
   "name": "@reactionable/graphql",
-  "version": "0.28.15",
+  "version": "0.28.16",
   "description": "Reactionable GraphQL package",
   "files": [
     "lib"
@@ -37,7 +37,7 @@
   "homepage": "https://github.com/reactionable/reactionable#readme",
   "dependencies": {
     "@apollo/client": "^3.5.7",
-    "@reactionable/core": "^0.28.15",
+    "@reactionable/core": "^0.28.16",
     "apollo-upload-client": "^17.0.0",
     "cross-fetch": "^3.1.5",
     "graphql": "^16.2.0"
