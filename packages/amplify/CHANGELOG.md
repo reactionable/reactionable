@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.28.18 (2022-01-28)
+
+**Note:** Version bump only for package @reactionable/amplify
+
+
+
+
+
 ## 0.28.17 (2022-01-21)
 
 **Note:** Version bump only for package @reactionable/amplify
