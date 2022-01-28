@@ -1,38 +1,25 @@
 import {
   ApolloClient,
   ApolloClientOptions,
-  ApolloLink,
   DocumentNode,
   InMemoryCache,
   InMemoryCacheConfig,
 } from "@apollo/client";
-import {
-  ApolloProvider,
-  HttpOptions,
-  OperationVariables,
-  gql,
-  useApolloClient,
-} from "@apollo/client";
-import { ContextSetter, setContext as setApolloContext } from "@apollo/client/link/context";
+import { ApolloProvider, OperationVariables, gql, useApolloClient } from "@apollo/client";
 import { IData as ICoreData } from "@reactionable/core/lib/query/Query";
-import { createUploadLink } from "apollo-upload-client";
-import fetch from "cross-fetch";
 import { PropsWithChildren, ReactElement, useMemo } from "react";
+import { getGraphqlClientLink, IGraphqlClientLinkProps } from "./ClientLink";
 export { gql } from "@apollo/client";
 
 export type IGraphqlClient = ApolloClient<IGraphqlClientState>;
-export type IGraphqlClientUri = HttpOptions["uri"];
+
 export type IGraphqlClientState = Record<string, unknown>;
-export type IGraphqlClientLinkContextSetter = ContextSetter;
-export type IGraphqlClientAuthorizationGetter = () => string;
 export type IGraphqlClientConfig = {
-  uri: IGraphqlClientUri;
   initialState?: IGraphqlClientState;
   cacheConfig?: InMemoryCacheConfig;
-  getAuthorization?: IGraphqlClientAuthorizationGetter;
-  setContext?: IGraphqlClientLinkContextSetter;
-} & // eslint-disable-next-line @typescript-eslint/no-explicit-any
-Partial<ApolloClientOptions<any>>;
+} & IGraphqlClientLinkProps &
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  Partial<ApolloClientOptions<any>>;
 
 export type IVariables = OperationVariables;
 export type IData = ICoreData;
@@ -47,31 +34,19 @@ function createGraphqlClient({
   cacheConfig,
   getAuthorization,
   setContext,
+  link,
   ...apolloProps
 }: IGraphqlClientConfig) {
-  const httpLink: ApolloLink = createUploadLink({
+  const graphqlClientLink = getGraphqlClientLink({
     uri,
-    fetch,
-    credentials: "include",
-  });
-
-  const authLink: ApolloLink = setApolloContext((_, prevContext) => {
-    if (getAuthorization) {
-      prevContext = {
-        ...prevContext,
-        headers: {
-          ...(prevContext?.headers || {}),
-          Authorization: getAuthorization(),
-        },
-      };
-    }
-
-    return setContext ? setContext(_, prevContext) : prevContext;
+    link,
+    getAuthorization,
+    setContext,
   });
 
   return new ApolloClient({
     ssrMode: typeof window === "undefined",
-    link: authLink.concat(httpLink),
+    link: graphqlClientLink,
     cache: new InMemoryCache(cacheConfig),
     ...apolloProps,
   });
