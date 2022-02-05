@@ -21,30 +21,29 @@ export function getGraphqlClientLink({
   setContext,
   link,
 }: IGraphqlClientLinkProps) {
-  const httpLink: ApolloLink = createUploadLink({
-    uri,
-    fetch,
-    credentials: "include",
-  });
+  const links: ApolloLink[] = [
+    setApolloContext((_, prevContext) => {
+      if (getAuthorization) {
+        prevContext = {
+          ...prevContext,
+          headers: {
+            ...(prevContext?.headers || {}),
+            Authorization: getAuthorization(),
+          },
+        };
+      }
 
-  const authLink: ApolloLink = setApolloContext((_, prevContext) => {
-    if (getAuthorization) {
-      prevContext = {
-        ...prevContext,
-        headers: {
-          ...(prevContext?.headers || {}),
-          Authorization: getAuthorization(),
-        },
-      };
-    }
-
-    return setContext ? setContext(_, prevContext) : prevContext;
-  });
-
-  const graphqlClientLink = authLink.concat(httpLink);
+      return setContext ? setContext(_, prevContext) : prevContext;
+    }),
+    createUploadLink({
+      uri,
+      fetch,
+      credentials: "include",
+    }),
+  ];
   if (link) {
-    graphqlClientLink.concat(link);
+    links.unshift(link);
   }
 
-  return graphqlClientLink;
+  return ApolloLink.from(links);
 }
