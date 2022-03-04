@@ -7372,10 +7372,10 @@ balanced-match@^1.0.0:
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.2.tgz#e83e3a7e3f300b34cb9d87f615fa0cbf357690ee"
   integrity sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==
 
-barrelsby@^2.3.2:
-  version "2.3.2"
-  resolved "https://registry.yarnpkg.com/barrelsby/-/barrelsby-2.3.2.tgz#1a88c660766a62202bcc38bafe6b963dd41c74f8"
-  integrity sha512-DLMrQWNe33+TNOEnPRb64f2XsUE2ybOegzxMTDDUzNg/P7s4uOPCLvVnkIS+Xy2lSLBeZWcfKLmPXi4iZb8+1A==
+barrelsby@^2.3.3:
+  version "2.3.3"
+  resolved "https://registry.yarnpkg.com/barrelsby/-/barrelsby-2.3.3.tgz#bc1dd62bd39682ee7eae77e8a9fade33f3323a0f"
+  integrity sha512-4zHhiOcSaa4TR2cnDIFJeYTpSEX+vp2WVtdDkOKfZdLxmzK5GZctwOxP+vDb9uPt0kjApUPrFS/+9gm/qXjVhQ==
   dependencies:
     "@types/yargs" "^17.0.3"
     signale "^1.4.0"
