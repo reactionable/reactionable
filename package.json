@@ -22,7 +22,7 @@
     "typescript": "^4.6.3"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^6.4.20",
+    "@storybook/addon-actions": "^6.4.22",
     "@storybook/addon-controls": "^6.4.22",
     "@storybook/addon-docs": "^6.4.20",
     "@storybook/addon-info": "^6.0.0-alpha.2",
