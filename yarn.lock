@@ -5102,23 +5102,6 @@
     global "^4.3.2"
     util-deprecate "^1.0.2"
 
-"@storybook/addons@6.4.20":
-  version "6.4.20"
-  resolved "https://registry.yarnpkg.com/@storybook/addons/-/addons-6.4.20.tgz#bbf568b7c4c5a25ef296f285aef0299998ec5933"
-  integrity sha512-NbsLjDSkE9v2fOr0M7r2hpdYnlYs789ALkXemdTz2y0NUYSPdRfzVVQNXWrgmXivWQRL0aJ3bOjCOc668PPYjg==
-  dependencies:
-    "@storybook/api" "6.4.20"
-    "@storybook/channels" "6.4.20"
-    "@storybook/client-logger" "6.4.20"
-    "@storybook/core-events" "6.4.20"
-    "@storybook/csf" "0.0.2--canary.87bc651.0"
-    "@storybook/router" "6.4.20"
-    "@storybook/theming" "6.4.20"
-    "@types/webpack-env" "^1.16.0"
-    core-js "^3.8.2"
-    global "^4.4.0"
-    regenerator-runtime "^0.13.7"
-
 "@storybook/addons@6.4.22", "@storybook/addons@^6.4.19":
   version "6.4.22"
   resolved "https://registry.yarnpkg.com/@storybook/addons/-/addons-6.4.22.tgz#e165407ca132c2182de2d466b7ff7c5644b6ad7b"
@@ -5160,29 +5143,6 @@
     shallow-equal "^1.1.0"
     store2 "^2.7.1"
     telejson "^3.2.0"
-    util-deprecate "^1.0.2"
-
-"@storybook/api@6.4.20":
-  version "6.4.20"
-  resolved "https://registry.yarnpkg.com/@storybook/api/-/api-6.4.20.tgz#65da720985b4b46998a405bddc42c9cef9bad7e4"
-  integrity sha512-YatZjb8HlJFE9umDzd7aqabn5oXvAculX76pTZWMxm53GROMZVeICGOYtSasJZYlkv9fLx/Gy/ksrKQnA719ig==
-  dependencies:
-    "@storybook/channels" "6.4.20"
-    "@storybook/client-logger" "6.4.20"
-    "@storybook/core-events" "6.4.20"
-    "@storybook/csf" "0.0.2--canary.87bc651.0"
-    "@storybook/router" "6.4.20"
-    "@storybook/semver" "^7.3.2"
-    "@storybook/theming" "6.4.20"
-    core-js "^3.8.2"
-    fast-deep-equal "^3.1.3"
-    global "^4.4.0"
-    lodash "^4.17.21"
-    memoizerific "^1.11.3"
-    regenerator-runtime "^0.13.7"
-    store2 "^2.12.0"
-    telejson "^5.3.2"
-    ts-dedent "^2.0.0"
     util-deprecate "^1.0.2"
 
 "@storybook/api@6.4.22":
@@ -5314,15 +5274,6 @@
   dependencies:
     core-js "^3.0.1"
 
-"@storybook/channels@6.4.20":
-  version "6.4.20"
-  resolved "https://registry.yarnpkg.com/@storybook/channels/-/channels-6.4.20.tgz#a5b3a72c0f95ea28d631817f252496d3718b97e6"
-  integrity sha512-BXvI2/bQIvtQ0LPJCEQwrYm0iMkXD0Pu4WuUGfRCbyqhyw6/VnxOP0x92mvFbtBvjHhyNwk9kZloHyI5zJ3STg==
-  dependencies:
-    core-js "^3.8.2"
-    ts-dedent "^2.0.0"
-    util-deprecate "^1.0.2"
-
 "@storybook/channels@6.4.22":
   version "6.4.22"
   resolved "https://registry.yarnpkg.com/@storybook/channels/-/channels-6.4.22.tgz#710f732763d63f063f615898ab1afbe74e309596"
@@ -5364,14 +5315,6 @@
   integrity sha512-pG0cwr3GNe5UYG5QWPMlcFXmnBJub3xbgvqNuI3NLBlbPaDR0o5xG+kdeLZEDSY/2h8+zQb6bb9GLi/+j4ix3Q==
   dependencies:
     core-js "^3.0.1"
-
-"@storybook/client-logger@6.4.20":
-  version "6.4.20"
-  resolved "https://registry.yarnpkg.com/@storybook/client-logger/-/client-logger-6.4.20.tgz#5a10d86f720c2a8d408aeb61c8d08eb5dcc3833a"
-  integrity sha512-vbEivQvLQm05tuqSAb4s9RCc82YF1HcAvRneOYUGI7T/wSoijZzauIstKtb3LHEBBYpsELf4hJ3GuE5xZW3wXg==
-  dependencies:
-    core-js "^3.8.2"
-    global "^4.4.0"
 
 "@storybook/client-logger@6.4.22":
   version "6.4.22"
@@ -5524,13 +5467,6 @@
   integrity sha512-r4YdZBCZxt7fhK7TGmVchsv6y0UTfkaffjtxzOqzoCHc8VOHMQY//nwPzYzRQvjaoyazw0p88gexT7M207L8cg==
   dependencies:
     core-js "^3.0.1"
-
-"@storybook/core-events@6.4.20":
-  version "6.4.20"
-  resolved "https://registry.yarnpkg.com/@storybook/core-events/-/core-events-6.4.20.tgz#c442028a048bac38a60aabcacb5b215a1bc24b25"
-  integrity sha512-POizjsPSA4SeBRKaIMpH/M2Mtw3ZPp1hCdIXTxK+S2M1j2rt3ZvNnG2y4IJM+dYjkL1Qwl3WJusa7qcDCS2+dA==
-  dependencies:
-    core-js "^3.8.2"
 
 "@storybook/core-events@6.4.22":
   version "6.4.22"
@@ -5772,23 +5708,6 @@
     qs "^6.6.0"
     util-deprecate "^1.0.2"
 
-"@storybook/router@6.4.20":
-  version "6.4.20"
-  resolved "https://registry.yarnpkg.com/@storybook/router/-/router-6.4.20.tgz#4344e699332837fe51142b215e315b0a9e6a6e44"
-  integrity sha512-lwTBtuq9gNywkVs1rye50dPF6pJEGHhZ+2MOTMtASjuM8KIL/wI3OYwRDnDf/98FcinFAeBcEPrEHmV5sAW73w==
-  dependencies:
-    "@storybook/client-logger" "6.4.20"
-    core-js "^3.8.2"
-    fast-deep-equal "^3.1.3"
-    global "^4.4.0"
-    history "5.0.0"
-    lodash "^4.17.21"
-    memoizerific "^1.11.3"
-    qs "^6.10.0"
-    react-router "^6.0.0"
-    react-router-dom "^6.0.0"
-    ts-dedent "^2.0.0"
-
 "@storybook/router@6.4.22":
   version "6.4.22"
   resolved "https://registry.yarnpkg.com/@storybook/router/-/router-6.4.22.tgz#e3cc5cd8595668a367e971efb9695bbc122ed95e"
@@ -5880,24 +5799,6 @@
     prop-types "^15.7.2"
     resolve-from "^5.0.0"
     ts-dedent "^1.1.0"
-
-"@storybook/theming@6.4.20":
-  version "6.4.20"
-  resolved "https://registry.yarnpkg.com/@storybook/theming/-/theming-6.4.20.tgz#b015b976a4c5f7648ec213ebb1fd76f3ec38fe85"
-  integrity sha512-sVGpRYyJHbdme8ozd9AT70VZ24ug6eypAKT7P+cfzImlYJABjmcfaJ+V4rlavoJF1sGnmauJmGoOf40b1U5JZQ==
-  dependencies:
-    "@emotion/core" "^10.1.1"
-    "@emotion/is-prop-valid" "^0.8.6"
-    "@emotion/styled" "^10.0.27"
-    "@storybook/client-logger" "6.4.20"
-    core-js "^3.8.2"
-    deep-object-diff "^1.1.0"
-    emotion-theming "^10.0.27"
-    global "^4.4.0"
-    memoizerific "^1.11.3"
-    polished "^4.0.5"
-    resolve-from "^5.0.0"
-    ts-dedent "^2.0.0"
 
 "@storybook/theming@6.4.22", "@storybook/theming@^6.4.19":
   version "6.4.22"
@@ -15259,13 +15160,13 @@ react-dom@^16.8.3, react-dom@^17.0.2:
     object-assign "^4.1.1"
     scheduler "^0.20.2"
 
-react-draggable@^4.4.3, react-draggable@^4.4.4:
-  version "4.4.4"
-  resolved "https://registry.yarnpkg.com/react-draggable/-/react-draggable-4.4.4.tgz#5b26d9996be63d32d285a426f41055de87e59b2f"
-  integrity sha512-6e0WdcNLwpBx/YIDpoyd2Xb04PB0elrDrulKUgdrIlwuYvxh5Ok9M+F8cljm8kPXXs43PmMzek9RrB1b7mLMqA==
+react-draggable@^4.4.3, react-draggable@^4.4.5:
+  version "4.4.5"
+  resolved "https://registry.yarnpkg.com/react-draggable/-/react-draggable-4.4.5.tgz#9e37fe7ce1a4cf843030f521a0a4cc41886d7e7c"
+  integrity sha512-OMHzJdyJbYTZo4uQE393fHcqqPYsEtkjfMgvCHr6rejT+Ezn4OZbNyGH50vv+SunC1RMvwOTSWkEODQLzw1M9g==
   dependencies:
     clsx "^1.1.1"
-    prop-types "^15.6.0"
+    prop-types "^15.8.1"
 
 react-element-to-jsx-string@^14.0.2, react-element-to-jsx-string@^14.3.4:
   version "14.3.4"

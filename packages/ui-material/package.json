@@ -41,7 +41,7 @@
     "@material-ui/icons": "^4.11.3",
     "@material-ui/lab": "^4.0.0-alpha.61",
     "@reactionable/core": "^0.28.21",
-    "react-draggable": "^4.4.4"
+    "react-draggable": "^4.4.5"
   },
   "jest": {
     "preset": "ts-jest",
