@@ -1,8 +1,9 @@
 import { useTranslation } from "@reactionable/core/lib/i18n/I18n";
 import { INavItemsProps } from "@reactionable/core/lib/nav/NavItem";
-import { INavItemsProviderProps as ICoreNavItemsProviderProps } from "@reactionable/core/lib/nav/NavItemsContextProvider";
+import { INavItemsProviderProps as ICoreNavItemsProviderProps } from "@reactionable/core/lib/nav/NavItemsProviderProps";
 import {
   Sidebar as CoreSidebar,
+  ISidebarProps as ICoreSidebarProps,
   useSidebarContext as coreUseSidebarContext,
 } from "@reactionable/core/lib/ui/layout/sidebar/Sidebar";
 import { PropsWithChildren, ReactElement, useState } from "react";
@@ -17,7 +18,7 @@ import { INavItemProps, NavItems } from "../../nav/NavItem";
 
 export type INavItemsProviderProps = ICoreNavItemsProviderProps<INavItemsProps<INavItemProps>>;
 
-export type ISidebarProps = Partial<INavItemsProviderProps>;
+export type ISidebarProps = ICoreSidebarProps<INavItemsProps<INavItemProps>>;
 
 export function useSidebarContext(): INavItemsProviderProps {
   return coreUseSidebarContext();
@@ -63,7 +64,7 @@ const SidebarItems = ({ children }: PropsWithChildren<unknown>): ReactElement =>
   );
 };
 
-export function SidebarComponent({ children }: PropsWithChildren<ISidebarProps>): ReactElement {
+export function SidebarComponent({ children }: ISidebarProps): ReactElement {
   return (
     <Container
       fluid

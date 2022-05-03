@@ -10,7 +10,7 @@ import {
 import { useTranslation } from "../../../i18n/I18n";
 import { useIdentityContext } from "../../../identity/Identity";
 import { NavItem } from "../../../nav/NavItem";
-import { useRouterContext } from "../../../router/Router";
+import { useRouterContext } from "../../../router/useRouterContext";
 import { ILinkProps } from "../../link/Link";
 import { useUIContext } from "../../UI";
 

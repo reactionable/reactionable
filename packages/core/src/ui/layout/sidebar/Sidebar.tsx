@@ -1,18 +1,19 @@
 import { ComponentProps, ComponentType, PropsWithChildren, ReactElement } from "react";
 
 import { INavItemProps, INavItemsProps, NavItems } from "../../../nav/NavItem";
-import {
-  INavItemsProviderProps,
-  createNavItemsContextProvider,
-} from "../../../nav/NavItemsContextProvider";
+import { createNavItemsContextProvider } from "../../../nav/NavItemsContextProvider";
+import { INavItemsProviderProps } from "../../../nav/NavItemsProviderProps";
+
+export type ISidebarComponent = ComponentType<PropsWithChildren<unknown>>;
 
 export type ISidebarProps<
   NavItemsProps extends INavItemsProps<INavItemProps>,
-  SidebarComponent extends ComponentType = ComponentType
-> = Partial<Omit<INavItemsProviderProps<NavItemsProps>, "Component">> & {
-  Component?: SidebarComponent;
-  sidebar?: ComponentProps<SidebarComponent>;
-};
+  SidebarComponent extends ISidebarComponent = ISidebarComponent
+> = Partial<Omit<INavItemsProviderProps<NavItemsProps>, "Component">> &
+  PropsWithChildren<{
+    Component?: SidebarComponent;
+    sidebar?: Omit<ComponentProps<SidebarComponent>, "children">;
+  }>;
 
 export const {
   NavItemsContextProvider: SidebarContextProvider,
@@ -35,11 +36,11 @@ export function SidebarComponent({ children }: PropsWithChildren<unknown>): Reac
 }
 
 export function Sidebar<NavItemsProps extends INavItemsProps<INavItemProps>>({
-  children,
   Component,
   sidebar,
+  children,
   ...props
-}: PropsWithChildren<ISidebarProps<NavItemsProps>>): ReactElement {
+}: ISidebarProps<NavItemsProps>): ReactElement {
   if (!Component) {
     Component = SidebarComponent;
   }

@@ -1,4 +1,4 @@
-import { act, renderHook } from "@testing-library/react-hooks";
+import { act, renderHook } from "@testing-library/react";
 
 import { i18nTestInstance } from "../../testing/I18n";
 import { useAlert } from "./useAlert";

@@ -13,7 +13,7 @@ import {
 } from "@reactionable/core/lib/crud/list/ListTable";
 import { useTranslation } from "@reactionable/core/lib/i18n/I18n";
 import { IData } from "@reactionable/core/lib/query/Query";
-import { PropsWithChildren, ReactElement } from "react";
+import { ReactElement } from "react";
 
 export function ListTableHead({ head }: IListTableHeadProps): ReactElement {
   const { t } = useTranslation();
@@ -49,8 +49,6 @@ export function ListTableComponent<Data extends IData = IData>({
   );
 }
 
-export function ListTable<Data extends IData = IData>(
-  props: PropsWithChildren<IListTableProps<Data>>
-): ReactElement {
+export function ListTable<Data extends IData = IData>(props: IListTableProps<Data>): ReactElement {
   return <CoreListTable<Data> Component={ListTableComponent} {...props} />;
 }

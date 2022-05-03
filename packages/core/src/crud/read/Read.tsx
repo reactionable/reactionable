@@ -1,4 +1,4 @@
-import { ComponentType, PropsWithChildren, ReactElement } from "react";
+import { ComponentType, ReactElement } from "react";
 
 import { IData } from "../../query/Query";
 import { IQueryWrapperProps, QueryWrapper } from "../../query/QueryWrapper";
@@ -11,8 +11,6 @@ export type IReadProps<Data extends IData = IData> = IUseReadResult<Data> & {
 
 export type ReadComponent<Data extends IData = IData> = ComponentType<IReadProps<Data>>;
 
-export function Read<Data extends IData = IData>(
-  props: PropsWithChildren<IReadProps<Data>>
-): ReactElement {
+export function Read<Data extends IData = IData>(props: IReadProps<Data>): ReactElement {
   return <QueryWrapper<Data> {...props} />;
 }

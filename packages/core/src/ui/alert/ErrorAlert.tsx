@@ -10,9 +10,8 @@ export type IErrorAlertProps<AlertProps extends IAlertProps = IAlertProps> = Omi
   children?: IError;
 };
 
-export type ErrorAlertComponent<AlertProps extends IAlertProps = IAlertProps> = ComponentType<
-  IErrorAlertProps<AlertProps>
->;
+export type ErrorAlertComponent<ErrorAlertProps extends IErrorAlertProps = IErrorAlertProps> =
+  ComponentType<ErrorAlertProps>;
 
 export function ErrorAlert<AlertProps extends IAlertProps = IAlertProps>({
   children,
@@ -21,11 +20,10 @@ export function ErrorAlert<AlertProps extends IAlertProps = IAlertProps>({
   return <Alert {...props}>{printError(children)}</Alert>;
 }
 
-export type IUseErrorAlertProps<
-  ErrorAlertProps extends IErrorAlertProps = IErrorAlertProps
-> = ErrorAlertProps & {
-  Component?: ErrorAlertComponent;
-};
+export type IUseErrorAlertProps<ErrorAlertProps extends IErrorAlertProps = IErrorAlertProps> =
+  ErrorAlertProps & {
+    Component?: ErrorAlertComponent;
+  };
 
 export interface IUseErrorAlertResult {
   errorAlert: ReactElement | null;

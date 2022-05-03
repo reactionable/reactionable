@@ -1,11 +1,13 @@
 import { ReactElement } from "react";
 
-import { RouterContextProvider, useRouter, useRouterProviderProps } from "./Router";
+import { useRouterProviderProps } from "./useRouterProviderProps";
+import { RouterContextProvider } from "./useRouterContext";
+import { useRouter } from "./useRouter";
 
 export default {
   title: "Core/Components/Router",
   parameters: {
-    subcomponent: [RouterContextProvider, useRouter],
+    subcomponent: [useRouterProviderProps, RouterContextProvider, useRouter],
   },
 };
 

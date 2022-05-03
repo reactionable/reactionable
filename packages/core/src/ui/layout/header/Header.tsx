@@ -1,4 +1,4 @@
-import { ComponentType, PropsWithChildren, ReactElement, ReactNode } from "react";
+import { ComponentType, ReactElement, ReactNode } from "react";
 
 import { INavItemProps, INavItemsProps, NavItems } from "../../../nav/NavItem";
 import { isLinkProps } from "../../link/Link";
@@ -10,18 +10,12 @@ export type IHeaderProps<NavItemProps extends INavItemProps> = INavItemsProps<Na
   UserHeaderNavComponent?: ComponentType;
 };
 
-export type HeaderComponent<
-  HeaderProps extends IHeaderProps<INavItemProps>
-> = ComponentType<HeaderProps>;
+export type HeaderComponent<HeaderProps extends IHeaderProps<INavItemProps>> =
+  ComponentType<HeaderProps>;
 
 export function Header<
   HeaderProps extends IHeaderProps<INavItemProps> = IHeaderProps<INavItemProps>
->({
-  brand,
-  navItems = [],
-  UserHeaderNavComponent,
-  ...navbarProps
-}: PropsWithChildren<HeaderProps>): ReactElement {
+>({ brand, navItems = [], UserHeaderNavComponent, ...navbarProps }: HeaderProps): ReactElement {
   let brandContent: ReactElement | null = null;
   const { useLink } = useUIContext();
 

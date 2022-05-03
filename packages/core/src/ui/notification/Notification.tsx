@@ -8,9 +8,9 @@ export interface INotificationProps {
   show?: boolean;
 }
 
-export type NotificationComponent = ComponentType<INotificationProps>;
+export type INotificationComponent = ComponentType<PropsWithChildren<INotificationProps>>;
 
-export const Notification: NotificationComponent = ({
+export const Notification: INotificationComponent = ({
   children,
   title,
   show = true,
@@ -26,7 +26,7 @@ export const Notification: NotificationComponent = ({
 
 export type IUseNotificationProps<
   NotificationProps extends INotificationProps = INotificationProps
-> = PropsWithChildren<NotificationProps & { Component?: NotificationComponent }>;
+> = PropsWithChildren<NotificationProps & { Component?: INotificationComponent }>;
 
 export interface IUseNotificationResult {
   notification: ReactNode;

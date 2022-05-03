@@ -44,9 +44,7 @@ export async function query<Data extends IData, QO extends IQueryOptions<IVariab
       throw new Error("An unexpected error occurred");
     }
 
-    // TODO: types will be fixed: https://github.com/aws-amplify/amplify-js/pull/5994
-    const errors = error.errors;
-    throw new Error(errors.map((errorItem) => errorItem.message).join(", "));
+    throw new Error(error.errors.map((errorItem) => errorItem.message).join(", "));
   }
 
   if (!result || !isGraphQLResult(result) || !result.data) {
@@ -54,7 +52,7 @@ export async function query<Data extends IData, QO extends IQueryOptions<IVariab
   }
 
   if (rawData) {
-    return (result.data as unknown) as Data;
+    return result.data as unknown as Data;
   }
 
   const data = extractData<Data>(result.data as IData);

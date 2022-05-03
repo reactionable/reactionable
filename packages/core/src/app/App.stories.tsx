@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 
 import { useIdentityProviderProps } from "../identity/Identity";
-import { useRouterProviderProps } from "../router/Router";
+import { useRouterProviderProps } from "../router/useRouterProviderProps";
 import { useUIProviderProps } from "../ui/UI";
 import { App } from "./App";
 

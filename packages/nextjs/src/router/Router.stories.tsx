@@ -1,7 +1,8 @@
 import { ReactElement } from "react";
 
 import { TestWrapper } from "../testing/TestWrapper";
-import { RouterContextProvider, useRouter } from "./Router";
+import { RouterContextProvider } from "./useRouterContext";
+import { useRouter } from "./useRouter";
 
 export default {
   title: "NextJS/Components/Router",

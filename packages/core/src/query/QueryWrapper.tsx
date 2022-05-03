@@ -1,4 +1,4 @@
-import { PropsWithChildren, ReactElement, ReactNode, useEffect, useState } from "react";
+import { ReactElement, ReactNode, useEffect, useState } from "react";
 
 import { IError } from "../error/IError";
 import { IUseErrorAlertResult } from "../ui/alert/ErrorAlert";
@@ -41,7 +41,7 @@ export function QueryWrapper<Data extends IData = IData>({
   children,
   data,
   ...props
-}: PropsWithChildren<IQueryWrapperProps<Data>>): ReactElement {
+}: IQueryWrapperProps<Data>): ReactElement {
   const { loading, error, noData } = props;
   const { useLoader, useErrorAlert, useWarningAlert } = useUIContext();
   const { loader, setLoading } = useLoader({ loading });

@@ -1,18 +1,9 @@
-import { FastField, Field, FieldInputProps, FieldProps, getIn } from "formik";
-import {
-  ChangeEvent,
-  ComponentType,
-  HTMLProps,
-  ReactElement,
-  ReactNode,
-  RefObject,
-  createElement,
-  forwardRef,
-  useEffect,
-  useRef,
-} from "react";
+import { FastField, Field, FieldProps } from "formik";
+import { ChangeEvent, HTMLProps, ReactElement, ReactNode } from "react";
 
-import { FormErrorMessage } from "./FormErrorMessage";
+import { FormFieldChildren, IFormFieldChildrenProps } from "./FormFieldChildren";
+import { IFieldInputPropsEnhanced } from "./FormFieldInput";
+import { IRenderFormField } from "./RenderFormField";
 
 export type IFormFieldValue = string;
 export type IFieldElementProps<
@@ -20,14 +11,6 @@ export type IFieldElementProps<
 > = FieldProps & {
   label?: ReactNode | string;
 };
-
-export type IFieldInputPropsEnhanced<
-  FieldElementProps extends IFieldElementProps,
-  Value extends IFormFieldValue
-> = FieldElementProps &
-  FieldInputProps<Value> & {
-    ref: RefObject<unknown>;
-  };
 
 export type IFormFieldPropsEnhanced<
   FieldElementProps extends IFieldElementProps,
@@ -39,11 +22,6 @@ export type IFormFieldPropsEnhanced<
   field: IFieldInputPropsEnhanced<FieldElementProps, Value>;
 };
 
-export type IRenderFormField<
-  FieldElementProps extends IFieldElementProps,
-  Value extends IFormFieldValue
-> = ComponentType<IFormFieldPropsEnhanced<FieldElementProps, Value>>;
-
 export type IFormFieldProps<
   FieldElementProps extends IFieldElementProps,
   Value extends IFormFieldValue
@@ -51,115 +29,6 @@ export type IFormFieldProps<
   render?: IRenderFormField<FieldElementProps, Value>;
   fastField?: boolean;
 };
-
-type IFormFieldInputProps<
-  FieldElementProps extends IFieldElementProps = IFieldElementProps,
-  Value extends IFormFieldValue = IFormFieldValue
-> = IFormFieldPropsEnhanced<FieldElementProps, Value>["field"];
-
-const FormFieldInput = forwardRef(function FormFieldInput(
-  { as = "input", ...props }: IFormFieldInputProps,
-  ref
-) {
-  return createElement(as || "input", { ...props, ref });
-});
-
-export function getFormFieldLabelContent(
-  label?: ReactNode,
-  required?: boolean
-): ReactNode | undefined {
-  if (!label) {
-    return undefined;
-  }
-  if (!required) {
-    return label;
-  }
-
-  if ("string" === typeof label) {
-    return label + " \u00a0*";
-  }
-  return (
-    <>
-      {label}
-      {"\u00a0*"}
-    </>
-  );
-}
-
-export function RenderFormField<
-  FieldElementProps extends IFieldElementProps = IFieldElementProps,
-  Value extends IFormFieldValue = IFormFieldValue
->({ field: { label, ...props } }: IFormFieldPropsEnhanced<FieldElementProps, Value>): ReactElement {
-  let fieldContent = (
-    <>
-      <FormFieldInput {...props} />
-      <FormErrorMessage name={props.name} />
-    </>
-  );
-
-  if (props.type === "hidden") {
-    return fieldContent;
-  }
-
-  const labelContent = getFormFieldLabelContent(label, props.required);
-
-  if (labelContent) {
-    fieldContent = (
-      <label>
-        {labelContent} {fieldContent}
-      </label>
-    );
-  }
-
-  return <div>{fieldContent}</div>;
-}
-
-type IFormFieldChildrenProps<
-  FieldElementProps extends IFieldElementProps,
-  Value extends IFormFieldValue
-> = Pick<IFormFieldProps<FieldElementProps, Value>, "render" | "as" | "autoFocus"> & {
-  fieldProps: FieldProps<Value>;
-};
-export function FormFieldChildren<
-  FieldElementProps extends IFieldElementProps,
-  Value extends IFormFieldValue
->({
-  as,
-  render,
-  autoFocus,
-  fieldProps: { field, ...fieldProps },
-}: IFormFieldChildrenProps<FieldElementProps, Value>): ReactElement {
-  const inputRef = useRef<{ focus: () => void }>(null);
-
-  useEffect(() => {
-    if (autoFocus === true && inputRef && inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, [inputRef, autoFocus]);
-
-  const touch = getIn(fieldProps.form.touched, field.name);
-  const error = getIn(fieldProps.form.errors, field.name);
-  const isValid = !!(touch && !error);
-  const isInvalid = !!error;
-
-  const fieldInputPropsEnhanced: IFieldInputPropsEnhanced<FieldElementProps, Value> = ({
-    as,
-    ref: inputRef,
-    ...field,
-  } as unknown) as IFieldInputPropsEnhanced<FieldElementProps, Value>;
-
-  const fieldPropsEnhanced: IFormFieldPropsEnhanced<FieldElementProps, Value> = {
-    ...fieldProps,
-    error: touch ? error : undefined,
-    isValid,
-    isInvalid,
-    field: fieldInputPropsEnhanced,
-  };
-
-  const RenderFormFieldComponent = render ?? RenderFormField;
-
-  return <RenderFormFieldComponent {...fieldPropsEnhanced} />;
-}
 
 export function FormField<
   FieldElementProps extends IFieldElementProps = IFieldElementProps,

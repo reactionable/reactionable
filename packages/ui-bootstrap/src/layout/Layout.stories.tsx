@@ -5,7 +5,8 @@ import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 
-import { Layout, useLayout } from "./Layout";
+import { Layout } from "./Layout";
+import { useLayout } from "./useLayout";
 
 export default {
   title: "UI Bootstrap/Components/Layout",

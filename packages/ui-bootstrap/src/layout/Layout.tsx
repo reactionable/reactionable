@@ -1,10 +1,8 @@
 import {
   Layout as CoreLayout,
   ILayoutProps as ICoreLayoutProps,
-  IUseLayoutProps as ICoreUseLayoutProps,
-  IUseLayoutResult,
-  useLayout as useLayoutCore,
 } from "@reactionable/core/lib/ui/layout/Layout";
+import { IUseLayoutProps as ICoreUseLayoutProps } from "@reactionable/core/lib/ui/layout/useLayout";
 import { PropsWithChildren, ReactElement } from "react";
 
 import { Body, IBodyProps } from "./body/Body";
@@ -26,13 +24,4 @@ export function Layout(props: PropsWithChildren<ILayoutProps>): ReactElement {
       }}
     />
   );
-}
-
-export function useLayout(props: IUseLayoutProps): IUseLayoutResult {
-  return useLayoutCore<IUseLayoutProps>({
-    HeaderComponent: Header,
-    BodyComponent: Body,
-    FooterComponent: Footer,
-    ...props,
-  });
 }

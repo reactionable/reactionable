@@ -1,7 +1,8 @@
 import { PropsWithChildren, ReactElement, StrictMode } from "react";
 
 import { IIdentityProviderProps, IdentityContextProvider } from "../identity/Identity";
-import { IRouterProviderProps, RouterContextProvider } from "../router/Router";
+import { IRouterProviderProps } from "../router/useRouterProviderProps";
+import { RouterContextProvider } from "../router/useRouterContext";
 import { IUIProviderProps, UIContextProvider } from "../ui/UI";
 
 export type IAppProps<

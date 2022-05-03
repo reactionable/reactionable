@@ -1,9 +1,9 @@
-import { ComponentType, PropsWithChildren, ReactNode } from "react";
+import { ComponentType, PropsWithChildren } from "react";
 
-export type IAlertProps = { children?: ReactNode };
+export type IAlertProps = PropsWithChildren<unknown>;
 
 export type AlertComponent = ComponentType<IAlertProps>;
 
-export const Alert: AlertComponent = ({ children }: PropsWithChildren<IAlertProps>) => {
+export const Alert: AlertComponent = ({ children }: IAlertProps) => {
   return <div>{children}</div>;
 };
