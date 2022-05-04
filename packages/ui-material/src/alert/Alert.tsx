@@ -10,8 +10,10 @@ import { ComponentType, ReactNode } from "react";
 
 import { IIconProps, Icon } from "../icon/Icon";
 
+export type IAlertIconProps = IIconProps | AlertProps["icon"];
+
 export type IAlertProps = IAlertPropsCore &
-  Omit<AlertProps, "title"> & { title?: ReactNode; icon?: AlertProps["icon"] | IIconProps };
+  Omit<AlertProps, "title" | "icon"> & { title?: ReactNode; icon?: IAlertIconProps };
 
 export type AlertComponent = ComponentType<IAlertProps>;
 
@@ -26,7 +28,7 @@ export const Alert: AlertComponent = ({ children, title, icon, ...props }: IAler
 
   let iconProp: AlertProps["icon"];
 
-  if (!icon || typeof icon === "boolean") {
+  if (!icon) {
     iconProp = icon;
   } else {
     iconProp = <Icon {...(icon as IIconProps)} fontSize="inherit" />;

@@ -11,21 +11,25 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import { INavItemsProps } from "@reactionable/core/lib/nav/NavItem";
-import { INavItemsProviderProps as ICoreNavItemsProviderProps } from "@reactionable/core/lib/nav/NavItemsContextProvider";
+import { INavItemsProviderProps as ICoreNavItemsProviderProps } from "@reactionable/core/lib/nav/NavItemsProviderProps";
 import {
   Sidebar as CoreSidebar,
   useSidebarContext as coreUseSidebarContext,
+  ISidebarProps as ICoreSidebarProps,
 } from "@reactionable/core/lib/ui/layout/sidebar/Sidebar";
 import clsx from "clsx";
 import { PropsWithChildren, ReactElement, useEffect, useState } from "react";
 
 import { ISidebarNavItemProps, SidebarNavItems } from "./SidebarNavItem";
+import { INavItemProps } from "../../nav/NavItem";
 
 export type INavItemsProviderProps = ICoreNavItemsProviderProps<
   INavItemsProps<ISidebarNavItemProps>
 >;
 
-export type ISidebarProps = Partial<INavItemsProviderProps> & ISidebarComponentProps;
+export type ISidebarProps = ICoreSidebarProps<INavItemsProps<INavItemProps>> & {
+  open?: boolean;
+};
 
 export function useSidebarContext(): INavItemsProviderProps {
   return coreUseSidebarContext();
@@ -68,14 +72,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export type ISidebarComponentProps = {
-  open?: boolean;
-};
-
-export function SidebarComponent({
-  children,
-  open = true,
-}: PropsWithChildren<ISidebarComponentProps>): ReactElement {
+export function SidebarComponent({ children, open = true }: ISidebarProps): ReactElement {
   const classes = useStyles();
   const theme = useTheme();
 

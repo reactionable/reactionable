@@ -1,13 +1,10 @@
 import { ComponentType, PropsWithChildren, ReactElement } from "react";
 
 import { INavItemProps } from "../../nav/NavItem";
-import {
-  INavItemsProviderProps,
-  createNavItemsContextProvider,
-} from "../../nav/NavItemsContextProvider";
 import { Body, BodyComponent, IBodyProps } from "./body/Body";
 import { Footer, FooterComponent, IFooterProps } from "./footer/Footer";
 import { Header, HeaderComponent, IHeaderProps } from "./header/Header";
+import { HeaderContextProvider } from "./header/useHeaderContext";
 
 export interface ILayoutProps<
   HeaderProps extends IHeaderProps<INavItemProps> = IHeaderProps<INavItemProps>,
@@ -22,20 +19,8 @@ export interface ILayoutProps<
   FooterComponent?: FooterComponent<FooterProps>;
 }
 
-export type LayoutComponent<
-  LayoutProps extends ILayoutProps = ILayoutProps
-> = ComponentType<LayoutProps>;
-
-const { NavItemsContextProvider, useNavItemsContext } = createNavItemsContextProvider<
-  IHeaderProps<INavItemProps>
->();
-
-export const HeaderContextProvider = NavItemsContextProvider;
-export function useHeaderContext<
-  HeaderProps extends IHeaderProps<INavItemProps>
->(): INavItemsProviderProps<HeaderProps> {
-  return useNavItemsContext();
-}
+export type LayoutComponent<LayoutProps extends ILayoutProps = ILayoutProps> =
+  ComponentType<LayoutProps>;
 
 export function Layout<
   HeaderProps extends IHeaderProps<INavItemProps>,
@@ -89,24 +74,4 @@ export function Layout<
   }
 
   return layoutElement;
-}
-
-export type IUseLayoutProps<LayoutProps extends ILayoutProps = ILayoutProps> = PropsWithChildren<
-  LayoutProps & { Component?: LayoutComponent<LayoutProps> }
->;
-
-export type IUseLayoutResult = ReactElement;
-
-export type IUseLayout<UseLayoutProps extends IUseLayoutProps> = (
-  props: UseLayoutProps
-) => IUseLayoutResult;
-
-export function useLayout<UseLayoutProps extends IUseLayoutProps>({
-  Component,
-  ...props
-}: UseLayoutProps): IUseLayoutResult {
-  if (!Component) {
-    Component = Layout;
-  }
-  return <Component {...props} />;
 }

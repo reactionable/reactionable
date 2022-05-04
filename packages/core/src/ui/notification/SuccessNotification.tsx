@@ -3,13 +3,13 @@ import { ReactNode } from "react";
 import {
   INotificationProps,
   IUseNotificationProps,
-  NotificationComponent,
+  INotificationComponent,
   useNotification,
 } from "./Notification";
 
 export type ISuccessNotificationProps = INotificationProps;
 
-export type SuccessNotificationComponent = NotificationComponent;
+export type SuccessNotificationComponent = INotificationComponent;
 
 export type IUseSuccessNotificationProps = IUseNotificationProps;
 
@@ -24,9 +24,7 @@ export type IUseSuccessNotification<
 export function useSuccessNotification<P extends IUseSuccessNotificationProps>(
   props: P & { Component: SuccessNotificationComponent }
 ): IUseSuccessNotificationResult {
-  const {
-    notification: successNotification,
-    setNotification: setSuccessNotification,
-  } = useNotification(props);
+  const { notification: successNotification, setNotification: setSuccessNotification } =
+    useNotification(props);
   return { successNotification, setSuccessNotification };
 }

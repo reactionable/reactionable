@@ -2,7 +2,7 @@ import { PropsWithChildren, ReactElement } from "react";
 
 import { App } from "../app/App";
 import { IIdentityProviderProps, useIdentityProviderProps } from "../identity/Identity";
-import { IRouterProviderProps, useRouterProviderProps } from "../router/Router";
+import { IRouterProviderProps, useRouterProviderProps } from "../router/useRouterProviderProps";
 import { IUIProviderProps, useUIProviderProps } from "../ui/UI";
 
 export type ITestWrapperProps<

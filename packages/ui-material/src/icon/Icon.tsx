@@ -4,6 +4,7 @@ import { ComponentProps, ReactElement } from "react";
 type IIconPropsWithIcon = ComponentProps<typeof SvgIcon> & { icon: typeof SvgIcon };
 type IIconPropsWithMaybeIcon = Omit<IIconPropsWithIcon, "icon"> &
   Partial<Pick<IIconPropsWithIcon, "icon">>;
+
 export type IIconProps = typeof SvgIcon | IIconPropsWithMaybeIcon;
 
 function isIconPropsWithIcon(props: IIconProps): props is IIconPropsWithIcon {

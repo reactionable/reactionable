@@ -1,6 +1,7 @@
 import { ReactElement } from "react";
 
-import { Layout, useLayout } from "./Layout";
+import { Layout } from "./Layout";
+import { useLayout } from "./useLayout";
 
 export default {
   title: "Core/Components/UI/Layout",

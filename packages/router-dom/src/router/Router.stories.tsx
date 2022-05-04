@@ -1,7 +1,9 @@
 import { ReactElement } from "react";
 
 import { TestWrapper } from "../testing/TestWrapper";
-import { RouterComponent, RouterContextProvider, useRouter } from "./Router";
+import { RouterComponent } from "./RouterComponent";
+import { RouterContextProvider } from "./useRouterContext";
+import { useRouter } from "./useRouter";
 
 export default {
   title: "Router DOM/Components/Router",

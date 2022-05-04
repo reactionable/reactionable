@@ -1,8 +1,12 @@
 import { ComponentType, Context, PropsWithChildren, createContext, useContext } from "react";
 
 type IProviderExtraProps = Record<string, unknown>;
+
+type IProviderComponent<ExtraProps extends IProviderExtraProps = IProviderExtraProps> =
+  ComponentType<Partial<ExtraProps>>;
+
 export type IProviderProps<ExtraProps extends IProviderExtraProps = IProviderExtraProps> = {
-  Component?: ComponentType;
+  Component?: IProviderComponent<ExtraProps>;
 } & ExtraProps;
 
 export type ICreateProviderResult<ProviderProps extends IProviderProps> = {
@@ -10,20 +14,20 @@ export type ICreateProviderResult<ProviderProps extends IProviderProps> = {
   ContextProvider: ComponentType<ProviderProps>;
   useContext: () => ProviderProps;
 };
+
 export function createProvider<ProviderProps extends IProviderProps = IProviderProps>(
   props: ProviderProps
 ): ICreateProviderResult<ProviderProps> {
   const CreatedContext = createContext<ProviderProps>(props);
 
-  const ContextProvider = ({ children, Component, ...props }: PropsWithChildren<ProviderProps>) => {
+  const ContextProvider = ({ Component, children, ...props }: PropsWithChildren<ProviderProps>) => {
     if (Component) {
-      const ProviderComponent = Component as ComponentType;
+      const ProviderComponent = Component;
       children = <ProviderComponent {...props}>{children}</ProviderComponent>;
     }
+
     return (
-      <CreatedContext.Provider value={{ ...props, Component } as ProviderProps}>
-        {children}
-      </CreatedContext.Provider>
+      <CreatedContext.Provider value={props as ProviderProps}>{children}</CreatedContext.Provider>
     );
   };
 

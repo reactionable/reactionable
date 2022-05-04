@@ -19,7 +19,7 @@ export const ErrorAlert: ErrorAlertComponent = ({ children, ...props }: IErrorAl
   );
 };
 
-export type IUseErrorAlertProps = ICoreUseErrorAlertProps & IAlertProps;
+export type IUseErrorAlertProps = ICoreUseErrorAlertProps & Omit<IAlertProps, "children">;
 export const useErrorAlert = (props?: IUseErrorAlertProps): IUseErrorAlertResult => {
   return useCoreErrorAlert<IUseErrorAlertProps>({
     Component: ErrorAlert,

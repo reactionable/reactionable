@@ -1,7 +1,7 @@
 import { FC, ReactElement } from "react";
 
 import { useTranslation } from "../../../i18n/I18n";
-import { useRouteMatch } from "../../../router/Router";
+import { useRouteMatch } from "../../../router/useRouteMatch";
 import { generatePath } from "../../../router/RouterLink";
 import { UIContextProvider, useUIProviderProps } from "../../UI";
 import { Sidebar, useSidebarContext } from "./Sidebar";

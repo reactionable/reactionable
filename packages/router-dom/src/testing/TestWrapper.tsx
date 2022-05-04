@@ -6,11 +6,8 @@ import {
 import { IUIProviderProps } from "@reactionable/core/lib/ui/UI";
 import { ReactElement } from "react";
 
-import {
-  IRouterProviderProps,
-  MemoryRouterComponent,
-  useRouterProviderProps,
-} from "../router/Router";
+import { IRouterProviderProps, useRouterProviderProps } from "../router/useRouterProviderProps";
+import { MemoryRouterComponent } from "../router/MemoryRouterComponent";
 
 export function TestWrapper<
   IdentityProviderProps extends IIdentityProviderProps = IIdentityProviderProps,

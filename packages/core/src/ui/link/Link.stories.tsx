@@ -1,6 +1,7 @@
 import { ReactElement } from "react";
 
-import { RouterContextProvider, useRouterProviderProps } from "../../router/Router";
+import { useRouterProviderProps } from "../../router/useRouterProviderProps";
+import { RouterContextProvider } from "../../router/useRouterContext";
 import { Link, useLink } from "./Link";
 
 export default {

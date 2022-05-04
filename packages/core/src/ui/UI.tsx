@@ -27,7 +27,7 @@ import {
 import { Body } from "./layout/body/Body";
 import { Footer } from "./layout/footer/Footer";
 import { Header } from "./layout/header/Header";
-import { IUseLayoutProps, IUseLayoutResult, useLayout } from "./layout/Layout";
+import { IUseLayoutProps, IUseLayoutResult, useLayout } from "./layout/useLayout";
 import { ILinkProps, useLink } from "./link/Link";
 import { Loader } from "./loader/Loader";
 import { IUseLoaderProps, IUseLoaderResult, useLoader } from "./loader/useLoader";

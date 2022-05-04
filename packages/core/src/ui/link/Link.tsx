@@ -5,9 +5,10 @@ import {
   MouseEvent as ReactMouseEvent,
   ReactNode,
   forwardRef,
+  PropsWithChildren,
 } from "react";
 
-import { useRouterContext } from "../../router/Router";
+import { useRouterContext } from "../../router/useRouterContext";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type LinkForwardedRef = ForwardedRef<any>;
@@ -16,16 +17,15 @@ export type ILinkComponentProps = Omit<ILinkProps, "Component"> & { ref?: LinkFo
 export type LinkComponent = ComponentType<ILinkComponentProps>;
 
 // Commmon props of what could be a link (should be as generic as possible to be extended without issues)
-export type ILinkProps = {
+export type ILinkProps = PropsWithChildren<{
   href?: string;
   title?: string;
-  children?: ReactNode;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onClick?: (event: ReactMouseEvent<any, MouseEvent>) => void;
   "data-testid"?: string;
   ref?: ForwardedRef<HTMLAnchorElement>;
   Component?: LinkComponent;
-};
+}>;
 
 export const LinkAnchor = forwardRef(function LinkAnchor(
   props: ILinkComponentProps,

@@ -1,5 +1,5 @@
 import { FormikConfig, FormikProps } from "formik";
-import { ReactElement } from "react";
+import { isValidElement, ReactElement } from "react";
 
 import { IFormValues } from "./Form";
 
@@ -11,6 +11,17 @@ export type IFormFieldsProps<Values extends IFormValues = IFormValues> = {
 export function FormFields<Values extends IFormValues = IFormValues>({
   children,
   formikProps,
-}: IFormFieldsProps<Values>): ReactElement {
-  return children ? ("function" === typeof children ? children(formikProps) : children) : undefined;
+}: IFormFieldsProps<Values>): ReactElement | null {
+  if ("function" === typeof children) {
+    children = children(formikProps);
+  }
+  if (!children) {
+    return null;
+  }
+
+  if (isValidElement(children)) {
+    return children;
+  }
+
+  return <>{children}</>;
 }

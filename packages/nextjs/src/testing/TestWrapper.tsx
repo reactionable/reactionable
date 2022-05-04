@@ -3,11 +3,12 @@ import { IIdentityProviderProps } from "@reactionable/core/lib/identity/Identity
 import { TestWrapper as CoreTestWrapper } from "@reactionable/core/lib/testing/TestWrapper";
 import { IUIProviderProps } from "@reactionable/core/lib/ui/UI";
 import { NEXT_DATA } from "next/dist/shared/lib/utils";
-import { createRouter,  } from "next/router";
-import {RouterContext} from 'next/dist/shared/lib/router-context';
+import { createRouter } from "next/router";
+import { RouterContext } from "next/dist/shared/lib/router-context";
 import { PropsWithChildren, ReactElement } from "react";
 
-import { IRouterProviderProps, useRouterProviderProps } from "../router/Router";
+import { IRouterProviderProps } from "../router/useRouterContext";
+import { useRouterProviderProps } from "../router/useRouterProviderProps";
 
 declare global {
   interface Window {
@@ -16,7 +17,9 @@ declare global {
   }
 }
 
-function RouterComponent({ children }: PropsWithChildren<unknown>): ReactElement {
+function RouterComponent({
+  children,
+}: PropsWithChildren<Partial<IRouterProviderProps>>): ReactElement {
   window.__NEXT_DATA__ = {
     props: {},
     page: "",

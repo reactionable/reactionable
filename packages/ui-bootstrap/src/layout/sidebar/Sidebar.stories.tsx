@@ -2,7 +2,7 @@ import "../../../stories/config";
 
 import { faAtom } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation } from "@reactionable/core/lib/i18n/I18n";
-import { useRouteMatch } from "@reactionable/core/lib/router/Router";
+import { useRouteMatch } from "@reactionable/core/lib/router/useRouteMatch";
 import { generatePath } from "@reactionable/core/lib/router/RouterLink";
 import { FC, ReactElement } from "react";
 import Button from "react-bootstrap/Button";

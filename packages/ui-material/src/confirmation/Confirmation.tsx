@@ -20,6 +20,13 @@ import {
 import { PropsWithChildren, ReactElement } from "react";
 import Draggable from "react-draggable";
 
+// FIXME: Until this PR is merged https://github.com/react-grid-layout/react-draggable/pull/648
+declare module "react-draggable" {
+  export interface DraggableProps {
+    children: React.ReactNode;
+  }
+}
+
 import { IIconProps, Icon } from "../icon/Icon";
 
 export type IConfirmationProps = ICoreConfirmationProps;

@@ -4,19 +4,20 @@ import {
   IUseErrorNotificationProps as ICoreUseErrorNotificationProps,
   IUseErrorNotificationResult,
   useErrorNotification as useCoreErrorNotification,
+  ErrorNotificationComponent,
 } from "@reactionable/core/lib/ui/notification/ErrorNotification";
-import { PropsWithChildren, ReactElement } from "react";
+import { ReactElement } from "react";
 
 import { ErrorAlert } from "../alert/ErrorAlert";
 import { Notification } from "./Notification";
 
 export type IErrorNotificationProps = ICoreErrorNotificationProps;
 
-export const ErrorNotification = ({
+export const ErrorNotification: ErrorNotificationComponent = ({
   title,
   children,
   ...props
-}: PropsWithChildren<IErrorNotificationProps>): ReactElement => {
+}: IErrorNotificationProps): ReactElement => {
   const { t } = useTranslation();
   if (!title) {
     title = t("An error has occured");
@@ -36,5 +37,5 @@ export const useErrorNotification = (
   return useCoreErrorNotification<IUseErrorNotificationProps>({
     ...props,
     Component: ErrorNotification,
-  });
+  } as IUseErrorNotificationProps);
 };

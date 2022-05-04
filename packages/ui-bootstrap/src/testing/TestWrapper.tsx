@@ -1,5 +1,5 @@
 import { IIdentityProviderProps } from "@reactionable/core/lib/identity/Identity";
-import { IRouterProviderProps } from "@reactionable/core/lib/router/Router";
+import { IRouterProviderProps } from "@reactionable/core/lib/router/useRouterProviderProps";
 import {
   TestWrapper as CoreTestWrapper,
   ITestWrapperProps,
