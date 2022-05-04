@@ -25,16 +25,16 @@ import {
   useSuccessNotification,
 } from "./notification/SuccessNotification";
 
-export type IUIComponentProps = {
+export type IUIComponentProps = PropsWithChildren<{
   theme?: Theme | ThemeOptions;
   cssBaseline?: boolean;
-};
+}>;
 
 export function UIComponent({
   children,
   theme = {},
   cssBaseline = true,
-}: PropsWithChildren<IUIComponentProps>): ReactElement {
+}: IUIComponentProps): ReactElement {
   const providerTheme = createTheme(theme);
   return (
     <ThemeProvider theme={providerTheme}>
@@ -72,7 +72,7 @@ export function useUIProviderProps(props?: Partial<IUIProviderProps>): IUIProvid
     useModalForm,
     useLink,
     ...props,
-  });
+  } as IUIProviderProps);
 }
 
 export const UIContextProvider = (
