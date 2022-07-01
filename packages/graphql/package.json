@@ -43,7 +43,7 @@
     "graphql": "^16.5.0"
   },
   "devDependencies": {
-    "@types/apollo-upload-client": "^17.0.0"
+    "@types/apollo-upload-client": "^17.0.1"
   },
   "publishConfig": {
     "access": "public"
