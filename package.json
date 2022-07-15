@@ -6,15 +6,15 @@
     "start": "lerna bootstrap && lerna run --parallel start --",
     "test": "lerna run --stream test --",
     "test:ci": "lerna run --stream test:coverage --",
-    "format": "prettier --write \"**/*.ts\"  \"!**/lib/**\"",
+    "format": "prettier --cache --write '**/*.ts' '!**/lib/**'",
     "lint": "lerna run --stream lint --",
     "build": "lerna run --stream build --",
     "build:ci": "yarn build -p tsconfig.build.json",
     "link": "node dev-link link",
     "unlink": "node dev-link unlink",
     "docs:build": "lerna run --stream build:docs",
-    "storybook": "start-storybook -p 6006 -s .storybook/public",
-    "storybook:build": "build-storybook -s .storybook/public -o build/storybook",
+    "storybook": "start-storybook -p 6006",
+    "storybook:build": "build-storybook -o build/storybook",
     "storybook:deploy": "storybook-to-ghpages -e build/storybook --ci",
     "prepare": "ts-dev-tools install"
   },
@@ -29,17 +29,17 @@
     "@storybook/addon-knobs": "^6.4.0",
     "@storybook/addon-links": "^6.5.9",
     "@storybook/addon-storysource": "^6.5.9",
-    "@storybook/addons": "^6.4.19",
-    "@storybook/react": "^6.4.22",
-    "@storybook/storybook-deployer": "^2.8.11",
-    "@storybook/theming": "^6.4.19",
-    "@ts-dev-tools/react": "^1.5.31",
+    "@storybook/addons": "^6.5.9",
+    "@storybook/react": "^6.5.9",
+    "@storybook/storybook-deployer": "^2.8.12",
+    "@storybook/theming": "^6.5.9",
+    "@ts-dev-tools/react": "^1.5.32",
     "barrelsby": "^2.3.4",
     "lerna": "^5.1.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rimraf": "^3.0.2",
-    "typedoc": "^0.23.7"
+    "typedoc": "^0.23.8"
   },
   "resolutions": {
     "react": "^18.1.0",
@@ -105,6 +105,6 @@
     }
   },
   "tsDevTools": {
-    "version": "20201111162698-init"
+    "version": "20220617100200-prettier-cache"
   }
 }
