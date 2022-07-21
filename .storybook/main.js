@@ -16,4 +16,8 @@ module.exports = {
     fastRefresh: true,
     strictMode: true,
   },
+  staticDirs: ["./public"],
+  core: {
+    disableTelemetry: true,
+  },
 };

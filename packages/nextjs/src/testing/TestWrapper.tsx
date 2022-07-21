@@ -29,7 +29,7 @@ function RouterComponent({
   const router = createRouter("", {}, "", {
     initialProps: {},
     pageLoader: {
-      getPageList: () => [],
+      getMiddlewareList: () => [],
     },
     App: () => null,
     Component: () => null,
