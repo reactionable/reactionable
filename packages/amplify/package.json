@@ -36,7 +36,7 @@
   "homepage": "https://github.com/reactionable/reactionable#readme",
   "dependencies": {
     "@reactionable/core": "^0.28.22",
-    "aws-amplify": "^4.3.28",
+    "aws-amplify": "^4.3.29",
     "aws-amplify-react": "^5.1.9"
   },
   "publishConfig": {
