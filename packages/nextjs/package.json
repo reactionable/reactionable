@@ -35,7 +35,7 @@
   },
   "homepage": "https://github.com/reactionable/reactionable#readme",
   "dependencies": {
-    "@emotion/cache": "^11.9.3",
+    "@emotion/cache": "^11.10.1",
     "@emotion/react": "^11.9.3",
     "@emotion/server": "^11.4.0",
     "@reactionable/core": "^0.28.22",
