@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "formik": "^2.2.9",
-    "i18next": "^21.8.16",
+    "i18next": "^21.9.0",
     "i18next-browser-languagedetector": "^6.1.5",
     "path-to-regexp": "^6.2.1",
     "react-fast-compare": "^3.2.0",
