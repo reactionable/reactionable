@@ -49,7 +49,9 @@ export function RenderFormField<
       case field.as === "select":
         // eslint-disable-next-line no-case-declarations
         fieldContent = (
-          <Select {...(fieldProps as SelectProps)} label={labelContent} children={children} />
+          <Select {...(fieldProps as SelectProps)} label={labelContent}>
+            {children}
+          </Select>
         );
         if (labelContent) {
           fieldContent = (
@@ -79,7 +81,9 @@ export function RenderFormField<
 
       default:
         fieldContent = (
-          <TextField {...(fieldProps as TextFieldProps)} label={label} children={children} />
+          <TextField {...(fieldProps as TextFieldProps)} label={label}>
+            {children}
+          </TextField>
         );
     }
 

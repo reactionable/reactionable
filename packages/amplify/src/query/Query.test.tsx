@@ -35,7 +35,7 @@ describe("Query", () => {
         query: testQuery,
       });
 
-      await expect(queryOperation).rejects.toThrowError(new Error(expectedError));
+      await expect(queryOperation).rejects.toThrow(new Error(expectedError));
     });
   });
 });

@@ -29,12 +29,14 @@ export function RenderFormField<
 
   if (field.type === "checkbox") {
     input = (
-      <FormCheck {...(fieldProps as FormCheckProps)} label={labelContent} children={children} />
+      <FormCheck {...(fieldProps as FormCheckProps)} label={labelContent}>
+        {children}
+      </FormCheck>
     );
   } else if (typeof children === "function") {
     input = <>{children(field)}</>;
   } else {
-    input = <FormControl {...(fieldProps as FormControlProps)} children={children} />;
+    input = <FormControl {...(fieldProps as FormControlProps)}>{children}</FormControl>;
     if (labelContent) {
       input = (
         <>

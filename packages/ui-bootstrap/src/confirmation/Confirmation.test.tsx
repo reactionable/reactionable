@@ -24,8 +24,7 @@ describe("Confirmation", () => {
     });
   });
 
-  // Fixme: findDomNode error (https://github.com/react-bootstrap/react-bootstrap/issues/5075)
-  it.skip("should confirm", async () => {
+  it("should confirm", async () => {
     const callback = jest.fn();
 
     const { getByText } = render(
@@ -39,8 +38,7 @@ describe("Confirmation", () => {
     expect(callback).toHaveBeenCalledWith(true);
   });
 
-  // Fixme: findDomNode error (https://github.com/react-bootstrap/react-bootstrap/issues/5075)
-  it.skip("should cancel", async () => {
+  it("should cancel", async () => {
     const callback = jest.fn();
 
     const { getByText } = render(

@@ -1,5 +1,6 @@
 import type { NextRouter } from "next/router";
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const useRouter = jest.spyOn(require("next/router"), "useRouter");
 
 const mockUseNextRouter = useRouter;

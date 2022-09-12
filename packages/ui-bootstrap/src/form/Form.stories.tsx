@@ -74,12 +74,8 @@ export const FormWithAppendTextInput = (): ReactElement => (
       validationSchema={{ test: string().required("Test is required") }}
       initialValues={{ test: "" }}
     >
-      <FormField
-        name="test"
-        autoFocus
-        placeholder="Basic form input"
-        required
-        children={(fieldProps) => (
+      <FormField name="test" autoFocus placeholder="Basic form input" required>
+        {(fieldProps) => (
           <>
             <InputGroup className="mb-3">
               <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
@@ -87,7 +83,7 @@ export const FormWithAppendTextInput = (): ReactElement => (
             </InputGroup>
           </>
         )}
-      />
+      </FormField>
     </Form>
   </UIContextProvider>
 );
