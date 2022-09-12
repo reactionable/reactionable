@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.29.0 (2022-09-12)
+
+
+### Features
+
+* upgrade dependencies ([f1fbea4](https://github.com/reactionable/reactionable/commit/f1fbea4878cb3850eebde77876130f9685ec3cef))
+
+
+
+
+
 ## 0.28.22 (2022-05-06)
 
 **Note:** Version bump only for package @reactionable/ui-bootstrap
