@@ -2,13 +2,13 @@ import { IAppProps } from "@reactionable/core/lib/app/App";
 import { IIdentityProviderProps } from "@reactionable/core/lib/identity/Identity";
 import { TestWrapper as CoreTestWrapper } from "@reactionable/core/lib/testing/TestWrapper";
 import { IUIProviderProps } from "@reactionable/core/lib/ui/UI";
-import { NEXT_DATA } from "next/dist/shared/lib/utils";
-import { createRouter } from "next/router";
 import { RouterContext } from "next/dist/shared/lib/router-context";
+import { NEXT_DATA } from "next/dist/shared/lib/utils";
 import { PropsWithChildren, ReactElement } from "react";
 
 import { IRouterProviderProps } from "../router/useRouterContext";
 import { useRouterProviderProps } from "../router/useRouterProviderProps";
+import mockNextRouter from "./mockNextRouter";
 
 declare global {
   interface Window {
@@ -26,17 +26,7 @@ function RouterComponent({
     query: {},
     buildId: ",",
   };
-  const router = createRouter("", {}, "", {
-    initialProps: {},
-    pageLoader: {
-      getMiddlewareList: () => [],
-    },
-    App: () => null,
-    Component: () => null,
-    subscription: async () => undefined,
-    wrapApp: () => null,
-    isFallback: false,
-  });
+  const router = mockNextRouter({ pathname: "/", asPath: "/" });
   return <RouterContext.Provider value={router}>{children}</RouterContext.Provider>;
 }
 

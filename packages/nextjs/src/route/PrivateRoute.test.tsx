@@ -4,6 +4,8 @@ import { render } from "@testing-library/react";
 import { TestWrapper } from "../testing/TestWrapper";
 import { PrivateRoute } from "./PrivateRoute";
 
+jest.mock("next/router", () => require("next-router-mock"));
+
 describe("PrivateRoute", () => {
   beforeAll(i18nTestInstance);
 
