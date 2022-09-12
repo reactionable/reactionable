@@ -5,6 +5,7 @@ import FormCheck, { FormCheckProps } from "react-bootstrap/FormCheck";
 import FormControl, { FormControlProps } from "react-bootstrap/FormControl";
 import FormGroup from "react-bootstrap/FormGroup";
 import FormLabel from "react-bootstrap/FormLabel";
+
 import { FormErrorMessage } from "./FormErrorMessage";
 import { IFieldElementProps, IFormFieldPropsEnhanced } from "./FormField";
 
@@ -14,7 +15,7 @@ export function RenderFormField<
 >({
   isValid,
   isInvalid,
-  field: { label, ...field },
+  field: { label, children, ...field },
 }: IFormFieldPropsEnhanced<FieldElementProps, Value>): ReactElement {
   let input: ReactElement;
 
@@ -27,9 +28,13 @@ export function RenderFormField<
   const labelContent = getFormFieldLabelContent(label, field.required);
 
   if (field.type === "checkbox") {
-    input = <FormCheck {...(fieldProps as FormCheckProps)} label={labelContent} />;
+    input = (
+      <FormCheck {...(fieldProps as FormCheckProps)} label={labelContent} children={children} />
+    );
+  } else if (typeof children === "function") {
+    input = <>{children(field)}</>;
   } else {
-    input = <FormControl {...(fieldProps as FormControlProps)} />;
+    input = <FormControl {...(fieldProps as FormControlProps)} children={children} />;
     if (labelContent) {
       input = (
         <>

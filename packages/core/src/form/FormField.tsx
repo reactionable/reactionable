@@ -9,6 +9,7 @@ export type IFormFieldValue = string;
 export type IFieldElementProps<
   FieldProps extends HTMLProps<HTMLInputElement> = HTMLProps<HTMLInputElement>
 > = FieldProps & {
+  children?: FieldProps["children"] | ((props: FieldProps) => FieldProps["children"]);
   label?: ReactNode | string;
 };
 

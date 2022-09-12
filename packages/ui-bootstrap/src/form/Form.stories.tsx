@@ -1,5 +1,6 @@
 import { action } from "@storybook/addon-actions";
 import { ChangeEvent, ReactElement, useEffect, useState } from "react";
+import { FormControl, FormControlProps, InputGroup } from "react-bootstrap";
 import Image from "react-bootstrap/Image";
 import { string } from "yup";
 
@@ -55,6 +56,38 @@ export const FormWithLabelledInput = (): ReactElement => (
       initialValues={{ test: "" }}
     >
       <FormField label="Test" name="test" autoFocus placeholder="Basic form input" required />
+    </Form>
+  </UIContextProvider>
+);
+
+export const FormWithAppendTextInput = (): ReactElement => (
+  <UIContextProvider>
+    <Form
+      title="Basic form"
+      submitButton
+      onSubmit={async (values) => {
+        action("Form submitted...")(values);
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        return values;
+      }}
+      onSuccess={action("Form submit succeed")}
+      validationSchema={{ test: string().required("Test is required") }}
+      initialValues={{ test: "" }}
+    >
+      <FormField
+        name="test"
+        autoFocus
+        placeholder="Basic form input"
+        required
+        children={(fieldProps) => (
+          <>
+            <InputGroup className="mb-3">
+              <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
+              <FormControl {...(fieldProps as FormControlProps)} />
+            </InputGroup>
+          </>
+        )}
+      />
     </Form>
   </UIContextProvider>
 );
