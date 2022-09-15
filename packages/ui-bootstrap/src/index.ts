@@ -30,6 +30,7 @@ export * from "./layout/footer/Footer";
 export * from "./layout/header/Header";
 export * from "./layout/header/UserHeaderNav";
 export * from "./layout/sidebar/Sidebar";
+export * from "./link/ButtonLink";
 export * from "./link/Link";
 export * from "./loader/Loader";
 export * from "./modal/Modal";
