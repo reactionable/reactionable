@@ -8,7 +8,7 @@ import { PrivateRoute } from "./PrivateRoute";
 
 export type IRouteProps = ICoreRouteProps & ILazyRouteProps;
 
-export const Route = ({ privateRoute, component, ...routeProps }: IRouteProps): ReactElement => {
+export const Route = ({ privateRoute, ...routeProps }: IRouteProps): ReactElement => {
   if (privateRoute) {
     return <PrivateRoute {...routeProps} />;
   }
@@ -24,7 +24,7 @@ export function renderRoute(props: IRouteProps): ReactElement {
 }
 
 export function renderRoutes(routes: IRouteProps[]): ReactNode {
-  let children = <>{routes.filter((route) => route.path || !route.component).map((props) => {})}</>;
+  let children = <>{routes.filter((route) => route.path || !route.component).map(() => null)}</>;
 
   const notFoundRoute = routes.find((route) => !route.path && route.component);
 
