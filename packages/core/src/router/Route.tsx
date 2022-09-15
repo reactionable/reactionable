@@ -2,7 +2,7 @@ import { ExoticComponent, ReactElement } from "react";
 
 export type IRouteProps = {
   privateRoute?: boolean;
-  exact?: boolean;
+  index?: boolean;
   path?: string;
   component: ExoticComponent<never>;
 };
@@ -10,7 +10,7 @@ export type IRouteProps = {
 export type IRouteMatchParams = Record<string, string | string[] | undefined>;
 export type IRouteMatch<RouteMatchParams extends IRouteMatchParams = IRouteMatchParams> = {
   params: RouteMatchParams;
-  isExact: boolean;
+  isIndex: boolean;
   path: string;
   url: string;
 };

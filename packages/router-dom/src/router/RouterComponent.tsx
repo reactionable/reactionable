@@ -1,4 +1,5 @@
 import { ComponentType, LazyExoticComponent, PropsWithChildren, ReactElement } from "react";
+
 import { IRouteProps, renderRoutes } from "../route/Route";
 
 export type RouterComponentProps = {
@@ -20,7 +21,7 @@ export function RouterComponent({
     if (!hasHomeRoute) {
       routesToRender.unshift({
         component: HomeComponent,
-        exact: true,
+        index: true,
         path: "/",
         privateRoute: false,
       });

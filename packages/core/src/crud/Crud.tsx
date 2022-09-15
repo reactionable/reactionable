@@ -43,7 +43,7 @@ export function Crud<Data extends IFormData = IFormData>({
 
   if (listComponent) {
     routes.push({
-      exact: true,
+      index: true,
       path: match.path,
       component: listComponent,
       privateRoute: privateRoute,
@@ -52,7 +52,7 @@ export function Crud<Data extends IFormData = IFormData>({
 
   if (readComponent) {
     routes.push({
-      exact: true,
+      index: true,
       path: `${match.path}/${idParam}`,
       component: readComponent,
       privateRoute: privateRoute,

@@ -8,7 +8,7 @@ export function useRouteMatch<
   return {
     params: (router.query as RouteMatchParams) || {},
     url: router.route,
-    isExact: true,
     path: router.pathname,
+    isIndex: true,
   };
 }
