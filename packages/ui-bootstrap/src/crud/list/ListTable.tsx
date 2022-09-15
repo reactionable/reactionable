@@ -1,13 +1,15 @@
 import {
   ListTable as CoreListTable,
+  IListTableProps as ICoreListTableProps,
   IListTableComponentProps,
-  IListTableProps,
   ListTableBody,
   ListTableHead,
 } from "@reactionable/core/lib/crud/list/ListTable";
 import { IData } from "@reactionable/core/lib/query/Query";
 import { ReactElement } from "react";
 import Table from "react-bootstrap/Table";
+
+export type IListTableProps<Data extends IData = IData> = ICoreListTableProps<Data>;
 
 export function ListTableComponent<Data extends IData = IData>({
   head,
