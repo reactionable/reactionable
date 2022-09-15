@@ -1,6 +1,6 @@
 {
   "name": "@reactionable/nextjs",
-  "version": "0.28.22",
+  "version": "0.28.23",
   "description": "Reactionable package for NextJs integration",
   "files": [
     "lib"
@@ -38,7 +38,7 @@
     "@emotion/cache": "^11.10.3",
     "@emotion/react": "^11.10.4",
     "@emotion/server": "^11.10.0",
-    "@reactionable/core": "^0.28.22",
+    "@reactionable/core": "^0.28.23",
     "next": "^12.2.2"
   },
   "publishConfig": {

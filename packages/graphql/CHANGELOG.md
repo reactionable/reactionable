@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.28.23 (2022-09-15)
+
+**Note:** Version bump only for package @reactionable/graphql
+
+
+
+
+
 ## 0.28.22 (2022-05-06)
 
 **Note:** Version bump only for package @reactionable/graphql
