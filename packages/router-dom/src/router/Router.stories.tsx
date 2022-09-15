@@ -1,9 +1,10 @@
-import { ReactElement } from "react";
+import { ReactElement, lazy } from "react";
+import { Route, Routes } from "react-router-dom";
 
 import { TestWrapper } from "../testing/TestWrapper";
 import { RouterComponent } from "./RouterComponent";
-import { RouterContextProvider } from "./useRouterContext";
 import { useRouter } from "./useRouter";
+import { RouterContextProvider } from "./useRouterContext";
 
 export default {
   title: "Router DOM/Components/Router",
@@ -13,8 +14,16 @@ export default {
   },
 };
 
+const IndexComponent = lazy(() => Promise.resolve({ default: () => <>Index route</> }));
+
 export const BasicRouterContextProvider = (): ReactElement => {
-  return <RouterContextProvider>test</RouterContextProvider>;
+  return (
+    <RouterContextProvider>
+      <Routes>
+        <Route path="/" element={<IndexComponent />} />
+      </Routes>
+    </RouterContextProvider>
+  );
 };
 
 export const UseRouter = (): ReactElement => {

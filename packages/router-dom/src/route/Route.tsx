@@ -8,19 +8,23 @@ import { PrivateRoute } from "./PrivateRoute";
 
 export type IRouteProps = ICoreRouteProps & ILazyRouteProps;
 
-export function renderRoute({ privateRoute, component, ...routeProps }: IRouteProps): ReactElement {
-  const key = `${routeProps.exact ? "exact" : "non-exact"}-${routeProps.path}-${
-    privateRoute ? "private" : "public"
-  }-${component.name}`;
-
+export const Route = ({ privateRoute, ...routeProps }: IRouteProps): ReactElement => {
   if (privateRoute) {
-    return <PrivateRoute key={key} component={component} {...routeProps} />;
+    return <PrivateRoute {...routeProps} />;
   }
-  return <LazyRoute key={key} component={component} {...routeProps} />;
+  return <LazyRoute {...routeProps} />;
+};
+
+export function renderRoute(props: IRouteProps): ReactElement {
+  const key = `${props.index ? "index" : "non-index"}-${props.path}-${
+    props.privateRoute ? "private" : "public"
+  }-${props.component.name}`;
+
+  return <Route key={key} {...props} />;
 }
 
 export function renderRoutes(routes: IRouteProps[]): ReactNode {
-  let children = <>{routes.filter((route) => route.path || !route.component).map(renderRoute)}</>;
+  let children = <>{routes.filter((route) => route.path || !route.component).map(() => null)}</>;
 
   const notFoundRoute = routes.find((route) => !route.path && route.component);
 

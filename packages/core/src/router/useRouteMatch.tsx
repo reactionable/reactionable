@@ -7,7 +7,7 @@ export function useRouteMatch<
   const params = Object.fromEntries(searchParams.entries()) as RouteMatchParams;
   return {
     params,
-    isExact: true,
+    isIndex: true,
     path: location.pathname,
     url: location.href,
   };
