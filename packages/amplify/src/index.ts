@@ -7,3 +7,6 @@ export * from "./i18n/I18n";
 export * from "./identity/Identity";
 export * from "./query/Mutation";
 export * from "./query/Query";
+export * from "./query/QueryList";
+export * from "./query/useQuery";
+export * from "./query/useQueryList";
