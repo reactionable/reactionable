@@ -1,6 +1,6 @@
 {
   "name": "@reactionable/core",
-  "version": "0.28.23",
+  "version": "0.28.24",
   "description": "Reactionable Core package",
   "files": [
     "lib"
