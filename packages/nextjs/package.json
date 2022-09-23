@@ -39,7 +39,7 @@
     "@emotion/react": "^11.10.4",
     "@emotion/server": "^11.10.0",
     "@reactionable/core": "^0.28.24",
-    "next": "^12.2.2"
+    "next": "^12.3.1"
   },
   "publishConfig": {
     "access": "public"
