@@ -41,7 +41,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@reactionable/core": "^0.28.25",
-    "bootstrap": "^5.2.1",
+    "bootstrap": "^5.2.2",
     "react-bootstrap": "^2.5.0"
   },
   "publishConfig": {
