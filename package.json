@@ -33,7 +33,7 @@
     "@storybook/builder-webpack5": "^6.5.12",
     "@storybook/manager-webpack5": "^6.5.12",
     "@storybook/react": "^6.5.12",
-    "@storybook/storybook-deployer": "^2.8.12",
+    "@storybook/storybook-deployer": "^2.8.16",
     "@storybook/theming": "^6.5.9",
     "@ts-dev-tools/react": "^1.5.35",
     "barrelsby": "^2.5.1",
