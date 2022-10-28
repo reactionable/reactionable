@@ -8,8 +8,8 @@ import {
   useIdentityContext as coreUseIdentityContext,
   useIdentityProviderProps as coreUseIdentityProviderProps,
 } from "@reactionable/core/lib/identity/Identity";
-import Authenticator, { IAuthenticatorProps } from "aws-amplify-react/lib/Auth/Authenticator";
-import { UsernameAttributes } from "aws-amplify-react/lib/Auth/common/types";
+import { Authenticator, IAuthenticatorProps } from "aws-amplify-react/lib-esm/Auth/Authenticator";
+import { UsernameAttributes } from "aws-amplify-react/lib-esm/Auth/common/types";
 import { ComponentType, PropsWithChildren, ReactElement, useEffect, useState } from "react";
 
 export type IUser = ICoreUser & {
@@ -27,7 +27,7 @@ export {
   ForgotPassword,
   SignUp,
   SignOut,
-} from "aws-amplify-react/lib/Auth";
+} from "aws-amplify-react/lib-esm/Auth";
 
 const dataToUser = (data?: IUser): IUser | null => {
   if (!data) {
