@@ -35,7 +35,7 @@
     "@storybook/react": "^6.5.12",
     "@storybook/storybook-deployer": "^2.8.16",
     "@storybook/theming": "^6.5.9",
-    "@ts-dev-tools/react": "^1.5.35",
+    "@ts-dev-tools/react": "^1.5.36",
     "barrelsby": "^2.5.1",
     "lerna": "^6.0.1",
     "react": "^18.2.0",
