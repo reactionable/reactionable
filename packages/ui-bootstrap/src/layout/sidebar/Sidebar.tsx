@@ -46,7 +46,7 @@ const SidebarItems = ({ children }: PropsWithChildren<unknown>): ReactElement =>
           {!open && (
             <Button
               onClick={() => setOpen(!open)}
-              aria-controls={t("Collapse sidebar")}
+              aria-controls={t("Collapse sidebar") ?? undefined}
               aria-expanded={open}
             >
               {t("Collapse sidebar")}

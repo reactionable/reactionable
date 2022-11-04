@@ -14,7 +14,7 @@ export type ILoaderProps = ICoreLoaderProps & {
 
 export const Loader = ({ overlay = true }: ILoaderProps): ReactElement => {
   const { t } = useTranslation();
-  const spinnerElement = <CircularProgress title={t("Loading")} />;
+  const spinnerElement = <CircularProgress title={t("Loading") ?? undefined} />;
   if (!overlay) {
     return spinnerElement;
   }
