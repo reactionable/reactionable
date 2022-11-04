@@ -41,7 +41,7 @@
   "dependencies": {
     "formik": "^2.2.9",
     "i18next": "^22.0.3",
-    "i18next-browser-languagedetector": "^7.0.0",
+    "i18next-browser-languagedetector": "^7.0.1",
     "path-to-regexp": "^6.2.1",
     "react-fast-compare": "^3.2.0",
     "react-i18next": "^11.18.5",
