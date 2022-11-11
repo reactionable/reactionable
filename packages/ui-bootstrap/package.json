@@ -42,7 +42,7 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@reactionable/core": "^0.28.26",
     "bootstrap": "^5.2.2",
-    "react-bootstrap": "^2.5.0"
+    "react-bootstrap": "^2.6.0"
   },
   "publishConfig": {
     "access": "public"
