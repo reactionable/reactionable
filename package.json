@@ -34,7 +34,7 @@
     "@storybook/manager-webpack5": "^6.5.13",
     "@storybook/react": "^6.5.13",
     "@storybook/storybook-deployer": "^2.8.16",
-    "@storybook/theming": "^6.5.9",
+    "@storybook/theming": "^6.5.14",
     "@ts-dev-tools/react": "^1.5.36",
     "barrelsby": "^2.5.1",
     "lerna": "^6.0.3",
