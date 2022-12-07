@@ -32,6 +32,7 @@ export function renderLazyRoute({
 
 export function LazyRoute({
   component,
+  index,
   ...routeProps
 }: PropsWithChildren<ILazyRouteProps>): ReactElement {
   return (
@@ -39,6 +40,7 @@ export function LazyRoute({
       element={renderLazyRoute({
         component,
       })}
+      index={index === false ? index : undefined}
       {...routeProps}
     />
   );
