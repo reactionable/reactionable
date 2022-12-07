@@ -12,7 +12,6 @@ import enCommon from "./locales/en/common.json";
 import enIdentity from "./locales/en/identity.json";
 import frCommon from "./locales/fr/common.json";
 import frIdentity from "./locales/fr/identity.json";
-
 export { useTranslation } from "react-i18next";
 
 const builtInResources = {
@@ -24,6 +23,14 @@ const builtInResources = {
     common: frCommon,
     identity: frIdentity,
   },
+};
+
+const defaultOptions = {
+  debug: false,
+  interpolation: {
+    escapeValue: false, // react already safes from xss
+  },
+  defaultNS: "common",
 };
 
 // Merge a `source` object to a `target` recursively
@@ -61,13 +68,9 @@ export async function initializeI18n(options: InitOptions = {}): Promise<I18nTyp
     // init i18next
     // for all options read: https://www.i18next.com/overview/configuration-options
     .init({
+      ...defaultOptions,
       fallbackLng: Object.keys(resourcesLanguages)[0] ?? undefined,
-      debug: false,
-      interpolation: {
-        escapeValue: false, // react already safes from xss
-      },
       supportedLngs,
-      defaultNS: "common",
       ...options,
     });
   return i18n;
