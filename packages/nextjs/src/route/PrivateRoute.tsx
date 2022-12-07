@@ -7,7 +7,7 @@ import { ComponentType, PropsWithChildren, ReactElement, isValidElement, useEffe
 export function UnauthorizedComponent(): ReactElement | null {
   const { t } = useTranslation("identity");
   const { errorAlert } = useUIContext().useErrorAlert({
-    children: new Error(t("You are not allowed to reach this page")),
+    children: new Error(t("You are not allowed to reach this page") ?? undefined),
   });
   return errorAlert;
 }

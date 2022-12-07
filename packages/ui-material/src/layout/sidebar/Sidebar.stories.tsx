@@ -4,8 +4,8 @@ import Button from "@material-ui/core/Button/Button";
 import Paper from "@material-ui/core/Paper/Paper";
 import SaveIcon from "@material-ui/icons/Save";
 import { useTranslation } from "@reactionable/core/lib/i18n/I18n";
-import { useRouteMatch } from "@reactionable/core/lib/router/useRouteMatch";
 import { generatePath } from "@reactionable/core/lib/router/RouterLink";
+import { useRouteMatch } from "@reactionable/core/lib/router/useRouteMatch";
 import { FC, ReactElement } from "react";
 
 import { UIContextProvider } from "../../UI";
@@ -25,7 +25,7 @@ const SampleComponent: FC = () => {
   setNavItems([
     {
       href: generatePath(`${match.path}/sample`, match.params),
-      title: t("Go to sample page"),
+      title: t("Go to sample page") ?? undefined,
       icon: SaveIcon,
       children: t("Sample"),
     },

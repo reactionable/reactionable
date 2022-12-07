@@ -6,9 +6,8 @@ export interface IFooterProps {
   brand?: ReactNode | string;
   sponsor?: boolean;
 }
-export type FooterComponent<
-  FooterProps extends IFooterProps = IFooterProps
-> = ComponentType<FooterProps>;
+export type FooterComponent<FooterProps extends IFooterProps = IFooterProps> =
+  ComponentType<FooterProps>;
 
 export function Footer<FooterProps extends IFooterProps = IFooterProps>({
   sponsor = true,
@@ -45,12 +44,12 @@ export const SponsorFooter = (): ReactElement => {
   const { t } = useTranslation();
   return (
     <>
-      <span title={t("Powered by")}>{t("⚡ by")} </span>
+      <span title={t("Powered by") ?? undefined}>{t("⚡ by")} </span>
       <a
         href="https://reactionable.github.io/reactionable/"
         rel="noreferrer"
         target="_blank"
-        title={t("Reactionable - An effective toolkit for React")}
+        title={t("Reactionable - An effective toolkit for React") ?? undefined}
       >
         Reactionable
       </a>
