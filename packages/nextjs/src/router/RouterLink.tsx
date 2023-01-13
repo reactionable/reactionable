@@ -26,7 +26,7 @@ export const RouterLink = forwardRef(function RouterLink(
   };
 
   return (
-    <Link {...linkProps} passHref>
+    <Link {...linkProps} passHref legacyBehavior>
       <Component {...componentProps} ref={ref as ForwardedRef<HTMLAnchorElement>}>
         {children}
       </Component>
