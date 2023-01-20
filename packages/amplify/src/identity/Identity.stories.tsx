@@ -1,4 +1,4 @@
-import "@aws-amplify/ui/dist/style.css";
+import "@aws-amplify/ui-react/styles.css";
 
 import { boolean, withKnobs } from "@storybook/addon-knobs";
 import { ReactElement, useEffect } from "react";
