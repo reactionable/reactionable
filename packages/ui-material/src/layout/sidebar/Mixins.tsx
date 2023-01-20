@@ -1,4 +1,4 @@
-import { CSSObject } from "@emotion/styled/types/base";
+import { CSSObject } from "@emotion/react";
 import { Theme } from "@mui/material/styles/createTheme";
 
 export const drawerWidth = (theme: Theme): string => theme.spacing(25);

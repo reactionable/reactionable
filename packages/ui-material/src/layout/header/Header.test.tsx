@@ -28,12 +28,11 @@ describe("Header", () => {
     it("should render without crashing when a user is logged in", () => {
       const result = render(
         <HeaderWithIdentity
-        // FIXME: MUST support user in render
-        // user={{
-        //   id: "test-user-id",
-        //   username: "Test user",
-        //   attributes: { email: "test@test.com" },
-        // }}
+          user={{
+            id: "test-user-id",
+            username: "Test user",
+            attributes: { email: "test@test.com" },
+          }}
         />
       );
 
