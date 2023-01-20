@@ -11,6 +11,7 @@ module.exports = {
     "@storybook/addon-storysource",
     "@storybook/addon-docs",
     "@storybook/addon-controls",
+    "storybook-dark-mode",
   ],
   reactOptions: {
     fastRefresh: true,
