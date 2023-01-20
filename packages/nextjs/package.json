@@ -59,6 +59,6 @@
     ]
   },
   "devDependencies": {
-    "next-router-mock": "^0.8.0"
+    "next-router-mock": "^0.9.1-beta.0"
   }
 }
