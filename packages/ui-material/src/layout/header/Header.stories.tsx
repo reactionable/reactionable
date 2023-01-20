@@ -20,7 +20,6 @@ export const BasicHeader: StoryObj<IHeaderProps & { mode: PaletteMode }> = {
     color: "default",
     type: "light",
   },
-  // FIXME: MUST support type in render
   render: ({ mode, ...props }) => (
     <TestWrapper ui={{ theme: { palette: { mode } } }}>
       <Header {...props} />
@@ -49,7 +48,6 @@ export const HeaderWithIdentity: StoryObj<ComponentProps<typeof Header> & { user
         },
       },
     },
-    // FIXME: MUST support user in render
     render: ({ user, ...props }) => {
       const useFetchUser = () => ({
         loading: false,
