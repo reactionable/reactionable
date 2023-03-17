@@ -14549,9 +14549,9 @@ nested-object-assign@^1.0.3:
   integrity sha512-FlZ7oN9ICt+fbcJ4ag2IsALIcalfE/E16ttdSA8peBiHJI+oEKdOcafqDnUbeUe5NwWGn/m9zZGO9qrAGzfesg==
 
 next-router-mock@^0.9.1-beta.0:
-  version "0.9.1"
-  resolved "https://registry.yarnpkg.com/next-router-mock/-/next-router-mock-0.9.1.tgz#28adbda2c1bbd0d0b7567e7f83dcf0e211d9a4ba"
-  integrity sha512-GTrns944dnFNgycpinyRszOiwwk99LUJsvvX0FWRgUFHv6hOuzCns1rmTlzO+DRimYB9/XMA+87X2/dQLzjiUQ==
+  version "0.9.2"
+  resolved "https://registry.yarnpkg.com/next-router-mock/-/next-router-mock-0.9.2.tgz#750341ea0bab9fa04257fb38a85bbe5c25dc19e5"
+  integrity sha512-rh6Mq1xhZ4Y0y9Z3seHZ04k4dAKnAyRcis7q3ZUF+Xp0uBeNqPC8Ydw5DldYncN3o1sYBqRyz25F/v/kfcg0/Q==
 
 next@^13.1.2:
   version "13.2.4"
