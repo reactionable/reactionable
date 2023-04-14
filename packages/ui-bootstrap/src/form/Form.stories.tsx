@@ -79,7 +79,7 @@ export const FormWithAppendTextInput = (): ReactElement => (
           <>
             <InputGroup className="mb-3">
               <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
-              <FormControl {...(fieldProps as FormControlProps)} />
+              <FormControl type="text" {...(fieldProps as FormControlProps)} />
             </InputGroup>
           </>
         )}

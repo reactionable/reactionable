@@ -22,7 +22,7 @@ const UserLoggedHeaderNav = () => {
     <NavDropdown id="userLoggedHeaderNav" title={displayName()} className="justify-content-end">
       <AccountLink NavItemComponent={NavDropdown.Item} />
       <NavDropdown.Divider />
-      <LogoutLink<DropdownItemProps> NavItemComponent={NavDropdown.Item} />
+      <LogoutLink<Omit<DropdownItemProps, "as">> NavItemComponent={NavDropdown.Item} />
     </NavDropdown>
   );
 };
@@ -37,7 +37,7 @@ export const UserHeaderNav = (): ReactElement | null => {
   return (
     <>
       <UserLoggedHeaderNav />
-      <UserUnloggedHeaderNav<NavLinkProps> NavItemComponent={Nav.Link} />
+      <UserUnloggedHeaderNav<Omit<NavLinkProps, "as">> NavItemComponent={Nav.Link} />
     </>
   );
 };

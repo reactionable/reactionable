@@ -20,7 +20,7 @@ describe("QueryWrapper", () => {
   it("should render render children only when data is defined", async () => {
     const children = jest.fn();
 
-    const data = "test";
+    const data = { test: "test" };
 
     render(
       <QueryWrapper loading={false} data={data}>

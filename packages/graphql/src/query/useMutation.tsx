@@ -26,9 +26,7 @@ export type IMutationHookOptions<TData = IData, TVariables = IVariables> = Mutat
 
 export type IUseMutationResult<TData = IData, TVariables = IVariables> = MutationResult<TData> & {
   data: TData | undefined;
-  mutate: (
-    options?: IMutationFunctionOptions<TData, TVariables>
-  ) => Promise<
+  mutate: (options?: IMutationFunctionOptions<TData, TVariables>) => Promise<
     FetchResult<TData> & {
       data: TData | undefined;
     }

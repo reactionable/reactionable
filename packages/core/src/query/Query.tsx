@@ -3,7 +3,7 @@ import { useState } from "react";
 import { IError } from "../error/IError";
 import { useDeepCompareEffect } from "../hooks/useDeepCompareEffect";
 
-export type IData = unknown;
+export type IData = Record<string, unknown>;
 export type IVariables = Record<string, unknown>;
 
 export type IQueryOptions<Variables extends IVariables = IVariables> = {
@@ -16,7 +16,7 @@ export type IUseQueryOptions<
 > = IQueryOptions<Variables> & {
   handleQuery: (queryOptions: IQueryOptions<Variables>) => Promise<Data>;
 };
-export interface IUseQueryResult<Data extends IData = IData> {
+export interface IUseQueryResult<Data extends IData | null = IData> {
   loading: boolean;
   error?: IError;
   data?: Data;

@@ -12,6 +12,7 @@ import enCommon from "./locales/en/common.json";
 import enIdentity from "./locales/en/identity.json";
 import frCommon from "./locales/fr/common.json";
 import frIdentity from "./locales/fr/identity.json";
+
 export { useTranslation } from "react-i18next";
 
 const builtInResources = {
@@ -38,6 +39,10 @@ function mergeResources<MergableResource extends Resource | ResourceLanguage | R
   target: MergableResource,
   source: MergableResource
 ): MergableResource {
+  if (typeof source === "string" || typeof target === "string") {
+    return target;
+  }
+
   // Iterate through `source` properties and if an `Object` set property to merge of `target` and `source` properties
   for (const key of Object.keys(source)) {
     if (source[key] instanceof Object) {

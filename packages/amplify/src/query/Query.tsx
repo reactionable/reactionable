@@ -10,15 +10,11 @@ export type IData = {};
 export type IVariables = ICoreVariables;
 
 function isGraphQLResult(arg: unknown): arg is GraphQLResult {
-  return !!(
-    arg &&
-    "object" === typeof arg &&
-    (arg["data"] !== undefined || arg["errors"] !== undefined)
-  );
+  return !!(arg && typeof arg === "object" && ("data" in arg || "errors" in arg));
 }
 
 function extractData<Data>(result: IData): Data | undefined {
-  const data = result[Object.keys(result)[0]];
+  const data = Object.values(result)[0];
   return data as Data | undefined;
 }
 

@@ -19,7 +19,7 @@
     "prepare": "ts-dev-tools install"
   },
   "dependencies": {
-    "typescript": "^4.9.3"
+    "typescript": "^5.0.4"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^6.5.14",
