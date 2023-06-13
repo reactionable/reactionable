@@ -41,7 +41,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rimraf": "^5.0.1",
-    "typedoc": "^0.23.21"
+    "typedoc": "^0.24.8"
   },
   "resolutions": {
     "react": "^18.1.0",
