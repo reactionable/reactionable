@@ -18,25 +18,54 @@
   },
   "targetDefaults": {
     "start": {
-      "dependsOn": ["^start"]
+      "dependsOn": [
+        "^start"
+      ]
     },
     "build": {
-      "dependsOn": ["^build"],
-      "outputs": ["{projectRoot}/lib"]
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        "{projectRoot}/lib"
+      ]
     },
     "build:clean": {
-      "dependsOn": ["^build:clean"],
-      "outputs": ["{projectRoot}/lib"]
+      "dependsOn": [
+        "^build:clean"
+      ],
+      "outputs": [
+        "{projectRoot}/lib"
+      ]
     },
     "build:barrelsby": {
-      "dependsOn": ["^build:barrelsby"],
-      "outputs": ["{projectRoot}/src/index.ts"]
+      "dependsOn": [
+        "^build:barrelsby"
+      ],
+      "outputs": [
+        "{projectRoot}/src/index.ts"
+      ]
     },
     "test:coverage": {
-      "outputs": ["{projectRoot}/coverage"]
+      "outputs": [
+        "{projectRoot}/coverage"
+      ]
     },
     "build:docs": {
-      "outputs": ["{projectRoot}/../../build/storybook/docs"]
+      "outputs": [
+        "{projectRoot}/../../build/storybook/docs"
+      ]
     }
+  },
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "namedInputs": {
+    "default": [
+      "{projectRoot}/**/*",
+      "sharedGlobals"
+    ],
+    "sharedGlobals": [],
+    "production": [
+      "default"
+    ]
   }
 }
