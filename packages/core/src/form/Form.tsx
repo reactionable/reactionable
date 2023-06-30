@@ -1,10 +1,8 @@
 import { Formik, FormikConfig, FormikHelpers, FormikProps } from "formik";
 import { ComponentType, ReactElement, ReactNode, useEffect, useState } from "react";
-import { AnySchema, object as yupObject } from "yup";
-import Lazy from "yup/lib/Lazy";
-import Reference from "yup/lib/Reference";
-import { IError } from "../error/IError";
+import { ObjectShape, object as yupObject } from "yup";
 
+import { IError } from "../error/IError";
 import { useUIContext } from "../ui/UI";
 import { IFormButtonProps } from "./FormButton";
 import { FormWrapper, IFormWrapperProps } from "./FormWrapper";
@@ -28,8 +26,7 @@ export type IFormData = {};
 
 export type IValidationSchema<Values extends IFormValues> = Record<
   keyof Values,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  AnySchema | Reference | Lazy<any, any>
+  ObjectShape[string]
 >;
 
 export interface IFormProps<
