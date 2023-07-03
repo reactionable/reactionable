@@ -20,7 +20,6 @@
     "strictNullChecks": true,
     "pretty": true,
     "jsx": "react-jsx",
-    "suppressImplicitAnyIndexErrors": true,
     "esModuleInterop": true,
     "importHelpers": true,
     "skipLibCheck": true,

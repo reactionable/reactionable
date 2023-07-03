@@ -8,7 +8,8 @@ import {
 import { ApolloProvider, OperationVariables, gql, useApolloClient } from "@apollo/client";
 import { IData as ICoreData } from "@reactionable/core/lib/query/Query";
 import { PropsWithChildren, ReactElement, useMemo } from "react";
-import { getGraphqlClientLink, IGraphqlClientLinkProps } from "./ClientLink";
+
+import { IGraphqlClientLinkProps, getGraphqlClientLink } from "./ClientLink";
 export { gql } from "@apollo/client";
 
 export type IGraphqlClient = ApolloClient<IGraphqlClientState>;
@@ -100,6 +101,9 @@ export function stringToGQL(query: string): DocumentNode {
 }
 
 export function extractGqlData<Data>(result: IData): Data | undefined {
-  const data = result && "object" === typeof result ? result[Object.keys(result)[0]] : result;
+  const data =
+    result && "object" === typeof result
+      ? result[Object.keys(result)[0] as keyof typeof result]
+      : result;
   return data as Data | undefined;
 }

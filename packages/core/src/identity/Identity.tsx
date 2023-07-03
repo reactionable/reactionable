@@ -11,6 +11,10 @@ import { Auth } from "./Auth";
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type IUser = {};
 
+type IUserWithUserName = IUser & {
+  username: string | null;
+};
+
 export interface ILoginFormValues {
   username: string;
   password: string;
@@ -30,7 +34,7 @@ export type IIdentityProviderValue<User extends IUser = IUser> = Omit<
   IIdentityProviderProps<User>,
   "displayName"
 > & {
-  displayName: () => string | null;
+  displayName: () => string;
   setUser: (user: User | null) => void;
 };
 
@@ -46,9 +50,17 @@ export function useIdentityProviderProps<User extends IUser = IUser>(
     identityProvider: undefined,
     AuthComponent: Auth,
     useFetchUser: () => ({ data: null, loading: false, refetch: () => null }),
-    displayName: (user: User) => user["username"] ?? "",
+    displayName: (user: User) => (isUserWithUsername(user) ? user["username"] ?? "null" : ""),
     ...props,
   };
+}
+
+export function isUserWithUsername(arg: unknown): arg is IUserWithUserName {
+  return !!(
+    arg &&
+    typeof arg === "object" &&
+    Object.prototype.hasOwnProperty.call(arg, "username")
+  );
 }
 
 const { Context: IdentityContext, useContext } = createProvider<IIdentityProviderValue>({
@@ -122,7 +134,7 @@ function IdentityContextProvider<User extends IUser>({
   }, [logout]);
 
   const displayNameHandler = useCallback(() => {
-    return userState ? displayName(userState) : null;
+    return userState ? displayName(userState) : "";
   }, [userState, displayName]);
 
   const providerValues: IIdentityProviderValue<User> = {

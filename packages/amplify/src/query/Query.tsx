@@ -12,13 +12,14 @@ export type IVariables = ICoreVariables;
 function isGraphQLResult(arg: unknown): arg is GraphQLResult {
   return !!(
     arg &&
-    "object" === typeof arg &&
-    (arg["data"] !== undefined || arg["errors"] !== undefined)
+    typeof arg === "object" &&
+    ((arg as Record<string, unknown>)["data"] !== undefined ||
+      (arg as Record<string, unknown>)["errors"] !== undefined)
   );
 }
 
 function extractData<Data>(result: IData): Data | undefined {
-  const data = result[Object.keys(result)[0]];
+  const data = result[Object.keys(result)[0] as keyof typeof result];
   return data as Data | undefined;
 }
 

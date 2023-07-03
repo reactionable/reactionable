@@ -6,8 +6,8 @@ export function isIError(arg: unknown): arg is IError {
   return !!(
     arg &&
     typeof arg === "object" &&
-    arg["name"] !== undefined &&
-    arg["message"] !== undefined
+    Object.prototype.hasOwnProperty.call(arg, "name") &&
+    Object.prototype.hasOwnProperty.call(arg, "message")
   );
 }
 

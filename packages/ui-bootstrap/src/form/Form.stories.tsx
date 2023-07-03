@@ -1,6 +1,7 @@
 import { action } from "@storybook/addon-actions";
 import { ChangeEvent, ReactElement, useEffect, useState } from "react";
-import { FormControl, FormControlProps, InputGroup } from "react-bootstrap";
+import { FormControl, InputGroup } from "react-bootstrap";
+import { BsPrefixProps } from "react-bootstrap/esm/helpers";
 import Image from "react-bootstrap/Image";
 import { string } from "yup";
 
@@ -79,7 +80,7 @@ export const FormWithAppendTextInput = (): ReactElement => (
           <>
             <InputGroup className="mb-3">
               <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
-              <FormControl {...(fieldProps as FormControlProps)} />
+              <FormControl {...(fieldProps as BsPrefixProps<"input">)} />
             </InputGroup>
           </>
         )}
