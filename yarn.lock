@@ -6072,10 +6072,10 @@
   resolved "https://registry.yarnpkg.com/@tootallnate/once/-/once-2.0.0.tgz#f544a148d3ab35801c1f633a7441fd87c2e484bf"
   integrity sha512-XCuKFP5PS55gnMVu3dty8KPatLqUoy/ZYzDzAGCQ8JNFCkLXzmI7vNHCR+XpbZaMWQK/vQubr7PkYq8g470J/A==
 
-"@ts-dev-tools/core@^1.5.39":
-  version "1.5.39"
-  resolved "https://registry.yarnpkg.com/@ts-dev-tools/core/-/core-1.5.39.tgz#c1773fa51cbb135b7974c2895c74b29389953e0b"
-  integrity sha512-o2hD2zaxrPi5RMRYsGWDWAGAytoK1pZUQ4ciaw0cjGlIH8KdAmIQdX6jlPNNY8r4IyMMh+XFqCi9nCf5nblbLA==
+"@ts-dev-tools/core@^1.5.40":
+  version "1.5.40"
+  resolved "https://registry.yarnpkg.com/@ts-dev-tools/core/-/core-1.5.40.tgz#7acda99906ec1a54681e22357a6386433270d95d"
+  integrity sha512-uWpBctSlrt2wT9pBuQ0XD23EyImYhmE77y0g6ls4AdLnE0YxehMs1sxbtBaotXvTHE65FnaS1AGiOwCAtvxG4Q==
   dependencies:
     "@commitlint/cli" "^17.2.0"
     "@commitlint/config-conventional" "^17.2.0"
@@ -6099,13 +6099,13 @@
     typescript "^5.0.2"
 
 "@ts-dev-tools/react@^1.5.38":
-  version "1.5.39"
-  resolved "https://registry.yarnpkg.com/@ts-dev-tools/react/-/react-1.5.39.tgz#e98448a5d2b185cbd764dab72be9261abfdc1640"
-  integrity sha512-GHPM8xK+ACTC8YKzgUMu1on1Wt4TpiHvW7kiOTLRdEx8SG2aH9FQ1UFzymws2s812CSi/0duOyTmg2VSd2ypZw==
+  version "1.5.40"
+  resolved "https://registry.yarnpkg.com/@ts-dev-tools/react/-/react-1.5.40.tgz#fe3416e44556dcd4fd7aa026628ab314021a1700"
+  integrity sha512-1tGhidkMWBrDuKpxfY/DmMNqka8LcgRQwhiGmyISL/9D9MwdxW4oRjLxd8/Xa7afYqL0PzI/B6lax7YHhYH2Gg==
   dependencies:
     "@testing-library/jest-dom" "^5.16.5"
     "@testing-library/react" "^14.0.0"
-    "@ts-dev-tools/core" "^1.5.39"
+    "@ts-dev-tools/core" "^1.5.40"
     "@types/react" "^18.0.25"
     "@types/react-dom" "^18.0.9"
     eslint-plugin-react "^7.31.10"
