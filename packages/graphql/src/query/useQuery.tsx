@@ -12,19 +12,19 @@ export type IQueryOptions<TVariables = IVariables, TData = IData> = Omit<
   "query"
 >;
 
-export type IQueryHookOptions<TData = IData, TVariables = IVariables> = Omit<
+export type IQueryHookOptions<TData = IData, TVariables extends IVariables = IVariables> = Omit<
   QueryHookOptions<TData, TVariables>,
   "query"
 >;
 
-export type IUseQueryResult<TData = IData, TVariables = IVariables> = QueryResult<
-  TData,
-  TVariables
-> & {
+export type IUseQueryResult<
+  TData = IData,
+  TVariables extends IVariables = IVariables,
+> = QueryResult<TData, TVariables> & {
   data: TData | undefined;
 };
 
-export function useQuery<TData = IData, TVariables = IVariables>(
+export function useQuery<TData = IData, TVariables extends IVariables = IVariables>(
   query: string,
   options?: IQueryHookOptions<TData, TVariables>
 ): IUseQueryResult<TData, TVariables> {
