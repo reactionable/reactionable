@@ -2,29 +2,34 @@ import { IRouteProps as ICoreRouteProps } from "@reactionable/core/lib/router/Ro
 import { ReactElement, ReactNode } from "react";
 import { Routes } from "react-router-dom";
 
-import { ILazyRouteProps, LazyRoute } from "./LazyRoute";
+import { ILazyRouteProps, renderLazyRoute } from "./LazyRoute";
 import { INotFoundComponent, useCaptureRouteNotFound } from "./NotFound";
 import { PrivateRoute } from "./PrivateRoute";
 
 export type IRouteProps = ICoreRouteProps & ILazyRouteProps;
 
-export const Route = ({ privateRoute, ...routeProps }: IRouteProps): ReactElement => {
+export function renderRoute({ privateRoute, ...routeProps }: IRouteProps): ReactElement {
+  const key = `${routeProps.index ? "index" : "non-index"}-${routeProps.path}-${
+    privateRoute ? "private" : "public"
+  }-${routeProps.component.name}`;
+
   if (privateRoute) {
-    return <PrivateRoute {...routeProps} />;
+    return renderLazyRoute({
+      ...routeProps,
+      key,
+      element: <PrivateRoute />,
+      children: renderLazyRoute(routeProps),
+    });
   }
-  return <LazyRoute {...routeProps} />;
-};
 
-export function renderRoute(props: IRouteProps): ReactElement {
-  const key = `${props.index ? "index" : "non-index"}-${props.path}-${
-    props.privateRoute ? "private" : "public"
-  }-${props.component.name}`;
-
-  return <Route key={key} {...props} />;
+  return renderLazyRoute({
+    ...routeProps,
+    key,
+  });
 }
 
 export function renderRoutes(routes: IRouteProps[]): ReactNode {
-  let children = <>{routes.filter((route) => route.path || !route.component).map(() => null)}</>;
+  let children = <>{routes.filter((route) => route.path || !route.component).map(renderRoute)}</>;
 
   const notFoundRoute = routes.find((route) => !route.path && route.component);
 

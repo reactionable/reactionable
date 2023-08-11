@@ -1,9 +1,7 @@
 import { useIdentityContext } from "@reactionable/core/lib/identity/Identity";
 import { useUIContext } from "@reactionable/core/lib/ui/UI";
-import { PropsWithChildren, ReactElement } from "react";
-import { Navigate } from "react-router-dom";
-
-import { ILazyRouteProps, LazyRoute } from "./LazyRoute";
+import { ReactElement } from "react";
+import { Navigate, Outlet } from "react-router-dom";
 
 function PrivateRouteWithoutUser({ user }: { user: undefined | null }) {
   const { loader } = useUIContext().useLoader({});
@@ -15,11 +13,12 @@ function PrivateRouteWithoutUser({ user }: { user: undefined | null }) {
   }
 }
 
-export function PrivateRoute(props: PropsWithChildren<ILazyRouteProps>): ReactElement {
+export function PrivateRoute(): ReactElement {
   const { user } = useIdentityContext();
 
   if (user === undefined || user === null) {
-    return <LazyRoute {...props} element={<PrivateRouteWithoutUser user={user} />} />;
+    return <PrivateRouteWithoutUser user={user} />;
   }
-  return <LazyRoute {...props} />;
+
+  return <Outlet />;
 }
