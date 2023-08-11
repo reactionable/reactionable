@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "@storybook/addon-actions": "^6.5.14",
-    "@storybook/addon-controls": "^6.5.14",
+    "@storybook/addon-controls": "^7.2.2",
     "@storybook/addon-docs": "^6.5.14",
     "@storybook/addon-info": "^6.0.0-alpha.2",
     "@storybook/addon-knobs": "^6.4.0",
