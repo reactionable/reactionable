@@ -9,10 +9,11 @@ import {
 import { Route, RouteProps } from "react-router-dom";
 
 export type ILazyRouteProps = Omit<RouteProps, "component"> & {
+  key?: string;
   component?: LazyExoticComponent<ComponentType>;
 };
 
-export function renderLazyRoute({
+export function renderLazyRouteElement({
   component,
   element,
 }: {
@@ -30,18 +31,18 @@ export function renderLazyRoute({
   return <>{rendered}</>;
 }
 
-export function LazyRoute({
+export function renderLazyRoute({
   component,
   index,
   ...routeProps
 }: PropsWithChildren<ILazyRouteProps>): ReactElement {
-  return (
-    <Route
-      element={renderLazyRoute({
-        component,
-      })}
-      index={index === false ? index : undefined}
-      {...routeProps}
-    />
-  );
+  const props = {
+    element: renderLazyRouteElement({
+      component,
+    }),
+    index: index === false ? index : undefined,
+    ...routeProps,
+  } as RouteProps;
+
+  return <Route {...props} />;
 }
