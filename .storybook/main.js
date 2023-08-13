@@ -21,4 +21,7 @@ module.exports = {
     disableTelemetry: true,
     builder: "webpack5",
   },
+  typescript: {
+    reactDocgen: 'react-docgen-typescript-plugin' // FIXME: https://github.com/hipstersmoothie/react-docgen-typescript-plugin/issues/78
+  },
 };
