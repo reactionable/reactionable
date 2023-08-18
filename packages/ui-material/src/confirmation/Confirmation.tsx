@@ -44,7 +44,7 @@ export const Confirmation: ConfirmationComponent = ({
   children,
   title,
 }: PropsWithChildren<IConfirmationProps>) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("common");
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const handleCancel = () => callback(false);

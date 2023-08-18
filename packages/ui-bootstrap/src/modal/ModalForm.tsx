@@ -14,13 +14,13 @@ import { IFormButtonProps, useFormButton, useSubmitFormButton } from "../form/Fo
 export type IModalFormProps<
   Values extends IFormValues,
   Data extends IFormData,
-  FormButtonProps extends IFormButtonProps
+  FormButtonProps extends IFormButtonProps,
 > = ICoreModalFormProps<Values, Data, FormButtonProps>;
 
 type IModalFormChildrenProps<
   Values extends IFormValues,
   Data extends IFormData,
-  FormButtonProps extends IFormButtonProps
+  FormButtonProps extends IFormButtonProps,
 > = {
   submitButton: IModalFormProps<Values, Data, FormButtonProps>["submitButton"];
   cancelButton: IModalFormProps<Values, Data, FormButtonProps>["cancelButton"];
@@ -32,7 +32,7 @@ type IModalFormChildrenProps<
 function ModalFormChildren<
   Values extends IFormValues,
   Data extends IFormData,
-  FormButtonProps extends IFormButtonProps
+  FormButtonProps extends IFormButtonProps,
 >({
   cancelButton,
   submitButton,
@@ -40,7 +40,7 @@ function ModalFormChildren<
   closeModal,
   formikProps,
 }: IModalFormChildrenProps<Values, Data, FormButtonProps>) {
-  const { t } = useTranslation();
+  const { t } = useTranslation("common");
   const submit = useSubmitFormButton({
     children: submitButton ?? true,
     disabled: formikProps.isSubmitting,
@@ -69,7 +69,7 @@ function ModalFormChildren<
 export function ModalForm<
   Values extends IFormValues,
   Data extends IFormData,
-  FormButtonProps extends IFormButtonProps
+  FormButtonProps extends IFormButtonProps,
 >({
   children,
   submitButton,

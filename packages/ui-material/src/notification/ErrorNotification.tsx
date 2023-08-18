@@ -22,7 +22,7 @@ export const ErrorNotification: ErrorNotificationComponent = ({
   alert,
   ...props
 }: IErrorNotificationProps): ReactElement => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("common");
   if (!title) {
     title = t("An error has occured");
   }

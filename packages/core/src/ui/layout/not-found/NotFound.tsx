@@ -5,7 +5,7 @@ import { useUIContext } from "../../UI";
 
 export type INotFoundProps = Record<string, unknown>;
 export function NotFound(): ReactElement {
-  const { t } = useTranslation();
+  const { t } = useTranslation("common");
   const { useLink } = useUIContext();
   const homepageLink = useLink({ href: "/", children: t("Go To Homepage") });
 

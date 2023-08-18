@@ -13,7 +13,7 @@ export type ILoaderProps = ICoreLoaderProps & {
 };
 
 export const Loader = ({ overlay = true }: ILoaderProps): ReactElement => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("common");
   const spinnerElement = (
     <Spinner animation="grow" role="status" variant="primary">
       <span className="sr-only">{t("Loading")}</span>

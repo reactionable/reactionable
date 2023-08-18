@@ -4,11 +4,12 @@ import { ComponentType, PropsWithChildren } from "react";
 import { useTranslation } from "../../../i18n/I18n";
 
 export type ILanguageSelectorItemComponentProps<
-  LanguageSelectorItemComponentProps extends { children?: ReactNode } = { children?: ReactNode }
+  LanguageSelectorItemComponentProps extends { children?: ReactNode } = { children?: ReactNode },
 > = LanguageSelectorItemComponentProps;
 
 export type LanguageSelectorItemComponent<
-  LanguageSelectorItemComponentProps extends ILanguageSelectorItemComponentProps = ILanguageSelectorItemComponentProps
+  LanguageSelectorItemComponentProps extends
+    ILanguageSelectorItemComponentProps = ILanguageSelectorItemComponentProps,
 > = ComponentType<LanguageSelectorItemComponentProps>;
 
 export function LanguageSelectorItemComponent(
@@ -18,7 +19,8 @@ export function LanguageSelectorItemComponent(
 }
 
 export type ILanguageSelectorComponentProps<
-  LanguageSelectorItemComponentProps extends ILanguageSelectorItemComponentProps = ILanguageSelectorItemComponentProps
+  LanguageSelectorItemComponentProps extends
+    ILanguageSelectorItemComponentProps = ILanguageSelectorItemComponentProps,
 > = {
   languages: string[];
   current?: string;
@@ -26,7 +28,8 @@ export type ILanguageSelectorComponentProps<
 } & Required<Pick<ILanguageSelectorProps, "onSelectLanguage">>;
 
 export type LanguageSelectorComponent<
-  LanguageSelectorComponentProps extends ILanguageSelectorComponentProps = ILanguageSelectorComponentProps
+  LanguageSelectorComponentProps extends
+    ILanguageSelectorComponentProps = ILanguageSelectorComponentProps,
 > = ComponentType<LanguageSelectorComponentProps>;
 
 export function LanguageSelectorComponent({
@@ -71,7 +74,9 @@ export function LanguageSelector({
     if (i18nLanguage !== current) {
       setLanguage(i18nLanguage);
       setLanguages(
-        supportedLngs ? supportedLngs.filter((lng) => ![current, "cimode"].includes(lng)) : []
+        Array.isArray(supportedLngs)
+          ? supportedLngs.filter((lng) => ![current, "cimode"].includes(lng))
+          : []
       );
     }
   }, [i18nLanguage, supportedLngs]);

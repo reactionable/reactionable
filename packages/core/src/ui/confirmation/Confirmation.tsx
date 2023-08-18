@@ -24,7 +24,7 @@ export const Confirmation: ConfirmationComponent = ({
   children,
   title,
 }: PropsWithChildren<IConfirmationProps>) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("common");
 
   return (
     <div>
@@ -85,12 +85,8 @@ export type ConfirmationActionComponent<Data> = ComponentType<IConfirmationActio
 export function ConfirmationAction<Data>(
   props: PropsWithChildren<IConfirmationActionProps<Data>>
 ): ReactElement {
-  const {
-    useLoader,
-    useSuccessNotification,
-    useErrorNotification,
-    useConfirmation,
-  } = useUIContext();
+  const { useLoader, useSuccessNotification, useErrorNotification, useConfirmation } =
+    useUIContext();
 
   const { loader, loading, setLoading } = useLoader({});
   const { successNotification, setSuccessNotification } = useSuccessNotification({

@@ -28,19 +28,18 @@ export function useFormButton<FormButtonProps extends IFormButtonProps>({
   if (!Component) {
     Component = FormButton;
   }
-  const componentProps: FormButtonProps = (props as unknown) as FormButtonProps;
+  const componentProps: FormButtonProps = props as unknown as FormButtonProps;
   return <Component type="button" {...componentProps} />;
 }
 
-export type IUseSubmitFormButtonProps<
-  FormButtonProps extends IFormButtonProps = IFormButtonProps
-> = Omit<IUseFormButtonProps<FormButtonProps>, "type">;
+export type IUseSubmitFormButtonProps<FormButtonProps extends IFormButtonProps = IFormButtonProps> =
+  Omit<IUseFormButtonProps<FormButtonProps>, "type">;
 
 export function useSubmitFormButton<FormButtonProps extends IFormButtonProps>({
   children,
   ...props
 }: IUseSubmitFormButtonProps<FormButtonProps>): ReactNode | undefined {
-  const { t } = useTranslation();
+  const { t } = useTranslation("common");
   switch (typeof children) {
     case "boolean":
       children = t("Save");
