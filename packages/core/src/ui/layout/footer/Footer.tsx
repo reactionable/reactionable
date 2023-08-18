@@ -30,7 +30,7 @@ export function Footer<FooterProps extends IFooterProps = IFooterProps>({
 export function CopyrightFooter<FooterProps extends IFooterProps = IFooterProps>({
   brand,
 }: PropsWithChildren<Pick<FooterProps, "brand">>): ReactElement {
-  const { t } = useTranslation();
+  const { t } = useTranslation("common");
 
   const currentYear = new Date().getFullYear();
   return (
@@ -41,7 +41,7 @@ export function CopyrightFooter<FooterProps extends IFooterProps = IFooterProps>
 }
 
 export const SponsorFooter = (): ReactElement => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("common");
   return (
     <>
       <span title={t("Powered by") ?? undefined}>{t("⚡ by")} </span>

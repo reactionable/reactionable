@@ -37,7 +37,7 @@ const dataToUser = (data?: IUser): IUser | null => {
 };
 
 function AuthComponent(props: PropsWithChildren<IAuthenticatorProps>) {
-  const { t } = useTranslation();
+  const { t } = useTranslation("identity");
   const { setUser, hide } = useIdentityContext();
 
   const authenticatorProps = Object.assign(

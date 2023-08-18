@@ -7,7 +7,7 @@ export type ILoaderProps = Record<string, unknown>;
 export type LoaderComponent = ComponentType<ILoaderProps>;
 
 export const Loader: LoaderComponent = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("common");
   return <>{t("Loading")}</>;
 };
 
