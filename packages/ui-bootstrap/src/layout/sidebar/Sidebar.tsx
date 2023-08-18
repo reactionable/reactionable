@@ -25,7 +25,7 @@ export function useSidebarContext(): INavItemsProviderProps {
 }
 
 const SidebarItems = ({ children }: PropsWithChildren<unknown>): ReactElement => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("common");
   const [open, setOpen] = useState(true);
   const { navItems } = useSidebarContext();
 

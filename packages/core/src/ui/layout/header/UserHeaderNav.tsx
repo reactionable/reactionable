@@ -21,7 +21,7 @@ type IWithNavItemComponentProps<LinkProps extends ILinkProps> = LinkProps & {
 export type IAccountLinkProps<LinkProps extends ILinkProps> = IWithNavItemComponentProps<LinkProps>;
 
 export const AccountLink = forwardRef(function AccountLink<
-  LinkProps extends ILinkProps = ILinkProps
+  LinkProps extends ILinkProps = ILinkProps,
 >(
   // eslint-disable-next-line react/prop-types
   { NavItemComponent, onClick, ...props }: IAccountLinkProps<LinkProps>,
@@ -133,7 +133,7 @@ export type IUserUnloggedHeaderNavProps<LinkProps extends ILinkProps> = {
 export function UserUnloggedHeaderNav<LinkProps extends ILinkProps = ILinkProps>({
   NavItemComponent = NavItem,
 }: IUserUnloggedHeaderNavProps<LinkProps>): ReactElement | null {
-  const { t } = useTranslation();
+  const { t } = useTranslation("identity");
   const { user, AuthComponent } = useIdentityContext();
   const { useModal } = useUIContext();
   const { useLink } = useUIContext();

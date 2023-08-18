@@ -33,7 +33,7 @@ export function useErrorNotification<UseErrorNotificationProps extends IUseError
   ...props
 }: UseErrorNotificationProps): IUseErrorNotificationResult {
   const [errorNotification, setErrorNotification] = useState<IError | undefined>(undefined);
-  const { t } = useTranslation();
+  const { t } = useTranslation("common");
   if (!title) {
     title = t("An error has occured");
   }

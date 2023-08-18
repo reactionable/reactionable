@@ -12,9 +12,9 @@ import enCommon from "./locales/en/common.json";
 import enIdentity from "./locales/en/identity.json";
 import frCommon from "./locales/fr/common.json";
 import frIdentity from "./locales/fr/identity.json";
-export { useTranslation } from "react-i18next";
+import { useTranslation as i18nextUseTranslation } from "react-i18next";
 
-const builtInResources = {
+const builtInResources: Resource = {
   en: {
     common: enCommon,
     identity: enIdentity,
@@ -33,13 +33,23 @@ const defaultOptions = {
   defaultNS: "common",
 };
 
+export const useTranslation = i18nextUseTranslation;
+
 // Merge a `source` object to a `target` recursively
 function mergeResources<MergableResource extends Resource | ResourceLanguage | ResourceKey>(
   target: MergableResource,
   source: MergableResource
 ): MergableResource {
+  if (!source || typeof source !== "object") {
+    throw new Error("Source must be an object");
+  }
+
   // Iterate through `source` properties and if an `Object` set property to merge of `target` and `source` properties
   for (const key of Object.keys(source)) {
+    if (source[key] === undefined) {
+      continue;
+    }
+
     if (source[key] instanceof Object) {
       const mergedResources = mergeResources(target[key], source[key]);
       Object.assign(source[key], mergedResources);
