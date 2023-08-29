@@ -1,4 +1,4 @@
-import "@testing-library/jest-dom/extend-expect";
+import "@testing-library/jest-dom";
 
 import createTheme from "@material-ui/core/styles/createTheme";
 import useTheme from "@material-ui/core/styles/useTheme";
