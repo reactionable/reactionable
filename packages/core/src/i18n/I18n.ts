@@ -46,10 +46,6 @@ function mergeResources<MergableResource extends Resource | ResourceLanguage | R
 
   // Iterate through `source` properties and if an `Object` set property to merge of `target` and `source` properties
   for (const key of Object.keys(source)) {
-    if (source[key] === undefined) {
-      continue;
-    }
-
     if (source[key] instanceof Object) {
       const mergedResources = mergeResources(target[key], source[key]);
       Object.assign(source[key], mergedResources);

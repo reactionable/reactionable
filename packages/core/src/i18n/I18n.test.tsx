@@ -40,5 +40,18 @@ describe("I18n", () => {
       const unchangedTranslation = i18nInstance.t("Powered by");
       expect(unchangedTranslation).toEqual("Propulsé par");
     });
+
+    it("should merge with new given translations", async () => {
+      const newTranslation = "Nouveau";
+      const i18nInstance = await initializeI18n({
+        resources: { fr: { new: { New: newTranslation } } },
+      });
+
+      await i18nInstance.changeLanguage("fr");
+      const overridedTranslation = i18nInstance.t("New", {
+        ns: "new",
+      });
+      expect(overridedTranslation).toEqual(newTranslation);
+    });
   });
 });
