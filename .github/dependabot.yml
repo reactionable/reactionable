@@ -8,6 +8,29 @@ updates:
       interval: weekly
       day: friday
       time: "04:00"
+    groups:
+      storybook-dependencies:
+        patterns:
+          - "@storybook/*"
+      i18next-dependencies:
+        patterns:
+          - "i18next"
+          - "i18next-*"
+          - "react-i18next"
+      emotion-dependencies:
+        patterns:
+          - "@emotion/*"
+      fortawesome-dependencies:
+        patterns:
+          - "@fortawesome/*"
+      bootstrap-dependencies:
+        patterns:
+          - "bootstrap"
+          - "react-bootstrap"
+      react-dependencies:
+        patterns:
+          - "react"
+          - "react-*"
 
   - package-ecosystem: github-actions
     directory: "/"
