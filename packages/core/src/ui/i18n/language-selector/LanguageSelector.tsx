@@ -38,15 +38,21 @@ export function LanguageSelectorComponent({
   onSelectLanguage,
   ItemComponent = LanguageSelectorItemComponent,
 }: PropsWithChildren<ILanguageSelectorComponentProps>): ReactElement {
+  const [selectedOption, setSelectedOption] = useState(current);
   const handleOnChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const language = event.target.value;
-    onSelectLanguage(language);
+    if (selectedOption !== language) {
+      setSelectedOption(language);
+      onSelectLanguage(language);
+    }
   };
 
+  // Get unique values
+  const items = [...new Set([current, ...languages])].filter((language) => !!language);
+
   return (
-    <select value={current} onChange={handleOnChange}>
-      <ItemComponent>{current}</ItemComponent>
-      {languages.map((language) => (
+    <select value={selectedOption} onChange={handleOnChange}>
+      {items.map((language) => (
         <ItemComponent key={language}>{language}</ItemComponent>
       ))}
     </select>
