@@ -106,5 +106,6 @@
   },
   "tsDevTools": {
     "version": "20220617100200-prettier-cache"
-  }
+  },
+  "dependencies": {}
 }

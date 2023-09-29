@@ -2,49 +2,28 @@ import { IAppProps } from "@reactionable/core/lib/app/App";
 import { IIdentityProviderProps } from "@reactionable/core/lib/identity/Identity";
 import { TestWrapper as CoreTestWrapper } from "@reactionable/core/lib/testing/TestWrapper";
 import { IUIProviderProps } from "@reactionable/core/lib/ui/UI";
-import { RouterContext } from "next/dist/shared/lib/router-context";
-import { NEXT_DATA } from "next/dist/shared/lib/utils";
-import { PropsWithChildren, ReactElement } from "react";
+import { ReactElement } from "react";
 
 import { IRouterProviderProps } from "../router/useRouterContext";
 import { useRouterProviderProps } from "../router/useRouterProviderProps";
-import mockNextRouter from "./mockNextRouter";
 
-declare global {
-  interface Window {
-    /* prod */
-    __NEXT_DATA__: NEXT_DATA;
-  }
-}
-
-function RouterComponent({
-  children,
-}: PropsWithChildren<Partial<IRouterProviderProps>>): ReactElement {
-  window.__NEXT_DATA__ = {
-    props: {},
-    page: "",
-    query: {},
-    buildId: ",",
-  };
-  const router = mockNextRouter({ pathname: "/", asPath: "/" });
-  return <RouterContext.Provider value={router}>{children}</RouterContext.Provider>;
-}
+jest.mock("next/router", () => require("next-router-mock"));
 
 export type ITestWrapperProps<
   IdentityProviderProps extends IIdentityProviderProps,
   UIProviderProps extends IUIProviderProps,
-  RouterProviderProps extends IRouterProviderProps
+  RouterProviderProps extends IRouterProviderProps,
 > = IAppProps<IdentityProviderProps, UIProviderProps, RouterProviderProps>;
 
 export function TestWrapper<
   IdentityProviderProps extends IIdentityProviderProps = IIdentityProviderProps,
   UIProviderProps extends IUIProviderProps = IUIProviderProps,
-  RouterProviderProps extends IRouterProviderProps = IRouterProviderProps
+  RouterProviderProps extends IRouterProviderProps = IRouterProviderProps,
 >({
   router,
   ...props
 }: ITestWrapperProps<IdentityProviderProps, UIProviderProps, RouterProviderProps>): ReactElement {
-  router = useRouterProviderProps({ ...router, Component: RouterComponent }) as RouterProviderProps;
+  router = useRouterProviderProps({ ...router }) as RouterProviderProps;
   return (
     <CoreTestWrapper<IdentityProviderProps, UIProviderProps, RouterProviderProps>
       {...props}
