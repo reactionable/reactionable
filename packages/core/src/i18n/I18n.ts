@@ -1,9 +1,11 @@
 import i18n, {
   i18n as I18nType,
   InitOptions,
+  Namespace,
   Resource,
   ResourceKey,
   ResourceLanguage,
+  TFunction,
 } from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
@@ -33,7 +35,12 @@ const defaultOptions = {
   defaultNS: "common",
 };
 
-export const useTranslation = i18nextUseTranslation;
+export function useTranslation<Ns extends Namespace, KPrefix>(
+  namespace: Ns | undefined = undefined
+): { t: TFunction<Ns, KPrefix>; i18n: I18nType } {
+  const { t, i18n } = i18nextUseTranslation(namespace);
+  return { t, i18n };
+}
 
 // Merge a `source` object to a `target` recursively
 function mergeResources<MergableResource extends Resource | ResourceLanguage | ResourceKey>(
