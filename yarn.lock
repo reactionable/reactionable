@@ -6096,9 +6096,9 @@
     "@turf/helpers" "^6.5.0"
 
 "@types/apollo-upload-client@^17.0.2":
-  version "17.0.3"
-  resolved "https://registry.yarnpkg.com/@types/apollo-upload-client/-/apollo-upload-client-17.0.3.tgz#96c6b8b2dd4c3998ac4ce3d4a51f6c99c1e0a163"
-  integrity sha512-uomG6TvssrJXx1XeLdo/YvViLRTuEOrHeC0+uDG8qK1GFeeRMiwGqp9T4e7vR2Bwrk5qydvQjnyv9SJX6zPLJQ==
+  version "17.0.4"
+  resolved "https://registry.yarnpkg.com/@types/apollo-upload-client/-/apollo-upload-client-17.0.4.tgz#5b1dde37659e57cc38738fa8e77123083cce9e28"
+  integrity sha512-lUoGuvesg4W4mgEk8SRiuh0tDC4mXv92Jj2ogaMEjTR2Wt6eBYCUoy1pDXVapqXv4uZGh+oKlqrtadXySKO+jQ==
   dependencies:
     "@apollo/client" "^3.7.0"
     "@types/extract-files" "*"
