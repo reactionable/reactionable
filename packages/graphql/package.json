@@ -38,7 +38,7 @@
   "dependencies": {
     "@apollo/client": "^3.7.1",
     "@reactionable/core": "^0.28.26",
-    "apollo-upload-client": "^17.0.0",
+    "apollo-upload-client": "^18.0.1",
     "cross-fetch": "^4.0.0",
     "graphql": "^16.6.0"
   },
