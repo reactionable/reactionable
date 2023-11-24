@@ -4,3 +4,4 @@ build/
 coverage/
 yarn-error.log
 storybook-static
+.nx/cache
