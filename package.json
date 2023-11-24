@@ -34,7 +34,7 @@
     "@storybook/theming": "^6.5.9",
     "@ts-dev-tools/react": "^1.5.38",
     "barrelsby": "^2.5.1",
-    "lerna": "^7.1.1",
+    "lerna": "^8.0.0",
     "react": "^18.2.0",
     "react-docgen-typescript-plugin": "^1.0.5",
     "react-dom": "^18.2.0",

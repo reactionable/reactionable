@@ -1,71 +1,45 @@
 {
-  "tasksRunnerOptions": {
-    "default": {
-      "runner": "nx/tasks-runners/default",
-      "options": {
-        "cacheableOperations": [
-          "jest",
-          "test",
-          "test:coverage",
-          "build",
-          "build:clean",
-          "build:barrelsby",
-          "build:docs",
-          "lint"
-        ]
-      }
-    }
-  },
   "targetDefaults": {
     "start": {
-      "dependsOn": [
-        "^start"
-      ]
+      "dependsOn": ["^start"]
     },
     "build": {
-      "dependsOn": [
-        "^build"
-      ],
-      "outputs": [
-        "{projectRoot}/lib"
-      ]
+      "dependsOn": ["^build"],
+      "outputs": ["{projectRoot}/lib"],
+      "cache": true
     },
     "build:clean": {
-      "dependsOn": [
-        "^build:clean"
-      ],
-      "outputs": [
-        "{projectRoot}/lib"
-      ]
+      "dependsOn": ["^build:clean"],
+      "outputs": ["{projectRoot}/lib"],
+      "cache": true
     },
     "build:barrelsby": {
-      "dependsOn": [
-        "^build:barrelsby"
-      ],
-      "outputs": [
-        "{projectRoot}/src/index.ts"
-      ]
+      "dependsOn": ["^build:barrelsby"],
+      "outputs": ["{projectRoot}/src/index.ts"],
+      "cache": true
     },
     "test:coverage": {
-      "outputs": [
-        "{projectRoot}/coverage"
-      ]
+      "outputs": ["{projectRoot}/coverage"],
+      "cache": true
     },
     "build:docs": {
-      "outputs": [
-        "{projectRoot}/../../build/storybook/docs"
-      ]
+      "outputs": ["{projectRoot}/../../build/storybook/docs"],
+      "cache": true
+    },
+    "jest": {
+      "cache": true
+    },
+    "test": {
+      "cache": true
+    },
+    "lint": {
+      "cache": true
     }
   },
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "namedInputs": {
-    "default": [
-      "{projectRoot}/**/*",
-      "sharedGlobals"
-    ],
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "sharedGlobals": [],
-    "production": [
-      "default"
-    ]
+    "production": ["default"]
   }
 }
