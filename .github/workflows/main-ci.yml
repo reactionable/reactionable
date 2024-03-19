@@ -13,33 +13,3 @@ jobs:
   ci:
     uses: ./.github/workflows/__shared-ci.yml
     secrets: inherit
-
-  release:
-    needs: ci
-    runs-on: ubuntu-latest
-    environment: github-pages
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GH_PRIVATE_ACCESS_TOKEN }}
-
-      - uses: hoverkraft-tech/ci-github-nodejs/actions/setup-node@0.3.0
-
-      - name: 🔖 Configure publish
-        env:
-          NPM_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
-        run: |
-          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
-
-          git config --local user.email "${{ github.actor }}@users.noreply.github.com"
-          git config --local user.name "${{ github.actor }}"
-
-      - name: 📦 Publish NPM packages
-        env:
-          GH_TOKEN: ${{ secrets.GH_PRIVATE_ACCESS_TOKEN }}
-        run: yarn lerna publish --conventional-commits --create-release github --yes
-
-      - name: 🌐 Publish to gh-pages
-        run: yarn storybook:deploy --source-branch=${{ github.event.repository.default_branch }}
-        env:
-          GH_TOKEN: ${{ github.actor }}:${{ secrets.GH_PRIVATE_ACCESS_TOKEN }}
