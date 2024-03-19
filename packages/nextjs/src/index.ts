@@ -11,4 +11,3 @@ export * from "./router/useRouter";
 export * from "./router/useRouterContext";
 export * from "./router/useRouterProviderProps";
 export * from "./testing/TestWrapper";
-export * from "./testing/mockNextRouter";
