@@ -16,26 +16,27 @@ export type IMutationOptions<TData = IData, TVariables = IVariables> = Omit<
 
 export type IMutationFunctionOptions<
   TData = IData,
-  TVariables = IVariables
+  TVariables = IVariables,
 > = MutationFunctionOptions<TData, TVariables>;
 
-export type IMutationHookOptions<TData = IData, TVariables = IVariables> = MutationHookOptions<
-  TData,
-  TVariables
->;
+export type IMutationHookOptions<
+  TData extends IData = IData,
+  TVariables extends IVariables = IVariables,
+> = MutationHookOptions<TData, TVariables>;
 
 export type IUseMutationResult<TData = IData, TVariables = IVariables> = MutationResult<TData> & {
   data: TData | undefined;
-  mutate: (
-    options?: IMutationFunctionOptions<TData, TVariables>
-  ) => Promise<
+  mutate: (options?: IMutationFunctionOptions<TData, TVariables>) => Promise<
     FetchResult<TData> & {
       data: TData | undefined;
     }
   >;
 };
 
-export function useMutation<TData = IData, TVariables = IVariables>(
+export function useMutation<
+  TData extends IData = IData,
+  TVariables extends IVariables = IVariables,
+>(
   mutation: string,
   options?: IMutationHookOptions<TData, TVariables>
 ): IUseMutationResult<TData, TVariables> {

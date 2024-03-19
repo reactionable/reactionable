@@ -1,18 +1,16 @@
-import { compile } from "path-to-regexp";
+import { PathFunction, compile } from "path-to-regexp";
 import { ComponentType, ForwardedRef, ReactElement, forwardRef } from "react";
 
 import { IRouteMatchParams } from "./Route";
 
-export type IRouterLinkProps<
-  Props extends Record<string, unknown> = Record<string, unknown>
-> = Partial<Props> & {
-  href?: string;
-  Component: ComponentType<Partial<Props>>;
-};
+export type IRouterLinkProps<Props extends Record<string, unknown> = Record<string, unknown>> =
+  Partial<Props> & {
+    href?: string;
+    Component: ComponentType<Partial<Props>>;
+  };
 
-export type IRouterLinkComponent<
-  RouterLinkProps extends IRouterLinkProps
-> = ComponentType<RouterLinkProps>;
+export type IRouterLinkComponent<RouterLinkProps extends IRouterLinkProps> =
+  ComponentType<RouterLinkProps>;
 
 export type ILinkAnchorProps<RouterLinkProps extends IRouterLinkProps> = Omit<
   RouterLinkProps,
@@ -57,19 +55,24 @@ const normalizePath = (path: string): string => {
   return normalizedPath;
 };
 
-const cache = {};
+type PathGenerator = PathFunction<object>;
+
+const cache = new Map<string, PathGenerator>();
 const cacheLimit = 10000;
-let cacheCount = 0;
-function compilePath(path: string) {
-  if (cache[path]) return cache[path];
-
-  const generator = compile(path);
-
-  if (cacheCount < cacheLimit) {
-    cache[path] = generator;
-    cacheCount++;
+function compilePath(path: string): PathGenerator {
+  let generator = cache.get(path);
+  if (generator) {
+    return generator;
   }
 
+  generator = compile(path);
+
+  if (cache.size > cacheLimit) {
+    const firstKey = cache.keys().next().value;
+    cache.delete(firstKey);
+  }
+
+  cache.set(path, generator);
   return generator;
 }
 
@@ -84,5 +87,5 @@ export function generatePath(pattern: string, ...params: IRouteMatchParams[]): s
     return path;
   }
 
-  return compilePath(path)(parsedParams, { pretty: true });
+  return compilePath(path)(parsedParams);
 }

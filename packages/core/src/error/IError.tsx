@@ -3,12 +3,7 @@ export interface IError extends Error {
 }
 
 export function isIError(arg: unknown): arg is IError {
-  return !!(
-    arg &&
-    typeof arg === "object" &&
-    arg["name"] !== undefined &&
-    arg["message"] !== undefined
-  );
+  return arg !== null && typeof arg === "object" && "name" in arg && "message" in arg;
 }
 
 export function printError(error?: IError): string | undefined {

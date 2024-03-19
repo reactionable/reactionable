@@ -100,6 +100,15 @@ export function stringToGQL(query: string): DocumentNode {
 }
 
 export function extractGqlData<Data>(result: IData): Data | undefined {
-  const data = result && "object" === typeof result ? result[Object.keys(result)[0]] : result;
-  return data as Data | undefined;
+  if (!result || "object" !== typeof result) {
+    return result as Data | undefined;
+  }
+
+  const resultKeys = Object.keys(result) as Array<keyof typeof result>;
+
+  if (!resultKeys.length) {
+    return undefined;
+  }
+
+  return result[resultKeys[0]] as Data | undefined;
 }

@@ -1,13 +1,16 @@
 import { IData, IVariables } from "../Client";
 import { IMutationHookOptions, IUseMutationResult, useMutation } from "./useMutation";
 
-export function useMutationDelete<TData = IData, TVariables = IVariables>(
+export function useMutationDelete<
+  TData extends IData = IData,
+  TVariables extends IVariables = IVariables,
+>(
   mutation: string,
   options?: IMutationHookOptions<TData, TVariables>
 ): IUseMutationResult<TData, TVariables> {
   return useMutation<TData, TVariables>(mutation, {
     update: (cache, { data }) => {
-      if (data && data["__typename"] && data["id"]) {
+      if (isEntityData(data)) {
         cache.evict({
           id: cache.identify({
             __typename: data["__typename"],
@@ -18,4 +21,8 @@ export function useMutationDelete<TData = IData, TVariables = IVariables>(
     },
     ...options,
   });
+}
+
+function isEntityData(data: unknown): data is { __typename: string; id: string } {
+  return data !== null && typeof data === "object" && "__typename" in data && "id" in data;
 }

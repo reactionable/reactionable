@@ -46,7 +46,9 @@ export function useIdentityProviderProps<User extends IUser = IUser>(
     identityProvider: undefined,
     AuthComponent: Auth,
     useFetchUser: () => ({ data: null, loading: false, refetch: () => null }),
-    displayName: (user: User) => user["username"] ?? "",
+    displayName: (user: User) => {
+      return user ? user.toString() : "";
+    },
     ...props,
   };
 }
