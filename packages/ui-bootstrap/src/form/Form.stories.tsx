@@ -1,6 +1,6 @@
 import { action } from "@storybook/addon-actions";
 import { ChangeEvent, ReactElement, useEffect, useState } from "react";
-import { FormControl, InputGroup } from "react-bootstrap";
+import { FormControl, FormControlProps, InputGroup } from "react-bootstrap";
 import Image from "react-bootstrap/Image";
 import { string } from "yup";
 
@@ -74,12 +74,12 @@ export const FormWithAppendTextInput = (): ReactElement => (
       validationSchema={{ test: string().required("Test is required") }}
       initialValues={{ test: "" }}
     >
-      <FormField name="test" autoFocus placeholder="Basic form input" required>
+      <FormField type="text" name="test" autoFocus placeholder="Basic form input" required>
         {(fieldProps) => (
           <>
             <InputGroup className="mb-3">
               <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
-              <FormControl as="text" {...fieldProps} />
+              <FormControl as="text" {...(fieldProps as unknown as FormControlProps)} />
             </InputGroup>
           </>
         )}
