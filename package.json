@@ -39,7 +39,7 @@
     "react-docgen-typescript-plugin": "^1.0.5",
     "react-dom": "^18.2.0",
     "rimraf": "^5.0.1",
-    "typedoc": "^0.25.0"
+    "typedoc": "^0.26.3"
   },
   "resolutions": {
     "react": "^18.2.0",
