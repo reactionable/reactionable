@@ -16,7 +16,8 @@
     "storybook": "start-storybook -p 6006",
     "storybook:build": "build-storybook -o build/storybook",
     "storybook:deploy": "storybook-to-ghpages -e build/storybook --ci",
-    "prepare": "ts-dev-tools install"
+    "prepare": "ts-dev-tools install",
+    "ci": "yarn lint && yarn test:ci && yarn build:ci && yarn docs:build && yarn storybook:build"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^6.5.15",
@@ -34,9 +35,9 @@
     "@storybook/theming": "^6.5.9",
     "@ts-dev-tools/react": "^1.5.38",
     "barrelsby": "^2.5.1",
-    "lerna": "^8.0.0",
+    "lerna": "^8.1.9",
     "react": "^18.2.0",
-    "react-docgen-typescript-plugin": "^1.0.5",
+    "react-docgen-typescript-plugin": "^1.0.8",
     "react-dom": "^18.2.0",
     "rimraf": "^5.0.1",
     "typedoc": "^0.25.0"
