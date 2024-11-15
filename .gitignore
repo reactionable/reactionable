@@ -5,3 +5,4 @@ coverage/
 yarn-error.log
 storybook-static
 .nx/cache
+.nx/workspace-data
