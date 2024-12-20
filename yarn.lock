@@ -11970,16 +11970,16 @@ hyphenate-style-name@^1.0.3:
   integrity sha512-ygGZLjmXfPHj+ZWh6LwbC37l43MhfztxetbFCoYTM2VjkIUpeHgSNn7QIyVFj7YQ1Wl9Cbw5sholVJPzWvC2MQ==
 
 i18next-browser-languagedetector@^8.0.0:
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/i18next-browser-languagedetector/-/i18next-browser-languagedetector-8.0.0.tgz#b6fdd9b43af67c47f2c26c9ba27710a1eaf31e2f"
-  integrity sha512-zhXdJXTTCoG39QsrOCiOabnWj2jecouOqbchu3EfhtSHxIB5Uugnm9JaizenOy39h7ne3+fLikIjeW88+rgszw==
+  version "8.0.2"
+  resolved "https://registry.yarnpkg.com/i18next-browser-languagedetector/-/i18next-browser-languagedetector-8.0.2.tgz#037ca25c26877cad778f060a9e177054d9f8eaa3"
+  integrity sha512-shBvPmnIyZeD2VU5jVGIOWP7u9qNG3Lj7mpaiPFpbJ3LVfHZJvVzKR4v1Cb91wAOFpNw442N+LGPzHOHsten2g==
   dependencies:
     "@babel/runtime" "^7.23.2"
 
-i18next@^23.0.2:
-  version "23.16.8"
-  resolved "https://registry.yarnpkg.com/i18next/-/i18next-23.16.8.tgz#3ae1373d344c2393f465556f394aba5a9233b93a"
-  integrity sha512-06r/TitrM88Mg5FdUXAKL96dJMzgqLE5dv3ryBAra4KCwD9mJ4ndOTS95ZuymIGoE+2hzfdaMak2X11/es7ZWg==
+i18next@^24.1.2:
+  version "24.1.2"
+  resolved "https://registry.yarnpkg.com/i18next/-/i18next-24.1.2.tgz#6dd0bcf6d50d8d61227b0a3aefb653885d267d09"
+  integrity sha512-th/075GW0Ub1gYDMHLiZXMGSfGv1aP1VqjT3fma/12hNHCNlH8oJMftvlDzycT/R+KoULWk+xLU8H1JRwV85qw==
   dependencies:
     "@babel/runtime" "^7.23.2"
 
