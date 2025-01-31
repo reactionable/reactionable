@@ -39,7 +39,7 @@
   "dependencies": {
     "@reactionable/core": "^0.28.28",
     "react-helmet": "^6.1.0",
-    "react-router-dom": "^6.4.4"
+    "react-router-dom": "^7.1.4"
   },
   "devDependencies": {
     "@types/react-helmet": "^6.1.6",
