@@ -8,6 +8,7 @@ import {
 } from "@apollo/client";
 
 import { IData, IVariables, extractGqlData, stringToGQL } from "../Client";
+import { Unmasked } from "@apollo/client/masking";
 
 export type IMutationOptions<TData = IData, TVariables = IVariables> = Omit<
   MutationOptions<TData, TVariables>,
@@ -48,12 +49,10 @@ export function useMutation<
     ...options,
     ...(update
       ? {
-          update: (cache, { data, ...mutationResult }, ...othersArguments) =>
-            update(
-              cache,
-              { data: extractGqlData<TData>(data) as TData, ...mutationResult },
-              ...othersArguments
-            ),
+          update: (cache, { data, ...mutationResult }, ...othersArguments) => {
+            const updateData = extractGqlData<TData>(data) as Unmasked<TData>;
+            return update(cache, { data: updateData, ...mutationResult }, ...othersArguments);
+          },
         }
       : undefined),
   });
