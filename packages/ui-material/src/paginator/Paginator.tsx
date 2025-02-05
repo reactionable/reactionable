@@ -2,7 +2,7 @@ import { PaginationProps } from "@material-ui/lab/Pagination/Pagination";
 import {
   Paginator as CorePaginator,
   IPaginatorProps as ICorePaginatorProps,
-} from "@reactionable/core/lib/ui/paginator/Paginator";
+} from "@reactionable/core";
 import { ReactElement } from "react";
 import { Pagination } from "./Pagination";
 

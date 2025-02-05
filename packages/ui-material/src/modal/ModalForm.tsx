@@ -1,13 +1,15 @@
 import DialogActions from "@material-ui/core/DialogActions/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent/DialogContent";
-import { IFormData, IFormValues } from "@reactionable/core/lib/form/Form";
-import { FormFields, IFormFieldsProps } from "@reactionable/core/lib/form/FormFields";
-import { IFormWrapperProps } from "@reactionable/core/lib/form/FormWrapper";
-import { useTranslation } from "@reactionable/core/lib/i18n/I18n";
 import {
+  IFormData,
+  IFormValues,
+  FormFields,
+  IFormFieldsProps,
+  IFormWrapperProps,
+  useTranslation,
   ModalForm as CoreModalForm,
   IModalFormProps as ICoreModalFormProps,
-} from "@reactionable/core/lib/ui/modal/ModalForm";
+} from "@reactionable/core";
 import { ReactElement } from "react";
 
 import { IFormButtonProps, useFormButton, useSubmitFormButton } from "../form/FormButton";
@@ -73,7 +75,7 @@ function ModalFormChildren<
 export function ModalForm<
   Values extends IFormValues,
   Data extends IFormData,
-  FormButtonProps extends IFormButtonProps,
+  FormButtonProps extends IFormButtonProps = IFormButtonProps,
 >({
   children,
   submitButton,

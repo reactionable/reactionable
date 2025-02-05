@@ -13,7 +13,9 @@ export function PaginationLink({
       {...props}
       onClick={(event) => {
         event.preventDefault();
-        !disabled && onClick && onClick(event);
+        if (!disabled && onClick) {
+          onClick(event);
+        }
       }}
     />
   );

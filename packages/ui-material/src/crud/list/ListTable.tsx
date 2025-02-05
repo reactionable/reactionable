@@ -10,9 +10,9 @@ import {
   IListTableComponentProps,
   IListTableHeadProps,
   IListTableProps,
-} from "@reactionable/core/lib/crud/list/ListTable";
-import { useTranslation } from "@reactionable/core/lib/i18n/I18n";
-import { IData } from "@reactionable/core/lib/query/Query";
+  useTranslation,
+  IData,
+} from "@reactionable/core";
 import { ReactElement } from "react";
 
 export function ListTableHead({ head }: IListTableHeadProps): ReactElement {

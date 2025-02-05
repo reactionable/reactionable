@@ -1,8 +1,11 @@
+import { composeStories } from "@storybook/react";
 import { render, fireEvent } from "@testing-library/react";
 
-import { i18nTestInstance } from "../../../testing/I18n";
-import { BasicLanguageSelector } from "./LanguageSelector.stories";
 import { LanguageSelectorComponent } from "./LanguageSelector";
+import { i18nTestInstance } from "../../../testing/I18n";
+import * as stories from "./LanguageSelector.stories";
+
+const { BasicLanguageSelector } = composeStories(stories);
 
 describe("LanguageSelector", () => {
   beforeAll(i18nTestInstance);

@@ -6,7 +6,7 @@ import {
   InMemoryCacheConfig,
 } from "@apollo/client";
 import { ApolloProvider, OperationVariables, gql, useApolloClient } from "@apollo/client";
-import { IData as ICoreData } from "@reactionable/core/lib/query/Query";
+import { IData as ICoreData } from "@reactionable/core";
 import { PropsWithChildren, ReactElement, useMemo } from "react";
 import { getGraphqlClientLink, IGraphqlClientLinkProps } from "./ClientLink";
 export { gql } from "@apollo/client";

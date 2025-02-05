@@ -2,11 +2,10 @@ import { GraphQLAPI, GraphQLResult, graphqlOperation } from "@aws-amplify/api-gr
 import {
   IQueryOptions as ICoreQueryOptions,
   IVariables as ICoreVariables,
-} from "@reactionable/core/lib/query/Query";
+} from "@reactionable/core";
 
 // Required by amplify
-// eslint-disable-next-line @typescript-eslint/ban-types
-export type IData = {};
+export type IData = object;
 export type IVariables = ICoreVariables;
 
 function isGraphQLResult(arg: unknown): arg is GraphQLResult {

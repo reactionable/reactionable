@@ -1,20 +1,15 @@
-import { i18nTestInstance } from "@reactionable/core/lib/testing/I18n";
+import { i18nTestInstance } from "@reactionable/core";
 import { fireEvent, render } from "@testing-library/react";
+import { composeStories } from "@storybook/react";
 
 import { TestWrapper } from "../testing/TestWrapper";
 import { Confirmation } from "./Confirmation";
-import { BasicConfirmationAction, UseConfirmation } from "./Confirmation.stories";
+import * as stories from "./Confirmation.stories";
+
+const { UseConfirmation, BasicConfirmationAction } = composeStories(stories);
 
 describe("Confirmation", () => {
   beforeAll(i18nTestInstance);
-
-  describe("BasicConfirmationAction", () => {
-    it("should render without crashing", () => {
-      const result = render(<BasicConfirmationAction />);
-
-      expect(result).toBeTruthy();
-    });
-  });
 
   describe("UseConfirmation", () => {
     it("should render without crashing", () => {
@@ -24,7 +19,14 @@ describe("Confirmation", () => {
     });
   });
 
-  // Fixme: findDomNode error (https://github.com/mui-org/material-ui/issues/13394)
+  describe("BasicConfirmationAction", () => {
+    it("should render without crashing", () => {
+      const result = render(<BasicConfirmationAction />);
+
+      expect(result).toBeTruthy();
+    });
+  });
+
   it.skip("should confirm", async () => {
     const callback = jest.fn();
 
@@ -39,7 +41,6 @@ describe("Confirmation", () => {
     expect(callback).toHaveBeenCalledWith(true);
   });
 
-  // Fixme: findDomNode error (https://github.com/mui-org/material-ui/issues/13394)
   it.skip("should cancel", async () => {
     const callback = jest.fn();
 
@@ -48,6 +49,9 @@ describe("Confirmation", () => {
         <Confirmation title="test" callback={callback} />
       </TestWrapper>
     );
+
+    // Wait for the confirmation to be displayed
+    await new Promise((resolve) => setTimeout(resolve, 100));
 
     fireEvent.click(getByText("Cancel"));
 

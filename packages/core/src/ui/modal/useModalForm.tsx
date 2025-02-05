@@ -9,8 +9,8 @@ import { ModalForm, ModalFormComponent } from "./ModalForm";
 export type IUseModalFormProps<
   Values extends IFormValues,
   Data extends IFormData,
-  FormButtonProps extends IFormButtonProps,
-  ModalProps extends IModalProps
+  FormButtonProps extends IFormButtonProps = IFormButtonProps,
+  ModalProps extends IModalProps = IModalProps,
 > = ModalProps & { form: IFormProps<Values, Data, FormButtonProps> } & {
   Component?: ModalFormComponent<Values, Data, FormButtonProps>;
 };
@@ -19,7 +19,7 @@ export function useModalForm<
   Values extends IFormValues,
   Data extends IFormData,
   FormButtonProps extends IFormButtonProps,
-  ModalProps extends IModalProps
+  ModalProps extends IModalProps,
 >({
   form: { onSuccess, onSubmit, ...form },
   title,

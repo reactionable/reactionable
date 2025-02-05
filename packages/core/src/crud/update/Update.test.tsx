@@ -1,9 +1,11 @@
 import "@testing-library/jest-dom";
 
 import { render } from "@testing-library/react";
+import { composeStories } from "@storybook/react";
 
 import { i18nTestInstance } from "../../testing/I18n";
-import { BasicUpdate, UpdateInModal } from "./Update.stories";
+import * as stories from "./Update.stories";
+const { BasicUpdate, UpdateInModal } = composeStories(stories);
 
 describe("Update", () => {
   beforeAll(i18nTestInstance);

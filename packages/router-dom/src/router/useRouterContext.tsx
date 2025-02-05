@@ -1,8 +1,8 @@
-import { IRouterProviderProps as ICoreRouterProviderProps } from "@reactionable/core/lib/router/useRouterProviderProps";
 import {
+  IRouterProviderProps as ICoreRouterProviderProps,
   RouterContextProvider as CoreRouterContextProvider,
   useRouterContext as useCoreRouterContext,
-} from "@reactionable/core/lib/router/useRouterContext";
+} from "@reactionable/core";
 import { PropsWithChildren, ReactElement } from "react";
 import { IRouterProviderProps, useRouterProviderProps } from "./useRouterProviderProps";
 

@@ -1,5 +1,4 @@
-import { IFormFieldValue } from "@reactionable/core/lib/form/FormField";
-import { getFormFieldLabelContent } from "@reactionable/core/lib/form/RenderFormField";
+import { IFormFieldValue, getFormFieldLabelContent } from "@reactionable/core";
 import { ReactElement } from "react";
 import FormCheck, { FormCheckProps } from "react-bootstrap/FormCheck";
 import FormControl, { FormControlProps } from "react-bootstrap/FormControl";
@@ -11,7 +10,7 @@ import { IFieldElementProps, IFormFieldPropsEnhanced } from "./FormField";
 
 export function RenderFormField<
   FieldElementProps extends IFieldElementProps = IFieldElementProps,
-  Value extends IFormFieldValue = IFormFieldValue
+  Value extends IFormFieldValue = IFormFieldValue,
 >({
   isValid,
   isInvalid,

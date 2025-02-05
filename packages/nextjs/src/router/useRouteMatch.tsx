@@ -1,8 +1,8 @@
-import { IRouteMatch, IRouteMatchParams } from "@reactionable/core/lib/router/Route";
+import { IRouteMatch, IRouteMatchParams } from "@reactionable/core";
 import { useRouter as nextUseRouter } from "next/router";
 
 export function useRouteMatch<
-  RouteMatchParams extends IRouteMatchParams = IRouteMatchParams
+  RouteMatchParams extends IRouteMatchParams = IRouteMatchParams,
 >(): IRouteMatch<RouteMatchParams> {
   const router = nextUseRouter();
   return {

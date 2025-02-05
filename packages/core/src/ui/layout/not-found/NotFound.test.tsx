@@ -1,9 +1,12 @@
 import "@testing-library/jest-dom";
 
+import { composeStories } from "@storybook/react";
 import { render } from "@testing-library/react";
 
 import { i18nTestInstance } from "../../../testing/I18n";
-import { BasicNotFound } from "./NotFound.stories";
+import * as stories from "./NotFound.stories";
+
+const { BasicNotFound } = composeStories(stories);
 
 describe("NotFound", () => {
   beforeAll(i18nTestInstance);

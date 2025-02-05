@@ -1,35 +1,24 @@
 import { action } from "@storybook/addon-actions";
-import { number, withKnobs } from "@storybook/addon-knobs";
-import { ReactElement } from "react";
+import type { Meta, StoryObj } from "@storybook/react";
 
 import { Paginator } from "./Paginator";
 
-export default {
+const meta: Meta<typeof Paginator> = {
   title: "UI Material/Components/Paginator",
-  parameters: {
-    info: { inline: true },
-    options: { showPanel: true },
-    component: Paginator,
-  },
-  decorators: [withKnobs],
+  component: Paginator,
 };
 
-export const BasicPaginator = (): ReactElement => {
-  const currentPage = number("Current page", 2);
-  const totalCount = number("Total count", 10);
-  const perPage = number("Per page", 2);
-  const pageRangeDisplayed = number("Page range displayed", 2);
-  const marginPagesDisplayed = number("Margin pages displayed", 2);
-  const onChange = action(`Page changed`);
+export default meta;
 
-  return (
-    <Paginator
-      currentPage={currentPage}
-      totalCount={totalCount}
-      perPage={perPage}
-      pageRangeDisplayed={pageRangeDisplayed}
-      marginPagesDisplayed={marginPagesDisplayed}
-      onChange={onChange}
-    />
-  );
+type Story = StoryObj<typeof Paginator>;
+
+export const BasicPaginator: Story = {
+  args: {
+    currentPage: 2,
+    totalCount: 10,
+    perPage: 2,
+    pageRangeDisplayed: 2,
+    marginPagesDisplayed: 2,
+    onChange: action(`Page changed`),
+  },
 };

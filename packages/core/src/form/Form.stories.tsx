@@ -1,238 +1,192 @@
 import { action } from "@storybook/addon-actions";
-import { ChangeEvent, ReactElement, useEffect, useState } from "react";
+import type { Meta, StoryObj } from "@storybook/react";
+import { ChangeEvent, ComponentProps, useEffect, useState } from "react";
 import { string } from "yup";
 
 import { UIContextProvider, useUIProviderProps } from "../ui/UI";
 import { Form } from "./Form";
 import { FormField } from "./FormField";
 
-export default {
+const meta: Meta<typeof Form> = {
   title: "Core/Components/Form",
-  parameters: { info: { inline: true }, options: { showPanel: true }, component: Form },
-  subComponents: [FormField],
+  component: Form,
 };
 
-interface IFormValues {
+export default meta;
+
+type IFormData = {
   test: string;
-}
-
-export const Introduction = (): ReactElement => {
-  return (
-    <div className="container">
-      <div className="row">
-        <div className="col">
-          <div className="jumbotron">
-            <h1 className="display-4">
-              <code>@reactionable/core</code> - <code>Form</code>
-            </h1>
-            <hr />
-            <p className="lead">
-              Form component helps to render Form and fields, manage form state and validation
-            </p>
-            <p>
-              It is based on <a href="https://formik.org/">Formik</a> and{" "}
-              <a href="https://github.com/jquense/yup">Yup</a>
-            </p>
-            <h5>How to render a form (template): </h5>
-            <pre className="border shadow-sm rounded bg-white p-2">
-              <code>{`import { Form } from "@reactionable/ui-material/lib/form/Form";
-import { FormField } from "@reactionable/ui-material/lib/form/FormField";
-import { ... } from 'yup';
-
-const MyForm = (): ReactElement => (
-  <Form {Form props}>
-    <FormField {Form field props} />
-  </Form>
-);`}</code>
-            </pre>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
 };
 
-export const BasicForm = (): ReactElement => (
-  <UIContextProvider {...useUIProviderProps()}>
-    <Form
-      title="Basic form"
-      submitButton
-      onSubmit={async (values) => {
-        action("Form submitted...")(values);
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        return values;
-      }}
-      onSuccess={action("Form submit succeed")}
-      validationSchema={{
-        firstname: string().required("Firstname is required"),
-        lastname: string().required("Lastname is required"),
-      }}
-      initialValues={{ firstname: "", lastname: "" }}
-    >
-      <FormField name="firstname" autoFocus placeholder="Firstname" required />
-      <FormField name="lastname" placeholder="Lastname" required />
-    </Form>
-  </UIContextProvider>
-);
+type IFormValues = {
+  test: string;
+};
 
-export const FormWithLabelledInput = (): ReactElement => (
-  <UIContextProvider {...useUIProviderProps()}>
-    <Form
-      title="Basic form"
-      submitButton
-      onSubmit={async (values) => {
-        action("Form submitted...")(values);
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        return values;
-      }}
-      onSuccess={action("Form submit succeed")}
-      validationSchema={{ test: string().required("Test is required") }}
-      initialValues={{ test: "" }}
-    >
-      <FormField label="Test" name="test" autoFocus placeholder="Basic form input" required />
-    </Form>
-  </UIContextProvider>
-);
+type Story = StoryObj<typeof Form<IFormValues, IFormData>>;
 
-export const FormWithTextArea = (): ReactElement => (
-  <UIContextProvider {...useUIProviderProps()}>
-    <Form
-      title="Form with textarea"
-      submitButton
-      onSubmit={async (values: IFormValues) => {
-        action("Form submitted...")(values);
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        return values;
-      }}
-      onSuccess={action("Form submit succeed")}
-      validationSchema={{ test: string().required("Test is required") }}
-      initialValues={{ test: "" }}
-    >
-      <FormField as="textarea" name="test" autoFocus placeholder="Text area form input" required />
-    </Form>
-  </UIContextProvider>
-);
+const defaultArgs: Partial<ComponentProps<typeof Form<IFormValues, IFormData>>> = {
+  title: "Basic form",
+  submitButton: true,
+  onSubmit: async (values: IFormValues) => {
+    action("Form submitted...")(values);
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    return values;
+  },
+  onSuccess: action("Form submit succeed"),
+  validationSchema: {
+    test: string().required("Test input is required"),
+  },
+  initialValues: { test: "" },
+};
 
-export const FormWithSelect = (): ReactElement => (
-  <UIContextProvider {...useUIProviderProps()}>
-    <Form
-      title="Form with select"
-      submitButton
-      onSubmit={async (values: IFormValues) => {
-        action("Form submitted...")(values);
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        return values;
-      }}
-      onSuccess={action("Form submit succeed")}
-      validationSchema={{ test: string().required("Test is required") }}
-      initialValues={{ test: "" }}
-    >
-      <FormField as="select" name="test" label="Test" autoFocus required>
-        <option value="">Choose an option</option>
-        <option value="1">First option</option>
-        <option value="2">Second option</option>
-      </FormField>
-    </Form>
-  </UIContextProvider>
-);
-
-export const FormWithCheckbox = (): ReactElement => (
-  <UIContextProvider {...useUIProviderProps()}>
-    <Form
-      title="Form with select"
-      submitButton
-      onSubmit={async (values: IFormValues) => {
-        action("Form submitted...")(values);
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        return values;
-      }}
-      onSuccess={action("Form submit succeed")}
-      validationSchema={{ test: string().required("Test is required") }}
-      initialValues={{ test: "" }}
-    >
-      <FormField type="checkbox" name="test" autoFocus required />
-    </Form>
-  </UIContextProvider>
-);
-
-export const FormWithFileAndPreview = (): ReactElement => {
-  const [filePreview, setFilePreview] = useState<string | null>(null);
-  const [file, setFile] = useState<File | null>(null);
-
-  function fileToDataSrc(file: File): Promise<string | undefined> {
-    // Encode the file using the FileReader API
-    const reader = new FileReader();
-    return new Promise((resolve, reject) => {
-      try {
-        reader.onloadend = () => {
-          resolve(reader.result?.toString());
-        };
-        reader.readAsDataURL(file);
-      } catch (error) {
-        reject(error);
-      }
-    });
-  }
-
-  useEffect(() => {
-    if (file) {
-      fileToDataSrc(file).then((src) => {
-        setFilePreview(src || null);
-      });
-    } else {
-      setFilePreview(null);
-    }
-  }, [file]);
-
-  return (
+export const BasicForm: Story = {
+  args: defaultArgs,
+  render: (props) => (
     <UIContextProvider {...useUIProviderProps()}>
-      <Form
-        title="Form with file"
-        submitButton
-        onSubmit={async (values: IFormValues) => {
-          action("Form submitted...")(values);
-          await new Promise((resolve) => setTimeout(resolve, 1000));
-          return values;
-        }}
-        onSuccess={action("Form submit succeed")}
-        validationSchema={{ test: string().required("Test is required") }}
-        initialValues={{ test: "" }}
-      >
-        <FormField
-          type="file"
-          name="test"
-          autoFocus
-          required
-          onChange={(event: ChangeEvent<HTMLInputElement>) =>
-            setFile(event?.target?.files?.length ? event.target.files[0] : null)
-          }
-        />
-        {filePreview && (
-          <p>
-            <img height="200" width="200" src={filePreview} />
-          </p>
-        )}
+      <Form {...props}>
+        <FormField name="test" autoFocus placeholder="Test input" required />
       </Form>
     </UIContextProvider>
-  );
+  ),
 };
 
-export const FormSubmitError = (): ReactElement => (
-  <UIContextProvider {...useUIProviderProps()}>
-    <Form
-      title="Form submit error"
-      submitButton
-      onSubmit={async (values) => {
-        action("Form submitted...")(values);
+export const FormWithLabelledInput: Story = {
+  args: {
+    ...defaultArgs,
+    title: "Form with labelled input",
+  },
+  render: (props) => (
+    <UIContextProvider {...useUIProviderProps()}>
+      <Form {...props}>
+        <FormField label="Test" name="test" autoFocus placeholder="Basic form input" required />
+      </Form>
+    </UIContextProvider>
+  ),
+};
 
-        throw new Error("Submit error");
-      }}
-      validationSchema={{
-        test: string().required("Test is required"),
-      }}
-      initialValues={{ test: "" }}
-    >
-      <FormField name="test" autoFocus label="Test" required />
-    </Form>
-  </UIContextProvider>
-);
+export const FormWithTextArea: Story = {
+  args: {
+    ...defaultArgs,
+    title: "Form with textarea",
+  },
+  render: (props) => (
+    <UIContextProvider {...useUIProviderProps()}>
+      <Form {...props}>
+        <FormField
+          as="textarea"
+          name="test"
+          autoFocus
+          placeholder="Text area form input"
+          required
+        />
+      </Form>
+    </UIContextProvider>
+  ),
+};
+
+export const FormWithSelect: Story = {
+  args: {
+    ...defaultArgs,
+    title: "Form with select",
+  },
+  render: (props) => (
+    <UIContextProvider {...useUIProviderProps()}>
+      <Form {...props}>
+        <FormField as="select" name="test" label="Test" autoFocus required>
+          <option value="">Choose an option</option>
+          <option value="1">First option</option>
+          <option value="2">Second option</option>
+        </FormField>
+      </Form>
+    </UIContextProvider>
+  ),
+};
+
+export const FormWithCheckbox: Story = {
+  args: {
+    ...defaultArgs,
+    title: "Form with checkbox",
+  },
+  render: (props) => (
+    <UIContextProvider {...useUIProviderProps()}>
+      <Form {...props}>
+        <FormField type="checkbox" name="test" label="Test" autoFocus required />
+      </Form>
+    </UIContextProvider>
+  ),
+};
+
+export const FormWithFileAndPreview: Story = {
+  args: {
+    ...defaultArgs,
+    title: "Form with file",
+  },
+  render: (props) => {
+    const [filePreview, setFilePreview] = useState<string | null>(null);
+    const [file, setFile] = useState<File | null>(null);
+
+    function fileToDataSrc(file: File): Promise<string | undefined> {
+      // Encode the file using the FileReader API
+      const reader = new FileReader();
+      return new Promise((resolve, reject) => {
+        try {
+          reader.onloadend = () => {
+            resolve(reader.result?.toString());
+          };
+          reader.readAsDataURL(file);
+        } catch (error) {
+          reject(error);
+        }
+      });
+    }
+
+    useEffect(() => {
+      if (file) {
+        fileToDataSrc(file).then((src) => {
+          setFilePreview(src || null);
+        });
+      } else {
+        setFilePreview(null);
+      }
+    }, [file]);
+
+    return (
+      <UIContextProvider {...useUIProviderProps()}>
+        <Form {...props}>
+          <FormField
+            type="file"
+            name="test"
+            autoFocus
+            required
+            onChange={(event: ChangeEvent<HTMLInputElement>) =>
+              setFile(event?.target?.files?.length ? event.target.files[0] : null)
+            }
+          />
+          {filePreview && (
+            <p>
+              <img height="200" width="200" src={filePreview} />
+            </p>
+          )}
+        </Form>
+      </UIContextProvider>
+    );
+  },
+};
+
+export const FormSubmitError: Story = {
+  args: {
+    ...defaultArgs,
+    title: "Form with submit error",
+    onSubmit: async (values: IFormValues) => {
+      action("Form submitted...")(values);
+      throw new Error("Submit error");
+    },
+  },
+  render: (props) => (
+    <UIContextProvider {...useUIProviderProps()}>
+      <Form {...props}>
+        <FormField name="test" autoFocus label="Test" required />
+      </Form>
+    </UIContextProvider>
+  ),
+};

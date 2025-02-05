@@ -1,70 +1,84 @@
-import { text, withKnobs } from "@storybook/addon-knobs";
-import { ReactElement } from "react";
+import type { Meta, StoryObj } from "@storybook/react";
 
 import { Alert } from "./Alert";
-import { ErrorAlert, useErrorAlert } from "./ErrorAlert";
+import { ErrorAlert, IUseErrorAlertProps, useErrorAlert } from "./ErrorAlert";
 import { useAlert } from "./useAlert";
-import { WarningAlert, useWarningAlert } from "./WarningAlert";
+import { IUseWarningAlertProps, WarningAlert, useWarningAlert } from "./WarningAlert";
 
-export default {
+const meta: Meta<typeof Alert> = {
   title: "Core/Components/UI/Alert",
-  parameters: {
-    info: { inline: true },
-    options: { showPanel: true },
-    component: Alert,
-    subComponents: [ErrorAlert, WarningAlert],
+  component: Alert,
+};
+
+export default meta;
+
+export const BasicAlert: StoryObj<typeof Alert> = {
+  args: {
+    children: "Test alert",
   },
-  decorators: [withKnobs],
 };
 
-export const BasicAlert = (): ReactElement => <Alert>Test alert</Alert>;
+export const UseAlert: StoryObj<typeof Alert> = {
+  args: {
+    children: "This is the alert content",
+  },
+  render: ({ children }) => {
+    const { alert, setAlert } = useAlert();
 
-export const UseAlert = (): ReactElement => {
-  const content = text("Content", "This is the alert content");
-
-  const { alert, setAlert } = useAlert();
-
-  return (
-    <>
-      <button onClick={() => setAlert(content)}>Click on me</button>
-      <hr />
-      {alert}
-    </>
-  );
+    return (
+      <>
+        <button onClick={() => setAlert(children)}>Click on me</button>
+        <hr />
+        {alert}
+      </>
+    );
+  },
 };
 
-export const BasicErrorAlert = (): ReactElement => (
-  <ErrorAlert>{new Error("Test error alert")}</ErrorAlert>
-);
-
-export const UseErrorAlert = (): ReactElement => {
-  const content = text("Content", "This is the error alert content");
-
-  const { errorAlert, setErrorAlert } = useErrorAlert();
-
-  return (
-    <>
-      <button onClick={() => setErrorAlert(new Error(content))}>Click on me</button>
-      <hr />
-      {errorAlert}
-    </>
-  );
+export const BasicErrorAlert: StoryObj<typeof ErrorAlert> = {
+  args: {
+    error: new Error("Test error alert"),
+  },
+  render: (props) => <ErrorAlert {...props} />,
 };
 
-export const BasicWarningAlert = (): ReactElement => (
-  <WarningAlert>Test warning alert</WarningAlert>
-);
+export const UseErrorAlert: StoryObj<IUseErrorAlertProps> = {
+  args: {
+    error: new Error("Test error alert"),
+  },
+  render: ({ error, ...props }) => {
+    const { errorAlert, setErrorAlert } = useErrorAlert(props);
 
-export const UseWarningAlert = (): ReactElement => {
-  const content = text("Content", "This is the warning alert content");
+    return (
+      <>
+        <button onClick={() => setErrorAlert(error)}>Click on me</button>
+        <hr />
+        {errorAlert}
+      </>
+    );
+  },
+};
 
-  const { warningAlert, setWarningAlert } = useWarningAlert();
+export const BasicWarningAlert: StoryObj<typeof WarningAlert> = {
+  args: {
+    children: "Test warning alert",
+  },
+  render: (props) => <WarningAlert {...props} />,
+};
 
-  return (
-    <>
-      <button onClick={() => setWarningAlert(content)}>Click on me</button>
-      <hr />
-      {warningAlert}
-    </>
-  );
+export const UseWarningAlert: StoryObj<IUseWarningAlertProps> = {
+  args: {
+    children: "Test warning alert",
+  },
+  render: ({ children, ...props }) => {
+    const { warningAlert, setWarningAlert } = useWarningAlert(props);
+
+    return (
+      <>
+        <button onClick={() => setWarningAlert(children)}>Click on me</button>
+        <hr />
+        {warningAlert}
+      </>
+    );
+  },
 };

@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import type { Meta, StoryObj } from "@storybook/react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
@@ -8,15 +8,14 @@ import Row from "react-bootstrap/Row";
 import { Layout } from "./Layout";
 import { useLayout } from "./useLayout";
 
-export default {
+const meta: Meta<typeof Layout> = {
   title: "UI Bootstrap/Components/Layout",
-  parameters: {
-    info: { inline: true },
-    options: { showPanel: true },
-    component: Layout,
-    sub_components: [useLayout],
-  },
+  component: Layout,
 };
+
+export default meta;
+
+type Story = StoryObj<typeof Layout>;
 
 const LayoutContent = () => (
   <Container fluid>
@@ -43,35 +42,38 @@ const LayoutContent = () => (
   </Container>
 );
 
-export const BasicLayout = (): ReactElement => (
-  <Layout>
-    <LayoutContent />
-  </Layout>
-);
-
-export const LayoutWithHeader = (): ReactElement => (
-  <Layout header={{ brand: "My App" }}>
-    <LayoutContent />
-  </Layout>
-);
-
-export const LayoutWithFooter = (): ReactElement => (
-  <Layout footer={{ brand: "My App" }}>
-    <LayoutContent />
-  </Layout>
-);
-
-export const LayoutWithHeaderAndFooter = (): ReactElement => (
-  <Layout header={{ brand: "My App" }} footer={{ brand: "My App" }}>
-    <LayoutContent />
-  </Layout>
-);
-
-export const UseLayout = (): ReactElement => {
-  return useLayout({
+export const BasicLayout: Story = {
+  args: {
     children: <LayoutContent />,
-    header: {
-      brand: "My App",
-    },
-  });
+  },
+};
+
+export const LayoutWithHeader: Story = {
+  args: {
+    children: <LayoutContent />,
+    header: { brand: "My App" },
+  },
+};
+
+export const LayoutWithFooter: Story = {
+  args: {
+    children: <LayoutContent />,
+    footer: { brand: "My App" },
+  },
+};
+
+export const LayoutWithHeaderAndFooter: Story = {
+  args: {
+    children: <LayoutContent />,
+    header: { brand: "My App" },
+    footer: { brand: "My App" },
+  },
+};
+
+export const UseLayout: StoryObj<typeof useLayout> = {
+  args: {
+    children: <LayoutContent />,
+    header: { brand: "My App" },
+  },
+  render: (props) => useLayout(props),
 };

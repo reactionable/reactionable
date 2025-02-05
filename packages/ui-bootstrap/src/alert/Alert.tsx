@@ -1,8 +1,8 @@
-import { IAlertProps as IAlertPropsCore } from "@reactionable/core/lib/ui/alert/Alert";
 import {
+  IAlertProps as IAlertPropsCore,
   IUseAlertResult,
   useAlert as useAlertCore,
-} from "@reactionable/core/lib/ui/alert/useAlert";
+} from "@reactionable/core";
 import { ComponentType } from "react";
 import BootstrapAlert, { AlertProps } from "react-bootstrap/Alert";
 

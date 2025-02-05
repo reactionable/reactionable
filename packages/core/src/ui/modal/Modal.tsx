@@ -20,7 +20,9 @@ export function Modal<P extends IModalProps = IModalProps>({
 }: PropsWithChildren<P>): ReactElement {
   const { t } = useTranslation();
   const handleOnClose = () => {
-    onHide && onHide();
+    if (onHide) {
+      onHide();
+    }
   };
 
   return (
@@ -62,7 +64,9 @@ export function useModal<P extends IUseModalProps>({
   const closeModal = () => setShow(false);
   const handleOnHide = () => {
     closeModal();
-    onHide && onHide();
+    if (onHide) {
+      onHide();
+    }
   };
 
   const ModalComponent = Component || Modal;

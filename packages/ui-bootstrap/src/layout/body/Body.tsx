@@ -1,4 +1,4 @@
-import { IBodyProps as ICoreBodyProps } from "@reactionable/core/lib/ui/layout/body/Body";
+import { IBodyProps as ICoreBodyProps } from "@reactionable/core";
 import { ComponentType, PropsWithChildren, ReactElement } from "react";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";

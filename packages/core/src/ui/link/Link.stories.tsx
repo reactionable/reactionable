@@ -1,29 +1,34 @@
-import { ReactElement } from "react";
+import type { Meta, StoryObj } from "@storybook/react";
 
 import { useRouterProviderProps } from "../../router/useRouterProviderProps";
 import { RouterContextProvider } from "../../router/useRouterContext";
 import { Link, useLink } from "./Link";
 
-export default {
+const meta: Meta<typeof Link> = {
   title: "Core/Components/UI/Link",
-  parameters: {
-    info: { inline: true },
-    options: { showPanel: true },
-    component: Link,
-  },
+  component: Link,
 };
 
-export const BasicLink = (): ReactElement => {
-  return (
-    <RouterContextProvider {...useRouterProviderProps()}>
-      <Link href="/test">test</Link>
-    </RouterContextProvider>
-  );
-};
+export default meta;
 
-export const UseLink = (): ReactElement => {
-  return useLink({
+type Story = StoryObj<typeof Link>;
+
+export const BasicLink: Story = {
+  args: {
     href: "/test",
-    children: "test",
-  });
+    children: "Test",
+  },
+  render: (props) => (
+    <RouterContextProvider {...useRouterProviderProps()}>
+      <Link {...props} />
+    </RouterContextProvider>
+  ),
+};
+
+export const UseLink: StoryObj<typeof useLink> = {
+  args: {
+    href: "/test",
+    children: "Test",
+  },
+  render: (props) => useLink(props),
 };

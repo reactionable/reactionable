@@ -1,9 +1,11 @@
 import "@testing-library/jest-dom";
 
-import { i18nTestInstance } from "@reactionable/core/lib/testing/I18n";
+import { composeStories } from "@storybook/react";
+import { i18nTestInstance } from "@reactionable/core";
 import { render } from "@testing-library/react";
+import * as stories from "./Link.stories";
 
-import { BasicLink, UseLink } from "./Link.stories";
+const { BasicLink, UseLink } = composeStories(stories);
 
 describe("Link", () => {
   beforeAll(i18nTestInstance);

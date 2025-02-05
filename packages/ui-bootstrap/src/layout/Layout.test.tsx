@@ -1,15 +1,12 @@
 import "@testing-library/jest-dom";
 
-import { i18nTestInstance } from "@reactionable/core/lib/testing/I18n";
+import { composeStories } from "@storybook/react";
+import { i18nTestInstance } from "@reactionable/core";
 import { render } from "@testing-library/react";
+import * as stories from "./Layout.stories";
 
-import {
-  BasicLayout,
-  LayoutWithFooter,
-  LayoutWithHeader,
-  LayoutWithHeaderAndFooter,
-  UseLayout,
-} from "./Layout.stories";
+const { BasicLayout, LayoutWithFooter, LayoutWithHeader, LayoutWithHeaderAndFooter, UseLayout } =
+  composeStories(stories);
 
 describe("Layout", () => {
   beforeAll(i18nTestInstance);

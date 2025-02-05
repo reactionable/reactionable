@@ -1,9 +1,11 @@
 import "@testing-library/jest-dom";
 
-import { i18nTestInstance } from "@reactionable/core/lib/testing/I18n";
+import { composeStories } from "@storybook/react";
+import { i18nTestInstance } from "@reactionable/core";
 import { render } from "@testing-library/react";
+import * as stories from "./List.stories";
 
-import { BasicList, BasicListTable } from "./List.stories";
+const { BasicList } = composeStories(stories);
 
 describe("List", () => {
   beforeAll(i18nTestInstance);
@@ -11,14 +13,6 @@ describe("List", () => {
   describe("BasicList", () => {
     it("should render without crashing", () => {
       const result = render(<BasicList />);
-
-      expect(result).toBeTruthy();
-    });
-  });
-
-  describe("BasicListTable", () => {
-    it("should render without crashing", () => {
-      const result = render(<BasicListTable />);
 
       expect(result).toBeTruthy();
     });

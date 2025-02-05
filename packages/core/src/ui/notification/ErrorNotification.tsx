@@ -1,20 +1,20 @@
-import { ComponentType, PropsWithChildren, ReactElement, ReactNode, useState } from "react";
+import { ComponentType, ReactElement, ReactNode, useState } from "react";
 
 import { IError, printError } from "../../error/IError";
 import { useTranslation } from "../../i18n/I18n";
 import { INotificationProps, Notification } from "./Notification";
 
 export type IErrorNotificationProps = INotificationProps & {
-  children?: IError;
+  error?: IError;
 };
 export type ErrorNotificationComponent = ComponentType<IErrorNotificationProps>;
 
-export function ErrorNotification({ children, ...props }: IErrorNotificationProps): ReactElement {
-  return <Notification {...props}>{printError(children)}</Notification>;
+export function ErrorNotification({ error, ...props }: IErrorNotificationProps): ReactElement {
+  return <Notification {...props}>{printError(error)}</Notification>;
 }
 
-export type IUseErrorNotificationProps = PropsWithChildren<INotificationProps> & {
-  children?: IError;
+export type IUseErrorNotificationProps = INotificationProps & {
+  error?: IError;
   Component?: ErrorNotificationComponent;
 };
 
@@ -44,9 +44,12 @@ export function useErrorNotification<UseErrorNotificationProps extends IUseError
 
   return {
     errorNotification: errorNotification ? (
-      <Component {...props} title={title} onClose={() => setErrorNotification(undefined)}>
-        {errorNotification}
-      </Component>
+      <Component
+        {...props}
+        title={title}
+        onClose={() => setErrorNotification(undefined)}
+        error={errorNotification}
+      />
     ) : undefined,
     setErrorNotification,
   };

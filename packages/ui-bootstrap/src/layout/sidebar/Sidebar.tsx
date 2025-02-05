@@ -1,11 +1,11 @@
-import { useTranslation } from "@reactionable/core/lib/i18n/I18n";
-import { INavItemsProps } from "@reactionable/core/lib/nav/NavItem";
-import { INavItemsProviderProps as ICoreNavItemsProviderProps } from "@reactionable/core/lib/nav/NavItemsProviderProps";
 import {
+  useTranslation,
+  INavItemsProps,
+  INavItemsProviderProps as ICoreNavItemsProviderProps,
   Sidebar as CoreSidebar,
   ISidebarProps as ICoreSidebarProps,
   useSidebarContext as coreUseSidebarContext,
-} from "@reactionable/core/lib/ui/layout/sidebar/Sidebar";
+} from "@reactionable/core";
 import { PropsWithChildren, ReactElement, useState } from "react";
 import { Nav } from "react-bootstrap";
 import Button from "react-bootstrap/Button";

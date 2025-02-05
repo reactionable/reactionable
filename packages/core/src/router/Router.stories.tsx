@@ -1,38 +1,46 @@
-import { ReactElement } from "react";
+import type { Meta, StoryObj } from "@storybook/react";
 
 import { useRouterProviderProps } from "./useRouterProviderProps";
 import { RouterContextProvider } from "./useRouterContext";
 import { useRouter } from "./useRouter";
-
-export default {
+const meta: Meta = {
   title: "Core/Components/Router",
-  parameters: {
-    subcomponent: [useRouterProviderProps, RouterContextProvider, useRouter],
+  component: RouterContextProvider,
+};
+
+export default meta;
+
+export const BasicRouterContextProvider: StoryObj<typeof RouterContextProvider> = {
+  args: {
+    children: "test",
   },
-};
-
-export const BasicRouterContextProvider = (): ReactElement => {
-  return <RouterContextProvider {...useRouterProviderProps()}>test</RouterContextProvider>;
-};
-
-export const UseRouter = (): ReactElement => {
-  const RouterInfos = () => {
-    const router = useRouter();
-    return (
-      <dl>
-        <dt>Match</dt>
-        <dd>
-          <code>
-            <pre>{JSON.stringify(router.match, null, 2)}</pre>
-          </code>
-        </dd>
-      </dl>
-    );
-  };
-
-  return (
-    <RouterContextProvider {...useRouterProviderProps()}>
-      <RouterInfos />
+  render: ({ children, ...props }) => (
+    <RouterContextProvider {...useRouterProviderProps({ ...props })}>
+      {children}
     </RouterContextProvider>
-  );
+  ),
+};
+
+export const UseRouter: StoryObj<typeof useRouter> = {
+  render: () => {
+    const RouterInfos = () => {
+      const router = useRouter();
+      return (
+        <dl>
+          <dt>Match</dt>
+          <dd>
+            <code>
+              <pre>{JSON.stringify(router.match, null, 2)}</pre>
+            </code>
+          </dd>
+        </dl>
+      );
+    };
+
+    return (
+      <RouterContextProvider {...useRouterProviderProps()}>
+        <RouterInfos />
+      </RouterContextProvider>
+    );
+  },
 };

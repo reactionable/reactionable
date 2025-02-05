@@ -9,38 +9,40 @@
     "format": "prettier --cache --write '**/*.ts' '!**/lib/**'",
     "lint": "lerna run --stream lint --",
     "build": "lerna run --stream build --",
-    "build:ci": "yarn build -p tsconfig.build.json",
+    "build:ci": "lerna run --stream build:ci --",
+    "build:all": "yarn build:ci && yarn docs:build && yarn storybook:build",
     "link": "node dev-link link",
     "unlink": "node dev-link unlink",
     "docs:build": "lerna run --stream build:docs",
-    "storybook": "start-storybook -p 6006",
-    "storybook:build": "build-storybook -o build/storybook",
+    "storybook": "storybook dev -p 6006",
+    "storybook:build": "yarn build-storybook -o build/storybook",
     "storybook:deploy": "storybook-to-ghpages -e build/storybook --ci",
     "prepare": "ts-dev-tools install",
-    "ci": "yarn lint && yarn test:ci && yarn build:ci && yarn docs:build && yarn storybook:build"
+    "ci": "yarn lint && yarn build:all && yarn test:ci",
+    "build-storybook": "storybook build"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^6.5.15",
-    "@storybook/addon-controls": "^6.5.15",
-    "@storybook/addon-docs": "^6.5.15",
-    "@storybook/addon-info": "^6.0.0-alpha.2",
-    "@storybook/addon-knobs": "^6.4.0",
-    "@storybook/addon-links": "^6.5.15",
-    "@storybook/addon-storysource": "^6.5.15",
-    "@storybook/addons": "^6.5.13",
-    "@storybook/builder-webpack5": "^6.5.15",
-    "@storybook/manager-webpack5": "^6.5.15",
-    "@storybook/react": "^6.5.15",
-    "@storybook/storybook-deployer": "^2.8.16",
-    "@storybook/theming": "^6.5.9",
-    "@ts-dev-tools/react": "^1.5.38",
+    "@chromatic-com/storybook": "^3.2.4",
+    "@storybook/addon-essentials": "^8.5.3",
+    "@storybook/addon-interactions": "^8.5.3",
+    "@storybook/addon-links": "^8.5.3",
+    "@storybook/addon-onboarding": "^8.5.3",
+    "@storybook/blocks": "^8.5.3",
+    "@storybook/react": "^8.5.3",
+    "@storybook/react-vite": "^8.5.3",
+    "@storybook/test": "^8.5.3",
+    "@ts-dev-tools/react": "^1.8.9",
     "barrelsby": "^2.5.1",
+    "eslint-plugin-storybook": "^0.11.2",
     "lerna": "^8.1.9",
     "react": "^18.2.0",
     "react-docgen-typescript-plugin": "^1.0.8",
     "react-dom": "^18.2.0",
+    "remark-gfm": "^4.0.0",
     "rimraf": "^6.0.1",
-    "typedoc": "^0.25.0"
+    "storybook": "^8.5.3",
+    "typedoc": "^0.27.6",
+    "vite": "^6.0.11"
   },
   "resolutions": {
     "react": "^18.2.0",
@@ -49,41 +51,6 @@
   "workspaces": [
     "packages/*"
   ],
-  "eslintConfig": {
-    "root": true,
-    "parser": "@typescript-eslint/parser",
-    "plugins": [
-      "@typescript-eslint",
-      "jest"
-    ],
-    "extends": [
-      "eslint:recommended",
-      "plugin:@typescript-eslint/recommended",
-      "plugin:jest/recommended",
-      "plugin:react/recommended",
-      "prettier"
-    ],
-    "env": {
-      "es2021": true,
-      "browser": true
-    },
-    "parserOptions": {
-      "ecmaFeatures": {
-        "jsx": true
-      },
-      "ecmaVersion": 12,
-      "sourceType": "module"
-    },
-    "settings": {
-      "react": {
-        "version": "detect"
-      }
-    },
-    "rules": {
-      "react/jsx-uses-react": "off",
-      "react/react-in-jsx-scope": "off"
-    }
-  },
   "prettier": {
     "semi": true,
     "printWidth": 100,
@@ -91,7 +58,8 @@
   },
   "commitlint": {
     "extends": [
-      "@commitlint/config-conventional"
+      "@commitlint/config-conventional",
+      "@commitlint/config-nx-scopes"
     ]
   },
   "lint-staged": {
@@ -106,7 +74,6 @@
     }
   },
   "tsDevTools": {
-    "version": "20220617100200-prettier-cache"
-  },
-  "dependencies": {}
+    "version": "20240617094000-config-nx-scopes"
+  }
 }

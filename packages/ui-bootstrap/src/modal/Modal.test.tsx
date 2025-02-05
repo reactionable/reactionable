@@ -1,9 +1,11 @@
 import "@testing-library/jest-dom";
 
-import { i18nTestInstance } from "@reactionable/core/lib/testing/I18n";
+import { composeStories } from "@storybook/react";
+import { i18nTestInstance } from "@reactionable/core";
 import { render } from "@testing-library/react";
+import * as stories from "./Modal.stories";
 
-import { BasicModal, ModalWithForm, UseModalFormHook, UseModalHook } from "./Modal.stories";
+const { BasicModal, UseModalHook, ModalWithForm, UseModalFormHook } = composeStories(stories);
 
 describe("Modal", () => {
   beforeAll(i18nTestInstance);

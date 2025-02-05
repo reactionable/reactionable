@@ -3,7 +3,7 @@ import {
   Link as CoreLink,
   ILinkProps as ICoreLinkProps,
   isLinkProps as coreIsLinkProps,
-} from "@reactionable/core/lib/ui/link/Link";
+} from "@reactionable/core";
 import { ForwardedRef, ReactElement, ReactNode, forwardRef } from "react";
 
 export type ILinkProps = LinkProps & ICoreLinkProps;

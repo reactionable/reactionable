@@ -1,14 +1,14 @@
-import { useIdentityContext } from "@reactionable/core/lib/identity/Identity";
 import {
+  useIdentityContext,
   AccountLink,
   LogoutLink,
   UserUnloggedHeaderNav,
-} from "@reactionable/core/lib/ui/layout/header/UserHeaderNav";
+} from "@reactionable/core";
 import { ReactElement, ComponentProps } from "react";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
-export { UserUnloggedHeaderNav } from "@reactionable/core/lib/ui/layout/header/UserHeaderNav";
+export { UserUnloggedHeaderNav } from "@reactionable/core";
 
 const UserLoggedHeaderNav = () => {
   const { user, displayName } = useIdentityContext();

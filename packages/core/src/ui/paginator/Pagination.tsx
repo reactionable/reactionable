@@ -40,19 +40,27 @@ export function Pagination({
   PaginationLinkLastComponent = PaginationLinkLast,
 }: IPaginationProps): ReactElement {
   const handleFirstPage = (event: ChangeEvent<unknown>) => {
-    currentPage > 1 && onChange(event, 1);
+    if (currentPage > 1) {
+      onChange(event, 1);
+    }
   };
 
   const handlePreviousPage = (event: ChangeEvent<unknown>) => {
-    currentPage > 1 && onChange(event, currentPage - 1);
+    if (currentPage > 1) {
+      onChange(event, currentPage - 1);
+    }
   };
 
   const handleNextPage = (event: ChangeEvent<unknown>) => {
-    currentPage < pageCount && onChange(event, currentPage + 1);
+    if (currentPage < pageCount) {
+      onChange(event, currentPage + 1);
+    }
   };
 
   const handleLastPage = (event: ChangeEvent<unknown>) => {
-    currentPage < pageCount && onChange(event, pageCount);
+    if (currentPage < pageCount) {
+      onChange(event, pageCount);
+    }
   };
 
   return (

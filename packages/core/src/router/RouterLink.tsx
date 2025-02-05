@@ -69,7 +69,9 @@ function compilePath(path: string): PathGenerator {
 
   if (cache.size > cacheLimit) {
     const firstKey = cache.keys().next().value;
-    cache.delete(firstKey);
+    if (firstKey) {
+      cache.delete(firstKey);
+    }
   }
 
   cache.set(path, generator);

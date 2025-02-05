@@ -1,8 +1,4 @@
-import {
-  List as CoreList,
-  IListProps as ICoreListProps,
-} from "@reactionable/core/lib/crud/list/List";
-import { IData } from "@reactionable/core/lib/query/Query";
+import { List as CoreList, IListProps as ICoreListProps, IData } from "@reactionable/core";
 import { ReactElement } from "react";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";

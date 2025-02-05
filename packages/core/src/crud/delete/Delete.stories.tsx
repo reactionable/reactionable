@@ -1,28 +1,34 @@
 import { action } from "@storybook/addon-actions";
-import { ReactElement } from "react";
+import type { Meta, StoryObj } from "@storybook/react";
 
 import { UIContextProvider, useUIProviderProps } from "../../ui/UI";
 import { Delete } from "./Delete";
 
-export default {
+const meta: Meta<typeof Delete> = {
   title: "Core/Components/Crud/Delete",
-  parameters: { info: { inline: true }, options: { showPanel: true }, component: Delete },
+  component: Delete,
 };
 
-export const BasicDelete = (): ReactElement => (
-  <UIContextProvider {...useUIProviderProps()}>
-    <Delete
-      title="Basic label"
-      confirmationMessage="Do you want to delete?"
-      successMessage="The deletion has been done"
-      onConfirm={async () => {
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        action("Action confirmed")();
-        return "ok";
-      }}
-      onSuccess={action("Action succeed")}
-    >
-      <button>Click on me</button>
-    </Delete>
-  </UIContextProvider>
-);
+export default meta;
+
+type Story = StoryObj<typeof Delete>;
+
+export const BasicDelete: Story = {
+  args: {
+    title: "Basic label",
+    confirmationMessage: "Do you want to delete?",
+    successMessage: "The deletion has been done",
+    onConfirm: async () => {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      action("Action confirmed")();
+      return "ok";
+    },
+    onSuccess: action("Action succeed"),
+    children: <button>Click on me</button>,
+  },
+  render: (props) => (
+    <UIContextProvider {...useUIProviderProps()}>
+      <Delete {...props} />
+    </UIContextProvider>
+  ),
+};

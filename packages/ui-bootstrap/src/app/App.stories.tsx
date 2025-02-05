@@ -1,19 +1,24 @@
 import "../../stories/config";
 
-import { App } from "@reactionable/core/lib/app/App";
-import { ReactElement } from "react";
+import { App } from "@reactionable/core";
+import type { Meta, StoryObj } from "@storybook/react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
+import { ReactElement } from "react";
 
 import { useUIProviderProps } from "../UI";
 
-export default {
+const meta: Meta = {
   title: "UI Bootstrap/Components/App",
-  parameters: { info: { inline: true }, options: { showPanel: true }, component: App },
+  component: App,
 };
+
+export default meta;
+
+type Story = StoryObj<typeof App>;
 
 const Home = (): ReactElement => (
   <Container fluid>
@@ -40,8 +45,9 @@ const Home = (): ReactElement => (
   </Container>
 );
 
-export const AppWithProviders = (): ReactElement => (
-  <App ui={useUIProviderProps()}>
-    <Home />
-  </App>
-);
+export const AppWithProviders: Story = {
+  args: {
+    ui: useUIProviderProps(),
+    children: <Home />,
+  },
+};

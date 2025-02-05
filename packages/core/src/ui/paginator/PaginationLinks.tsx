@@ -31,7 +31,9 @@ export function PaginationLinks({
       active={currentPage === page}
       disabled={currentPage === page}
       onClick={(event) => {
-        currentPage !== page && onChange(event, page);
+        if (currentPage !== page) {
+          onChange(event, page);
+        }
       }}
     >
       {page}

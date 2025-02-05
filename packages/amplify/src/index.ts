@@ -10,3 +10,4 @@ export * from "./query/Query";
 export * from "./query/QueryList";
 export * from "./query/useQuery";
 export * from "./query/useQueryList";
+export * from "./query/__mocks__/@aws-amplify/api-graphql";

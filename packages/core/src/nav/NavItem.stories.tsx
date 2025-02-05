@@ -1,19 +1,25 @@
-import { ReactElement } from "react";
+import type { Meta, StoryObj } from "@storybook/react";
 
 import { UIContextProvider, useUIProviderProps } from "../ui/UI";
 import { NavItem } from "./NavItem";
 
-export default {
+const meta: Meta<typeof NavItem> = {
   title: "Core/Components/Nav/NavItem",
-  parameters: {
-    info: { inline: true },
-    options: { showPanel: true },
-    component: NavItem,
-  },
+  component: NavItem,
 };
 
-export const BasicNavItem = (): ReactElement => (
-  <UIContextProvider {...useUIProviderProps()}>
-    <NavItem href="/test">Test</NavItem>
-  </UIContextProvider>
-);
+export default meta;
+
+type Story = StoryObj<typeof NavItem>;
+
+export const BasicNavItem: Story = {
+  args: {
+    href: "/test",
+    children: "Test",
+  },
+  render: (props) => (
+    <UIContextProvider {...useUIProviderProps()}>
+      <NavItem {...props} />
+    </UIContextProvider>
+  ),
+};

@@ -1,9 +1,9 @@
-import { IIdentityProviderProps } from "@reactionable/core/lib/identity/Identity";
 import {
+  IIdentityProviderProps,
   TestWrapper as CoreTestWrapper,
   ITestWrapperProps,
-} from "@reactionable/core/lib/testing/TestWrapper";
-import { IUIProviderProps } from "@reactionable/core/lib/ui/UI";
+  IUIProviderProps,
+} from "@reactionable/core";
 import { ReactElement } from "react";
 
 import { IRouterProviderProps, useRouterProviderProps } from "../router/useRouterProviderProps";
@@ -12,7 +12,7 @@ import { MemoryRouterComponent } from "../router/MemoryRouterComponent";
 export function TestWrapper<
   IdentityProviderProps extends IIdentityProviderProps = IIdentityProviderProps,
   UIProviderProps extends IUIProviderProps = IUIProviderProps,
-  RouterProviderProps extends IRouterProviderProps = IRouterProviderProps
+  RouterProviderProps extends IRouterProviderProps = IRouterProviderProps,
 >({
   router,
   ...props

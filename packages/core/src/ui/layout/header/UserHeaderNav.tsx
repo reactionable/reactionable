@@ -23,7 +23,6 @@ export type IAccountLinkProps<LinkProps extends ILinkProps> = IWithNavItemCompon
 export const AccountLink = forwardRef(function AccountLink<
   LinkProps extends ILinkProps = ILinkProps,
 >(
-  // eslint-disable-next-line react/prop-types
   { NavItemComponent, onClick, ...props }: IAccountLinkProps<LinkProps>,
   ref: ForwardedRef<HTMLAnchorElement>
 ): ReactElement {

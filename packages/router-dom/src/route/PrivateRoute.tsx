@@ -1,5 +1,4 @@
-import { useIdentityContext } from "@reactionable/core/lib/identity/Identity";
-import { useUIContext } from "@reactionable/core/lib/ui/UI";
+import { useIdentityContext, useUIContext } from "@reactionable/core";
 import { ReactElement } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 

@@ -8,8 +8,7 @@ import { IUseQueryResult } from "../query/Query";
 import { useUIContext } from "../ui/UI";
 import { Auth } from "./Auth";
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-export type IUser = {};
+export type IUser = object;
 
 export interface ILoginFormValues {
   username: string;

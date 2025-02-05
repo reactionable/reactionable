@@ -1,8 +1,8 @@
 import {
   Layout as CoreLayout,
   ILayoutProps as ICoreLayoutProps,
-} from "@reactionable/core/lib/ui/layout/Layout";
-import { IUseLayoutProps as ICoreUseLayoutProps } from "@reactionable/core/lib/ui/layout/useLayout";
+  IUseLayoutProps as ICoreUseLayoutProps,
+} from "@reactionable/core";
 import { PropsWithChildren, ReactElement } from "react";
 
 import { Body, IBodyProps } from "./body/Body";

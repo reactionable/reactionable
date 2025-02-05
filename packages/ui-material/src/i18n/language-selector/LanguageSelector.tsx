@@ -11,7 +11,7 @@ import {
   ILanguageSelectorComponentProps as ICoreLanguageSelectorComponentProps,
   ILanguageSelectorItemComponentProps as ICoreLanguageSelectorItemComponentProps,
   ILanguageSelectorProps as ICoreLanguageSelectorProps,
-} from "@reactionable/core/lib/ui/i18n/language-selector/LanguageSelector";
+} from "@reactionable/core";
 import { ComponentProps, ComponentType, PropsWithChildren, ReactElement, useState } from "react";
 
 export type ILanguageSelectorItemComponentProps = ICoreLanguageSelectorItemComponentProps<

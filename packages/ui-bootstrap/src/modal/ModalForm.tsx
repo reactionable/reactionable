@@ -1,11 +1,13 @@
-import { IFormData, IFormValues } from "@reactionable/core/lib/form/Form";
-import { FormFields, IFormFieldsProps } from "@reactionable/core/lib/form/FormFields";
-import { IFormWrapperProps } from "@reactionable/core/lib/form/FormWrapper";
-import { useTranslation } from "@reactionable/core/lib/i18n/I18n";
 import {
+  IFormData,
+  IFormValues,
+  FormFields,
+  IFormFieldsProps,
+  IFormWrapperProps,
+  useTranslation,
   ModalForm as CoreModalForm,
   IModalFormProps as ICoreModalFormProps,
-} from "@reactionable/core/lib/ui/modal/ModalForm";
+} from "@reactionable/core";
 import { ReactElement } from "react";
 import BootstrapModal from "react-bootstrap/Modal";
 
@@ -69,7 +71,7 @@ function ModalFormChildren<
 export function ModalForm<
   Values extends IFormValues,
   Data extends IFormData,
-  FormButtonProps extends IFormButtonProps,
+  FormButtonProps extends IFormButtonProps = IFormButtonProps,
 >({
   children,
   submitButton,

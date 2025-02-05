@@ -1,26 +1,39 @@
 import SaveIcon from "@material-ui/icons/Save";
-import { ReactElement } from "react";
+import type { Meta, StoryObj } from "@storybook/react";
 
 import { TestWrapper } from "../testing/TestWrapper";
 import { NavItem } from "./NavItem";
 
-export default {
-  title: "UI Material/Components/NavItem",
-  parameters: {
-    component: NavItem,
-  },
+const meta: Meta<typeof NavItem> = {
+  title: "UI Material/Components/Nav/NavItem",
+  component: NavItem,
 };
 
-export const BasicNavItem = (): ReactElement => (
-  <TestWrapper>
-    <NavItem href="/test">Test</NavItem>
-  </TestWrapper>
-);
+export default meta;
 
-export const NavItemWithIcon = (): ReactElement => (
-  <TestWrapper>
-    <NavItem href="/test" icon={SaveIcon}>
-      Test
-    </NavItem>
-  </TestWrapper>
-);
+type Story = StoryObj<typeof NavItem>;
+
+export const BasicNavItem: Story = {
+  args: {
+    href: "/test",
+    children: "Test",
+  },
+  render: (props) => (
+    <TestWrapper>
+      <NavItem {...props} />
+    </TestWrapper>
+  ),
+};
+
+export const NavItemWithIcon: Story = {
+  args: {
+    href: "/test",
+    children: "Test",
+    icon: SaveIcon,
+  },
+  render: (props) => (
+    <TestWrapper>
+      <NavItem {...props} />
+    </TestWrapper>
+  ),
+};

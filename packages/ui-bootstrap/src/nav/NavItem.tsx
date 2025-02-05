@@ -2,7 +2,7 @@ import {
   NavItems as CoreNavItems,
   INavItemProps as ICoreNavItemProps,
   INavItemsComponentProps,
-} from "@reactionable/core/lib/nav/NavItem";
+} from "@reactionable/core";
 import { ReactElement } from "react";
 import NavLink, { NavLinkProps } from "react-bootstrap/NavLink";
 

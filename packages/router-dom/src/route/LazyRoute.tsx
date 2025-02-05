@@ -1,4 +1,4 @@
-import { lazyLoad } from "@reactionable/core/lib/ui/loader/Loader";
+import { lazyLoad } from "@reactionable/core";
 import {
   ComponentType,
   LazyExoticComponent,

@@ -4,7 +4,7 @@ import {
   IUseWarningAlertResult,
   WarningAlertComponent,
   useWarningAlert as useCoreWarningAlert,
-} from "@reactionable/core/lib/ui/alert/WarningAlert";
+} from "@reactionable/core";
 
 import { Alert, IAlertProps } from "./Alert";
 

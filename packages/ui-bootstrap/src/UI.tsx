@@ -3,7 +3,7 @@ import {
   IUIProviderProps as ICoreUIContextProviderProps,
   useUIContext as coreUseUIContext,
   useUIProviderProps as useCoreUIProviderProps,
-} from "@reactionable/core/lib/ui/UI";
+} from "@reactionable/core";
 import { PropsWithChildren, ReactElement } from "react";
 
 import { IUseErrorAlertProps, useErrorAlert } from "./alert/ErrorAlert";

@@ -1,10 +1,7 @@
 import Button from "@material-ui/core/Button/Button";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import DeleteIcon from "@material-ui/icons/Delete";
-import {
-  Delete as DeleteCore,
-  IDeleteProps as ICoreDeleteProps,
-} from "@reactionable/core/lib/crud/delete/Delete";
+import { Delete as DeleteCore, IDeleteProps as ICoreDeleteProps } from "@reactionable/core";
 import { Children, PropsWithChildren, ReactElement } from "react";
 
 import { IIconProps, Icon } from "../../icon/Icon";

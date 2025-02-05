@@ -1,12 +1,21 @@
 import "../../../stories/config";
 
-import { ReactElement } from "react";
+import type { Meta, StoryObj } from "@storybook/react";
 
 import { Footer } from "./Footer";
 
-export default {
+const meta: Meta<typeof Footer> = {
   title: "UI Bootstrap/Components/Layout/Footer",
-  parameters: { info: { inline: true }, options: { showPanel: true }, component: Footer },
+  component: Footer,
 };
 
-export const BasicFooter = (): ReactElement => <Footer />;
+export default meta;
+
+type Story = StoryObj<typeof Footer>;
+
+export const BasicFooter: Story = {
+  args: {
+    brand: "Test Brand",
+    sponsor: true,
+  },
+};

@@ -1,14 +1,12 @@
-import { INavItemsProviderProps } from "@reactionable/core/lib/nav/NavItemsProviderProps";
 import {
+  INavItemsProviderProps,
   Layout as CoreLayout,
   ILayoutProps as ICoreLayoutProps,
-} from "@reactionable/core/lib/ui/layout/Layout";
-import {
   IUseLayoutProps as ICoreUseLayoutProps,
   IUseLayoutResult,
   useLayout as useLayoutCore,
-} from "@reactionable/core/lib/ui/layout/useLayout";
-import { useHeaderContext as coreUseHeaderContext } from "@reactionable/core/lib/ui/layout/header/useHeaderContext";
+  useHeaderContext as coreUseHeaderContext,
+} from "@reactionable/core";
 import { PropsWithChildren, ReactElement } from "react";
 
 import { Body, IBodyProps } from "./body/Body";

@@ -1,9 +1,12 @@
 import "@testing-library/jest-dom";
 
-import { i18nTestInstance } from "@reactionable/core/lib/testing/I18n";
+import { i18nTestInstance } from "@reactionable/core";
+import { composeStories } from "@storybook/react";
 import { render } from "@testing-library/react";
 
-import { UseIdentityContext } from "./Identity.stories";
+import * as stories from "./Identity.stories";
+
+const { UseIdentityContext } = composeStories(stories);
 
 describe("Identity", () => {
   beforeAll(i18nTestInstance);

@@ -6,7 +6,7 @@ import {
   IUseNotificationProps as ICoreUseNotificationProps,
   IUseNotificationResult,
   useNotification as useCoreNotification,
-} from "@reactionable/core/lib/ui/notification/Notification";
+} from "@reactionable/core";
 import {
   MouseEvent,
   PropsWithChildren,
@@ -56,7 +56,9 @@ export const Notification = ({
     }
     setOpen(false);
 
-    onClose && onClose();
+    if (onClose) {
+      onClose();
+    }
   };
 
   return (

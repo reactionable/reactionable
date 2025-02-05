@@ -7,7 +7,7 @@ import { IRenderFormField } from "./RenderFormField";
 
 export type IFormFieldValue = string;
 export type IFieldElementProps<
-  FieldProps extends HTMLProps<HTMLInputElement> = HTMLProps<HTMLInputElement>
+  FieldProps extends HTMLProps<HTMLInputElement> = HTMLProps<HTMLInputElement>,
 > = FieldProps & {
   children?: FieldProps["children"] | ((props: FieldProps) => FieldProps["children"]);
   label?: ReactNode | string;
@@ -15,7 +15,7 @@ export type IFieldElementProps<
 
 export type IFormFieldPropsEnhanced<
   FieldElementProps extends IFieldElementProps,
-  Value extends IFormFieldValue
+  Value extends IFormFieldValue,
 > = FieldProps<Value> & {
   error?: string;
   isValid: boolean;
@@ -25,7 +25,7 @@ export type IFormFieldPropsEnhanced<
 
 export type IFormFieldProps<
   FieldElementProps extends IFieldElementProps,
-  Value extends IFormFieldValue
+  Value extends IFormFieldValue,
 > = FieldElementProps & {
   render?: IRenderFormField<FieldElementProps, Value>;
   fastField?: boolean;
@@ -33,7 +33,7 @@ export type IFormFieldProps<
 
 export function FormField<
   FieldElementProps extends IFieldElementProps = IFieldElementProps,
-  Value extends IFormFieldValue = IFormFieldValue
+  Value extends IFormFieldValue = IFormFieldValue,
 >({
   render,
   fastField = true,
@@ -54,8 +54,12 @@ export function FormField<
           ...props,
           ...fieldProps.field,
           onChange: (event: ChangeEvent<HTMLInputElement>) => {
-            props.onChange && props.onChange(event);
-            fieldProps.field.onChange && fieldProps.field.onChange(event);
+            if (props.onChange) {
+              props.onChange(event);
+            }
+            if (fieldProps.field.onChange) {
+              fieldProps.field.onChange(event);
+            }
           },
         },
       }}

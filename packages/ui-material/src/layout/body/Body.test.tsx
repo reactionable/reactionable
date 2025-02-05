@@ -1,8 +1,20 @@
+import "@testing-library/jest-dom";
+
+import { composeStories } from "@storybook/react";
+import { i18nTestInstance } from "@reactionable/core";
 import { render } from "@testing-library/react";
+import * as stories from "./Body.stories";
 
-import { Body } from "./Body";
+const { BasicBody } = composeStories(stories);
 
-it("should render without crashing", () => {
-  const result = render(<Body />);
-  expect(result).toBeTruthy();
+describe("Body", () => {
+  beforeAll(i18nTestInstance);
+
+  describe("BasicBody", () => {
+    it("should render without crashing", () => {
+      const result = render(<BasicBody />);
+
+      expect(result).toBeTruthy();
+    });
+  });
 });

@@ -1,17 +1,19 @@
 import "@testing-library/jest-dom";
 
-import { i18nTestInstance } from "@reactionable/core/lib/testing/I18n";
+import { composeStories } from "@storybook/react";
+import { i18nTestInstance } from "@reactionable/core";
 import { render } from "@testing-library/react";
+import * as stories from "./Notification.stories";
 
-import {
-  BasicErrorNotification,
+const {
   BasicNotification,
-  BasicSuccessNotification,
   NotificationWithComplexContent,
-  UseErrorNotification,
   UseNotification,
+  BasicSuccessNotification,
   UseSuccessNotification,
-} from "./Notification.stories";
+  BasicErrorNotification,
+  UseErrorNotification,
+} = composeStories(stories);
 
 describe("Notification", () => {
   beforeAll(i18nTestInstance);

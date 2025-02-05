@@ -17,10 +17,12 @@ export type INavItemsContextProviderResult<NavItemsProps extends INavItemsProps<
 export function createNavItemsContextProvider<NavItemsProps extends INavItemsProps<INavItemProps>>(
   props?: Partial<INavItemsProviderProps<NavItemsProps>>
 ): INavItemsContextProviderResult<NavItemsProps> {
+  let navItemsStorage: NavItemsProps["navItems"] = [];
+
   const navItemsProviderProps = {
-    navItems: [],
+    navItems: navItemsStorage,
     setNavItems: (navItems: NavItemsProps["navItems"]) => {
-      navItems;
+      navItemsStorage = navItems;
     },
     ...props,
   } as INavItemsProviderProps<NavItemsProps>;

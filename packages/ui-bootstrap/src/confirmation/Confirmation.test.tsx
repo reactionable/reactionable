@@ -1,24 +1,27 @@
-import { i18nTestInstance } from "@reactionable/core/lib/testing/I18n";
+import { i18nTestInstance } from "@reactionable/core";
 import { fireEvent, render } from "@testing-library/react";
+import { composeStories } from "@storybook/react";
 
 import { TestWrapper } from "../testing/TestWrapper";
 import { Confirmation } from "./Confirmation";
-import { BasicConfirmationAction, UseConfirmation } from "./Confirmation.stories";
+import * as stories from "./Confirmation.stories";
+
+const { UseConfirmation, BasicConfirmationAction } = composeStories(stories);
 
 describe("Confirmation", () => {
   beforeAll(i18nTestInstance);
 
-  describe("BasicConfirmationAction", () => {
+  describe("UseConfirmation", () => {
     it("should render without crashing", () => {
-      const result = render(<BasicConfirmationAction />);
+      const result = render(<UseConfirmation />);
 
       expect(result).toBeTruthy();
     });
   });
 
-  describe("UseConfirmation", () => {
+  describe("BasicConfirmationAction", () => {
     it("should render without crashing", () => {
-      const result = render(<UseConfirmation />);
+      const result = render(<BasicConfirmationAction />);
 
       expect(result).toBeTruthy();
     });

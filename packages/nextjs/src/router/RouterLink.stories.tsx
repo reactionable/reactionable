@@ -1,96 +1,115 @@
-import { LinkAnchor } from "@reactionable/core/lib/ui/link/Link";
-import { useUIContext } from "@reactionable/core/lib/ui/UI";
-import {
-  AnchorHTMLAttributes,
-  DetailedHTMLProps,
-  ForwardedRef,
-  ReactElement,
-  forwardRef,
-} from "react";
+import type { Meta, StoryObj } from "@storybook/react";
+import { LinkAnchor, useUIContext } from "@reactionable/core";
+import { AnchorHTMLAttributes, DetailedHTMLProps, ForwardedRef, forwardRef } from "react";
 
 import { TestWrapper } from "../testing/TestWrapper";
 import { RouterLink } from "./RouterLink";
 
-export default {
+const meta: Meta<typeof RouterLink> = {
   title: "NextJs/Components/Router/RouterLink",
-  parameters: { component: RouterLink },
+  component: RouterLink,
 };
 
-export const BasicRouterLink = (): ReactElement => {
-  return (
-    <TestWrapper>
-      <RouterLink href="test" Component={LinkAnchor}>
-        test
-      </RouterLink>
-    </TestWrapper>
-  );
-};
+export default meta;
 
-export const RouterLinkCustomComponent = (): ReactElement => {
-  const CustomComponent = forwardRef(function CustomComponent(
-    {
-      children,
-      ...props
-    }: DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>,
-    ref: ForwardedRef<HTMLAnchorElement>
-  ) {
+type Story = StoryObj<typeof RouterLink>;
+
+export const BasicRouterLink: Story = {
+  args: {
+    href: "/test",
+    children: "Test",
+    Component: LinkAnchor,
+  },
+  render: (props) => {
     return (
-      <a {...props} className="custom-component" ref={ref}>
-        <b>{children}</b>
-      </a>
+      <TestWrapper>
+        <RouterLink {...props} />
+      </TestWrapper>
     );
-  });
-
-  return (
-    <TestWrapper>
-      <RouterLink href="test" Component={CustomComponent}>
-        test
-      </RouterLink>
-    </TestWrapper>
-  );
+  },
 };
 
-export const BasicLinkInRouterLink = (): ReactElement => {
-  const LinkComponent = () => {
-    return useUIContext().useLink({
-      children: "test",
-      href: "/test",
+export const RouterLinkCustomComponent: Story = {
+  args: {
+    href: "/test",
+    children: "Test",
+  },
+  render: (props) => {
+    const CustomComponent = forwardRef(function CustomComponent(
+      {
+        children,
+        ...props
+      }: DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>,
+      ref: ForwardedRef<HTMLAnchorElement>
+    ) {
+      return (
+        <a {...props} className="custom-component" ref={ref}>
+          <b>{children}</b>
+        </a>
+      );
     });
-  };
 
-  return (
-    <TestWrapper>
-      <LinkComponent />
-    </TestWrapper>
-  );
-};
-
-export const RouterLinkCustomComponentInRouterLink = (): ReactElement => {
-  const CustomComponent = forwardRef(function CustomComponent(
-    {
-      children,
-      ...props
-    }: DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>,
-    ref: ForwardedRef<HTMLAnchorElement>
-  ) {
     return (
-      <a {...props} className="custom-component" ref={ref}>
-        <b>{children}</b>
-      </a>
+      <TestWrapper>
+        <RouterLink {...props} Component={CustomComponent} />
+      </TestWrapper>
     );
-  });
+  },
+};
 
-  const LinkComponent = () => {
-    return useUIContext().useLink({
-      children: "test",
-      href: "/test",
-      Component: CustomComponent,
+export const BasicLinkInRouterLink: Story = {
+  args: {
+    href: "/test",
+    children: "Test",
+  },
+  render: ({ href, children }) => {
+    const LinkComponent = () => {
+      return useUIContext().useLink({
+        children: <>{children}</>,
+        href: `${href}`,
+      });
+    };
+
+    return (
+      <TestWrapper>
+        <LinkComponent />
+      </TestWrapper>
+    );
+  },
+};
+
+export const RouterLinkCustomComponentInRouterLink: Story = {
+  args: {
+    href: "/test",
+    children: "Test",
+  },
+  render: ({ href, children }) => {
+    const CustomComponent = forwardRef(function CustomComponent(
+      {
+        children,
+        ...props
+      }: DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>,
+      ref: ForwardedRef<HTMLAnchorElement>
+    ) {
+      return (
+        <a {...props} className="custom-component" ref={ref}>
+          <b>{children}</b>
+        </a>
+      );
     });
-  };
 
-  return (
-    <TestWrapper>
-      <LinkComponent />
-    </TestWrapper>
-  );
+    const LinkComponent = () => {
+      return useUIContext().useLink({
+        children: <>{children}</>,
+        href: `${href}`,
+        Component: CustomComponent,
+      });
+    };
+
+    return (
+      <TestWrapper>
+        <LinkComponent />
+      </TestWrapper>
+    );
+  },
 };

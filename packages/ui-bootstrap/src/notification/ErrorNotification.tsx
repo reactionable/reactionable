@@ -1,11 +1,11 @@
-import { useTranslation } from "@reactionable/core/lib/i18n/I18n";
 import {
+  useTranslation,
   IErrorNotificationProps as ICoreErrorNotificationProps,
   IUseErrorNotificationProps as ICoreUseErrorNotificationProps,
   IUseErrorNotificationResult,
   useErrorNotification as useCoreErrorNotification,
   ErrorNotificationComponent,
-} from "@reactionable/core/lib/ui/notification/ErrorNotification";
+} from "@reactionable/core";
 import { ReactElement } from "react";
 
 import { ErrorAlert } from "../alert/ErrorAlert";
@@ -15,7 +15,7 @@ export type IErrorNotificationProps = ICoreErrorNotificationProps;
 
 export const ErrorNotification: ErrorNotificationComponent = ({
   title,
-  children,
+  error,
   ...props
 }: IErrorNotificationProps): ReactElement => {
   const { t } = useTranslation("common");
@@ -25,12 +25,13 @@ export const ErrorNotification: ErrorNotificationComponent = ({
 
   return (
     <Notification variant="danger" title={title} {...props}>
-      <ErrorAlert className="mb-0">{children}</ErrorAlert>
+      <ErrorAlert className="mb-0" error={error} />
     </Notification>
   );
 };
 
-export type IUseErrorNotificationProps = ICoreUseErrorNotificationProps & IErrorNotificationProps;
+export type IUseErrorNotificationProps = ICoreUseErrorNotificationProps &
+  Omit<IErrorNotificationProps, "children">;
 export const useErrorNotification = (
   props: IErrorNotificationProps
 ): IUseErrorNotificationResult => {
