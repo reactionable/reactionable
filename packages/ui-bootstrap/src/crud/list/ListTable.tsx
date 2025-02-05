@@ -4,8 +4,8 @@ import {
   IListTableComponentProps,
   ListTableBody,
   ListTableHead,
-} from "@reactionable/core/lib/crud/list/ListTable";
-import { IData } from "@reactionable/core/lib/query/Query";
+  IData,
+} from "@reactionable/core";
 import { ReactElement } from "react";
 import Table from "react-bootstrap/Table";
 

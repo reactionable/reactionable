@@ -1,21 +1,31 @@
 import Button from "@material-ui/core/Button/Button";
 import Paper from "@material-ui/core/Paper/Paper";
-import { App } from "@reactionable/core/lib/app/App";
+import { App } from "@reactionable/core";
+import type { Meta, StoryObj } from "@storybook/react";
 import { ReactElement } from "react";
 
 import { useUIProviderProps } from "../UI";
 
-export default {
+const meta: Meta = {
   title: "UI Material/Components/App",
-  parameters: { info: { inline: true }, options: { showPanel: true }, component: App },
+  component: App,
 };
 
-const Home = () => (
+export default meta;
+
+type Story = StoryObj<typeof App>;
+
+const Home = (): ReactElement => (
   <Paper elevation={3}>
     <h1>Hello, world!</h1>
     <p>
-      This is a Basic hero unit, a Basic jumbotron-style component for calling extra attention to
-      featured content or information.
+      <b>Lorem Ipsum</b> is simply dummy text of the printing and typesetting industry.{" "}
+      <b>Lorem Ipsum</b> has been the industry&apos; standard dummy text ever since the 1500s, when
+      an unknown printer took a galley of type and scrambled it to make a type specimen book. It has
+      survived not only five centuries, but also the leap into electronic typesetting, remaining
+      essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
+      containing <b>Lorem Ipsum</b> passages, and more recently with desktop publishing software
+      like Aldus PageMaker including versions of <b>Lorem Ipsum</b>
     </p>
     <p>
       <Button color="primary">Learn more</Button>
@@ -23,8 +33,9 @@ const Home = () => (
   </Paper>
 );
 
-export const AppWithProviders = (): ReactElement => (
-  <App ui={useUIProviderProps()}>
-    <Home />
-  </App>
-);
+export const AppWithProviders: Story = {
+  args: {
+    ui: useUIProviderProps(),
+    children: <Home />,
+  },
+};

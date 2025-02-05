@@ -4,17 +4,19 @@ import {
   IUseSubmitFormButtonProps as ICoreUseSubmitFormButtonProps,
   useFormButton as coreUseFormButton,
   useSubmitFormButton as coreUseSubmitFormButton,
-} from "@reactionable/core/lib/form/FormButton";
-import { ReactElement, ReactNode } from "react";
-import Button, { ButtonProps } from "react-bootstrap/Button";
+} from "@reactionable/core";
+import { ComponentProps, ReactElement, ReactNode } from "react";
+import Button from "react-bootstrap/Button";
 
-export type IFormButtonProps = ICoreFormButtonProps & Omit<ButtonProps, "type">;
+type IButtonProps = ComponentProps<typeof Button>;
+
+export type IFormButtonProps = ICoreFormButtonProps & Omit<IButtonProps, "type">;
 
 export function FormButton(props: IFormButtonProps): ReactElement {
   return <Button variant="primary" {...props} />;
 }
 
-export type IUseFormButtonProps = Omit<ICoreUseFormButtonProps<IFormButtonProps>, "Component">;
+export type IUseFormButtonProps = ICoreUseFormButtonProps<IFormButtonProps>;
 
 export function useFormButton(props: IUseFormButtonProps): ReactNode | undefined {
   return coreUseFormButton({

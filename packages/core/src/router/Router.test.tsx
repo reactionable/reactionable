@@ -1,9 +1,12 @@
 import "@testing-library/jest-dom";
 
+import { composeStories } from "@storybook/react";
 import { render } from "@testing-library/react";
 
 import { i18nTestInstance } from "../testing/I18n";
-import { BasicRouterContextProvider, UseRouter } from "./Router.stories";
+import * as stories from "./Router.stories";
+
+const { BasicRouterContextProvider, UseRouter } = composeStories(stories);
 
 describe("Router", () => {
   beforeAll(i18nTestInstance);

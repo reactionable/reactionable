@@ -1,7 +1,12 @@
-import { IId } from "@reactionable/core/lib/crud/Crud";
-import { IUseListOptions, IUseListResult } from "@reactionable/core/lib/crud/list/useList";
-import { IUseReadOptions, IUseReadResult } from "@reactionable/core/lib/crud/read/useRead";
-import { IFormData, IFormValues } from "@reactionable/core/lib/form/Form";
+import {
+  IId,
+  IUseListOptions,
+  IUseListResult,
+  IUseReadOptions,
+  IUseReadResult,
+  IFormData,
+  IFormValues,
+} from "@reactionable/core";
 
 import { ICreateProps } from "./create/Create";
 import { IUpdateProps } from "./update/Update";
@@ -9,7 +14,7 @@ import { IUpdateProps } from "./update/Update";
 export type ICrudConfig<
   Values extends IFormValues = IFormValues,
   Data extends IFormData = IFormData,
-  Id extends IId = IId
+  Id extends IId = IId,
 > = {
   onCreate: ICreateProps<Values, Data>["form"]["onSubmit"];
   onUpdate: IUpdateProps<Values & { id: Id }, Data>["form"]["onSubmit"];

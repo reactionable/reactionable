@@ -1,17 +1,20 @@
 import "@testing-library/jest-dom";
 
-import { i18nTestInstance } from "@reactionable/core/lib/testing/I18n";
+import { composeStories } from "@storybook/react";
+import { i18nTestInstance } from "@reactionable/core";
 import { render } from "@testing-library/react";
+import * as stories from "./Form.stories";
 
-import {
+const {
   BasicForm,
-  FormSubmitError,
+  FormWithLabelledInput,
+  FormWithTextArea,
+  FormWithSelect,
   FormWithCheckbox,
   FormWithFileAndPreview,
-  FormWithLabelledInput,
-  FormWithSelect,
-  FormWithTextArea,
-} from "./Form.stories";
+  FormSubmitError,
+  FormWithAppendTextInput,
+} = composeStories(stories);
 
 describe("Form", () => {
   beforeAll(i18nTestInstance);
@@ -67,6 +70,14 @@ describe("Form", () => {
   describe("FormSubmitError", () => {
     it("should render without crashing", () => {
       const result = render(<FormSubmitError />);
+
+      expect(result).toBeTruthy();
+    });
+  });
+
+  describe("FormWithAppendTextInput", () => {
+    it("should render without crashing", () => {
+      const result = render(<FormWithAppendTextInput />);
 
       expect(result).toBeTruthy();
     });

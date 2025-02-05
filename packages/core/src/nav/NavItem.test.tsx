@@ -1,9 +1,12 @@
 import "@testing-library/jest-dom";
 
+import { composeStories } from "@storybook/react";
 import { render } from "@testing-library/react";
 
 import { i18nTestInstance } from "../testing/I18n";
-import { BasicNavItem } from "./NavItem.stories";
+import * as stories from "./NavItem.stories";
+
+const { BasicNavItem } = composeStories(stories);
 
 describe("NavItem", () => {
   beforeAll(i18nTestInstance);

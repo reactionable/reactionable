@@ -1,63 +1,67 @@
 import { action } from "@storybook/addon-actions";
-import { ReactElement } from "react";
+import type { Meta, StoryObj } from "@storybook/react";
 import { string } from "yup";
 
 import { FormField } from "../../form/FormField";
 import { UIContextProvider, useUIProviderProps } from "../../ui/UI";
 import { Create } from "./Create";
 
-export default {
+const meta: Meta<typeof Create> = {
   title: "Core/Components/Crud/Create",
-  parameters: { info: { inline: true }, options: { showPanel: true }, component: Create },
+  component: Create,
 };
+
+export default meta;
 
 interface IFormValues {
   test: string;
 }
 
-export const BasicCreate = (): ReactElement => {
-  return (
+type Story = StoryObj<typeof Create<IFormValues>>;
+
+export const BasicCreate: Story = {
+  args: {
+    form: {
+      title: "Create form",
+      onSubmit: async (values: IFormValues) => {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        action("Form submit")(values);
+        return values;
+      },
+      successMessage: "Creation succeed",
+      onSuccess: action("Form submit succeed"),
+      validationSchema: { test: string().required("Test is required") },
+      initialValues: { test: "" },
+      children: <FormField name="test" autoFocus placeholder="Basic form input" />,
+    },
+  },
+  render: ({ form }) => (
     <UIContextProvider {...useUIProviderProps()}>
-      <Create
-        form={{
-          title: "Create form",
-          onSubmit: async (values: IFormValues) => {
-            await new Promise((resolve) => setTimeout(resolve, 1000));
-            action("Form submit")(values);
-            return values;
-          },
-          successMessage: "Creation succeed",
-          onSuccess: action("Form submit succeed"),
-          validationSchema: { test: string().required("Test is required") },
-          initialValues: { test: "" },
-          children: <FormField name="test" autoFocus placeholder="Basic form input" />,
-        }}
-      />
+      <Create form={form} />
     </UIContextProvider>
-  );
+  ),
 };
 
-export const CreateInModal = (): ReactElement => {
-  return (
+export const CreateInModal: Story = {
+  args: {
+    form: {
+      title: "Create form",
+      onSubmit: async (values: IFormValues) => {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        action("Form submit")(values);
+        return values;
+      },
+      successMessage: "Creation succeed",
+      onSuccess: action("Form submit succeed"),
+      validationSchema: { test: string().required("Test is required") },
+      initialValues: { test: "" },
+      children: <FormField name="test" autoFocus placeholder="Basic form input" />,
+    },
+    children: <button>Open create form in modal</button>,
+  },
+  render: (props) => (
     <UIContextProvider {...useUIProviderProps()}>
-      <Create
-        modal
-        form={{
-          title: "Create form",
-          onSubmit: async (values: IFormValues) => {
-            await new Promise((resolve) => setTimeout(resolve, 1000));
-            action("Form submit")(values);
-            return values;
-          },
-          successMessage: "Creation succeed",
-          onSuccess: action("Form submit succeed"),
-          validationSchema: { test: string().required("Test is required") },
-          initialValues: { test: "" },
-          children: <FormField name="test" autoFocus placeholder="Basic form input" />,
-        }}
-      >
-        <button>Open create form in modal</button>
-      </Create>
+      <Create {...props} modal />
     </UIContextProvider>
-  );
+  ),
 };

@@ -1,0 +1,33 @@
+import { Meta, Controls, Primary, Stories, Title, Subtitle } from "@storybook/blocks";
+import * as FormStories from "./Form.stories";
+
+<Meta title="Core/Components/Form" of={FormStories} />
+
+<Title>Form</Title>
+
+<Subtitle>Definition</Subtitle>
+Form component helps to render Form and fields, manage form state and validation. It is based on [Formik](https://formik.org/")
+and [Yup](https://github.com/jquense/yup) for validation.
+
+<Subtitle>Usage</Subtitle>
+How to render a form (template):
+
+```tsx
+import { Form } from "@reactionable/ui-material/lib/form/Form";
+import { FormField } from "@reactionable/ui-material/lib/form/FormField";
+import { ... } from 'yup';
+
+const MyForm = (): ReactElement => (
+  <Form {...formProps}>
+    <FormField {...formFieldProps} />
+  </Form>
+);
+```
+
+<Primary />
+
+<Subtitle>Properties</Subtitle>
+
+<Controls />
+
+<Stories />

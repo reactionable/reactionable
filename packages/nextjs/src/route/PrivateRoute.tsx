@@ -1,13 +1,11 @@
-import { useTranslation } from "@reactionable/core/lib/i18n/I18n";
-import { useIdentityContext } from "@reactionable/core/lib/identity/Identity";
-import { useUIContext } from "@reactionable/core/lib/ui/UI";
+import { useTranslation, useUIContext, useIdentityContext } from "@reactionable/core";
 import Router from "next/router";
 import { ComponentType, PropsWithChildren, ReactElement, isValidElement, useEffect } from "react";
 
 export function UnauthorizedComponent(): ReactElement | null {
   const { t } = useTranslation("identity");
   const { errorAlert } = useUIContext().useErrorAlert({
-    children: new Error(t("You are not allowed to reach this page") ?? undefined),
+    error: new Error(t("You are not allowed to reach this page") ?? undefined),
   });
   return errorAlert;
 }

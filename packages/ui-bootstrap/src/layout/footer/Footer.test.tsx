@@ -1,9 +1,11 @@
 import "@testing-library/jest-dom";
 
-import { i18nTestInstance } from "@reactionable/core/lib/testing/I18n";
+import { composeStories } from "@storybook/react";
+import { i18nTestInstance } from "@reactionable/core";
 import { render } from "@testing-library/react";
+import * as stories from "./Footer.stories";
 
-import { BasicFooter } from "./Footer.stories";
+const { BasicFooter } = composeStories(stories);
 
 describe("Footer", () => {
   beforeAll(i18nTestInstance);

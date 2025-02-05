@@ -3,18 +3,21 @@ import Box from "@material-ui/core/Box/Box";
 import Button from "@material-ui/core/Button/Button";
 import Paper from "@material-ui/core/Paper/Paper";
 import SaveIcon from "@material-ui/icons/Save";
-import { useTranslation } from "@reactionable/core/lib/i18n/I18n";
-import { generatePath } from "@reactionable/core/lib/router/RouterLink";
-import { useRouteMatch } from "@reactionable/core/lib/router/useRouteMatch";
-import { FC, ReactElement } from "react";
+import type { Meta, StoryObj } from "@storybook/react";
+import { useTranslation, generatePath, useRouteMatch } from "@reactionable/core";
+import { FC } from "react";
 
 import { UIContextProvider } from "../../UI";
 import { Sidebar, useSidebarContext } from "./Sidebar";
 
-export default {
+const meta: Meta<typeof Sidebar> = {
   title: "UI Material/Components/Layout/Sidebar",
-  parameters: { info: { inline: true }, options: { showPanel: true }, component: Sidebar },
+  component: Sidebar,
 };
+
+export default meta;
+
+type Story = StoryObj<typeof Sidebar>;
 
 const SampleComponent: FC = () => {
   const { t } = useTranslation();
@@ -55,10 +58,14 @@ const SampleComponent: FC = () => {
   );
 };
 
-export const BasicSidebar = (): ReactElement => (
-  <UIContextProvider>
-    <Sidebar open={false}>
-      <SampleComponent />
-    </Sidebar>
-  </UIContextProvider>
-);
+export const BasicSidebar: Story = {
+  args: {
+    children: <SampleComponent />,
+    open: false,
+  },
+  render: (props) => (
+    <UIContextProvider>
+      <Sidebar {...props} />
+    </UIContextProvider>
+  ),
+};

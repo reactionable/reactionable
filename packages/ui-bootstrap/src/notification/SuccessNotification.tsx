@@ -4,7 +4,7 @@ import {
   IUseSuccessNotificationProps as ICoreUseSuccessNotificationProps,
   IUseSuccessNotificationResult,
   useSuccessNotification as useCoreSuccessNotification,
-} from "@reactionable/core/lib/ui/notification/SuccessNotification";
+} from "@reactionable/core";
 import { PropsWithChildren, ReactElement } from "react";
 
 import { Alert } from "../alert/Alert";

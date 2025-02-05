@@ -1,10 +1,13 @@
 import "@testing-library/jest-dom";
 
-import { i18nTestInstance } from "@reactionable/core/lib/testing/I18n";
+import { composeStories } from "@storybook/react";
+import { i18nTestInstance } from "@reactionable/core";
 import { render } from "@testing-library/react";
 
 import { Sidebar, useSidebarContext } from "./Sidebar";
-import { BasicSidebar } from "./Sidebar.stories";
+import * as stories from "./Sidebar.stories";
+
+const { BasicSidebar } = composeStories(stories);
 
 describe("Sidebar", () => {
   beforeAll(i18nTestInstance);

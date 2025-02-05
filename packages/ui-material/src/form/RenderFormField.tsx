@@ -8,15 +8,14 @@ import Select, { SelectProps } from "@material-ui/core/Select/Select";
 import TextareaAutosize, {
   TextareaAutosizeProps,
 } from "@material-ui/core/TextareaAutosize/TextareaAutosize";
-import { IFormFieldValue } from "@reactionable/core/lib/form/FormField";
-import { getFormFieldLabelContent } from "@reactionable/core/lib/form/RenderFormField";
+import { IFormFieldValue, getFormFieldLabelContent } from "@reactionable/core";
 import { ReactElement } from "react";
 
 import { IFieldElementProps, IFormFieldPropsEnhanced } from "./FormField";
 
 export function RenderFormField<
   FieldElementProps extends IFieldElementProps = IFieldElementProps,
-  Value extends IFormFieldValue = IFormFieldValue
+  Value extends IFormFieldValue = IFormFieldValue,
 >({
   error,
   isInvalid,
@@ -47,7 +46,6 @@ export function RenderFormField<
         break;
 
       case field.as === "select":
-        // eslint-disable-next-line no-case-declarations
         fieldContent = (
           <Select {...(fieldProps as SelectProps)} label={labelContent}>
             {children}

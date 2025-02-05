@@ -1,7 +1,7 @@
 import {
   FormErrorMessage as CoreFormErrorMessage,
   IFormErrorMessageProps as ICoreFormErrorMessageProps,
-} from "@reactionable/core/lib/form/FormErrorMessage";
+} from "@reactionable/core";
 import { ReactElement } from "react";
 import Feedback from "react-bootstrap/Feedback";
 

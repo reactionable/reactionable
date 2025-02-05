@@ -3,7 +3,7 @@ import {
   IUseNotificationProps as ICoreUseNotificationProps,
   IUseNotificationResult,
   useNotification as useCoreNotification,
-} from "@reactionable/core/lib/ui/notification/Notification";
+} from "@reactionable/core";
 import { PropsWithChildren, ReactElement } from "react";
 import Toast, { ToastProps } from "react-bootstrap/Toast";
 

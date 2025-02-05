@@ -1,40 +1,54 @@
 import "../../../stories/config";
 
-import { boolean, withKnobs } from "@storybook/addon-knobs";
-import { ReactElement } from "react";
+import type { Meta, StoryObj } from "@storybook/react";
+import { action } from "@storybook/addon-actions";
 
 import { UIContextProvider } from "../../UI";
 import { List } from "./List";
-import { ListTable } from "./ListTable";
 
-export default {
+const meta: Meta<typeof List> = {
   title: "UI Bootstrap/Components/Crud/List",
-  parameters: {
-    info: { inline: true },
-    options: { showPanel: true },
-    component: List,
-    subcomponents: [ListTable],
-  },
-  decorators: [withKnobs],
+  component: List,
 };
 
-export const BasicList = (): ReactElement => {
-  const loading = boolean("Is loading?", false);
-  const hasError = boolean("Has error?", false);
-  return (
+export default meta;
+
+type TestData = { id: string; label: string };
+type Story = StoryObj<typeof List<TestData>>;
+
+export const BasicList: Story = {
+  args: {
+    data: {
+      count: 2,
+      items: [
+        { id: "1", label: "Data 1" },
+        { id: "2", label: "Data 2" },
+      ],
+    },
+    refetch: async () => {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      action("Data refetched");
+    },
+  },
+  argTypes: {
+    loading: {
+      control: {
+        type: "boolean",
+      },
+    },
+    error: {
+      control: {
+        type: "boolean",
+      },
+      mapping: {
+        true: new Error("An error has occured"),
+        false: undefined,
+      },
+    },
+  },
+  render: (props) => (
     <UIContextProvider>
-      <List
-        loading={loading}
-        error={hasError ? new Error("An error has occured") : undefined}
-        data={{
-          count: 2,
-          items: [
-            { id: "1", label: "Data 1" },
-            { id: "2", label: "Data 2" },
-          ],
-        }}
-        refetch={() => null}
-      >
+      <List {...props}>
         {({ data }) => (
           <ul>
             {data.items.map((item) => (
@@ -51,35 +65,5 @@ export const BasicList = (): ReactElement => {
         )}
       </List>
     </UIContextProvider>
-  );
-};
-
-export const BasicListTable = (): ReactElement => {
-  const loading = boolean("Is loading?", false);
-  const hasError = boolean("Has error?", false);
-
-  return (
-    <UIContextProvider>
-      <ListTable
-        loading={loading}
-        error={hasError ? new Error("An error has occured") : undefined}
-        head={["ID", "Label"]}
-        data={{
-          count: 2,
-          items: [
-            { id: "1", label: "Data 1" },
-            { id: "2", label: "Data 2" },
-          ],
-        }}
-        refetch={() => null}
-      >
-        {(data) => (
-          <tr key={data.id}>
-            <td>{data.id}</td>
-            <td>{data.label}</td>
-          </tr>
-        )}
-      </ListTable>
-    </UIContextProvider>
-  );
+  ),
 };

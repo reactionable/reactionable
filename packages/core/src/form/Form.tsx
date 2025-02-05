@@ -19,10 +19,8 @@ export type INestedFormValues =
   | Array<IComposedFormValues>
   | { [key: string]: IComposedFormValues };
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-export type IFormValues = {};
-// eslint-disable-next-line @typescript-eslint/ban-types
-export type IFormData = {};
+export type IFormValues = object;
+export type IFormData = object;
 
 export type IValidationSchema<Values extends IFormValues> = Record<
   keyof Values,
@@ -32,7 +30,7 @@ export type IValidationSchema<Values extends IFormValues> = Record<
 export interface IFormProps<
   Values extends IFormValues,
   Data extends IFormData,
-  FormButtonProps extends IFormButtonProps
+  FormButtonProps extends IFormButtonProps,
 > extends FormikConfig<Values> {
   title?: ReactNode;
   validationSchema: IValidationSchema<Values>;
@@ -48,13 +46,13 @@ export interface IFormProps<
 export type FormComponent<
   Values extends IFormValues,
   Data extends IFormData,
-  FormButtonProps extends IFormButtonProps
+  FormButtonProps extends IFormButtonProps,
 > = ComponentType<IFormProps<Values, Data, FormButtonProps>>;
 
 export function Form<
   Values extends IFormValues,
   Data extends IFormData,
-  FormButtonProps extends IFormButtonProps
+  FormButtonProps extends IFormButtonProps = IFormButtonProps,
 >({
   title,
   validationSchema,

@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "ES6",
+    "moduleResolution": "node",
+    "module": "ESNext",
+    "target": "ESNext",
+    "esModuleInterop": true,
     "lib": ["es2018", "dom", "dom.iterable", "esnext"],
     "sourceMap": true,
     "allowJs": true,
-    "moduleResolution": "node",
     "strict": true,
     "declaration": true,
     "downlevelIteration": true,

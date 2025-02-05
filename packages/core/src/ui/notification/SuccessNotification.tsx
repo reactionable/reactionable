@@ -5,13 +5,16 @@ import {
   IUseNotificationProps,
   INotificationComponent,
   useNotification,
+  Notification,
 } from "./Notification";
 
 export type ISuccessNotificationProps = INotificationProps;
 
-export type SuccessNotificationComponent = INotificationComponent;
+export type ISuccessNotificationComponent = INotificationComponent;
 
 export type IUseSuccessNotificationProps = IUseNotificationProps;
+
+export const SuccessNotification = Notification;
 
 export interface IUseSuccessNotificationResult {
   successNotification: ReactNode;
@@ -19,10 +22,10 @@ export interface IUseSuccessNotificationResult {
 }
 
 export type IUseSuccessNotification<
-  UseSuccessNotificationProps extends IUseSuccessNotificationProps
+  UseSuccessNotificationProps extends IUseSuccessNotificationProps,
 > = (props: UseSuccessNotificationProps) => IUseSuccessNotificationResult;
 export function useSuccessNotification<P extends IUseSuccessNotificationProps>(
-  props: P & { Component: SuccessNotificationComponent }
+  props: P & { Component: ISuccessNotificationComponent }
 ): IUseSuccessNotificationResult {
   const { notification: successNotification, setNotification: setSuccessNotification } =
     useNotification(props);

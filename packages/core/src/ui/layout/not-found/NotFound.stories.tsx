@@ -1,12 +1,14 @@
-import { ReactElement } from "react";
+import type { Meta, StoryObj } from "@storybook/react";
 
 import { NotFound } from "./NotFound";
 
-export default {
+const meta: Meta<typeof NotFound> = {
   title: "Core/Components/UI/Layout/NotFound",
-  parameters: { component: NotFound },
+  component: NotFound,
 };
 
-export const BasicNotFound = (): ReactElement => {
-  return <NotFound />;
-};
+export default meta;
+
+type Story = StoryObj<typeof NotFound>;
+
+export const BasicNotFound: Story = {};

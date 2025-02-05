@@ -1,28 +1,32 @@
-import { boolean, withKnobs } from "@storybook/addon-knobs";
-import { ReactElement, useEffect } from "react";
+import type { Meta, StoryObj } from "@storybook/react";
 
 import { Loader, useLoader } from "./Loader";
 
-export default {
+const meta: Meta<typeof Loader> = {
   title: "UI Material/Components/Loader",
-  parameters: { info: { inline: true }, options: { showPanel: true }, component: Loader },
-  decorators: [withKnobs],
+  component: Loader,
 };
 
-export const BasicLoader = (): ReactElement => {
-  const overlay = boolean("Overlay", false);
+export default meta;
 
-  return <Loader overlay={overlay} />;
+type Story = StoryObj<typeof Loader>;
+
+export const BasicLoader: Story = {
+  args: {
+    overlay: false,
+  },
 };
 
-export const UseLoader = (): ReactElement | null => {
-  const overlay = boolean("Overlay", false);
-  const loading = boolean("Loading", true);
-  const { loader, setLoading } = useLoader({ overlay });
+export const UseLoader: StoryObj<typeof useLoader> = {
+  args: {
+    overlay: false,
+    loading: true,
+  },
+  render: (props) => {
+    const { loader } = useLoader({
+      ...props,
+    });
 
-  useEffect(() => {
-    setLoading(loading);
-  }, [loading]);
-
-  return loader;
+    return <>{loader}</>;
+  },
 };

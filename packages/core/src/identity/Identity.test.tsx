@@ -1,9 +1,12 @@
 import "@testing-library/jest-dom";
 
+import { composeStories } from "@storybook/react";
 import { render } from "@testing-library/react";
 
 import { i18nTestInstance } from "../testing/I18n";
-import { BasicAuth, UseIdentityContext } from "./Identity.stories";
+import * as stories from "./Identity.stories";
+
+const { BasicAuth, UseIdentityContext, AuthSubmitError } = composeStories(stories);
 
 describe("Identity", () => {
   beforeAll(i18nTestInstance);
@@ -19,6 +22,14 @@ describe("Identity", () => {
   describe("BasicAuth", () => {
     it("should render without crashing", () => {
       const result = render(<BasicAuth />);
+
+      expect(result).toBeTruthy();
+    });
+  });
+
+  describe("AuthSubmitError", () => {
+    it("should render without crashing", () => {
+      const result = render(<AuthSubmitError />);
 
       expect(result).toBeTruthy();
     });

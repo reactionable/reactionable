@@ -2,7 +2,7 @@ import {
   CopyrightFooter,
   IFooterProps as ICoreFooterProps,
   SponsorFooter,
-} from "@reactionable/core/lib/ui/layout/footer/Footer";
+} from "@reactionable/core";
 import { ComponentType, DetailedHTMLProps, HTMLAttributes, ReactElement } from "react";
 import { PropsWithChildren } from "react";
 import Col from "react-bootstrap/Col";

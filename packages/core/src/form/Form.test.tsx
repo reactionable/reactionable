@@ -1,11 +1,15 @@
 import "@testing-library/jest-dom";
 
+import { composeStories } from "@storybook/react";
 import { render } from "@testing-library/react";
 import { string } from "yup";
 
 import { i18nTestInstance } from "../testing/I18n";
 import { Form } from "./Form";
-import {
+import * as stories from "./Form.stories";
+import { FormField } from "./FormField";
+
+const {
   BasicForm,
   FormSubmitError,
   FormWithCheckbox,
@@ -13,8 +17,7 @@ import {
   FormWithLabelledInput,
   FormWithSelect,
   FormWithTextArea,
-} from "./Form.stories";
-import { FormField } from "./FormField";
+} = composeStories(stories);
 
 describe("Form", () => {
   beforeAll(i18nTestInstance);

@@ -1,9 +1,11 @@
 import "@testing-library/jest-dom";
-
 import { render } from "@testing-library/react";
+import { composeStories } from "@storybook/react";
 
 import { i18nTestInstance } from "../../testing/I18n";
-import { BasicDelete } from "./Delete.stories";
+
+import * as stories from "./Delete.stories";
+const { BasicDelete } = composeStories(stories);
 
 describe("Delete", () => {
   beforeAll(i18nTestInstance);

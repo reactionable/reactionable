@@ -15,7 +15,7 @@ import {
   IUseModalProps as ICoreUseModalProps,
   IUseModalResult,
   useModal as useCoreModal,
-} from "@reactionable/core/lib/ui/modal/Modal";
+} from "@reactionable/core";
 import { ComponentType, ReactNode } from "react";
 
 export type IModalProps = ICoreModalProps &
@@ -50,7 +50,9 @@ export const Modal: ModalComponent = ({
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
   const handleOnClose = () => {
-    onHide && onHide();
+    if (onHide) {
+      onHide();
+    }
   };
 
   return (

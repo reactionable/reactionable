@@ -1,4 +1,4 @@
-import { Meta } from "@storybook/addon-docs";
+import { Meta } from "@storybook/blocks";
 
 <Meta title="Core/Home" />
 
@@ -35,7 +35,7 @@ yarn add @reactionable/core
 ##### 1. Create file `i18n/i18n.ts` in the source folder (`src`) of your app
 
 ```ts
-import { initializeI18n } from "@reactionable/core/lib/i18n/I18n";
+import { initializeI18n } from "@reactionable/core";
 
 import enCommon from "./locales/en/common.json";
 import frCommon from "./locales/fr/common.json";
@@ -71,7 +71,7 @@ import "./i18n/i18n";
 ###### In a React App
 
 ```tsx
-import { App } from "@reactionable/core/lib/app/App";
+import { App } from "@reactionable/core";
 import { ReactElement } from "react";
 
 const MyApp = (): ReactElement => {
@@ -83,7 +83,7 @@ export default MyApp;
 ###### In a NextJs App
 
 ```tsx
-import { App } from "@reactionable/core/lib/app/App";
+import { App } from "@reactionable/core";
 import { ReactElement } from "react";
 
 const MyApp = ({ Component, pageProps }): ReactElement => {

@@ -1,100 +1,112 @@
 import Button from "@material-ui/core/Button/Button";
-import { text, withKnobs } from "@storybook/addon-knobs";
-import { ReactElement } from "react";
+import type { Meta, StoryObj } from "@storybook/react";
 
-import { ErrorNotification, useErrorNotification } from "./ErrorNotification";
-import { Notification, useNotification } from "./Notification";
-import { SuccessNotification, useSuccessNotification } from "./SuccessNotification";
+import {
+  ErrorNotification,
+  IUseErrorNotificationProps,
+  useErrorNotification,
+} from "./ErrorNotification";
+import { IUseNotificationProps, Notification, useNotification } from "./Notification";
+import {
+  IUseSuccessNotificationProps,
+  SuccessNotification,
+  useSuccessNotification,
+} from "./SuccessNotification";
 
-export default {
+const meta: Meta<typeof Notification> = {
   title: "UI Material/Components/Notification",
-  parameters: {
-    info: { inline: true },
-    options: { showPanel: true },
-    component: Notification,
-    subComponents: [SuccessNotification, ErrorNotification],
+  component: Notification,
+};
+
+export default meta;
+
+type Story = StoryObj<typeof Notification>;
+
+export const BasicNotification: Story = {
+  args: {
+    title: "Basic notification",
+    children: "Basic notification content",
   },
-  decorators: [withKnobs],
 };
 
-export const BasicNotification = (): ReactElement => {
-  const title = text("Title", "This is a notification");
-  const content = text("Content", "This is the notification content");
-
-  return <Notification title={title}>{content}</Notification>;
+export const NotificationWithComplexContent: Story = {
+  args: {
+    title: "Notification With Complex Content",
+    children: (
+      <>
+        <b>Lorem Ipsum</b> is simply dummy text of the printing and typesetting industry.{" "}
+        <b>Lorem Ipsum</b> has been the industry&apos;s standard dummy text ever since the 1500s,
+        when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+        It has survived not only five centuries, but also the leap into electronic typesetting,
+        remaining essentially unchanged. It was popularised in the 1960s with the release of
+        Letraset sheets containing <b>Lorem Ipsum</b> passages, and more recently with desktop
+        publishing software like Aldus PageMaker including versions of <b>Lorem Ipsum</b>
+      </>
+    ),
+  },
 };
 
-export const NotificationWithComplexContent = (): ReactElement => {
-  const content = (
-    <>
-      <b>Lorem Ipsum</b> is simply dummy text of the printing and typesetting industry.{" "}
-      <b>Lorem Ipsum</b> has been the industry&apos; standard dummy text ever since the 1500s, when
-      an unknown printer took a galley of type and scrambled it to make a type specimen book. It has
-      survived not only five centuries, but also the leap into electronic typesetting, remaining
-      essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
-      containing <b>Lorem Ipsum</b> passages, and more recently with desktop publishing software
-      like Aldus PageMaker including versions of <b>Lorem Ipsum</b>
-    </>
-  );
-  return <Notification title="Notification With Complex Content">{content}</Notification>;
+export const UseNotification: StoryObj<IUseNotificationProps> = {
+  args: {
+    title: "Use notification",
+    children: "Use notification content",
+  },
+  render: ({ children, ...props }) => {
+    const { notification, setNotification } = useNotification(props);
+
+    return (
+      <>
+        <Button onClick={() => setNotification(children)}>Click on me</Button>
+        {notification}
+      </>
+    );
+  },
 };
 
-export const UseNotification = (): ReactElement => {
-  const title = text("Title", "This is a notification");
-  const content = text("Content", "This is the notification content");
-
-  const { notification, setNotification } = useNotification({ title, children: content });
-
-  return (
-    <>
-      <Button onClick={() => setNotification(content)}>Click on me</Button>
-      {notification}
-    </>
-  );
+export const BasicSuccessNotification: StoryObj<typeof SuccessNotification> = {
+  args: {
+    title: "Success notification",
+    children: "Success notification content",
+  },
 };
 
-export const BasicSuccessNotification = (): ReactElement => {
-  const title = text("Title", "This is a success notification");
-  const content = text("Content", "This is the success notification content");
+export const UseSuccessNotification: StoryObj<IUseSuccessNotificationProps> = {
+  args: {
+    title: "Use success notification",
+    children: "Use success notification content",
+  },
+  render: ({ children, ...props }) => {
+    const { successNotification, setSuccessNotification } = useSuccessNotification(props);
 
-  return <SuccessNotification title={title}>{content}</SuccessNotification>;
+    return (
+      <>
+        <Button onClick={() => setSuccessNotification(children)}>Click on me</Button>
+        {successNotification}
+      </>
+    );
+  },
 };
 
-export const UseSuccessNotification = (): ReactElement => {
-  const title = text("Title", "This is a success notification");
-  const content = text("Content", "This is the success notification content");
-
-  const { successNotification, setSuccessNotification } = useSuccessNotification({
-    title,
-  });
-
-  return (
-    <>
-      <Button onClick={() => setSuccessNotification(content)}>Click on me</Button>
-      {successNotification}
-    </>
-  );
+export const BasicErrorNotification: StoryObj<typeof ErrorNotification> = {
+  args: {
+    title: "Error notification",
+    error: new Error("Error notification content"),
+  },
 };
 
-export const BasicErrorNotification = (): ReactElement => {
-  const title = text("Title", "This is an error notification");
-  const content = text("Content", "This is an error notification content");
+export const UseErrorNotification: StoryObj<IUseErrorNotificationProps> = {
+  args: {
+    title: "Use error notification",
+    error: new Error("Use error notification content"),
+  },
+  render: ({ error, ...props }) => {
+    const { errorNotification, setErrorNotification } = useErrorNotification(props);
 
-  return <ErrorNotification title={title}>{new Error(content)}</ErrorNotification>;
-};
-
-export const UseErrorNotification = (): ReactElement => {
-  const title = text("Title", "This is a success notification");
-  const content = text("Content", "This is the success notification content");
-
-  const { errorNotification, setErrorNotification } = useErrorNotification({
-    title,
-  });
-
-  return (
-    <>
-      <Button onClick={() => setErrorNotification(new Error(content))}>Click on me</Button>
-      {errorNotification}
-    </>
-  );
+    return (
+      <>
+        <Button onClick={() => setErrorNotification(error)}>Click on me</Button>
+        {errorNotification}
+      </>
+    );
+  },
 };

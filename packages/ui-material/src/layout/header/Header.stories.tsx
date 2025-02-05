@@ -1,71 +1,81 @@
-import { useIdentityContext, withIdentityContext } from "@reactionable/core/lib/identity/Identity";
-import { boolean, select, withKnobs } from "@storybook/addon-knobs";
-import { ReactElement, useEffect } from "react";
+import { IUser, useIdentityContext, withIdentityContext } from "@reactionable/core";
+import type { Meta, StoryObj } from "@storybook/react";
+import { ComponentProps, useEffect } from "react";
 
 import { TestWrapper } from "../../testing/TestWrapper";
-import { UIContextProvider } from "../../UI";
-import { Header } from "./Header";
+import { Header, IHeaderProps } from "./Header";
+import { PaletteType } from "@material-ui/core";
 
-export default {
+const meta: Meta<typeof Header> = {
   title: "UI Material/Components/Layout/Header",
-  parameters: { info: { inline: true }, options: { showPanel: true }, component: Header },
-  decorators: [withKnobs],
+  component: Header,
 };
 
-export const BasicHeader = (): ReactElement => {
-  const variant = select(
-    "Variant",
-    ["default", "inherit", "primary", "secondary", "transparent", undefined],
-    "default"
-  );
+export default meta;
 
-  const dark = boolean("Dark Mode", false);
-
-  return (
-    <TestWrapper ui={{ theme: { palette: { type: dark ? "dark" : "light" } } }}>
-      <Header
-        brand="Test brand header"
-        color={variant}
-        navItems={[{ href: "/sample", children: "Sample link" }]}
-      />
+export const BasicHeader: StoryObj<IHeaderProps & { type: PaletteType }> = {
+  args: {
+    brand: "Test Brand",
+    navItems: [{ href: "/sample", children: "Sample link" }],
+    color: "default",
+    type: "light",
+  },
+  // FIXME: MUST support type in render
+  // render: ({ type, ...props }) => (
+  // <TestWrapper ui={{ theme: { palette: { type } } }}>
+  render: ({ ...props }) => (
+    <TestWrapper ui={{ theme: { palette: { type: "light" } } }}>
+      <Header {...props} />
     </TestWrapper>
-  );
+  ),
 };
 
-export const HeaderWithIdentity = ({
-  defaultUserIsLoggedIn = false,
-}: {
-  defaultUserIsLoggedIn?: boolean;
-}): ReactElement => {
-  const user = { username: "Test user" };
-  const userIsLoggedIn = boolean("User is logged in", defaultUserIsLoggedIn);
+export const HeaderWithIdentity: StoryObj<ComponentProps<typeof Header> & { user: IUser | null }> =
+  {
+    args: {
+      brand: "Test Brand",
+      navItems: [{ href: "/sample", children: "Sample link" }],
+    },
+    argTypes: {
+      user: {
+        control: {
+          type: "boolean",
+        },
+        mapping: {
+          true: {
+            id: "test-user-id",
+            username: "Test user",
+            attributes: { email: "test@test.com" },
+          },
+          false: null,
+        },
+      },
+    },
+    // FIXME: MUST support user in render
+    // render: ({ user, ...props }) => {
+    render: ({ ...props }) => {
+      const user = null;
 
-  const useFetchUser = () => ({
-    loading: false,
-    data: defaultUserIsLoggedIn ? user : null,
-    refetch: () => null,
-  });
+      const useFetchUser = () => ({
+        loading: false,
+        data: user,
+        refetch: () => null,
+      });
 
-  return withIdentityContext(
-    () => {
-      const { setUser } = useIdentityContext();
+      return withIdentityContext(
+        () => {
+          const { setUser } = useIdentityContext();
 
-      useEffect(() => {
-        setUser(userIsLoggedIn ? user : null);
-      }, [userIsLoggedIn]);
+          useEffect(() => {
+            setUser(user);
+          }, [user]);
 
-      return (
-        <UIContextProvider>
-          <Header
-            brand="Test brand header"
-            navItems={[{ href: "/sample", children: "Sample link" }]}
-          />
-        </UIContextProvider>
+          return <Header {...props} />;
+        },
+        {
+          identityProvider: "storybook",
+          useFetchUser,
+        }
       );
     },
-    {
-      identityProvider: "storybook",
-      useFetchUser,
-    }
-  );
-};
+  };

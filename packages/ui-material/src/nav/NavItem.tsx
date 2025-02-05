@@ -4,7 +4,7 @@ import {
   NavItems as CoreNavItems,
   INavItemProps as ICoreNavItemProps,
   INavItemsComponentProps,
-} from "@reactionable/core/lib/nav/NavItem";
+} from "@reactionable/core";
 import { ReactElement } from "react";
 
 import { Icon } from "../icon/Icon";

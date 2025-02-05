@@ -1,4 +1,4 @@
-import { IRouterLinkProps as ICoreRouterLinkProps } from "@reactionable/core/lib/router/RouterLink";
+import { IRouterLinkProps as ICoreRouterLinkProps } from "@reactionable/core";
 import { ForwardedRef, forwardRef } from "react";
 import { LinkProps, useHref, useLinkClickHandler } from "react-router-dom";
 

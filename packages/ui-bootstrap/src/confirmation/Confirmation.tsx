@@ -1,5 +1,5 @@
-import { useTranslation } from "@reactionable/core/lib/i18n/I18n";
 import {
+  useTranslation,
   ConfirmationComponent,
   ConfirmationAction as CoreConfirmationAction,
   IConfirmationActionProps as ICoreConfirmationActionProps,
@@ -7,9 +7,9 @@ import {
   IUseConfirmationProps as ICoreUseConfirmationProps,
   IUseConfirmationResult,
   useConfirmation as useConfirmationCore,
-} from "@reactionable/core/lib/ui/confirmation/Confirmation";
-import { PropsWithChildren, ReactElement } from "react";
-import Button, { ButtonProps } from "react-bootstrap/Button";
+} from "@reactionable/core";
+import { ComponentProps, ReactElement } from "react";
+import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
 import { IIconProps, Icon } from "../icon/Icon";
@@ -20,7 +20,7 @@ export const Confirmation: ConfirmationComponent = ({
   callback,
   children,
   title,
-}: PropsWithChildren<IConfirmationProps>) => {
+}: IConfirmationProps) => {
   const { t } = useTranslation();
   const handleCancel = () => callback(false);
   const handleOk = () => callback(true);
@@ -49,10 +49,12 @@ export const Confirmation: ConfirmationComponent = ({
   );
 };
 
+type IButtonProps = ComponentProps<typeof Button>;
+
 export interface IConfirmationActionProps<Data> extends ICoreConfirmationActionProps<Data> {
   label?: string;
   icon?: IIconProps;
-  button?: ButtonProps;
+  button?: IButtonProps;
 }
 
 export function ConfirmationAction<Data>({
@@ -61,7 +63,7 @@ export function ConfirmationAction<Data>({
   icon,
   children,
   ...props
-}: PropsWithChildren<IConfirmationActionProps<Data>>): ReactElement {
+}: IConfirmationActionProps<Data>): ReactElement {
   return (
     <CoreConfirmationAction<Data> {...props}>
       {children}

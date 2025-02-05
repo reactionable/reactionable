@@ -1,5 +1,5 @@
 import { Theme, createStyles, makeStyles } from "@material-ui/core";
-import { IBodyProps as ICoreBodyProps } from "@reactionable/core/lib/ui/layout/body/Body";
+import { IBodyProps as ICoreBodyProps } from "@reactionable/core";
 import clsx from "clsx";
 import { ComponentType, PropsWithChildren, ReactElement } from "react";
 

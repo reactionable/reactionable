@@ -1,11 +1,11 @@
 import { makeStyles } from "@material-ui/core";
 import UiAlert, { AlertProps } from "@material-ui/lab/Alert";
 import AlertTitle from "@material-ui/lab/AlertTitle/AlertTitle";
-import { IAlertProps as IAlertPropsCore } from "@reactionable/core/lib/ui/alert/Alert";
 import {
+  IAlertProps as IAlertPropsCore,
   IUseAlertResult,
   useAlert as useAlertCore,
-} from "@reactionable/core/lib/ui/alert/useAlert";
+} from "@reactionable/core";
 import { ComponentType, ReactNode } from "react";
 
 import { IIconProps, Icon } from "../icon/Icon";

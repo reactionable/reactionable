@@ -1,4 +1,4 @@
-import { IRouteProps as ICoreRouteProps } from "@reactionable/core/lib/router/Route";
+import { IRouteProps as ICoreRouteProps } from "@reactionable/core";
 import { ReactElement, ReactNode } from "react";
 import { Routes } from "react-router-dom";
 

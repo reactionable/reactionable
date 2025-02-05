@@ -1,12 +1,30 @@
 import "@testing-library/jest-dom";
 
+import { composeStories } from "@storybook/react";
 import { render, fireEvent } from "@testing-library/react";
 
 import { i18nTestInstance } from "../../testing/I18n";
-import { BasicConfirmationAction } from "./Confirmation.stories";
+import * as stories from "./Confirmation.stories";
+const { BasicConfirmation, UseConfirmation, BasicConfirmationAction } = composeStories(stories);
 
 describe("Confirmation", () => {
   beforeAll(i18nTestInstance);
+
+  describe("BasicConfirmation", () => {
+    it("should render without crashing", () => {
+      const result = render(<BasicConfirmation />);
+
+      expect(result).toBeTruthy();
+    });
+  });
+
+  describe("UseConfirmation", () => {
+    it("should render without crashing", () => {
+      const result = render(<UseConfirmation />);
+
+      expect(result).toBeTruthy();
+    });
+  });
 
   describe("BasicConfirmationAction", () => {
     it("should render without crashing", () => {

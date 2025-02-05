@@ -12,10 +12,10 @@ import { IError } from "../../error/IError";
 import { useTranslation } from "../../i18n/I18n";
 import { useUIContext } from "../UI";
 
-export type IConfirmationProps = {
+export type IConfirmationProps = PropsWithChildren<{
   title: string;
   callback: (confirm: boolean) => void;
-};
+}>;
 
 export type ConfirmationComponent = ComponentType<IConfirmationProps>;
 
@@ -23,7 +23,7 @@ export const Confirmation: ConfirmationComponent = ({
   callback,
   children,
   title,
-}: PropsWithChildren<IConfirmationProps>) => {
+}: IConfirmationProps) => {
   const { t } = useTranslation("common");
 
   return (
@@ -38,9 +38,7 @@ export const Confirmation: ConfirmationComponent = ({
   );
 };
 
-export type IUseConfirmationProps = PropsWithChildren<
-  IConfirmationProps & { Component?: ConfirmationComponent }
->;
+export type IUseConfirmationProps = IConfirmationProps & { Component?: ConfirmationComponent };
 
 export interface IUseConfirmationResult {
   confirmation: ReactNode;
@@ -72,19 +70,17 @@ export function useConfirmation<UseConfirmationProps extends IUseConfirmationPro
   };
 }
 
-export interface IConfirmationActionProps<Data> {
+export type IConfirmationActionProps<Data> = PropsWithChildren<{
   title: string;
   successMessage: string;
   confirmationMessage: string;
   onConfirm: () => Promise<Data>;
   onSuccess?: (result: Data) => void;
-}
+}>;
 
 export type ConfirmationActionComponent<Data> = ComponentType<IConfirmationActionProps<Data>>;
 
-export function ConfirmationAction<Data>(
-  props: PropsWithChildren<IConfirmationActionProps<Data>>
-): ReactElement {
+export function ConfirmationAction<Data>(props: IConfirmationActionProps<Data>): ReactElement {
   const { useLoader, useSuccessNotification, useErrorNotification, useConfirmation } =
     useUIContext();
 

@@ -1,10 +1,10 @@
-import { useTranslation } from "@reactionable/core/lib/i18n/I18n";
-import { ILoaderProps as ICoreLoaderProps } from "@reactionable/core/lib/ui/loader/Loader";
 import {
+  useTranslation,
+  ILoaderProps as ICoreLoaderProps,
   IUseLoaderProps as ICoreUseLoaderProps,
   IUseLoader,
   useLoader as useLoaderCore,
-} from "@reactionable/core/lib/ui/loader/useLoader";
+} from "@reactionable/core";
 import { ReactElement } from "react";
 import Spinner from "react-bootstrap/Spinner";
 

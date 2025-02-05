@@ -1,4 +1,5 @@
-import { FC, ReactElement } from "react";
+import type { Meta, StoryObj } from "@storybook/react";
+import { FC } from "react";
 
 import { useTranslation } from "../../../i18n/I18n";
 import { useRouteMatch } from "../../../router/useRouteMatch";
@@ -6,10 +7,14 @@ import { generatePath } from "../../../router/RouterLink";
 import { UIContextProvider, useUIProviderProps } from "../../UI";
 import { Sidebar, useSidebarContext } from "./Sidebar";
 
-export default {
+const meta: Meta<typeof Sidebar> = {
   title: "Core/Components/UI/Layout/Sidebar",
-  parameters: { info: { inline: true }, options: { showPanel: true }, component: Sidebar },
+  component: Sidebar,
 };
+
+export default meta;
+
+type Story = StoryObj<typeof Sidebar>;
 
 const SampleComponent: FC = () => {
   const { t } = useTranslation();
@@ -42,10 +47,13 @@ const SampleComponent: FC = () => {
   );
 };
 
-export const BasicSidebar = (): ReactElement => (
-  <UIContextProvider {...useUIProviderProps()}>
-    <Sidebar>
-      <SampleComponent />
-    </Sidebar>
-  </UIContextProvider>
-);
+export const BasicSidebar: Story = {
+  args: {
+    children: <SampleComponent />,
+  },
+  render: (props) => (
+    <UIContextProvider {...useUIProviderProps()}>
+      <Sidebar {...props} />
+    </UIContextProvider>
+  ),
+};

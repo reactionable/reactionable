@@ -1,9 +1,11 @@
 import "@testing-library/jest-dom";
 
-import { i18nTestInstance } from "@reactionable/core/lib/testing/I18n";
+import { composeStories } from "@storybook/react";
+import { i18nTestInstance } from "@reactionable/core";
 import { render } from "@testing-library/react";
+import * as stories from "./Icon.stories";
 
-import { BasicIcon } from "./Icon.stories";
+const { BasicIcon } = composeStories(stories);
 
 describe("Icon", () => {
   beforeAll(i18nTestInstance);

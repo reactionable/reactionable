@@ -3,7 +3,7 @@ import {
   IUseModalProps as ICoreUseModalProps,
   IUseModalResult,
   useModal as useCoreModal,
-} from "@reactionable/core/lib/ui/modal/Modal";
+} from "@reactionable/core";
 import { ComponentType, ReactElement, ReactNode } from "react";
 import BootstrapModal, { ModalProps } from "react-bootstrap/Modal";
 
@@ -23,7 +23,9 @@ export const Modal = ({
   ...modalProps
 }: IModalProps): ReactElement => {
   const handleOnClose = () => {
-    onHide && onHide();
+    if (onHide) {
+      onHide();
+    }
   };
 
   return (

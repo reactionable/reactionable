@@ -2,17 +2,17 @@ import IconButton from "@material-ui/core/IconButton/IconButton";
 import Menu from "@material-ui/core/Menu/Menu";
 import MenuItem from "@material-ui/core/MenuItem/MenuItem";
 import { AccountCircle } from "@material-ui/icons";
-import { useIdentityContext } from "@reactionable/core/lib/identity/Identity";
 import {
+  useIdentityContext,
   AccountLink,
   LogoutLink,
   UserUnloggedHeaderNav,
-} from "@reactionable/core/lib/ui/layout/header/UserHeaderNav";
+} from "@reactionable/core";
 import { ForwardedRef, MouseEvent, ReactElement, forwardRef, useState } from "react";
 
 import { ILinkProps } from "../../link/Link";
 
-export { UserUnloggedHeaderNav } from "@reactionable/core/lib/ui/layout/header/UserHeaderNav";
+export { UserUnloggedHeaderNav } from "@reactionable/core";
 
 const NavItemComponent = forwardRef(function NavItemComponent(
   { children, onClick }: ILinkProps,

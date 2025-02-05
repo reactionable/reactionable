@@ -1,9 +1,11 @@
 import "@testing-library/jest-dom";
 
 import { render } from "@testing-library/react";
+import { composeStories } from "@storybook/react";
 
 import { i18nTestInstance } from "../testing/I18n";
-import { AppWithChildren, AppWithProviders, BasicApp } from "./App.stories";
+import * as stories from "./App.stories";
+const { AppWithChildren, AppWithProviders, BasicApp } = composeStories(stories);
 
 describe("App", () => {
   beforeAll(i18nTestInstance);

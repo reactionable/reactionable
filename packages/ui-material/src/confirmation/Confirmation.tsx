@@ -7,8 +7,8 @@ import DialogTitle from "@material-ui/core/DialogTitle/DialogTitle";
 import Paper, { PaperProps } from "@material-ui/core/Paper/Paper";
 import useTheme from "@material-ui/core/styles/useTheme";
 import useMediaQuery from "@material-ui/core/useMediaQuery/useMediaQuery";
-import { useTranslation } from "@reactionable/core/lib/i18n/I18n";
 import {
+  useTranslation,
   ConfirmationComponent,
   ConfirmationAction as CoreConfirmationAction,
   IConfirmationActionProps as ICoreConfirmationActionProps,
@@ -16,7 +16,7 @@ import {
   IUseConfirmationProps as ICoreUseConfirmationProps,
   IUseConfirmationResult,
   useConfirmation as useConfirmationCore,
-} from "@reactionable/core/lib/ui/confirmation/Confirmation";
+} from "@reactionable/core";
 import { PropsWithChildren, ReactElement } from "react";
 import Draggable from "react-draggable";
 

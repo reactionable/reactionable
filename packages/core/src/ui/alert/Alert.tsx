@@ -1,6 +1,6 @@
 import { ComponentType, PropsWithChildren } from "react";
 
-export type IAlertProps = PropsWithChildren<unknown>;
+export type IAlertProps = PropsWithChildren;
 
 export type AlertComponent = ComponentType<IAlertProps>;
 

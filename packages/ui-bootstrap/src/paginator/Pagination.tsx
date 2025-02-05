@@ -1,8 +1,8 @@
 import {
   Pagination as CorePagination,
   IPaginationProps as ICorePaginationProps,
-} from "@reactionable/core/lib/ui/paginator/Pagination";
-import { IPaginationEllipsisComponent } from "@reactionable/core/lib/ui/paginator/PaginationEllipsis";
+  IPaginationEllipsisComponent,
+} from "@reactionable/core";
 import { ReactElement } from "react";
 import BootstrapPagination from "react-bootstrap/Pagination";
 

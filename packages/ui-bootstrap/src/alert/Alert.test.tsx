@@ -1,16 +1,12 @@
 import "@testing-library/jest-dom";
 
-import { i18nTestInstance } from "@reactionable/core/lib/testing/I18n";
+import { composeStories } from "@storybook/react";
+import { i18nTestInstance } from "@reactionable/core";
 import { render } from "@testing-library/react";
+import * as stories from "./Alert.stories";
 
-import {
-  BasicAlert,
-  BasicErrorAlert,
-  BasicWarningAlert,
-  UseAlert,
-  UseErrorAlert,
-  UseWarningAlert,
-} from "./Alert.stories";
+const { BasicAlert, UseAlert, BasicErrorAlert, UseErrorAlert, BasicWarningAlert, UseWarningAlert } =
+  composeStories(stories);
 
 describe("Alert", () => {
   beforeAll(i18nTestInstance);

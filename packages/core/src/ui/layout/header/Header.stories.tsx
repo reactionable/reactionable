@@ -1,54 +1,68 @@
-import { boolean, withKnobs } from "@storybook/addon-knobs";
-import { ReactElement, useEffect } from "react";
+import type { Meta, StoryObj } from "@storybook/react";
 
-import { useIdentityContext, withIdentityContext } from "../../../identity/Identity";
+import { ComponentProps, useEffect } from "react";
+
+import { IUser, useIdentityContext, withIdentityContext } from "../../../identity/Identity";
 import { Header } from "./Header";
 
-export default {
+const meta: Meta<typeof Header> = {
   title: "Core/Components/UI/Layout/Header",
-  parameters: { info: { inline: true }, options: { showPanel: true }, component: Header },
-  decorators: [withKnobs],
+  component: Header,
 };
 
-export const BasicHeader = (): ReactElement => {
-  return (
-    <Header brand="Test brand header" navItems={[{ href: "/sample", children: "Sample link" }]} />
-  );
+export default meta;
+
+type Story = StoryObj<typeof Header>;
+
+export const BasicHeader: Story = {
+  args: {
+    brand: "Test Brand",
+    navItems: [{ href: "/sample", children: "Sample link" }],
+  },
 };
 
-export const HeaderWithIdentity = ({
-  defaultUserIsLoggedIn = false,
-}: {
-  defaultUserIsLoggedIn?: boolean;
-}): ReactElement => {
-  const userIsLoggedIn = boolean("User is logged in", defaultUserIsLoggedIn);
+export const HeaderWithIdentity: StoryObj<ComponentProps<typeof Header> & { user: IUser | null }> =
+  {
+    args: {
+      brand: "Test Brand",
+      navItems: [{ href: "/sample", children: "Sample link" }],
+    },
+    argTypes: {
+      user: {
+        control: {
+          type: "boolean",
+        },
+        mapping: {
+          true: {
+            id: "test-user-id",
+            username: "Test user",
+            attributes: { email: "test@test.com" },
+          },
+          false: null,
+        },
+      },
+    },
+    render: ({ user, ...props }) => {
+      const useFetchUser = () => ({
+        loading: false,
+        data: user,
+        refetch: () => null,
+      });
 
-  const user = { username: "Test user" };
+      return withIdentityContext(
+        () => {
+          const { setUser } = useIdentityContext();
 
-  const useFetchUser = () => ({
-    loading: false,
-    data: defaultUserIsLoggedIn ? user : null,
-    refetch: () => null,
-  });
+          useEffect(() => {
+            setUser(user);
+          }, [user]);
 
-  return withIdentityContext(
-    () => {
-      const { setUser } = useIdentityContext();
-
-      useEffect(() => {
-        setUser(userIsLoggedIn ? user : null);
-      }, [userIsLoggedIn]);
-
-      return (
-        <Header
-          brand="Test brand header"
-          navItems={[{ href: "/sample", children: "Sample link" }]}
-        />
+          return <Header {...props} />;
+        },
+        {
+          identityProvider: "storybook",
+          useFetchUser,
+        }
       );
     },
-    {
-      identityProvider: "storybook",
-      useFetchUser,
-    }
-  );
-};
+  };

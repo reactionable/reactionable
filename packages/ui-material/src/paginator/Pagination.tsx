@@ -1,5 +1,5 @@
 import MaterialUIPagination, { PaginationProps } from "@material-ui/lab/Pagination/Pagination";
-import { IPaginationProps as ICorePaginationProps } from "@reactionable/core/lib/ui/paginator/Pagination";
+import { IPaginationProps as ICorePaginationProps } from "@reactionable/core";
 import { ReactElement } from "react";
 
 export type IPaginationProps = Omit<

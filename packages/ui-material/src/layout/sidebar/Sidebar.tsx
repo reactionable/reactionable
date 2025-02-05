@@ -10,13 +10,13 @@ import Toolbar from "@material-ui/core/Toolbar/Toolbar";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import { INavItemsProps } from "@reactionable/core/lib/nav/NavItem";
-import { INavItemsProviderProps as ICoreNavItemsProviderProps } from "@reactionable/core/lib/nav/NavItemsProviderProps";
 import {
+  INavItemsProps,
+  INavItemsProviderProps as ICoreNavItemsProviderProps,
   Sidebar as CoreSidebar,
   useSidebarContext as coreUseSidebarContext,
   ISidebarProps as ICoreSidebarProps,
-} from "@reactionable/core/lib/ui/layout/sidebar/Sidebar";
+} from "@reactionable/core";
 import clsx from "clsx";
 import { PropsWithChildren, ReactElement, useEffect, useState } from "react";
 

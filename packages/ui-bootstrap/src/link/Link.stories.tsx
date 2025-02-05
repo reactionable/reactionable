@@ -1,27 +1,27 @@
-import { ReactElement } from "react";
+import type { Meta, StoryObj } from "@storybook/react";
 
-import { ButtonLink } from "./ButtonLink";
 import { Link, useLink } from "./Link";
 
-export default {
+const meta: Meta<typeof Link> = {
   title: "UI Bootstrap/Components/Link",
-  parameters: { component: Link },
+  component: Link,
 };
 
-export const BasicLink = (): ReactElement => {
-  return <Link href="/test">test</Link>;
-};
-export const BasicButtonLink = (): ReactElement => {
-  return (
-    <ButtonLink href="/test" variant="danger">
-      Test
-    </ButtonLink>
-  );
-};
+export default meta;
 
-export const UseLink = (): ReactElement => {
-  return useLink({
+type Story = StoryObj<typeof Link>;
+
+export const BasicLink: Story = {
+  args: {
     href: "/test",
-    children: "test",
-  });
+    children: "Test",
+  },
+};
+
+export const UseLink: StoryObj<typeof useLink> = {
+  args: {
+    href: "/test",
+    children: "Test",
+  },
+  render: (props) => useLink(props),
 };

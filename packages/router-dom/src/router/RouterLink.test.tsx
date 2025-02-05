@@ -1,11 +1,14 @@
-import { i18nTestInstance } from "@reactionable/core/lib/testing/I18n";
+import { composeStories } from "@storybook/react";
+import { i18nTestInstance } from "@reactionable/core";
 import { render } from "@testing-library/react";
+import * as stories from "./RouterLink.stories";
 
-import {
-  BasicLinkInRouterLink,
+const {
   BasicRouterLink,
+  BasicLinkInRouterLink,
   RouterLinkCustomComponentInRouterLink,
-} from "./RouterLink.stories";
+  RouterLinkCustomComponent,
+} = composeStories(stories);
 
 describe("RouterLink", () => {
   beforeAll(i18nTestInstance);
@@ -29,6 +32,14 @@ describe("RouterLink", () => {
   describe("RouterLinkCustomComponentInRouterLink", () => {
     it("should render without crashing", () => {
       const result = render(<RouterLinkCustomComponentInRouterLink />);
+
+      expect(result).toBeTruthy();
+    });
+  });
+
+  describe("RouterLinkCustomComponent", () => {
+    it("should render without crashing", () => {
+      const result = render(<RouterLinkCustomComponent />);
 
       expect(result).toBeTruthy();
     });

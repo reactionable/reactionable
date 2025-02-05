@@ -1,5 +1,5 @@
 import { I18n } from "@aws-amplify/core";
-import { initializeI18n as coreInitializeI18n } from "@reactionable/core/lib/i18n/I18n";
+import { initializeI18n as coreInitializeI18n } from "@reactionable/core";
 import { i18n as I18nType, InitOptions } from "i18next";
 
 function extractLanguage(language: string) {

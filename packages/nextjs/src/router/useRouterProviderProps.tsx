@@ -1,6 +1,9 @@
-import { IRenderRoutes, renderRoutes } from "@reactionable/core/lib/router/Route";
-import { useRouterProviderProps as useCoreRouterProviderProps } from "@reactionable/core/lib/router/useRouterProviderProps";
-import { IRouterLinkComponent } from "@reactionable/core/lib/router/RouterLink";
+import {
+  IRouterLinkComponent,
+  renderRoutes,
+  IRenderRoutes,
+  useRouterProviderProps as useCoreRouterProviderProps,
+} from "@reactionable/core";
 import { IRouterLinkProps, RouterLink } from "./RouterLink";
 import { IRouterProviderProps } from "./useRouterContext";
 import { useRouter } from "./useRouter";

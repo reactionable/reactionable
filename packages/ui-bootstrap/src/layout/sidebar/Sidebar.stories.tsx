@@ -1,10 +1,9 @@
 import "../../../stories/config";
 
+import type { Meta, StoryObj } from "@storybook/react";
 import { faAtom } from "@fortawesome/free-solid-svg-icons";
-import { useTranslation } from "@reactionable/core/lib/i18n/I18n";
-import { generatePath } from "@reactionable/core/lib/router/RouterLink";
-import { useRouteMatch } from "@reactionable/core/lib/router/useRouteMatch";
-import { FC, ReactElement } from "react";
+import { useTranslation, generatePath, useRouteMatch } from "@reactionable/core";
+import { FC } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
@@ -14,16 +13,21 @@ import Row from "react-bootstrap/Row";
 import { TestWrapper } from "../../testing/TestWrapper";
 import { Sidebar, useSidebarContext } from "./Sidebar";
 
-export default {
+const meta: Meta<typeof Sidebar> = {
   title: "UI Bootstrap/Components/Layout/Sidebar",
-  parameters: { info: { inline: true }, options: { showPanel: true }, component: Sidebar },
+  component: Sidebar,
 };
+
+export default meta;
+
+type Story = StoryObj<typeof Sidebar>;
 
 const SampleComponent: FC = () => {
   const { t } = useTranslation();
   const match = useRouteMatch();
 
   const { setNavItems } = useSidebarContext();
+
   setNavItems([
     {
       href: generatePath(`${match.path}/sample`, match.params),
@@ -59,10 +63,13 @@ const SampleComponent: FC = () => {
   );
 };
 
-export const BasicSidebar = (): ReactElement => (
-  <TestWrapper>
-    <Sidebar>
-      <SampleComponent />
-    </Sidebar>
-  </TestWrapper>
-);
+export const BasicSidebar: Story = {
+  args: {
+    children: <SampleComponent />,
+  },
+  render: (props) => (
+    <TestWrapper>
+      <Sidebar {...props} />
+    </TestWrapper>
+  ),
+};

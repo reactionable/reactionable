@@ -90,7 +90,9 @@ export function LanguageSelector({
   const handleOnSelectLanguage = (language: string) => {
     setLanguage(language);
     i18n.changeLanguage(language);
-    onSelectLanguage && onSelectLanguage(language);
+    if (onSelectLanguage) {
+      onSelectLanguage(language);
+    }
   };
 
   return (

@@ -22,8 +22,7 @@ export type IRenderRoutes<RouteProps extends IRouteProps = IRouteProps> = (
 export function renderRoutes<RouteProps extends IRouteProps = IRouteProps>(
   routes: RouteProps[]
 ): never {
-  routes;
   throw new Error(
-    '@reactionable/core does not provide routes rendering function, please install a "@reactionable/router-*" package'
+    `@reactionable/core does not provide routes rendering function for given routes "${typeof routes}", please install a "@reactionable/router-*" package`
   );
 }

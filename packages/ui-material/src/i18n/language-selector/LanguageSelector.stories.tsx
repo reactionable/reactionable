@@ -1,24 +1,28 @@
-import { i18nTestInstance } from "@reactionable/core/lib/testing/I18n";
+import { i18nTestInstance } from "@reactionable/core";
 import { action } from "@storybook/addon-actions";
-import { ReactElement } from "react";
+import type { Meta, StoryObj } from "@storybook/react";
 
 import { UIContextProvider } from "../../UI";
 import { LanguageSelector } from "./LanguageSelector";
 
-export default {
-  title: "UI Material/Components/I18n",
-  parameters: {
-    info: { inline: true },
-    options: { showPanel: true },
-    component: LanguageSelector,
-  },
+const meta: Meta<typeof LanguageSelector> = {
+  title: "UI Material/Components/I18n/LanguageSelector",
+  component: LanguageSelector,
 };
 
-export const BasicLanguageSelector = (): ReactElement => {
-  i18nTestInstance();
-  return (
+export default meta;
+
+type Story = StoryObj<typeof LanguageSelector>;
+
+i18nTestInstance();
+
+export const BasicLanguageSelector: Story = {
+  args: {
+    onSelectLanguage: action("Language has changed"),
+  },
+  render: (props) => (
     <UIContextProvider>
-      <LanguageSelector onSelectLanguage={action("Language has changed")} />
+      <LanguageSelector {...props} />
     </UIContextProvider>
-  );
+  ),
 };

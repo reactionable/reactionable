@@ -1,35 +1,68 @@
 import { action } from "@storybook/addon-actions";
-import { ReactElement } from "react";
+import type { Meta, StoryObj } from "@storybook/react";
 
 import { UIContextProvider, useUIProviderProps } from "../UI";
-import { ConfirmationAction } from "./Confirmation";
+import { Confirmation, ConfirmationAction, useConfirmation } from "./Confirmation";
 
-export default {
+const meta: Meta<typeof Confirmation> = {
   title: "Core/Components/UI/Confirmation",
-  parameters: {
-    info: { inline: true },
-    options: { showPanel: true },
-    component: ConfirmationAction,
+  component: Confirmation,
+};
+
+export default meta;
+
+type Story = StoryObj<typeof Confirmation>;
+
+export const BasicConfirmation: Story = {
+  args: {
+    title: "Confirm?",
+    children: "Do you want to perform this action",
+    callback: async (confirm: boolean) => {
+      action(confirm ? "Action confirmed" : "Action canceled")();
+    },
   },
 };
 
-export const BasicConfirmationAction = (): ReactElement => (
-  <UIContextProvider {...useUIProviderProps()}>
-    <ConfirmationAction
-      title="Confirm?"
-      confirmationMessage="Do you want to perform this action"
-      successMessage="The action has been confirmed"
-      onConfirm={async () => {
-        action("Action confirmed")();
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        return "ok";
-      }}
-      onSuccess={action("Action succeed")}
-    >
+export const UseConfirmation: Story = {
+  args: {
+    title: "Confirm?",
+    callback: async (confirm: boolean) => {
+      action(confirm ? "Action confirmed" : "Action canceled")();
+    },
+  },
+  render: (props) => {
+    const { confirmation, setConfirmation } = useConfirmation(props);
+
+    return (
+      <>
+        <button onClick={() => setConfirmation(true)}>Click on me</button>
+        {confirmation}
+      </>
+    );
+  },
+};
+
+export const BasicConfirmationAction: StoryObj<typeof ConfirmationAction> = {
+  args: {
+    title: "Confirm?",
+    confirmationMessage: "Do you want to perform this action",
+    successMessage: "The action has been confirmed",
+    onConfirm: async () => {
+      action("Action confirmed")();
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      return "ok";
+    },
+    onSuccess: action("Action succeed"),
+    children: (
       <div>
         <button>Click on me</button>
         <hr />
       </div>
-    </ConfirmationAction>
-  </UIContextProvider>
-);
+    ),
+  },
+  render: (props) => (
+    <UIContextProvider {...useUIProviderProps()}>
+      <ConfirmationAction {...props} />
+    </UIContextProvider>
+  ),
+};

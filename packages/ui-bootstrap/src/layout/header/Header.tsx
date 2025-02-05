@@ -1,4 +1,4 @@
-import { IHeaderProps as ICoreHeaderProps } from "@reactionable/core/lib/ui/layout/header/Header";
+import { IHeaderProps as ICoreHeaderProps } from "@reactionable/core";
 import { ComponentType, PropsWithChildren, ReactElement } from "react";
 import Nav from "react-bootstrap/Nav";
 import Navbar, { NavbarProps } from "react-bootstrap/Navbar";
