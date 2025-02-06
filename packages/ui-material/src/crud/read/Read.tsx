@@ -1,4 +1,4 @@
-import Grid from "@material-ui/core/Grid/Grid";
+import Grid from "@mui/material/Grid2";
 import { Read as CoreRead, IReadProps as ICoreReadProps, IData } from "@reactionable/core";
 import { ReactElement } from "react";
 
@@ -12,9 +12,7 @@ export function Read<Data extends IData = IData>({
     <CoreRead<Data> {...props}>
       {(props) => (
         <Grid container>
-          <Grid item xs>
-            {children(props)}
-          </Grid>
+          <Grid size={"grow"}>{children(props)}</Grid>
         </Grid>
       )}
     </CoreRead>

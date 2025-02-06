@@ -1,4 +1,4 @@
-import "@aws-amplify/ui/dist/style.css";
+import "@aws-amplify/ui-react/styles.css";
 
 import type { Meta, StoryObj } from "@storybook/react";
 
@@ -18,9 +18,16 @@ const meta: Meta<typeof IdentityContextProvider> = {
 };
 
 configure({
-  oauth: {},
-  userPoolId: "eu-west-1_testuserpoolid",
-  userPoolWebClientId: "test_clientid",
+  Auth: {
+    Cognito: {
+      userPoolId: "eu-west-1_testuserpoolid",
+      identityPoolId: "eu-west-1_testuserpoolid",
+      userPoolClientId: "test_clientid",
+      loginWith: {
+        email: true,
+      },
+    },
+  },
 });
 
 export default meta;

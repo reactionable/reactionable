@@ -7,7 +7,7 @@ const { resolve, basename } = require("path");
 const externalPackagesToLink = [
   "react",
   "react-dom",
-  "react-router-dom",
+  "react-router",
   "react-i18next",
   "aws-amplify",
   "@material-ui/styles",

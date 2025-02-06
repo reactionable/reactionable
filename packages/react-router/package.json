@@ -1,7 +1,7 @@
 {
-  "name": "@reactionable/router-dom",
+  "name": "@reactionable/react-router",
   "version": "0.28.28",
-  "description": "Reactionable Router package for react-router-dom",
+  "description": "Reactionable Router package for react-router",
   "files": [
     "lib"
   ],
@@ -36,8 +36,7 @@
     "react",
     "framework",
     "Router",
-    "Dom",
-    "react-router-dom"
+    "react-router"
   ],
   "author": "ESCEMI <developer@escemi.com>",
   "license": "MIT",
@@ -48,11 +47,10 @@
   "dependencies": {
     "@reactionable/core": "^0.28.28",
     "react-helmet": "^6.1.0",
-    "react-router-dom": "^7.1.5"
+    "react-router": "^7.1.5"
   },
   "devDependencies": {
-    "@types/react-helmet": "^6.1.6",
-    "@types/react-router-dom": "^5.3.3"
+    "@types/react-helmet": "^6.1.6"
   },
   "publishConfig": {
     "access": "public"

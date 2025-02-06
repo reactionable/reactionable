@@ -1,5 +1,5 @@
 import { IRouteMatch, IRouteMatchParams } from "@reactionable/core";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 
 export function useRouteMatch<
   RouteMatchParams extends IRouteMatchParams = IRouteMatchParams,

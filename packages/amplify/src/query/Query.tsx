@@ -1,3 +1,4 @@
+import { Amplify } from "@aws-amplify/core";
 import { GraphQLAPI, GraphQLResult, graphqlOperation } from "@aws-amplify/api-graphql";
 import {
   IQueryOptions as ICoreQueryOptions,
@@ -34,7 +35,7 @@ export async function query<Data extends IData, QO extends IQueryOptions<IVariab
 }: QO): Promise<Data> {
   let result;
   try {
-    result = await GraphQLAPI.graphql(graphqlOperation(query, variables));
+    result = await GraphQLAPI.graphql(Amplify, graphqlOperation(query, variables));
   } catch (error) {
     if (error instanceof Error) {
       throw error;

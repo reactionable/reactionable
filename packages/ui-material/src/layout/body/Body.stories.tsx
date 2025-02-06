@@ -1,6 +1,6 @@
-import Box from "@material-ui/core/Box/Box";
-import Button from "@material-ui/core/Button/Button";
-import Paper from "@material-ui/core/Paper/Paper";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Paper from "@mui/material/Paper";
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { Body } from "./Body";

@@ -1,6 +1,5 @@
-import { makeStyles } from "@material-ui/core";
-import UiAlert, { AlertProps } from "@material-ui/lab/Alert";
-import AlertTitle from "@material-ui/lab/AlertTitle/AlertTitle";
+import UiAlert, { AlertProps } from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
 import {
   IAlertProps as IAlertPropsCore,
   IUseAlertResult,
@@ -17,15 +16,7 @@ export type IAlertProps = IAlertPropsCore &
 
 export type AlertComponent = ComponentType<IAlertProps>;
 
-const useStyles = makeStyles(() => ({
-  message: {
-    width: "100%",
-  },
-}));
-
 export const Alert: AlertComponent = ({ children, title, icon, ...props }: IAlertProps) => {
-  const classes = useStyles();
-
   let iconProp: AlertProps["icon"];
 
   if (!icon) {
@@ -35,7 +26,7 @@ export const Alert: AlertComponent = ({ children, title, icon, ...props }: IAler
   }
 
   return (
-    <UiAlert icon={iconProp} classes={classes} {...props}>
+    <UiAlert icon={iconProp} {...props}>
       {title && <AlertTitle>{title}</AlertTitle>}
       {children}
     </UiAlert>

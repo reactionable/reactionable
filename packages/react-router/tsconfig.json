@@ -6,7 +6,7 @@
   },
   "include": ["src"],
   "typedocOptions": {
-    "out": "../../build/storybook/docs/router-dom",
+    "out": "../../build/storybook/docs/react-router",
     "entryPoints": ["src/index.ts"],
     "hideGenerator": true,
     "githubPages": true,

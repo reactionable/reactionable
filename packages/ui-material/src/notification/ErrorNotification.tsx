@@ -1,4 +1,4 @@
-import { SnackbarProps } from "@material-ui/core/Snackbar/Snackbar";
+import { SnackbarProps } from "@mui/material/Snackbar";
 import {
   useTranslation,
   ErrorNotificationComponent,

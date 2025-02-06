@@ -1,4 +1,4 @@
-import SaveIcon from "@material-ui/icons/Save";
+import SaveIcon from "@mui/icons-material/Save";
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { TestWrapper } from "../testing/TestWrapper";

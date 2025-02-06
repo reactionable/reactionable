@@ -1,11 +1,10 @@
 import {
-  IFormFieldValue,
   IUseFormFieldProps as ICoreUseFormFieldProps,
   useFormField as useCoreFormField,
 } from "@reactionable/core";
 import { ReactElement } from "react";
 
-import { FormField, IFieldElementProps } from "./FormField";
+import { FormField, IFieldElementProps, IFormFieldValue } from "./FormField";
 
 export type IUseFormFieldProps<
   FieldElementProps extends IFieldElementProps = IFieldElementProps,

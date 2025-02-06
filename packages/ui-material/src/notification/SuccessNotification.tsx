@@ -1,4 +1,4 @@
-import { SnackbarProps } from "@material-ui/core/Snackbar/Snackbar";
+import { SnackbarProps } from "@mui/material/Snackbar";
 import {
   ISuccessNotificationProps as ICoreSuccessNotificationProps,
   IUseSuccessNotificationProps as ICoreUseSuccessNotificationProps,

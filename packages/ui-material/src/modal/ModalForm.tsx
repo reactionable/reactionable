@@ -1,5 +1,5 @@
-import DialogActions from "@material-ui/core/DialogActions/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
 import {
   IFormData,
   IFormValues,
@@ -55,7 +55,7 @@ function ModalFormChildren<
     children: cancelButton ?? t("Cancel"),
     disabled: formikProps.isSubmitting,
     onClick: closeModal,
-    color: "default",
+    color: "inherit",
     fullWidth: false,
   });
 

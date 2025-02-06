@@ -1,5 +1,5 @@
-import Button from "@material-ui/core/Button/Button";
-import AnnouncementIcon from "@material-ui/icons/Announcement";
+import Button from "@mui/material/Button";
+import AnnouncementIcon from "@mui/icons-material/Announcement";
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { Alert, useAlert } from "./Alert";

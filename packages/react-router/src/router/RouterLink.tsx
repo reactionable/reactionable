@@ -1,6 +1,6 @@
 import { IRouterLinkProps as ICoreRouterLinkProps } from "@reactionable/core";
 import { ForwardedRef, forwardRef } from "react";
-import { LinkProps, useHref, useLinkClickHandler } from "react-router-dom";
+import { LinkProps, useHref, useLinkClickHandler } from "react-router";
 
 export type IRouterLinkProps = ICoreRouterLinkProps<
   Partial<LinkProps> & { ref: ForwardedRef<HTMLAnchorElement> }

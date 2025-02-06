@@ -1,15 +1,12 @@
-import Dialog, { DialogProps } from "@material-ui/core/Dialog/Dialog";
-import DialogActions from "@material-ui/core/DialogActions/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle/DialogTitle";
-import IconButton from "@material-ui/core/IconButton/IconButton";
-import { Theme } from "@material-ui/core/styles/createTheme";
-import createStyles from "@material-ui/core/styles/createStyles";
-import makeStyles from "@material-ui/core/styles/makeStyles";
-import useTheme from "@material-ui/core/styles/useTheme";
-import useMediaQuery from "@material-ui/core/useMediaQuery/useMediaQuery";
-import CloseIcon from "@material-ui/icons/Close";
+import Dialog, { DialogProps } from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import IconButton from "@mui/material/IconButton";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import CloseIcon from "@mui/icons-material/Close";
 import {
   IModalProps as ICoreModalProps,
   IUseModalProps as ICoreUseModalProps,
@@ -24,17 +21,6 @@ export type IModalProps = ICoreModalProps &
     footer?: ReactNode;
   };
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    closeButton: {
-      position: "absolute",
-      right: theme.spacing(1),
-      top: theme.spacing(1),
-      color: theme.palette.grey[500],
-    },
-  })
-);
-
 export type ModalComponent = ComponentType<IModalProps>;
 export const Modal: ModalComponent = ({
   title,
@@ -45,9 +31,8 @@ export const Modal: ModalComponent = ({
   show: open,
   ...dialogProps
 }: IModalProps) => {
-  const classes = useStyles();
   const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const fullScreen = useMediaQuery(theme.breakpoints.down("lg"));
 
   const handleOnClose = () => {
     if (onHide) {
@@ -66,7 +51,17 @@ export const Modal: ModalComponent = ({
     >
       <DialogTitle id="dialog-title">
         {title}
-        <IconButton aria-label="close" className={classes.closeButton} onClick={handleOnClose}>
+        <IconButton
+          aria-label="close"
+          onClick={handleOnClose}
+          size="large"
+          sx={{
+            position: "absolute",
+            right: (theme) => theme.spacing(1),
+            top: (theme) => theme.spacing(1),
+            color: (theme) => theme.palette.grey[500],
+          }}
+        >
           <CloseIcon />
         </IconButton>
       </DialogTitle>

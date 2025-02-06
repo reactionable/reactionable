@@ -1,33 +1,27 @@
-import { Container } from "@material-ui/core";
-import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
-import clsx from "clsx";
+import { Container } from "@mui/material";
+import { deepmerge } from "@mui/utils";
 import { ComponentProps, ElementType, ReactElement } from "react";
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    main: {
-      marginTop: theme.spacing(4),
-      [theme.breakpoints.down("xs")]: {
-        padding: theme.spacing(3, 0),
-      },
-    },
-  })
-);
 
 export type IResponsiveContainerProps = Partial<ComponentProps<typeof Container>> & {
   component?: ElementType;
-  classes?: ReturnType<typeof useStyles>;
 };
 
 export const ResponsiveContainer = ({
   children,
-  classes: overrideClasses,
+  sx,
   ...props
 }: IResponsiveContainerProps): ReactElement => {
-  const classes = useStyles();
-
   return (
-    <Container maxWidth="xl" className={clsx(classes.main, overrideClasses?.main)} {...props}>
+    <Container
+      maxWidth="xl"
+      sx={deepmerge(
+        {
+          marginTop: (theme) => theme.spacing(4),
+        },
+        sx
+      )}
+      {...props}
+    >
       {children || <></>}
     </Container>
   );

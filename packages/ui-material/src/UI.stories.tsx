@@ -1,5 +1,5 @@
-import Button from "@material-ui/core/Button/Button";
-import Paper from "@material-ui/core/Paper/Paper";
+import Button from "@mui/material/Button";
+import Paper from "@mui/material/Paper";
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { UIContextProvider } from "./UI";

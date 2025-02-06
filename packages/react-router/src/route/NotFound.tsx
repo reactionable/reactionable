@@ -1,6 +1,6 @@
 import { lazyLoad } from "@reactionable/core";
 import { ComponentType, LazyExoticComponent, PropsWithChildren } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 
 export type INotFoundComponent = LazyExoticComponent<ComponentType<unknown>>;
 

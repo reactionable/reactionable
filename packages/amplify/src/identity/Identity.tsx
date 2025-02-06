@@ -1,4 +1,5 @@
-import { Auth } from "@aws-amplify/auth";
+import { Authenticator, AuthenticatorProps } from "@aws-amplify/ui-react";
+import { signIn, signOut, getCurrentUser, AuthUser, fetchAuthSession } from "aws-amplify/auth";
 import {
   useTranslation,
   IdentityContextProvider as CoreIdentityContextProvider,
@@ -8,79 +9,45 @@ import {
   useIdentityContext as coreUseIdentityContext,
   useIdentityProviderProps as coreUseIdentityProviderProps,
 } from "@reactionable/core";
-import Authenticator, { IAuthenticatorProps } from "aws-amplify-react/lib/Auth/Authenticator";
-import { UsernameAttributes } from "aws-amplify-react/lib/Auth/common/types";
 import { ComponentType, PropsWithChildren, ReactElement, useEffect, useState } from "react";
 
 export type IUser = ICoreUser & {
   id: string;
   username: string;
-  attributes: {
-    email: string;
-  };
 };
 
-export {
-  SignIn,
-  ConfirmSignIn,
-  VerifyContact,
-  ForgotPassword,
-  SignUp,
-  SignOut,
-} from "aws-amplify-react/lib/Auth";
-
-const dataToUser = (data?: IUser): IUser | null => {
+const dataToUser = (data?: AuthUser): IUser | null => {
   if (!data) {
     return null;
   }
-  return data;
+  return {
+    id: data.userId,
+    username: data.username,
+  };
 };
 
-function AuthComponent(props: PropsWithChildren<IAuthenticatorProps>) {
-  const { t } = useTranslation("identity");
-  const { setUser, hide } = useIdentityContext();
+function AuthComponent(props: PropsWithChildren<AuthenticatorProps>) {
+  const { t } = useTranslation();
+  const { setUser } = useIdentityContext();
 
-  const authenticatorProps = Object.assign(
-    {
-      errorMessage: (message: string) => t(message),
-      usernameAttributes: UsernameAttributes.EMAIL,
-      signUpConfig: {
-        hideAllDefaults: true,
-        signUpFields: [
-          {
-            label: "Email",
-            key: "email",
-            required: true,
-            displayOrder: 1,
-            type: "string",
-          },
-          {
-            label: "Password",
-            key: "password",
-            required: true,
-            displayOrder: 2,
-            type: "password",
-          },
-          ...(props?.signUpConfig?.signUpFields || []),
-        ],
-        ...(props?.signUpConfig || {}),
-      },
-    },
-    hide
-  );
+  const authenticatorProps = Object.assign({
+    errorMessage: (message: string) => t(message),
+    ...props,
+  });
 
   return (
     <Authenticator
       {...authenticatorProps}
-      onStateChange={(authState: string, data?) => {
+      onStateChange={(authState: string, data?: AuthUser) => {
         setUser(authState !== "signedIn" ? null : dataToUser(data));
       }}
     />
   );
 }
 
-export type IIdentityProviderProps = ICoreIdentityProviderProps<IUser> & IAuthenticatorProps;
-export type IIdentityProviderValue = ICoreIdentityProviderValue<IUser> & IAuthenticatorProps;
+export type IIdentityProviderProps = ICoreIdentityProviderProps<IUser> &
+  Omit<AuthenticatorProps, "children">;
+export type IIdentityProviderValue = ICoreIdentityProviderValue<IUser> & AuthenticatorProps;
 
 export const useIdentityProviderProps = (
   props: Partial<IIdentityProviderProps> = {}
@@ -94,9 +61,22 @@ export const useIdentityProviderProps = (
     }
 
     if (userState === undefined) {
-      Auth.currentAuthenticatedUser()
+      fetchAuthSession()
         .then((data) => {
-          setUser(dataToUser(data));
+          if (!data.identityId) {
+            return;
+          }
+          getCurrentUser()
+            .then((data) => {
+              setUser(dataToUser(data));
+            })
+            .catch((error) => {
+              if (error === "The user is not authenticated") {
+                setUser(null);
+              } else {
+                throw error;
+              }
+            });
         })
         .catch((error) => {
           if (error === "The user is not authenticated") {
@@ -111,12 +91,15 @@ export const useIdentityProviderProps = (
   return {
     ...coreUseIdentityProviderProps(),
     identityProvider: "Amplify",
-    logout: async () => await Auth.signOut(),
+    logout: async () => await signOut(),
     login: async (values) => {
-      const result = await Auth.signIn(values);
-      const user = dataToUser(result);
-      if (user) {
-        return user;
+      const result = await signIn(values);
+
+      if (result.isSignedIn) {
+        const user = dataToUser(await getCurrentUser());
+        if (user) {
+          return user;
+        }
       }
 
       throw new Error("No user retrieved from signIn");
@@ -142,8 +125,6 @@ export function withIdentityContext(
   );
 }
 
-export const IdentityContextProvider = (
-  props?: PropsWithChildren<Partial<IIdentityProviderProps>>
-): ReactElement => {
-  return <CoreIdentityContextProvider {...useIdentityProviderProps(props)} />;
+export const IdentityContextProvider = (props?: Partial<IIdentityProviderProps>): ReactElement => {
+  return <CoreIdentityContextProvider<IUser> {...useIdentityProviderProps(props)} />;
 };

@@ -15,8 +15,8 @@ describe("Identity", () => {
     it("should render without crashing", async () => {
       const { findByText } = render(<UseIdentityContext />);
 
-      expect(await findByText("Sign in to your account")).toBeInTheDocument();
-      expect(await findByText("Create account")).toBeInTheDocument();
+      expect(await findByText("Sign In")).toBeInTheDocument();
+      expect(await findByText("Create Account")).toBeInTheDocument();
     });
   });
 });

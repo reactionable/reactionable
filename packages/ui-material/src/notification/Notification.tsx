@@ -1,6 +1,6 @@
-import Snackbar, { SnackbarProps } from "@material-ui/core/Snackbar/Snackbar";
-import SnackbarContent from "@material-ui/core/SnackbarContent/SnackbarContent";
-import Typography from "@material-ui/core/Typography/Typography";
+import Snackbar, { SnackbarProps } from "@mui/material/Snackbar";
+import SnackbarContent from "@mui/material/SnackbarContent";
+import Typography from "@mui/material/Typography";
 import {
   INotificationProps as ICoreNotificationProps,
   IUseNotificationProps as ICoreUseNotificationProps,
@@ -8,10 +8,10 @@ import {
   useNotification as useCoreNotification,
 } from "@reactionable/core";
 import {
-  MouseEvent,
+  ForwardedRef,
   PropsWithChildren,
   ReactElement,
-  SyntheticEvent,
+  forwardRef,
   isValidElement,
   useEffect,
   useState,
@@ -19,14 +19,10 @@ import {
 
 export type INotificationProps = ICoreNotificationProps & Omit<SnackbarProps, "children" | "title">;
 
-export const Notification = ({
-  onClose,
-  title,
-  children,
-  show = true,
-  ...props
-}: PropsWithChildren<INotificationProps>): ReactElement => {
-  if (!children || !isValidElement(children)) {
+type WrappedSnackbarContentProps = PropsWithChildren<Pick<INotificationProps, "title">>;
+
+const WrappedSnackbarContent = forwardRef<unknown, WrappedSnackbarContentProps>(
+  function WrappedChildren({ children, title }: WrappedSnackbarContentProps, ref) {
     if (title) {
       children = (
         <>
@@ -35,9 +31,26 @@ export const Notification = ({
         </>
       );
     }
-    children = <SnackbarContent message={children} />;
-  }
 
+    if (!children) {
+      return null;
+    }
+
+    if (!title && isValidElement(children)) {
+      return <div ref={ref as ForwardedRef<HTMLDivElement>}>{children}</div>;
+    }
+
+    return <SnackbarContent ref={ref as ForwardedRef<HTMLDivElement>} message={children} />;
+  }
+);
+
+export const Notification = ({
+  onClose,
+  title,
+  children,
+  show = true,
+  ...props
+}: PropsWithChildren<INotificationProps>): ReactElement => {
   const [open, setOpen] = useState<boolean>();
 
   useEffect(() => {
@@ -47,7 +60,7 @@ export const Notification = ({
   }, [open, show]);
 
   let firstClickAway = true;
-  const handleClose = (event: SyntheticEvent | MouseEvent, reason?: string) => {
+  const handleClose: SnackbarProps["onClose"] = (event, reason?: string) => {
     if (reason === "clickaway") {
       if (firstClickAway) {
         firstClickAway = false;
@@ -61,9 +74,16 @@ export const Notification = ({
     }
   };
 
+  const snackbarProps: SnackbarProps = {
+    open,
+    autoHideDuration: 6000,
+    onClose: handleClose,
+    ...props,
+  };
+
   return (
-    <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} {...props}>
-      {children as ReactElement}
+    <Snackbar {...snackbarProps}>
+      <WrappedSnackbarContent title={title}>{children}</WrappedSnackbarContent>
     </Snackbar>
   );
 };
