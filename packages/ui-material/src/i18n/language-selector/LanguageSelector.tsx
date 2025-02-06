@@ -1,11 +1,8 @@
-import Button from "@material-ui/core/Button/Button";
-import Menu from "@material-ui/core/Menu/Menu";
-import MenuItem from "@material-ui/core/MenuItem/MenuItem";
-import { Theme } from "@material-ui/core/styles/createTheme";
-import createStyles from "@material-ui/core/styles/createStyles";
-import makeStyles from "@material-ui/core/styles/makeStyles";
-import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
-import Translate from "@material-ui/icons/Translate";
+import Button from "@mui/material/Button";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import Translate from "@mui/icons-material/Translate";
 import {
   LanguageSelector as CoreLanguageSelector,
   ILanguageSelectorComponentProps as ICoreLanguageSelectorComponentProps,
@@ -23,20 +20,12 @@ export type ILanguageSelectorComponentProps = ComponentProps<typeof Button> &
 
 export type LanguageSelectorComponent = ComponentType<ILanguageSelectorComponentProps>;
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    item: {
-      minWidth: theme.spacing(15),
-    },
-  })
-);
 export function LanguageSelectorComponent({
   current,
   languages,
   onSelectLanguage,
   ...props
 }: PropsWithChildren<ILanguageSelectorComponentProps>): ReactElement {
-  const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -73,7 +62,13 @@ export function LanguageSelectorComponent({
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem className={classes.item} disabled selected>
+        <MenuItem
+          disabled
+          selected
+          sx={{
+            minWidth: (theme) => theme.spacing(15),
+          }}
+        >
           {current}
         </MenuItem>
         {languages.map((language) => (

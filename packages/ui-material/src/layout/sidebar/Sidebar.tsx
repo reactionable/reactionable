@@ -1,15 +1,12 @@
-import Divider from "@material-ui/core/Divider/Divider";
-import Drawer from "@material-ui/core/Drawer/Drawer";
-import IconButton from "@material-ui/core/IconButton/IconButton";
-import List from "@material-ui/core/List";
-import { Theme } from "@material-ui/core/styles/createTheme";
-import createStyles from "@material-ui/core/styles/createStyles";
-import makeStyles from "@material-ui/core/styles/makeStyles";
-import useTheme from "@material-ui/core/styles/useTheme";
-import Toolbar from "@material-ui/core/Toolbar/Toolbar";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import Divider from "@mui/material/Divider";
+import Drawer from "@mui/material/Drawer";
+import IconButton from "@mui/material/IconButton";
+import List from "@mui/material/List";
+import { useTheme } from "@mui/material/styles";
+import Toolbar from "@mui/material/Toolbar";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import {
   INavItemsProps,
   INavItemsProviderProps as ICoreNavItemsProviderProps,
@@ -17,7 +14,6 @@ import {
   useSidebarContext as coreUseSidebarContext,
   ISidebarProps as ICoreSidebarProps,
 } from "@reactionable/core";
-import clsx from "clsx";
 import { PropsWithChildren, ReactElement, useEffect, useState } from "react";
 
 import { ISidebarNavItemProps, SidebarNavItems } from "./SidebarNavItem";
@@ -35,45 +31,7 @@ export function useSidebarContext(): INavItemsProviderProps {
   return coreUseSidebarContext();
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      display: "flex",
-    },
-    content: {
-      flexGrow: 1,
-    },
-    drawer: {
-      width: theme.spacing(25),
-      flexShrink: 0,
-      whiteSpace: "nowrap",
-    },
-    drawerPaper: {
-      marginTop: theme.spacing(8) + 1,
-    },
-    drawerOpen: {
-      width: theme.spacing(25),
-      transition: theme.transitions.create("width", {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
-    },
-    drawerClose: {
-      transition: theme.transitions.create("width", {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
-      overflowX: "hidden",
-      width: theme.spacing(7) + 1,
-      [theme.breakpoints.up("sm")]: {
-        width: theme.spacing(9) + 1,
-      },
-    },
-  })
-);
-
 export function SidebarComponent({ children, open = true }: ISidebarProps): ReactElement {
-  const classes = useStyles();
   const theme = useTheme();
 
   const [openState, setOpen] = useState<boolean>(open);
@@ -84,23 +42,10 @@ export function SidebarComponent({ children, open = true }: ISidebarProps): Reac
   };
 
   return (
-    <div className={classes.root}>
-      <Drawer
-        variant="permanent"
-        className={clsx(classes.drawer, {
-          [classes.drawerOpen]: openState,
-          [classes.drawerClose]: !openState,
-        })}
-        classes={{
-          paper: clsx({
-            [classes.drawerPaper]: true,
-            [classes.drawerOpen]: openState,
-            [classes.drawerClose]: !openState,
-          }),
-        }}
-      >
+    <div>
+      <Drawer variant="permanent">
         <Toolbar color="primary">
-          <IconButton onClick={toggleSidebar} color="secondary">
+          <IconButton onClick={toggleSidebar} color="secondary" size="large">
             {theme.direction === "rtl" ? (
               openState ? (
                 <ChevronRightIcon />
@@ -119,7 +64,7 @@ export function SidebarComponent({ children, open = true }: ISidebarProps): Reac
           <SidebarNavItems navItems={navItems} />
         </List>
       </Drawer>
-      <main className={classes.content}>{children}</main>
+      <main>{children}</main>
     </div>
   );
 }

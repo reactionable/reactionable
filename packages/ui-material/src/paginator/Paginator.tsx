@@ -1,4 +1,4 @@
-import { PaginationProps } from "@material-ui/lab/Pagination/Pagination";
+import { PaginationProps } from "@mui/material/Pagination";
 import {
   Paginator as CorePaginator,
   IPaginatorProps as ICorePaginatorProps,

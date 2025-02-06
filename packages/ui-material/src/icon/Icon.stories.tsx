@@ -1,4 +1,4 @@
-import Star from "@material-ui/icons/Star";
+import Star from "@mui/icons-material/Star";
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { Icon } from "./Icon";
@@ -17,8 +17,4 @@ export const BasicIcon: Story = {
     icon: Star,
     color: "primary",
   },
-};
-
-export const IconWithComponentAsProp: Story = {
-  args: Star,
 };

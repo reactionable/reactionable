@@ -1,9 +1,8 @@
-import AppBar, { AppBarProps } from "@material-ui/core/AppBar/AppBar";
-import List from "@material-ui/core/List";
-import createStyles from "@material-ui/core/styles/createStyles";
-import makeStyles from "@material-ui/core/styles/makeStyles";
-import Toolbar from "@material-ui/core/Toolbar/Toolbar";
-import Typography from "@material-ui/core/Typography/Typography";
+import AppBar, { AppBarProps } from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import List from "@mui/material/List";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
 import { IHeaderProps as ICoreHeaderProps, useUIContext } from "@reactionable/core";
 import { ComponentType, PropsWithChildren, ReactElement, ReactNode } from "react";
 
@@ -14,22 +13,6 @@ import { UserHeaderNav } from "./UserHeaderNav";
 export type IHeaderProps = ICoreHeaderProps<INavItemProps> & AppBarProps;
 export type HeaderComponent = ComponentType<IHeaderProps>;
 
-const useStyles = makeStyles((theme) =>
-  createStyles({
-    title: {
-      marginRight: theme.spacing(5),
-    },
-    children: {
-      flexGrow: 1,
-    },
-    link: {
-      display: "flex",
-      justifyContent: "flex-start",
-      alignItems: "center",
-    },
-  })
-);
-
 export const Header = ({
   brand,
   navItems = [],
@@ -37,7 +20,6 @@ export const Header = ({
   children,
   ...appBarProps
 }: PropsWithChildren<IHeaderProps>): ReactElement => {
-  const classes = useStyles();
   const { useLink } = useUIContext();
 
   let brandContent: ReactNode = null;
@@ -45,10 +27,19 @@ export const Header = ({
     const linkProps = isLinkProps(brand) ? brand : { href: "/", children: brand };
     const link = useLink({
       ...linkProps,
-      className: classes.link,
+      sx: {
+        display: "flex",
+        justifyContent: "flex-start",
+        alignItems: "center",
+      },
     });
     brandContent = (
-      <Typography variant="h6" className={classes.title}>
+      <Typography
+        variant="h6"
+        sx={{
+          marginRight: (theme) => theme.spacing(5),
+        }}
+      >
         {link}
       </Typography>
     );
@@ -62,13 +53,17 @@ export const Header = ({
     <AppBar position="static" color="default" {...appBarProps} component="header">
       <Toolbar>
         {brandContent}
-        <div className={classes.children}>
+        <Box
+          sx={{
+            flexGrow: 1,
+          }}
+        >
           {children || (
             <List>
               <NavItems navItems={navItems} />
             </List>
           )}
-        </div>
+        </Box>
         <UserHeaderNavComponent />
       </Toolbar>
     </AppBar>

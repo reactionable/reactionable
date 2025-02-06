@@ -1,6 +1,11 @@
-import CssBaseline from "@material-ui/core/CssBaseline";
-import { ThemeProvider } from "@material-ui/core/styles";
-import createTheme, { Theme, ThemeOptions } from "@material-ui/core/styles/createTheme";
+import CssBaseline from "@mui/material/CssBaseline";
+import {
+  StyledEngineProvider,
+  Theme,
+  ThemeOptions,
+  ThemeProvider,
+  createTheme,
+} from "@mui/material/styles";
 import {
   UIContextProvider as CoreUIContextProvider,
   IUIProviderProps as ICoreUIContextProviderProps,
@@ -37,10 +42,14 @@ export function UIComponent({
 }: IUIComponentProps): ReactElement {
   const providerTheme = createTheme(theme);
   return (
-    <ThemeProvider theme={providerTheme}>
-      {cssBaseline && <CssBaseline />}
-      {children || <></>}
-    </ThemeProvider>
+    <StyledEngineProvider injectFirst>
+      (
+      <ThemeProvider theme={providerTheme}>
+        {cssBaseline && <CssBaseline />}
+        {children || <></>}
+      </ThemeProvider>
+      )
+    </StyledEngineProvider>
   );
 }
 

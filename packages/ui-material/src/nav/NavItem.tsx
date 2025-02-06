@@ -1,5 +1,5 @@
-import { LinkProps, SvgIcon } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
+import { LinkProps, SvgIcon } from "@mui/material";
+import Button from "@mui/material/Button";
 import {
   NavItems as CoreNavItems,
   INavItemProps as ICoreNavItemProps,

@@ -1,4 +1,4 @@
-import Grid from "@material-ui/core/Grid/Grid";
+import Grid from "@mui/material/Grid";
 import { List as CoreList, IListProps as ICoreListProps, IData } from "@reactionable/core";
 import { ReactElement } from "react";
 

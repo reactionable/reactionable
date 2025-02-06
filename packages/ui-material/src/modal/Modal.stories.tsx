@@ -1,4 +1,4 @@
-import Button from "@material-ui/core/Button/Button";
+import Button from "@mui/material/Button";
 import { action } from "@storybook/addon-actions";
 import type { Meta, StoryObj } from "@storybook/react";
 import { string } from "yup";
@@ -57,7 +57,7 @@ export const UseModalHook: StoryObj<IUseModalProps> = {
   },
   render: (props) => {
     const ModalHook = () => {
-      const { openModal, modal } = useModal(props);
+      const { openModal, modal } = useModal(props as IUseModalProps);
       return (
         <>
           <Button onClick={() => openModal()}>Open modal</Button>
@@ -124,7 +124,9 @@ export const UseModalFormHook: StoryObj<IUseModalFormProps<IFormValues, IFormDat
   },
   render: (props) => {
     const ModalFormHook = () => {
-      const { openModal, modal } = useModalForm(props);
+      const { openModal, modal } = useModalForm(
+        props as IUseModalFormProps<IFormValues, IFormData>
+      );
       return (
         <>
           <Button onClick={() => openModal()}>Open modal with form</Button>

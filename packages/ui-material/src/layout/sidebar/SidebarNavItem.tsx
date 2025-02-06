@@ -1,7 +1,7 @@
-import { SvgIcon } from "@material-ui/core";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
+import { SvgIcon } from "@mui/material";
+import ListItem from "@mui/material/ListItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
 import {
   INavItemProps as ICoreNavItemProps,
   INavItemsComponentProps,
@@ -39,7 +39,7 @@ export function SidebarNavItem(props: ISidebarNavItemProps): ReactElement {
   }
 
   return (
-    <ListItem button component={Link} {...linkProps}>
+    <ListItem component={Link} {...linkProps}>
       {listItemChildren}
     </ListItem>
   );

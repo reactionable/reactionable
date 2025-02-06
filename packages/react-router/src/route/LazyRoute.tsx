@@ -6,7 +6,7 @@ import {
   ReactElement,
   ReactNode,
 } from "react";
-import { Route, RouteProps } from "react-router-dom";
+import { Route, RouteProps } from "react-router";
 
 export type ILazyRouteProps = Omit<RouteProps, "component"> & {
   key?: string;
@@ -34,6 +34,7 @@ export function renderLazyRouteElement({
 export function renderLazyRoute({
   component,
   index,
+  key,
   ...routeProps
 }: PropsWithChildren<ILazyRouteProps>): ReactElement {
   const props = {
@@ -44,5 +45,5 @@ export function renderLazyRoute({
     ...routeProps,
   } as RouteProps;
 
-  return <Route {...props} />;
+  return <Route key={key} {...props} />;
 }

@@ -1,6 +1,6 @@
 import { useIdentityContext, useUIContext } from "@reactionable/core";
 import { ReactElement } from "react";
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router";
 
 function PrivateRouteWithoutUser({ user }: { user: undefined | null }) {
   const { loader } = useUIContext().useLoader({});

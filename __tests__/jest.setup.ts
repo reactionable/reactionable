@@ -7,3 +7,8 @@ global.console.error = function (...args: unknown[]) {
   const errorMessage = args.length ? format(args.shift(), ...args) : "";
   throw new Error(errorMessage);
 };
+
+if (typeof global.TextEncoder === "undefined") {
+  const { TextEncoder } = require("util");
+  global.TextEncoder = TextEncoder;
+}

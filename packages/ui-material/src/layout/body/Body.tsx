@@ -1,6 +1,6 @@
-import { Theme, createStyles, makeStyles } from "@material-ui/core";
+import { Theme } from "@mui/material";
+import { deepmerge } from "@mui/utils";
 import { IBodyProps as ICoreBodyProps } from "@reactionable/core";
-import clsx from "clsx";
 import { ComponentType, PropsWithChildren, ReactElement } from "react";
 
 import {
@@ -11,24 +11,21 @@ import {
 export type IBodyProps = ICoreBodyProps & IResponsiveContainerProps;
 export type BodyComponent = ComponentType<IBodyProps>;
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    main: {
-      minHeight: `calc(100% - ${theme.spacing(18)}px)`,
-    },
-  })
-);
-
 export function Body({
-  classes: overrideClasses,
   component = "main",
+  sx,
   ...props
 }: PropsWithChildren<IBodyProps>): ReactElement {
-  const classes = useStyles();
-  const bodyClasses = {
-    main: clsx(classes.main, overrideClasses?.main),
-    ...overrideClasses,
-  };
-
-  return <ResponsiveContainer {...props} component={component} classes={bodyClasses} />;
+  return (
+    <ResponsiveContainer
+      {...props}
+      component={component}
+      sx={deepmerge(
+        {
+          minHeight: (theme: Theme) => `calc(100% - ${theme.spacing(18)}px)`,
+        },
+        sx
+      )}
+    />
+  );
 }

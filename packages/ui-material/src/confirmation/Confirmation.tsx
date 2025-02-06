@@ -1,12 +1,12 @@
-import Button, { ButtonProps } from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog/Dialog";
-import DialogActions from "@material-ui/core/DialogActions/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle/DialogTitle";
-import Paper, { PaperProps } from "@material-ui/core/Paper/Paper";
-import useTheme from "@material-ui/core/styles/useTheme";
-import useMediaQuery from "@material-ui/core/useMediaQuery/useMediaQuery";
+import Button, { ButtonProps } from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Paper, { PaperProps } from "@mui/material/Paper";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import {
   useTranslation,
   ConfirmationComponent,
@@ -19,13 +19,6 @@ import {
 } from "@reactionable/core";
 import { PropsWithChildren, ReactElement } from "react";
 import Draggable from "react-draggable";
-
-// FIXME: Until this PR is merged https://github.com/react-grid-layout/react-draggable/pull/648
-declare module "react-draggable" {
-  export interface DraggableProps {
-    children: React.ReactNode;
-  }
-}
 
 import { IIconProps, Icon } from "../icon/Icon";
 
@@ -46,7 +39,7 @@ export const Confirmation: ConfirmationComponent = ({
 }: PropsWithChildren<IConfirmationProps>) => {
   const { t } = useTranslation("common");
   const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const fullScreen = useMediaQuery(theme.breakpoints.down("lg"));
   const handleCancel = () => callback(false);
   const handleOk = () => callback(true);
 

@@ -1,13 +1,13 @@
 import { PropsWithChildren, ReactElement } from "react";
-import { MemoryRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router";
 import { RouterComponentProps, RouterComponent } from "./RouterComponent";
 
-export function MemoryRouterComponent(
+export function BrowserRouterComponent(
   props: PropsWithChildren<RouterComponentProps>
 ): ReactElement {
   return (
-    <MemoryRouter>
+    <BrowserRouter>
       <RouterComponent {...props} />
-    </MemoryRouter>
+    </BrowserRouter>
   );
 }

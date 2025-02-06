@@ -1,8 +1,8 @@
 import "@testing-library/jest-dom";
 
+import { createTheme, useTheme } from "@mui/material/styles";
+
 import { composeStories } from "@storybook/react";
-import createTheme from "@material-ui/core/styles/createTheme";
-import useTheme from "@material-ui/core/styles/useTheme";
 import { i18nTestInstance, useUIContext } from "@reactionable/core";
 import { render } from "@testing-library/react";
 

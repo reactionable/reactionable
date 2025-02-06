@@ -1,7 +1,7 @@
-import IconButton from "@material-ui/core/IconButton/IconButton";
-import Menu from "@material-ui/core/Menu/Menu";
-import MenuItem from "@material-ui/core/MenuItem/MenuItem";
-import { AccountCircle } from "@material-ui/icons";
+import IconButton from "@mui/material/IconButton";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import { AccountCircle } from "@mui/icons-material";
 import {
   useIdentityContext,
   AccountLink,
@@ -20,7 +20,7 @@ const NavItemComponent = forwardRef(function NavItemComponent(
   ref: ForwardedRef<any>
 ) {
   return (
-    <MenuItem button onClick={onClick} ref={ref}>
+    <MenuItem onClick={onClick} ref={ref}>
       {children}
     </MenuItem>
   );
@@ -51,6 +51,7 @@ const UserLoggedHeaderNav = () => {
         aria-haspopup="true"
         onClick={handleClick}
         color="inherit"
+        size="large"
       >
         <AccountCircle />
       </IconButton>

@@ -1,10 +1,10 @@
 import { IUser, useIdentityContext, withIdentityContext } from "@reactionable/core";
 import type { Meta, StoryObj } from "@storybook/react";
 import { ComponentProps, useEffect } from "react";
+import { PaletteMode } from "@mui/material/styles";
 
 import { TestWrapper } from "../../testing/TestWrapper";
 import { Header, IHeaderProps } from "./Header";
-import { PaletteType } from "@material-ui/core";
 
 const meta: Meta<typeof Header> = {
   title: "UI Material/Components/Layout/Header",
@@ -13,7 +13,7 @@ const meta: Meta<typeof Header> = {
 
 export default meta;
 
-export const BasicHeader: StoryObj<IHeaderProps & { type: PaletteType }> = {
+export const BasicHeader: StoryObj<IHeaderProps & { mode: PaletteMode }> = {
   args: {
     brand: "Test Brand",
     navItems: [{ href: "/sample", children: "Sample link" }],
@@ -21,10 +21,8 @@ export const BasicHeader: StoryObj<IHeaderProps & { type: PaletteType }> = {
     type: "light",
   },
   // FIXME: MUST support type in render
-  // render: ({ type, ...props }) => (
-  // <TestWrapper ui={{ theme: { palette: { type } } }}>
-  render: ({ ...props }) => (
-    <TestWrapper ui={{ theme: { palette: { type: "light" } } }}>
+  render: ({ mode, ...props }) => (
+    <TestWrapper ui={{ theme: { palette: { mode } } }}>
       <Header {...props} />
     </TestWrapper>
   ),
@@ -52,10 +50,7 @@ export const HeaderWithIdentity: StoryObj<ComponentProps<typeof Header> & { user
       },
     },
     // FIXME: MUST support user in render
-    // render: ({ user, ...props }) => {
-    render: ({ ...props }) => {
-      const user = null;
-
+    render: ({ user, ...props }) => {
       const useFetchUser = () => ({
         loading: false,
         data: user,

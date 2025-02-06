@@ -2,8 +2,9 @@ import { I18n } from "@aws-amplify/core";
 import { initializeI18n as coreInitializeI18n } from "@reactionable/core";
 import { i18n as I18nType, InitOptions } from "i18next";
 
-function extractLanguage(language: string) {
-  return language.split("-").shift();
+function extractLanguage(language: string): string {
+  const languageParts = language.split("-");
+  return languageParts[0];
 }
 
 export async function initializeI18n(options: InitOptions): Promise<I18nType> {
@@ -12,11 +13,9 @@ export async function initializeI18n(options: InitOptions): Promise<I18nType> {
 
   if (options.resources) {
     for (const language of Object.keys(options.resources)) {
-      if (options.resources[language].translation) {
-        I18n.putVocabulariesForLanguage(
-          extractLanguage(language),
-          options.resources[language].translation
-        );
+      const translation = options.resources[language].translation;
+      if ("object" === typeof translation) {
+        I18n.putVocabulariesForLanguage(extractLanguage(language), translation);
       }
     }
   }

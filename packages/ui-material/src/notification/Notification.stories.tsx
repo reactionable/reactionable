@@ -1,4 +1,4 @@
-import Button from "@material-ui/core/Button/Button";
+import Button from "@mui/material/Button";
 import type { Meta, StoryObj } from "@storybook/react";
 
 import {

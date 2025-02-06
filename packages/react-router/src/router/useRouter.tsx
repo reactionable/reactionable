@@ -1,5 +1,5 @@
 import { IRouteMatch, IRouteMatchParams, IRouter } from "@reactionable/core";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { useRouteMatch } from "./useRouteMatch";
 
 export function useRouter<

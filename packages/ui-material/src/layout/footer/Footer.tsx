@@ -1,6 +1,5 @@
-import Grid from "@material-ui/core/Grid/Grid";
-import createStyles from "@material-ui/core/styles/createStyles";
-import makeStyles from "@material-ui/core/styles/makeStyles";
+import { Theme } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 import {
   CopyrightFooter,
   IFooterProps as ICoreFooterProps,
@@ -13,34 +12,26 @@ import { ResponsiveContainer } from "../responsive-container/ResponsiveContainer
 export type IFooterProps = ICoreFooterProps &
   Omit<DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>, "onSelect" | "ref">;
 
-const useStyles = makeStyles((theme) =>
-  createStyles({
-    footer: {
-      marginTop: theme.spacing(1),
-    },
-  })
-);
-
 export function Footer({
   brand,
   sponsor = true,
   ...footerProps
 }: PropsWithChildren<IFooterProps>): ReactElement {
-  const classes = useStyles();
-
   return (
     <ResponsiveContainer
       component="footer"
       maxWidth="xl"
-      className={classes.footer}
+      sx={{
+        marginTop: (theme: Theme) => theme.spacing(1),
+      }}
       {...footerProps}
     >
       <Grid container direction="row" justifyContent="center" alignItems="center" spacing={4}>
-        <Grid item>
+        <Grid>
           <CopyrightFooter brand={brand} />
         </Grid>
         {sponsor && (
-          <Grid item>
+          <Grid>
             - <SponsorFooter />
           </Grid>
         )}

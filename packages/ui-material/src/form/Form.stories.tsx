@@ -1,8 +1,5 @@
-import Avatar from "@material-ui/core/Avatar";
-import MenuItem from "@material-ui/core/MenuItem/MenuItem";
-import { Theme } from "@material-ui/core/styles/createTheme";
-import createStyles from "@material-ui/core/styles/createStyles";
-import makeStyles from "@material-ui/core/styles/makeStyles";
+import Avatar from "@mui/material/Avatar";
+import MenuItem from "@mui/material/MenuItem";
 import { action } from "@storybook/addon-actions";
 import type { Meta, StoryObj } from "@storybook/react";
 import { ChangeEvent, ComponentProps, useEffect, useState } from "react";
@@ -121,15 +118,6 @@ export const FormWithCheckbox: Story = {
   ),
 };
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    avatar: {
-      width: theme.spacing(15),
-      height: theme.spacing(15),
-    },
-  })
-);
-
 export const FormWithFileAndPreview: Story = {
   args: {
     ...defaultArgs,
@@ -138,7 +126,6 @@ export const FormWithFileAndPreview: Story = {
   render: (props) => {
     const [filePreview, setFilePreview] = useState<string | null>(null);
     const [file, setFile] = useState<File | null>(null);
-    const classes = useStyles();
 
     function fileToDataSrc(file: File): Promise<string | undefined> {
       // Encode the file using the FileReader API
@@ -179,7 +166,14 @@ export const FormWithFileAndPreview: Story = {
           />
           {filePreview && (
             <p>
-              <Avatar src={filePreview} variant="square" className={classes.avatar} />
+              <Avatar
+                src={filePreview}
+                variant="square"
+                sx={{
+                  width: (theme) => theme.spacing(15),
+                  height: (theme) => theme.spacing(15),
+                }}
+              />
             </p>
           )}
         </Form>
