@@ -1,4 +1,4 @@
-import { RouterContext } from "next/dist/shared/lib/router-context";
+import { RouterContext } from "next/dist/shared/lib/router-context.shared-runtime";
 import { NEXT_DATA } from "next/dist/shared/lib/utils";
 import { PropsWithChildren, ReactElement } from "react";
 
