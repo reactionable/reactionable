@@ -11,7 +11,10 @@ updates:
     groups:
       storybook-dependencies:
         patterns:
+          - "storybook"
           - "@storybook/*"
+          - "vite"
+          - "remark-gfm"
       i18next-dependencies:
         patterns:
           - "i18next"
