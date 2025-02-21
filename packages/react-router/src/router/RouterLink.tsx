@@ -1,6 +1,6 @@
 import { IRouterLinkProps as ICoreRouterLinkProps } from "@reactionable/core";
 import { ForwardedRef, forwardRef } from "react";
-import { LinkProps, useHref, useLinkClickHandler } from "react-router";
+import { href, LinkProps, useHref, useLinkClickHandler } from "react-router";
 
 export type IRouterLinkProps = ICoreRouterLinkProps<
   Partial<LinkProps> & { ref: ForwardedRef<HTMLAnchorElement> }
@@ -10,7 +10,7 @@ export const RouterLink = forwardRef(function RouterLink(
   { Component, onClick, replace = false, state, target, to, ...rest }: IRouterLinkProps,
   ref: ForwardedRef<HTMLAnchorElement>
 ) {
-  const href = useHref(to || "");
+  const toHref = useHref(to ? href(to.toString()) : "");
   const handleClick = useLinkClickHandler(to || "", {
     replace,
     state,
@@ -20,7 +20,7 @@ export const RouterLink = forwardRef(function RouterLink(
   return (
     <Component
       {...rest}
-      to={href}
+      to={toHref}
       onClick={(event) => {
         onClick?.(event);
         if (!event.defaultPrevented) {
