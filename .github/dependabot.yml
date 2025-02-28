@@ -1,7 +1,7 @@
 version: 2
 updates:
   - package-ecosystem: npm
-    versioning-strategy: widen
+    versioning-strategy: increase
     directory: "/"
     open-pull-requests-limit: 20
     schedule:
@@ -9,32 +9,35 @@ updates:
       day: friday
       time: "04:00"
     groups:
-      storybook-dependencies:
+      npm-storybook-dependencies:
         patterns:
           - "storybook"
           - "@storybook/*"
           - "vite"
           - "remark-gfm"
-      i18next-dependencies:
+      npm-i18next-dependencies:
         patterns:
           - "i18next"
           - "i18next-*"
           - "react-i18next"
-      emotion-dependencies:
+      npm-emotion-dependencies:
         patterns:
           - "@emotion/*"
-      fortawesome-dependencies:
+      npm-mui-dependencies:
+        patterns:
+          - "@mui/*"
+      npm-fortawesome-dependencies:
         patterns:
           - "@fortawesome/*"
-      bootstrap-dependencies:
+      npm-bootstrap-dependencies:
         patterns:
           - "bootstrap"
           - "react-bootstrap"
-      react-dependencies:
+      npm-react-dependencies:
         patterns:
           - "react"
           - "react-*"
-      development-dependencies:
+      npm-development-dependencies:
         dependency-type: "development"
 
   - package-ecosystem: github-actions
