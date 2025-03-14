@@ -45,7 +45,7 @@
   },
   "homepage": "https://github.com/reactionable/reactionable#readme",
   "dependencies": {
-    "@apollo/client": "^3.13.2",
+    "@apollo/client": "^3.13.4",
     "@reactionable/core": "^0.28.28",
     "apollo-upload-client": "^17.0.0",
     "cross-fetch": "^4.0.0",
