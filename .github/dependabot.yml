@@ -37,6 +37,10 @@ updates:
         patterns:
           - "react"
           - "react-*"
+      npm-aws-amplify-dependencies:
+        patterns:
+          - "aws-amplify"
+          - "@aws-amplify"
       npm-development-dependencies:
         dependency-type: "development"
 
