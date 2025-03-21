@@ -40,7 +40,7 @@ updates:
       npm-aws-amplify-dependencies:
         patterns:
           - "aws-amplify"
-          - "@aws-amplify"
+          - "@aws-amplify/*"
       npm-development-dependencies:
         dependency-type: "development"
 
