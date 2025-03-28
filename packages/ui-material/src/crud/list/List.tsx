@@ -12,7 +12,7 @@ export function List<Data extends IData = IData>({
     <CoreList<Data> {...props}>
       {(props) => (
         <Grid container>
-          <Grid item xs>
+          <Grid size={"grow"}>
             {children(props)}
           </Grid>
         </Grid>
