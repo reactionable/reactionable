@@ -42,7 +42,7 @@
     "rimraf": "^6.0.1",
     "storybook": "^8.6.4",
     "typedoc": "^0.27.6",
-    "vite": "^6.2.5"
+    "vite": "^6.2.6"
   },
   "resolutions": {
     "react": "^19.0.0",
