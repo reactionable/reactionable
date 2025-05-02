@@ -7884,17 +7884,17 @@ human-signals@^5.0.0:
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-5.0.0.tgz#42665a284f9ae0dade3ba41ebc37eb4b852f3a28"
   integrity sha512-AXcZb6vzzrFAUE61HnN4mpLqd/cSIwNQjtNWR0euPm6y0iqx3G4gOXaIDdtdDwZmhwe82LA6+zinmW4UBWVePQ==
 
-i18next-browser-languagedetector@^8.0.5:
-  version "8.0.5"
-  resolved "https://registry.yarnpkg.com/i18next-browser-languagedetector/-/i18next-browser-languagedetector-8.0.5.tgz#6cfdc72820457ce95e69a2788a4f837d1d8f4e9d"
-  integrity sha512-OstebRKqKiQw8xEvQF5aRyUujsCatanj7Q9eo5iiH2gJpoXGZ7483ol3sVBwfqbobTQPNH1J+NAyJ1aCQoEC+w==
+i18next-browser-languagedetector@^8.1.0:
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/i18next-browser-languagedetector/-/i18next-browser-languagedetector-8.1.0.tgz#e7fcc1084e9ca8fece329c8c05b000a6e25bd82e"
+  integrity sha512-mHZxNx1Lq09xt5kCauZ/4bsXOEA2pfpwSoU11/QTJB+pD94iONFwp+ohqi///PwiFvjFOxe1akYCdHyFo1ng5Q==
   dependencies:
     "@babel/runtime" "^7.23.2"
 
-i18next@^25.0.1:
-  version "25.0.1"
-  resolved "https://registry.yarnpkg.com/i18next/-/i18next-25.0.1.tgz#8870939202299a29fe2c99ea913f8e72db535e31"
-  integrity sha512-8S8PyZbrymJZn3DaN70/34JYWNhsqrU6yA4MuzcygJBv+41dgNMocEA8h+kV1P7MCc1ll03lOTOIXE7mpNCicw==
+i18next@^25.0.2:
+  version "25.0.2"
+  resolved "https://registry.yarnpkg.com/i18next/-/i18next-25.0.2.tgz#3bfd51d11603e130cc4a88ff37038393dc560951"
+  integrity sha512-xWxgK8GAaPYkV9ia2tdgbtdM+qiC+ysVTBPvXhpCORU/+QkeQe3BSI7Crr+c4ZXULN1PfnXG/HY2n7HGx4KKBg==
   dependencies:
     "@babel/runtime" "^7.26.10"
 
