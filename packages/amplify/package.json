@@ -44,7 +44,7 @@
   },
   "homepage": "https://github.com/reactionable/reactionable#readme",
   "dependencies": {
-    "@aws-amplify/ui-react": "^6.11.1",
+    "@aws-amplify/ui-react": "^6.11.2",
     "@reactionable/core": "^0.28.28",
     "aws-amplify": "^6.14.4"
   },
