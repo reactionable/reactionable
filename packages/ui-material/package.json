@@ -51,7 +51,7 @@
     "@mui/icons-material": "^7.1.2",
     "@mui/material": "^7.1.2",
     "@reactionable/core": "^0.28.28",
-    "react-draggable": "^4.4.6"
+    "react-draggable": "^4.5.0"
   },
   "publishConfig": {
     "access": "public"
