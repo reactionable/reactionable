@@ -8321,10 +8321,10 @@ i18next-browser-languagedetector@^8.2.0:
   dependencies:
     "@babel/runtime" "^7.23.2"
 
-i18next@^25.3.6:
-  version "25.3.6"
-  resolved "https://registry.yarnpkg.com/i18next/-/i18next-25.3.6.tgz#28c2d1dfef7399d6a2d8860f9b77bf5f39e69024"
-  integrity sha512-dThZ0CTCM3sUG/qS0ZtQYZQcUI6DtBN8yBHK+SKEqihPcEYmjVWh/YJ4luic73Iq6Uxhp6q7LJJntRK5+1t7jQ==
+i18next@^25.4.0:
+  version "25.4.0"
+  resolved "https://registry.yarnpkg.com/i18next/-/i18next-25.4.0.tgz#8c6f10bb365260c882aa532aec5e97b65cbdc997"
+  integrity sha512-UH5aiamXsO3cfrZFurCHiB6YSs3C+s+XY9UaJllMMSbmaoXILxFgqDEZu4NbfzJFjmUo3BNMa++Rjkr3ofjfLw==
   dependencies:
     "@babel/runtime" "^7.27.6"
 
@@ -12050,10 +12050,10 @@ react-hook-form@^7.53.2:
   resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.54.2.tgz#8c26ed54c71628dff57ccd3c074b1dd377cfb211"
   integrity sha512-eHpAUgUjWbZocoQYUHposymRb4ZP6d0uwUnooL2uOybA9/3tPUvoAKqEWK1WaSiTxxOfTpffNZP7QwlnM3/gEg==
 
-react-i18next@^15.6.1:
-  version "15.6.1"
-  resolved "https://registry.yarnpkg.com/react-i18next/-/react-i18next-15.6.1.tgz#a2747bed7768faef28fa28de32ff3811b2459c20"
-  integrity sha512-uGrzSsOUUe2sDBG/+FJq2J1MM+Y4368/QW8OLEKSFvnDflHBbZhSd1u3UkW0Z06rMhZmnB/AQrhCpYfE5/5XNg==
+react-i18next@^15.7.1:
+  version "15.7.1"
+  resolved "https://registry.yarnpkg.com/react-i18next/-/react-i18next-15.7.1.tgz#f3b573f41b3d57fc217dfa35be93352dc2eb0afc"
+  integrity sha512-o4VsKh30fy7p0z5ACHuyWqB6xu9WpQIQy2/ZcbCqopNnrnTVOPn/nAv9uYP4xYAWg99QMpvZ9Bu/si3eGurzGw==
   dependencies:
     "@babel/runtime" "^7.27.6"
     html-parse-stringify "^3.0.1"
