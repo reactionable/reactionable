@@ -31,7 +31,7 @@
     "@storybook/react": "^8.6.4",
     "@storybook/react-vite": "^8.6.4",
     "@storybook/test": "^8.5.3",
-    "@ts-dev-tools/react": "^1.8.9",
+    "@ts-dev-tools/react": "^1.9.5",
     "barrelsby": "^2.5.1",
     "eslint-plugin-storybook": "^0.11.2",
     "lerna": "^8.2.0",
@@ -54,7 +54,10 @@
   "prettier": {
     "semi": true,
     "printWidth": 100,
-    "trailingComma": "es5"
+    "trailingComma": "es5",
+    "plugins": [
+      "@prettier/plugin-oxc"
+    ]
   },
   "commitlint": {
     "extends": [
@@ -74,6 +77,6 @@
     }
   },
   "tsDevTools": {
-    "version": "20240617094000-config-nx-scopes"
+    "version": "20250623095500-add-prettier-oxc"
   }
 }
