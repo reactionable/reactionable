@@ -21,7 +21,7 @@
     "build": "yarn build:pre && yarn build:cjs && yarn build:esm",
     "build:ci": "yarn build:pre && yarn build:cjs -p tsconfig.build.json && yarn build:esm -p tsconfig.build.json",
     "build:clean": "rimraf lib",
-    "build:barrelsby": "barrelsby -d src --exclude \".+\\.test\\..+\" --exclude \".+\\.stories\\..+\" --delete -q && yarn prettier --write src/index.ts",
+    "build:barrelsby": "barrelsby --noHeader -d src --exclude \".+\\.test\\..+\" --exclude \".+\\.stories\\..+\" --delete -q && yarn prettier --write src/index.ts",
     "build:cjs": "mkdir -p lib/cjs && echo '{\"type\": \"commonjs\"}' > lib/cjs/package.json && tsc --pretty --module commonjs --outDir lib/cjs/",
     "build:esm": "mkdir -p lib/esm && echo '{\"type\": \"module\"}' > lib/esm/package.json && tsc --pretty --module esnext --outDir lib/esm/",
     "build:docs": "typedoc",

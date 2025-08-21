@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { LinkAnchor, useUIContext } from "@reactionable/core";
 import { AnchorHTMLAttributes, DetailedHTMLProps, ForwardedRef, forwardRef } from "react";
 

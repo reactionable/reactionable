@@ -1,5 +1,5 @@
-import { action } from "@storybook/addon-actions";
-import type { Meta, StoryObj } from "@storybook/react";
+import { action } from "storybook/actions";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { i18nTestInstance } from "../../../testing/I18n";
 import { UIContextProvider, useUIProviderProps } from "../../UI";

@@ -1,7 +1,7 @@
 import "../../stories/config";
 
 import { faAtom } from "@fortawesome/free-solid-svg-icons";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import Button from "react-bootstrap/Button";
 
 import { Alert, useAlert } from "./Alert";

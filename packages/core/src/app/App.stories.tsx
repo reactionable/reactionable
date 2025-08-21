@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useIdentityProviderProps } from "../identity/Identity";
 import { useRouterProviderProps } from "../router/useRouterProviderProps";
 import { useUIProviderProps } from "../ui/UI";

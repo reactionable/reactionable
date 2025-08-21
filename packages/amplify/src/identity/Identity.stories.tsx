@@ -1,6 +1,6 @@
 import "@aws-amplify/ui-react/styles.css";
 
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { ComponentProps, useEffect } from "react";
 

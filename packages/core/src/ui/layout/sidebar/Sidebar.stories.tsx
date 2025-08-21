@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { FC } from "react";
 
 import { useTranslation } from "../../../i18n/I18n";

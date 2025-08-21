@@ -1,7 +1,7 @@
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import { App } from "@reactionable/core";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { ReactElement } from "react";
 
 import { useUIProviderProps } from "../UI";

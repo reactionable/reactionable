@@ -1,7 +1,7 @@
 import Avatar from "@mui/material/Avatar";
 import MenuItem from "@mui/material/MenuItem";
-import { action } from "@storybook/addon-actions";
-import type { Meta, StoryObj } from "@storybook/react";
+import { action } from "storybook/actions";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { ChangeEvent, ComponentProps, useEffect, useState } from "react";
 import { string } from "yup";
 

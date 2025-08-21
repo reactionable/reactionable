@@ -1,5 +1,5 @@
 import SaveIcon from "@mui/icons-material/Save";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { TestWrapper } from "../testing/TestWrapper";
 import { NavItem } from "./NavItem";

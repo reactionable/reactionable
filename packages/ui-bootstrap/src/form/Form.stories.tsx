@@ -1,5 +1,5 @@
-import { action } from "@storybook/addon-actions";
-import type { Meta, StoryObj } from "@storybook/react";
+import { action } from "storybook/actions";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { ChangeEvent, ComponentProps, useEffect, useState } from "react";
 import { FormControl, FormControlProps, InputGroup } from "react-bootstrap";
 import Image from "react-bootstrap/Image";

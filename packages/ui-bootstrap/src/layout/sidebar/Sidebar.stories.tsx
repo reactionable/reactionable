@@ -1,6 +1,6 @@
 import "../../../stories/config";
 
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { faAtom } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation, generatePath, useRouteMatch } from "@reactionable/core";
 import { FC } from "react";

@@ -1,6 +1,6 @@
 import Button from "@mui/material/Button";
 import AnnouncementIcon from "@mui/icons-material/Announcement";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { Alert, useAlert } from "./Alert";
 import { ErrorAlert, IUseErrorAlertProps, useErrorAlert } from "./ErrorAlert";
