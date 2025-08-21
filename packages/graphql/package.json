@@ -47,17 +47,14 @@
   "dependencies": {
     "@apollo/client": "^3.13.9",
     "@reactionable/core": "^0.28.28",
-    "apollo-upload-client": "^17.0.0",
+    "apollo-upload-client": "^18.0.1",
     "cross-fetch": "^4.0.0",
     "graphql": "^16.11.0"
   },
-  "devDependencies": {
-    "@types/apollo-upload-client": "^17.0.2"
-  },
+  "devDependencies": {},
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "1301e652cf34ddf0e2e42509f49b059f34c492a9",
   "jest": {
     "preset": "ts-jest",
     "testEnvironment": "jsdom",
@@ -68,7 +65,6 @@
       "<rootDir>/lib/"
     ],
     "testMatch": [
-      "**/__tests__/**/*.[jt]s?(x)",
       "**/?(*.)+(spec|test).+(ts|tsx|js)"
     ]
   }
