@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { useRouterProviderProps } from "../../router/useRouterProviderProps";
 import { RouterContextProvider } from "../../router/useRouterContext";

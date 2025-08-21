@@ -1,7 +1,7 @@
 import type { StorybookConfig } from "@storybook/react-vite";
 import remarkGfm from "remark-gfm";
 
-import { join, dirname, resolve } from "path";
+import { join, dirname } from "path";
 
 /**
  * This function is used to resolve the absolute path of a package.
@@ -16,21 +16,16 @@ const config: StorybookConfig = {
     "../packages/*/src/**/*.mdx",
     "../packages/*/src/**/*.stories.@(js|jsx|mjs|ts|tsx|mdx)",
   ],
-  addons: [
-    getAbsolutePath("@storybook/addon-essentials"),
-    getAbsolutePath("@chromatic-com/storybook"),
-    getAbsolutePath("@storybook/addon-interactions"),
-    {
-      name: "@storybook/addon-docs",
-      options: {
-        mdxPluginOptions: {
-          mdxCompileOptions: {
-            remarkPlugins: [remarkGfm],
-          },
+  addons: [getAbsolutePath("@chromatic-com/storybook"), {
+    name: getAbsolutePath("@storybook/addon-docs"),
+    options: {
+      mdxPluginOptions: {
+        mdxCompileOptions: {
+          remarkPlugins: [remarkGfm],
         },
       },
     },
-  ],
+  }],
   framework: {
     name: getAbsolutePath("@storybook/react-vite"),
     options: {},

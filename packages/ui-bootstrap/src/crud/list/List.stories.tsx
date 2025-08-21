@@ -1,7 +1,7 @@
 import "../../../stories/config";
 
-import type { Meta, StoryObj } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import { action } from "storybook/actions";
 
 import { UIContextProvider } from "../../UI";
 import { List } from "./List";

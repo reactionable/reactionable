@@ -1,5 +1,5 @@
 import Button from "@mui/material/Button";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import {
   ErrorNotification,

@@ -1,7 +1,7 @@
 import "../../../stories/config";
 
 import { IUser, useIdentityContext, withIdentityContext } from "@reactionable/core";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { ComponentProps, useEffect } from "react";
 
 import { TestWrapper } from "../../testing/TestWrapper";
