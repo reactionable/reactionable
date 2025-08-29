@@ -1940,12 +1940,12 @@
   dependencies:
     "@fortawesome/fontawesome-common-types" "7.0.0"
 
-"@fortawesome/react-fontawesome@^0.2.6":
-  version "0.2.6"
-  resolved "https://registry.yarnpkg.com/@fortawesome/react-fontawesome/-/react-fontawesome-0.2.6.tgz#b75d0c7710c646c9bb6b9bb61cb5b8548a9ef2f5"
-  integrity sha512-mtBFIi1UsYQo7rYonYFkjgYKGoL8T+fEH6NGUpvuqtY3ytMsAoDaPo5rk25KuMtKDipY4bGYM/CkmCHA1N3FUg==
+"@fortawesome/react-fontawesome@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@fortawesome/react-fontawesome/-/react-fontawesome-3.0.1.tgz#85b579e1b9420716c897957111553620fec48b18"
+  integrity sha512-kpVyf85UHhQ+Y/TPyiNaUldqylhhXiVXv20z7sq+CLmhKLXWbzjIHaRPDrHIydnrL6Qq9oFwuNHq66alJdDM5Q==
   dependencies:
-    prop-types "^15.8.1"
+    semver "^7.7.2"
 
 "@gerrit0/mini-shiki@^3.9.0":
   version "3.11.0"
@@ -12207,27 +12207,10 @@ semver@^6.0.0, semver@^6.3.0, semver@^6.3.1:
   resolved "https://registry.yarnpkg.com/semver/-/semver-6.3.1.tgz#556d2ef8689146e46dcea4bfdd095f3434dffcb4"
   integrity sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==
 
-semver@^7.0.0, semver@^7.1.1, semver@^7.3.4, semver@^7.3.5, semver@^7.3.7, semver@^7.3.8, semver@^7.5.3:
-  version "7.5.4"
-  resolved "https://registry.yarnpkg.com/semver/-/semver-7.5.4.tgz#483986ec4ed38e1c6c48c34894a9182dbff68a6e"
-  integrity sha512-1bCSESV6Pv+i21Hvpxp3Dx+pSD8lIPt8uVjRrxAUt/nbswYc+tK6Y2btiULjd4+fnq15PX+nqQDC7Oft7WkwcA==
-  dependencies:
-    lru-cache "^6.0.0"
-
-semver@^7.5.4, semver@^7.7.2:
+semver@^7.0.0, semver@^7.1.1, semver@^7.3.4, semver@^7.3.5, semver@^7.3.7, semver@^7.3.8, semver@^7.5.3, semver@^7.5.4, semver@^7.6.0, semver@^7.6.2, semver@^7.6.3, semver@^7.7.2:
   version "7.7.2"
   resolved "https://registry.yarnpkg.com/semver/-/semver-7.7.2.tgz#67d99fdcd35cec21e6f8b87a7fd515a33f982b58"
   integrity sha512-RF0Fw+rO5AMf9MAyaRXI4AV0Ulj5lMHqVxxdSgiVbixSCXoEmmX/jk0CuJw4+3SqroYO9VoUh+HcuJivvtJemA==
-
-semver@^7.6.0, semver@^7.6.2:
-  version "7.7.0"
-  resolved "https://registry.yarnpkg.com/semver/-/semver-7.7.0.tgz#9c6fe61d0c6f9fa9e26575162ee5a9180361b09c"
-  integrity sha512-DrfFnPzblFmNrIZzg5RzHegbiRWg7KMR7btwi2yjHwx06zsUbO5g613sVwEV7FTwmzJu+Io0lJe2GJ3LxqpvBQ==
-
-semver@^7.6.3:
-  version "7.7.1"
-  resolved "https://registry.yarnpkg.com/semver/-/semver-7.7.1.tgz#abd5098d82b18c6c81f6074ff2647fd3e7220c9f"
-  integrity sha512-hlq8tAfn0m/61p4BVRcPzIGr6LKiMwo4VM6dGi6pt4qcRkmNzTcWq6eCEjEh+qXjkMDvPlOFFSGwQjoEa6gyMA==
 
 set-blocking@^2.0.0:
   version "2.0.0"
