@@ -35,9 +35,9 @@
     "react-dom": "^19.1.0",
     "remark-gfm": "^4.0.0",
     "rimraf": "^6.0.1",
-    "storybook": "^9.1.4",
+    "storybook": "^9.1.7",
     "typedoc": "^0.28.11",
-    "vite": "^7.1.5"
+    "vite": "^7.1.6"
   },
   "resolutions": {
     "react": "^19.0.0",
