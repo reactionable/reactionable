@@ -1,6 +1,6 @@
 import { HttpOptions, ApolloLink, ApolloClientOptions } from "@apollo/client";
 import { setContext as setApolloContext } from "@apollo/client/link/context";
-import { createUploadLink } from "apollo-upload-client";
+import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
 import { ContextSetter } from "@apollo/client/link/context";
 import fetch from "cross-fetch";
 
