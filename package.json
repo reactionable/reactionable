@@ -16,7 +16,6 @@
     "docs:build": "lerna run --stream build:docs",
     "storybook": "storybook dev -p 6006",
     "storybook:build": "yarn build-storybook -o build/storybook",
-    "storybook:deploy": "storybook-to-ghpages -e build/storybook --ci",
     "prepare": "ts-dev-tools install",
     "ci": "yarn lint && yarn build:all && yarn test:ci",
     "build-storybook": "storybook build"

@@ -12,7 +12,9 @@ jobs:
     name: 🚀 Release
     needs: ci
     runs-on: ubuntu-latest
-    environment: github-pages
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.url }}
     steps:
       - uses: actions/checkout@v5
         with:
@@ -40,6 +42,8 @@ jobs:
         run: yarn lerna publish --conventional-commits --create-release github --yes
 
       - name: 🌐 Publish to gh-pages
-        run: yarn storybook:deploy --source-branch=${{ github.event.repository.default_branch }}
-        env:
-          GH_TOKEN: ${{ github.actor }}:${{ secrets.GH_PRIVATE_ACCESS_TOKEN }}
+        id: deployment
+        uses: hoverkraft-tech/ci-github-publish/actions/deploy/github-pages@42d50a3461a177557ca3f83b1d927d7c0783c894 # 0.11.2
+        with:
+          build-path: "build/storybook"
+          build-artifact-name: "build"
