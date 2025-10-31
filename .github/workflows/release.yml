@@ -20,9 +20,9 @@ jobs:
         with:
           token: ${{ secrets.GH_PRIVATE_ACCESS_TOKEN }}
 
-      - uses: hoverkraft-tech/ci-github-nodejs/actions/setup-node@0.16.0
+      - uses: hoverkraft-tech/ci-github-nodejs/actions/setup-node@0.16.1
 
-      - uses: actions/download-artifact@v5
+      - uses: actions/download-artifact@v6
         with:
           name: build
           path: /
