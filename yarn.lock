@@ -177,24 +177,24 @@
     fast-xml-parser "^4.4.1"
     tslib "^2.5.0"
 
-"@aws-amplify/ui-react-core@3.4.5":
-  version "3.4.5"
-  resolved "https://registry.yarnpkg.com/@aws-amplify/ui-react-core/-/ui-react-core-3.4.5.tgz#29915d117281790d49f6c36583ff898671be64cc"
-  integrity sha512-bocYdgjBJaeoihLw7EEVewADEvQPyhA6qXCKMmIpb2j/hOTtdpwomYC7O07gQFMay0NhB+MNQ6nJ7W6RDAvsDQ==
+"@aws-amplify/ui-react-core@3.4.6":
+  version "3.4.6"
+  resolved "https://registry.yarnpkg.com/@aws-amplify/ui-react-core/-/ui-react-core-3.4.6.tgz#6e573229e4dfbd1bef81ad3e3f2dc5a47169cae3"
+  integrity sha512-GHGSnd7/p3gl1xrs62wBqDfY+FWsvAh4M8XYgQMNLa24VO7HWmpJ4WgV6SzKWnhQ/5OuEJDJv7L9bukBV3KIOg==
   dependencies:
-    "@aws-amplify/ui" "6.12.0"
+    "@aws-amplify/ui" "6.12.1"
     "@xstate/react" "^3.2.2"
     lodash "4.17.21"
-    react-hook-form "^7.53.2"
+    react-hook-form "7.53.2"
     xstate "^4.33.6"
 
-"@aws-amplify/ui-react@^6.13.0":
-  version "6.13.0"
-  resolved "https://registry.yarnpkg.com/@aws-amplify/ui-react/-/ui-react-6.13.0.tgz#a1cd7066339b883f208e05718f4bc0765031de66"
-  integrity sha512-FVVIZ5tfCbFR6vfeAEU2MxQSB0xi9UjsYZzD835UwMGECOcwHD+TdDQjZ0NwpMbwheM8a0oCP9lBW76eug7AcA==
+"@aws-amplify/ui-react@^6.13.1":
+  version "6.13.1"
+  resolved "https://registry.yarnpkg.com/@aws-amplify/ui-react/-/ui-react-6.13.1.tgz#3dcdd4bf9ec4805d7834b5ae0851cf3001aafe5c"
+  integrity sha512-I12oNZpXHi8w5vdwmxjt+oC5qBHWZXThrq2Sb6VdC3BpTgXM4Yp5j2HsFzjNeytEsfQkiZNFweiV/Oi2nEx2/g==
   dependencies:
-    "@aws-amplify/ui" "6.12.0"
-    "@aws-amplify/ui-react-core" "3.4.5"
+    "@aws-amplify/ui" "6.12.1"
+    "@aws-amplify/ui-react-core" "3.4.6"
     "@radix-ui/react-direction" "^1.1.0"
     "@radix-ui/react-dropdown-menu" "^2.1.10"
     "@radix-ui/react-slider" "^1.3.2"
@@ -203,10 +203,10 @@
     qrcode "1.5.0"
     tslib "^2.5.2"
 
-"@aws-amplify/ui@6.12.0":
-  version "6.12.0"
-  resolved "https://registry.yarnpkg.com/@aws-amplify/ui/-/ui-6.12.0.tgz#601f60d314150a38d93e379ecf4c8d4f24a6f874"
-  integrity sha512-rgO1Jwhfw5LmJhS+zPHXCNcfB0AgtAkO3kZzk6XwYE85P0tiRMmn4Kto+qoiRLbG9hzUMQVYjletzxCr+eu1rA==
+"@aws-amplify/ui@6.12.1":
+  version "6.12.1"
+  resolved "https://registry.yarnpkg.com/@aws-amplify/ui/-/ui-6.12.1.tgz#134c4c49da01faa8411f1eda4869aaaa998434cd"
+  integrity sha512-RPcluEnuzKmE5lhT6LdhrJLaPkEtYKtNj3I7Ra6zQX4qBDmrCKzib0jDCkqgjodsHzwXXjTB8Mr4NQABUoatHQ==
   dependencies:
     csstype "^3.1.1"
     lodash "4.17.21"
@@ -11843,10 +11843,10 @@ react-helmet@^6.1.0:
     react-fast-compare "^3.1.1"
     react-side-effect "^2.1.0"
 
-react-hook-form@^7.53.2:
-  version "7.54.2"
-  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.54.2.tgz#8c26ed54c71628dff57ccd3c074b1dd377cfb211"
-  integrity sha512-eHpAUgUjWbZocoQYUHposymRb4ZP6d0uwUnooL2uOybA9/3tPUvoAKqEWK1WaSiTxxOfTpffNZP7QwlnM3/gEg==
+react-hook-form@7.53.2:
+  version "7.53.2"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.53.2.tgz#6fa37ae27330af81089baadd7f322cc987b8e2ac"
+  integrity sha512-YVel6fW5sOeedd1524pltpHX+jgU2u3DSDtXEaBORNdqiNrsX/nUI/iGXONegttg0mJVnfrIkiV0cmTU6Oo2xw==
 
 react-i18next@^16.1.6:
   version "16.1.6"
