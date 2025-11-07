@@ -20,7 +20,7 @@ jobs:
         with:
           token: ${{ secrets.GH_PRIVATE_ACCESS_TOKEN }}
 
-      - uses: hoverkraft-tech/ci-github-nodejs/actions/setup-node@0.16.1
+      - uses: hoverkraft-tech/ci-github-nodejs/actions/setup-node@0.17.0
 
       - uses: actions/download-artifact@v6
         with:
@@ -43,7 +43,7 @@ jobs:
 
       - name: 🌐 Publish to gh-pages
         id: deployment
-        uses: hoverkraft-tech/ci-github-publish/actions/deploy/github-pages@b5b9f9278423f286fa2e14ca86f932475493828a # 0.12.1
+        uses: hoverkraft-tech/ci-github-publish/actions/deploy/github-pages@38963f37ef5be0b6ae84147f542d96d9eb02802b # 0.14.0
         with:
           build-path: "build/storybook"
           build-artifact-name: "build"
