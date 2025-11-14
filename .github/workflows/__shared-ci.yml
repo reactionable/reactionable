@@ -3,16 +3,21 @@ name: Internal - Common Continuous Integration tasks
 on:
   workflow_call:
 
+permissions: {}
+
 jobs:
   continuous-integration:
+    uses: hoverkraft-tech/ci-github-nodejs/.github/workflows/continuous-integration.yml@32a69b7b8fd5f7ab7bf656e7e88aa90ad235cf8d # 0.18.0
     permissions:
-      id-token: write
-      security-events: write
       contents: read
-    uses: hoverkraft-tech/ci-github-nodejs/.github/workflows/continuous-integration.yml@0.17.0
+      id-token: write
+      pull-requests: write
+      security-events: write
     with:
       build: |
         {
           "commands": ["build:ci", "storybook:build", "docs:build"],
           "artifact": ["packages/**/lib", "build", "packages/**/docs"]
         }
+      test: |
+        { "coverage": "codecov" }
