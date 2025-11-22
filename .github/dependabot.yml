@@ -9,6 +9,8 @@ updates:
       day: friday
       time: "04:00"
     groups:
+      npm-development-dependencies:
+        dependency-type: "development"
       npm-storybook-dependencies:
         patterns:
           - "storybook"
@@ -41,8 +43,6 @@ updates:
         patterns:
           - "aws-amplify"
           - "@aws-amplify/*"
-      npm-development-dependencies:
-        dependency-type: "development"
 
   - package-ecosystem: github-actions
     directory: "/"
@@ -55,3 +55,11 @@ updates:
       github-actions-dependencies:
         patterns:
           - "*"
+
+  - package-ecosystem: "devcontainers"
+    open-pull-requests-limit: 20
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: friday
+      time: "04:00"
