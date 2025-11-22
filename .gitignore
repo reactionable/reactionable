@@ -7,3 +7,4 @@ storybook-static
 .nx/cache
 .nx/workspace-data
 *storybook.log
+eslint-report.json

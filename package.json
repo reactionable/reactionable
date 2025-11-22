@@ -8,6 +8,7 @@
     "test:ci": "lerna run --stream test:coverage --",
     "format": "prettier --cache --write '**/*.ts' '!**/lib/**'",
     "lint": "lerna run --stream lint --",
+    "lint:ci": "lerna run --stream lint:ci --",
     "build": "lerna run --stream build --",
     "build:ci": "lerna run --stream build:ci --",
     "build:all": "yarn build:ci && yarn docs:build && yarn storybook:build",
