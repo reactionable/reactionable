@@ -25,7 +25,8 @@
     "build:cjs": "mkdir -p lib/cjs && echo '{\"type\": \"commonjs\"}' > lib/cjs/package.json && tsc --pretty --module commonjs --outDir lib/cjs/",
     "build:esm": "mkdir -p lib/esm && echo '{\"type\": \"module\"}' > lib/esm/package.json && tsc --pretty --module esnext --outDir lib/esm/",
     "build:docs": "typedoc",
-    "lint": "eslint \"{src,stories}/**/*.{ts,tsx}\""
+    "lint": "eslint \"{src,stories}/**/*.{ts,tsx}\"",
+    "lint:ci": "yarn lint  --output-file eslint-report.json --format json"
   },
   "repository": {
     "type": "git",
