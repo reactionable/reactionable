@@ -12663,10 +12663,10 @@ stack-utils@^2.0.6:
   dependencies:
     escape-string-regexp "^2.0.0"
 
-storybook@^9.1.13:
-  version "9.1.13"
-  resolved "https://registry.yarnpkg.com/storybook/-/storybook-9.1.13.tgz#fa8459381c0120ffad19876b03174c52ec6f8584"
-  integrity sha512-G3KZ36EVzXyHds72B/qtWiJnhUpM0xOUeYlDcO9DSHL1bDTv15cW4+upBl+mcBZrDvU838cn7Bv4GpF+O5MCfw==
+storybook@^9.1.17:
+  version "9.1.17"
+  resolved "https://registry.yarnpkg.com/storybook/-/storybook-9.1.17.tgz#1d210ecb7e62260a68644d3e6cc81e04c0dcce85"
+  integrity sha512-kfr6kxQAjA96ADlH6FMALJwJ+eM80UqXy106yVHNgdsAP/CdzkkicglRAhZAvUycXK9AeadF6KZ00CWLtVMN4w==
   dependencies:
     "@storybook/global" "^5.0.0"
     "@testing-library/jest-dom" "^6.6.3"
