@@ -2,7 +2,7 @@ import { DependencyList, EffectCallback, useEffect, useRef } from "react";
 import isEqual from "react-fast-compare";
 
 export function useDeepCompareMemoize(value: DependencyList): DependencyList | undefined {
-  const ref = useRef<DependencyList>();
+  const ref = useRef<DependencyList | undefined>(undefined);
 
   if (!isEqual(ref.current, value)) {
     ref.current = value;

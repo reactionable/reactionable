@@ -1,14 +1,11 @@
 import { FieldInputProps } from "formik";
-import { createElement, forwardRef, RefObject } from "react";
+import { createElement, forwardRef } from "react";
 import { IFieldElementProps, IFormFieldValue, IFormFieldPropsEnhanced } from "./FormField";
 
 export type IFieldInputPropsEnhanced<
   FieldElementProps extends IFieldElementProps,
   Value extends IFormFieldValue
-> = FieldElementProps &
-  FieldInputProps<Value> & {
-    ref: RefObject<unknown>;
-  };
+> = FieldElementProps & FieldInputProps<Value>;
 
 export type IFormFieldInputProps<
   FieldElementProps extends IFieldElementProps = IFieldElementProps,

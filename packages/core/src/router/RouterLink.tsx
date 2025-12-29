@@ -1,12 +1,14 @@
 import { PathFunction, compile } from "path-to-regexp";
-import { ComponentType, ForwardedRef, ReactElement, forwardRef } from "react";
+import { ComponentType, ElementType, ForwardedRef, ReactElement, createElement, forwardRef } from "react";
 
 import { IRouteMatchParams } from "./Route";
 
-export type IRouterLinkProps<Props extends Record<string, unknown> = Record<string, unknown>> =
+export type IRouterLinkProps<Props extends object = object> =
   Partial<Props> & {
     href?: string;
-    Component: ComponentType<Partial<Props>>;
+    ref?: ForwardedRef<HTMLAnchorElement>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    Component: ElementType<any>;
   };
 
 export type IRouterLinkComponent<RouterLinkProps extends IRouterLinkProps> =
@@ -17,11 +19,20 @@ export type ILinkAnchorProps<RouterLinkProps extends IRouterLinkProps> = Omit<
   "Component"
 >;
 
-export const RouterLink = forwardRef(function RouterLink<RouterLinkProps extends IRouterLinkProps>(
-  { Component, ...props }: RouterLinkProps,
+export const RouterLink = forwardRef<HTMLAnchorElement, IRouterLinkProps>(function RouterLink(
+  routerLinkProps: IRouterLinkProps,
   ref: ForwardedRef<HTMLAnchorElement>
 ): ReactElement {
-  return <Component {...props} ref={ref} />;
+  const { Component, ref: refProp, ...props } = routerLinkProps;
+  void refProp;
+
+  if (!ref) {
+    return createElement(Component, props);
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const ComponentWithRef = Component as unknown as ElementType<any>;
+  return createElement(ComponentWithRef, { ...props, ref });
 });
 
 const normalizePath = (path: string): string => {

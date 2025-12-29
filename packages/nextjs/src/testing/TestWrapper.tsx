@@ -7,6 +7,7 @@ import { useRouterProviderProps } from "../router/useRouterProviderProps";
 import mockNextRouter from "./mockNextRouter";
 import {
   IIdentityProviderProps,
+  IRouterProviderProps as ICoreRouterProviderProps,
   IUIProviderProps,
   IAppProps,
   TestWrapper as CoreTestWrapper,
@@ -35,22 +36,26 @@ function RouterComponent({
 export type ITestWrapperProps<
   IdentityProviderProps extends IIdentityProviderProps,
   UIProviderProps extends IUIProviderProps,
-  RouterProviderProps extends IRouterProviderProps,
+  RouterProviderProps extends ICoreRouterProviderProps,
 > = IAppProps<IdentityProviderProps, UIProviderProps, RouterProviderProps>;
 
 export function TestWrapper<
   IdentityProviderProps extends IIdentityProviderProps = IIdentityProviderProps,
   UIProviderProps extends IUIProviderProps = IUIProviderProps,
-  RouterProviderProps extends IRouterProviderProps = IRouterProviderProps,
+  RouterProviderProps extends ICoreRouterProviderProps = ICoreRouterProviderProps,
 >({
   router,
   ...props
 }: ITestWrapperProps<IdentityProviderProps, UIProviderProps, RouterProviderProps>): ReactElement {
-  router = useRouterProviderProps({ ...router, Component: RouterComponent }) as RouterProviderProps;
   return (
     <CoreTestWrapper<IdentityProviderProps, UIProviderProps, RouterProviderProps>
       {...props}
-      router={router}
+      router={
+        useRouterProviderProps({
+          ...(router as Partial<IRouterProviderProps>),
+          Component: RouterComponent,
+        }) as unknown as RouterProviderProps
+      }
     />
   );
 }

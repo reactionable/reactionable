@@ -2,29 +2,34 @@ import {
   IIdentityProviderProps,
   TestWrapper as CoreTestWrapper,
   ITestWrapperProps,
+  IRouterProviderProps as ICoreRouterProviderProps,
   IUIProviderProps,
 } from "@reactionable/core";
 import { ReactElement } from "react";
 
-import { IRouterProviderProps, useRouterProviderProps } from "../router/useRouterProviderProps";
+import {
+  IRouterProviderProps as IReactRouterProviderProps,
+  useRouterProviderProps,
+} from "../router/useRouterProviderProps";
 import { MemoryRouterComponent } from "../router/MemoryRouterComponent";
 
 export function TestWrapper<
   IdentityProviderProps extends IIdentityProviderProps = IIdentityProviderProps,
   UIProviderProps extends IUIProviderProps = IUIProviderProps,
-  RouterProviderProps extends IRouterProviderProps = IRouterProviderProps,
+  RouterProviderProps extends ICoreRouterProviderProps = ICoreRouterProviderProps,
 >({
   router,
   ...props
 }: ITestWrapperProps<IdentityProviderProps, UIProviderProps, RouterProviderProps>): ReactElement {
-  const routerProps = useRouterProviderProps({
-    ...router,
-    Component: MemoryRouterComponent,
-  }) as RouterProviderProps;
   return (
     <CoreTestWrapper<IdentityProviderProps, UIProviderProps, RouterProviderProps>
       {...props}
-      router={routerProps}
+      router={
+        useRouterProviderProps({
+          ...(router as Partial<IReactRouterProviderProps>),
+          Component: MemoryRouterComponent,
+        }) as unknown as RouterProviderProps
+      }
     />
   );
 }
