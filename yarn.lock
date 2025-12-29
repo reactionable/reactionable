@@ -4608,17 +4608,17 @@
   resolved "https://registry.yarnpkg.com/@testing-library/user-event/-/user-event-14.6.1.tgz#13e09a32d7a8b7060fe38304788ebf4197cd2149"
   integrity sha512-vq7fv0rnt+QTXgPxr5Hjc210p6YKq2kmdziLgnsZGgLJ9e6VAShx1pACLuRjd/AS/sr7phAR58OIIpf0LlmQNw==
 
-"@ts-dev-tools/core@^1.9.11":
-  version "1.9.11"
-  resolved "https://registry.yarnpkg.com/@ts-dev-tools/core/-/core-1.9.11.tgz#120bc165c45df9413263954ed9e1acc5f3342ed3"
-  integrity sha512-JZFSA1AHN8ASG2myAegk7ovElWpTrkNqz4ZVD0JfQkz4nphjF+PbYhso6HBsBtixvPtxpGX0s7mUBMR1ITm4Gw==
+"@ts-dev-tools/core@^1.9.13":
+  version "1.9.13"
+  resolved "https://registry.yarnpkg.com/@ts-dev-tools/core/-/core-1.9.13.tgz#a8d9ef269dc3e8bde2a3e5f8d5228de0e6b7b097"
+  integrity sha512-TUGaL8laK1cqA4vznR2fJsVVUBYB6K3iL2Cfty1UO0IDHax7j959f+rHX+03XhXmRcP4HjHTMWtGsGznQBD2hA==
   dependencies:
     "@commitlint/cli" "^20.0.0"
     "@commitlint/config-conventional" "^20.0.0"
     "@eslint/js" "^9.25.0"
     "@prettier/plugin-oxc" "^0.1.1"
     "@types/jest" "^30.0.0"
-    "@types/node" "^24.0.1"
+    "@types/node" "^25.0.1"
     eslint "^9.25.0"
     eslint-config-prettier "^10.1.2"
     eslint-plugin-jest "^29.0.1"
@@ -4632,15 +4632,15 @@
     typescript "^5.8.3"
     typescript-eslint "^8.30.1"
 
-"@ts-dev-tools/react@^1.9.11":
-  version "1.9.11"
-  resolved "https://registry.yarnpkg.com/@ts-dev-tools/react/-/react-1.9.11.tgz#9e1944974410fd2e9bf64b77abe0b1018ab05446"
-  integrity sha512-CPOkE0r5bgg3x2Ip2aZNbgn1kAMCf0E5fjQYPqNrL+kHxYgT2lehfD9bJAdiBFdEuknbBsyr8SAuv9rA1JXt4g==
+"@ts-dev-tools/react@^1.9.13":
+  version "1.9.13"
+  resolved "https://registry.yarnpkg.com/@ts-dev-tools/react/-/react-1.9.13.tgz#4bc3709f6c99cca19dbfa06f617b5c1916728bdf"
+  integrity sha512-T2s+IuVhK4XpS0I80RO627RE+gUiwWq9aLKngEiXS28qVKflxqsf8SrQDR/fnnsA75FtSO8W7WNRBz71xuLSgg==
   dependencies:
     "@testing-library/dom" "^10.4.0"
     "@testing-library/jest-dom" "^6.5.0"
     "@testing-library/react" "^16.3.0"
-    "@ts-dev-tools/core" "^1.9.11"
+    "@ts-dev-tools/core" "^1.9.13"
     "@types/react" "^19.1.2"
     "@types/react-dom" "^19.1.2"
     eslint-plugin-react "^7.37.5"
@@ -4886,12 +4886,12 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-18.11.12.tgz#89e7f8aa8c88abf432f9bd594888144d7dba10aa"
   integrity sha512-FgD3NtTAKvyMmD44T07zz2fEf+OKwutgBCEVM8GcvMGVGaDktiLNTDvPwC/LUe3PinMW+X6CuLOF2Ui1mAlSXg==
 
-"@types/node@^24.0.1":
-  version "24.3.0"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-24.3.0.tgz#89b09f45cb9a8ee69466f18ee5864e4c3eb84dec"
-  integrity sha512-aPTXCrfwnDLj4VvXrm+UUCQjNEvJgNA8s5F1cvwQU+3KNltTOkBm1j30uNLyqqPNe7gE3KFzImYoZEfLhp4Yow==
+"@types/node@^25.0.1":
+  version "25.0.3"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-25.0.3.tgz#79b9ac8318f373fbfaaf6e2784893efa9701f269"
+  integrity sha512-W609buLVRVmeW693xKfzHeIV6nJGGz98uCPfeXI1ELMLXVeKYZ9m15fAMSaUPBHYLGFsVRcMmSCksQOrZV9BYA==
   dependencies:
-    undici-types "~7.10.0"
+    undici-types "~7.16.0"
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.1"
@@ -4903,7 +4903,7 @@
   resolved "https://registry.yarnpkg.com/@types/parse-json/-/parse-json-4.0.0.tgz#2f8bb441434d163b35fb8ffdccd7138927ffb8c0"
   integrity sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==
 
-"@types/prop-types@*", "@types/prop-types@^15.7.12":
+"@types/prop-types@^15.7.12":
   version "15.7.14"
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.14.tgz#1433419d73b2a7ebfc6918dcefd2ec0d5cd698f2"
   integrity sha512-gNMvNH49DJ7OJYv+KAKn0Xp45p8PLl6zo2YnvDIbTd4J6MER2BmWN49TG7n9LvkyihINxeKW8+3bfS2yDC9dzQ==
@@ -4930,16 +4930,7 @@
   resolved "https://registry.yarnpkg.com/@types/react-transition-group/-/react-transition-group-4.4.12.tgz#b5d76568485b02a307238270bfe96cb51ee2a044"
   integrity sha512-8TV6R3h2j7a91c+1DXdJi3Syo69zzIZbz7Lg5tORM5LEJG7X/E6a1V3drRyBRZq7/utz7A+c4OgYLiLcYGHG6w==
 
-"@types/react@*", "@types/react@>=16.9.11":
-  version "18.0.26"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.0.26.tgz#8ad59fc01fef8eaf5c74f4ea392621749f0b7917"
-  integrity sha512-hCR3PJQsAIXyxhTNSiDFY//LhnMZWpNNr5etoCqx/iUfGc5gXWtQR2Phl908jVR6uPXacojQWTg4qRpkxTuGug==
-  dependencies:
-    "@types/prop-types" "*"
-    "@types/scheduler" "*"
-    csstype "^3.0.2"
-
-"@types/react@^19.1.2":
+"@types/react@*", "@types/react@>=16.9.11", "@types/react@^19.1.2":
   version "19.1.10"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-19.1.10.tgz#a05015952ef328e1b85579c839a71304b07d21d9"
   integrity sha512-EhBeSYX0Y6ye8pNebpKrwFJq7BoQ8J5SO6NlvNwwHjSj6adXJViPQrKlsyPw7hLBLvckEMO1yxeGdR82YBBlDg==
@@ -4950,11 +4941,6 @@
   version "1.20.6"
   resolved "https://registry.yarnpkg.com/@types/resolve/-/resolve-1.20.6.tgz#e6e60dad29c2c8c206c026e6dd8d6d1bdda850b8"
   integrity sha512-A4STmOXPhMUtHH+S6ymgE2GiBSMqf4oTvcQZMcHzokuTLVYzXTB8ttjcgxOVaAp2lGwEdzZ0J+cRbbeevQj1UQ==
-
-"@types/scheduler@*":
-  version "0.16.2"
-  resolved "https://registry.yarnpkg.com/@types/scheduler/-/scheduler-0.16.2.tgz#1a62f89525723dde24ba1b01b092bf5df8ad4d39"
-  integrity sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==
 
 "@types/stack-utils@^2.0.3":
   version "2.0.3"
@@ -13488,10 +13474,10 @@ uncontrollable@^8.0.4:
   resolved "https://registry.yarnpkg.com/uncontrollable/-/uncontrollable-8.0.4.tgz#a0a8307f638795162fafd0550f4a1efa0f8c5eb6"
   integrity sha512-ulRWYWHvscPFc0QQXvyJjY6LIXU56f0h8pQFvhxiKk5V1fcI8gp9Ht9leVAhrVjzqMw0BgjspBINx9r6oyJUvQ==
 
-undici-types@~7.10.0:
-  version "7.10.0"
-  resolved "https://registry.yarnpkg.com/undici-types/-/undici-types-7.10.0.tgz#4ac2e058ce56b462b056e629cc6a02393d3ff350"
-  integrity sha512-t5Fy/nfn+14LuOc2KNYg75vZqClpAiqscVvMygNnlsHBFpSXdJaYtXMcdNLpl/Qvc3P2cB3s6lOV51nqsFq4ag==
+undici-types@~7.16.0:
+  version "7.16.0"
+  resolved "https://registry.yarnpkg.com/undici-types/-/undici-types-7.16.0.tgz#ffccdff36aea4884cbfce9a750a0580224f58a46"
+  integrity sha512-Zz+aZWSj8LE6zoxD+xrjh4VfkIG8Ya6LvYkZqtUQGJPZjYl53ypCaUwWqo7eI0x66KBGeRo+mlBEkMSeSZ38Nw==
 
 unicorn-magic@^0.1.0:
   version "0.1.0"

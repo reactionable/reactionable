@@ -33,6 +33,7 @@ export function LanguageSelectorComponent({
     variant: props.variant ?? "secondary",
     ...props,
     onSelect: undefined,
+    onToggle: undefined,
     children: undefined,
   };
 
