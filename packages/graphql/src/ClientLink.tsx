@@ -1,7 +1,8 @@
-import { HttpOptions, ApolloLink, ApolloClientOptions } from "@apollo/client";
-import { setContext as setApolloContext } from "@apollo/client/link/context";
+import { ApolloLink } from "@apollo/client/index.js";
+import { setContext as setApolloContext } from "@apollo/client/link/context/index.js";
 import { createUploadLink } from "apollo-upload-client";
-import { ContextSetter } from "@apollo/client/link/context";
+import type { ApolloClientOptions, HttpOptions } from "@apollo/client";
+import type { ContextSetter } from "@apollo/client/link/context";
 import fetch from "cross-fetch";
 
 export type IGraphqlClientUri = HttpOptions["uri"];

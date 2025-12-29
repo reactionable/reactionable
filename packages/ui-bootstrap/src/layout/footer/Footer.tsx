@@ -5,9 +5,7 @@ import {
 } from "@reactionable/core";
 import { ComponentType, DetailedHTMLProps, HTMLAttributes, ReactElement } from "react";
 import { PropsWithChildren } from "react";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
+import { Col, Container, Row } from "react-bootstrap";
 
 export type IFooterProps = ICoreFooterProps &
   Omit<DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>, "onSelect">;

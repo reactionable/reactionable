@@ -1,9 +1,5 @@
-import {
-  QueryHookOptions,
-  QueryOptions,
-  QueryResult,
-  useQuery as useQueryHook,
-} from "@apollo/client";
+import { useQuery as useQueryHook } from "@apollo/client/index.js";
+import type { QueryHookOptions, QueryOptions, QueryResult } from "@apollo/client";
 
 import { IData, IVariables, extractGqlData, stringToGQL } from "../Client";
 

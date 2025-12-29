@@ -2,6 +2,9 @@ import type { StorybookConfig } from "@storybook/react-vite";
 import remarkGfm from "remark-gfm";
 
 import { join, dirname } from "path";
+import { createRequire } from "module";
+
+const require = createRequire(import.meta.url);
 
 /**
  * This function is used to resolve the absolute path of a package.

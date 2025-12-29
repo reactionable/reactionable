@@ -14,17 +14,17 @@
   "typings": "lib/index.d.ts",
   "scripts": {
     "start": "yarn build:barrelsby && tsc --watch",
-    "jest": "jest --detectOpenHandles --forceExit",
+    "jest": "NODE_OPTIONS=--experimental-vm-modules jest --detectOpenHandles --forceExit",
     "test": "yarn jest --maxWorkers=50%",
     "test:coverage": "yarn jest --coverage",
     "build:pre": "yarn build:clean && yarn build:barrelsby",
-    "build": "yarn build:pre && yarn build:cjs && yarn build:esm",
+    "build": "yarn build:pre && yarn build:cjs -p tsconfig.build.json && yarn build:esm -p tsconfig.build.json",
     "build:ci": "yarn build:pre && yarn build:cjs -p tsconfig.build.json && yarn build:esm -p tsconfig.build.json",
     "build:clean": "rimraf lib",
     "build:barrelsby": "barrelsby --noHeader -d src --exclude \".+\\.test\\..+\" --exclude \".+\\.stories\\..+\" --delete -q && yarn prettier --write src/index.ts",
     "build:cjs": "mkdir -p lib/cjs && echo '{\"type\": \"commonjs\"}' > lib/cjs/package.json && tsc --pretty --module commonjs --outDir lib/cjs/",
     "build:esm": "mkdir -p lib/esm && echo '{\"type\": \"module\"}' > lib/esm/package.json && tsc --pretty --module esnext --outDir lib/esm/",
-    "build:docs": "typedoc",
+    "build:docs": "typedoc --tsconfig tsconfig.build.json",
     "lint": "eslint \"{src,stories}/**/*.{ts,tsx}\"",
     "lint:ci": "yarn lint  --output-file eslint-report.json --format json"
   },
@@ -51,12 +51,19 @@
     "@reactionable/core": "^0.28.29",
     "next": "^16.1.1"
   },
+  "devDependencies": {
+    "next-router-mock": "^1.0.4"
+  },
   "publishConfig": {
     "access": "public"
   },
   "jest": {
-    "preset": "ts-jest",
+    "preset": "ts-jest/presets/default-esm",
     "testEnvironment": "jsdom",
+    "extensionsToTreatAsEsm": [
+      ".ts",
+      ".tsx"
+    ],
     "setupFilesAfterEnv": [
       "<rootDir>/../../__tests__/jest.setup.ts"
     ],
@@ -66,9 +73,14 @@
     "testMatch": [
       "**/__tests__/**/*.[jt]s?(x)",
       "**/?(*.)+(spec|test).+(ts|tsx|js)"
-    ]
-  },
-  "devDependencies": {
-    "next-router-mock": "^1.0.4"
+    ],
+    "globals": {
+      "ts-jest": {
+        "useESM": true,
+        "tsconfig": "../../tsconfig.jest.json",
+        "isolatedModules": true,
+        "diagnostics": false
+      }
+    }
   }
 }

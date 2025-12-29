@@ -1,8 +1,6 @@
 import { Read as CoreRead, IReadProps as ICoreReadProps, IData } from "@reactionable/core";
 import { ReactElement } from "react";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
+import { Col, Container, Row } from "react-bootstrap";
 
 export type IReadProps<Data extends IData = IData> = ICoreReadProps<Data>;
 

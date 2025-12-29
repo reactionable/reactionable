@@ -1,11 +1,7 @@
 import "../../../stories/config";
 
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
+import { Button, Card, Col, Container, Row } from "react-bootstrap";
 
 import { Body } from "./Body";
 

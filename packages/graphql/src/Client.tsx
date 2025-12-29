@@ -1,15 +1,14 @@
-import {
-  ApolloClient,
+import { ApolloClient, ApolloProvider, InMemoryCache, gql, useApolloClient } from "@apollo/client/index.js";
+import type {
   ApolloClientOptions,
   DocumentNode,
-  InMemoryCache,
   InMemoryCacheConfig,
+  OperationVariables,
 } from "@apollo/client";
-import { ApolloProvider, OperationVariables, gql, useApolloClient } from "@apollo/client";
 import { IData as ICoreData } from "@reactionable/core";
 import { PropsWithChildren, ReactElement, useMemo } from "react";
 import { getGraphqlClientLink, IGraphqlClientLinkProps } from "./ClientLink";
-export { gql } from "@apollo/client";
+export { gql } from "@apollo/client/index.js";
 
 export type IGraphqlClient = ApolloClient<IGraphqlClientState>;
 

@@ -4,7 +4,12 @@
     "module": "ESNext",
     "target": "ESNext",
     "esModuleInterop": true,
-    "lib": ["es2018", "dom", "dom.iterable", "esnext"],
+    "lib": [
+      "es2018",
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "sourceMap": true,
     "allowJs": true,
     "strict": true,
@@ -31,6 +36,8 @@
     "baseUrl": "src"
   },
   "paths": {
-    "@reactionable/*": ["packages/*"]
+    "@reactionable/*": [
+      "packages/*"
+    ]
   }
 }

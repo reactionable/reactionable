@@ -1,14 +1,14 @@
-import {
+import { useMutation as useMutationHook } from "@apollo/client/index.js";
+import type {
   FetchResult,
   MutationFunctionOptions,
   MutationHookOptions,
   MutationOptions,
   MutationResult,
-  useMutation as useMutationHook,
 } from "@apollo/client";
 
 import { IData, IVariables, extractGqlData, stringToGQL } from "../Client";
-import { Unmasked } from "@apollo/client/masking";
+import type { Unmasked } from "@apollo/client/masking";
 
 export type IMutationOptions<TData = IData, TVariables = IVariables> = Omit<
   MutationOptions<TData, TVariables>,
