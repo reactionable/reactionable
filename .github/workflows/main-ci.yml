@@ -1,4 +1,4 @@
-name: Internal - Main - Continuous Integration
+name: Main - Continuous Integration
 
 on:
   push:

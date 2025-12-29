@@ -1,7 +1,7 @@
 <p align="center">
   <a href="/" target="_blank"><img src="https://repository-images.githubusercontent.com/215304880/54c18000-3001-11eb-99e6-e7d2ceccde7f" width="600"></a>
   <br/><br/>
-  <a href="https://github.com/reactionable/reactionable/actions?query=workflow%3A%22Continuous+Integration%22" target="_blank"><img alt="Continuous integration" src="https://github.com/reactionable/reactionable/workflows/Continuous%20Integration/badge.svg"></a>
+  <a href="https://github.com/reactionable/reactionable/actions/workflows/main-ci.yml" target="_blank"><img alt="Continuous integration" src="https://github.com/reactionable/reactionable/actions/workflows/main-ci.yml/badge.svg"></a>
   <a href="https://codecov.io/gh/reactionable/reactionable" target="_blank"><img alt="Coverage Status" src="https://codecov.io/gh/reactionable/reactionable/branch/master/graph/badge.svg"></a>
   <a href="https://github.com/reactionable/reactionable/blob/master/LICENSE" target="_blank"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" /></a>
   <a href="https://www.npmjs.com/search?q=%40reactionable" target="_blank"><img alt="npm" src="https://img.shields.io/npm/v/@reactionable/core"></a>

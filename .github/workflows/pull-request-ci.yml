@@ -1,4 +1,4 @@
-name: Internal - Pull request - Continuous Integration
+name: Pull request - Continuous Integration
 
 on:
   merge_group:
