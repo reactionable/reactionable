@@ -19,6 +19,9 @@
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode"
       ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "zsh"
+      },
       "mcp": {
         "servers": {}
       }

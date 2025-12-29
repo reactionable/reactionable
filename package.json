@@ -27,17 +27,17 @@
     "@storybook/addon-links": "^9.1.13",
     "@storybook/addon-onboarding": "^9.1.13",
     "@storybook/react-vite": "^9.1.13",
-    "@ts-dev-tools/react": "^1.9.7",
+    "@ts-dev-tools/react": "^1.9.11",
     "barrelsby": "^2.5.1",
     "eslint-plugin-storybook": "^9.1.13",
-    "lerna": "^9.0.1",
+    "lerna": "^9.0.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "remark-gfm": "^4.0.0",
     "rimraf": "^6.1.2",
     "storybook": "^9.1.17",
-    "typedoc": "^0.28.14",
-    "vite": "^7.2.4"
+    "typedoc": "^0.28.15",
+    "vite": "^7.3.0"
   },
   "resolutions": {
     "react": "^19.0.0",
@@ -50,9 +50,7 @@
     "semi": true,
     "printWidth": 100,
     "trailingComma": "es5",
-    "plugins": [
-      "@prettier/plugin-oxc"
-    ]
+    "plugins": []
   },
   "commitlint": {
     "extends": [
@@ -72,6 +70,6 @@
     }
   },
   "tsDevTools": {
-    "version": "20250623095500-add-prettier-oxc"
+    "version": "20250623095600-remove-prettier-oxc"
   }
 }
