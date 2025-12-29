@@ -4,11 +4,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { faAtom } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation, generatePath, useRouteMatch } from "@reactionable/core";
 import { FC } from "react";
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
+import { Button, Card, Col, Container, Row } from "react-bootstrap";
 
 import { TestWrapper } from "../../testing/TestWrapper";
 import { Sidebar, useSidebarContext } from "./Sidebar";

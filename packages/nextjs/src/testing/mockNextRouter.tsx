@@ -1,10 +1,5 @@
 import type { NextRouter } from "next/router";
 
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const useRouter = window.jest ? jest.spyOn(require("next/router"), "useRouter") : undefined;
-
-const mockUseNextRouter = useRouter;
-
 export function createMockRouter(overrides: Partial<NextRouter>): NextRouter {
   return {
     basePath: "",
@@ -54,6 +49,5 @@ export function createMockRouter(overrides: Partial<NextRouter>): NextRouter {
  */
 export default function mockNextRouter(overrides: Partial<NextRouter> = {}) {
   const mockRouter = createMockRouter(overrides);
-  mockUseNextRouter?.mockReturnValue(mockRouter);
   return mockRouter;
 }

@@ -5,8 +5,7 @@ import {
   UserUnloggedHeaderNav,
 } from "@reactionable/core";
 import { ReactElement, ComponentProps } from "react";
-import Nav from "react-bootstrap/Nav";
-import NavDropdown from "react-bootstrap/NavDropdown";
+import { Nav, NavDropdown } from "react-bootstrap";
 
 export { UserUnloggedHeaderNav } from "@reactionable/core";
 

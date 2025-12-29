@@ -1,4 +1,5 @@
-import { act, renderHook } from "@testing-library/react";
+import { renderHook, waitFor } from "@testing-library/react";
+import { GraphQLAPI } from "@aws-amplify/api-graphql";
 
 import { IData, IVariables } from "./Query";
 import { useQuery } from "./useQuery";
@@ -13,9 +14,16 @@ const testQuery = `query Test() {
 
 describe("useQuery", () => {
   it("should render without crashing", async () => {
-    await act(() => {
-      const { result } = renderHook(() => useQuery<ITestData, ITestVariables>(testQuery));
-      expect(result).toBeTruthy();
+    const graphqlSpy = jest.spyOn(GraphQLAPI, "graphql");
+    graphqlSpy.mockResolvedValueOnce({ data: { test: {} } } as unknown as { data: ITestData });
+
+    const { result } = renderHook(() => useQuery<ITestData, ITestVariables>(testQuery));
+    expect(result).toBeTruthy();
+
+    await waitFor(() => {
+      expect(result.current.loading).toBe(false);
     });
+
+    graphqlSpy.mockRestore();
   });
 });

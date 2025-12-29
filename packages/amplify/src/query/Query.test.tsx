@@ -10,17 +10,17 @@ const testQuery = `query Test() {
     test() { }
 }`;
 
-const graphqlMock = GraphQLAPI.graphql as jest.MockedFunction<typeof GraphQLAPI.graphql>;
+const graphqlSpy = jest.spyOn(GraphQLAPI, "graphql");
 
 describe("Query", () => {
   beforeEach(() => {
-    graphqlMock.mockReset();
+    graphqlSpy.mockReset();
   });
 
   describe("query", () => {
     it("should return the retrieve graphql error", async () => {
       const expectedError = "test graphql error";
-      graphqlMock.mockRejectedValueOnce({
+      graphqlSpy.mockRejectedValueOnce({
         data: undefined,
         errors: [
           {

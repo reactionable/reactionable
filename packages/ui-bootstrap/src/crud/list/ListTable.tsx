@@ -7,7 +7,7 @@ import {
   IData,
 } from "@reactionable/core";
 import { ReactElement } from "react";
-import Table from "react-bootstrap/Table";
+import { Table } from "react-bootstrap";
 
 export type IListTableProps<Data extends IData = IData> = ICoreListTableProps<Data>;
 

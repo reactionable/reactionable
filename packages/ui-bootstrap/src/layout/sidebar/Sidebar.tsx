@@ -7,12 +7,7 @@ import {
   useSidebarContext as coreUseSidebarContext,
 } from "@reactionable/core";
 import { PropsWithChildren, ReactElement, useState } from "react";
-import { Nav } from "react-bootstrap";
-import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
-import Collapse from "react-bootstrap/Collapse";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
+import { Button, Col, Collapse, Container, Nav, Row } from "react-bootstrap";
 
 import { INavItemProps, NavItems } from "../../nav/NavItem";
 
