@@ -11,14 +11,14 @@
     "lint:ci": "lerna run --stream lint:ci --",
     "build": "lerna run --stream build --",
     "build:ci": "lerna run --stream build:ci --",
-    "build:all": "yarn build:ci && yarn docs:build && yarn storybook:build",
+    "build:all": "npm run build:ci && npm run docs:build && npm run storybook:build",
     "link": "node dev-link link",
     "unlink": "node dev-link unlink",
     "docs:build": "lerna run --stream build:docs",
     "storybook": "storybook dev -p 6006",
-    "storybook:build": "yarn build-storybook -o build/storybook",
+    "storybook:build": "npm run build-storybook -- -o build/storybook",
     "prepare": "ts-dev-tools install",
-    "ci": "yarn lint && yarn build:all && yarn test:ci",
+    "ci": "npm run lint && npm run build:all && npm run test:ci",
     "build-storybook": "storybook build"
   },
   "devDependencies": {
@@ -41,9 +41,9 @@
     "typedoc": "^0.28.15",
     "vite": "^7.3.0"
   },
-  "resolutions": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+  "overrides": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   },
   "workspaces": [
     "packages/*"
