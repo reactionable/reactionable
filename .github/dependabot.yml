@@ -9,8 +9,6 @@ updates:
       day: friday
       time: "04:00"
     groups:
-      npm-development-dependencies:
-        dependency-type: "development"
       npm-storybook-dependencies:
         patterns:
           - "storybook"
@@ -48,6 +46,8 @@ updates:
           - "@apollo/*"
           - "apollo-*"
           - "@types/apollo-*"
+      npm-development-dependencies:
+        dependency-type: "development"
 
   - package-ecosystem: github-actions
     directory: "/"
