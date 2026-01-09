@@ -1,17 +1,16 @@
-import { ApolloLink } from "@apollo/client/index.js";
-import { setContext as setApolloContext } from "@apollo/client/link/context/index.js";
-import { createUploadLink } from "apollo-upload-client";
-import type { ApolloClientOptions, HttpOptions } from "@apollo/client";
-import type { ContextSetter } from "@apollo/client/link/context";
+import type { ApolloLink } from "@apollo/client/link";
+import { ApolloLink as ApolloLinkImpl } from "@apollo/client/link";
+import { setContext as setApolloContext } from "@apollo/client/link/context";
+import UploadHttpLink from "apollo-upload-client/UploadHttpLink.mjs";
 import fetch from "cross-fetch";
 
-export type IGraphqlClientUri = HttpOptions["uri"];
 export type IGraphqlClientAuthorizationGetter = () => string;
-export type IGraphqlClientLinkContextSetter = ContextSetter;
+export type IGraphqlClientLinkContextSetter = Parameters<typeof setApolloContext>[0];
+export type IGraphqlClientUri = string;
 
 export type IGraphqlClientLinkProps = {
   uri: IGraphqlClientUri;
-  link?: ApolloClientOptions<unknown>["link"];
+  link?: ApolloLink;
   getAuthorization?: IGraphqlClientAuthorizationGetter;
   setContext?: IGraphqlClientLinkContextSetter;
 };
@@ -36,7 +35,7 @@ export function getGraphqlClientLink({
 
       return setContext ? setContext(_, prevContext) : prevContext;
     }),
-    createUploadLink({
+    new UploadHttpLink({
       uri,
       fetch,
       credentials: "include",
@@ -46,5 +45,5 @@ export function getGraphqlClientLink({
     links.unshift(link);
   }
 
-  return ApolloLink.from(links);
+  return ApolloLinkImpl.from(links);
 }

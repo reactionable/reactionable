@@ -1,5 +1,6 @@
 import { IData, IVariables } from "../Client";
 import { IMutationHookOptions, IUseMutationResult, useMutation } from "./useMutation";
+import type { ApolloCache } from "@apollo/client/cache";
 
 export function useMutationDelete<
   TData extends IData = IData,
@@ -9,7 +10,8 @@ export function useMutationDelete<
   options?: IMutationHookOptions<TData, TVariables>
 ): IUseMutationResult<TData, TVariables> {
   return useMutation<TData, TVariables>(mutation, {
-    update: (cache, { data }) => {
+    update: (cache: ApolloCache, mutationResult: { data?: unknown }) => {
+      const { data } = mutationResult;
       if (isEntityData(data)) {
         cache.evict({
           id: cache.identify({

@@ -1,23 +1,23 @@
-import { useMutation as useMutationHook } from "@apollo/client/index.js";
+import { useMutation as useMutationHook } from "@apollo/client/react";
 import type {
-  FetchResult,
   MutationFunctionOptions,
   MutationHookOptions,
-  MutationOptions,
   MutationResult,
-} from "@apollo/client";
+} from "@apollo/client/react";
+import type { MutationOptions } from "@apollo/client/core";
+import type { FetchResult } from "@apollo/client/core";
 
 import { IData, IVariables, extractGqlData, stringToGQL } from "../Client";
 import type { Unmasked } from "@apollo/client/masking";
 
-export type IMutationOptions<TData = IData, TVariables = IVariables> = Omit<
+export type IMutationOptions<TData = IData, TVariables extends IVariables = IVariables> = Omit<
   MutationOptions<TData, TVariables>,
   "mutation"
 >;
 
 export type IMutationFunctionOptions<
   TData = IData,
-  TVariables = IVariables,
+  TVariables extends IVariables = IVariables,
 > = MutationFunctionOptions<TData, TVariables>;
 
 export type IMutationHookOptions<
@@ -25,7 +25,10 @@ export type IMutationHookOptions<
   TVariables extends IVariables = IVariables,
 > = MutationHookOptions<TData, TVariables>;
 
-export type IUseMutationResult<TData = IData, TVariables = IVariables> = MutationResult<TData> & {
+export type IUseMutationResult<TData = IData, TVariables extends IVariables = IVariables> = Omit<
+  MutationResult<TData>,
+  "data"
+> & {
   data: TData | undefined;
   mutate: (options?: IMutationFunctionOptions<TData, TVariables>) => Promise<
     FetchResult<TData> & {
@@ -45,21 +48,39 @@ export function useMutation<
 
   const update = options?.update;
 
+  type UpdateFunction = NonNullable<IMutationHookOptions<TData, TVariables>["update"]>;
+
   const [mutate, { error, data, ...result }] = useMutationHook<TData, TVariables>(gqlQuery, {
     ...options,
     ...(update
       ? {
-          update: (cache, { data, ...mutationResult }, ...othersArguments) => {
-            const updateData = extractGqlData<TData>(data) as Unmasked<TData>;
-            return update(cache, { data: updateData, ...mutationResult }, ...othersArguments);
-          },
+          update: ((cache: unknown, mutationResult: unknown, ...othersArguments: unknown[]) => {
+            const mutationResultRecord = mutationResult as { data?: unknown } & Record<string, unknown>;
+            const updateData = extractGqlData<TData>(mutationResultRecord.data as IData) as Unmasked<TData>;
+            const nextResult = { ...mutationResultRecord, data: updateData };
+            if (othersArguments.length) {
+              return (update as unknown as (cache: unknown, result: unknown, options: unknown) => unknown)(
+                cache,
+                nextResult,
+                othersArguments[0]
+              ) as never;
+            }
+
+            return (update as unknown as (cache: unknown, result: unknown) => unknown)(
+              cache,
+              nextResult
+            ) as never;
+          }) as UpdateFunction,
         }
       : undefined),
   });
 
   return {
     mutate: async (options?: IMutationFunctionOptions<TData, TVariables>) => {
-      const { data, ...result } = await mutate(options);
+      const mutateFn = mutate as unknown as (
+        options?: IMutationFunctionOptions<TData, TVariables>
+      ) => Promise<FetchResult<TData>>;
+      const { data, ...result } = await mutateFn(options);
       return {
         ...result,
         data: extractGqlData<TData>(data),
