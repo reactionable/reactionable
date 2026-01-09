@@ -43,6 +43,11 @@ updates:
         patterns:
           - "aws-amplify"
           - "@aws-amplify/*"
+      npm-apollo-dependencies:
+        patterns:
+          - "@apollo/*"
+          - "apollo-*"
+          - "@types/apollo-*"
 
   - package-ecosystem: github-actions
     directory: "/"
