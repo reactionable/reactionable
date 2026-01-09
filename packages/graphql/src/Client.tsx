@@ -1,24 +1,22 @@
-import { ApolloClient, ApolloProvider, InMemoryCache, gql, useApolloClient } from "@apollo/client/index.js";
-import type {
-  ApolloClientOptions,
-  DocumentNode,
-  InMemoryCacheConfig,
-  OperationVariables,
-} from "@apollo/client";
+import type { OperationVariables } from "@apollo/client/core";
+import { ApolloClient, gql } from "@apollo/client/core";
+import type { InMemoryCacheConfig } from "@apollo/client/cache";
+import { InMemoryCache } from "@apollo/client/cache";
+import { ApolloProvider, useApolloClient } from "@apollo/client/react";
+import type { DocumentNode } from "graphql";
 import { IData as ICoreData } from "@reactionable/core";
 import { PropsWithChildren, ReactElement, useMemo } from "react";
 import { getGraphqlClientLink, IGraphqlClientLinkProps } from "./ClientLink";
-export { gql } from "@apollo/client/index.js";
+export { gql } from "@apollo/client/core";
 
-export type IGraphqlClient = ApolloClient<IGraphqlClientState>;
+export type IGraphqlClient = ApolloClient;
 
 export type IGraphqlClientState = Record<string, unknown>;
 export type IGraphqlClientConfig = {
   initialState?: IGraphqlClientState;
   cacheConfig?: InMemoryCacheConfig;
 } & IGraphqlClientLinkProps &
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  Partial<ApolloClientOptions<any>>;
+  Partial<ApolloClient.Options>;
 
 export type IVariables = OperationVariables;
 export type IData = ICoreData;
@@ -64,7 +62,10 @@ export function initializeGraphqlClient({
     const existingCache = _graphqlClient.extract();
     // Restore the cache using the data passed from getStaticProps/getServerSideProps
     // combined with the existing cached data
-    _graphqlClient.cache.restore({ ...existingCache, ...initialState });
+    _graphqlClient.cache.restore({
+      ...(existingCache as Record<string, unknown>),
+      ...(initialState as Record<string, unknown>),
+    });
   }
   // For SSG and SSR always create a new Apollo Client
   if (typeof window === "undefined") return _graphqlClient;

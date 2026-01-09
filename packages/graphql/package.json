@@ -46,14 +46,14 @@
   },
   "homepage": "https://github.com/reactionable/reactionable#readme",
   "dependencies": {
-    "@apollo/client": "^3.13.9",
+    "@apollo/client": "^4.0.11",
     "@reactionable/core": "^0.28.31",
-    "apollo-upload-client": "^17.0.0",
-    "cross-fetch": "^4.0.0",
+    "apollo-upload-client": "^19.0.0",
+    "cross-fetch": "^4.1.0",
     "graphql": "^16.12.0"
   },
   "devDependencies": {
-    "@types/apollo-upload-client": "^17.0.2"
+    "@types/apollo-upload-client": "^19.0.0"
   },
   "publishConfig": {
     "access": "public"
@@ -66,6 +66,11 @@
       ".ts",
       ".tsx"
     ],
+    "moduleNameMapper": {
+      "^apollo-upload-client/UploadHttpLink\\.mjs$": "<rootDir>/test-mocks/UploadHttpLink.mock.ts",
+      "^rxjs$": "<rootDir>/../../node_modules/rxjs/dist/cjs/index.js",
+      "^rxjs/(.*)$": "<rootDir>/../../node_modules/rxjs/dist/cjs/$1"
+    },
     "setupFilesAfterEnv": [
       "<rootDir>/../../__tests__/jest.setup.ts"
     ],
