@@ -37,7 +37,7 @@
     "react-dom": "^19.1.0",
     "remark-gfm": "^4.0.0",
     "rimraf": "^6.1.2",
-    "storybook": "^10.2.8",
+    "storybook": "^10.2.13",
     "typedoc": "^0.28.16",
     "vite": "^7.3.1"
   },
