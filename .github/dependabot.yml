@@ -48,6 +48,12 @@ updates:
           - "@types/apollo-*"
       npm-development-dependencies:
         dependency-type: "development"
+        patterns:
+          - "*"
+      npm-production-dependencies:
+        dependency-type: "production"
+        patterns:
+          - "*"
 
   - package-ecosystem: github-actions
     directory: "/"
