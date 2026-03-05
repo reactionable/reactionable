@@ -3,6 +3,7 @@ import { initReactI18next } from "react-i18next";
 
 export async function i18nTestInstance(): Promise<I18nType> {
   await i18n.use(initReactI18next).init({
+    showSupportNotice: false,
     resources: {
       en: { translation: {} },
       fr: { translation: {} },

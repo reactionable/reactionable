@@ -29,6 +29,7 @@ const builtInResources: Resource = {
 
 const defaultOptions = {
   debug: false,
+  showSupportNotice: false,
   interpolation: {
     escapeValue: false, // react already safes from xss
   },

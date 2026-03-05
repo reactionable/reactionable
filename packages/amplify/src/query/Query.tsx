@@ -42,10 +42,12 @@ export async function query<Data extends IData, QO extends IQueryOptions<IVariab
     }
 
     if (!isGraphQLResult(error) || !error.errors) {
-      throw new Error("An unexpected error occurred");
+      throw new Error("An unexpected error occurred", { cause: error });
     }
 
-    throw new Error(error.errors.map((errorItem) => errorItem.message).join(", "));
+    throw new Error(error.errors.map((errorItem) => errorItem.message).join(", "), {
+      cause: error,
+    });
   }
 
   if (!result || !isGraphQLResult(result) || !result.data) {

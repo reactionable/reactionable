@@ -40,14 +40,13 @@ describe("LanguageSelector", () => {
       );
       expect(result).toBeTruthy();
 
-      let select = (await result.getByRole("combobox")) as HTMLSelectElement;
+      const select = (await result.getByRole("combobox")) as HTMLSelectElement;
 
       expect(select.value).toEqual("en");
       expect(onChange).not.toHaveBeenCalled();
 
       // Change current language
       fireEvent.change(select, { target: { value: "fr" } });
-      select = (await result.getByRole("combobox")) as HTMLSelectElement;
       expect(onChange).toHaveBeenCalledWith("fr");
     });
   });
