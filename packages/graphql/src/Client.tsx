@@ -70,7 +70,11 @@ export function initializeGraphqlClient({
   // For SSG and SSR always create a new Apollo Client
   if (typeof window === "undefined") return _graphqlClient;
 
-  return _graphqlClient;
+  if (!graphqlClient) {
+    graphqlClient = _graphqlClient;
+  }
+
+  return graphqlClient;
 }
 
 export function useInitGraphqlClient(graphqlClientConfig: IGraphqlClientConfig): IGraphqlClient {
