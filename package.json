@@ -24,11 +24,11 @@
   "devDependencies": {
     "@chromatic-com/storybook": "^5.0.2",
     "@jridgewell/gen-mapping": "^0.3.13",
-    "@storybook/addon-docs": "^10.3.1",
-    "@storybook/addon-links": "^10.3.1",
-    "@storybook/addon-onboarding": "^10.3.1",
-    "@storybook/react": "^10.3.1",
-    "@storybook/react-vite": "^10.3.1",
+    "@storybook/addon-docs": "^10.3.3",
+    "@storybook/addon-links": "^10.3.3",
+    "@storybook/addon-onboarding": "^10.3.3",
+    "@storybook/react": "^10.3.3",
+    "@storybook/react-vite": "^10.3.3",
     "@ts-dev-tools/react": "^1.9.17",
     "barrelsby": "^2.5.1",
     "eslint-plugin-storybook": "^10.3.1",
@@ -39,7 +39,7 @@
     "rimraf": "^6.1.3",
     "storybook": "^10.2.13",
     "typedoc": "^0.28.17",
-    "vite": "^8.0.1"
+    "vite": "^8.0.3"
   },
   "overrides": {
     "react": "^19.1.0",
