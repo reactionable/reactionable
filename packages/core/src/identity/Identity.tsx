@@ -3,7 +3,7 @@ import { ComponentType, PropsWithChildren } from "react";
 
 import { IProviderProps, createProvider } from "../app/Provider";
 import { IError } from "../error/IError";
-import { useTranslation } from "../i18n/I18n";
+import { keyFromSelector, useTranslation } from "../i18n/I18n";
 import { IUseQueryResult } from "../query/Query";
 import { useUIContext } from "../ui/UI";
 import { Auth } from "./Auth";
@@ -71,7 +71,7 @@ function IdentityContextProvider<User extends IUser>({
   const { useErrorNotification, useErrorAlert, useLoader } = useUIContext();
   const { t } = useTranslation("identity");
   const { errorNotification, setErrorNotification } = useErrorNotification({
-    title: t("Authentication"),
+    title: t(keyFromSelector(($) => $["Authentication"], { ns: "identity" })),
   });
   const { errorAlert, setErrorAlert } = useErrorAlert();
   const { loader, setLoading } = useLoader();

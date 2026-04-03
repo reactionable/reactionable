@@ -6,6 +6,7 @@ import {
   FormFields,
   IFormFieldsProps,
   IFormWrapperProps,
+  keyFromSelector,
   useTranslation,
   ModalForm as CoreModalForm,
   IModalFormProps as ICoreModalFormProps,
@@ -52,7 +53,7 @@ function ModalFormChildren<
   });
 
   const cancel = useFormButton({
-    children: cancelButton ?? t("Cancel"),
+    children: cancelButton ?? t(keyFromSelector(($) => $["Cancel"], { ns: "common" })),
     disabled: formikProps.isSubmitting,
     onClick: closeModal,
     color: "secondary",

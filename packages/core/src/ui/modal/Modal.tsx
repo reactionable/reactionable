@@ -1,6 +1,6 @@
 import { ComponentType, PropsWithChildren, ReactElement, ReactNode, useState } from "react";
 
-import { useTranslation } from "../../i18n/I18n";
+import { keyFromSelector, useTranslation } from "../../i18n/I18n";
 
 export interface IModalProps {
   title: ReactNode;
@@ -18,7 +18,7 @@ export function Modal<P extends IModalProps = IModalProps>({
 
   ...modalProps
 }: PropsWithChildren<P>): ReactElement {
-  const { t } = useTranslation();
+  const { t } = useTranslation("common");
   const handleOnClose = () => {
     if (onHide) {
       onHide();
@@ -29,7 +29,9 @@ export function Modal<P extends IModalProps = IModalProps>({
     <div {...modalProps} hidden={!show}>
       <div>
         <div>{title}</div>
-        <button onClick={handleOnClose}>{t("Close")}</button>
+        <button onClick={handleOnClose}>
+          {t(keyFromSelector(($) => $["Close"], { ns: "common" }))}
+        </button>
       </div>
       {children}
     </div>

@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { useTranslation, generatePath, useRouteMatch } from "@reactionable/core";
+import { keyFromSelector, useTranslation, generatePath, useRouteMatch } from "@reactionable/core";
 import { FC } from "react";
 
 import { UIContextProvider } from "../../UI";
@@ -28,9 +28,9 @@ const SampleComponent: FC = () => {
   setNavItems([
     {
       href: generatePath(`${match.path}/sample`, match.params),
-      title: t("Go to sample page") ?? undefined,
+      title: t(keyFromSelector(($) => $["Go to sample page"], { ns: "common" })),
       icon: SaveIcon,
-      children: t("Sample"),
+      children: t(keyFromSelector(($) => $["Sample"], { ns: "common" })),
     },
   ]);
   return (

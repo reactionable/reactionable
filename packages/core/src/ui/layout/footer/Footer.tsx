@@ -1,6 +1,6 @@
 import { ComponentType, PropsWithChildren, ReactElement, ReactNode } from "react";
 
-import { useTranslation } from "../../../i18n/I18n";
+import { keyFromSelector, useTranslation } from "../../../i18n/I18n";
 
 export interface IFooterProps {
   brand?: ReactNode | string;
@@ -35,7 +35,7 @@ export function CopyrightFooter<FooterProps extends IFooterProps = IFooterProps>
   const currentYear = new Date().getFullYear();
   return (
     <>
-      {t("Copyright")} &copy; {currentYear} {brand}
+      {t(keyFromSelector(($) => $["Copyright"], { ns: "common" }))} &copy; {currentYear} {brand}
     </>
   );
 }
@@ -44,12 +44,18 @@ export const SponsorFooter = (): ReactElement => {
   const { t } = useTranslation("common");
   return (
     <>
-      <span title={t("Powered by") ?? undefined}>{t("⚡ by")} </span>
+      <span title={t(keyFromSelector(($) => $["Powered by"], { ns: "common" }))}>
+        {t(keyFromSelector(($) => $["⚡ by"], { ns: "common" }))} 
+      </span>
       <a
         href="https://reactionable.github.io/reactionable/"
         rel="noreferrer"
         target="_blank"
-        title={t("Reactionable - An effective toolkit for React") ?? undefined}
+        title={t(
+          keyFromSelector(($) => $["Reactionable - An effective toolkit for React"], {
+            ns: "common",
+          })
+        )}
       >
         Reactionable
       </a>

@@ -53,5 +53,16 @@ describe("I18n", () => {
       });
       expect(overridedTranslation).toEqual(newTranslation);
     });
+
+    it("should not persist overridden translations between initializations", async () => {
+      await initializeI18n({
+        resources: { fr: { common: { Cancel: "Annuler !" } } },
+      });
+
+      const i18nInstance = await initializeI18n();
+
+      await i18nInstance.changeLanguage("fr");
+      expect(i18nInstance.t("Cancel")).toEqual("Annuler");
+    });
   });
 });

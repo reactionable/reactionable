@@ -1,6 +1,6 @@
 import { ComponentType, LazyExoticComponent, PropsWithChildren } from "react";
 
-import { useTranslation } from "../../i18n/I18n";
+import { keyFromSelector, useTranslation } from "../../i18n/I18n";
 import { withSuspense } from "../suspense/Suspense";
 
 export type ILoaderProps = Record<string, unknown>;
@@ -8,7 +8,7 @@ export type LoaderComponent = ComponentType<ILoaderProps>;
 
 export const Loader: LoaderComponent = () => {
   const { t } = useTranslation("common");
-  return <>{t("Loading")}</>;
+  return <>{t(keyFromSelector(($) => $["Loading"], { ns: "common" }))}</>;
 };
 
 export function lazyLoad<Component extends ComponentType = ComponentType>(

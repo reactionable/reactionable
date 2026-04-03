@@ -8,6 +8,7 @@ import Paper, { PaperProps } from "@mui/material/Paper";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import {
+  keyFromSelector,
   useTranslation,
   ConfirmationComponent,
   ConfirmationAction as CoreConfirmationAction,
@@ -53,17 +54,17 @@ export const Confirmation: ConfirmationComponent = ({
       fullWidth
     >
       <DialogTitle style={{ cursor: "move" }} id="draggable-dialog-title">
-        {title || t("Confirm ?")}
+        {title || t(keyFromSelector(($) => $["Confirm ?"], { ns: "common" }))}
       </DialogTitle>
       <DialogContent>
         <DialogContentText>{children}</DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button onClick={handleCancel} color="primary">
-          {t("Cancel")}
+          {t(keyFromSelector(($) => $["Cancel"], { ns: "common" }))}
         </Button>
         <Button onClick={handleOk} color="primary">
-          {t("OK")}
+          {t(keyFromSelector(($) => $["OK"], { ns: "common" }))}
         </Button>
       </DialogActions>
     </Dialog>

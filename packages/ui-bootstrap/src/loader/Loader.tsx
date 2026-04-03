@@ -1,4 +1,5 @@
 import {
+  keyFromSelector,
   useTranslation,
   ILoaderProps as ICoreLoaderProps,
   IUseLoaderProps as ICoreUseLoaderProps,
@@ -16,7 +17,9 @@ export const Loader = ({ overlay = true }: ILoaderProps): ReactElement => {
   const { t } = useTranslation("common");
   const spinnerElement = (
     <Spinner animation="grow" role="status" variant="primary">
-      <span className="sr-only">{t("Loading")}</span>
+      <span className="sr-only">
+        {t(keyFromSelector(($) => $["Loading"], { ns: "common" }))}
+      </span>
     </Spinner>
   );
   if (!overlay) {

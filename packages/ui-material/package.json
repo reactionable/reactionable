@@ -64,6 +64,16 @@
       ".ts",
       ".tsx"
     ],
+    "transform": {
+      "^.+\\.tsx?$": [
+        "ts-jest",
+        {
+          "useESM": true,
+          "tsconfig": "../../tsconfig.jest.json",
+          "diagnostics": false
+        }
+      ]
+    },
     "setupFilesAfterEnv": [
       "<rootDir>/../../__tests__/jest.setup.ts"
     ],
@@ -72,14 +82,6 @@
     ],
     "testMatch": [
       "**/?(*.)+(spec|test).+(ts|tsx|js)"
-    ],
-    "globals": {
-      "ts-jest": {
-        "useESM": true,
-        "tsconfig": "../../tsconfig.jest.json",
-        "isolatedModules": true,
-        "diagnostics": false
-      }
-    }
+    ]
   }
 }

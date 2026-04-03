@@ -1,5 +1,6 @@
 import CircularProgress from "@mui/material/CircularProgress";
 import {
+  keyFromSelector,
   useTranslation,
   ILoaderProps as ICoreLoaderProps,
   IUseLoaderProps as ICoreUseLoaderProps,
@@ -14,7 +15,9 @@ export type ILoaderProps = ICoreLoaderProps & {
 
 export const Loader = ({ overlay = true }: ILoaderProps): ReactElement => {
   const { t } = useTranslation("common");
-  const spinnerElement = <CircularProgress title={t("Loading") ?? undefined} />;
+  const spinnerElement = (
+    <CircularProgress title={t(keyFromSelector(($) => $["Loading"], { ns: "common" }))} />
+  );
   if (!overlay) {
     return spinnerElement;
   }

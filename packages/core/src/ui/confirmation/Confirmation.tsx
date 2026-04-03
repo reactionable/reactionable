@@ -9,7 +9,7 @@ import {
 
 import { EnhanceChildren } from "../../enhance-children/EnhanceChildren";
 import { IError } from "../../error/IError";
-import { useTranslation } from "../../i18n/I18n";
+import { keyFromSelector, useTranslation } from "../../i18n/I18n";
 import { useUIContext } from "../UI";
 
 export type IConfirmationProps = PropsWithChildren<{
@@ -28,11 +28,15 @@ export const Confirmation: ConfirmationComponent = ({
 
   return (
     <div>
-      <div>{title || t("Confirm ?")}</div>
+      <div>{title || t(keyFromSelector(($) => $["Confirm ?"], { ns: "common" }))}</div>
       <div>{children}</div>
       <div>
-        <button onClick={() => callback(false)}>{t("Cancel")} </button>
-        <button onClick={() => callback(true)}>{t("OK")}</button>
+        <button onClick={() => callback(false)}>
+          {t(keyFromSelector(($) => $["Cancel"], { ns: "common" }))} 
+        </button>
+        <button onClick={() => callback(true)}>
+          {t(keyFromSelector(($) => $["OK"], { ns: "common" }))} 
+        </button>
       </div>
     </div>
   );

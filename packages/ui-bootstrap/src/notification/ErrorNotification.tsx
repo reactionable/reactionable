@@ -1,4 +1,5 @@
 import {
+  keyFromSelector,
   useTranslation,
   IErrorNotificationProps as ICoreErrorNotificationProps,
   IUseErrorNotificationProps as ICoreUseErrorNotificationProps,
@@ -20,7 +21,7 @@ export const ErrorNotification: ErrorNotificationComponent = ({
 }: IErrorNotificationProps): ReactElement => {
   const { t } = useTranslation("common");
   if (!title) {
-    title = t("An error has occured");
+    title = t(keyFromSelector(($) => $["An error has occured"], { ns: "common" }));
   }
 
   return (

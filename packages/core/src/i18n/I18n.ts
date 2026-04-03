@@ -1,20 +1,16 @@
 import i18n, {
   i18n as I18nType,
   InitOptions,
-  Namespace,
   Resource,
-  ResourceKey,
-  ResourceLanguage,
-  TFunction,
 } from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
 
+import { defaultNamespace } from "./i18next";
 import enCommon from "./locales/en/common.json";
 import enIdentity from "./locales/en/identity.json";
 import frCommon from "./locales/fr/common.json";
 import frIdentity from "./locales/fr/identity.json";
-import { useTranslation as i18nextUseTranslation } from "react-i18next";
 
 const builtInResources: Resource = {
   en: {
@@ -29,53 +25,48 @@ const builtInResources: Resource = {
 
 const defaultOptions = {
   debug: false,
-  showSupportNotice: false,
+  enableSelector: "optimize" as const,
   interpolation: {
     escapeValue: false, // react already safes from xss
   },
-  defaultNS: "common",
+  defaultNS: defaultNamespace,
+  returnNull: false,
 };
 
-export function useTranslation<Ns extends Namespace, KPrefix>(
-  namespace: Ns | undefined = undefined
-): { t: TFunction<Ns, KPrefix>; i18n: I18nType } {
-  const { t, i18n } = i18nextUseTranslation(namespace);
-  return { t, i18n };
+export { useTranslation } from "react-i18next";
+export { keyFromSelector } from "i18next";
+
+type ResourceTree = Record<string, unknown>;
+
+function isResourceTree(value: unknown): value is ResourceTree {
+  return !!value && typeof value === "object" && !Array.isArray(value);
 }
 
-// Merge a `source` object to a `target` recursively
-function mergeResources<MergableResource extends Resource | ResourceLanguage | ResourceKey>(
-  target: MergableResource,
-  source: MergableResource
-): MergableResource {
-  if (!source || typeof source !== "object") {
-    throw new Error("Source must be an object");
-  }
+function mergeResources(target: ResourceTree, source: ResourceTree): ResourceTree {
+  const mergedResources: ResourceTree = { ...target };
 
-  // Iterate through `source` properties and if an `Object` set property to merge of `target` and `source` properties
-  for (const key of Object.keys(source)) {
-    if (typeof source[key] !== "object") {
+  for (const [key, value] of Object.entries(source)) {
+    const targetValue = mergedResources[key];
+    if (isResourceTree(targetValue) && isResourceTree(value)) {
+      mergedResources[key] = mergeResources(targetValue, value);
       continue;
     }
 
-    if (typeof target !== "object") {
-      continue;
-    }
-
-    const mergedResources = mergeResources(target[key], source[key]);
-    Object.assign(source[key], mergedResources);
+    mergedResources[key] = value;
   }
 
-  // Join `target` and modified `source`
-  Object.assign(target || {}, source);
-  return target;
+  return mergedResources;
 }
 
 export async function initializeI18n(options: InitOptions = {}): Promise<I18nType> {
-  options.resources = mergeResources(builtInResources, options.resources ?? {});
+  const { resources: userResources, ...initOptions } = options;
+  const resources = mergeResources(
+    builtInResources as ResourceTree,
+    (userResources ?? {}) as ResourceTree
+  ) as Resource;
 
-  const resourcesLanguages = Object.keys(options.resources);
-  const supportedLngs = [options.lng, options.fallbackLng, ...resourcesLanguages]
+  const resourcesLanguages = Object.keys(resources);
+  const supportedLngs = [initOptions.lng, initOptions.fallbackLng, ...resourcesLanguages]
     .filter((language) => !!language)
     .filter((value, index, self) => self.indexOf(value) === index) as string[];
 
@@ -89,9 +80,10 @@ export async function initializeI18n(options: InitOptions = {}): Promise<I18nTyp
     // for all options read: https://www.i18next.com/overview/configuration-options
     .init({
       ...defaultOptions,
-      fallbackLng: Object.keys(resourcesLanguages)[0] ?? undefined,
+      fallbackLng: resourcesLanguages[0] ?? undefined,
+      resources,
       supportedLngs,
-      ...options,
+      ...initOptions,
     });
   return i18n;
 }

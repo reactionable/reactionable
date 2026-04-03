@@ -24,6 +24,7 @@ export * from "./form/useForm";
 export * from "./form/useFormField";
 export * from "./hooks/useDeepCompareEffect";
 export * from "./i18n/I18n";
+export * from "./i18n/i18next";
 export * from "./identity/Auth";
 export * from "./identity/Identity";
 export * from "./nav/NavItem";
