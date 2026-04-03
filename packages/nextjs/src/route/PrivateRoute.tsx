@@ -1,11 +1,13 @@
-import { useTranslation, useUIContext, useIdentityContext } from "@reactionable/core";
+import { keyFromSelector, useTranslation, useUIContext, useIdentityContext } from "@reactionable/core";
 import Router from "next/router";
 import { ComponentType, PropsWithChildren, ReactElement, isValidElement, useEffect } from "react";
 
 export function UnauthorizedComponent(): ReactElement | null {
   const { t } = useTranslation("identity");
   const { errorAlert } = useUIContext().useErrorAlert({
-    error: new Error(t("You are not allowed to reach this page") ?? undefined),
+    error: new Error(
+      t(keyFromSelector(($) => $["You are not allowed to reach this page"], { ns: "identity" }))
+    ),
   });
   return errorAlert;
 }

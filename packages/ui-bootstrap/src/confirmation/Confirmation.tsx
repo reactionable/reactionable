@@ -1,4 +1,5 @@
 import {
+  keyFromSelector,
   useTranslation,
   ConfirmationComponent,
   ConfirmationAction as CoreConfirmationAction,
@@ -21,7 +22,7 @@ export const Confirmation: ConfirmationComponent = ({
   children,
   title,
 }: IConfirmationProps) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("common");
   const handleCancel = () => callback(false);
   const handleOk = () => callback(true);
 
@@ -34,15 +35,17 @@ export const Confirmation: ConfirmationComponent = ({
       onHide={handleCancel}
     >
       <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">{title || t("Confirm ?")}</Modal.Title>
+        <Modal.Title id="contained-modal-title-vcenter">
+          {title || t(keyFromSelector(($) => $["Confirm ?"], { ns: "common" }))}
+        </Modal.Title>
       </Modal.Header>
       <Modal.Body>{children}</Modal.Body>
       <Modal.Footer>
         <Button variant="outline-primary" onClick={handleCancel}>
-          {t("Cancel")}
+          {t(keyFromSelector(($) => $["Cancel"], { ns: "common" }))}
         </Button>
         <Button variant="primary" onClick={handleOk}>
-          {t("OK")}
+          {t(keyFromSelector(($) => $["OK"], { ns: "common" }))}
         </Button>
       </Modal.Footer>
     </Modal>

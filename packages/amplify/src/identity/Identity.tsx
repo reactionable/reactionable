@@ -1,7 +1,6 @@
 import { Authenticator, AuthenticatorProps } from "@aws-amplify/ui-react";
 import { signIn, signOut, getCurrentUser, AuthUser, fetchAuthSession } from "aws-amplify/auth";
 import {
-  useTranslation,
   IdentityContextProvider as CoreIdentityContextProvider,
   IIdentityProviderProps as ICoreIdentityProviderProps,
   IIdentityProviderValue as ICoreIdentityProviderValue,
@@ -27,11 +26,10 @@ const dataToUser = (data?: AuthUser): IUser | null => {
 };
 
 function AuthComponent(props: PropsWithChildren<AuthenticatorProps>) {
-  const { t } = useTranslation();
   const { setUser } = useIdentityContext();
 
   const authenticatorProps = Object.assign({
-    errorMessage: (message: string) => t(message),
+    errorMessage: (message: string) => message,
     ...props,
   });
 

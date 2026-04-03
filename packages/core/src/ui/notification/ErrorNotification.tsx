@@ -1,7 +1,7 @@
 import { ComponentType, ReactElement, ReactNode, useState } from "react";
 
 import { IError, printError } from "../../error/IError";
-import { useTranslation } from "../../i18n/I18n";
+import { keyFromSelector, useTranslation } from "../../i18n/I18n";
 import { INotificationProps, Notification } from "./Notification";
 
 export type IErrorNotificationProps = INotificationProps & {
@@ -35,7 +35,7 @@ export function useErrorNotification<UseErrorNotificationProps extends IUseError
   const [errorNotification, setErrorNotification] = useState<IError | undefined>(undefined);
   const { t } = useTranslation("common");
   if (!title) {
-    title = t("An error has occured");
+    title = t(keyFromSelector(($) => $["An error has occured"], { ns: "common" }));
   }
 
   if (!Component) {

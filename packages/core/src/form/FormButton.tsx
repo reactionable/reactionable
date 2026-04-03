@@ -1,6 +1,6 @@
 import { ComponentType, DetailedHTMLProps, ReactElement, ReactNode } from "react";
 
-import { useTranslation } from "../i18n/I18n";
+import { keyFromSelector, useTranslation } from "../i18n/I18n";
 
 type IHtmlFormButtonProps = DetailedHTMLProps<
   React.ButtonHTMLAttributes<HTMLButtonElement>,
@@ -42,7 +42,7 @@ export function useSubmitFormButton<FormButtonProps extends IFormButtonProps>({
   const { t } = useTranslation("common");
   switch (typeof children) {
     case "boolean":
-      children = t("Save");
+      children = t(keyFromSelector(($) => $["Save"], { ns: "common" }));
       break;
   }
 

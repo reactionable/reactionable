@@ -10,18 +10,16 @@ import {
   IListTableComponentProps,
   IListTableHeadProps,
   IListTableProps,
-  useTranslation,
   IData,
 } from "@reactionable/core";
 import { ReactElement } from "react";
 
 export function ListTableHead({ head }: IListTableHeadProps): ReactElement {
-  const { t } = useTranslation();
   return (
     <TableHead>
       <TableRow>
         {head?.map((item) =>
-          "string" === typeof item ? <TableCell key={item}>{t(item)}</TableCell> : item
+          "string" === typeof item ? <TableCell key={item}>{item}</TableCell> : item
         )}
       </TableRow>
     </TableHead>

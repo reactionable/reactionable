@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { FC } from "react";
 
-import { useTranslation } from "../../../i18n/I18n";
+import { keyFromSelector, useTranslation } from "../../../i18n/I18n";
 import { useRouteMatch } from "../../../router/useRouteMatch";
 import { generatePath } from "../../../router/RouterLink";
 import { UIContextProvider, useUIProviderProps } from "../../UI";
@@ -24,7 +24,7 @@ const SampleComponent: FC = () => {
   setNavItems([
     {
       href: generatePath(`${match.path}/sample`, match.params),
-      children: t("Sample"),
+      children: t(keyFromSelector(($) => $["Sample"], { ns: "common" })),
     },
   ]);
 

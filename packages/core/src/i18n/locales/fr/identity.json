@@ -8,5 +8,6 @@
   "Sign In": "Connexion",
   "Username is not a valid email": "L'identifiant n'est pas une adresse email valide",
   "Username is required": "L'identifiant est requis",
-  "Password is required": "Le mot de passe est requis"
+  "Password is required": "Le mot de passe est requis",
+  "Authentication": "Authentification"
 }

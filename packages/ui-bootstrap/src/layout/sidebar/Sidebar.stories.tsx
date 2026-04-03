@@ -2,7 +2,7 @@ import "../../../stories/config";
 
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { faAtom } from "@fortawesome/free-solid-svg-icons";
-import { useTranslation, generatePath, useRouteMatch } from "@reactionable/core";
+import { keyFromSelector, useTranslation, generatePath, useRouteMatch } from "@reactionable/core";
 import { FC } from "react";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 
@@ -27,9 +27,9 @@ const SampleComponent: FC = () => {
   setNavItems([
     {
       href: generatePath(`${match.path}/sample`, match.params),
-      title: t("Go to sample page") ?? undefined,
+      title: t(keyFromSelector(($) => $["Go to sample page"], { ns: "common" })),
       icon: { icon: faAtom },
-      children: t("Sample"),
+      children: t(keyFromSelector(($) => $["Sample"], { ns: "common" })),
     },
   ]);
 

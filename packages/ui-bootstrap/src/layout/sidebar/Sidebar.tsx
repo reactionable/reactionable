@@ -1,4 +1,5 @@
 import {
+  keyFromSelector,
   useTranslation,
   INavItemsProps,
   INavItemsProviderProps as ICoreNavItemsProviderProps,
@@ -41,10 +42,10 @@ const SidebarItems = ({ children }: PropsWithChildren<unknown>): ReactElement =>
           {!open && (
             <Button
               onClick={() => setOpen(!open)}
-              aria-controls={t("Collapse sidebar") ?? undefined}
+              aria-controls={t(keyFromSelector(($) => $["Collapse sidebar"], { ns: "common" }))}
               aria-expanded={open}
             >
-              {t("Collapse sidebar")}
+              {t(keyFromSelector(($) => $["Collapse sidebar"], { ns: "common" }))}
             </Button>
           )}
           <Nav className="flex-column">

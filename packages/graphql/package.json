@@ -66,6 +66,16 @@
       ".ts",
       ".tsx"
     ],
+    "transform": {
+      "^.+\\.tsx?$": [
+        "ts-jest",
+        {
+          "useESM": true,
+          "tsconfig": "../../tsconfig.jest.json",
+          "diagnostics": false
+        }
+      ]
+    },
     "moduleNameMapper": {
       "^apollo-upload-client/UploadHttpLink\\.mjs$": "<rootDir>/test-mocks/UploadHttpLink.mock.ts",
       "^rxjs$": "<rootDir>/../../node_modules/rxjs/dist/cjs/index.js",
@@ -80,14 +90,6 @@
     "testMatch": [
       "**/__tests__/**/*.[jt]s?(x)",
       "**/?(*.)+(spec|test).+(ts|tsx|js)"
-    ],
-    "globals": {
-      "ts-jest": {
-        "useESM": true,
-        "tsconfig": "../../tsconfig.jest.json",
-        "isolatedModules": true,
-        "diagnostics": false
-      }
-    }
+    ]
   }
 }

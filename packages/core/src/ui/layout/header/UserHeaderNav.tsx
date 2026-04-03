@@ -7,7 +7,7 @@ import {
   useEffect,
 } from "react";
 
-import { useTranslation } from "../../../i18n/I18n";
+import { keyFromSelector, useTranslation } from "../../../i18n/I18n";
 import { useIdentityContext } from "../../../identity/Identity";
 import { NavItem } from "../../../nav/NavItem";
 import { useRouterContext } from "../../../router/useRouterContext";
@@ -38,7 +38,7 @@ export const AccountLink = forwardRef(function AccountLink<
   };
 
   const linkComponentProps = {
-    children: t("My account"),
+    children: t(keyFromSelector(($) => $["My account"], { ns: "identity" })),
     ...props,
   } as LinkProps;
 
@@ -63,7 +63,7 @@ export function LogoutLink<LinkProps extends ILinkProps = ILinkProps>({
   const { useLoader, useErrorNotification } = useUIContext();
   const { loader, setLoading } = useLoader({ loading: false });
   const { errorNotification, setErrorNotification } = useErrorNotification({
-    title: t("Log out"),
+    title: t(keyFromSelector(($) => $["Log out"], { ns: "identity" })),
   });
   const { useLink } = useUIContext();
 
@@ -82,7 +82,7 @@ export function LogoutLink<LinkProps extends ILinkProps = ILinkProps>({
   };
 
   const linkComponentProps = {
-    children: t("Log out"),
+    children: t(keyFromSelector(($) => $["Log out"], { ns: "identity" })),
     onClick: handleLogout,
     ...props,
   } as LinkProps;
@@ -138,7 +138,7 @@ export function UserUnloggedHeaderNav<LinkProps extends ILinkProps = ILinkProps>
   const { useLink } = useUIContext();
 
   const { modal, openModal } = useModal({
-    title: t("Sign In / Sign Up"),
+    title: t(keyFromSelector(($) => $["Sign In / Sign Up"], { ns: "identity" })),
     body: <AuthComponent />,
   });
 
@@ -153,7 +153,7 @@ export function UserUnloggedHeaderNav<LinkProps extends ILinkProps = ILinkProps>
   }
 
   const linkComponentProps = {
-    children: t("Sign In / Sign Up"),
+    children: t(keyFromSelector(($) => $["Sign In / Sign Up"], { ns: "identity" })),
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     onClick: (event: ReactMouseEvent<HTMLAnchorElement, MouseEvent>) => openModal(),
   } as LinkProps;

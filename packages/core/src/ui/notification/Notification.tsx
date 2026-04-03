@@ -1,7 +1,5 @@
 import { ComponentType, PropsWithChildren, ReactNode, useState } from "react";
 
-import { useTranslation } from "../../i18n/I18n";
-
 export interface INotificationProps {
   title: ReactNode;
   onClose?: () => void;
@@ -15,10 +13,9 @@ export const Notification: INotificationComponent = ({
   title,
   show = true,
 }: PropsWithChildren<INotificationProps>) => {
-  const { t } = useTranslation();
   return (
     <div hidden={!show}>
-      <div>{"string" === typeof title ? t(title) : title}</div>
+      <div>{title}</div>
       <div>{children}</div>
     </div>
   );
