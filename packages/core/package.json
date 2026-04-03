@@ -52,7 +52,7 @@
     "formik": "^2.4.9",
     "i18next": "^25.10.10",
     "i18next-browser-languagedetector": "^8.2.1",
-    "path-to-regexp": "^8.4.0",
+    "path-to-regexp": "^8.4.2",
     "react-fast-compare": "^3.2.0",
     "react-i18next": "^16.6.6",
     "yup": "^1.7.1"
