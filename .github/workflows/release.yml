@@ -31,7 +31,7 @@ jobs:
         with:
           persist-credentials: true
 
-      - uses: hoverkraft-tech/ci-github-nodejs/actions/setup-node@775ce0902c528062cc94141dd7d13261083b752a # 0.22.0
+      - uses: hoverkraft-tech/ci-github-nodejs/actions/setup-node@a10d5e32daef8e060c49fe617833fb0d53476f22 # 0.24.0
         with:
           registry-url: "https://registry.npmjs.org/"
 
@@ -52,6 +52,6 @@ jobs:
 
       - name: 🌐 Publish to gh-pages
         id: deployment
-        uses: hoverkraft-tech/ci-github-publish/actions/deploy/github-pages@b56be562f38e0e3e712f09691a8fe930aae9db1b # 0.22.0
+        uses: hoverkraft-tech/ci-github-publish/actions/deploy/github-pages@2c8e24b416226074aea1e240468f043edefc5760 # 0.23.2
         with:
           build-path: "build/storybook"
