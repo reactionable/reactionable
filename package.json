@@ -2,8 +2,7 @@
 	"name": "root",
 	"private": true,
 	"scripts": {
-		"bootstrap": "lerna bootstrap",
-		"start": "lerna bootstrap && lerna run --parallel start --",
+		"start": "lerna run --parallel start --",
 		"test": "lerna run --stream test --",
 		"test:ci": "lerna run --stream test:coverage --",
 		"lint": "lerna run --stream lint --",
@@ -31,7 +30,7 @@
 		"@storybook/react-vite": "^10.5.7",
 		"@ts-dev-tools/react": "^1.11.1",
 		"barrelsby": "^2.8.1",
-		"lerna": "^9.0.7",
+		"lerna": "^10.0.0",
 		"nx": "^23.1.1",
 		"react": "^19.2.8",
 		"react-dom": "^19.2.8",
@@ -61,6 +60,6 @@
 		"esbuild@0.28.1": true,
 		"sharp@0.34.5": true,
 		"unrs-resolver@1.11.1": true,
-		"nx@22.7.8": true
+		"nx@23.1.1": true
 	}
 }
