@@ -1,67 +1,85 @@
-import { Amplify } from "@aws-amplify/core";
-import { GraphQLAPI, GraphQLResult, graphqlOperation } from "@aws-amplify/api-graphql";
 import {
-  IQueryOptions as ICoreQueryOptions,
-  IVariables as ICoreVariables,
+	GraphQLAPI,
+	type GraphQLResult,
+	graphqlOperation,
+} from "@aws-amplify/api-graphql";
+import { Amplify } from "@aws-amplify/core";
+import type {
+	IQueryOptions as ICoreQueryOptions,
+	IVariables as ICoreVariables,
 } from "@reactionable/core";
+import type { Observable } from "rxjs";
 
 // Required by amplify
 export type IData = object;
 export type IVariables = ICoreVariables;
 
 function isGraphQLResult(arg: unknown): arg is GraphQLResult {
-  return arg !== null && typeof arg === "object" && ("data" in arg || "errors" in arg);
+	return (
+		arg !== null &&
+		typeof arg === "object" &&
+		("data" in arg || "errors" in arg)
+	);
 }
 
 function extractData<Data>(result: IData): Data | undefined {
-  const resultKeys = Object.keys(result) as Array<keyof IData>;
-  if (resultKeys.length !== 1) {
-    return undefined;
-  }
+	const resultKeys = Object.keys(result) as Array<keyof IData>;
+	if (resultKeys.length !== 1) {
+		return undefined;
+	}
 
-  const data = result[resultKeys[0]];
-  return data as Data | undefined;
+	const data = result[resultKeys[0]];
+	return data as Data | undefined;
 }
 
-export type IQueryOptions<Variables extends IVariables> = ICoreQueryOptions<Variables> & {
-  query: string;
-  rawData?: boolean;
-};
+export type IQueryOptions<Variables extends IVariables> =
+	ICoreQueryOptions<Variables> & {
+		query: string;
+		rawData?: boolean;
+	};
 
-export async function query<Data extends IData, QO extends IQueryOptions<IVariables>>({
-  query,
-  variables,
-  rawData,
-}: QO): Promise<Data> {
-  let result;
-  try {
-    result = await GraphQLAPI.graphql(Amplify, graphqlOperation(query, variables));
-  } catch (error) {
-    if (error instanceof Error) {
-      throw error;
-    }
+export async function query<
+	Data extends IData,
+	QO extends IQueryOptions<IVariables>,
+>({ query, variables, rawData }: QO): Promise<Data> {
+	let result:
+		| GraphQLResult<object | null>
+		| Observable<GraphQLResult<object | null>>
+		| undefined;
+	try {
+		result = await GraphQLAPI.graphql(
+			Amplify,
+			graphqlOperation(query, variables),
+		);
+	} catch (error) {
+		if (error instanceof Error) {
+			throw error;
+		}
 
-    if (!isGraphQLResult(error) || !error.errors) {
-      throw new Error("An unexpected error occurred", { cause: error });
-    }
+		if (!isGraphQLResult(error) || !error.errors) {
+			throw new Error("An unexpected error occurred", { cause: error });
+		}
 
-    throw new Error(error.errors.map((errorItem) => errorItem.message).join(", "), {
-      cause: error,
-    });
-  }
+		throw new Error(
+			error.errors.map((errorItem) => errorItem.message).join(", "),
+			{
+				cause: error,
+			},
+		);
+	}
 
-  if (!result || !isGraphQLResult(result) || !result.data) {
-    throw new Error("No data");
-  }
+	if (!result || !isGraphQLResult(result) || !result.data) {
+		throw new Error("No data");
+	}
 
-  if (rawData) {
-    return result.data as unknown as Data;
-  }
+	if (rawData) {
+		return result.data as unknown as Data;
+	}
 
-  const data = extractData<Data>(result.data as IData);
-  if (!data) {
-    throw new Error("No data");
-  }
+	const data = extractData<Data>(result.data as IData);
+	if (!data) {
+		throw new Error("No data");
+	}
 
-  return data;
+	return data;
 }

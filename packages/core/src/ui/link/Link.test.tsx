@@ -9,21 +9,21 @@ import * as stories from "./Link.stories";
 const { BasicLink, UseLink } = composeStories(stories);
 
 describe("Link", () => {
-  beforeAll(i18nTestInstance);
+	beforeAll(i18nTestInstance);
 
-  describe("BasicLink", () => {
-    it("should render without crashing", () => {
-      const result = render(<BasicLink />);
+	describe("BasicLink", () => {
+		it("should render without crashing", () => {
+			const result = render(<BasicLink />);
 
-      expect(result).toBeTruthy();
-    });
-  });
+			expect(result).toBeTruthy();
+		});
+	});
 
-  describe("UseLink", () => {
-    it("should render without crashing", () => {
-      const result = render(<UseLink />);
+	describe("UseLink", () => {
+		it("should render without crashing", () => {
+			const result = render(<UseLink />);
 
-      expect(result).toBeTruthy();
-    });
-  });
+			expect(result).toBeTruthy();
+		});
+	});
 });

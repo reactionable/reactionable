@@ -6,73 +6,73 @@ import { generatePath } from "./RouterLink";
 import * as stories from "./RouterLink.stories";
 
 const {
-  BasicLinkInRouterLink,
-  BasicRouterLink,
-  RouterLinkCustomComponentInRouterLink,
-  RouterLinkCustomComponent,
+	BasicLinkInRouterLink,
+	BasicRouterLink,
+	RouterLinkCustomComponentInRouterLink,
+	RouterLinkCustomComponent,
 } = composeStories(stories);
 
 describe("RouterLink", () => {
-  beforeAll(i18nTestInstance);
+	beforeAll(i18nTestInstance);
 
-  describe("BasicRouterLink", () => {
-    it("should render without crashing", () => {
-      const result = render(<BasicRouterLink />);
+	describe("BasicRouterLink", () => {
+		it("should render without crashing", () => {
+			const result = render(<BasicRouterLink />);
 
-      expect(result).toBeTruthy();
-    });
-  });
+			expect(result).toBeTruthy();
+		});
+	});
 
-  describe("BasicLinkInRouterLink", () => {
-    it("should render without crashing", () => {
-      const result = render(<BasicLinkInRouterLink />);
+	describe("BasicLinkInRouterLink", () => {
+		it("should render without crashing", () => {
+			const result = render(<BasicLinkInRouterLink />);
 
-      expect(result).toBeTruthy();
-    });
-  });
+			expect(result).toBeTruthy();
+		});
+	});
 
-  describe("RouterLinkCustomComponentInRouterLink", () => {
-    it("should render without crashing", () => {
-      const result = render(<RouterLinkCustomComponentInRouterLink />);
+	describe("RouterLinkCustomComponentInRouterLink", () => {
+		it("should render without crashing", () => {
+			const result = render(<RouterLinkCustomComponentInRouterLink />);
 
-      expect(result).toBeTruthy();
-    });
-  });
+			expect(result).toBeTruthy();
+		});
+	});
 
-  describe("RouterLinkCustomComponent", () => {
-    it("should render without crashing", () => {
-      const result = render(<RouterLinkCustomComponent />);
+	describe("RouterLinkCustomComponent", () => {
+		it("should render without crashing", () => {
+			const result = render(<RouterLinkCustomComponent />);
 
-      expect(result).toBeTruthy();
-    });
-  });
+			expect(result).toBeTruthy();
+		});
+	});
 
-  describe("generatePath", () => {
-    it("generate absolute path with duplicated separators", () => {
-      for (const path of ["/", "/", "/test/..", "/test/../", "//test//..//"]) {
-        const value = generatePath(path);
-        expect(value).toBe("/");
-      }
-    });
+	describe("generatePath", () => {
+		it("generate absolute path with duplicated separators", () => {
+			for (const path of ["/", "/", "/test/..", "/test/../", "//test//..//"]) {
+				const value = generatePath(path);
+				expect(value).toBe("/");
+			}
+		});
 
-    it("generate absolute path with parent directory pattern", () => {
-      for (const path of [
-        "/test/:id/child/:childId/sub-child/..",
-        "/test//:id/child//:childId/sub-child/..",
-      ]) {
-        const value = generatePath(path, { id: "1" }, { childId: "2" });
-        expect(value).toBe("/test/1/child/2");
-      }
-    });
+		it("generate absolute path with parent directory pattern", () => {
+			for (const path of [
+				"/test/:id/child/:childId/sub-child/..",
+				"/test//:id/child//:childId/sub-child/..",
+			]) {
+				const value = generatePath(path, { id: "1" }, { childId: "2" });
+				expect(value).toBe("/test/1/child/2");
+			}
+		});
 
-    it("generate relative path with parent directory pattern", () => {
-      for (const path of [
-        "test/:id/child/:childId/sub-child/..",
-        "test//:id/child//:childId/sub-child/..",
-      ]) {
-        const value = generatePath(path, { id: "1" }, { childId: "2" });
-        expect(value).toBe("test/1/child/2");
-      }
-    });
-  });
+		it("generate relative path with parent directory pattern", () => {
+			for (const path of [
+				"test/:id/child/:childId/sub-child/..",
+				"test//:id/child//:childId/sub-child/..",
+			]) {
+				const value = generatePath(path, { id: "1" }, { childId: "2" });
+				expect(value).toBe("test/1/child/2");
+			}
+		});
+	});
 });

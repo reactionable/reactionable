@@ -1,3 +1,4 @@
-import { Amplify, ResourcesConfig } from "aws-amplify";
+import { Amplify, type ResourcesConfig } from "aws-amplify";
 
-export const configure = (config: ResourcesConfig): void => Amplify.configure(config);
+export const configure = (config: ResourcesConfig): void =>
+	Amplify.configure(config);

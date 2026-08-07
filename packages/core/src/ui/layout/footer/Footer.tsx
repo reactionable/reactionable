@@ -1,64 +1,75 @@
-import { ComponentType, PropsWithChildren, ReactElement, ReactNode } from "react";
+import type {
+	ComponentType,
+	PropsWithChildren,
+	ReactElement,
+	ReactNode,
+} from "react";
 
 import { keyFromSelector, useTranslation } from "../../../i18n/I18n";
 
 export interface IFooterProps {
-  brand?: ReactNode | string;
-  sponsor?: boolean;
+	brand?: ReactNode | string;
+	sponsor?: boolean;
 }
 export type FooterComponent<FooterProps extends IFooterProps = IFooterProps> =
-  ComponentType<FooterProps>;
+	ComponentType<FooterProps>;
 
 export function Footer<FooterProps extends IFooterProps = IFooterProps>({
-  sponsor = true,
-  ...props
+	sponsor = true,
+	...props
 }: PropsWithChildren<FooterProps>): ReactElement {
-  return (
-    <footer>
-      <div>
-        <CopyrightFooter {...props} />
-      </div>
-      {sponsor && (
-        <div>
-          <SponsorFooter />
-        </div>
-      )}
-    </footer>
-  );
+	return (
+		<footer>
+			<div>
+				<CopyrightFooter {...props} />
+			</div>
+			{sponsor && (
+				<div>
+					<SponsorFooter />
+				</div>
+			)}
+		</footer>
+	);
 }
 
-export function CopyrightFooter<FooterProps extends IFooterProps = IFooterProps>({
-  brand,
-}: PropsWithChildren<Pick<FooterProps, "brand">>): ReactElement {
-  const { t } = useTranslation("common");
+export function CopyrightFooter<
+	FooterProps extends IFooterProps = IFooterProps,
+>({ brand }: PropsWithChildren<Pick<FooterProps, "brand">>): ReactElement {
+	const { t } = useTranslation("common");
 
-  const currentYear = new Date().getFullYear();
-  return (
-    <>
-      {t(keyFromSelector(($) => $["Copyright"], { ns: "common" }))} &copy; {currentYear} {brand}
-    </>
-  );
+	const currentYear = new Date().getFullYear();
+	return (
+		<>
+			{t(keyFromSelector(($) => $.Copyright, { ns: "common" }))} &copy;{" "}
+			{currentYear} {brand}
+		</>
+	);
 }
 
 export const SponsorFooter = (): ReactElement => {
-  const { t } = useTranslation("common");
-  return (
-    <>
-      <span title={t(keyFromSelector(($) => $["Powered by"], { ns: "common" }))}>
-        {t(keyFromSelector(($) => $["⚡ by"], { ns: "common" }))} 
-      </span>
-      <a
-        href="https://reactionable.github.io/reactionable/"
-        rel="noreferrer"
-        target="_blank"
-        title={t(
-          keyFromSelector(($) => $["Reactionable - An effective toolkit for React"], {
-            ns: "common",
-          })
-        )}
-      >
-        Reactionable
-      </a>
-    </>
-  );
+	const { t } = useTranslation("common");
+	return (
+		<>
+			<span
+				title={t(keyFromSelector(($) => $["Powered by"], { ns: "common" }))}
+			>
+				{t(keyFromSelector(($) => $["⚡ by"], { ns: "common" }))}
+			</span>
+			<a
+				href="https://reactionable.github.io/reactionable/"
+				rel="noreferrer"
+				target="_blank"
+				title={t(
+					keyFromSelector(
+						($) => $["Reactionable - An effective toolkit for React"],
+						{
+							ns: "common",
+						},
+					),
+				)}
+			>
+				Reactionable
+			</a>
+		</>
+	);
 };

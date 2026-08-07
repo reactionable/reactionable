@@ -1,6 +1,6 @@
 import { i18nTestInstance } from "@reactionable/core";
-import { fireEvent, render } from "@testing-library/react";
 import { composeStories } from "@storybook/react";
+import { fireEvent, render } from "@testing-library/react";
 
 import { TestWrapper } from "../testing/TestWrapper";
 import { Confirmation } from "./Confirmation";
@@ -9,52 +9,52 @@ import * as stories from "./Confirmation.stories";
 const { UseConfirmation, BasicConfirmationAction } = composeStories(stories);
 
 describe("Confirmation", () => {
-  beforeAll(i18nTestInstance);
+	beforeAll(i18nTestInstance);
 
-  describe("UseConfirmation", () => {
-    it("should render without crashing", () => {
-      const result = render(<UseConfirmation />);
+	describe("UseConfirmation", () => {
+		it("should render without crashing", () => {
+			const result = render(<UseConfirmation />);
 
-      expect(result).toBeTruthy();
-    });
-  });
+			expect(result).toBeTruthy();
+		});
+	});
 
-  describe("BasicConfirmationAction", () => {
-    it("should render without crashing", () => {
-      const result = render(<BasicConfirmationAction />);
+	describe("BasicConfirmationAction", () => {
+		it("should render without crashing", () => {
+			const result = render(<BasicConfirmationAction />);
 
-      expect(result).toBeTruthy();
-    });
-  });
+			expect(result).toBeTruthy();
+		});
+	});
 
-  it.skip("should confirm", async () => {
-    const callback = jest.fn();
+	it.skip("should confirm", async () => {
+		const callback = jest.fn();
 
-    const { getByText } = render(
-      <TestWrapper>
-        <Confirmation title="test" callback={callback} />
-      </TestWrapper>
-    );
+		const { getByText } = render(
+			<TestWrapper>
+				<Confirmation title="test" callback={callback} />
+			</TestWrapper>,
+		);
 
-    fireEvent.click(getByText("OK"));
+		fireEvent.click(getByText("OK"));
 
-    expect(callback).toHaveBeenCalledWith(true);
-  });
+		expect(callback).toHaveBeenCalledWith(true);
+	});
 
-  it.skip("should cancel", async () => {
-    const callback = jest.fn();
+	it.skip("should cancel", async () => {
+		const callback = jest.fn();
 
-    const { getByText } = render(
-      <TestWrapper>
-        <Confirmation title="test" callback={callback} />
-      </TestWrapper>
-    );
+		const { getByText } = render(
+			<TestWrapper>
+				<Confirmation title="test" callback={callback} />
+			</TestWrapper>,
+		);
 
-    // Wait for the confirmation to be displayed
-    await new Promise((resolve) => setTimeout(resolve, 100));
+		// Wait for the confirmation to be displayed
+		await new Promise((resolve) => setTimeout(resolve, 100));
 
-    fireEvent.click(getByText("Cancel"));
+		fireEvent.click(getByText("Cancel"));
 
-    expect(callback).toHaveBeenCalledWith(false);
-  });
+		expect(callback).toHaveBeenCalledWith(false);
+	});
 });

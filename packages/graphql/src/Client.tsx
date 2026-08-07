@@ -1,118 +1,125 @@
-import type { OperationVariables } from "@apollo/client/core";
-import { ApolloClient, gql } from "@apollo/client/core";
 import type { InMemoryCacheConfig } from "@apollo/client/cache";
 import { InMemoryCache } from "@apollo/client/cache";
+import type { OperationVariables } from "@apollo/client/core";
+import { ApolloClient, gql } from "@apollo/client/core";
 import { ApolloProvider, useApolloClient } from "@apollo/client/react";
+import type { IData as ICoreData } from "@reactionable/core";
 import type { DocumentNode } from "graphql";
-import { IData as ICoreData } from "@reactionable/core";
-import { PropsWithChildren, ReactElement, useMemo } from "react";
-import { getGraphqlClientLink, IGraphqlClientLinkProps } from "./ClientLink";
+import { type PropsWithChildren, type ReactElement, useMemo } from "react";
+import {
+	getGraphqlClientLink,
+	type IGraphqlClientLinkProps,
+} from "./ClientLink";
+
 export { gql } from "@apollo/client/core";
 
 export type IGraphqlClient = ApolloClient;
 
 export type IGraphqlClientState = Record<string, unknown>;
 export type IGraphqlClientConfig = {
-  initialState?: IGraphqlClientState;
-  cacheConfig?: InMemoryCacheConfig;
+	initialState?: IGraphqlClientState;
+	cacheConfig?: InMemoryCacheConfig;
 } & IGraphqlClientLinkProps &
-  Partial<ApolloClient.Options>;
+	Partial<ApolloClient.Options>;
 
 export type IVariables = OperationVariables;
 export type IData = ICoreData;
 
 let graphqlClient: IGraphqlClient | undefined;
 function getGraphqlClient() {
-  return graphqlClient;
+	return graphqlClient;
 }
 
 function createGraphqlClient({
-  uri,
-  cacheConfig,
-  getAuthorization,
-  setContext,
-  link,
-  ...apolloProps
+	uri,
+	cacheConfig,
+	getAuthorization,
+	setContext,
+	link,
+	...apolloProps
 }: IGraphqlClientConfig) {
-  const graphqlClientLink = getGraphqlClientLink({
-    uri,
-    link,
-    getAuthorization,
-    setContext,
-  });
+	const graphqlClientLink = getGraphqlClientLink({
+		uri,
+		link,
+		getAuthorization,
+		setContext,
+	});
 
-  return new ApolloClient({
-    ssrMode: typeof window === "undefined",
-    link: graphqlClientLink,
-    cache: new InMemoryCache(cacheConfig),
-    ...apolloProps,
-  });
+	return new ApolloClient({
+		ssrMode: typeof window === "undefined",
+		link: graphqlClientLink,
+		cache: new InMemoryCache(cacheConfig),
+		...apolloProps,
+	});
 }
 
 export function initializeGraphqlClient({
-  initialState,
-  ...graphqlClientConfig
+	initialState,
+	...graphqlClientConfig
 }: IGraphqlClientConfig): IGraphqlClient {
-  const _graphqlClient = getGraphqlClient() || createGraphqlClient(graphqlClientConfig);
+	const _graphqlClient =
+		getGraphqlClient() || createGraphqlClient(graphqlClientConfig);
 
-  // If your page has Next.js data fetching methods that use Apollo Client, the initial state
-  // gets hydrated here
-  if (initialState) {
-    // Get existing cache, loaded during client side data fetching
-    const existingCache = _graphqlClient.extract();
-    // Restore the cache using the data passed from getStaticProps/getServerSideProps
-    // combined with the existing cached data
-    _graphqlClient.cache.restore({
-      ...(existingCache as Record<string, unknown>),
-      ...(initialState as Record<string, unknown>),
-    });
-  }
-  // For SSG and SSR always create a new Apollo Client
-  if (typeof window === "undefined") return _graphqlClient;
+	// If your page has Next.js data fetching methods that use Apollo Client, the initial state
+	// gets hydrated here
+	if (initialState) {
+		// Get existing cache, loaded during client side data fetching
+		const existingCache = _graphqlClient.extract();
+		// Restore the cache using the data passed from getStaticProps/getServerSideProps
+		// combined with the existing cached data
+		_graphqlClient.cache.restore({
+			...(existingCache as Record<string, unknown>),
+			...(initialState as Record<string, unknown>),
+		});
+	}
+	// For SSG and SSR always create a new Apollo Client
+	if (typeof window === "undefined") return _graphqlClient;
 
-  if (!graphqlClient) {
-    graphqlClient = _graphqlClient;
-  }
+	if (!graphqlClient) {
+		graphqlClient = _graphqlClient;
+	}
 
-  return graphqlClient;
+	return graphqlClient;
 }
 
-export function useInitGraphqlClient(graphqlClientConfig: IGraphqlClientConfig): IGraphqlClient {
-  const store = useMemo(
-    () => initializeGraphqlClient(graphqlClientConfig),
-    graphqlClientConfig.initialState ? [graphqlClientConfig.initialState] : []
-  );
-  return store;
+export function useInitGraphqlClient(
+	graphqlClientConfig: IGraphqlClientConfig,
+): IGraphqlClient {
+	const store = useMemo(
+		() => initializeGraphqlClient(graphqlClientConfig),
+		graphqlClientConfig.initialState ? [graphqlClientConfig.initialState] : [],
+	);
+	return store;
 }
 
 export function useGraphqlClient(): IGraphqlClient {
-  return useApolloClient() as IGraphqlClient;
+	return useApolloClient() as IGraphqlClient;
 }
 
 export function GraphqlProvider({
-  children,
-  ...graphqlClientConfig
+	children,
+	...graphqlClientConfig
 }: PropsWithChildren<IGraphqlClientConfig>): ReactElement {
-  const graphqlClient = useInitGraphqlClient(graphqlClientConfig);
-  return <ApolloProvider client={graphqlClient}>{children}</ApolloProvider>;
+	const graphqlClient = useInitGraphqlClient(graphqlClientConfig);
+	return <ApolloProvider client={graphqlClient}>{children}</ApolloProvider>;
 }
 
 export function stringToGQL(query: string): DocumentNode {
-  return gql`
+	return gql`
     ${query}
   `;
 }
 
 export function extractGqlData<Data>(result: IData): Data | undefined {
-  if (!result || "object" !== typeof result) {
-    return result as Data | undefined;
-  }
+	if (!result || "object" !== typeof result) {
+		return result as Data | undefined;
+	}
 
-  const resultKeys = Object.keys(result) as Array<keyof typeof result>;
+	const resultKeys = Object.keys(result) as Array<keyof typeof result>;
 
-  if (!resultKeys.length) {
-    return undefined;
-  }
+	if (!resultKeys.length) {
+		return undefined;
+	}
 
-  return result[resultKeys[0]] as Data | undefined;
+	return result[resultKeys[0]] as Data | undefined;
 }

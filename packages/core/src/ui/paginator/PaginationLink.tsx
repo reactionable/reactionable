@@ -1,45 +1,45 @@
-import { AnchorHTMLAttributes, ComponentType, ReactElement } from "react";
+import type { AnchorHTMLAttributes, ComponentType, ReactElement } from "react";
 
 export function PaginationLink({
-  onClick,
-  disabled,
-  active,
-  ...props
+	onClick,
+	disabled,
+	active,
+	...props
 }: IPaginationLinkProps): ReactElement {
-  return (
-    <a
-      href="#"
-      className={active ? "active" : ""}
-      {...props}
-      onClick={(event) => {
-        event.preventDefault();
-        if (!disabled && onClick) {
-          onClick(event);
-        }
-      }}
-    />
-  );
+	return (
+		<a
+			href="#"
+			className={active ? "active" : ""}
+			{...props}
+			onClick={(event) => {
+				event.preventDefault();
+				if (!disabled && onClick) {
+					onClick(event);
+				}
+			}}
+		/>
+	);
 }
 
 export type IPaginationLinkProps = Pick<
-  AnchorHTMLAttributes<HTMLAnchorElement>,
-  "onClick" | "children"
+	AnchorHTMLAttributes<HTMLAnchorElement>,
+	"onClick" | "children"
 > & {
-  disabled?: boolean;
-  active?: boolean;
+	disabled?: boolean;
+	active?: boolean;
 };
 
 export type IPaginationLinkComponent = ComponentType<IPaginationLinkProps>;
 
 export function PaginationLinkFirst(props: IPaginationLinkProps): ReactElement {
-  return <PaginationLink {...props}>{"<<"}</PaginationLink>;
+	return <PaginationLink {...props}>{"<<"}</PaginationLink>;
 }
 export function PaginationLinkPrev(props: IPaginationLinkProps): ReactElement {
-  return <PaginationLink {...props}>{"<"}</PaginationLink>;
+	return <PaginationLink {...props}>{"<"}</PaginationLink>;
 }
 export function PaginationLinkNext(props: IPaginationLinkProps): ReactElement {
-  return <PaginationLink {...props}>{">"}</PaginationLink>;
+	return <PaginationLink {...props}>{">"}</PaginationLink>;
 }
 export function PaginationLinkLast(props: IPaginationLinkProps): ReactElement {
-  return <PaginationLink {...props}>{">>"}</PaginationLink>;
+	return <PaginationLink {...props}>{">>"}</PaginationLink>;
 }

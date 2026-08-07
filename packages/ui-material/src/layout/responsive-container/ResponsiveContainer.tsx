@@ -1,28 +1,30 @@
 import Container from "@mui/material/Container";
 import { deepmerge } from "@mui/utils";
-import { ComponentProps, ElementType, ReactElement } from "react";
+import type { ComponentProps, ElementType, ReactElement } from "react";
 
-export type IResponsiveContainerProps = Partial<ComponentProps<typeof Container>> & {
-  component?: ElementType;
+export type IResponsiveContainerProps = Partial<
+	ComponentProps<typeof Container>
+> & {
+	component?: ElementType;
 };
 
 export const ResponsiveContainer = ({
-  children,
-  sx,
-  ...props
+	children,
+	sx,
+	...props
 }: IResponsiveContainerProps): ReactElement => {
-  return (
-    <Container
-      maxWidth="xl"
-      sx={deepmerge(
-        {
-          marginTop: (theme) => theme.spacing(4),
-        },
-        sx
-      )}
-      {...props}
-    >
-      {children || <></>}
-    </Container>
-  );
+	return (
+		<Container
+			maxWidth="xl"
+			sx={deepmerge(
+				{
+					marginTop: (theme) => theme.spacing(4),
+				},
+				sx,
+			)}
+			{...props}
+		>
+			{children ?? null}
+		</Container>
+	);
 };

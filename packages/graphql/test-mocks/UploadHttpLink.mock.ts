@@ -1,9 +1,9 @@
 type RequestHandler = (...args: unknown[]) => unknown;
 
 export default class UploadHttpLink {
-    request: RequestHandler;
+	request: RequestHandler;
 
-    constructor() {
-        this.request = () => null;
-    }
+	constructor() {
+		this.request = () => null;
+	}
 }

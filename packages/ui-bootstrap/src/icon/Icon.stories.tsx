@@ -4,8 +4,8 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Icon } from "./Icon";
 
 const meta: Meta<typeof Icon> = {
-  title: "UI Bootstrap/Components/Icon",
-  component: Icon,
+	title: "UI Bootstrap/Components/Icon",
+	component: Icon,
 };
 
 export default meta;
@@ -13,8 +13,8 @@ export default meta;
 type Story = StoryObj<typeof Icon>;
 
 export const BasicIcon: Story = {
-  args: {
-    icon: faAtom,
-    color: "primary",
-  },
+	args: {
+		icon: faAtom,
+		color: "primary",
+	},
 };

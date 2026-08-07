@@ -9,13 +9,13 @@ import * as stories from "./NotFound.stories";
 const { BasicNotFound } = composeStories(stories);
 
 describe("NotFound", () => {
-  beforeAll(i18nTestInstance);
+	beforeAll(i18nTestInstance);
 
-  describe("BasicNotFound", () => {
-    it("should render without crashing", () => {
-      const result = render(<BasicNotFound />);
+	describe("BasicNotFound", () => {
+		it("should render without crashing", () => {
+			const result = render(<BasicNotFound />);
 
-      expect(result).toBeTruthy();
-    });
-  });
+			expect(result).toBeTruthy();
+		});
+	});
 });

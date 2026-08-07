@@ -1,18 +1,18 @@
 {
-  "extends": "../../tsconfig.json",
-  "compilerOptions": {
-    "outDir": "lib",
-    "declarationDir": "lib"
-  },
-  "include": ["src"],
-  "typedocOptions": {
-    "out": "../../build/storybook/docs/nextjs",
-    "entryPoints": ["src/index.ts"],
-    "hideGenerator": true,
-    "githubPages": true,
-    "includeVersion": true,
-    "readme": "none",
-    "excludeExternals": true,
-    "excludePrivate": true
-  }
+	"extends": "../../tsconfig.json",
+	"compilerOptions": {
+		"outDir": "lib",
+		"declarationDir": "lib"
+	},
+	"include": ["src"],
+	"typedocOptions": {
+		"out": "../../build/storybook/docs/nextjs",
+		"entryPoints": ["src/index.ts"],
+		"hideGenerator": true,
+		"githubPages": true,
+		"includeVersion": true,
+		"readme": "none",
+		"excludeExternals": true,
+		"excludePrivate": true
+	}
 }

@@ -1,1 +1,1 @@
-export { Link, isLinkProps, useLink } from "@reactionable/core";
+export { isLinkProps, Link, useLink } from "@reactionable/core";

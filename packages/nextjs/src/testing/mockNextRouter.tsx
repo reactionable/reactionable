@@ -1,53 +1,53 @@
 import type { NextRouter } from "next/router";
 
 export function createMockRouter(overrides: Partial<NextRouter>): NextRouter {
-  return {
-    basePath: "",
-    pathname: "/",
-    route: "/",
-    query: {},
-    asPath: "/",
-    back: () => {
-      return;
-    },
-    beforePopState: () => {
-      return;
-    },
-    prefetch: async () => {
-      return;
-    },
-    push: async () => true,
-    reload: () => {
-      return;
-    },
-    replace: async () => true,
-    forward: () => {
-      return;
-    },
-    events: {
-      on: () => {
-        return;
-      },
-      off: () => {
-        return;
-      },
-      emit: () => {
-        return;
-      },
-    },
-    isFallback: false,
-    isLocaleDomain: false,
-    isReady: true,
-    defaultLocale: "en",
-    isPreview: false,
-    ...overrides,
-  };
+	return {
+		basePath: "",
+		pathname: "/",
+		route: "/",
+		query: {},
+		asPath: "/",
+		back: () => {
+			return;
+		},
+		beforePopState: () => {
+			return;
+		},
+		prefetch: async () => {
+			return;
+		},
+		push: async () => true,
+		reload: () => {
+			return;
+		},
+		replace: async () => true,
+		forward: () => {
+			return;
+		},
+		events: {
+			on: () => {
+				return;
+			},
+			off: () => {
+				return;
+			},
+			emit: () => {
+				return;
+			},
+		},
+		isFallback: false,
+		isLocaleDomain: false,
+		isReady: true,
+		defaultLocale: "en",
+		isPreview: false,
+		...overrides,
+	};
 }
 
 /**
  * Mock the `useRouter()` hook and return the mocked router instance.
  */
 export default function mockNextRouter(overrides: Partial<NextRouter> = {}) {
-  const mockRouter = createMockRouter(overrides);
-  return mockRouter;
+	const mockRouter = createMockRouter(overrides);
+	return mockRouter;
 }

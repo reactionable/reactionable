@@ -1,13 +1,13 @@
-import { action } from "storybook/actions";
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { action } from "storybook/actions";
 
 import { i18nTestInstance } from "../../../testing/I18n";
 import { UIContextProvider, useUIProviderProps } from "../../UI";
 import { LanguageSelector } from "./LanguageSelector";
 
 const meta: Meta<typeof LanguageSelector> = {
-  title: "Core/Components/UI/I18n/LanguageSelector",
-  component: LanguageSelector,
+	title: "Core/Components/UI/I18n/LanguageSelector",
+	component: LanguageSelector,
 };
 
 export default meta;
@@ -17,12 +17,12 @@ type Story = StoryObj<typeof LanguageSelector>;
 i18nTestInstance();
 
 export const BasicLanguageSelector: Story = {
-  args: {
-    onSelectLanguage: action("Language has changed"),
-  },
-  render: (props) => (
-    <UIContextProvider {...useUIProviderProps()}>
-      <LanguageSelector {...props} />
-    </UIContextProvider>
-  ),
+	args: {
+		onSelectLanguage: action("Language has changed"),
+	},
+	render: (props) => (
+		<UIContextProvider {...useUIProviderProps()}>
+			<LanguageSelector {...props} />
+		</UIContextProvider>
+	),
 };

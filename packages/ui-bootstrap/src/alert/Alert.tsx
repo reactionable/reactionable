@@ -1,29 +1,33 @@
 import {
-  IAlertProps as IAlertPropsCore,
-  IUseAlertResult,
-  useAlert as useAlertCore,
+	type IAlertProps as IAlertPropsCore,
+	type IUseAlertResult,
+	useAlert as useAlertCore,
 } from "@reactionable/core";
-import { ComponentType } from "react";
-import BootstrapAlert, { AlertProps } from "react-bootstrap/Alert";
+import type { ComponentType } from "react";
+import BootstrapAlert, { type AlertProps } from "react-bootstrap/Alert";
 
-import { IIconProps, Icon } from "../icon/Icon";
+import { Icon, type IIconProps } from "../icon/Icon";
 
 export type IAlertProps = IAlertPropsCore &
-  AlertProps & {
-    icon?: IIconProps;
-  };
+	AlertProps & {
+		icon?: IIconProps;
+	};
 
 export type AlertComponent = ComponentType<IAlertProps>;
 
-export const Alert: AlertComponent = ({ children, icon, ...props }: IAlertProps) => {
-  return (
-    <BootstrapAlert {...props}>
-      {icon && <Icon className="me-2" {...icon} />}
-      {children}
-    </BootstrapAlert>
-  );
+export const Alert: AlertComponent = ({
+	children,
+	icon,
+	...props
+}: IAlertProps) => {
+	return (
+		<BootstrapAlert {...props}>
+			{icon && <Icon className="me-2" {...icon} />}
+			{children}
+		</BootstrapAlert>
+	);
 };
 
 export const useAlert = (props?: IAlertProps): IUseAlertResult => {
-  return useAlertCore<IAlertProps>({ Component: Alert, ...props });
+	return useAlertCore<IAlertProps>({ Component: Alert, ...props });
 };

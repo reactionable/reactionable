@@ -9,14 +9,14 @@ import * as stories from "./Identity.stories";
 const { UseIdentityContext } = composeStories(stories);
 
 describe("Identity", () => {
-  beforeAll(i18nTestInstance);
+	beforeAll(i18nTestInstance);
 
-  describe("UseIdentityContext", () => {
-    it("should render without crashing", async () => {
-      const { findByText } = render(<UseIdentityContext />);
+	describe("UseIdentityContext", () => {
+		it("should render without crashing", async () => {
+			const { findByText } = render(<UseIdentityContext />);
 
-      expect(await findByText("Sign In")).toBeInTheDocument();
-      expect(await findByText("Create Account")).toBeInTheDocument();
-    });
-  });
+			expect(await findByText("Sign In")).toBeInTheDocument();
+			expect(await findByText("Create Account")).toBeInTheDocument();
+		});
+	});
 });

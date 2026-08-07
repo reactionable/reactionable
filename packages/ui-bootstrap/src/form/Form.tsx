@@ -1,35 +1,35 @@
 import {
-  Form as CoreForm,
-  IFormProps as ICoreFormProps,
-  IOnSubmitForm as ICoreOnSubmitForm,
-  IFormData,
-  IFormValues,
+	Form as CoreForm,
+	type IFormProps as ICoreFormProps,
+	type IOnSubmitForm as ICoreOnSubmitForm,
+	type IFormData,
+	type IFormValues,
 } from "@reactionable/core";
-import { ReactElement } from "react";
+import type { ReactElement } from "react";
 
-import { FormButton, IFormButtonProps } from "./FormButton";
+import { FormButton, type IFormButtonProps } from "./FormButton";
 
 export type IFormProps<
-  Values extends IFormValues,
-  Data extends IFormData,
-  FormButtonProps extends IFormButtonProps = IFormButtonProps,
+	Values extends IFormValues,
+	Data extends IFormData,
+	FormButtonProps extends IFormButtonProps = IFormButtonProps,
 > = ICoreFormProps<Values, Data, FormButtonProps>;
 
-export type IOnSubmitForm<Values extends IFormValues, Data extends IFormData> = ICoreOnSubmitForm<
-  Values,
-  Data
->;
+export type IOnSubmitForm<
+	Values extends IFormValues,
+	Data extends IFormData,
+> = ICoreOnSubmitForm<Values, Data>;
 
 export function Form<
-  Values extends IFormValues,
-  Data extends IFormData,
-  FormButtonProps extends IFormButtonProps = IFormButtonProps,
+	Values extends IFormValues,
+	Data extends IFormData,
+	FormButtonProps extends IFormButtonProps = IFormButtonProps,
 >(props: IFormProps<Values, Data, FormButtonProps>): ReactElement {
-  return (
-    <CoreForm<Values, Data, FormButtonProps>
-      {...props}
-      form={{ className: "needs-validation mb-1", ...props.form }}
-      FormButtonComponent={FormButton}
-    />
-  );
+	return (
+		<CoreForm<Values, Data, FormButtonProps>
+			{...props}
+			form={{ className: "needs-validation mb-1", ...props.form }}
+			FormButtonComponent={FormButton}
+		/>
+	);
 }

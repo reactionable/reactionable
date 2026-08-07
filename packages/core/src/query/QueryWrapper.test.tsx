@@ -10,33 +10,33 @@ import * as stories from "./QueryWrapper.stories";
 const { BasicQueryWrapper } = composeStories(stories);
 
 describe("QueryWrapper", () => {
-  beforeAll(i18nTestInstance);
+	beforeAll(i18nTestInstance);
 
-  describe("BasicQueryWrapper", () => {
-    it("should render without crashing", () => {
-      const result = render(<BasicQueryWrapper />);
+	describe("BasicQueryWrapper", () => {
+		it("should render without crashing", () => {
+			const result = render(<BasicQueryWrapper />);
 
-      expect(result).toBeTruthy();
-    });
-  });
+			expect(result).toBeTruthy();
+		});
+	});
 
-  it("should render render children only when data is defined", async () => {
-    const children = jest.fn();
+	it("should render render children only when data is defined", async () => {
+		const children = jest.fn();
 
-    const data = "test";
+		const data = "test";
 
-    render(
-      <QueryWrapper loading={false} data={data}>
-        {children}
-      </QueryWrapper>
-    );
+		render(
+			<QueryWrapper loading={false} data={data}>
+				{children}
+			</QueryWrapper>,
+		);
 
-    expect(children).toHaveBeenCalledWith({
-      data,
-      loading: false,
-      setErrorAlert: expect.any(Function),
-      setLoading: expect.any(Function),
-      setWarningAlert: expect.any(Function),
-    });
-  });
+		expect(children).toHaveBeenCalledWith({
+			data,
+			loading: false,
+			setErrorAlert: expect.any(Function),
+			setLoading: expect.any(Function),
+			setWarningAlert: expect.any(Function),
+		});
+	});
 });

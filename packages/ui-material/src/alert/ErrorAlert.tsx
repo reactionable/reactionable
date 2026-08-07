@@ -1,32 +1,34 @@
 import {
-  printError,
-  ErrorAlertComponent as CoreErrorAlertComponent,
-  IErrorAlertProps as ICoreErrorAlertProps,
-  IUseErrorAlertProps as ICoreUseErrorAlertProps,
-  IUseErrorAlertResult,
-  useErrorAlert as useCoreErrorAlert,
+	type ErrorAlertComponent as CoreErrorAlertComponent,
+	type IErrorAlertProps as ICoreErrorAlertProps,
+	type IUseErrorAlertProps as ICoreUseErrorAlertProps,
+	type IUseErrorAlertResult,
+	printError,
+	useErrorAlert as useCoreErrorAlert,
 } from "@reactionable/core";
 
-import { Alert, IAlertProps } from "./Alert";
+import { Alert, type IAlertProps } from "./Alert";
 
 export type IErrorAlertProps = ICoreErrorAlertProps<IAlertProps>;
 export type ErrorAlertComponent = CoreErrorAlertComponent<IErrorAlertProps>;
 export const ErrorAlert: ErrorAlertComponent = ({
-  children,
-  error,
-  ...props
+	children,
+	error,
+	...props
 }: IErrorAlertProps) => {
-  return (
-    <Alert severity="error" {...props}>
-      {error ? printError(error) : children}
-    </Alert>
-  );
+	return (
+		<Alert severity="error" {...props}>
+			{error ? printError(error) : children}
+		</Alert>
+	);
 };
 
 export type IUseErrorAlertProps = ICoreUseErrorAlertProps;
-export const useErrorAlert = (props?: IUseErrorAlertProps): IUseErrorAlertResult => {
-  return useCoreErrorAlert<IUseErrorAlertProps>({
-    Component: ErrorAlert,
-    ...props,
-  });
+export const useErrorAlert = (
+	props?: IUseErrorAlertProps,
+): IUseErrorAlertResult => {
+	return useCoreErrorAlert<IUseErrorAlertProps>({
+		Component: ErrorAlert,
+		...props,
+	});
 };

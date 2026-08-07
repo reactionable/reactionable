@@ -1,42 +1,66 @@
-import { ComponentType, Context, PropsWithChildren, ReactElement } from "react";
+import type {
+	ComponentType,
+	Context,
+	PropsWithChildren,
+	ReactElement,
+} from "react";
 
-import { IProviderProps, createProvider } from "../app/Provider";
-import { INavItemsProviderProps, useNavItemsProviderProps } from "./NavItemsProviderProps";
-import { INavItemProps, INavItemsProps } from "./NavItem";
+import { createProvider, type IProviderProps } from "../app/Provider";
+import type { INavItemProps, INavItemsProps } from "./NavItem";
+import {
+	type INavItemsProviderProps,
+	useNavItemsProviderProps,
+} from "./NavItemsProviderProps";
 
-type INavItemsContextProvider<NavItemsProps extends INavItemsProps<INavItemProps>> = ComponentType<
-  PropsWithChildren<Partial<INavItemsProviderProps<NavItemsProps>>>
+type INavItemsContextProvider<
+	NavItemsProps extends INavItemsProps<INavItemProps>,
+> = ComponentType<
+	PropsWithChildren<Partial<INavItemsProviderProps<NavItemsProps>>>
 >;
 
-export type INavItemsContextProviderResult<NavItemsProps extends INavItemsProps<INavItemProps>> = {
-  NavItemsContext: Context<IProviderProps<INavItemsProviderProps<NavItemsProps>>>;
-  useNavItemsContext: () => INavItemsProviderProps<NavItemsProps>;
-  NavItemsContextProvider: INavItemsContextProvider<NavItemsProps>;
+export type INavItemsContextProviderResult<
+	NavItemsProps extends INavItemsProps<INavItemProps>,
+> = {
+	NavItemsContext: Context<
+		IProviderProps<INavItemsProviderProps<NavItemsProps>>
+	>;
+	useNavItemsContext: () => INavItemsProviderProps<NavItemsProps>;
+	NavItemsContextProvider: INavItemsContextProvider<NavItemsProps>;
 };
 
-export function createNavItemsContextProvider<NavItemsProps extends INavItemsProps<INavItemProps>>(
-  props?: Partial<INavItemsProviderProps<NavItemsProps>>
+export function createNavItemsContextProvider<
+	NavItemsProps extends INavItemsProps<INavItemProps>,
+>(
+	props?: Partial<INavItemsProviderProps<NavItemsProps>>,
 ): INavItemsContextProviderResult<NavItemsProps> {
-  let navItemsStorage: NavItemsProps["navItems"] = [];
+	let navItemsStorage: NavItemsProps["navItems"] = [];
 
-  const navItemsProviderProps = {
-    navItems: navItemsStorage,
-    setNavItems: (navItems: NavItemsProps["navItems"]) => {
-      navItemsStorage = navItems;
-    },
-    ...props,
-  } as INavItemsProviderProps<NavItemsProps>;
+	const navItemsProviderProps = {
+		navItems: navItemsStorage,
+		setNavItems: (navItems: NavItemsProps["navItems"]) => {
+			navItemsStorage = navItems;
+		},
+		...props,
+	} as INavItemsProviderProps<NavItemsProps>;
 
-  const { Context: NavItemsContext, useContext: useNavItemsContext } =
-    createProvider<INavItemsProviderProps<NavItemsProps>>(navItemsProviderProps);
+	const { Context: NavItemsContext, useContext: useNavItemsContext } =
+		createProvider<INavItemsProviderProps<NavItemsProps>>(
+			navItemsProviderProps,
+		);
 
-  const NavItemsContextProvider = ({
-    children,
-    ...props
-  }: PropsWithChildren<Partial<INavItemsProviderProps<NavItemsProps>>>): ReactElement => {
-    const value = useNavItemsProviderProps(props);
-    return <NavItemsContext.Provider value={value}>{children}</NavItemsContext.Provider>;
-  };
+	const NavItemsContextProvider = ({
+		children,
+		...props
+	}: PropsWithChildren<
+		Partial<INavItemsProviderProps<NavItemsProps>>
+	>): ReactElement => {
+		const value = useNavItemsProviderProps(props);
+		return (
+			<NavItemsContext.Provider value={value}>
+				{children}
+			</NavItemsContext.Provider>
+		);
+	};
 
-  return { NavItemsContext, useNavItemsContext, NavItemsContextProvider };
+	return { NavItemsContext, useNavItemsContext, NavItemsContextProvider };
 }

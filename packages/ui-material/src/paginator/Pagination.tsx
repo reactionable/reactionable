@@ -1,26 +1,29 @@
-import MaterialUIPagination, { PaginationProps } from "@mui/material/Pagination";
-import { IPaginationProps as ICorePaginationProps } from "@reactionable/core";
-import { ReactElement } from "react";
+import MaterialUIPagination, {
+	type PaginationProps,
+} from "@mui/material/Pagination";
+import type { IPaginationProps as ICorePaginationProps } from "@reactionable/core";
+import type { ReactElement } from "react";
 
 export type IPaginationProps = Omit<
-  ICorePaginationProps,
-  | "PaginationLinkComponent"
-  | "PaginationEllipsisComponent"
-  | "PaginationLinkFirstComponent"
-  | "PaginationLinkPrevComponent"
-  | "PaginationLinkNextComponent"
-  | "PaginationLinkLastComponent"
+	ICorePaginationProps,
+	| "PaginationLinkComponent"
+	| "PaginationEllipsisComponent"
+	| "PaginationLinkFirstComponent"
+	| "PaginationLinkPrevComponent"
+	| "PaginationLinkNextComponent"
+	| "PaginationLinkLastComponent"
 > &
-  PaginationProps;
+	PaginationProps;
 
 export function Pagination({
-  pageCount: count,
-  currentPage: page,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  pageRangeDisplayed,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  marginPagesDisplayed,
-  ...props
+	pageCount: count,
+	currentPage: page,
+	pageRangeDisplayed,
+	marginPagesDisplayed,
+	...props
 }: IPaginationProps): ReactElement {
-  return <MaterialUIPagination page={page} count={count} {...props} />;
+	void pageRangeDisplayed;
+	void marginPagesDisplayed;
+
+	return <MaterialUIPagination page={page} count={count} {...props} />;
 }

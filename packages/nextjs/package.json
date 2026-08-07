@@ -1,88 +1,59 @@
 {
-  "name": "@reactionable/nextjs",
-  "version": "0.28.31",
-  "description": "Reactionable package for NextJs integration",
-  "files": [
-    "lib"
-  ],
-  "type": "module",
-  "exports": {
-    "require": "./lib/cjs/index.js",
-    "import": "./lib/esm/index.js"
-  },
-  "main": "lib/cjs/index.js",
-  "typings": "lib/index.d.ts",
-  "scripts": {
-    "start": "npm run build:barrelsby && tsc --watch",
-    "jest": "NODE_OPTIONS=--experimental-vm-modules jest --detectOpenHandles --forceExit",
-    "test": "npm run jest -- --maxWorkers=50%",
-    "test:coverage": "npm run jest -- --coverage",
-    "build:pre": "npm run build:clean && npm run build:barrelsby",
-    "build": "npm run build:pre && npm run build:cjs && npm run build:esm",
-    "build:ci": "npm run build:pre && npm run build:cjs && npm run build:esm",
-    "build:clean": "rimraf lib",
-    "build:barrelsby": "npm exec barrelsby -- --noHeader -d src --exclude \".+\\.test\\..+\" --exclude \".+\\.stories\\..+\" --delete -q && npm exec prettier -- --write src/index.ts",
-    "build:cjs": "mkdir -p lib/cjs && echo '{\"type\": \"commonjs\"}' > lib/cjs/package.json && tsc --pretty -p tsconfig.build.json --module commonjs --outDir lib/cjs/",
-    "build:esm": "mkdir -p lib/esm && echo '{\"type\": \"module\"}' > lib/esm/package.json && tsc --pretty -p tsconfig.build.json --module esnext --outDir lib/esm/",
-    "build:docs": "typedoc --tsconfig tsconfig.build.json",
-    "lint": "eslint \"{src,stories}/**/*.{ts,tsx}\"",
-    "lint:ci": "npm run lint -- --output-file eslint-report.json --format json"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/reactionable/reactionable.git"
-  },
-  "keywords": [
-    "reactionable",
-    "react",
-    "framework",
-    "NextJs"
-  ],
-  "author": "ESCEMI <developer@escemi.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/reactionable/reactionable/issues"
-  },
-  "homepage": "https://github.com/reactionable/reactionable#readme",
-  "dependencies": {
-    "@emotion/cache": "^11.10.3",
-    "@emotion/react": "^11.10.5",
-    "@emotion/server": "^11.10.0",
-    "@reactionable/core": "^0.28.31",
-    "next": "^16.2.11"
-  },
-  "devDependencies": {
-    "next-router-mock": "^1.0.5"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "jest": {
-    "preset": "ts-jest/presets/default-esm",
-    "testEnvironment": "jsdom",
-    "extensionsToTreatAsEsm": [
-      ".ts",
-      ".tsx"
-    ],
-    "transform": {
-      "^.+\\.tsx?$": [
-        "ts-jest",
-        {
-          "useESM": true,
-          "tsconfig": "../../tsconfig.jest.json",
-          "diagnostics": false
-        }
-      ]
-    },
-    "setupFilesAfterEnv": [
-      "<rootDir>/../../__tests__/jest.setup.ts"
-    ],
-    "modulePathIgnorePatterns": [
-      "<rootDir>/lib/"
-    ],
-    "testMatch": [
-      "**/__tests__/**/*.[jt]s?(x)",
-      "**/?(*.)+(spec|test).+(ts|tsx|js)"
-    ]
-  }
+	"name": "@reactionable/nextjs",
+	"version": "0.28.31",
+	"description": "Reactionable package for NextJs integration",
+	"files": [
+		"lib"
+	],
+	"type": "module",
+	"exports": {
+		"require": "./lib/cjs/index.js",
+		"import": "./lib/esm/index.js"
+	},
+	"main": "lib/cjs/index.js",
+	"typings": "lib/index.d.ts",
+	"scripts": {
+		"start": "npm run build:barrelsby && tsc --watch",
+		"test": "vitest run --config ../../vitest.config.mts src",
+		"test:coverage": "vitest run --config ../../vitest.config.mts --coverage src",
+		"build:pre": "npm run build:clean && npm run build:barrelsby",
+		"build": "npm run build:pre && npm run build:cjs && npm run build:esm",
+		"build:ci": "npm run build:pre && npm run build:cjs && npm run build:esm",
+		"build:clean": "rimraf lib",
+		"build:barrelsby": "npm exec barrelsby -- --noHeader -d src --exclude \".+\\.test\\..+\" --exclude \".+\\.stories\\..+\" --exclude \".+/__mocks__/.+\" --delete -q && npm exec prettier -- --write src/index.ts",
+		"build:cjs": "mkdir -p lib/cjs && echo '{\"type\": \"commonjs\"}' > lib/cjs/package.json && tsc --pretty -p tsconfig.build.json --module commonjs --outDir lib/cjs/",
+		"build:esm": "mkdir -p lib/esm && echo '{\"type\": \"module\"}' > lib/esm/package.json && tsc --pretty -p tsconfig.build.json --module esnext --outDir lib/esm/",
+		"build:docs": "typedoc --tsconfig tsconfig.build.json",
+		"lint": "biome lint --error-on-warnings .",
+		"lint:ci": "biome lint --error-on-warnings --reporter=json-pretty . > biome-report.json"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/reactionable/reactionable.git"
+	},
+	"keywords": [
+		"reactionable",
+		"react",
+		"framework",
+		"NextJs"
+	],
+	"author": "ESCEMI <developer@escemi.com>",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/reactionable/reactionable/issues"
+	},
+	"homepage": "https://github.com/reactionable/reactionable#readme",
+	"dependencies": {
+		"@emotion/cache": "^11.10.3",
+		"@emotion/react": "^11.10.5",
+		"@emotion/server": "^11.10.0",
+		"@reactionable/core": "^0.28.31",
+		"next": "^16.2.11"
+	},
+	"devDependencies": {
+		"next-router-mock": "^1.0.5"
+	},
+	"publishConfig": {
+		"access": "public"
+	}
 }

@@ -1,15 +1,19 @@
-import { IRouteMatch, IRouteMatchParams, IRouter } from "@reactionable/core";
+import type {
+	IRouteMatch,
+	IRouteMatchParams,
+	IRouter,
+} from "@reactionable/core";
 import { useNavigate } from "react-router";
 import { useRouteMatch } from "./useRouteMatch";
 
 export function useRouter<
-  RouteMatchParams extends IRouteMatchParams = IRouteMatchParams,
+	RouteMatchParams extends IRouteMatchParams = IRouteMatchParams,
 >(): IRouter<RouteMatchParams> {
-  const match = useRouteMatch() as IRouteMatch<RouteMatchParams>;
-  const navigate = useNavigate();
+	const match = useRouteMatch() as IRouteMatch<RouteMatchParams>;
+	const navigate = useNavigate();
 
-  return {
-    match,
-    push: navigate.bind(navigate),
-  };
+	return {
+		match,
+		push: navigate.bind(navigate),
+	};
 }

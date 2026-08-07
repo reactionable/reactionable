@@ -7,71 +7,71 @@ import { i18nTestInstance } from "../../testing/I18n";
 import * as stories from "./Notification.stories";
 
 const {
-  BasicNotification,
-  NotificationWithComplexContent,
-  UseNotification,
-  BasicErrorNotification,
-  UseErrorNotification,
-  BasicSuccessNotification,
-  UseSuccessNotification,
+	BasicNotification,
+	NotificationWithComplexContent,
+	UseNotification,
+	BasicErrorNotification,
+	UseErrorNotification,
+	BasicSuccessNotification,
+	UseSuccessNotification,
 } = composeStories(stories);
 
 describe("Notification", () => {
-  beforeAll(i18nTestInstance);
+	beforeAll(i18nTestInstance);
 
-  describe("BasicNotification", () => {
-    it("should render without crashing", () => {
-      const result = render(<BasicNotification />);
+	describe("BasicNotification", () => {
+		it("should render without crashing", () => {
+			const result = render(<BasicNotification />);
 
-      expect(result).toBeTruthy();
-    });
-  });
+			expect(result).toBeTruthy();
+		});
+	});
 
-  describe("NotificationWithComplexContent", () => {
-    it("should render without crashing", () => {
-      const result = render(<NotificationWithComplexContent />);
+	describe("NotificationWithComplexContent", () => {
+		it("should render without crashing", () => {
+			const result = render(<NotificationWithComplexContent />);
 
-      expect(result).toBeTruthy();
-    });
-  });
+			expect(result).toBeTruthy();
+		});
+	});
 
-  describe("UseNotification", () => {
-    it("should render without crashing", () => {
-      const result = render(<UseNotification />);
+	describe("UseNotification", () => {
+		it("should render without crashing", () => {
+			const result = render(<UseNotification />);
 
-      expect(result).toBeTruthy();
-    });
-  });
+			expect(result).toBeTruthy();
+		});
+	});
 
-  describe("BasicErrorNotification", () => {
-    it("should render without crashing", () => {
-      const result = render(<BasicErrorNotification />);
+	describe("BasicErrorNotification", () => {
+		it("should render without crashing", () => {
+			const result = render(<BasicErrorNotification />);
 
-      expect(result).toBeTruthy();
-    });
-  });
+			expect(result).toBeTruthy();
+		});
+	});
 
-  describe("UseErrorNotification", () => {
-    it("should render without crashing", () => {
-      const result = render(<UseErrorNotification />);
+	describe("UseErrorNotification", () => {
+		it("should render without crashing", () => {
+			const result = render(<UseErrorNotification />);
 
-      expect(result).toBeTruthy();
-    });
-  });
+			expect(result).toBeTruthy();
+		});
+	});
 
-  describe("BasicSuccessNotification", () => {
-    it("should render without crashing", () => {
-      const result = render(<BasicSuccessNotification />);
+	describe("BasicSuccessNotification", () => {
+		it("should render without crashing", () => {
+			const result = render(<BasicSuccessNotification />);
 
-      expect(result).toBeTruthy();
-    });
-  });
+			expect(result).toBeTruthy();
+		});
+	});
 
-  describe("UseSuccessNotification", () => {
-    it("should render without crashing", () => {
-      const result = render(<UseSuccessNotification />);
+	describe("UseSuccessNotification", () => {
+		it("should render without crashing", () => {
+			const result = render(<UseSuccessNotification />);
 
-      expect(result).toBeTruthy();
-    });
-  });
+			expect(result).toBeTruthy();
+		});
+	});
 });

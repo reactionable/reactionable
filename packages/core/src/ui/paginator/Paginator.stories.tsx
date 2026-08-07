@@ -1,11 +1,11 @@
-import { action } from "storybook/actions";
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { action } from "storybook/actions";
 
 import { Paginator } from "./Paginator";
 
 const meta: Meta<typeof Paginator> = {
-  title: "Core/Components/UI/Paginator",
-  component: Paginator,
+	title: "Core/Components/UI/Paginator",
+	component: Paginator,
 };
 
 export default meta;
@@ -13,12 +13,12 @@ export default meta;
 type Story = StoryObj<typeof Paginator>;
 
 export const BasicPaginator: Story = {
-  args: {
-    currentPage: 2,
-    totalCount: 10,
-    perPage: 2,
-    pageRangeDisplayed: 2,
-    marginPagesDisplayed: 2,
-    onChange: action(`Page changed`),
-  },
+	args: {
+		currentPage: 2,
+		totalCount: 10,
+		perPage: 2,
+		pageRangeDisplayed: 2,
+		marginPagesDisplayed: 2,
+		onChange: action(`Page changed`),
+	},
 };

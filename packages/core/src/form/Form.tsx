@@ -1,124 +1,152 @@
-import { Formik, FormikConfig, FormikHelpers, FormikProps } from "formik";
-import { ComponentType, ReactElement, ReactNode, useEffect, useState } from "react";
-import { ObjectShape, object as yupObject } from "yup";
+import {
+	Formik,
+	type FormikConfig,
+	type FormikHelpers,
+	type FormikProps,
+} from "formik";
+import {
+	type ComponentType,
+	type ReactElement,
+	type ReactNode,
+	useEffect,
+	useState,
+} from "react";
+import { type ObjectShape, object as yupObject } from "yup";
 
-import { IError } from "../error/IError";
+import type { IError } from "../error/IError";
 import { useUIContext } from "../ui/UI";
-import { IFormButtonProps } from "./FormButton";
-import { FormWrapper, IFormWrapperProps } from "./FormWrapper";
+import type { IFormButtonProps } from "./FormButton";
+import { FormWrapper, type IFormWrapperProps } from "./FormWrapper";
 
-export type IOnSubmitForm<Values extends IFormValues, Data extends IFormData> = (
-  values: Values,
-  formikHelpers: FormikHelpers<Values>
+export type IOnSubmitForm<
+	Values extends IFormValues,
+	Data extends IFormData,
+> = (
+	values: Values,
+	formikHelpers: FormikHelpers<Values>,
 ) => Promise<Data | null>;
 
 export type IFormValue = string | boolean | File;
-export type IComposedFormValues = IFormValue | Array<IFormValue> | { [key: string]: IFormValue };
+export type IComposedFormValues =
+	| IFormValue
+	| Array<IFormValue>
+	| { [key: string]: IFormValue };
 export type INestedFormValues =
-  | IComposedFormValues
-  | Array<IComposedFormValues>
-  | { [key: string]: IComposedFormValues };
+	| IComposedFormValues
+	| Array<IComposedFormValues>
+	| { [key: string]: IComposedFormValues };
 
 export type IFormValues = object;
 export type IFormData = object;
 
 export type IValidationSchema<Values extends IFormValues> = Record<
-  keyof Values,
-  ObjectShape[string]
+	keyof Values,
+	ObjectShape[string]
 >;
 
 export interface IFormProps<
-  Values extends IFormValues,
-  Data extends IFormData,
-  FormButtonProps extends IFormButtonProps,
+	Values extends IFormValues,
+	Data extends IFormData,
+	FormButtonProps extends IFormButtonProps,
 > extends FormikConfig<Values> {
-  title?: ReactNode;
-  validationSchema: IValidationSchema<Values>;
-  successMessage?: ReactNode;
-  onSubmit: IOnSubmitForm<Values, Data>;
-  onSuccess?: (result: Data | null) => void;
-  children: IFormWrapperProps<Values, FormButtonProps>["children"];
-  form?: IFormWrapperProps<Values, FormButtonProps>["form"];
-  submitButton?: IFormWrapperProps<Values, FormButtonProps>["submitButton"];
-  FormButtonComponent?: IFormWrapperProps<Values, FormButtonProps>["FormButtonComponent"];
+	title?: ReactNode;
+	validationSchema: IValidationSchema<Values>;
+	successMessage?: ReactNode;
+	onSubmit: IOnSubmitForm<Values, Data>;
+	onSuccess?: (result: Data | null) => void;
+	children: IFormWrapperProps<Values, FormButtonProps>["children"];
+	form?: IFormWrapperProps<Values, FormButtonProps>["form"];
+	submitButton?: IFormWrapperProps<Values, FormButtonProps>["submitButton"];
+	FormButtonComponent?: IFormWrapperProps<
+		Values,
+		FormButtonProps
+	>["FormButtonComponent"];
 }
 
 export type FormComponent<
-  Values extends IFormValues,
-  Data extends IFormData,
-  FormButtonProps extends IFormButtonProps,
+	Values extends IFormValues,
+	Data extends IFormData,
+	FormButtonProps extends IFormButtonProps,
 > = ComponentType<IFormProps<Values, Data, FormButtonProps>>;
 
 export function Form<
-  Values extends IFormValues,
-  Data extends IFormData,
-  FormButtonProps extends IFormButtonProps = IFormButtonProps,
+	Values extends IFormValues,
+	Data extends IFormData,
+	FormButtonProps extends IFormButtonProps = IFormButtonProps,
 >({
-  title,
-  validationSchema,
-  successMessage,
-  onSuccess,
-  form,
-  submitButton,
-  FormButtonComponent,
-  children,
-  onSubmit,
-  ...formikConfig
+	title,
+	validationSchema,
+	successMessage,
+	onSuccess,
+	form,
+	submitButton,
+	FormButtonComponent,
+	children,
+	onSubmit,
+	...formikConfig
 }: IFormProps<Values, Data, FormButtonProps>): ReactElement {
-  const { useLoader, useSuccessNotification, useErrorAlert } = useUIContext();
-  const { loader, setLoading } = useLoader({});
-  const { errorAlert, setErrorAlert } = useErrorAlert({});
-  const { successNotification, setSuccessNotification } = useSuccessNotification({ title });
-  const [success, setSuccess] = useState<Data | null>();
-  const shapedvalidationSchema = yupObject().shape(validationSchema);
+	const { useLoader, useSuccessNotification, useErrorAlert } = useUIContext();
+	const { loader, setLoading } = useLoader({});
+	const { errorAlert, setErrorAlert } = useErrorAlert({});
+	const { successNotification, setSuccessNotification } =
+		useSuccessNotification({ title });
+	const [success, setSuccess] = useState<Data | null>();
+	const shapedvalidationSchema = yupObject().shape(validationSchema);
 
-  useEffect(() => {
-    if (success) {
-      if (successMessage) {
-        setSuccessNotification(successMessage);
-      }
-      setSuccess(undefined);
-      if (onSuccess) {
-        onSuccess(success);
-      }
-    }
-  }, [success]);
+	useEffect(() => {
+		if (success) {
+			if (successMessage) {
+				setSuccessNotification(successMessage);
+			}
+			setSuccess(undefined);
+			if (onSuccess) {
+				onSuccess(success);
+			}
+		}
+	}, [success]);
 
-  if (submitButton === undefined) {
-    submitButton = true;
-  }
+	if (submitButton === undefined) {
+		submitButton = true;
+	}
 
-  const renderFormChildren = (formikProps: FormikProps<Values>) => (
-    <FormWrapper<Values, FormButtonProps>
-      form={form}
-      submitButton={submitButton}
-      formikProps={formikProps}
-      loader={loader}
-      errorAlert={errorAlert}
-      successNotification={successNotification}
-      FormButtonComponent={FormButtonComponent}
-    >
-      {children}
-    </FormWrapper>
-  );
+	const renderFormChildren = (formikProps: FormikProps<Values>) => (
+		<FormWrapper<Values, FormButtonProps>
+			form={form}
+			submitButton={submitButton}
+			formikProps={formikProps}
+			loader={loader}
+			errorAlert={errorAlert}
+			successNotification={successNotification}
+			FormButtonComponent={FormButtonComponent}
+		>
+			{children}
+		</FormWrapper>
+	);
 
-  const onSubmitCallback = async (values: Values, formikHelpers: FormikHelpers<Values>) => {
-    setLoading(true);
+	const onSubmitCallback = async (
+		values: Values,
+		formikHelpers: FormikHelpers<Values>,
+	) => {
+		setLoading(true);
 
-    try {
-      const data = await onSubmit(values, formikHelpers);
-      setSuccess(data);
-    } catch (error) {
-      setErrorAlert(error as IError);
-    }
+		try {
+			const data = await onSubmit(values, formikHelpers);
+			setSuccess(data);
+		} catch (error) {
+			setErrorAlert(error as IError);
+		}
 
-    setLoading(false);
-    formikHelpers.setSubmitting(false);
-  };
+		setLoading(false);
+		formikHelpers.setSubmitting(false);
+	};
 
-  return (
-    <Formik onSubmit={onSubmitCallback} validationSchema={shapedvalidationSchema} {...formikConfig}>
-      {renderFormChildren}
-    </Formik>
-  );
+	return (
+		<Formik
+			onSubmit={onSubmitCallback}
+			validationSchema={shapedvalidationSchema}
+			{...formikConfig}
+		>
+			{renderFormChildren}
+		</Formik>
+	);
 }

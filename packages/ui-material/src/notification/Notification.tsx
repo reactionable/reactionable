@@ -1,98 +1,122 @@
-import Snackbar, { SnackbarCloseReason, SnackbarProps } from "@mui/material/Snackbar";
+import Snackbar, {
+	type SnackbarCloseReason,
+	type SnackbarProps,
+} from "@mui/material/Snackbar";
 import SnackbarContent from "@mui/material/SnackbarContent";
 import Typography from "@mui/material/Typography";
 import {
-  INotificationProps as ICoreNotificationProps,
-  IUseNotificationProps as ICoreUseNotificationProps,
-  IUseNotificationResult,
-  useNotification as useCoreNotification,
+	type INotificationProps as ICoreNotificationProps,
+	type IUseNotificationProps as ICoreUseNotificationProps,
+	type IUseNotificationResult,
+	useNotification as useCoreNotification,
 } from "@reactionable/core";
 import {
-  ForwardedRef,
-  PropsWithChildren,
-  ReactElement,
-  forwardRef,
-  isValidElement,
-  useEffect,
-  useState,
+	type ForwardedRef,
+	forwardRef,
+	isValidElement,
+	type PropsWithChildren,
+	type ReactElement,
+	useEffect,
+	useState,
 } from "react";
 
-export type INotificationProps = ICoreNotificationProps & Omit<SnackbarProps, "children" | "title">;
+export type INotificationProps = ICoreNotificationProps &
+	Omit<SnackbarProps, "children" | "title">;
 
-type WrappedSnackbarContentProps = PropsWithChildren<Pick<INotificationProps, "title">>;
+type WrappedSnackbarContentProps = PropsWithChildren<
+	Pick<INotificationProps, "title">
+>;
 
 const WrappedSnackbarContent = forwardRef<unknown, WrappedSnackbarContentProps>(
-  function WrappedChildren({ children, title }: WrappedSnackbarContentProps, ref) {
-    if (title) {
-      children = (
-        <>
-          {"string" === typeof title ? <Typography variant="h5">{title}</Typography> : title}
-          <Typography variant="body1">{children}</Typography>
-        </>
-      );
-    }
+	function WrappedChildren(
+		{ children, title }: WrappedSnackbarContentProps,
+		ref,
+	) {
+		if (title) {
+			children = (
+				<>
+					{"string" === typeof title ? (
+						<Typography variant="h5">{title}</Typography>
+					) : (
+						title
+					)}
+					<Typography variant="body1">{children}</Typography>
+				</>
+			);
+		}
 
-    if (!children) {
-      return null;
-    }
+		if (!children) {
+			return null;
+		}
 
-    if (!title && isValidElement(children)) {
-      return <div ref={ref as ForwardedRef<HTMLDivElement>}>{children}</div>;
-    }
+		if (!title && isValidElement(children)) {
+			return <div ref={ref as ForwardedRef<HTMLDivElement>}>{children}</div>;
+		}
 
-    return <SnackbarContent ref={ref as ForwardedRef<HTMLDivElement>} message={children} />;
-  }
+		return (
+			<SnackbarContent
+				ref={ref as ForwardedRef<HTMLDivElement>}
+				message={children}
+			/>
+		);
+	},
 );
 
 export const Notification = ({
-  onClose,
-  title,
-  children,
-  show = true,
-  ...props
+	onClose,
+	title,
+	children,
+	show = true,
+	...props
 }: PropsWithChildren<INotificationProps>): ReactElement => {
-  const [open, setOpen] = useState<boolean>();
+	const [open, setOpen] = useState<boolean>();
 
-  useEffect(() => {
-    if (show !== open) {
-      setOpen(show);
-    }
-  }, [open, show]);
+	useEffect(() => {
+		if (show !== open) {
+			setOpen(show);
+		}
+	}, [open, show]);
 
-  let firstClickAway = true;
-  const handleClose: SnackbarProps["onClose"] = (event, reason?: SnackbarCloseReason) => {
-    if (reason === "clickaway") {
-      if (firstClickAway) {
-        firstClickAway = false;
-        return;
-      }
-    }
-    setOpen(false);
+	let firstClickAway = true;
+	const handleClose: SnackbarProps["onClose"] = (
+		_event,
+		reason?: SnackbarCloseReason,
+	) => {
+		if (reason === "clickaway") {
+			if (firstClickAway) {
+				firstClickAway = false;
+				return;
+			}
+		}
+		setOpen(false);
 
-    if (onClose) {
-      onClose();
-    }
-  };
+		if (onClose) {
+			onClose();
+		}
+	};
 
-  const snackbarProps: SnackbarProps = {
-    open,
-    autoHideDuration: 6000,
-    onClose: handleClose,
-    ...props,
-  };
+	const snackbarProps: SnackbarProps = {
+		open,
+		autoHideDuration: 6000,
+		onClose: handleClose,
+		...props,
+	};
 
-  return (
-    <Snackbar {...snackbarProps}>
-      <WrappedSnackbarContent title={title}>{children}</WrappedSnackbarContent>
-    </Snackbar>
-  );
+	return (
+		<Snackbar {...snackbarProps}>
+			<WrappedSnackbarContent title={title}>{children}</WrappedSnackbarContent>
+		</Snackbar>
+	);
 };
 
-export type IUseNotificationProps = ICoreUseNotificationProps<INotificationProps>;
+export type IUseNotificationProps =
+	ICoreUseNotificationProps<INotificationProps>;
 
-export const useNotification = (props: IUseNotificationProps): IUseNotificationResult => {
-  return useCoreNotification<IUseNotificationProps>({
-    ...props,
-    Component: Notification,
-  });
+export const useNotification = (
+	props: IUseNotificationProps,
+): IUseNotificationResult => {
+	return useCoreNotification<IUseNotificationProps>({
+		...props,
+		Component: Notification,
+	});
 };
