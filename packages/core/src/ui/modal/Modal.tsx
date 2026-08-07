@@ -1,81 +1,89 @@
-import { ComponentType, PropsWithChildren, ReactElement, ReactNode, useState } from "react";
+import {
+	type ComponentType,
+	type PropsWithChildren,
+	type ReactElement,
+	type ReactNode,
+	useState,
+} from "react";
 
 import { keyFromSelector, useTranslation } from "../../i18n/I18n";
 
 export interface IModalProps {
-  title: ReactNode;
-  show?: boolean;
-  onHide?: () => void;
+	title: ReactNode;
+	show?: boolean;
+	onHide?: () => void;
 }
 
-export type ModalComponent<P extends IModalProps = IModalProps> = ComponentType<P>;
+export type ModalComponent<P extends IModalProps = IModalProps> =
+	ComponentType<P>;
 
 export function Modal<P extends IModalProps = IModalProps>({
-  title,
-  children,
-  onHide,
-  show,
+	title,
+	children,
+	onHide,
+	show,
 
-  ...modalProps
+	...modalProps
 }: PropsWithChildren<P>): ReactElement {
-  const { t } = useTranslation("common");
-  const handleOnClose = () => {
-    if (onHide) {
-      onHide();
-    }
-  };
+	const { t } = useTranslation("common");
+	const handleOnClose = () => {
+		if (onHide) {
+			onHide();
+		}
+	};
 
-  return (
-    <div {...modalProps} hidden={!show}>
-      <div>
-        <div>{title}</div>
-        <button onClick={handleOnClose}>
-          {t(keyFromSelector(($) => $["Close"], { ns: "common" }))}
-        </button>
-      </div>
-      {children}
-    </div>
-  );
+	return (
+		<div {...modalProps} hidden={!show}>
+			<div>
+				<div>{title}</div>
+				<button onClick={handleOnClose}>
+					{t(keyFromSelector(($) => $.Close, { ns: "common" }))}
+				</button>
+			</div>
+			{children}
+		</div>
+	);
 }
 
-export type IUseModalProps<ModalProps extends IModalProps = IModalProps> = PropsWithChildren<
-  ModalProps & {
-    Component?: ModalComponent<ModalProps>;
-  }
->;
+export type IUseModalProps<ModalProps extends IModalProps = IModalProps> =
+	PropsWithChildren<
+		ModalProps & {
+			Component?: ModalComponent<ModalProps>;
+		}
+	>;
 
 export type IUseModalResult = {
-  modal: ReactElement;
-  openModal: () => void;
-  closeModal: () => void;
+	modal: ReactElement;
+	openModal: () => void;
+	closeModal: () => void;
 };
 
 export type IUseModal<UseModalProps extends IUseModalProps> = (
-  props: UseModalProps
+	props: UseModalProps,
 ) => IUseModalResult;
 
 export function useModal<P extends IUseModalProps>({
-  Component,
-  show,
-  onHide,
-  ...props
+	Component,
+	show,
+	onHide,
+	...props
 }: P): IUseModalResult {
-  const [showState, setShow] = useState(show);
+	const [showState, setShow] = useState(show);
 
-  const openModal = () => setShow(true);
-  const closeModal = () => setShow(false);
-  const handleOnHide = () => {
-    closeModal();
-    if (onHide) {
-      onHide();
-    }
-  };
+	const openModal = () => setShow(true);
+	const closeModal = () => setShow(false);
+	const handleOnHide = () => {
+		closeModal();
+		if (onHide) {
+			onHide();
+		}
+	};
 
-  const ModalComponent = Component || Modal;
+	const ModalComponent = Component || Modal;
 
-  return {
-    modal: <ModalComponent {...props} show={showState} onHide={handleOnHide} />,
-    openModal,
-    closeModal,
-  };
+	return {
+		modal: <ModalComponent {...props} show={showState} onHide={handleOnHide} />,
+		openModal,
+		closeModal,
+	};
 }

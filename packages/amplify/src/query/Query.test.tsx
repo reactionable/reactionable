@@ -1,6 +1,11 @@
 import { GraphQLAPI } from "@aws-amplify/api-graphql";
 
-import { IData, IQueryOptions, IVariables, query } from "./Query";
+import {
+	type IData,
+	type IQueryOptions,
+	type IVariables,
+	query,
+} from "./Query";
 
 type ITestData = IData;
 
@@ -13,29 +18,29 @@ const testQuery = `query Test() {
 const graphqlSpy = jest.spyOn(GraphQLAPI, "graphql");
 
 describe("Query", () => {
-  beforeEach(() => {
-    graphqlSpy.mockReset();
-  });
+	beforeEach(() => {
+		graphqlSpy.mockReset();
+	});
 
-  describe("query", () => {
-    it("should return the retrieve graphql error", async () => {
-      const expectedError = "test graphql error";
-      graphqlSpy.mockRejectedValueOnce({
-        data: undefined,
-        errors: [
-          {
-            path: null,
-            locations: null,
-            message: expectedError,
-          },
-        ],
-      });
+	describe("query", () => {
+		it("should return the retrieve graphql error", async () => {
+			const expectedError = "test graphql error";
+			graphqlSpy.mockRejectedValueOnce({
+				data: undefined,
+				errors: [
+					{
+						path: null,
+						locations: null,
+						message: expectedError,
+					},
+				],
+			});
 
-      const queryOperation = query<ITestData, IQueryOptions<TestVariables>>({
-        query: testQuery,
-      });
+			const queryOperation = query<ITestData, IQueryOptions<TestVariables>>({
+				query: testQuery,
+			});
 
-      await expect(queryOperation).rejects.toThrow(expectedError);
-    });
-  });
+			await expect(queryOperation).rejects.toThrow(expectedError);
+		});
+	});
 });

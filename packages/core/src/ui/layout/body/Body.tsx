@@ -1,10 +1,11 @@
-import { ComponentType, PropsWithChildren, ReactElement } from "react";
+import type { ComponentType, PropsWithChildren, ReactElement } from "react";
 
 export type IBodyProps = Record<string, unknown>;
-export type BodyComponent<BodyProps extends IBodyProps = IBodyProps> = ComponentType<BodyProps>;
+export type BodyComponent<BodyProps extends IBodyProps = IBodyProps> =
+	ComponentType<BodyProps>;
 
 export function Body<BodyProps extends IBodyProps = IBodyProps>({
-  children,
+	children,
 }: PropsWithChildren<BodyProps>): ReactElement {
-  return <main>{children}</main>;
+	return <main>{children}</main>;
 }

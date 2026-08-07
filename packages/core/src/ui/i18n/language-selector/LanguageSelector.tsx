@@ -1,106 +1,117 @@
-import { ChangeEvent, ReactElement, ReactNode, useEffect, useState } from "react";
-import { ComponentType, PropsWithChildren } from "react";
+import {
+	type ChangeEvent,
+	type ComponentType,
+	type PropsWithChildren,
+	type ReactElement,
+	type ReactNode,
+	useEffect,
+	useState,
+} from "react";
 
 import { useTranslation } from "../../../i18n/I18n";
 
 export type ILanguageSelectorItemComponentProps<
-  LanguageSelectorItemComponentProps extends { children?: ReactNode } = { children?: ReactNode },
+	LanguageSelectorItemComponentProps extends { children?: ReactNode } = {
+		children?: ReactNode;
+	},
 > = LanguageSelectorItemComponentProps;
 
 export type LanguageSelectorItemComponent<
-  LanguageSelectorItemComponentProps extends
-    ILanguageSelectorItemComponentProps = ILanguageSelectorItemComponentProps,
+	LanguageSelectorItemComponentProps extends
+		ILanguageSelectorItemComponentProps = ILanguageSelectorItemComponentProps,
 > = ComponentType<LanguageSelectorItemComponentProps>;
 
 export function LanguageSelectorItemComponent(
-  props: PropsWithChildren<ILanguageSelectorItemComponentProps>
+	props: PropsWithChildren<ILanguageSelectorItemComponentProps>,
 ): ReactElement {
-  return <option value={`${props.children}`} {...props} />;
+	return <option value={`${props.children}`} {...props} />;
 }
 
 export type ILanguageSelectorComponentProps<
-  LanguageSelectorItemComponentProps extends
-    ILanguageSelectorItemComponentProps = ILanguageSelectorItemComponentProps,
+	LanguageSelectorItemComponentProps extends
+		ILanguageSelectorItemComponentProps = ILanguageSelectorItemComponentProps,
 > = {
-  languages: string[];
-  current?: string;
-  ItemComponent?: LanguageSelectorItemComponent<LanguageSelectorItemComponentProps>;
+	languages: string[];
+	current?: string;
+	ItemComponent?: LanguageSelectorItemComponent<LanguageSelectorItemComponentProps>;
 } & Required<Pick<ILanguageSelectorProps, "onSelectLanguage">>;
 
 export type LanguageSelectorComponent<
-  LanguageSelectorComponentProps extends
-    ILanguageSelectorComponentProps = ILanguageSelectorComponentProps,
+	LanguageSelectorComponentProps extends
+		ILanguageSelectorComponentProps = ILanguageSelectorComponentProps,
 > = ComponentType<LanguageSelectorComponentProps>;
 
 export function LanguageSelectorComponent({
-  current,
-  languages,
-  onSelectLanguage,
-  ItemComponent = LanguageSelectorItemComponent,
+	current,
+	languages,
+	onSelectLanguage,
+	ItemComponent = LanguageSelectorItemComponent,
 }: PropsWithChildren<ILanguageSelectorComponentProps>): ReactElement {
-  const [selectedOption, setSelectedOption] = useState(current);
-  const handleOnChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    const language = event.target.value;
-    if (selectedOption !== language) {
-      setSelectedOption(language);
-      onSelectLanguage(language);
-    }
-  };
+	const [selectedOption, setSelectedOption] = useState(current);
+	const handleOnChange = (event: ChangeEvent<HTMLSelectElement>) => {
+		const language = event.target.value;
+		if (selectedOption !== language) {
+			setSelectedOption(language);
+			onSelectLanguage(language);
+		}
+	};
 
-  // Get unique values
-  const items = [...new Set([current, ...languages])].filter((language) => !!language);
+	// Get unique values
+	const items = [...new Set([current, ...languages])].filter(
+		(language) => !!language,
+	);
 
-  return (
-    <select value={selectedOption} onChange={handleOnChange}>
-      {items.map((language) => (
-        <ItemComponent key={language}>{language}</ItemComponent>
-      ))}
-    </select>
-  );
+	return (
+		<select value={selectedOption} onChange={handleOnChange}>
+			{items.map((language) => (
+				<ItemComponent key={language}>{language}</ItemComponent>
+			))}
+		</select>
+	);
 }
 
 export type ILanguageSelectorProps = {
-  onSelectLanguage?: (language: string) => void;
-  Component?: LanguageSelectorComponent;
+	onSelectLanguage?: (language: string) => void;
+	Component?: LanguageSelectorComponent;
 };
 export function LanguageSelector({
-  Component = LanguageSelectorComponent,
-  onSelectLanguage,
-  ...props
+	Component = LanguageSelectorComponent,
+	onSelectLanguage,
+	...props
 }: ILanguageSelectorProps): ReactElement {
-  const { i18n } = useTranslation();
+	const { i18n } = useTranslation();
 
-  const i18nLanguage = i18n.resolvedLanguage;
-  const supportedLngs = i18n.options.supportedLngs;
+	const i18nLanguage = i18n.resolvedLanguage;
+	const supportedLngs = i18n.options.supportedLngs;
 
-  const [current, setLanguage] = useState<string>();
-  const [languages, setLanguages] = useState<string[]>([]);
+	const [current, setLanguage] = useState<string>();
+	const [languages, setLanguages] = useState<string[]>([]);
 
-  useEffect(() => {
-    if (i18nLanguage !== current) {
-      setLanguage(i18nLanguage);
-      setLanguages(
-        Array.isArray(supportedLngs)
-          ? supportedLngs.filter((lng) => ![current, "cimode"].includes(lng))
-          : []
-      );
-    }
-  }, [i18nLanguage, supportedLngs]);
+	useEffect(() => {
+		if (i18nLanguage !== current) {
+			setLanguage(i18nLanguage);
+			setLanguages(
+				Array.isArray(supportedLngs)
+					? supportedLngs.filter((lng) => ![current, "cimode"].includes(lng))
+					: [],
+			);
+		}
+	}, [i18nLanguage, supportedLngs]);
 
-  const handleOnSelectLanguage = (language: string) => {
-    setLanguage(language);
-    i18n.changeLanguage(language);
-    if (onSelectLanguage) {
-      onSelectLanguage(language);
-    }
-  };
+	const handleOnSelectLanguage = (language: string) => {
+		setLanguage(language);
+		i18n.changeLanguage(language);
+		if (onSelectLanguage) {
+			onSelectLanguage(language);
+		}
+	};
 
-  return (
-    <Component
-      languages={languages}
-      current={current}
-      onSelectLanguage={handleOnSelectLanguage}
-      {...props}
-    />
-  );
+	return (
+		<Component
+			languages={languages}
+			current={current}
+			onSelectLanguage={handleOnSelectLanguage}
+			{...props}
+		/>
+	);
 }

@@ -1,70 +1,77 @@
-import { FastField, Field, FieldProps } from "formik";
-import { ChangeEvent, HTMLProps, ReactElement, ReactNode } from "react";
+import { FastField, Field, type FieldProps } from "formik";
+import type { ChangeEvent, HTMLProps, ReactElement, ReactNode } from "react";
 
-import { FormFieldChildren, IFormFieldChildrenProps } from "./FormFieldChildren";
-import { IFieldInputPropsEnhanced } from "./FormFieldInput";
-import { IRenderFormField } from "./RenderFormField";
+import {
+	FormFieldChildren,
+	type IFormFieldChildrenProps,
+} from "./FormFieldChildren";
+import type { IFieldInputPropsEnhanced } from "./FormFieldInput";
+import type { IRenderFormField } from "./RenderFormField";
 
 export type IFormFieldValue = string;
 export type IFieldElementProps<
-  FieldProps extends HTMLProps<HTMLInputElement> = HTMLProps<HTMLInputElement>,
+	FieldProps extends HTMLProps<HTMLInputElement> = HTMLProps<HTMLInputElement>,
 > = FieldProps & {
-  children?: FieldProps["children"] | ((props: FieldProps) => FieldProps["children"]);
-  label?: ReactNode | string;
+	children?:
+		| FieldProps["children"]
+		| ((props: FieldProps) => FieldProps["children"]);
+	label?: ReactNode | string;
 };
 
 export type IFormFieldPropsEnhanced<
-  FieldElementProps extends IFieldElementProps,
-  Value extends IFormFieldValue,
+	FieldElementProps extends IFieldElementProps,
+	Value extends IFormFieldValue,
 > = FieldProps<Value> & {
-  error?: string;
-  isValid: boolean;
-  isInvalid: boolean;
-  field: IFieldInputPropsEnhanced<FieldElementProps, Value>;
+	error?: string;
+	isValid: boolean;
+	isInvalid: boolean;
+	field: IFieldInputPropsEnhanced<FieldElementProps, Value>;
 };
 
 export type IFormFieldProps<
-  FieldElementProps extends IFieldElementProps,
-  Value extends IFormFieldValue,
+	FieldElementProps extends IFieldElementProps,
+	Value extends IFormFieldValue,
 > = FieldElementProps & {
-  render?: IRenderFormField<FieldElementProps, Value>;
-  fastField?: boolean;
+	render?: IRenderFormField<FieldElementProps, Value>;
+	fastField?: boolean;
 };
 
 export function FormField<
-  FieldElementProps extends IFieldElementProps = IFieldElementProps,
-  Value extends IFormFieldValue = IFormFieldValue,
+	FieldElementProps extends IFieldElementProps = IFieldElementProps,
+	Value extends IFormFieldValue = IFormFieldValue,
 >({
-  render,
-  fastField = true,
-  autoFocus,
-  as,
-  ...props
+	render,
+	fastField = true,
+	autoFocus,
+	as,
+	...props
 }: IFormFieldProps<FieldElementProps, Value>): ReactElement {
-  const FieldComponent = fastField ? FastField : Field;
+	const FieldComponent = fastField ? FastField : Field;
 
-  const renderChildren = (fieldProps: FieldProps<Value>) => (
-    <FormFieldChildren<FieldElementProps, Value>
-      render={render as IFormFieldChildrenProps<FieldElementProps, Value>["render"]}
-      autoFocus={autoFocus}
-      as={as}
-      fieldProps={{
-        ...fieldProps,
-        field: {
-          ...props,
-          ...fieldProps.field,
-          onChange: (event: ChangeEvent<HTMLInputElement>) => {
-            if (props.onChange) {
-              props.onChange(event);
-            }
-            if (fieldProps.field.onChange) {
-              fieldProps.field.onChange(event);
-            }
-          },
-        },
-      }}
-    />
-  );
+	const renderChildren = (fieldProps: FieldProps<Value>) => (
+		<FormFieldChildren<FieldElementProps, Value>
+			render={
+				render as IFormFieldChildrenProps<FieldElementProps, Value>["render"]
+			}
+			autoFocus={autoFocus}
+			as={as}
+			fieldProps={{
+				...fieldProps,
+				field: {
+					...props,
+					...fieldProps.field,
+					onChange: (event: ChangeEvent<HTMLInputElement>) => {
+						if (props.onChange) {
+							props.onChange(event);
+						}
+						if (fieldProps.field.onChange) {
+							fieldProps.field.onChange(event);
+						}
+					},
+				},
+			}}
+		/>
+	);
 
-  return <FieldComponent name={props.name}>{renderChildren}</FieldComponent>;
+	return <FieldComponent name={props.name}>{renderChildren}</FieldComponent>;
 }

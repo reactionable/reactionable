@@ -1,36 +1,45 @@
-import { IProviderProps } from "../app/Provider";
-import { IRouter, useRouter } from "./useRouter";
-import { IRenderRoutes, IRouteMatch, IRouteMatchParams, renderRoutes } from "./Route";
-import { IRouterLinkComponent, IRouterLinkProps, RouterLink } from "./RouterLink";
+import type { IProviderProps } from "../app/Provider";
+import {
+	type IRenderRoutes,
+	type IRouteMatch,
+	type IRouteMatchParams,
+	renderRoutes,
+} from "./Route";
+import {
+	type IRouterLinkComponent,
+	type IRouterLinkProps,
+	RouterLink,
+} from "./RouterLink";
 import { useRouteMatch } from "./useRouteMatch";
+import { type IRouter, useRouter } from "./useRouter";
 
 export type IRouterProviderProps<
-  RouterLinkProps extends IRouterLinkProps = IRouterLinkProps,
-  ExtraProps extends Record<string, unknown> = Record<string, unknown>
+	RouterLinkProps extends IRouterLinkProps = IRouterLinkProps,
+	ExtraProps extends Record<string, unknown> = Record<string, unknown>,
 > = IProviderProps<
-  {
-    RouterLink: IRouterLinkComponent<RouterLinkProps>;
-    useRouter: <
-      RouteMatchParams extends IRouteMatchParams = IRouteMatchParams
-    >() => IRouter<RouteMatchParams>;
-    useRouteMatch: <
-      RouteMatchParams extends IRouteMatchParams = IRouteMatchParams
-    >() => IRouteMatch<RouteMatchParams>;
-    renderRoutes: IRenderRoutes;
-  } & ExtraProps
+	{
+		RouterLink: IRouterLinkComponent<RouterLinkProps>;
+		useRouter: <
+			RouteMatchParams extends IRouteMatchParams = IRouteMatchParams,
+		>() => IRouter<RouteMatchParams>;
+		useRouteMatch: <
+			RouteMatchParams extends IRouteMatchParams = IRouteMatchParams,
+		>() => IRouteMatch<RouteMatchParams>;
+		renderRoutes: IRenderRoutes;
+	} & ExtraProps
 >;
 
 export function useRouterProviderProps<
-  RouterLinkProps extends IRouterLinkProps = IRouterLinkProps,
-  ExtraProps extends Record<string, unknown> = Record<string, unknown>
+	RouterLinkProps extends IRouterLinkProps = IRouterLinkProps,
+	ExtraProps extends Record<string, unknown> = Record<string, unknown>,
 >(
-  props?: Partial<IRouterProviderProps<RouterLinkProps, ExtraProps>>
+	props?: Partial<IRouterProviderProps<RouterLinkProps, ExtraProps>>,
 ): IRouterProviderProps<RouterLinkProps> {
-  return {
-    RouterLink,
-    useRouter,
-    useRouteMatch,
-    renderRoutes,
-    ...props,
-  } as IRouterProviderProps<RouterLinkProps>;
+	return {
+		RouterLink,
+		useRouter,
+		useRouteMatch,
+		renderRoutes,
+		...props,
+	} as IRouterProviderProps<RouterLinkProps>;
 }

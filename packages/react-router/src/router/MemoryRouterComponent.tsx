@@ -1,13 +1,13 @@
-import { PropsWithChildren, ReactElement } from "react";
+import type { PropsWithChildren, ReactElement } from "react";
 import { MemoryRouter } from "react-router";
-import { RouterComponentProps, RouterComponent } from "./RouterComponent";
+import { RouterComponent, type RouterComponentProps } from "./RouterComponent";
 
 export function MemoryRouterComponent(
-  props: PropsWithChildren<RouterComponentProps>
+	props: PropsWithChildren<RouterComponentProps>,
 ): ReactElement {
-  return (
-    <MemoryRouter>
-      <RouterComponent {...props} />
-    </MemoryRouter>
-  );
+	return (
+		<MemoryRouter>
+			<RouterComponent {...props} />
+		</MemoryRouter>
+	);
 }

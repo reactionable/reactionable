@@ -1,44 +1,46 @@
 import CircularProgress from "@mui/material/CircularProgress";
 import {
-  keyFromSelector,
-  useTranslation,
-  ILoaderProps as ICoreLoaderProps,
-  IUseLoaderProps as ICoreUseLoaderProps,
-  IUseLoader,
-  useLoader as useLoaderCore,
+	type ILoaderProps as ICoreLoaderProps,
+	type IUseLoaderProps as ICoreUseLoaderProps,
+	type IUseLoader,
+	keyFromSelector,
+	useLoader as useLoaderCore,
+	useTranslation,
 } from "@reactionable/core";
-import { ReactElement } from "react";
+import type { ReactElement } from "react";
 
 export type ILoaderProps = ICoreLoaderProps & {
-  overlay?: boolean;
+	overlay?: boolean;
 };
 
 export const Loader = ({ overlay = true }: ILoaderProps): ReactElement => {
-  const { t } = useTranslation("common");
-  const spinnerElement = (
-    <CircularProgress title={t(keyFromSelector(($) => $["Loading"], { ns: "common" }))} />
-  );
-  if (!overlay) {
-    return spinnerElement;
-  }
-  return (
-    <div
-      className="spinner--overlay"
-      style={{
-        width: "100%",
-        height: "100%",
-        position: "fixed",
-        top: "50%",
-        left: "50%",
-      }}
-    >
-      {spinnerElement}
-    </div>
-  );
+	const { t } = useTranslation("common");
+	const spinnerElement = (
+		<CircularProgress
+			title={t(keyFromSelector(($) => $.Loading, { ns: "common" }))}
+		/>
+	);
+	if (!overlay) {
+		return spinnerElement;
+	}
+	return (
+		<div
+			className="spinner--overlay"
+			style={{
+				width: "100%",
+				height: "100%",
+				position: "fixed",
+				top: "50%",
+				left: "50%",
+			}}
+		>
+			{spinnerElement}
+		</div>
+	);
 };
 
 export type IUseLoaderProps = ICoreUseLoaderProps & ILoaderProps;
 
 export const useLoader: IUseLoader<IUseLoaderProps> = (props = {}) => {
-  return useLoaderCore({ ...props, Component: Loader });
+	return useLoaderCore({ ...props, Component: Loader });
 };

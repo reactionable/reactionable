@@ -1,44 +1,48 @@
 import {
-  INavItemsProviderProps,
-  Layout as CoreLayout,
-  ILayoutProps as ICoreLayoutProps,
-  IUseLayoutProps as ICoreUseLayoutProps,
-  IUseLayoutResult,
-  useLayout as useLayoutCore,
-  useHeaderContext as coreUseHeaderContext,
+	Layout as CoreLayout,
+	useHeaderContext as coreUseHeaderContext,
+	type ILayoutProps as ICoreLayoutProps,
+	type IUseLayoutProps as ICoreUseLayoutProps,
+	type INavItemsProviderProps,
+	type IUseLayoutResult,
+	useLayout as useLayoutCore,
 } from "@reactionable/core";
-import { PropsWithChildren, ReactElement } from "react";
+import type { PropsWithChildren, ReactElement } from "react";
 
-import { Body, IBodyProps } from "./body/Body";
-import { Footer, IFooterProps } from "./footer/Footer";
-import { Header, IHeaderProps } from "./header/Header";
+import { Body, type IBodyProps } from "./body/Body";
+import { Footer, type IFooterProps } from "./footer/Footer";
+import { Header, type IHeaderProps } from "./header/Header";
 
-export type ILayoutProps = ICoreLayoutProps<IHeaderProps, IBodyProps, IFooterProps>;
+export type ILayoutProps = ICoreLayoutProps<
+	IHeaderProps,
+	IBodyProps,
+	IFooterProps
+>;
 
 export type IUseLayoutProps = ICoreUseLayoutProps<ILayoutProps>;
 
 export function Layout(props: PropsWithChildren<ILayoutProps>): ReactElement {
-  return (
-    <CoreLayout
-      {...{
-        HeaderComponent: Header,
-        BodyComponent: Body,
-        FooterComponent: Footer,
-        ...props,
-      }}
-    />
-  );
+	return (
+		<CoreLayout
+			{...{
+				HeaderComponent: Header,
+				BodyComponent: Body,
+				FooterComponent: Footer,
+				...props,
+			}}
+		/>
+	);
 }
 
 export function useLayout(props: IUseLayoutProps): IUseLayoutResult {
-  return useLayoutCore<IUseLayoutProps>({
-    ...props,
-    HeaderComponent: Header,
-    BodyComponent: Body,
-    FooterComponent: Footer,
-  });
+	return useLayoutCore<IUseLayoutProps>({
+		...props,
+		HeaderComponent: Header,
+		BodyComponent: Body,
+		FooterComponent: Footer,
+	});
 }
 
 export function useHeaderContext(): INavItemsProviderProps<IHeaderProps> {
-  return coreUseHeaderContext<IHeaderProps>();
+	return coreUseHeaderContext<IHeaderProps>();
 }

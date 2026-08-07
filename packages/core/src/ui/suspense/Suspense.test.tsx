@@ -5,14 +5,14 @@ import { TestWrapper } from "../../testing/TestWrapper";
 import { Suspense } from "./Suspense";
 
 describe("Suspense", () => {
-  beforeAll(i18nTestInstance);
+	beforeAll(i18nTestInstance);
 
-  it("should render without crashing", () => {
-    const result = render(
-      <TestWrapper>
-        <Suspense />
-      </TestWrapper>
-    );
-    expect(result).toBeTruthy();
-  });
+	it("should render without crashing", () => {
+		const result = render(
+			<TestWrapper>
+				<Suspense />
+			</TestWrapper>,
+		);
+		expect(result).toBeTruthy();
+	});
 });

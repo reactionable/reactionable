@@ -1,148 +1,169 @@
 import {
-  ComponentType,
-  PropsWithChildren,
-  ReactElement,
-  ReactNode,
-  useEffect,
-  useState,
+	type ComponentType,
+	type PropsWithChildren,
+	type ReactElement,
+	type ReactNode,
+	useEffect,
+	useState,
 } from "react";
 
 import { EnhanceChildren } from "../../enhance-children/EnhanceChildren";
-import { IError } from "../../error/IError";
+import type { IError } from "../../error/IError";
 import { keyFromSelector, useTranslation } from "../../i18n/I18n";
 import { useUIContext } from "../UI";
 
 export type IConfirmationProps = PropsWithChildren<{
-  title: string;
-  callback: (confirm: boolean) => void;
+	title: string;
+	callback: (confirm: boolean) => void;
 }>;
 
 export type ConfirmationComponent = ComponentType<IConfirmationProps>;
 
 export const Confirmation: ConfirmationComponent = ({
-  callback,
-  children,
-  title,
+	callback,
+	children,
+	title,
 }: IConfirmationProps) => {
-  const { t } = useTranslation("common");
+	const { t } = useTranslation("common");
 
-  return (
-    <div>
-      <div>{title || t(keyFromSelector(($) => $["Confirm ?"], { ns: "common" }))}</div>
-      <div>{children}</div>
-      <div>
-        <button onClick={() => callback(false)}>
-          {t(keyFromSelector(($) => $["Cancel"], { ns: "common" }))} 
-        </button>
-        <button onClick={() => callback(true)}>
-          {t(keyFromSelector(($) => $["OK"], { ns: "common" }))} 
-        </button>
-      </div>
-    </div>
-  );
+	return (
+		<div>
+			<div>
+				{title || t(keyFromSelector(($) => $["Confirm ?"], { ns: "common" }))}
+			</div>
+			<div>{children}</div>
+			<div>
+				<button onClick={() => callback(false)}>
+					{t(keyFromSelector(($) => $.Cancel, { ns: "common" }))}
+				</button>
+				<button onClick={() => callback(true)}>
+					{t(keyFromSelector(($) => $.OK, { ns: "common" }))}
+				</button>
+			</div>
+		</div>
+	);
 };
 
-export type IUseConfirmationProps = IConfirmationProps & { Component?: ConfirmationComponent };
+export type IUseConfirmationProps = IConfirmationProps & {
+	Component?: ConfirmationComponent;
+};
 
 export interface IUseConfirmationResult {
-  confirmation: ReactNode;
-  setConfirmation: (confirmation: boolean) => void;
+	confirmation: ReactNode;
+	setConfirmation: (confirmation: boolean) => void;
 }
 
-export type IUseConfirmation<UseConfirmationProps extends IUseConfirmationProps> = (
-  props: UseConfirmationProps
-) => IUseConfirmationResult;
+export type IUseConfirmation<
+	UseConfirmationProps extends IUseConfirmationProps,
+> = (props: UseConfirmationProps) => IUseConfirmationResult;
 
-export function useConfirmation<UseConfirmationProps extends IUseConfirmationProps>({
-  Component,
-  callback,
-  ...props
+export function useConfirmation<
+	UseConfirmationProps extends IUseConfirmationProps,
+>({
+	Component,
+	callback,
+	...props
 }: UseConfirmationProps): IUseConfirmationResult {
-  if (!Component) {
-    Component = Confirmation;
-  }
-  const [confirmation, setConfirmation] = useState<boolean>(false);
+	if (!Component) {
+		Component = Confirmation;
+	}
+	const [confirmation, setConfirmation] = useState<boolean>(false);
 
-  const confirmCallback = (confirm: boolean) => {
-    setConfirmation(false);
-    callback(confirm);
-  };
+	const confirmCallback = (confirm: boolean) => {
+		setConfirmation(false);
+		callback(confirm);
+	};
 
-  return {
-    confirmation: confirmation ? <Component callback={confirmCallback} {...props} /> : null,
-    setConfirmation,
-  };
+	return {
+		confirmation: confirmation ? (
+			<Component callback={confirmCallback} {...props} />
+		) : null,
+		setConfirmation,
+	};
 }
 
 export type IConfirmationActionProps<Data> = PropsWithChildren<{
-  title: string;
-  successMessage: string;
-  confirmationMessage: string;
-  onConfirm: () => Promise<Data>;
-  onSuccess?: (result: Data) => void;
+	title: string;
+	successMessage: string;
+	confirmationMessage: string;
+	onConfirm: () => Promise<Data>;
+	onSuccess?: (result: Data) => void;
 }>;
 
-export type ConfirmationActionComponent<Data> = ComponentType<IConfirmationActionProps<Data>>;
+export type ConfirmationActionComponent<Data> = ComponentType<
+	IConfirmationActionProps<Data>
+>;
 
-export function ConfirmationAction<Data>(props: IConfirmationActionProps<Data>): ReactElement {
-  const { useLoader, useSuccessNotification, useErrorNotification, useConfirmation } =
-    useUIContext();
+export function ConfirmationAction<Data>(
+	props: IConfirmationActionProps<Data>,
+): ReactElement {
+	const {
+		useLoader,
+		useSuccessNotification,
+		useErrorNotification,
+		useConfirmation,
+	} = useUIContext();
 
-  const { loader, loading, setLoading } = useLoader({});
-  const { successNotification, setSuccessNotification } = useSuccessNotification({
-    title: props.title,
-  });
-  const { errorNotification, setErrorNotification } = useErrorNotification({ title: props.title });
+	const { loader, loading, setLoading } = useLoader({});
+	const { successNotification, setSuccessNotification } =
+		useSuccessNotification({
+			title: props.title,
+		});
+	const { errorNotification, setErrorNotification } = useErrorNotification({
+		title: props.title,
+	});
 
-  const { onSuccess } = props;
-  const [success, setSuccess] = useState<Data>();
+	const { onSuccess } = props;
+	const [success, setSuccess] = useState<Data>();
 
-  useEffect(() => {
-    if (success && onSuccess) {
-      setSuccess(undefined);
-      onSuccess(success);
-    }
-  }, [success, onSuccess]);
+	useEffect(() => {
+		if (success && onSuccess) {
+			setSuccess(undefined);
+			onSuccess(success);
+		}
+	}, [success, onSuccess]);
 
-  const { confirmation, setConfirmation } = useConfirmation({
-    title: props.title,
-    children: props.confirmationMessage,
-    callback: async (confirm: boolean) => {
-      if (!confirm) {
-        setSuccessNotification(undefined);
-        setSuccess(undefined);
-        return;
-      }
-      setLoading(true);
+	const { confirmation, setConfirmation } = useConfirmation({
+		title: props.title,
+		children: props.confirmationMessage,
+		callback: async (confirm: boolean) => {
+			if (!confirm) {
+				setSuccessNotification(undefined);
+				setSuccess(undefined);
+				return;
+			}
+			setLoading(true);
 
-      try {
-        const data = await props.onConfirm();
-        setLoading(false);
-        setErrorNotification(undefined);
-        setSuccessNotification(props.successMessage);
-        setSuccess(data);
-      } catch (error) {
-        setLoading(false);
-        setSuccessNotification(undefined);
-        setErrorNotification(error as IError);
-      }
-    },
-  });
+			try {
+				const data = await props.onConfirm();
+				setLoading(false);
+				setErrorNotification(undefined);
+				setSuccessNotification(props.successMessage);
+				setSuccess(data);
+			} catch (error) {
+				setLoading(false);
+				setSuccessNotification(undefined);
+				setErrorNotification(error as IError);
+			}
+		},
+	});
 
-  const onClick = () => {
-    setErrorNotification(undefined);
-    setSuccessNotification(undefined);
-    setSuccess(undefined);
-    setConfirmation(true);
-  };
+	const onClick = () => {
+		setErrorNotification(undefined);
+		setSuccessNotification(undefined);
+		setSuccess(undefined);
+		setConfirmation(true);
+	};
 
-  return (
-    <>
-      <EnhanceChildren enhance={{ onClick, disabled: loading }}>{props.children}</EnhanceChildren>
-      {successNotification}
-      {errorNotification}
-      {confirmation}
-      {loader}
-    </>
-  );
+	return (
+		<>
+			<EnhanceChildren enhance={{ onClick, disabled: loading }}>
+				{props.children}
+			</EnhanceChildren>
+			{successNotification}
+			{errorNotification}
+			{confirmation}
+			{loader}
+		</>
+	);
 }

@@ -1,11 +1,13 @@
 export interface IError extends Error {
-  code?: number;
+	code?: number;
 }
 
 export function isIError(arg: unknown): arg is IError {
-  return arg !== null && typeof arg === "object" && "name" in arg && "message" in arg;
+	return (
+		arg !== null && typeof arg === "object" && "name" in arg && "message" in arg
+	);
 }
 
 export function printError(error?: IError): string | undefined {
-  return error ? error.message : undefined;
+	return error ? error.message : undefined;
 }

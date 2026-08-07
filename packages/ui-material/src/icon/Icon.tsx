@@ -1,9 +1,11 @@
-import SvgIcon from "@mui/material/SvgIcon";
-import { ComponentProps, ReactElement } from "react";
+import type SvgIcon from "@mui/material/SvgIcon";
+import type { ComponentProps, ReactElement } from "react";
 
-export type IIconProps = ComponentProps<typeof SvgIcon> & { icon: typeof SvgIcon };
+export type IIconProps = ComponentProps<typeof SvgIcon> & {
+	icon: typeof SvgIcon;
+};
 
 export function Icon(props: IIconProps): ReactElement {
-  const { icon: IconComponent, ...iconProps } = props;
-  return <IconComponent {...iconProps} />;
+	const { icon: IconComponent, ...iconProps } = props;
+	return <IconComponent {...iconProps} />;
 }

@@ -7,12 +7,12 @@ import * as stories from "./LanguageSelector.stories";
 const { BasicLanguageSelector } = composeStories(stories);
 
 describe("LanguageSelector", () => {
-  beforeAll(i18nTestInstance);
+	beforeAll(i18nTestInstance);
 
-  describe("BasicLanguageSelector", () => {
-    it("should render without crashing", () => {
-      const result = render(<BasicLanguageSelector />);
-      expect(result).toBeTruthy();
-    });
-  });
+	describe("BasicLanguageSelector", () => {
+		it("should render without crashing", () => {
+			const result = render(<BasicLanguageSelector />);
+			expect(result).toBeTruthy();
+		});
+	});
 });

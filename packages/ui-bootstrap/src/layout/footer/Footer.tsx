@@ -1,45 +1,50 @@
 import {
-  CopyrightFooter,
-  IFooterProps as ICoreFooterProps,
-  SponsorFooter,
+	CopyrightFooter,
+	type IFooterProps as ICoreFooterProps,
+	SponsorFooter,
 } from "@reactionable/core";
-import { ComponentType, DetailedHTMLProps, HTMLAttributes, ReactElement } from "react";
-import { PropsWithChildren } from "react";
+import type {
+	ComponentType,
+	DetailedHTMLProps,
+	HTMLAttributes,
+	PropsWithChildren,
+	ReactElement,
+} from "react";
 import { Col, Container, Row } from "react-bootstrap";
 
 export type IFooterProps = ICoreFooterProps &
-  Omit<DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>, "onSelect">;
+	Omit<DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>, "onSelect">;
 
 export type FooterComponent = ComponentType<IFooterProps>;
 
 export function Footer({
-  brand,
-  sponsor = true,
-  ...footerProps
+	brand,
+	sponsor = true,
+	...footerProps
 }: PropsWithChildren<IFooterProps>): ReactElement {
-  footerProps.style = {
-    position: "absolute",
-    bottom: 0,
-    width: "100vw",
-    height: "60px",
-    lineHeight: "60px",
-    ...footerProps.style,
-  };
+	footerProps.style = {
+		position: "absolute",
+		bottom: 0,
+		width: "100vw",
+		height: "60px",
+		lineHeight: "60px",
+		...footerProps.style,
+	};
 
-  return (
-    <footer {...footerProps}>
-      <Container>
-        <Row className="justify-content-between">
-          <Col>
-            <CopyrightFooter brand={brand} />
-          </Col>
-          {sponsor && (
-            <Col className="text-right">
-              <SponsorFooter />
-            </Col>
-          )}
-        </Row>
-      </Container>
-    </footer>
-  );
+	return (
+		<footer {...footerProps}>
+			<Container>
+				<Row className="justify-content-between">
+					<Col>
+						<CopyrightFooter brand={brand} />
+					</Col>
+					{sponsor && (
+						<Col className="text-right">
+							<SponsorFooter />
+						</Col>
+					)}
+				</Row>
+			</Container>
+		</footer>
+	);
 }

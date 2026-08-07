@@ -9,13 +9,13 @@ import * as stories from "./NavItem.stories";
 const { BasicNavItem } = composeStories(stories);
 
 describe("NavItem", () => {
-  beforeAll(i18nTestInstance);
+	beforeAll(i18nTestInstance);
 
-  describe("BasicNavItem", () => {
-    it("should render without crashing", () => {
-      const result = render(<BasicNavItem />);
+	describe("BasicNavItem", () => {
+		it("should render without crashing", () => {
+			const result = render(<BasicNavItem />);
 
-      expect(result).toBeTruthy();
-    });
-  });
+			expect(result).toBeTruthy();
+		});
+	});
 });

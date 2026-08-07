@@ -9,13 +9,13 @@ import * as stories from "./Body.stories";
 const { BasicBody } = composeStories(stories);
 
 describe("Body", () => {
-  beforeAll(i18nTestInstance);
+	beforeAll(i18nTestInstance);
 
-  describe("BasicBody", () => {
-    it("should render without crashing", () => {
-      const result = render(<BasicBody />);
+	describe("BasicBody", () => {
+		it("should render without crashing", () => {
+			const result = render(<BasicBody />);
 
-      expect(result).toBeTruthy();
-    });
-  });
+			expect(result).toBeTruthy();
+		});
+	});
 });

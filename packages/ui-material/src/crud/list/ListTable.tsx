@@ -5,48 +5,54 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import {
-  ListTable as CoreListTable,
-  IListTableBodyProps,
-  IListTableComponentProps,
-  IListTableHeadProps,
-  IListTableProps,
-  IData,
+	ListTable as CoreListTable,
+	type IData,
+	type IListTableBodyProps,
+	type IListTableComponentProps,
+	type IListTableHeadProps,
+	type IListTableProps,
 } from "@reactionable/core";
-import { ReactElement } from "react";
+import type { ReactElement } from "react";
 
 export function ListTableHead({ head }: IListTableHeadProps): ReactElement {
-  return (
-    <TableHead>
-      <TableRow>
-        {head?.map((item) =>
-          "string" === typeof item ? <TableCell key={item}>{item}</TableCell> : item
-        )}
-      </TableRow>
-    </TableHead>
-  );
+	return (
+		<TableHead>
+			<TableRow>
+				{head?.map((item) =>
+					"string" === typeof item ? (
+						<TableCell key={item}>{item}</TableCell>
+					) : (
+						item
+					),
+				)}
+			</TableRow>
+		</TableHead>
+	);
 }
 
 export function ListTableBody<Data extends IData = IData>({
-  data,
-  children,
+	data,
+	children,
 }: IListTableBodyProps<Data>): ReactElement {
-  return <TableBody>{data.items.map((item) => children(item))}</TableBody>;
+	return <TableBody>{data.items.map((item) => children(item))}</TableBody>;
 }
 
 export function ListTableComponent<Data extends IData = IData>({
-  head,
-  ...bodyProps
+	head,
+	...bodyProps
 }: IListTableComponentProps<Data>): ReactElement {
-  return (
-    <TableContainer>
-      <Table>
-        <ListTableHead head={head} />
-        <ListTableBody {...bodyProps} />
-      </Table>
-    </TableContainer>
-  );
+	return (
+		<TableContainer>
+			<Table>
+				<ListTableHead head={head} />
+				<ListTableBody {...bodyProps} />
+			</Table>
+		</TableContainer>
+	);
 }
 
-export function ListTable<Data extends IData = IData>(props: IListTableProps<Data>): ReactElement {
-  return <CoreListTable<Data> Component={ListTableComponent} {...props} />;
+export function ListTable<Data extends IData = IData>(
+	props: IListTableProps<Data>,
+): ReactElement {
+	return <CoreListTable<Data> Component={ListTableComponent} {...props} />;
 }

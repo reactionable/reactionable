@@ -10,86 +10,89 @@ import * as stories from "./Form.stories";
 import { FormField } from "./FormField";
 
 const {
-  BasicForm,
-  FormSubmitError,
-  FormWithCheckbox,
-  FormWithFileAndPreview,
-  FormWithLabelledInput,
-  FormWithSelect,
-  FormWithTextArea,
+	BasicForm,
+	FormSubmitError,
+	FormWithCheckbox,
+	FormWithFileAndPreview,
+	FormWithLabelledInput,
+	FormWithSelect,
+	FormWithTextArea,
 } = composeStories(stories);
 
 describe("Form", () => {
-  beforeAll(i18nTestInstance);
+	beforeAll(i18nTestInstance);
 
-  describe("BasicForm", () => {
-    it("should render without crashing", () => {
-      const result = render(<BasicForm />);
+	describe("BasicForm", () => {
+		it("should render without crashing", () => {
+			const result = render(<BasicForm />);
 
-      expect(result).toBeTruthy();
-    });
-  });
+			expect(result).toBeTruthy();
+		});
+	});
 
-  describe("FormWithLabelledInput", () => {
-    it("should render without crashing", () => {
-      const result = render(<FormWithLabelledInput />);
+	describe("FormWithLabelledInput", () => {
+		it("should render without crashing", () => {
+			const result = render(<FormWithLabelledInput />);
 
-      expect(result).toBeTruthy();
-    });
-  });
+			expect(result).toBeTruthy();
+		});
+	});
 
-  describe("FormWithTextArea", () => {
-    it("should render without crashing", () => {
-      const result = render(<FormWithTextArea />);
+	describe("FormWithTextArea", () => {
+		it("should render without crashing", () => {
+			const result = render(<FormWithTextArea />);
 
-      expect(result).toBeTruthy();
-    });
-  });
+			expect(result).toBeTruthy();
+		});
+	});
 
-  describe("FormWithSelect", () => {
-    it("should render without crashing", () => {
-      const result = render(<FormWithSelect />);
+	describe("FormWithSelect", () => {
+		it("should render without crashing", () => {
+			const result = render(<FormWithSelect />);
 
-      expect(result).toBeTruthy();
-    });
-  });
+			expect(result).toBeTruthy();
+		});
+	});
 
-  describe("FormWithCheckbox", () => {
-    it("should render without crashing", () => {
-      const result = render(<FormWithCheckbox />);
+	describe("FormWithCheckbox", () => {
+		it("should render without crashing", () => {
+			const result = render(<FormWithCheckbox />);
 
-      expect(result).toBeTruthy();
-    });
-  });
+			expect(result).toBeTruthy();
+		});
+	});
 
-  describe("FormWithFileAndPreview", () => {
-    it("should render without crashing", () => {
-      const result = render(<FormWithFileAndPreview />);
+	describe("FormWithFileAndPreview", () => {
+		it("should render without crashing", () => {
+			const result = render(<FormWithFileAndPreview />);
 
-      expect(result).toBeTruthy();
-    });
-  });
+			expect(result).toBeTruthy();
+		});
+	});
 
-  describe("FormSubmitError", () => {
-    it("should render without crashing", () => {
-      const result = render(<FormSubmitError />);
+	describe("FormSubmitError", () => {
+		it("should render without crashing", () => {
+			const result = render(<FormSubmitError />);
 
-      expect(result).toBeTruthy();
-    });
-  });
+			expect(result).toBeTruthy();
+		});
+	});
 
-  it("should set custom className", () => {
-    const formProps = {
-      title: "Basic form",
-      initialValues: { test: "" },
-      onSubmit: jest.fn(),
-      validationSchema: { test: string().required("Test is required") },
-      children: <FormField name="test" />,
-    };
+	it("should set custom className", () => {
+		const formProps = {
+			title: "Basic form",
+			initialValues: { test: "" },
+			onSubmit: jest.fn(),
+			validationSchema: { test: string().required("Test is required") },
+			children: <FormField name="test" />,
+		};
 
-    const { getByTestId } = render(
-      <Form {...formProps} form={{ className: "test-class", "data-testid": "test-form" }} />
-    );
-    expect(getByTestId("test-form")).toHaveClass("test-class");
-  });
+		const { getByTestId } = render(
+			<Form
+				{...formProps}
+				form={{ className: "test-class", "data-testid": "test-form" }}
+			/>,
+		);
+		expect(getByTestId("test-form")).toHaveClass("test-class");
+	});
 });

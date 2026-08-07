@@ -5,8 +5,8 @@ import { useUIProviderProps } from "../ui/UI";
 import { App } from "./App";
 
 const meta: Meta<typeof App> = {
-  title: "Core/Components/App",
-  component: App,
+	title: "Core/Components/App",
+	component: App,
 };
 
 export default meta;
@@ -18,15 +18,15 @@ export const BasicApp: Story = {};
 const Home = () => <div>Home</div>;
 
 export const AppWithChildren: Story = {
-  args: {
-    children: <Home />,
-  },
+	args: {
+		children: <Home />,
+	},
 };
 
 export const AppWithProviders: Story = {
-  args: {
-    ui: useUIProviderProps(),
-    identity: useIdentityProviderProps(),
-    router: useRouterProviderProps(),
-  },
+	args: {
+		ui: useUIProviderProps(),
+		identity: useIdentityProviderProps(),
+		router: useRouterProviderProps(),
+	},
 };

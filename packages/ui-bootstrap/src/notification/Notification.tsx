@@ -1,50 +1,53 @@
 import {
-  INotificationProps as ICoreNotificationProps,
-  IUseNotificationProps as ICoreUseNotificationProps,
-  IUseNotificationResult,
-  useNotification as useCoreNotification,
+	type INotificationProps as ICoreNotificationProps,
+	type IUseNotificationProps as ICoreUseNotificationProps,
+	type IUseNotificationResult,
+	useNotification as useCoreNotification,
 } from "@reactionable/core";
-import { PropsWithChildren, ReactElement } from "react";
-import Toast, { ToastProps } from "react-bootstrap/Toast";
+import type { PropsWithChildren, ReactElement } from "react";
+import Toast, { type ToastProps } from "react-bootstrap/Toast";
 
 export type INotificationProps = ICoreNotificationProps &
-  Omit<ToastProps, "title"> & {
-    variant?: string;
-  };
+	Omit<ToastProps, "title"> & {
+		variant?: string;
+	};
 
 export function Notification({
-  onClose,
-  variant,
-  title,
-  children,
-  ...props
+	onClose,
+	variant,
+	title,
+	children,
+	...props
 }: PropsWithChildren<INotificationProps>): ReactElement {
-  return (
-    <Toast
-      autohide
-      onClose={onClose}
-      style={{
-        position: "fixed",
-        top: "1vw",
-        right: "1vw",
-        zIndex: 9999,
-      }}
-      className={variant ? "border-" + variant : ""}
-      {...props}
-    >
-      <Toast.Header className={variant ? "text-" + variant : ""}>
-        <strong className="me-auto">{title}</strong>
-      </Toast.Header>
-      <Toast.Body>{children}</Toast.Body>
-    </Toast>
-  );
+	return (
+		<Toast
+			autohide
+			onClose={onClose}
+			style={{
+				position: "fixed",
+				top: "1vw",
+				right: "1vw",
+				zIndex: 9999,
+			}}
+			className={variant ? `border-${variant}` : ""}
+			{...props}
+		>
+			<Toast.Header className={variant ? `text-${variant}` : ""}>
+				<strong className="me-auto">{title}</strong>
+			</Toast.Header>
+			<Toast.Body>{children}</Toast.Body>
+		</Toast>
+	);
 }
 
-export type IUseNotificationProps = ICoreUseNotificationProps<INotificationProps>;
+export type IUseNotificationProps =
+	ICoreUseNotificationProps<INotificationProps>;
 
-export const useNotification = (props: IUseNotificationProps): IUseNotificationResult => {
-  return useCoreNotification<IUseNotificationProps>({
-    ...props,
-    Component: Notification,
-  });
+export const useNotification = (
+	props: IUseNotificationProps,
+): IUseNotificationResult => {
+	return useCoreNotification<IUseNotificationProps>({
+		...props,
+		Component: Notification,
+	});
 };

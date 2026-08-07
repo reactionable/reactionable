@@ -1,37 +1,42 @@
 import {
-  IFormButtonProps as ICoreFormButtonProps,
-  IUseFormButtonProps as ICoreUseFormButtonProps,
-  IUseSubmitFormButtonProps as ICoreUseSubmitFormButtonProps,
-  useFormButton as coreUseFormButton,
-  useSubmitFormButton as coreUseSubmitFormButton,
+	useFormButton as coreUseFormButton,
+	useSubmitFormButton as coreUseSubmitFormButton,
+	type IFormButtonProps as ICoreFormButtonProps,
+	type IUseFormButtonProps as ICoreUseFormButtonProps,
+	type IUseSubmitFormButtonProps as ICoreUseSubmitFormButtonProps,
 } from "@reactionable/core";
-import { ComponentProps, ReactElement, ReactNode } from "react";
+import type { ComponentProps, ReactElement, ReactNode } from "react";
 import Button from "react-bootstrap/Button";
 
 type IButtonProps = ComponentProps<typeof Button>;
 
-export type IFormButtonProps = ICoreFormButtonProps & Omit<IButtonProps, "type">;
+export type IFormButtonProps = ICoreFormButtonProps &
+	Omit<IButtonProps, "type">;
 
 export function FormButton(props: IFormButtonProps): ReactElement {
-  return <Button variant="primary" {...props} />;
+	return <Button variant="primary" {...props} />;
 }
 
 export type IUseFormButtonProps = ICoreUseFormButtonProps<IFormButtonProps>;
 
-export function useFormButton(props: IUseFormButtonProps): ReactNode | undefined {
-  return coreUseFormButton({
-    ...props,
-    Component: FormButton,
-  });
+export function useFormButton(
+	props: IUseFormButtonProps,
+): ReactNode | undefined {
+	return coreUseFormButton({
+		...props,
+		Component: FormButton,
+	});
 }
 
 export type IUseSubmitFormButtonProps = Omit<
-  ICoreUseSubmitFormButtonProps<IFormButtonProps>,
-  "Component"
+	ICoreUseSubmitFormButtonProps<IFormButtonProps>,
+	"Component"
 >;
-export function useSubmitFormButton(props: IUseSubmitFormButtonProps): ReactNode | undefined {
-  return coreUseSubmitFormButton({
-    ...props,
-    Component: FormButton,
-  });
+export function useSubmitFormButton(
+	props: IUseSubmitFormButtonProps,
+): ReactNode | undefined {
+	return coreUseSubmitFormButton({
+		...props,
+		Component: FormButton,
+	});
 }

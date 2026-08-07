@@ -1,28 +1,30 @@
 import {
-  ComponentType,
-  ReactElement,
-  ReactNode,
-  Suspense as ReactSuspence,
-  SuspenseProps,
+	type ComponentType,
+	type ReactElement,
+	type ReactNode,
+	Suspense as ReactSuspence,
+	type SuspenseProps,
 } from "react";
 
 import { useUIContext } from "../UI";
 
 export type ISuspenseProps = Pick<SuspenseProps, "children"> &
-  Partial<Omit<SuspenseProps, "children">>;
+	Partial<Omit<SuspenseProps, "children">>;
 
-export const Suspense: ComponentType<ISuspenseProps> = (props: ISuspenseProps) => {
-  let fallback: ISuspenseProps["fallback"];
-  if (props.fallback !== undefined) {
-    fallback = props.fallback;
-  } else {
-    const { loader } = useUIContext().useLoader({ loading: true });
-    fallback = loader;
-  }
+export const Suspense: ComponentType<ISuspenseProps> = (
+	props: ISuspenseProps,
+) => {
+	let fallback: ISuspenseProps["fallback"];
+	if (props.fallback !== undefined) {
+		fallback = props.fallback;
+	} else {
+		const { loader } = useUIContext().useLoader({ loading: true });
+		fallback = loader;
+	}
 
-  return <ReactSuspence fallback={fallback || null} {...props} />;
+	return <ReactSuspence fallback={fallback || null} {...props} />;
 };
 
 export const withSuspense = (component: ReactNode): ReactElement => {
-  return <Suspense>{component}</Suspense>;
+	return <Suspense>{component}</Suspense>;
 };

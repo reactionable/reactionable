@@ -1,39 +1,42 @@
-import { ComponentType, ReactElement } from "react";
+import type { ComponentType, ReactElement } from "react";
 
-import { ILinkProps } from "../ui/link/Link";
+import type { ILinkProps } from "../ui/link/Link";
 import { useUIContext } from "../ui/UI";
 
 export type INavItemProps = ILinkProps;
 
 export type INavItemsProps<NavItemProps extends INavItemProps> = {
-  navItems?: Array<NavItemProps>;
+	navItems?: Array<NavItemProps>;
 };
 
-export function NavItem<NavItemProps extends INavItemProps>(props: NavItemProps): ReactElement {
-  return <li>{useUIContext().useLink(props)}</li>;
+export function NavItem<NavItemProps extends INavItemProps>(
+	props: NavItemProps,
+): ReactElement {
+	return <li>{useUIContext().useLink(props)}</li>;
 }
 
-export type INavItemsComponentProps<
-  NavItemProps extends INavItemProps
-> = INavItemsProps<NavItemProps> & {
-  Component?: ComponentType<NavItemProps>;
-};
+export type INavItemsComponentProps<NavItemProps extends INavItemProps> =
+	INavItemsProps<NavItemProps> & {
+		Component?: ComponentType<NavItemProps>;
+	};
 
 export function NavItems<NavItemProps extends INavItemProps>({
-  navItems,
-  Component,
+	navItems,
+	Component,
 }: INavItemsComponentProps<NavItemProps>): ReactElement | null {
-  if (!navItems?.length) {
-    return null;
-  }
+	if (!navItems?.length) {
+		return null;
+	}
 
-  if (!Component) {
-    Component = NavItem;
-  }
+	if (!Component) {
+		Component = NavItem;
+	}
 
-  const navItemsContent: ReactElement[] = [];
-  for (const navItem of navItems) {
-    navItemsContent.push(<Component key={`${navItem.href}`} {...(navItem as NavItemProps)} />);
-  }
-  return <>{navItemsContent}</>;
+	const navItemsContent: ReactElement[] = [];
+	for (const navItem of navItems) {
+		navItemsContent.push(
+			<Component key={`${navItem.href}`} {...(navItem as NavItemProps)} />,
+		);
+	}
+	return <>{navItemsContent}</>;
 }

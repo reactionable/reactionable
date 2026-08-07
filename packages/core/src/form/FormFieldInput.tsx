@@ -1,20 +1,24 @@
-import { FieldInputProps } from "formik";
+import type { FieldInputProps } from "formik";
 import { createElement, forwardRef } from "react";
-import { IFieldElementProps, IFormFieldValue, IFormFieldPropsEnhanced } from "./FormField";
+import type {
+	IFieldElementProps,
+	IFormFieldPropsEnhanced,
+	IFormFieldValue,
+} from "./FormField";
 
 export type IFieldInputPropsEnhanced<
-  FieldElementProps extends IFieldElementProps,
-  Value extends IFormFieldValue
+	FieldElementProps extends IFieldElementProps,
+	Value extends IFormFieldValue,
 > = FieldElementProps & FieldInputProps<Value>;
 
 export type IFormFieldInputProps<
-  FieldElementProps extends IFieldElementProps = IFieldElementProps,
-  Value extends IFormFieldValue = IFormFieldValue
+	FieldElementProps extends IFieldElementProps = IFieldElementProps,
+	Value extends IFormFieldValue = IFormFieldValue,
 > = IFormFieldPropsEnhanced<FieldElementProps, Value>["field"];
 
 export const FormFieldInput = forwardRef(function FormFieldInput(
-  { as = "input", ...props }: IFormFieldInputProps,
-  ref
+	{ as = "input", ...props }: IFormFieldInputProps,
+	ref,
 ) {
-  return createElement(as || "input", { ...props, ref });
+	return createElement(as || "input", { ...props, ref });
 });

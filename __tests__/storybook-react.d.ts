@@ -1,3 +1,7 @@
 declare module "@storybook/react" {
-    export function composeStories(storiesImport: unknown): any;
+	import type { ComponentType } from "react";
+
+	export function composeStories(
+		storiesImport: unknown,
+	): Record<string, ComponentType<Record<string, unknown>>>;
 }
