@@ -6,7 +6,7 @@ import { useRouter } from "./useRouter";
 import { RouterContextProvider, useRouterContext } from "./useRouterContext";
 
 const meta: Meta = {
-	title: "Router DOM/Components/Router",
+	title: "React Router/Components/Router",
 	component: RouterContextProvider,
 };
 

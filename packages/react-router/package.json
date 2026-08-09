@@ -7,22 +7,23 @@
 	],
 	"type": "module",
 	"exports": {
-		"require": "./lib/cjs/index.js",
-		"import": "./lib/esm/index.js"
+		".": {
+			"types": "./lib/index.d.ts",
+			"default": "./lib/index.js"
+		}
 	},
-	"main": "lib/cjs/index.js",
+	"main": "lib/index.js",
 	"typings": "lib/index.d.ts",
 	"scripts": {
-		"start": "npm run build:barrelsby && tsc --watch",
+		"start": "npm run build:barrelsby && tsc --watch --outDir lib/",
 		"test": "vitest run --config ../../vitest.config.mts src",
 		"test:coverage": "vitest run --config ../../vitest.config.mts --coverage src",
 		"build:pre": "npm run build:clean && npm run build:barrelsby",
-		"build": "npm run build:pre && npm run build:cjs && npm run build:esm",
-		"build:ci": "npm run build:pre && npm run build:cjs && npm run build:esm",
+		"build": "npm run build:pre && npm run build:lib",
+		"build:ci": "npm run build:pre && npm run build:lib",
 		"build:clean": "rimraf lib",
 		"build:barrelsby": "npm exec barrelsby -- --noHeader -d src --exclude \".+\\.test\\..+\" --exclude \".+\\.stories\\..+\" --exclude \".+/__mocks__/.+\" --delete -q && npm exec prettier -- --write src/index.ts",
-		"build:cjs": "mkdir -p lib/cjs && echo '{\"type\": \"commonjs\"}' > lib/cjs/package.json && tsc --pretty -p tsconfig.build.json --module commonjs --outDir lib/cjs/",
-		"build:esm": "mkdir -p lib/esm && echo '{\"type\": \"module\"}' > lib/esm/package.json && tsc --pretty -p tsconfig.build.json --module esnext --outDir lib/esm/",
+		"build:lib": "tsc --pretty -p tsconfig.build.json --outDir lib/",
 		"build:docs": "typedoc --tsconfig tsconfig.build.json",
 		"lint": "biome lint --error-on-warnings .",
 		"lint:ci": "biome lint --error-on-warnings --reporter=json-pretty . > biome-report.json"
@@ -47,7 +48,7 @@
 	"dependencies": {
 		"@reactionable/core": "^0.28.31",
 		"react-helmet": "^6.1.0",
-		"react-router": "^7.17.0"
+		"react-router": "^8.3.0"
 	},
 	"devDependencies": {
 		"@types/react-helmet": "^6.1.6"
