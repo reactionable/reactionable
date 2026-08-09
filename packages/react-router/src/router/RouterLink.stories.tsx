@@ -6,7 +6,7 @@ import { TestWrapper } from "../testing/TestWrapper";
 import { RouterLink } from "./RouterLink";
 
 const meta: Meta<typeof RouterLink> = {
-	title: "Router DOM/Components/Router/RouterLink",
+	title: "React Router/Components/Router/RouterLink",
 	component: RouterLink,
 };
 
