@@ -1,10 +1,9 @@
 import type { InMemoryCacheConfig } from "@apollo/client/cache";
 import { InMemoryCache } from "@apollo/client/cache";
-import type { OperationVariables } from "@apollo/client/core";
+import type { DocumentNode, OperationVariables } from "@apollo/client/core";
 import { ApolloClient, gql } from "@apollo/client/core";
 import { ApolloProvider, useApolloClient } from "@apollo/client/react";
 import type { IData as ICoreData } from "@reactionable/core";
-import type { DocumentNode } from "graphql";
 import { type PropsWithChildren, type ReactElement, useMemo } from "react";
 import {
 	getGraphqlClientLink,
