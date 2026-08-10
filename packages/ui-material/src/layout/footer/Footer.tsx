@@ -37,16 +37,18 @@ export function Footer({
 			<Grid
 				container
 				direction="row"
-				justifyContent="center"
-				alignItems="center"
 				spacing={4}
+				sx={{
+					justifyContent: "center",
+					alignItems: "center",
+				}}
 			>
 				<Grid>
 					<CopyrightFooter brand={brand} />
 				</Grid>
 				{sponsor && (
 					<Grid>
-						- <SponsorFooter />
+						<SponsorFooter />
 					</Grid>
 				)}
 			</Grid>
