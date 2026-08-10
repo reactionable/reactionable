@@ -23,6 +23,7 @@ export function NavItem(props: INavItemProps): ReactElement {
 	return (
 		<Button
 			component={Link}
+			nativeButton={false}
 			{...linkProps}
 			startIcon={icon ? <Icon icon={icon} /> : undefined}
 		>

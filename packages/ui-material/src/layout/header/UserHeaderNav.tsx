@@ -1,4 +1,5 @@
 import AccountCircle from "@mui/icons-material/AccountCircle";
+import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -17,10 +18,11 @@ import {
 } from "react";
 
 import type { ILinkProps } from "../../link/Link";
+import { NavItem } from "../../nav/NavItem";
 
 export { UserUnloggedHeaderNav } from "@reactionable/core";
 
-const NavItemComponent = forwardRef(function NavItemComponent(
+const MenuNavItemComponent = forwardRef(function MenuNavItemComponent(
 	{ children, onClick }: ILinkProps,
 	// biome-ignore lint: Material UI forwards a generic ref type here.
 	ref: ForwardedRef<any>,
@@ -30,6 +32,18 @@ const NavItemComponent = forwardRef(function NavItemComponent(
 			{children}
 		</MenuItem>
 	);
+});
+
+const HeaderNavItemComponent = forwardRef(function HeaderNavItemComponent(
+	{ children, ...linkProps }: ILinkProps,
+	// biome-ignore lint: Material UI forwards a generic ref type here.
+	ref: ForwardedRef<any>,
+) {
+	if (!linkProps.title && typeof children === "string") {
+		linkProps.title = children;
+	}
+
+	return <NavItem {...linkProps} />;
 });
 
 const UserLoggedHeaderNav = () => {
@@ -69,11 +83,14 @@ const UserLoggedHeaderNav = () => {
 				onClose={handleClose}
 			>
 				<AccountLink
-					NavItemComponent={NavItemComponent}
+					NavItemComponent={MenuNavItemComponent}
 					onClick={handleClose}
 				/>
-				<hr />
-				<LogoutLink NavItemComponent={NavItemComponent} onClick={handleClose} />
+				<Divider />
+				<LogoutLink
+					NavItemComponent={MenuNavItemComponent}
+					onClick={handleClose}
+				/>
 			</Menu>
 		</>
 	);
@@ -89,7 +106,7 @@ export const UserHeaderNav = (): ReactElement | null => {
 	return (
 		<div>
 			<UserLoggedHeaderNav />
-			<UserUnloggedHeaderNav NavItemComponent={NavItemComponent} />
+			<UserUnloggedHeaderNav NavItemComponent={HeaderNavItemComponent} />
 		</div>
 	);
 };
