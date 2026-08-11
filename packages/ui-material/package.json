@@ -1,6 +1,6 @@
 {
 	"name": "@reactionable/ui-material",
-	"version": "0.28.31",
+	"version": "0.28.32",
 	"description": "Reactionable UI package for Material",
 	"files": [
 		"lib"
@@ -50,7 +50,7 @@
 		"@emotion/styled": "^11.14.1",
 		"@mui/icons-material": "^9.3.1",
 		"@mui/material": "^9.3.1",
-		"@reactionable/core": "^0.28.31",
+		"@reactionable/core": "^0.28.32",
 		"react-draggable": "^4.7.1"
 	},
 	"publishConfig": {
