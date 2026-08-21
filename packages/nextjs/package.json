@@ -48,7 +48,7 @@
 		"@emotion/react": "^11.10.5",
 		"@emotion/server": "^11.10.0",
 		"@reactionable/core": "^0.28.32",
-		"next": "^16.2.11"
+		"next": "^16.3.1"
 	},
 	"devDependencies": {
 		"next-router-mock": "^1.0.5"
