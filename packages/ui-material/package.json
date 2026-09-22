@@ -52,7 +52,7 @@
 		"@mui/material": "^9.3.1",
 		"@mui/system": "^9.4.0",
 		"@reactionable/core": "^0.28.32",
-		"react-draggable": "^4.7.1"
+		"react-draggable": "^4.7.2"
 	},
 	"publishConfig": {
 		"access": "public"
