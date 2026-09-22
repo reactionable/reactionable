@@ -1,9 +1,13 @@
-import MuiDrawer from "@mui/material/Drawer";
-import { styled } from "@mui/material/styles";
+import type { StyledComponent } from "@emotion/styled";
+import MuiDrawer, { type DrawerProps } from "@mui/material/Drawer";
+import { styled, type Theme } from "@mui/material/styles";
+import type { MUIStyledCommonProps } from "@mui/system";
 
 import { closedMixin, drawerWidth, openedMixin } from "./Mixins";
 
-export const Drawer = styled(MuiDrawer, {
+export const Drawer: StyledComponent<
+	DrawerProps & MUIStyledCommonProps<Theme> & { open: boolean }
+> = styled(MuiDrawer, {
 	shouldForwardProp: (prop) => prop !== "open",
 })<{
 	open: boolean;
