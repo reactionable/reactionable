@@ -1,14 +1,18 @@
+import type { StyledComponent } from "@emotion/styled";
 import MuiAppBar, {
 	type AppBarProps as MuiAppBarProps,
 } from "@mui/material/AppBar";
-import styled from "@mui/material/styles/styled";
+import { styled, type Theme } from "@mui/material/styles";
+import type { MUIStyledCommonProps } from "@mui/system";
 
 import { drawerWidth } from "./Mixins";
 
 interface AppBarProps extends MuiAppBarProps {
 	open?: boolean;
 }
-export const AppBar = styled(MuiAppBar, {
+export const AppBar: StyledComponent<
+	AppBarProps & MUIStyledCommonProps<Theme>
+> = styled(MuiAppBar, {
 	shouldForwardProp: (prop) => prop !== "open",
 })<AppBarProps>(({ theme, open }) => ({
 	zIndex: theme.zIndex.drawer + 1,

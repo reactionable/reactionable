@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		"moduleResolution": "node",
+		"moduleResolution": "bundler",
 		"module": "ESNext",
 		"target": "ESNext",
 		"esModuleInterop": true,
@@ -9,7 +9,6 @@
 		"allowJs": true,
 		"strict": true,
 		"declaration": true,
-		"downlevelIteration": true,
 		"allowUnreachableCode": false,
 		"noFallthroughCasesInSwitch": true,
 		"allowSyntheticDefaultImports": true,
@@ -26,8 +25,7 @@
 		"resolveJsonModule": true,
 		"isolatedModules": false,
 		"experimentalDecorators": true,
-		"emitDecoratorMetadata": true,
-		"baseUrl": "src"
+		"emitDecoratorMetadata": true
 	},
 	"paths": {
 		"@reactionable/*": ["packages/*"]
