@@ -20,7 +20,7 @@
 		"build-storybook": "storybook build"
 	},
 	"devDependencies": {
-		"@chromatic-com/storybook": "^5.5.1",
+		"@chromatic-com/storybook": "^5.6.0",
 		"@commitlint/config-nx-scopes": "^21.2.3",
 		"@jridgewell/gen-mapping": "^0.3.13",
 		"@storybook/addon-docs": "^10.6.4",
@@ -31,7 +31,7 @@
 		"@ts-dev-tools/react": "^1.12.0",
 		"barrelsby": "^2.8.1",
 		"lerna": "^10.1.1",
-		"nx": "^23.3.0",
+		"nx": "^24.0.2",
 		"react": "^19.3.1",
 		"react-dom": "^19.3.1",
 		"remark-gfm": "^4.0.1",
