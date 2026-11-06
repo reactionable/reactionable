@@ -4,14 +4,17 @@ on:
   workflow_call:
     outputs:
       build-artifact-id:
-        description: "Path to the build artifact"
+        description: Build artifact containing compiled packages and documentation
         value: ${{ jobs.continuous-integration.outputs.build-artifact-id }}
+      package-tarball-artifacts:
+        description: Validated tarball artifact IDs keyed by package directory
+        value: ${{ jobs.continuous-integration.outputs.package-tarball-artifacts }}
 
 permissions: {}
 
 jobs:
   continuous-integration:
-    uses: hoverkraft-tech/ci-github-nodejs/.github/workflows/continuous-integration.yml@df348077afa4e79725151d50606e9dc63f86dcb6 # 0.24.4
+    uses: hoverkraft-tech/ci-github-nodejs/.github/workflows/continuous-integration.yml@fbd3522b68c55a6314aadbededaa487825ba9b35 # 3.0.0
     permissions:
       contents: read
       id-token: write
@@ -19,6 +22,7 @@ jobs:
       pull-requests: write
       security-events: write
     with:
+      package: "true"
       build: |
         {
           "commands": ["build:ci", "storybook:build", "docs:build"],
