@@ -1,12 +1,42 @@
-name: 🚀 Release
+name: Release
 
 on:
   workflow_dispatch:
+    inputs:
+      force:
+        description: Release all public packages even without changes
+        type: boolean
+        default: false
+  schedule:
+    - cron: "25 8 * * 1"
 
 permissions: {}
 
+concurrency:
+  group: release-${{ github.repository }}
+  cancel-in-progress: false
+
 jobs:
+  prepare:
+    uses: hoverkraft-tech/ci-github-nodejs/.github/workflows/prepare-package-release.yml@edb594602aad107aa3917911341be04503e9e6bd # PR #563
+    permissions:
+      actions: write
+      contents: write
+      pull-requests: read
+    with:
+      versioning: lerna
+      release-config: &release-config |
+        name-template: v$RESOLVED_VERSION
+        tag-template: v$RESOLVED_VERSION
+        tag-prefix: v
+      force: ${{ github.event_name == 'workflow_dispatch' && inputs.force }}
+      github-app-client-id: ${{ vars.CI_BOT_APP_CLIENT_ID }}
+    secrets:
+      github-app-key: ${{ secrets.CI_BOT_APP_PRIVATE_KEY }}
+
   ci:
+    needs: prepare
+    if: needs.prepare.outputs.status == 'ready'
     uses: ./.github/workflows/__shared-ci.yml
     permissions:
       contents: read
@@ -14,44 +44,41 @@ jobs:
       packages: read
       pull-requests: write
       security-events: write
-    secrets: inherit
 
   release:
-    name: 🚀 Release
-    needs: ci
+    needs: [prepare, ci]
+    uses: hoverkraft-tech/ci-github-nodejs/.github/workflows/release.yml@edb594602aad107aa3917911341be04503e9e6bd # PR #563
+    permissions:
+      actions: read
+      contents: write
+      pull-requests: read
+      id-token: write
+    with:
+      release-config: *release-config
+      packages: ${{ needs.prepare.outputs.packages }}
+      package-tarball-artifacts: ${{ needs.ci.outputs.package-tarball-artifacts }}
+      environment: github-pages
+    secrets:
+      changelog-summary: ${{ secrets.CHANGELOG_SUMMARY }}
+
+  pages:
+    name: Deploy and check documentation
+    needs: [ci, release]
+    if: needs.release.result == 'success'
     runs-on: ubuntu-latest
     permissions:
+      contents: read
+      pages: write
       id-token: write
-      contents: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.url }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          persist-credentials: true
-
-      - uses: hoverkraft-tech/ci-github-nodejs/actions/setup-node@df348077afa4e79725151d50606e9dc63f86dcb6 # 0.24.4
+          persist-credentials: false
+      - id: deployment
+        uses: hoverkraft-tech/ci-github-publish/actions/deploy/github-pages@f06e0e72a76bfca57c34d08d03e5c1914275fd4c # 2.0.0
         with:
-          registry-url: "https://registry.npmjs.org/"
-
-      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
-        with:
-          artifact-ids: ${{ needs.ci.outputs.build-artifact-id }}
-          path: /
-
-      - name: 🔖 Configure publish
-        run: |
-          git config --local user.email "${{ github.actor }}@users.noreply.github.com"
-          git config --local user.name "${{ github.actor }}"
-
-      - name: 📦 Publish NPM packages
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npm exec lerna publish -- --conventional-commits --create-release github --yes
-
-      - name: 🌐 Publish to gh-pages
-        id: deployment
-        uses: hoverkraft-tech/ci-github-publish/actions/deploy/github-pages@1ee0354c40e4cd0a46c69cbe305c74fc67338042 # 0.28.0
-        with:
-          build-path: "build/storybook"
+          build-artifact-id: ${{ needs.ci.outputs.build-artifact-id }}
+          build-path: build/storybook
