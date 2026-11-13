@@ -10,6 +10,7 @@ import { BrowserRouterComponent } from "./BrowserRouterComponent";
 import type { RouterComponentProps } from "./RouterComponent";
 import { type IRouterLinkProps, RouterLink } from "./RouterLink";
 import { useRouteMatch } from "./useRouteMatch";
+import { useRouter } from "./useRouter";
 
 export type IRouterProviderProps = ICoreRouterProviderProps<
 	IRouterLinkProps,
@@ -24,6 +25,7 @@ export const useRouterProviderProps = (
 		Component: BrowserRouterComponent,
 		RouterLink: RouterLink as IRouterLinkComponent<IRouterLinkProps>,
 		useRouteMatch,
+		useRouter,
 		renderRoutes: renderRoutes as IRenderRoutes,
 		...props,
 	};

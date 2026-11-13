@@ -1,6 +1,6 @@
 import type { IRouteProps as ICoreRouteProps } from "@reactionable/core";
-import type { ReactElement, ReactNode } from "react";
-import { Routes } from "react-router";
+import type { ReactElement } from "react";
+import { Route, Routes } from "react-router";
 
 import { type ILazyRouteProps, renderLazyRoute } from "./LazyRoute";
 import { type INotFoundComponent, useCaptureRouteNotFound } from "./NotFound";
@@ -12,42 +12,31 @@ export function renderRoute({
 	privateRoute,
 	...routeProps
 }: IRouteProps): ReactElement {
-	const key = `${routeProps.index ? "index" : "non-index"}-${routeProps.path}-${
-		privateRoute ? "private" : "public"
-	}-${routeProps.component.name}`;
-
+	const key = `${routeProps.index ? "index" : "non-index"}-${routeProps.path}-${privateRoute ? "private" : "public"}`;
 	if (privateRoute) {
-		return renderLazyRoute({
-			...routeProps,
-			key,
-			element: <PrivateRoute />,
-			children: renderLazyRoute(routeProps),
-		});
+		return (
+			<Route key={key} element={<PrivateRoute />}>
+				{renderLazyRoute(routeProps)}
+			</Route>
+		);
 	}
-
-	return renderLazyRoute({
-		...routeProps,
-		key,
-	});
+	return renderLazyRoute({ ...routeProps, key });
 }
 
-export function renderRoutes(routes: IRouteProps[]): ReactNode {
-	let children = (
-		<>
-			{routes
-				.filter((route) => route.path || !route.component)
-				.map(renderRoute)}
-		</>
+export function renderRoutes(routes: IRouteProps[]): ReactElement {
+	const notFoundRoute = routes.find((route) => !route.index && !route.path);
+	const children = (
+		<Routes>
+			{routes.map((route) =>
+				renderRoute(route === notFoundRoute ? { ...route, path: "*" } : route),
+			)}
+		</Routes>
 	);
-
-	const notFoundRoute = routes.find((route) => !route.path && route.component);
-
 	if (notFoundRoute) {
 		const CaptureRouteNotFound = useCaptureRouteNotFound(
 			notFoundRoute.component as INotFoundComponent,
 		);
-		children = <CaptureRouteNotFound>{children}</CaptureRouteNotFound>;
+		return <CaptureRouteNotFound>{children}</CaptureRouteNotFound>;
 	}
-
-	return <Routes>{children}</Routes>;
+	return children;
 }

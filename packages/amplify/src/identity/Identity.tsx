@@ -6,10 +6,10 @@ import {
 	type IIdentityProviderProps as ICoreIdentityProviderProps,
 	type IIdentityProviderValue as ICoreIdentityProviderValue,
 	type IUser as ICoreUser,
+	useQuery,
 } from "@reactionable/core";
 import {
 	type AuthUser,
-	fetchAuthSession,
 	getCurrentUser,
 	signIn,
 	signOut,
@@ -19,7 +19,6 @@ import {
 	type PropsWithChildren,
 	type ReactElement,
 	useEffect,
-	useState,
 } from "react";
 
 export type IUser = ICoreUser & {
@@ -37,22 +36,30 @@ const dataToUser = (data?: AuthUser): IUser | null => {
 	};
 };
 
-function AuthComponent(props: PropsWithChildren<AuthenticatorProps>) {
+function AuthenticatedUser({ user }: { user?: AuthUser }) {
 	const { setUser } = useIdentityContext();
+	useEffect(() => {
+		if (user) setUser(dataToUser(user));
+	}, [user, setUser]);
+	return null;
+}
 
-	const authenticatorProps = Object.assign({
-		errorMessage: (message: string) => message,
-		...props,
-	});
-
+function AuthComponent(props: AuthenticatorProps) {
 	return (
-		<Authenticator
-			{...authenticatorProps}
-			onStateChange={(authState: string, data?: AuthUser) => {
-				setUser(authState !== "signedIn" ? null : dataToUser(data));
-			}}
-		/>
+		<Authenticator {...props}>
+			{({ user }) => <AuthenticatedUser user={user} />}
+		</Authenticator>
 	);
+}
+
+async function fetchCurrentUser(): Promise<IUser | null> {
+	try {
+		return dataToUser(await getCurrentUser());
+	} catch (error) {
+		if (error instanceof Error && error.name === "UserUnAuthenticatedException")
+			return null;
+		throw error;
+	}
 }
 
 export type IIdentityProviderProps = ICoreIdentityProviderProps<IUser> &
@@ -63,44 +70,15 @@ export type IIdentityProviderValue = ICoreIdentityProviderValue<IUser> &
 export const useIdentityProviderProps = (
 	props: Partial<IIdentityProviderProps> = {},
 ): IIdentityProviderProps => {
-	const user = props.user;
-	const [userState, setUser] = useState<IUser | undefined | null>();
-	useEffect(() => {
-		if (user && user !== userState) {
-			setUser(user);
-			return;
-		}
-
-		if (userState === undefined) {
-			fetchAuthSession()
-				.then((data) => {
-					if (!data.identityId) {
-						return;
-					}
-					getCurrentUser()
-						.then((data) => {
-							setUser(dataToUser(data));
-						})
-						.catch((error) => {
-							if (error === "The user is not authenticated") {
-								setUser(null);
-							} else {
-								throw error;
-							}
-						});
-				})
-				.catch((error) => {
-					if (error === "The user is not authenticated") {
-						setUser(null);
-					} else {
-						throw error;
-					}
-				});
-			return;
-		}
-	}, [user, userState]);
 	return {
-		...coreUseIdentityProviderProps(),
+		...coreUseIdentityProviderProps<IUser>(),
+		useFetchUser: () =>
+			useQuery<IUser | null, { user?: IUser | null }>({
+				variables: { user: props.user },
+				handleQuery: async ({ variables }) =>
+					variables?.user !== undefined ? variables.user : fetchCurrentUser(),
+			}),
+		displayName: (user) => user.username,
 		identityProvider: "Amplify",
 		logout: async () => await signOut(),
 		login: async (values) => {
@@ -116,7 +94,6 @@ export const useIdentityProviderProps = (
 			throw new Error("No user retrieved from signIn");
 		},
 		AuthComponent,
-		user,
 		...props,
 	};
 };
@@ -139,7 +116,7 @@ export function withIdentityContext(
 }
 
 export const IdentityContextProvider = (
-	props?: Partial<IIdentityProviderProps>,
+	props?: PropsWithChildren<Partial<IIdentityProviderProps>>,
 ): ReactElement => {
 	return (
 		<CoreIdentityContextProvider<IUser> {...useIdentityProviderProps(props)} />

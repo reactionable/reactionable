@@ -19,15 +19,16 @@ export function RouterComponent({
 	HomeComponent,
 	NotFoundComponent,
 }: PropsWithChildren<RouterComponentProps>): ReactElement {
-	const routesToRender: Array<IRouteProps> = routes || [];
+	const routesToRender: Array<IRouteProps> = [...(routes ?? [])];
 
 	if (HomeComponent) {
-		const hasHomeRoute = routesToRender.some(({ path }) => path === "/");
+		const hasHomeRoute = routesToRender.some(
+			({ path, index }) => path === "/" || index,
+		);
 		if (!hasHomeRoute) {
 			routesToRender.unshift({
 				component: HomeComponent,
 				index: true,
-				path: "/",
 				privateRoute: false,
 			});
 		}
@@ -35,7 +36,7 @@ export function RouterComponent({
 
 	if (NotFoundComponent) {
 		const hasNotFoundRoute = routesToRender.some(
-			({ path }) => path === undefined,
+			({ path, index }) => !index && path === undefined,
 		);
 		if (!hasNotFoundRoute) {
 			routesToRender.push({
