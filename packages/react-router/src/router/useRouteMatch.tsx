@@ -1,8 +1,16 @@
 import type { IRouteMatch, IRouteMatchParams } from "@reactionable/core";
-import { useParams } from "react-router";
+import { useLocation, useParams, useResolvedPath } from "react-router";
 
 export function useRouteMatch<
 	RouteMatchParams extends IRouteMatchParams = IRouteMatchParams,
 >(): IRouteMatch<RouteMatchParams> {
-	return useParams() as unknown as IRouteMatch<RouteMatchParams>;
+	const params = useParams();
+	const location = useLocation();
+	const { pathname } = useResolvedPath(".");
+	return {
+		params: params as RouteMatchParams,
+		isIndex: location.pathname === pathname,
+		path: pathname,
+		url: pathname,
+	};
 }

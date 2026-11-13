@@ -31,24 +31,19 @@ export function Crud<Data extends IFormData = IFormData>({
 	routes = [],
 	privateRoute = true,
 }: PropsWithChildren<ICrudProp<Data>>): ReactElement | null {
-	const { renderRoutes, useRouteMatch } = useRouterContext();
-	const match = useRouteMatch();
-	if (!match) {
-		return null;
-	}
+	const { renderRoutes } = useRouterContext();
 
 	const idParam = `:${name.charAt(0).toLowerCase() + name.slice(1)}Id`;
 
-	// Add CRUD path prefix to given routes
-	routes = routes.map((route) => {
-		route.path = `${match.path}/${idParam}/${route.path}`;
-		return route;
-	});
+	routes = routes.map((route) => ({
+		...route,
+		path: `${idParam}/${route.path}`,
+		privateRoute: route.privateRoute ?? privateRoute,
+	}));
 
 	if (listComponent) {
 		routes.push({
 			index: true,
-			path: match.path,
 			component: listComponent,
 			privateRoute: privateRoute,
 		});
@@ -56,8 +51,7 @@ export function Crud<Data extends IFormData = IFormData>({
 
 	if (readComponent) {
 		routes.push({
-			index: true,
-			path: `${match.path}/${idParam}`,
+			path: idParam,
 			component: readComponent,
 			privateRoute: privateRoute,
 		});

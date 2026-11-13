@@ -2,7 +2,6 @@ import { lazyLoad } from "@reactionable/core";
 import type {
 	ComponentType,
 	LazyExoticComponent,
-	PropsWithChildren,
 	ReactElement,
 	ReactNode,
 } from "react";
@@ -36,14 +35,18 @@ export function renderLazyRoute({
 	index,
 	key,
 	...routeProps
-}: PropsWithChildren<ILazyRouteProps>): ReactElement {
-	const props = {
-		element: renderLazyRouteElement({
-			component,
-		}),
-		index: index === false ? index : undefined,
-		...routeProps,
-	} as RouteProps;
-
-	return <Route key={key} {...props} />;
+}: ILazyRouteProps): ReactElement {
+	const element = routeProps.element ?? renderLazyRouteElement({ component });
+	if (index) {
+		return (
+			<Route
+				{...routeProps}
+				key={key}
+				index
+				element={element}
+				children={undefined}
+			/>
+		);
+	}
+	return <Route {...routeProps} key={key} index={index} element={element} />;
 }
