@@ -1,6 +1,6 @@
 {
 	"name": "@reactionable/react-router",
-	"version": "0.30.0",
+	"version": "1.0.0",
 	"description": "Reactionable Router package for react-router",
 	"files": [
 		"lib"
@@ -46,7 +46,7 @@
 	},
 	"homepage": "https://github.com/reactionable/reactionable#readme",
 	"dependencies": {
-		"@reactionable/core": "^0.30.0",
+		"@reactionable/core": "^1.0.0",
 		"react-helmet": "^6.1.0",
 		"react-router": "^8.5.1"
 	},
