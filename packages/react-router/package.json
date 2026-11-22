@@ -26,7 +26,7 @@
 		"build:lib": "tsc --pretty -p tsconfig.build.json --outDir lib/",
 		"build:docs": "typedoc --tsconfig tsconfig.build.json",
 		"lint": "biome lint --error-on-warnings .",
-		"lint:ci": "biome lint --error-on-warnings ."
+		"lint:ci": "biome check --assist-enabled=false . --reporter=sarif --reporter-file=biome-report.sarif --reporter=default"
 	},
 	"repository": {
 		"type": "git",

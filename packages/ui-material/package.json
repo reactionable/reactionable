@@ -28,7 +28,7 @@
 		"build:esm": "mkdir -p lib/esm && echo '{\"type\": \"module\"}' > lib/esm/package.json && tsc --pretty -p tsconfig.build.json --module esnext --outDir lib/esm/",
 		"build:docs": "typedoc --tsconfig tsconfig.build.json",
 		"lint": "biome lint --error-on-warnings .",
-		"lint:ci": "biome lint --error-on-warnings ."
+		"lint:ci": "biome check --assist-enabled=false . --reporter=sarif --reporter-file=biome-report.sarif --reporter=default"
 	},
 	"repository": {
 		"type": "git",
