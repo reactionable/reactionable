@@ -25,6 +25,7 @@
 				"useButtonType": "off"
 			},
 			"correctness": {
+				"noComponentHookFactories": "off",
 				"useExhaustiveDependencies": "off",
 				"useHookAtTopLevel": "off"
 			}
